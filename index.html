@@ -1466,6 +1466,7 @@ loadSettingsFromHash();
 updateCurrentBalance();
 updateStdDedHint();
 calculateAll();
+// Show admin controls when ?admin is in the URL (keep this URL private)
 if (new URLSearchParams(window.location.search).has('admin')) {
   document.getElementById('fbCsvBtn').style.display = '';
 }
