@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Refi Calculator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f0c;
+    --surface: #16180f;
+    --surface2: #1e2115;
+    --border: #2e3320;
+    --accent: #c8f060;
+    --accent-dim: #8aaa2a;
+    --text: #e8ead8;
+    --text-muted: #7a8060;
+    --blue: #60a0f0;
+    --red: #f06060;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 20px; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
+  header p { color: var(--text-muted); font-size: 12px; }
+
+  .layout { display: grid; grid-template-columns: 390px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+
+  .cur-loan-panel { padding: 20px 22px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+
+  .section-label {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent-dim); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace;
+    font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s;
+  }
+  .field input:focus { border-color: var(--accent-dim); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hint { font-size: 10px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+
+  .balance-display {
+    padding: 7px 10px; background: var(--bg); border: 1px solid var(--accent-dim);
+    border-radius: var(--radius); font-size: 14px; color: var(--accent);
+    font-family: 'DM Serif Display', serif;
+  }
+
+  /* Scenario tabs */
+  .scenarios-panel { flex: 1; display: flex; flex-direction: column; }
+  .scenario-tabs { display: flex; border-bottom: 1px solid var(--border); overflow-x: auto; flex-shrink: 0; }
+  .scenario-tab {
+    padding: 9px 15px; font-size: 11px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent; color: var(--text-muted);
+    transition: color 0.15s, border-color 0.15s; flex-shrink: 0;
+  }
+  .scenario-tab:hover { color: var(--text); }
+  .scenario-tab.active { color: var(--text); }
+  .add-scenario-btn {
+    padding: 9px 14px; font-size: 18px; cursor: pointer; color: var(--text-muted);
+    background: none; border: none; transition: color 0.15s; flex-shrink: 0; line-height: 1;
+  }
+  .add-scenario-btn:hover { color: var(--accent); }
+
+  .scenario-panels-wrap { flex: 1; }
+  .scenario-panel { display: none; padding: 16px 22px; }
+  .scenario-panel.active { display: block; }
+
+  .scenario-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .scenario-name-input {
+    flex: 1; background: transparent; border: none; border-bottom: 1px solid var(--border);
+    color: var(--text); font-family: 'DM Serif Display', serif; font-size: 15px;
+    padding: 3px 0; outline: none;
+  }
+  .scenario-name-input:focus { border-bottom-color: var(--accent-dim); }
+  .delete-btn {
+    background: none; border: none; color: var(--text-muted); cursor: pointer;
+    font-size: 15px; padding: 4px; transition: color 0.15s;
+  }
+  .delete-btn:hover { color: var(--red); }
+
+  .bal-type-btn {
+    flex: 1; padding: 7px 4px; font-size: 11px; font-family: 'DM Mono', monospace;
+    background: var(--surface2); border: none; border-right: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .bal-type-btn:last-child { border-right: none; }
+  .bal-type-btn:hover { color: var(--text); }
+  .bal-type-btn.active { background: var(--border); color: var(--text); }
+
+  .shared-settings { padding: 16px 22px; border-top: 1px solid var(--border); flex-shrink: 0; }
+  .calc-btn {
+    width: 100%; background: var(--accent); color: var(--bg); border: none;
+    border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 13px;
+    font-weight: 500; padding: 11px; cursor: pointer; letter-spacing: 0.05em;
+    transition: opacity 0.15s, transform 0.1s; margin-top: 8px;
+  }
+  .calc-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .calc-btn:active { transform: translateY(0); }
+
+  /* Main */
+  .main { padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; }
+
+  .results-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .results-tab {
+    padding: 6px 16px; border-radius: 20px; font-size: 11px; cursor: pointer;
+    border: 1px solid var(--border); color: var(--text-muted); transition: all 0.15s;
+    background: var(--surface);
+  }
+  .results-tab:hover { color: var(--text); }
+  .results-tab.active { color: var(--bg); border-color: transparent; }
+
+  .results-section { flex-direction: column; gap: 20px; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
+
+  .verdict-header { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 10px; }
+  .pos { color: var(--accent); } .neg { color: var(--red); } .neu { color: var(--blue); }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-value { font-size: 16px; font-family: 'DM Serif Display', serif; }
+  .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  .breakeven-note {
+    margin-top: 10px; padding: 9px 13px; background: var(--surface2);
+    border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 12px; color: var(--text-muted); line-height: 1.6;
+  }
+
+  .chart-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 280px; }
+  .legend { display: flex; gap: 18px; margin-top: 10px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .legend-line { width: 16px; height: 2px; flex-shrink: 0; }
+
+  /* Breakdown table */
+  .breakdown-grid {
+    display: grid; grid-template-columns: 80px 1fr 1fr 1fr;
+    border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 4px;
+  }
+  .bg-cell {
+    padding: 8px 11px; font-size: 11px;
+    border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .bg-cell:nth-child(4n) { border-right: none; }
+  .bg-cell.last-row { border-bottom: none; }
+  .bg-cell.hdr { background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; }
+
+  /* Expandable explanations */
+  .explain-section { margin-top: 16px; }
+  .explain-toggle {
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); user-select: none; padding: 4px 0;
+  }
+  .explain-toggle:hover { color: var(--text); }
+  .explain-arrow { transition: transform 0.2s; display: inline-block; font-size: 9px; }
+  .explain-toggle.open .explain-arrow { transform: rotate(90deg); }
+
+  .explain-body {
+    display: none; margin-top: 10px; padding: 16px 18px;
+    background: var(--surface2); border-radius: var(--radius);
+    font-size: 12px; line-height: 1.95; color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .explain-body.open { display: block; }
+  .explain-body strong { color: var(--text); }
+  .explain-body .hl { color: var(--accent); font-family: 'DM Serif Display', serif; font-size: 14px; }
+  .explain-body .hl-neg { color: var(--red); font-family: 'DM Serif Display', serif; font-size: 14px; }
+  .explain-body .hl-blue { color: var(--blue); font-family: 'DM Serif Display', serif; font-size: 14px; }
+
+  .step-block {
+    display: flex; gap: 14px; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-block:last-child { border-bottom: none; padding-bottom: 0; }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--text-muted); flex-shrink: 0; margin-top: 2px;
+  }
+  .step-content { flex: 1; }
+  .step-title { color: var(--text); font-size: 12px; margin-bottom: 5px; }
+
+  .two-col-compare {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0;
+  }
+  .compare-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 10px 12px; font-size: 11px;
+  }
+  .compare-box .cb-label { color: var(--text-muted); margin-bottom: 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; }
+  .compare-box .cb-val { font-family: 'DM Serif Display', serif; font-size: 15px; }
+
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100%; min-height: 300px; color: var(--text-muted); gap: 12px; text-align: center;
+  }
+  .empty-icon { font-size: 40px; opacity: 0.3; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .main { padding: 20px; }
+    header { padding: 18px 20px; flex-direction: column; gap: 4px; }
+    .two-col-compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Advanced Refi Calculator</h1>
+  <p>Compare refinancing options by actual net worth impact over time</p>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+
+  <div class="cur-loan-panel">
+    <div class="section-label">Your Current Loan</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Original Loan Amount ($)</label>
+        <input type="number" id="curBalance" value="907000" min="0" oninput="updateCurrentBalance()">
+      </div>
+      <div class="field">
+        <label>Interest Rate (%)</label>
+        <input type="number" id="curRate" value="6.125" step="0.01" min="0" oninput="updateCurrentBalance()">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Original Term (months)</label>
+        <input type="number" id="curOrigTerm" value="360" min="1" oninput="updateCurrentBalance()">
+      </div>
+      <div class="field">
+        <label>Remaining Term</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div>
+            <input type="number" id="curYearsRem" value="28" min="0" oninput="updateCurrentBalance()">
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px">years</div>
+          </div>
+          <div>
+            <input type="number" id="curMonthsRem" value="9" min="0" max="11" oninput="updateCurrentBalance()">
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px">months</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label style="color:var(--accent-dim)">Remaining Balance (calculated)</label>
+      <div class="balance-display" id="curBalanceDisplay">—</div>
+      <div class="hint">This is the balance that would be refinanced today</div>
+    </div>
+  </div>
+
+  <div class="scenarios-panel">
+    <div class="scenario-tabs" id="scenarioTabs"></div>
+    <div class="scenario-panels-wrap">
+      <div id="scenarioPanels"></div>
+    </div>
+  </div>
+
+  <div class="shared-settings">
+    <div class="section-label">Shared Settings</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Marginal Tax Rate (%)</label>
+        <input type="number" id="taxRate" value="32" step="1" min="0" max="100">
+      </div>
+      <div class="field">
+        <label>Capital Gains Rate (%)</label>
+        <input type="number" id="capGains" value="15" step="1" min="0" max="100">
+      </div>
+    </div>
+    <div class="field">
+      <label>Deductible Loan Balance Cap ($)</label>
+      <input type="number" id="deductibleCap" value="750000" min="0">
+      <div class="hint">IRS caps deductibility at $750k for loans after 12/15/2017</div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Portfolio Return (%)</label>
+        <input type="number" id="investReturn" value="8" step="0.1" min="0">
+      </div>
+      <div class="field">
+        <label>Project N Years</label>
+        <input type="number" id="projYears" value="30" min="1" max="50">
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:6px">The model assumes every dollar <em>not</em> spent on your mortgage goes into an investment portfolio at this annual return — including monthly payment savings, tax savings on deductible interest, and freed-up cash after the loan pays off. Closing costs are treated as money pulled out of that same portfolio on day one.</div>
+    <button class="calc-btn" onclick="calculateAll()">Calculate All Scenarios →</button>
+  </div>
+
+</aside>
+
+<main class="main" id="mainPanel">
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">⌗</div>
+    <div>Configure your scenarios and hit Calculate</div>
+    <div style="font-size:11px">Each scenario compares that refi option vs. keeping your current loan,<br>measured as net worth impact (equity + investments) year by year.</div>
+  </div>
+</main>
+</div>
+
+<script>
+// ── State ──
+let scenarios = [
+  { id: 1, name: 'Option A', newRate: 5.75, newTerm: 360, refiCost: 8000 },
+  { id: 2, name: 'Option B', newRate: 5.5, newTerm: 360, refiCost: 8000 },
+];
+let nextId = 3;
+const COLORS = ['#c8f060','#60a0f0','#f0a060','#b060f0','#f06060','#60f0d0'];
+const scColor = i => COLORS[i % COLORS.length];
+
+// ── Amortization ──
+function monthlyPmt(principal, annualRate, months) {
+  if (!annualRate) return principal / months;
+  const r = annualRate / 100 / 12;
+  return principal * r * Math.pow(1+r,months) / (Math.pow(1+r,months)-1);
+}
+function amortize(principal, annualRate, months) {
+  const r = annualRate / 100 / 12;
+  const pmt = monthlyPmt(principal, annualRate, months);
+  let bal = principal;
+  return Array.from({length: months}, () => {
+    const interest = bal * r;
+    const prin = pmt - interest;
+    bal = Math.max(0, bal - prin);
+    return { interest, principal: prin, balance: bal, payment: pmt };
+  });
+}
+
+// ── Format ──
+function fmt(n) {
+  const a = Math.abs(n), s = n < 0 ? '-' : '';
+  if (a >= 1e6) return s+'$'+(a/1e6).toFixed(2)+'M';
+  if (a >= 1e3) return s+'$'+(a/1e3).toFixed(1)+'k';
+  return s+'$'+a.toFixed(0);
+}
+function fmtFull(n) {
+  const a = Math.abs(n), s = n < 0 ? '-' : '';
+  return s + '$' + a.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+const sfmt = v => (v>=0?'+':'')+fmt(v);
+const gv = id => parseFloat(document.getElementById(id)?.value)||0;
+function getCurMonths() {
+  return Math.round(gv('curYearsRem')) * 12 + Math.round(gv('curMonthsRem'));
+}
+
+// ── Current balance ──
+function updateCurrentBalance() {
+  const orig=gv('curBalance'), rate=gv('curRate'), ot=Math.round(gv('curOrigTerm')), rem=Math.round(getCurMonths());
+  if (!orig||!rate||!ot||!rem) { document.getElementById('curBalanceDisplay').textContent='—'; return; }
+  const paid = ot - rem;
+  const sched = amortize(orig, rate, ot);
+  const bal = paid<=0 ? orig : (sched[paid-1]?.balance||0);
+  document.getElementById('curBalanceDisplay').textContent = fmt(bal);
+  // Refresh cash-out/paydown displays if open
+  scenarios.forEach(s => updateNewLoanDisplay(s.id));
+}
+
+// ── Scenario UI ──
+function renderScenarioTabs() {
+  const tabsEl = document.getElementById('scenarioTabs');
+  const panelsEl = document.getElementById('scenarioPanels');
+  tabsEl.innerHTML = '';
+  panelsEl.innerHTML = '';
+
+  scenarios.forEach((s, idx) => {
+    const tab = document.createElement('div');
+    tab.className = 'scenario-tab' + (idx===0?' active':'');
+    tab.dataset.idx = idx;
+    tab.style.borderBottomColor = idx===0 ? scColor(idx) : 'transparent';
+    tab.style.borderBottomWidth = '2px';
+    tab.style.borderBottomStyle = 'solid';
+    tab.textContent = s.name;
+    tab.onclick = () => switchScenarioTab(idx);
+    tabsEl.appendChild(tab);
+
+    const panel = document.createElement('div');
+    panel.className = 'scenario-panel'+(idx===0?' active':'');
+    panel.id = `sp-${s.id}`;
+    panel.innerHTML = `
+      <div class="scenario-header">
+        <input class="scenario-name-input" value="${s.name}" oninput="renameScenario(${s.id},this.value)" placeholder="Scenario name">
+        ${scenarios.length>1 ? `<button class="delete-btn" onclick="deleteScenario(${s.id})" title="Remove">✕</button>` : ''}
+      </div>
+      <div class="section-label" style="color:${scColor(idx)}">New Loan Terms</div>
+      <div class="field-row">
+        <div class="field">
+          <label>New Rate (%)</label>
+          <input type="number" id="nr-${s.id}" value="${s.newRate}" step="0.01" min="0">
+        </div>
+        <div class="field">
+          <label>New Term (months)</label>
+          <input type="number" id="nt-${s.id}" value="${s.newTerm}" min="1">
+        </div>
+      </div>
+      <div class="field">
+        <label>Loan Balance for Refinance</label>
+        <div style="display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:6px">
+          <button class="bal-type-btn active" data-sid="${s.id}" data-type="remaining" onclick="setBalType(${s.id},'remaining')">Remaining</button>
+          <button class="bal-type-btn" data-sid="${s.id}" data-type="cashout" onclick="setBalType(${s.id},'cashout')">Cash-Out</button>
+          <button class="bal-type-btn" data-sid="${s.id}" data-type="paydown" onclick="setBalType(${s.id},'paydown')">Pay Down</button>
+        </div>
+        <div id="bal-hint-${s.id}" class="hint" style="margin-bottom:6px">Refinance exactly the remaining balance — no cash taken out or paid in.</div>
+        <div id="bal-amount-wrap-${s.id}" style="display:none">
+          <input type="number" id="bal-amount-${s.id}" value="0" min="0" placeholder="Amount ($)" oninput="updateNewLoanDisplay(${s.id})" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:7px 10px;outline:none">
+          <div id="bal-amount-fmt-${s.id}" style="font-size:11px;color:var(--text-muted);margin-top:2px;font-family:'DM Mono',monospace"></div>
+          <div id="bal-amount-hint-${s.id}" class="hint"></div>
+        </div>
+        <div id="new-loan-display-${s.id}" style="display:none;flex-direction:column;gap:2px;padding:8px 11px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);margin-top:6px"></div>
+      </div>
+      <div class="field">
+        <label>Cost to Refinance ($)</label>
+        <input type="number" id="rc-${s.id}" value="${s.refiCost}" min="0">
+        <div class="hint">Closing costs, points, fees — treated as an opportunity cost (money that could have been invested).</div>
+      </div>
+    `;
+    panelsEl.appendChild(panel);
+  });
+
+  const addBtn = document.createElement('button');
+  addBtn.className = 'add-scenario-btn';
+  addBtn.title = 'Add scenario';
+  addBtn.textContent = '+';
+  addBtn.onclick = addScenario;
+  tabsEl.appendChild(addBtn);
+}
+
+function switchScenarioTab(idx) {
+  document.querySelectorAll('.scenario-tab').forEach((t,i) => {
+    t.classList.toggle('active', i===idx);
+    t.style.borderBottomColor = i===idx ? scColor(i) : 'transparent';
+    t.style.color = i===idx ? 'var(--text)' : '';
+  });
+  document.querySelectorAll('.scenario-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+
+function renameScenario(id, name) {
+  const s = scenarios.find(s=>s.id===id);
+  if (s) {
+    s.name = name;
+    document.querySelectorAll('.scenario-tab').forEach((t,i) => { if (scenarios[i]?.id===id) t.textContent = name; });
+  }
+}
+
+function addScenario() {
+  const idx = scenarios.length;
+  scenarios.push({ id: nextId++, name: `Option ${String.fromCharCode(65+idx)}`, newRate: 5.5, newTerm: 360, refiCost: 8000 });
+  renderScenarioTabs();
+  switchScenarioTab(scenarios.length-1);
+}
+
+function deleteScenario(id) {
+  scenarios = scenarios.filter(s=>s.id!==id);
+  renderScenarioTabs();
+  switchScenarioTab(0);
+}
+
+// ── Balance type toggle ──
+const balTypes = {}; // sid -> 'remaining' | 'cashout' | 'paydown'
+
+function setBalType(sid, type) {
+  balTypes[sid] = type;
+  document.querySelectorAll(`.bal-type-btn[data-sid="${sid}"]`).forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.type === type);
+  });
+  const wrap = document.getElementById(`bal-amount-wrap-${sid}`);
+  const hint = document.getElementById(`bal-hint-${sid}`);
+  const amtHint = document.getElementById(`bal-amount-hint-${sid}`);
+  if (type === 'remaining') {
+    wrap.style.display = 'none';
+    hint.textContent = 'Refinance exactly the remaining balance — no cash taken out or paid in.';
+  } else if (type === 'cashout') {
+    wrap.style.display = 'block';
+    hint.textContent = 'Borrow more than you owe. The extra cash goes straight into your investment portfolio on day one.';
+    amtHint.textContent = 'How much extra cash to pull out (above remaining balance)';
+    document.getElementById(`bal-amount-${sid}`).placeholder = 'Cash-out amount ($)';
+  } else {
+    wrap.style.display = 'block';
+    hint.textContent = 'Pay down the balance at closing. That cash leaves your portfolio — opportunity cost applies.';
+    amtHint.textContent = 'How much extra to pay down at closing (below remaining balance)';
+    document.getElementById(`bal-amount-${sid}`).placeholder = 'Pay-down amount ($)';
+  }
+  updateNewLoanDisplay(sid);
+}
+
+function updateNewLoanDisplay(sid) {
+  const type = balTypes[sid] || 'remaining';
+  const displayEl = document.getElementById(`new-loan-display-${sid}`);
+  if (!displayEl) return;
+
+  // Get current remaining balance from the main inputs
+  const orig = gv('curBalance'), rate = gv('curRate');
+  const ot = Math.round(gv('curOrigTerm')), rem = Math.round(getCurMonths());
+  const paid = ot - rem;
+  const fullSched = amortize(orig, rate, ot);
+  const curBal = paid <= 0 ? orig : (fullSched[paid-1]?.balance || 0);
+
+  const amount = gv(`bal-amount-${sid}`) || 0;
+  const fmtEl = document.getElementById(`bal-amount-fmt-${sid}`);
+  if (fmtEl) fmtEl.textContent = amount > 0 ? fmtFull(amount) : '';
+  let newLoan = curBal;
+  if (type === 'cashout') newLoan = curBal + amount;
+  else if (type === 'paydown') newLoan = Math.max(0, curBal - amount);
+
+  if (type === 'remaining') {
+    displayEl.style.display = 'none';
+  } else {
+    displayEl.style.display = 'flex';
+    const arrow = type === 'cashout' ? '↑' : '↓';
+    const col = type === 'cashout' ? 'var(--accent)' : 'var(--red)';
+    displayEl.innerHTML = `
+      <span style="color:var(--text-muted);font-size:11px">New loan amount:</span>
+      <span style="font-family:'DM Serif Display',serif;font-size:16px;color:${col}">${arrow} ${fmt(newLoan)}</span>
+      <span style="color:var(--text-muted);font-size:10px">(remaining balance was ${fmt(curBal)})</span>
+    `;
+  }
+}
+
+// ── Simulation ──
+function runScenario(curBal, curSched, curPmt, curMonths, s, shared) {
+  const { taxRate, capGainsRate, dedCap, investReturn, projYears } = shared;
+  const newRate = gv(`nr-${s.id}`);
+  const newTerm = Math.round(gv(`nt-${s.id}`));
+  const refiCost = gv(`rc-${s.id}`);
+  const balType = balTypes[s.id] || 'remaining';
+  const balAmount = gv(`bal-amount-${s.id}`) || 0;
+
+  // Determine actual loan amount for the new loan
+  let newLoanBal = curBal;
+  let cashOutAmount = 0;   // positive = cash received (invested day 1)
+  let payDownAmount = 0;   // positive = cash paid in (opportunity cost day 1)
+  if (balType === 'cashout') {
+    newLoanBal = curBal + balAmount;
+    cashOutAmount = balAmount;
+  } else if (balType === 'paydown') {
+    newLoanBal = Math.max(0, curBal - balAmount);
+    payDownAmount = balAmount;
+  }
+
+  const newSched = amortize(newLoanBal, newRate, newTerm);
+  const newPmt = newSched[0]?.payment||0;
+  const mReturn = investReturn/12;
+  const projMonths = projYears*12;
+
+  // Portfolio starting values:
+  // - refiCost is always an opportunity cost (subtracted)
+  // - cashOut is extra cash received (added)
+  // - payDown is extra cash paid in (subtracted, same as refiCost)
+  const refiPortStart = -refiCost + cashOutAmount - payDownAmount;
+
+  let curPort=0, refiPort=refiPortStart;
+  let curEq=0, refiEq=0;
+  let curCumTax=0, refiCumTax=0;
+  let curPortBefore=0, refiPortBefore=refiPortStart;
+
+  const yearlyDelta=[], yearLabels=[], yearlyBD=[];
+
+  for (let m=1; m<=projMonths; m++) {
+    let cI=0,cP=0,nI=0,nP=0;
+    if (m<=curMonths && curSched[m-1]) { cI=curSched[m-1].interest; cP=curSched[m-1].principal; curEq+=cP; }
+    if (m<=newTerm && newSched[m-1])  { nI=newSched[m-1].interest;  nP=newSched[m-1].principal; refiEq+=nP; }
+
+    const curAfter  = m>curMonths ? curPmt : 0;
+    const refiAfter = m>newTerm   ? newPmt  : 0;
+
+    const cBal = curSched[m-1]  ? curSched[m-1].balance+curSched[m-1].principal   : 0;
+    const nBal = newSched[m-1]  ? newSched[m-1].balance+newSched[m-1].principal   : 0;
+    const cDf = cBal>0 ? Math.min(1, dedCap/cBal) : 0;
+    const nDf = nBal>0 ? Math.min(1, dedCap/nBal) : 0;
+
+    const cTax = cI*cDf*taxRate; const nTax = nI*nDf*taxRate;
+    curCumTax+=cTax; refiCumTax+=nTax;
+
+    const payDiff = (m<=curMonths?curPmt:0) - (m<=newTerm?newPmt:0);
+
+    curPort  = curPort*(1+mReturn)  + cTax + (payDiff<0?-payDiff:0) + curAfter;
+    refiPort = refiPort*(1+mReturn) + nTax + (payDiff>0?payDiff:0)  + refiAfter;
+
+    if (m%12===0) {
+      const cg=curPort-curPortBefore, rg=refiPort-refiPortBefore;
+      if (cg>0) curPort  -= cg*capGainsRate;
+      if (rg>0) refiPort -= rg*capGainsRate;
+      curPortBefore=curPort; refiPortBefore=refiPort;
+
+      yearlyDelta.push(refiPort+refiEq - curPort-curEq);
+      yearLabels.push(new Date().getFullYear() + Math.ceil(m/12));
+      yearlyBD.push({
+        equityDelta: refiEq-curEq, portfolioDelta: refiPort-curPort,
+        curEq, refiEq, curPort, refiPort, curCumTax, refiCumTax
+      });
+    }
+  }
+
+  const curY1I = curSched.slice(0,12).reduce((s,r)=>s+r.interest,0);
+  const newY1I = newSched.slice(0,12).reduce((s,r)=>s+r.interest,0);
+
+  return { yearlyDelta, yearLabels, yearlyBD, curPmt, newPmt, refiCost, newRate, newTerm,
+           newLoanBal, balType, cashOutAmount, payDownAmount,
+           curY1I, newY1I, investReturn, projYears, curSched, newSched };
+}
+
+// ── Chart instances ──
+let charts = {};
+
+// ── Main calculate ──
+function calculateAll() {
+  const orig=gv('curBalance'), rate=gv('curRate');
+  const ot=Math.round(gv('curOrigTerm')), rem=Math.round(getCurMonths());
+  const taxRate=gv('taxRate')/100, capGainsRate=gv('capGains')/100;
+  const dedCap=gv('deductibleCap'), investReturn=gv('investReturn')/100;
+  const projYears=Math.round(gv('projYears'));
+
+  const paid=ot-rem;
+  const fullSched=amortize(orig,rate,ot);
+  const curBal = paid<=0 ? orig : (fullSched[paid-1]?.balance||0);
+  const curSched=amortize(curBal,rate,rem);
+  const curPmt=curSched[0]?.payment||0;
+
+  const shared={taxRate,capGainsRate,dedCap,investReturn,projYears};
+  const results=scenarios.map(s=>({s,r:runScenario(curBal,curSched,curPmt,rem,s,shared)}));
+
+  document.getElementById('emptyState').style.display='none';
+  const mainEl=document.getElementById('mainPanel');
+
+  // Clear old
+  mainEl.querySelectorAll('.results-section,.results-tabs-wrap').forEach(e=>e.remove());
+  Object.values(charts).forEach(c=>c.destroy()); charts={};
+
+  // Tabs row
+  const tabsWrap=document.createElement('div');
+  tabsWrap.className='results-tabs-wrap';
+  const tabsEl=document.createElement('div');
+  tabsEl.className='results-tabs';
+  tabsWrap.appendChild(tabsEl);
+  mainEl.appendChild(tabsWrap);
+
+  results.forEach(({s},idx)=>{
+    const tab=document.createElement('div');
+    tab.className='results-tab'+(idx===0?' active':'');
+    tab.style.background=idx===0?scColor(idx):'';
+    tab.style.color=idx===0?'var(--bg)':'';
+    tab.style.borderColor=idx===0?'transparent':'';
+    tab.textContent=s.name;
+    tab.onclick=()=>switchResultTab(idx,results.length);
+    tabsEl.appendChild(tab);
+  });
+
+  results.forEach(({s,r},idx)=>{
+    const sec=document.createElement('div');
+    sec.className='results-section';
+    sec.id=`res-${s.id}`;
+    sec.style.display=idx===0?'flex':'none';
+    sec.style.flexDirection='column';
+    sec.style.gap='20px';
+    mainEl.appendChild(sec);
+    renderResult(sec,s,r,idx,curBal,rem,rate,ot);
+  });
+}
+
+function switchResultTab(active, total) {
+  document.querySelectorAll('.results-tab').forEach((t,i)=>{
+    t.classList.toggle('active',i===active);
+    t.style.background=i===active?scColor(active):'';
+    t.style.color=i===active?'var(--bg)':'';
+    t.style.borderColor=i===active?'transparent':'';
+  });
+  document.querySelectorAll('.results-section').forEach((s,i)=>s.style.display=i===active?'flex':'none');
+}
+
+function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigTerm) {
+  const {yearlyDelta,yearLabels,yearlyBD,curPmt,newPmt,refiCost,newRate,newTerm,
+         newLoanBal,balType,cashOutAmount,payDownAmount,curY1I,newY1I,investReturn,projYears}=r;
+  const color=scColor(idx);
+  const finalDelta=yearlyDelta[yearlyDelta.length-1];
+  const refiWins=finalDelta>0;
+  const monthlySav=curPmt-newPmt;
+  let breakevenYear=null;
+  for(let i=0;i<yearlyDelta.length;i++) if(yearlyDelta[i]>=0){breakevenYear=i+1;break;}
+
+  // Build a context line describing the loan balance situation
+  let balContextLine = '';
+  if (balType === 'cashout' && cashOutAmount > 0) {
+    balContextLine = `<div style="margin-top:6px;padding:7px 11px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;font-size:12px;color:var(--text-muted)">
+      <strong style="color:var(--accent)">Cash-out:</strong> New loan is ${fmt(newLoanBal)} (${fmt(cashOutAmount)} above remaining balance). 
+      That ${fmt(cashOutAmount)} goes directly into your investment portfolio on day one and compounds at your expected return.
+    </div>`;
+  } else if (balType === 'paydown' && payDownAmount > 0) {
+    balContextLine = `<div style="margin-top:6px;padding:7px 11px;background:var(--surface2);border-left:3px solid var(--red);border-radius:0 var(--radius) var(--radius) 0;font-size:12px;color:var(--text-muted)">
+      <strong style="color:var(--red)">Pay-down:</strong> New loan is ${fmt(newLoanBal)} (${fmt(payDownAmount)} below remaining balance). 
+      That ${fmt(payDownAmount)} is treated as an opportunity cost — cash that could have been in the market instead.
+    </div>`;
+  }
+
+  // ── Verdict ──
+  const vc=document.createElement('div'); vc.className='card';
+  vc.innerHTML=`
+    <div class="verdict-header ${refiWins?'pos':'neg'}">
+      ${refiWins?`Refinancing wins — you'd be ${fmt(finalDelta)} ahead after ${projYears} years.`
+                :`Keep your current loan — you'd be ${fmt(Math.abs(finalDelta))} ahead after ${projYears} years.`}
+    </div>
+    <div style="color:var(--text-muted);font-size:12px;line-height:1.7;margin-bottom:2px">
+      Payment: <strong style="color:var(--blue)">${fmtFull(curPmt)}/mo</strong> → <strong style="color:${color}">${fmtFull(newPmt)}/mo</strong>
+      &nbsp;|&nbsp; Monthly ${monthlySav>=0?'savings':'increase'}:
+      <strong style="color:${monthlySav>=0?'var(--accent)':'var(--red)'}">${fmtFull(Math.abs(monthlySav))}</strong>
+    </div>
+    ${balContextLine}
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Monthly Change</div>
+        <div class="stat-value" style="color:${monthlySav>=0?'var(--accent)':'var(--red)'}">${fmtFull(Math.abs(monthlySav))}</div>
+        <div class="stat-sub">${monthlySav>=0?'saved per month':'more per month'}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Net Worth Δ at Yr ${projYears}</div>
+        <div class="stat-value" style="color:${refiWins?'var(--accent)':'var(--red)'}">${fmt(Math.abs(finalDelta))}</div>
+        <div class="stat-sub">${refiWins?'refi ahead':'current loan wins'}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Break-even Year</div>
+        <div class="stat-value" style="color:${breakevenYear?'var(--blue)':'var(--red)'}">${breakevenYear?'Year '+breakevenYear:'Never'}</div>
+        <div class="stat-sub">${breakevenYear?'refi stays ahead after this':`not in ${projYears}yr window`}</div>
+      </div>
+    </div>
+    <div class="breakeven-note">
+      ${breakevenYear
+        ?`Refi starts <em>behind</em> due to closing costs and the amortization reset, and catches up by <strong>Year ${breakevenYear}</strong>. After that it stays ahead.`
+        :refiWins
+          ?`Refi is ahead from day one — payment savings immediately outweigh closing costs.`
+          :`Closing costs and/or higher payments never fully recover within your ${projYears}-year window.`}
+    </div>
+  `;
+  container.appendChild(vc);
+
+  // ── Chart ──
+  const cc=document.createElement('div'); cc.className='card';
+  const cid=`chart-${s.id}`;
+  const eqD=yearlyBD.map(b=>b.equityDelta);
+  const ptD=yearlyBD.map(b=>b.portfolioDelta);
+  cc.innerHTML=`
+    <div class="chart-title">Net Worth Advantage vs. Keeping Current Loan (Refi − Current, Year by Year)</div>
+    <div class="chart-wrap"><canvas id="${cid}"></canvas></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Equity Δ (refi − current)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:${color}"></div>Portfolio Δ (positive)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Portfolio Δ (negative)</div>
+      <div class="legend-item"><div class="legend-line" style="background:#fff"></div>Net total</div>
+    </div>
+  `;
+  container.appendChild(cc);
+
+  setTimeout(()=>{
+    const ctx=document.getElementById(cid).getContext('2d');
+
+    // Store selected index per scenario (default: last year)
+    let selectedIdx = yearlyBD.length - 1;
+
+    const getBarBg = (data, idx, posColor, negColorPos, negColorNeg) =>
+      data.map((v,i) => {
+        const isSelected = i === selectedIdx;
+        if (v >= 0) return isSelected ? posColor.replace(/[\d.]+\)$/, '1)') : posColor;
+        else return isSelected ? negColorNeg.replace(/[\d.]+\)$/, '0.9)') : negColorNeg;
+      });
+
+    const buildDatasets = () => [
+      { type:'line', label:'Net', data:yearlyDelta,
+        borderColor:'#fff', backgroundColor:'transparent', borderWidth:2,
+        pointRadius: yearlyDelta.map((_,i) => i===selectedIdx ? 5 : 2),
+        pointBackgroundColor: yearlyDelta.map((_,i) => i===selectedIdx ? '#fff' : '#fff'),
+        pointBorderWidth: yearlyDelta.map((_,i) => i===selectedIdx ? 2 : 0),
+        pointBorderColor: '#c8f060',
+        tension:0.3, order:1 },
+      { type:'bar', label:'Equity Δ', data:eqD, stack:'d', order:2,
+        backgroundColor: eqD.map((v,i) => {
+          const base = v>=0 ? 'rgba(96,160,240,' : 'rgba(96,160,240,';
+          const alpha = v>=0 ? (i===selectedIdx?'1)':'0.72)') : (i===selectedIdx?'0.6)':'0.28)');
+          return base+alpha.slice(0); // simpler:
+        }).map((v,i) => eqD[i]>=0 ? (i===selectedIdx?'rgba(96,160,240,1)':'rgba(96,160,240,0.72)') : (i===selectedIdx?'rgba(96,160,240,0.55)':'rgba(96,160,240,0.28)')),
+        borderColor: eqD.map((_,i) => i===selectedIdx ? '#60a0f0' : 'rgba(96,160,240,0.85)'),
+        borderWidth: eqD.map((_,i) => i===selectedIdx ? 2 : 1) },
+      { type:'bar', label:'Portfolio Δ', data:ptD, stack:'d', order:3,
+        backgroundColor: ptD.map((v,i) => v>=0 ? (i===selectedIdx?color:'rgba('+hexToRgb(color)+',0.73)') : (i===selectedIdx?'rgba(240,96,96,0.9)':'rgba(240,96,96,0.65)')),
+        borderColor: ptD.map((v,i) => v>=0 ? color : '#f06060'),
+        borderWidth: ptD.map((_,i) => i===selectedIdx ? 2 : 1) },
+    ];
+
+    charts[s.id]=new Chart(ctx,{
+      type:'bar',
+      data:{ labels:yearLabels, datasets:buildDatasets() },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        onClick:(evt, elements) => {
+          if (!elements.length) return;
+          const idx = elements[0].index;
+          if (idx === selectedIdx) return;
+          selectedIdx = idx;
+          // Update bar highlight
+          const ds = charts[s.id].data.datasets;
+          const newDs = buildDatasets();
+          ds.forEach((d,di) => {
+            d.backgroundColor = newDs[di].backgroundColor;
+            d.borderWidth = newDs[di].borderWidth;
+            d.borderColor = newDs[di].borderColor;
+            if (newDs[di].pointRadius) d.pointRadius = newDs[di].pointRadius;
+          });
+          charts[s.id].update('none');
+          // Re-render explanations
+          renderExplanations(s.id, idx, yearlyBD, yearLabels, r, curBal, curMonths, curOrigTerm, newTerm, newRate, color);
+        },
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            backgroundColor:'#16180f', borderColor:'#2e3320', borderWidth:1,
+            titleColor:'#e8ead8', bodyColor:'#7a8060',
+            callbacks:{
+              label:(item)=>{
+                const i=item.dataIndex,bd=yearlyBD[i];
+                if(item.datasetIndex===0) return ` Net: ${sfmt(yearlyDelta[i])}`;
+                if(item.datasetIndex===1) return ` Equity Δ: ${sfmt(bd.equityDelta)}`;
+                if(item.datasetIndex===2) return ` Portfolio Δ: ${sfmt(bd.portfolioDelta)}`;
+              }
+            }
+          }
+        },
+        scales:{
+          x:{stacked:true,grid:{color:'#2e3320'},ticks:{color:'#7a8060',font:{family:'DM Mono',size:11},maxTicksLimit:15}},
+          y:{stacked:true,grid:{color:'#2e3320'},ticks:{color:'#7a8060',font:{family:'DM Mono',size:11},callback:v=>fmt(v)}}
+        }
+      }
+    });
+  },0);
+
+  // ── Breakdown table + explanations ──
+  const bc=document.createElement('div'); bc.className='card';
+  const showYrs=yearlyBD.map((bd,i)=>({bd,yr:i+1,label:yearLabels[i]})).filter(({yr})=>yr%5===0||yr===projYears);
+  const cls=v=>v>500?'pos':v<-500?'neg':'neu';
+
+  const trows=showYrs.map(({bd,label},i)=>{
+    const lc=i===showYrs.length-1?' last-row':'';
+    return `
+      <div class="bg-cell hdr${lc}">${label}</div>
+      <div class="bg-cell ${cls(bd.equityDelta)}${lc}">${sfmt(bd.equityDelta)}</div>
+      <div class="bg-cell ${cls(bd.portfolioDelta)}${lc}">${sfmt(bd.portfolioDelta)}</div>
+      <div class="bg-cell ${cls(bd.equityDelta+bd.portfolioDelta)}${lc}">${sfmt(bd.equityDelta+bd.portfolioDelta)}</div>`;
+  }).join('');
+
+  const finalBD=yearlyBD[yearlyBD.length-1];
+  bc.innerHTML=`
+    <div class="chart-title" style="margin-bottom:12px">Component Breakdown — Refi vs. Keeping Current Loan</div>
+    <div class="breakdown-grid">
+      <div class="bg-cell hdr">Year</div><div class="bg-cell hdr">Equity Δ</div>
+      <div class="bg-cell hdr">Portfolio Δ</div><div class="bg-cell hdr">Net Worth Δ</div>
+      ${trows}
+    </div>
+    <div id="explain-container-${s.id}"></div>
+  `;
+  container.appendChild(bc);
+
+  // Render explanations for the final year by default
+  renderExplanations(s.id, yearlyBD.length-1, yearlyBD, yearLabels, r, curBal, curMonths, curOrigTerm, newTerm, newRate, color);
+}
+
+function hexToRgb(hex) {
+  hex = hex.replace('#','');
+  if (hex.length===3) hex=hex.split('').map(c=>c+c).join('');
+  const n=parseInt(hex,16);
+  return `${(n>>16)&255},${(n>>8)&255},${n&255}`;
+}
+
+function renderExplanations(sid, idx, yearlyBD, yearLabels, r, curBal, curMonths, curOrigTerm, newTerm, newRate, color) {
+  const container = document.getElementById(`explain-container-${sid}`);
+  if (!container) return;
+  const bd = yearlyBD[idx];
+  const yearLabel = yearLabels[idx];
+  const yearNum = idx + 1;
+  // Preserve open/closed state of toggles
+  const equityOpen = container.querySelector('.explain-body.open:first-of-type') !== null;
+  container.innerHTML = buildExplanations(bd, r, curBal, curMonths, curOrigTerm, newTerm, newRate, color, yearNum, yearLabel);
+}
+
+function buildExplanations(bd, r, curBal, curMonths, curOrigTerm, newTerm, newRate, color, selectedYear, selectedYearLabel) {
+  const {curPmt,newPmt,refiCost,curY1I,newY1I,investReturn,projYears,
+         newLoanBal,balType,cashOutAmount,payDownAmount,curSched,newSched}=r;
+  const yr = selectedYear || projYears;
+  const yrLabel = selectedYearLabel || ('Year ' + projYears);
+  const isLastYear = yr === projYears;
+  const monthlySav=curPmt-newPmt;
+  const monthsPaid=Math.round(gv('curOrigTerm'))-curMonths;
+  const curRate=gv('curRate');
+
+  const curY1P=curPmt*12-curY1I;
+  const newY1P=newPmt*12-newY1I;
+  const curY1IPct=Math.round(curY1I/(curPmt*12)*100);
+  const newY1IPct=Math.round(newY1I/(newPmt*12)*100);
+
+  const mReturn=investReturn/12;
+  // FV of monthly savings over selected years (not projYears)
+  const savingsFVMonthly = Math.abs(monthlySav) * ((Math.pow(1+mReturn,yr*12)-1)/mReturn);
+  const refiCostFV = refiCost * Math.pow(1+investReturn,yr);
+  const cashOutFV = cashOutAmount * Math.pow(1+investReturn,yr);
+  const payDownFV = payDownAmount * Math.pow(1+investReturn,yr);
+  const totalOppCostFV = (refiCost + payDownAmount) * Math.pow(1+investReturn,yr);
+
+  const eqNeg=bd.equityDelta<-500, eqPos=bd.equityDelta>500;
+  const ptPos=bd.portfolioDelta>500;
+  const oppDir=Math.sign(bd.equityDelta)!==Math.sign(bd.portfolioDelta);
+
+  return `
+  <div style="display:flex;align-items:center;gap:10px;margin-top:18px;margin-bottom:4px">
+    <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)">Showing explanation for</span>
+    <span style="padding:3px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;font-family:'DM Serif Display',serif;font-size:14px;color:var(--accent)">${yrLabel}</span>
+    ${!isLastYear ? `<span style="font-size:10px;color:var(--text-muted)">(click any bar to change)</span>` : `<span style="font-size:10px;color:var(--text-muted)">(click any bar to explore a different year)</span>`}
+  </div>
+
+  <!-- EQUITY EXPLANATION -->
+  <div class="explain-section">
+    <div class="explain-toggle" onclick="toggleExplain(this)">
+      <span class="explain-arrow">▶</span>
+      &nbsp;Why is the equity difference
+      <span style="color:${eqNeg?'var(--red)':eqPos?'var(--accent)':'var(--blue)'};margin-left:6px;font-family:'DM Serif Display',serif;font-size:14px">${sfmt(bd.equityDelta)}</span>
+      <span style="font-size:10px;color:var(--text-muted);margin-left:4px">at ${yrLabel}?</span>
+    </div>
+    <div class="explain-body">
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">What equity actually means here</div>
+          Equity = how much of your loan balance you've paid off through principal payments. 
+          Every mortgage payment is a mix of <strong>interest</strong> (the lender's fee) and <strong>principal</strong> (reducing your balance). 
+          Only the principal part builds equity. The more principal you pay, the higher your equity — and that's what we're comparing between the two scenarios.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">How your current loan is set up right now</div>
+          You've already made <strong>${monthsPaid} payments</strong> (${(monthsPaid/12).toFixed(1)} years) on this loan.
+          In the early years almost everything went to interest, but now you've pushed past that and each payment does more work.
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">What refinancing does to the amortization schedule</div>
+          When you refinance, you <strong>start a brand new ${newTerm}-month loan from month 1</strong>.
+          The bank recalculates your schedule from scratch and front-loads the interest all over again.
+          Here's how the <strong>next 12 months</strong> compare side by side:
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 10px;margin-top:8px;margin-bottom:2px">
+            <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:0 4px">Keep current loan</div>
+            <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);padding:0 4px">Refinance</div>
+          </div>
+          <div class="two-col-compare" style="margin-top:0">
+            <div class="compare-box">
+              <div class="cb-label">Next 12mo interest</div>
+              <div class="cb-val" style="color:var(--text-muted)">${fmt(curY1I)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">${curY1IPct}% of payments</div>
+            </div>
+            <div class="compare-box">
+              <div class="cb-label">Next 12mo interest</div>
+              <div class="cb-val" style="color:${newY1I>curY1I?'var(--red)':'var(--accent)'}">${fmt(newY1I)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">${newY1IPct}% of payments — ${newY1I>curY1I?'more':'less'}</div>
+            </div>
+            <div class="compare-box">
+              <div class="cb-label">Next 12mo principal</div>
+              <div class="cb-val" style="color:var(--accent)">${fmt(curY1P)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">${100-curY1IPct}% of payments</div>
+            </div>
+            <div class="compare-box">
+              <div class="cb-label">Next 12mo principal</div>
+              <div class="cb-val" style="color:${newY1P>curY1P?'var(--accent)':'var(--red)'}">${fmt(newY1P)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">${100-newY1IPct}% of payments — ${newY1P>curY1P?'more':'less'}</div>
+            </div>
+          </div>
+          ${eqNeg
+            ? `<br>${newY1I>curY1I
+                ? `${newRate < curRate ? `Even with a lower rate (${newRate}% vs ${curRate}%), ` : ''}You pay <strong>more interest in the next year</strong> (${fmt(newY1I)} vs ${fmt(curY1I)}) — restarting the loan schedule from month 1 front-loads the interest all over again.`
+                : `You pay less interest per year, but you've <strong>reset to month 1 of a ${newTerm}-month schedule</strong> — so less of each payment goes to principal compared to where you were on the current loan.`} This is the clock-reset penalty.`
+            : `<br>${newY1P >= curY1P
+                ? `Despite restarting the amortization clock, the refi's next-year principal (${fmt(newY1P)}) matches or exceeds the current loan's (${fmt(curY1P)}).`
+                : `The refi pays slightly less principal next year (${fmt(newY1P)} vs ${fmt(curY1P)}), though other factors drive the overall equity outcome.`}`}
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">The result through ${yrLabel}</div>
+          ${eqNeg
+            ? `The refi scenario ends up with <span class="hl-neg">${sfmt(bd.equityDelta)}</span> less equity at ${yrLabel}. 
+               The amortization reset means years of rebuilding the principal-heavy later portion of the schedule — time you'd already earned on your current loan.
+               <br><br>
+               This is <em>not necessarily bad</em> — it just means the equity hole needs to be filled by the portfolio side of the equation (the investment gains from lower monthly payments).`
+            : eqPos
+            ? `Despite the schedule reset, the refi ends up with <span class="hl">${sfmt(bd.equityDelta)}</span> more equity at ${yrLabel}. The new loan's terms mean more principal accumulates over time than the current loan would have built from this point.`
+            : `The two scenarios end up with roughly the same equity — the effects of the amortization reset and the new loan terms roughly cancel each other out.`}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PORTFOLIO EXPLANATION -->
+  <div class="explain-section" style="margin-top:12px">
+    <div class="explain-toggle" onclick="toggleExplain(this)">
+      <span class="explain-arrow">▶</span>
+      &nbsp;Why is the portfolio difference
+      <span style="color:${ptPos?'var(--accent)':'var(--red)'};margin-left:6px;font-family:'DM Serif Display',serif;font-size:14px">${sfmt(bd.portfolioDelta)}</span>
+      <span style="font-size:10px;color:var(--text-muted);margin-left:4px">at ${yrLabel}?</span>
+    </div>
+    <div class="explain-body">
+
+      <div class="step-block">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">What the portfolio tracks</div>
+          The portfolio is where the money goes that <em>isn't</em> being paid to the mortgage. 
+          In the refi scenario: if your payment is lower, that difference gets invested every month.
+          In the current-loan scenario: if the refi payment would have been higher, <em>that</em> difference gets invested.
+          Tax savings on deductible interest also flow in each year. Everything compounds at your assumed <strong>${(investReturn*100).toFixed(1)}% annual return</strong>.
+          ${balType==='remaining'
+            ? `Both portfolios start at zero — except the refi portfolio starts at <span class="hl-neg">-${fmt(refiCost)}</span> (closing costs).`
+            : balType==='cashout'
+            ? `The refi portfolio starts at <span class="hl">${fmt(cashOutAmount - refiCost)}</span> — you received <span class="hl">+${fmt(cashOutAmount)}</span> cash-out, minus the <span class="hl-neg">-${fmt(refiCost)}</span> closing cost.`
+            : `The refi portfolio starts at <span class="hl-neg">-${fmt(payDownAmount + refiCost)}</span> — you paid <span class="hl-neg">-${fmt(payDownAmount)}</span> to reduce the loan balance, plus <span class="hl-neg">-${fmt(refiCost)}</span> closing costs.`}
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">${balType==='cashout' ? 'Cash-out: a head start for the portfolio' : balType==='paydown' ? 'Pay-down + closing costs: a compounded headwind' : 'The closing cost is a headstart against you'}</div>
+          ${balType==='cashout' && cashOutAmount > 0 ? `
+          You pulled out <strong>${fmt(cashOutAmount)}</strong> extra cash at closing, which goes directly into your investment portfolio. 
+          At ${(investReturn*100).toFixed(1)}% annually, that ${fmt(cashOutAmount)} grows to roughly <span class="hl">${fmt(cashOutFV)}</span> over ${yr} years — a major boost to the refi portfolio.
+          But you're also paying interest on that extra ${fmt(cashOutAmount)} every month for ${newTerm} months, which increases your payment and reduces monthly savings.
+          ${refiCost > 0 ? `The <strong>${fmt(refiCost)}</strong> closing cost is still an opportunity cost, working against you.` : ''}
+          <div class="two-col-compare" style="margin-top:10px">
+            <div class="compare-box">
+              <div class="cb-label">Cash-out invested (day 1)</div>
+              <div class="cb-val" style="color:var(--accent)">+${fmt(cashOutAmount)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">Grows to ~${fmt(cashOutFV)} by ${yrLabel}</div>
+            </div>
+            <div class="compare-box">
+              <div class="cb-label">Closing cost (opportunity cost)</div>
+              <div class="cb-val" style="color:var(--red)">-${fmt(refiCost)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">Would have grown to -${fmt(refiCostFV)}</div>
+            </div>
+          </div>` : balType==='paydown' && payDownAmount > 0 ? `
+          You're paying an extra <strong>${fmt(payDownAmount)}</strong> at closing to reduce your loan balance. That cash can no longer be in the market. 
+          Combined with the <strong>${fmt(refiCost)}</strong> closing cost, your refi portfolio starts <span class="hl-neg">-${fmt(payDownAmount+refiCost)}</span> in the hole. 
+          At ${(investReturn*100).toFixed(1)}% over ${yr} years, that combined amount would have grown to roughly <span class="hl-neg">${fmt(totalOppCostFV)}</span>.
+          The paydown does reduce your loan balance — so your payments on a smaller balance are lower, which helps the monthly savings side.
+          <div class="two-col-compare" style="margin-top:10px">
+            <div class="compare-box">
+              <div class="cb-label">Pay-down opportunity cost</div>
+              <div class="cb-val" style="color:var(--red)">-${fmt(payDownAmount)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">Would have grown to -${fmt(payDownFV)} by ${yrLabel}</div>
+            </div>
+            <div class="compare-box">
+              <div class="cb-label">Closing cost</div>
+              <div class="cb-val" style="color:var(--red)">-${fmt(refiCost)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">Would have grown to -${fmt(refiCostFV)} by ${yrLabel}</div>
+            </div>
+          </div>` : `
+          The <strong>${fmt(refiCost)}</strong> you spend to refinance is money that can no longer compound in the market. 
+          At ${(investReturn*100).toFixed(1)}% annually over ${yr} years, that ${fmt(refiCost)} would have grown to 
+          <span class="hl-neg">${fmt(refiCostFV)}</span>. 
+          The refi portfolio has to overcome this entire gap through monthly savings before it even breaks even with the current-loan portfolio.
+          <div class="two-col-compare" style="margin-top:10px">
+            <div class="compare-box">
+              <div class="cb-label">Refi cost today</div>
+              <div class="cb-val" style="color:var(--red)">-${fmt(refiCost)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">Immediately deducted from refi portfolio</div>
+            </div>
+            <div class="compare-box">
+              <div class="cb-label">Opportunity cost by ${yrLabel}</div>
+              <div class="cb-val" style="color:var(--red)">-${fmt(refiCostFV)}</div>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:3px">What it would have grown to</div>
+            </div>
+          </div>`}
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">The monthly savings (or cost) fighting back</div>
+          ${monthlySav>0
+            ? `Your payment drops by <strong>${fmtFull(monthlySav)}/month</strong>. In the refi scenario, this savings gets invested every single month.
+               Over ${yr} years, investing ${fmtFull(monthlySav)}/mo at ${(investReturn*100).toFixed(1)}% compounds to approximately
+               <span class="hl">${fmt(savingsFVMonthly)}</span>. 
+               ${ptPos
+                 ? `This is enough to <strong>more than overcome</strong> the ${fmt(refiCostFV)} opportunity cost of the closing fees by ${yrLabel}.`
+                 : `This helps significantly, but it's <strong>not quite enough</strong> to overcome the ${fmt(refiCostFV)} opportunity cost of closing fees by ${yrLabel}.`}`
+            : monthlySav===0
+              ? `Your monthly payment stays the same. The only portfolio difference comes from tax savings on interest.`
+              : `Your payment actually <strong>increases</strong> by ${fmtFull(Math.abs(monthlySav))}/month.
+                 This extra monthly cost doesn't get invested in the refi scenario — instead, it compounds in the current-loan scenario's portfolio. 
+                 Combined with the closing cost headwind, the current-loan portfolio grows significantly larger.`}
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Putting it all together</div>
+          Equity: <span class="${bd.equityDelta>=0?'hl':'hl-neg'}">${sfmt(bd.equityDelta)}</span> &nbsp;+&nbsp;
+          Portfolio: <span class="${bd.portfolioDelta>=0?'hl':'hl-neg'}">${sfmt(bd.portfolioDelta)}</span> &nbsp;=&nbsp;
+          Net: <span class="${bd.equityDelta+bd.portfolioDelta>=0?'hl':'hl-neg'}">${sfmt(bd.equityDelta+bd.portfolioDelta)}</span>
+          <br><br>
+          ${oppDir
+            ? `Notice that equity and portfolio are <strong>pulling in opposite directions</strong>. This is extremely common in refinancing decisions — the clock reset costs you equity, but the lower payment generates a larger investment portfolio (or vice versa). The question is which force is bigger, and over what time horizon.
+               <br><br>The ${Math.abs(bd.equityDelta)>Math.abs(bd.portfolioDelta)?'equity effect':'portfolio effect'} is larger here, so that side determines the winner.`
+            : `Both equity and portfolio favor the <strong>same scenario</strong>, so the advantage is unambiguous — you're winning on both fronts.`}
+        </div>
+      </div>
+
+    </div>
+  </div>`;
+}
+
+function toggleExplain(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+// ── Init ──
+renderScenarioTabs();
+updateCurrentBalance();
+calculateAll();
+</script>
+
+<section style="max-width:900px;margin:48px auto 60px;padding:0 24px">
+  <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);font-family:'DM Mono',monospace;margin-bottom:20px">About the Team</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <div style="width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:22px;color:var(--bg);flex-shrink:0">BR</div>
+        <div>
+          <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)">Brent Rowley</div>
+          <div style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;margin-top:2px">Data Analyst &amp; Suffering Enthusiast</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin:0">
+        Brent built this calculator after convincing himself that running 50 miles a week through mountain terrain was "active recovery." When not reorganizing pivot tables at 11pm or interrogating his mortgage servicer's amortization math, he can be found on a trail somewhere, inexplicably upbeat, eating a gel that tastes like sadness. He treats data with the same obsessive precision he brings to pacing charts — which is to say, he will build a dashboard for something that could have been a sticky note.
+      </p>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:24px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+        <div style="width:52px;height:52px;border-radius:50%;background:#60a0f0;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:22px;color:var(--bg);flex-shrink:0">AR</div>
+        <div>
+          <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)">Abel Ravindran-Rowley</div>
+          <div style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;margin-top:2px">Trusted Synergy Expert</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin:0">
+        Abel is the firm's foremost authority on synergy, leverage, and paradigm-adjacent frameworks. His methodologies have been described as "bold," "transformative," and "hard to argue with, mostly because no one fully understands them." Abel pioneered the concept of holistic mortgage alignment and once delivered a 47-slide deck on the synergistic value of low interest rates to an audience of three people, one of whom was asleep. His vision is unmatched. His jargon is impenetrable. His conviction is absolute.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
