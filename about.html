@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About the Team — Advanced Refi Calculator</title>
+<meta name="description" content="Meet Brent Rowley and Abel Ravindran-Rowley, the team behind the Advanced Mortgage Refinance Calculator.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f0c;
+    --surface: #16180f;
+    --surface2: #1e2115;
+    --border: #2e3320;
+    --accent: #c8f060;
+    --accent-dim: #8aaa2a;
+    --text: #e8ead8;
+    --text-muted: #7a8060;
+    --blue: #60a0f0;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
+  header p { color: var(--text-muted); font-size: 12px; }
+  .header-nav { margin-left: auto; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 48px; max-width: 560px; }
+
+  .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+
+  .person-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden;
+  }
+  .person-photo {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top;
+    display: block; background: var(--surface2);
+  }
+  .person-body { padding: 24px; }
+  .person-name { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); margin-bottom: 4px; }
+  .person-title { font-size: 11px; color: var(--accent-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .person-bio { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; transition: opacity 0.15s; }
+  .cta a:hover { opacity: 0.85; }
+
+  @media (max-width: 640px) {
+    header { padding: 18px 20px; }
+    main { padding: 32px 16px 60px; }
+    .team-grid { grid-template-columns: 1fr; }
+    .page-title { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Advanced Refi Calculator</h1>
+    <p>Compare refinancing options by actual net worth impact over time</p>
+  </div>
+  <nav class="header-nav">
+    <a href="index.html" class="back-link">← Back to Calculator</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">The People</div>
+  <h2 class="page-title">About the Team</h2>
+  <p class="page-sub">Two very different professionals. One shared conviction that spreadsheets deserve better. Here's who built this.</p>
+
+  <div class="team-grid">
+
+    <article class="person-card">
+      <img class="person-photo" src="Brent.jpg" alt="Brent Rowley — Data Analyst and creator of the Advanced Refi Calculator" style="object-position: right top;">
+      <div class="person-body">
+        <div class="person-name">Brent Rowley</div>
+        <div class="person-title">Data Analyst &amp; Suffering Enthusiast</div>
+        <p class="person-bio">
+          Brent built this calculator after convincing himself that running 50 miles a week through mountain terrain was "active recovery." When not reorganizing pivot tables at 11pm or interrogating his mortgage servicer's amortization math, he can be found on a trail somewhere, inexplicably upbeat, eating a gel that tastes like sadness. He treats data with the same obsessive precision he brings to pacing charts — which is to say, he will build a dashboard for something that could have been a sticky note.
+        </p>
+      </div>
+    </article>
+
+    <article class="person-card">
+      <img class="person-photo" src="Abel.jpg" alt="Abel Ravindran-Rowley — Trusted Synergy Expert" style="object-position: center center;">
+      <div class="person-body">
+        <div class="person-name">Abel Ravindran-Rowley</div>
+        <div class="person-title">Trusted Synergy Expert</div>
+        <p class="person-bio">
+          Abel is the firm's foremost authority on synergy, leverage, and paradigm-adjacent frameworks. His methodologies have been described as "bold," "transformative," and "hard to argue with, mostly because no one fully understands them." Abel pioneered the concept of holistic mortgage alignment and once delivered a 47-slide deck on the synergistic value of low interest rates to an audience of three people, one of whom was asleep. His vision is unmatched. His jargon is impenetrable. His conviction is absolute.
+        </p>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="cta">
+    <p>Want to run your own refinance scenario? The calculator is free, fast, and models the full picture — equity, portfolio, taxes, PMI, and break-even month.</p>
+    <a href="index.html">Open the Calculator →</a>
+  </div>
+</main>
+
+</body>
+</html>
