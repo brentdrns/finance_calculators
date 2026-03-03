@@ -128,7 +128,7 @@
   .verdict-header { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 10px; }
   .pos { color: var(--accent); } .neg { color: var(--red); } .neu { color: var(--blue); }
 
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
   .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 11px 13px; }
   .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
   .stat-value { font-size: 16px; font-family: 'DM Serif Display', serif; }
@@ -215,7 +215,7 @@
   @media (max-width: 900px) {
     .layout { grid-template-columns: 1fr; }
     .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
     .main { padding: 20px; }
     header { padding: 18px 20px; flex-direction: column; gap: 4px; }
     .two-col-compare { grid-template-columns: 1fr; }
@@ -268,6 +268,37 @@
       <div class="balance-display" id="curBalanceDisplay">—</div>
       <div class="hint">This is the balance that would be refinanced today</div>
     </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Home Value ($)</label>
+        <input type="number" id="homeValue" value="1150000" min="0" oninput="updateCurrentBalance()">
+        <div class="hint" id="ltvHint"></div>
+      </div>
+      <div class="field">
+        <label>PMI Rate (%/yr)</label>
+        <input type="number" id="pmiRate" value="0.7" step="0.1" min="0">
+        <div class="hint">Applied when LTV &gt; 80%</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Current Loan Extra Payment ($/mo)</label>
+      <input type="number" id="curExtraPayment" value="0" min="0">
+      <div class="hint">Extra principal paid monthly — shortens payoff and builds equity faster</div>
+    </div>
+    <div class="field">
+      <label style="color:var(--text-muted)">ARM / Rate Adjustment <span style="font-size:9px;opacity:0.6">(optional)</span></label>
+      <div class="field-row" style="margin-top:2px">
+        <div>
+          <input type="number" id="armAdjRate" value="" step="0.01" min="0" placeholder="Adjusted rate %">
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">new rate</div>
+        </div>
+        <div>
+          <input type="number" id="armAdjYear" value="" min="1" placeholder="Starting yr">
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">starting year</div>
+        </div>
+      </div>
+      <div class="hint">If your rate adjusts (ARM), enter the adjusted rate and the year it kicks in. Leave blank for fixed.</div>
+    </div>
   </div>
 
   <div class="scenarios-panel">
@@ -296,7 +327,24 @@
     </div>
     <div class="field-row">
       <div class="field">
-        <label>Portfolio Return (%)</label>
+        <label>Filing Status</label>
+        <select id="filingStatus" onchange="updateStdDedHint()" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:7px 10px;outline:none">
+          <option value="30000">Married Filing Jointly</option>
+          <option value="15000">Single / MFS</option>
+          <option value="22500">Head of Household</option>
+        </select>
+        <div class="hint">2025 standard deduction used</div>
+      </div>
+      <div class="field">
+        <label>Other Itemized Ded. ($/yr)</label>
+        <input type="number" id="otherDeductions" value="0" min="0" step="1000" oninput="updateStdDedHint()">
+        <div class="hint">SALT, charitable, etc.</div>
+      </div>
+    </div>
+    <div class="hint" id="stdDedHint" style="margin-bottom:4px;padding:5px 8px;background:var(--surface2);border-radius:var(--radius)"></div>
+    <div class="field-row">
+      <div class="field">
+        <label>Portfolio Return — nominal (%)</label>
         <input type="number" id="investReturn" value="8" step="0.1" min="0">
       </div>
       <div class="field">
@@ -304,7 +352,7 @@
         <input type="number" id="projYears" value="30" min="1" max="50">
       </div>
     </div>
-    <div class="hint" style="margin-bottom:6px">The model assumes every dollar <em>not</em> spent on your mortgage goes into an investment portfolio at this annual return — including monthly payment savings, tax savings on deductible interest, and freed-up cash after the loan pays off. Closing costs are treated as money pulled out of that same portfolio on day one.</div>
+    <div class="hint" style="margin-bottom:6px">Use a <strong>nominal</strong> (not inflation-adjusted) return — e.g. 8% for a broad stock index, which implies ~5% real at 3% inflation. This keeps the math consistent: your mortgage payments are fixed nominal dollars, so the portfolio must be in the same units. Both scenarios are compared in nominal dollars, so the <em>difference</em> between them is still meaningful even though the absolute figures grow with inflation. Every dollar <em>not</em> spent on your mortgage goes into this portfolio — payment savings, interest tax savings, and freed-up cash after payoff. Closing costs and extra paydown are treated as money pulled out on day one.</div>
     <button class="calc-btn" onclick="calculateAll()">Calculate All Scenarios →</button>
   </div>
 
@@ -335,16 +383,20 @@ function monthlyPmt(principal, annualRate, months) {
   const r = annualRate / 100 / 12;
   return principal * r * Math.pow(1+r,months) / (Math.pow(1+r,months)-1);
 }
-function amortize(principal, annualRate, months) {
+function amortize(principal, annualRate, months, extraPayment = 0) {
   const r = annualRate / 100 / 12;
   const pmt = monthlyPmt(principal, annualRate, months);
   let bal = principal;
-  return Array.from({length: months}, () => {
+  const result = [];
+  for (let i = 0; i < months && bal > 0.005; i++) {
     const interest = bal * r;
-    const prin = pmt - interest;
+    const scheduled = pmt - interest;
+    const extra = Math.min(extraPayment, Math.max(0, bal - scheduled));
+    const prin = scheduled + extra;
     bal = Math.max(0, bal - prin);
-    return { interest, principal: prin, balance: bal, payment: pmt };
-  });
+    result.push({ interest, principal: prin, balance: bal, payment: pmt });
+  }
+  return result;
 }
 
 // ── Format ──
@@ -372,8 +424,31 @@ function updateCurrentBalance() {
   const sched = amortize(orig, rate, ot);
   const bal = paid<=0 ? orig : (sched[paid-1]?.balance||0);
   document.getElementById('curBalanceDisplay').textContent = fmt(bal);
+  // LTV hint
+  const homeVal = gv('homeValue');
+  const ltvEl = document.getElementById('ltvHint');
+  if (ltvEl && homeVal > 0) {
+    const ltv = bal / homeVal * 100;
+    const pmiApplies = ltv > 80;
+    ltvEl.innerHTML = `Current LTV: <strong style="color:${pmiApplies?'var(--red)':'var(--accent)'}">${ltv.toFixed(1)}%</strong>${pmiApplies?' — PMI applies':''}`;
+  } else if (ltvEl) { ltvEl.textContent = ''; }
+  // Update stdDed hint
+  updateStdDedHint();
   // Refresh cash-out/paydown displays if open
   scenarios.forEach(s => updateNewLoanDisplay(s.id));
+}
+
+function updateStdDedHint() {
+  const el = document.getElementById('stdDedHint');
+  if (!el) return;
+  const stdDed = parseFloat(document.getElementById('filingStatus')?.value) || 30000;
+  const other = gv('otherDeductions');
+  const excess = Math.max(0, stdDed - other);
+  if (other >= stdDed) {
+    el.textContent = `You already itemize beyond the $${(stdDed/1000).toFixed(0)}k standard deduction — all deductible mortgage interest is marginal.`;
+  } else {
+    el.innerHTML = `Std deduction: <strong>$${(stdDed/1000).toFixed(0)}k</strong>. Only mortgage interest above <strong>$${(excess/1000).toFixed(1)}k/yr</strong> provides a tax benefit (the rest is already covered by standard deduction).`;
+  }
 }
 
 // ── Scenario UI ──
@@ -431,7 +506,19 @@ function renderScenarioTabs() {
       <div class="field">
         <label>Cost to Refinance ($)</label>
         <input type="number" id="rc-${s.id}" value="${s.refiCost}" min="0">
-        <div class="hint">Closing costs, points, fees — treated as an opportunity cost (money that could have been invested).</div>
+        <div class="hint">Closing costs and lender fees — treated as an opportunity cost.</div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Discount Points (%)</label>
+          <input type="number" id="pts-${s.id}" value="0" step="0.125" min="0">
+          <div class="hint">1 pt = 1% of loan amount, added to closing cost</div>
+        </div>
+        <div class="field">
+          <label>Extra Payment ($/mo)</label>
+          <input type="number" id="ep-${s.id}" value="0" min="0">
+          <div class="hint">Extra principal each month — shortens payoff</div>
+        </div>
       </div>
     `;
     panelsEl.appendChild(panel);
@@ -538,85 +625,121 @@ function updateNewLoanDisplay(sid) {
 
 // ── Simulation ──
 function runScenario(curBal, curSched, curPmt, curMonths, s, shared) {
-  const { taxRate, capGainsRate, dedCap, investReturn, projYears } = shared;
+  const { taxRate, capGainsRate, dedCap, investReturn, projYears,
+          homeValue, pmiRate, curExtraPayment, stdDeduction, otherDeductions } = shared;
   const newRate = gv(`nr-${s.id}`);
   const newTerm = Math.round(gv(`nt-${s.id}`));
-  const refiCost = gv(`rc-${s.id}`);
+  const refiCostBase = gv(`rc-${s.id}`);
+  const discountPoints = gv(`pts-${s.id}`) || 0;
+  const scenarioExtra = gv(`ep-${s.id}`) || 0;
   const balType = balTypes[s.id] || 'remaining';
   const balAmount = gv(`bal-amount-${s.id}`) || 0;
 
-  // Determine actual loan amount for the new loan
+  // Determine actual loan amount
   let newLoanBal = curBal;
-  let cashOutAmount = 0;   // positive = cash received (invested day 1)
-  let payDownAmount = 0;   // positive = cash paid in (opportunity cost day 1)
-  if (balType === 'cashout') {
-    newLoanBal = curBal + balAmount;
-    cashOutAmount = balAmount;
-  } else if (balType === 'paydown') {
-    newLoanBal = Math.max(0, curBal - balAmount);
-    payDownAmount = balAmount;
-  }
+  let cashOutAmount = 0, payDownAmount = 0;
+  if (balType === 'cashout') { newLoanBal = curBal + balAmount; cashOutAmount = balAmount; }
+  else if (balType === 'paydown') { newLoanBal = Math.max(0, curBal - balAmount); payDownAmount = balAmount; }
 
-  const newSched = amortize(newLoanBal, newRate, newTerm);
-  const newPmt = newSched[0]?.payment||0;
-  const mReturn = investReturn/12;
-  const projMonths = projYears*12;
+  // Points cost = points% of loan amount, added to effective closing cost
+  const pointsCost = (discountPoints / 100) * newLoanBal;
+  const refiCost = refiCostBase + pointsCost;
 
-  // Portfolio starting values:
-  // - refiCost is always an opportunity cost (subtracted)
-  // - cashOut is extra cash received (added)
-  // - payDown is extra cash paid in (subtracted, same as refiCost)
+  const newSched = amortize(newLoanBal, newRate, newTerm, scenarioExtra);
+  const newPmt = newSched[0]?.payment || 0;
+  const mReturn = investReturn / 12;
+  const projMonths = projYears * 12;
+  const pmiMonthly = pmiRate / 12;
+
+  // Actual payoff months (may be shorter than term due to extra payments)
+  const curPayoff = curSched.length;
+  const newPayoff = newSched.length;
+
   const refiPortStart = -refiCost + cashOutAmount - payDownAmount;
+  let curPort = 0, refiPort = refiPortStart;
+  let curEq = 0, refiEq = curBal - newLoanBal; // cash-out: starts negative (bigger loan = less equity); paydown: starts positive
+  let curCumTax = 0, refiCumTax = 0;
+  let curPortBefore = 0, refiPortBefore = refiPortStart;
+  let curAnnualDedI = 0, newAnnualDedI = 0;
+  let breakEvenMonth = null;
 
-  let curPort=0, refiPort=refiPortStart;
-  let curEq=0, refiEq=0;
-  let curCumTax=0, refiCumTax=0;
-  let curPortBefore=0, refiPortBefore=refiPortStart;
+  const yearlyDelta = [], yearLabels = [], yearlyBD = [];
+  // Standard deduction excess = amount of std ded NOT used by other deductions
+  const stdExcess = Math.max(0, stdDeduction - otherDeductions);
 
-  const yearlyDelta=[], yearLabels=[], yearlyBD=[];
+  for (let m = 1; m <= projMonths; m++) {
+    let cI = 0, cP = 0, nI = 0, nP = 0;
+    if (curSched[m-1]) { cI = curSched[m-1].interest; cP = curSched[m-1].principal; curEq += cP; }
+    if (newSched[m-1]) { nI = newSched[m-1].interest; nP = newSched[m-1].principal; refiEq += nP; }
 
-  for (let m=1; m<=projMonths; m++) {
-    let cI=0,cP=0,nI=0,nP=0;
-    if (m<=curMonths && curSched[m-1]) { cI=curSched[m-1].interest; cP=curSched[m-1].principal; curEq+=cP; }
-    if (m<=newTerm && newSched[m-1])  { nI=newSched[m-1].interest;  nP=newSched[m-1].principal; refiEq+=nP; }
+    // Deductibility fraction based on prior-month balance (loan balance before this payment)
+    const cBalPrev = curSched[m-1] ? curSched[m-1].balance + cP : 0;
+    const nBalPrev = newSched[m-1] ? newSched[m-1].balance + nP : 0;
+    const cDf = cBalPrev > 0 ? Math.min(1, dedCap / cBalPrev) : 0;
+    const nDf = nBalPrev > 0 ? Math.min(1, dedCap / nBalPrev) : 0;
 
-    const curAfter  = m>curMonths ? curPmt : 0;
-    const refiAfter = m>newTerm   ? newPmt  : 0;
+    // Accumulate annual deductible interest (applied annually with std deduction logic)
+    curAnnualDedI += cI * cDf;
+    newAnnualDedI += nI * nDf;
 
-    const cBal = curSched[m-1]  ? curSched[m-1].balance+curSched[m-1].principal   : 0;
-    const nBal = newSched[m-1]  ? newSched[m-1].balance+newSched[m-1].principal   : 0;
-    const cDf = cBal>0 ? Math.min(1, dedCap/cBal) : 0;
-    const nDf = nBal>0 ? Math.min(1, dedCap/nBal) : 0;
+    // PMI: applied when LTV > 80%
+    const curBal_m = curSched[m-1]?.balance || 0;
+    const newBal_m = newSched[m-1]?.balance || 0;
+    const curPMI = (homeValue > 0 && m <= curPayoff && curBal_m / homeValue > 0.80) ? curBal_m * pmiMonthly : 0;
+    const newPMI = (homeValue > 0 && m <= newPayoff && newBal_m / homeValue > 0.80) ? newBal_m * pmiMonthly : 0;
 
-    const cTax = cI*cDf*taxRate; const nTax = nI*nDf*taxRate;
-    curCumTax+=cTax; refiCumTax+=nTax;
+    // Effective payments (including PMI and extra principal — extra payments are opportunity costs)
+    const curEffPmt = (m <= curPayoff ? (curPmt + curExtraPayment) : 0) + curPMI;
+    const newEffPmt = (m <= newPayoff ? (newPmt + scenarioExtra) : 0) + newPMI;
+    const payDiff = curEffPmt - newEffPmt;
 
-    const payDiff = (m<=curMonths?curPmt:0) - (m<=newTerm?newPmt:0);
+    // payDiff handles all phases: active loan, one-loan-done transition, and both-done.
+    // When current is done: curEffPmt=0, so payDiff<0 and curPort gains newEffPmt/mo (current person freed, refi still paying).
+    // When refi is done: newEffPmt=0, so payDiff>0 and refiPort gains curEffPmt/mo (refi freed, current still paying).
+    // When both done: payDiff=0, neither portfolio gets new housing contributions — apples-to-apples.
+    curPort  = curPort  * (1 + mReturn) + (payDiff < 0 ? -payDiff : 0);
+    refiPort = refiPort * (1 + mReturn) + (payDiff > 0 ?  payDiff : 0);
 
-    curPort  = curPort*(1+mReturn)  + cTax + (payDiff<0?-payDiff:0) + curAfter;
-    refiPort = refiPort*(1+mReturn) + nTax + (payDiff>0?payDiff:0)  + refiAfter;
+    if (m % 12 === 0) {
+      // Apply tax benefit annually using standard deduction logic
+      const cEffDed = Math.max(0, curAnnualDedI - stdExcess);
+      const nEffDed = Math.max(0, newAnnualDedI - stdExcess);
+      const cTaxYear = cEffDed * taxRate;
+      const nTaxYear = nEffDed * taxRate;
+      curPort  += cTaxYear;
+      refiPort += nTaxYear;
+      curCumTax  += cTaxYear;
+      refiCumTax += nTaxYear;
+      curAnnualDedI = 0; newAnnualDedI = 0;
 
-    if (m%12===0) {
-      const cg=curPort-curPortBefore, rg=refiPort-refiPortBefore;
-      if (cg>0) curPort  -= cg*capGainsRate;
-      if (rg>0) refiPort -= rg*capGainsRate;
-      curPortBefore=curPort; refiPortBefore=refiPort;
+      // Capital gains tax annually
+      const cg = curPort - curPortBefore, rg = refiPort - refiPortBefore;
+      if (cg > 0) curPort  -= cg * capGainsRate;
+      if (rg > 0) refiPort -= rg * capGainsRate;
+      curPortBefore = curPort; refiPortBefore = refiPort;
 
-      yearlyDelta.push(refiPort+refiEq - curPort-curEq);
-      yearLabels.push(new Date().getFullYear() + Math.ceil(m/12));
+      yearlyDelta.push(refiPort + refiEq - curPort - curEq);
+      yearLabels.push(new Date().getFullYear() + Math.ceil(m / 12));
       yearlyBD.push({
-        equityDelta: refiEq-curEq, portfolioDelta: refiPort-curPort,
+        equityDelta: refiEq - curEq, portfolioDelta: refiPort - curPort,
         curEq, refiEq, curPort, refiPort, curCumTax, refiCumTax
       });
     }
+
+    // Track break-even at monthly granularity
+    if (breakEvenMonth === null && (refiPort + refiEq) >= (curPort + curEq)) {
+      breakEvenMonth = m;
+    }
   }
 
-  const curY1I = curSched.slice(0,12).reduce((s,r)=>s+r.interest,0);
-  const newY1I = newSched.slice(0,12).reduce((s,r)=>s+r.interest,0);
+  const curY1I = curSched.slice(0, 12).reduce((a, r) => a + r.interest, 0);
+  const newY1I = newSched.slice(0, 12).reduce((a, r) => a + r.interest, 0);
 
-  return { yearlyDelta, yearLabels, yearlyBD, curPmt, newPmt, refiCost, newRate, newTerm,
+  return { yearlyDelta, yearLabels, yearlyBD, curPmt, newPmt, refiCost, refiCostBase,
+           pointsCost, discountPoints, scenarioExtra, newRate, newTerm,
            newLoanBal, balType, cashOutAmount, payDownAmount,
-           curY1I, newY1I, investReturn, projYears, curSched, newSched };
+           curY1I, newY1I, investReturn, projYears, curSched, newSched,
+           breakEvenMonth, curPayoff, newPayoff };
 }
 
 // ── Chart instances ──
@@ -629,14 +752,34 @@ function calculateAll() {
   const taxRate=gv('taxRate')/100, capGainsRate=gv('capGains')/100;
   const dedCap=gv('deductibleCap'), investReturn=gv('investReturn')/100;
   const projYears=Math.round(gv('projYears'));
+  const homeValue=gv('homeValue'), pmiRate=gv('pmiRate')/100;
+  const curExtraPayment=gv('curExtraPayment');
+  const stdDeduction=parseFloat(document.getElementById('filingStatus')?.value)||30000;
+  const otherDeductions=gv('otherDeductions');
+  const armAdjRate=gv('armAdjRate'), armAdjYear=Math.round(gv('armAdjYear'));
+
+  updateStdDedHint();
 
   const paid=ot-rem;
   const fullSched=amortize(orig,rate,ot);
   const curBal = paid<=0 ? orig : (fullSched[paid-1]?.balance||0);
-  const curSched=amortize(curBal,rate,rem);
+
+  // Build current loan schedule, handling ARM adjustment and extra payments
+  let curSched;
+  if (armAdjRate > 0 && armAdjYear > 0 && armAdjYear * 12 < rem) {
+    const adjMonth = armAdjYear * 12;
+    const seg1 = amortize(curBal, rate, rem, curExtraPayment).slice(0, adjMonth);
+    const balAtAdj = seg1.length > 0 ? seg1[seg1.length-1].balance : curBal;
+    const remAfterAdj = rem - seg1.length;
+    const seg2 = remAfterAdj > 0 ? amortize(balAtAdj, armAdjRate, remAfterAdj, curExtraPayment) : [];
+    curSched = [...seg1, ...seg2];
+  } else {
+    curSched = amortize(curBal, rate, rem, curExtraPayment);
+  }
   const curPmt=curSched[0]?.payment||0;
 
-  const shared={taxRate,capGainsRate,dedCap,investReturn,projYears};
+  const shared={taxRate,capGainsRate,dedCap,investReturn,projYears,
+                homeValue,pmiRate,curExtraPayment,stdDeduction,otherDeductions};
   const results=scenarios.map(s=>({s,r:runScenario(curBal,curSched,curPmt,rem,s,shared)}));
 
   document.getElementById('emptyState').style.display='none';
@@ -688,14 +831,24 @@ function switchResultTab(active, total) {
 }
 
 function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigTerm) {
-  const {yearlyDelta,yearLabels,yearlyBD,curPmt,newPmt,refiCost,newRate,newTerm,
-         newLoanBal,balType,cashOutAmount,payDownAmount,curY1I,newY1I,investReturn,projYears}=r;
+  const {yearlyDelta,yearLabels,yearlyBD,curPmt,newPmt,refiCost,refiCostBase,pointsCost,
+         discountPoints,scenarioExtra,newRate,newTerm,newLoanBal,balType,cashOutAmount,
+         payDownAmount,curY1I,newY1I,investReturn,projYears,breakEvenMonth,curPayoff,newPayoff}=r;
   const color=scColor(idx);
   const finalDelta=yearlyDelta[yearlyDelta.length-1];
   const refiWins=finalDelta>0;
   const monthlySav=curPmt-newPmt;
-  let breakevenYear=null;
-  for(let i=0;i<yearlyDelta.length;i++) if(yearlyDelta[i]>=0){breakevenYear=i+1;break;}
+
+  // Month-precision break-even
+  const beMonth = breakEvenMonth;
+  const beYr = beMonth ? Math.ceil(beMonth / 12) : null;
+  const beMo = beMonth ? ((beMonth - 1) % 12) + 1 : null;
+  const beLabel = beMonth
+    ? (beMo === 0 ? `Yr ${beYr}` : `Mo ${beMonth} (Yr ${beYr})`)
+    : 'Never';
+  const beSub = beMonth
+    ? `month ${beMonth} — stays ahead after`
+    : `not within ${projYears}yr window`;
 
   // Build a context line describing the loan balance situation
   let balContextLine = '';
@@ -736,17 +889,22 @@ function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigT
         <div class="stat-sub">${refiWins?'refi ahead':'current loan wins'}</div>
       </div>
       <div class="stat-box">
-        <div class="stat-label">Break-even Year</div>
-        <div class="stat-value" style="color:${breakevenYear?'var(--blue)':'var(--red)'}">${breakevenYear?'Year '+breakevenYear:'Never'}</div>
-        <div class="stat-sub">${breakevenYear?'refi stays ahead after this':`not in ${projYears}yr window`}</div>
+        <div class="stat-label">Break-even</div>
+        <div class="stat-value" style="color:${beMonth?'var(--blue)':'var(--red)'}">${beLabel}</div>
+        <div class="stat-sub">${beSub}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Refi Payoff</div>
+        <div class="stat-value" style="color:var(--text);font-size:16px">${newPayoff < newTerm ? `Mo ${newPayoff}` : `Mo ${newPayoff}`}</div>
+        <div class="stat-sub">${newPayoff < newTerm ? `${Math.round((newTerm-newPayoff)/12)} yrs early (extra pmts)` : `full ${Math.round(newTerm/12)}-yr term`}</div>
       </div>
     </div>
     <div class="breakeven-note">
-      ${breakevenYear
-        ?`Refi starts <em>behind</em> due to closing costs and the amortization reset, and catches up by <strong>Year ${breakevenYear}</strong>. After that it stays ahead.`
-        :refiWins
-          ?`Refi is ahead from day one — payment savings immediately outweigh closing costs.`
-          :`Closing costs and/or higher payments never fully recover within your ${projYears}-year window.`}
+      ${beMonth
+        ? `Refi starts <em>behind</em> due to closing costs${refiCost !== refiCostBase ? ` (incl. ${fmt(pointsCost)} in points)` : ''} and the amortization reset, and catches up by <strong>month ${beMonth}</strong>. After that it stays ahead.`
+        : refiWins
+          ? `Refi is ahead from day one — payment savings immediately outweigh closing costs.`
+          : `Closing costs and/or higher payments never fully recover within your ${projYears}-year window.`}
     </div>
   `;
   container.appendChild(vc);
@@ -1150,6 +1308,7 @@ function toggleExplain(el) {
 // ── Init ──
 renderScenarioTabs();
 updateCurrentBalance();
+updateStdDedHint();
 calculateAll();
 </script>
 
