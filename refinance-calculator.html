@@ -18,6 +18,14 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"Advanced Mortgage Refinance Calculator","description":"Compare mortgage refinancing options by net worth impact including equity, investment portfolio, taxes, PMI, and break-even analysis.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -309,11 +317,11 @@
     <div class="field-row">
       <div class="field">
         <label>Original Loan Amount ($)</label>
-        <input type="number" id="curBalance" value="907000" min="0" oninput="updateCurrentBalance()">
+        <input type="number" id="curBalance" value="500000" min="0" oninput="updateCurrentBalance()">
       </div>
       <div class="field">
         <label>Interest Rate (%)</label>
-        <input type="number" id="curRate" value="6.125" step="0.01" min="0" oninput="updateCurrentBalance()">
+        <input type="number" id="curRate" value="7.0" step="0.01" min="0" oninput="updateCurrentBalance()">
       </div>
     </div>
     <div class="field-row">
@@ -325,11 +333,11 @@
         <label>Remaining Term</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
           <div>
-            <input type="number" id="curYearsRem" value="28" min="0" oninput="updateCurrentBalance()">
+            <input type="number" id="curYearsRem" value="29" min="0" oninput="updateCurrentBalance()">
             <div style="font-size:10px;color:var(--text-muted);margin-top:2px">years</div>
           </div>
           <div>
-            <input type="number" id="curMonthsRem" value="9" min="0" max="11" oninput="updateCurrentBalance()">
+            <input type="number" id="curMonthsRem" value="0" min="0" max="11" oninput="updateCurrentBalance()">
             <div style="font-size:10px;color:var(--text-muted);margin-top:2px">months</div>
           </div>
         </div>
@@ -343,7 +351,7 @@
     <div class="field-row">
       <div class="field">
         <label>Home Value ($)</label>
-        <input type="number" id="homeValue" value="1150000" min="0" oninput="updateCurrentBalance()">
+        <input type="number" id="homeValue" value="650000" min="0" oninput="updateCurrentBalance()">
         <div class="hint" id="ltvHint"></div>
       </div>
       <div class="field">
@@ -385,7 +393,7 @@
     <div class="field-row">
       <div class="field">
         <label>Marginal Tax Rate (%)</label>
-        <input type="number" id="taxRate" value="32" step="1" min="0" max="100">
+        <input type="number" id="taxRate" value="24" step="1" min="0" max="100">
       </div>
       <div class="field">
         <label>Capital Gains Rate (%)</label>
@@ -442,8 +450,8 @@
 <script>
 // ── State ──
 let scenarios = [
-  { id: 1, name: 'Option A', newRate: 5.75, newTerm: 360, refiCost: 8000 },
-  { id: 2, name: 'Option B', newRate: 5.5, newTerm: 360, refiCost: 8000 },
+  { id: 1, name: 'Option A', newRate: 5.75, newTerm: 360, refiCost: 6000 },
+  { id: 2, name: 'Option B', newRate: 5.5, newTerm: 360, refiCost: 6000 },
 ];
 let nextId = 3;
 const COLORS = ['#c8f060','#60a0f0','#f0a060','#b060f0','#f06060','#60f0d0'];
@@ -623,7 +631,7 @@ function renameScenario(id, name) {
 
 function addScenario() {
   const idx = scenarios.length;
-  scenarios.push({ id: nextId++, name: `Option ${String.fromCharCode(65+idx)}`, newRate: 5.5, newTerm: 360, refiCost: 8000 });
+  scenarios.push({ id: nextId++, name: `Option ${String.fromCharCode(65+idx)}`, newRate: 5.5, newTerm: 360, refiCost: 6000 });
   renderScenarioTabs();
   switchScenarioTab(scenarios.length-1);
 }
