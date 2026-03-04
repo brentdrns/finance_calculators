@@ -284,6 +284,14 @@
   .fb-csv { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; padding: 8px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .fb-csv:hover { color: var(--text); border-color: var(--accent-dim); }
   .fb-success { display: none; font-size: 12px; color: var(--accent); }
+
+  /* Site footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
   /* Hero band */
   .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
   .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
@@ -1581,10 +1589,16 @@ if (new URLSearchParams(window.location.search).has('admin')) {
       </div>
     </form>
   </div>
-  <p style="margin-top:12px;font-size:11px;color:var(--text-muted)">
-    <a href="index.html" style="color:var(--accent-dim);text-decoration:none">← Abel's Financial Calculators</a> · <a href="about.html" style="color:var(--accent-dim);text-decoration:none">About the Team</a>
-  </p>
 </section>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on the inputs you provide and do not account for all financial variables. Consult a licensed financial or mortgage professional before making any refinancing decision.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
 
 </body>
 </html>
