@@ -72,6 +72,11 @@
   .philosophy p { color: var(--text-muted); font-size: 13px; line-height: 1.85; max-width: 640px; }
   .philosophy p + p { margin-top: 12px; }
 
+  @keyframes abel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .abel-logo { animation: abel-spin 5s linear infinite; display: inline-block; vertical-align: middle; flex-shrink: 0; height: 56px; width: auto; }
+  .abel-logo-l { margin-right: 10px; }
+  .abel-logo-r { margin-left: 10px; animation-direction: reverse; }
+
   @media (max-width: 640px) {
     header { padding: 18px 20px; }
     header h1 { font-size: 22px; }
@@ -85,7 +90,7 @@
 
 <header>
   <div>
-    <h1>Abel's Financial Calculators</h1>
+    <h1><img class="abel-logo abel-logo-l" src="dog_head_transparent.png" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="dog_head_transparent.png" alt="" aria-hidden="true"></h1>
     <p>Smarter math for real financial decisions</p>
   </div>
   <nav class="header-nav" aria-label="Site navigation">
@@ -111,7 +116,7 @@
       <div class="calc-card-tag">Mortgage</div>
       <div class="calc-card-title">Refinance Calculator</div>
       <p class="calc-card-body">
-        Compare refinancing scenarios side by side — modeled as real net worth impact over time, not just monthly payment savings.
+        Compare refinancing scenarios side by side — modeled as real net worth impact over time, not just monthly payment savings. Abel has reviewed the math and remains focused on it, except briefly when a squirrel walked by.
       </p>
       <div class="calc-card-factors">
         <span class="factor-pill">Equity</span>
@@ -132,7 +137,7 @@
       The standard mortgage refinance calculator asks for your rate and loan balance, then tells you your new monthly payment. That's not a decision — that's arithmetic.
     </p>
     <p>
-      A real decision requires modeling what happens to your equity over time, what you give up by not investing the closing costs, how your tax deduction changes, whether PMI drops off, and exactly how many months until you break even. That's what our calculators do. Abel would also like a treat, but that's separate.
+      A real decision requires modeling what happens to your equity over time, what you give up by not investing the closing costs, how your tax deduction changes, whether PMI drops off, and exactly how many months until you break even. That's what our calculators do. Abel oversaw the entire development from the couch and is satisfied with the results.
     </p>
   </div>
 </main>
