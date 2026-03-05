@@ -11,11 +11,11 @@
 <meta property="og:description" content="Meet Abel, the dog behind Abel's Financial Calculators — building smarter financial tools that factor in more than the others.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://abelscalculators.com/about.html">
-<meta property="og:image" content="https://abelscalculators.com/Abel.jpg">
+<meta property="og:image" content="https://abelscalculators.com/images/Abel.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About the Team — Abel's Financial Calculators">
 <meta name="twitter:description" content="Meet Abel, the dog behind Abel's Financial Calculators.">
-<meta name="twitter:image" content="https://abelscalculators.com/Abel.jpg">
+<meta name="twitter:image" content="https://abelscalculators.com/images/Abel.jpg">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
 <script>
@@ -44,9 +44,11 @@
   header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
   header p { color: var(--text-muted); font-size: 12px; }
-  .header-nav { margin-left: auto; }
-  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
-  .back-link:hover { color: var(--text); border-color: var(--accent-dim); }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .header-nav a:hover { color: var(--text); border-color: var(--accent-dim); }
+  .header-nav a.active { color: var(--accent); border-color: var(--accent-dim); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
 
   main { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
 
@@ -94,18 +96,28 @@
   .site-footer-nav a:hover { color: var(--accent-dim); }
   @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"AboutPage","name":"About Abel's Financial Calculators","description":"Free financial calculators that model the full picture — built by a data analyst and his dog.","url":"https://abelscalculators.com/about.html","isPartOf":{"@type":"WebSite","name":"Abel's Financial Calculators","url":"https://abelscalculators.com/"}}
+</script>
 </head>
 <body>
 
 <header>
   <div>
-    <h1><img class="abel-logo abel-logo-l" src="dog_head_transparent.webp" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
+    <h1><img class="abel-logo abel-logo-l" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
     <p>Smarter math for real financial decisions</p>
   </div>
   <nav class="header-nav">
-    <a href="index.html" class="back-link">← Home</a>
-    <a href="rent-vs-buy.html" class="back-link">Rent vs Buy</a>
-    <a href="blog/is-refinancing-worth-it.html" class="back-link">Blog</a>
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="refinance.html">Refinance</a>
+    <a href="rent-vs-buy.html">Rent vs Buy</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="vehicle-cost.html">Vehicle Cost</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html" class="active">About</a>
   </nav>
 </header>
 
@@ -117,7 +129,7 @@
   <div class="team-grid">
 
     <article class="person-card">
-      <img class="person-photo" src="Brent.jpg" alt="Brent — Data Analyst and creator of Abel's Financial Calculators" style="object-position: right top;">
+      <img class="person-photo" src="images/Brent.jpg" alt="Brent — Data Analyst and creator of Abel's Financial Calculators" style="object-position: right top;">
       <div class="person-body">
         <div class="person-name">Brent</div>
         <div class="person-title">Bandwidth Optimization Specialist</div>
@@ -128,7 +140,7 @@
     </article>
 
     <article class="person-card">
-      <img class="person-photo" src="Abel.jpg" alt="Abel — Synergy Expert and founder of Abel's Financial Calculators" style="object-position: center center;">
+      <img class="person-photo" src="images/Abel.jpg" alt="Abel — Synergy Expert and founder of Abel's Financial Calculators" style="object-position: center center;">
       <div class="person-body">
         <div class="person-name">Abel</div>
         <div class="person-title">Senior Synergy Enablement Consultant</div>
@@ -141,17 +153,19 @@
   </div>
 
   <div class="cta">
-    <p>Want to run your own refinance scenario? The calculator is free, fast, and models the full picture — equity, portfolio, taxes, PMI, and break-even month. Abel approved it.</p>
-    <a href="index.html">Open the Refinance Calculator →</a>
+    <p>Want to run your own numbers? Our calculators are free, fast, and model the full picture. Abel approved them.</p>
+    <a href="index.html">Explore the calculators →</a>
   </div>
 </main>
 
 <footer class="site-footer">
   <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on the inputs you provide and do not account for all financial variables. Consult a licensed financial or mortgage professional before making any financial decision.</p>
   <nav class="site-footer-nav">
-    <a href="index.html">Home</a>
+    <a href="refinance.html">Refinance</a>
     <a href="rent-vs-buy.html">Rent vs Buy</a>
-    <a href="blog/is-refinancing-worth-it.html">Blog</a>
+    <a href="vehicle-cost.html">Vehicle Cost</a>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
     <a href="about.html">About</a>
     <a href="privacy.html">Privacy Policy</a>
   </nav>

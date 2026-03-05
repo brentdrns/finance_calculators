@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gas vs Electric: The Real Cost Comparison &mdash; Abel's Financial Calculators</title>
+<meta name="description" content="EVs have lower running costs but higher sticker prices. Here's how to figure out which actually costs less for you &mdash; based on how much you drive, where you live, and how long you keep the car.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/gas-vs-electric.html">
+<meta property="og:title" content="Gas vs Electric: The Real Cost Comparison">
+<meta property="og:description" content="EVs have lower running costs but higher sticker prices. Here's how to figure out which actually costs less for you.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/gas-vs-electric.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gas vs Electric: The Real Cost Comparison">
+<meta name="twitter:description" content="EVs have lower running costs but higher sticker prices. Here's how to figure out which actually costs less for you.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Gas vs Electric: The Real Cost Comparison",
+  "description": "EVs have lower running costs but higher sticker prices. Here's how to figure out which actually costs less for you &mdash; based on how much you drive, where you live, and how long you keep the car.",
+  "author": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "datePublished": "2026-03-05",
+  "dateModified": "2026-03-05",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/gas-vs-electric.html"
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f0c;
+    --surface: #16180f;
+    --surface2: #1e2115;
+    --border: #2e3320;
+    --accent: #c8f060;
+    --accent-dim: #8aaa2a;
+    --text: #e8ead8;
+    --text-muted: #7a8060;
+    --blue: #60a0f0;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
+  header p { color: var(--text-muted); font-size: 12px; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+
+  .callout { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+
+  .scenario-compare { margin: 32px 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-col-basic .sc-row-value { color: var(--text); }
+  .sc-col-full .sc-row-value { color: var(--text); }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-verdict strong { font-size: 13px; }
+  .sc-highlight { color: var(--accent); }
+  .sc-negative { color: #f06060; }
+  .sc-missed { font-size: 11px; color: var(--text-muted); font-style: italic; padding: 10px 24px; border-top: 1px solid var(--border); background: var(--surface2); line-height: 1.6; }
+  @media (max-width: 640px) {
+    .scenario-compare-body { grid-template-columns: 1fr; }
+    .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+
+  @keyframes abel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .abel-logo { animation: abel-spin 5s linear infinite; display: inline-block; vertical-align: middle; flex-shrink: 0; height: 56px; width: auto; }
+  .abel-logo-l { margin-right: 10px; }
+  .abel-logo-r { margin-left: 10px; animation-direction: reverse; }
+
+  @media (max-width: 640px) {
+    header { padding: 18px 20px; }
+    main { padding: 32px 16px 60px; }
+    .page-title { font-size: 28px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1><img class="abel-logo abel-logo-l" src="../images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="../index.html" style="color:inherit;text-decoration:none;">Abel&rsquo;s Calculators</a><img class="abel-logo abel-logo-r" src="../images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
+    <p>Smarter math for real financial decisions</p>
+  </div>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../refinance.html">Refinance</a>
+    <a href="../rent-vs-buy.html">Rent vs Buy</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../vehicle-cost.html">Vehicle Cost</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">Blog</div>
+  <h2 class="page-title">Gas vs Electric: What Actually Costs Less to Own?</h2>
+  <p class="page-sub">The sticker price says one thing. The 10-year cost says something else entirely.</p>
+  <p class="page-date">March 5, 2026</p>
+
+  <article>
+    <p>The gas vs electric debate usually starts and ends with the price tag. An EV costs more up front, so it must cost more overall&mdash;right? Not necessarily. But not always the other way either. The real answer depends on a few things that are specific to you: how much you drive, where you live, and how long you plan to keep the car.</p>
+
+    <p>Here&rsquo;s how to think about it.</p>
+
+    <h2>Two Different Cost Structures</h2>
+
+    <p>Gas cars and EVs don&rsquo;t just differ in fuel type&mdash;they have fundamentally different cost profiles. Understanding this is the key to the whole comparison.</p>
+
+    <p><strong>Gas cars have lower fixed costs but higher variable costs.</strong> You can buy a solid gas sedan for $28&ndash;32k. Depreciation is relatively predictable. But you&rsquo;re paying $3&ndash;5 per gallon, and maintenance costs add up over time&mdash;oil changes, transmission service, brake wear, and so on. The more you drive, the more it costs.</p>
+
+    <p><strong>EVs have higher fixed costs but lower variable costs.</strong> A comparable EV might run $40&ndash;48k. And EVs currently depreciate faster than gas cars in the first few years&mdash;roughly 60% over 5 years versus 50% for gas. But electricity is dramatically cheaper than gas per mile, and maintenance is minimal: no oil changes, no transmission, and regenerative braking means brake pads last much longer. The more you drive, the more that per-mile savings compounds.</p>
+
+    <div class="callout">
+      <p><strong>The crossover insight:</strong> Because EVs front-load their costs (purchase price, depreciation) and back-load their savings (cheap fuel, low maintenance), <strong>EVs tend to win when you drive more miles and keep the car longer.</strong> Gas cars tend to win when you drive less or plan to sell within a few years.</p>
+    </div>
+
+    <h2>Miles Driven Is the Biggest Lever</h2>
+
+    <p>This is the single most important variable. The per-mile cost difference between gas and electric is roughly:</p>
+
+    <ul>
+      <li><strong>Gas:</strong> At 30 MPG and $3.50/gal, you&rsquo;re paying about <strong>$0.117/mile</strong> in fuel</li>
+      <li><strong>Electric:</strong> At 3.5 mi/kWh and $0.13/kWh, you&rsquo;re paying about <strong>$0.037/mile</strong> in fuel</li>
+    </ul>
+
+    <p>That&rsquo;s roughly <strong>8 cents per mile cheaper</strong> on electricity. Doesn&rsquo;t sound like much, but it adds up fast:</p>
+
+    <ul>
+      <li><strong>8,000 miles/year:</strong> $640/year fuel savings</li>
+      <li><strong>12,000 miles/year:</strong> $960/year fuel savings</li>
+      <li><strong>20,000 miles/year:</strong> $1,600/year fuel savings</li>
+    </ul>
+
+    <p>Over 10 years at 15,000 miles/year, that fuel difference alone is roughly <strong>$12,000</strong>. Add in lower maintenance costs (roughly 3&cent;/mile vs 6&cent;/mile for gas), and the EV saves another <strong>$4,500</strong> over the same period. That $16,500 in running cost savings can close a lot of the gap on a higher purchase price.</p>
+
+    <h2>Where You Live Matters</h2>
+
+    <p>The fuel cost math above assumes national averages, but energy prices vary enormously by state. The gap between gas and electricity can make or break the EV case.</p>
+
+    <p><strong>States where EVs have the biggest fuel advantage:</strong> Washington, Oregon, Utah, Idaho, and other states with cheap hydroelectric power (electricity under $0.12/kWh) combined with moderate to high gas prices. In Washington, you might pay $0.11/kWh for electricity and $3.85/gal for gas&mdash;the per-mile cost difference is over 10 cents.</p>
+
+    <p><strong>States where the advantage shrinks:</strong> Hawaii, Massachusetts, Connecticut, and other states with expensive electricity (over $0.25/kWh). In Hawaii, electricity costs $0.39/kWh, which brings the EV fuel cost to $0.11/mile&mdash;nearly the same as gas. The fuel savings almost disappear.</p>
+
+    <p>Our <a href="../vehicle-cost.html">vehicle cost calculator</a> lets you select your state to auto-fill local gas and electricity prices, so you can see exactly how the math works where you live.</p>
+
+    <h2>The Feature Value Angle</h2>
+
+    <p>Here&rsquo;s something that gets overlooked in the gas vs electric debate: <strong>you might be able to get a more feature-rich EV and end up at a similar total cost to a base-model gas car</strong>, especially if you keep it long enough.</p>
+
+    <p>A $45k EV with a tech package, premium audio, and driver-assist features might look expensive next to a $32k base-model gas sedan. But after 8&ndash;10 years of lower fuel and maintenance costs, the total cost of ownership can converge. You end up driving a nicer car for roughly the same money&mdash;you just pay more of it up front.</p>
+
+    <p>This doesn&rsquo;t always work out, and it depends heavily on the specific models. But it&rsquo;s worth comparing at the total-cost level rather than just sticker price.</p>
+
+    <h2>The Unknown Factor</h2>
+
+    <p>All of the math above assumes things go as planned. But EVs are still relatively new, and there are real unknowns that gas cars don&rsquo;t have:</p>
+
+    <ul>
+      <li><strong>Battery degradation.</strong> Most EV batteries are warrantied for 8 years/100,000 miles, and real-world data suggests they hold up well within that window. But beyond it? Replacement costs can be $8,000&ndash;$15,000+. This is a risk that&rsquo;s hard to model.</li>
+      <li><strong>Long-term dependability.</strong> We have 50+ years of data on how gas cars age. For EVs, the track record is much shorter. Some components (motors, brakes) should last longer. Others (electronics, software systems) are less proven.</li>
+      <li><strong>Repair costs and access.</strong> If something does go wrong on an EV, parts can be harder to source and fewer shops are equipped to work on them. This is improving, but it&rsquo;s still a factor&mdash;especially outside major metro areas.</li>
+      <li><strong>Resale value volatility.</strong> EV depreciation has been steeper and less predictable than gas cars, partly because the technology is changing fast. A 3-year-old EV competes with newer models that may have significantly better range and features.</li>
+    </ul>
+
+    <p>None of this means EVs are a bad bet. But it does mean there&rsquo;s more uncertainty in the long tail of ownership.</p>
+
+    <h2>When Leasing Makes Sense</h2>
+
+    <p>If you&rsquo;re interested in an EV but wary of the unknowns, <strong>leasing can be a smart hedge.</strong></p>
+
+    <p>Leasing lets you lock in the benefits of an EV&mdash;lower fuel costs, lower maintenance, the driving experience&mdash;while capping your exposure to depreciation and long-term reliability risk. You hand the car back before the battery warranty becomes a concern, and you&rsquo;re not stuck holding an asset whose resale value is hard to predict.</p>
+
+    <p>This is especially worth considering if:</p>
+
+    <ul>
+      <li><strong>You don&rsquo;t drive a lot.</strong> If you&rsquo;re under 10,000 miles/year, the fuel savings are smaller, and the EV&rsquo;s high fixed costs (depreciation, purchase price) dominate. Leasing limits your commitment to the higher upfront cost.</li>
+      <li><strong>You don&rsquo;t plan to keep a car for 7+ years.</strong> The EV cost advantage really kicks in at higher mileage and longer ownership. If you like to switch cars every 3&ndash;4 years, a lease can be cheaper than buying and selling.</li>
+      <li><strong>EV technology is changing fast.</strong> In 3 years, there will likely be EVs with better range, faster charging, and lower prices. Leasing lets you upgrade without eating a big depreciation hit.</li>
+    </ul>
+
+    <p>The trade-off is that leasing is generally more expensive than buying and holding for 10+ years, since you never build equity. But you&rsquo;re paying for flexibility and risk reduction, and sometimes that&rsquo;s worth it.</p>
+
+    <h2>The Bottom Line</h2>
+
+    <p>There&rsquo;s no universal answer to gas vs electric. But the framework is straightforward:</p>
+
+    <ol>
+      <li><strong>High mileage + cheap electricity + long ownership = EV wins.</strong> The per-mile savings compound over time and eventually overtake the higher purchase price and depreciation.</li>
+      <li><strong>Low mileage + expensive electricity + short ownership = gas wins.</strong> The EV never drives enough miles to recoup its higher fixed costs.</li>
+      <li><strong>Uncertain about keeping it long-term? Consider leasing an EV.</strong> You get the running cost benefits without the long-term risk.</li>
+      <li><strong>Don&rsquo;t just compare sticker prices.</strong> A $45k EV and a $32k gas car can end up costing the same over 10 years once you factor in fuel, maintenance, and depreciation. Compare total cost, not purchase price.</li>
+    </ol>
+
+    <p>The only way to know for sure is to run the numbers with your actual situation&mdash;your miles, your energy prices, the specific cars you&rsquo;re considering.</p>
+
+    <div class="cta">
+      <p>We built a free vehicle cost calculator that models the full picture&mdash;depreciation, fuel, maintenance, insurance, registration, and financing. Compare a gas car, an EV, or a lease side by side with your actual numbers.</p>
+      <a class="cta-btn" href="../vehicle-cost.html">Try the Vehicle Cost Calculator &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on the inputs you provide and do not account for all financial variables. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../rent-vs-buy.html">Rent vs Buy</a>
+    <a href="../vehicle-cost.html">Vehicle Cost</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+</body>
+</html>
