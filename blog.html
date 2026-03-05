@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog &mdash; Abel&#8217;s Financial Calculators</title>
+<meta name="description" content="Articles on real financial decisions &mdash; gas vs electric, refinancing, rent vs buy, and more. Written by a data analyst (and his dog).">
+<meta name="author" content="Abel&#8217;s Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog.html">
+<meta property="og:title" content="Blog &mdash; Abel&#8217;s Financial Calculators">
+<meta property="og:description" content="Articles on real financial decisions &mdash; gas vs electric, refinancing, rent vs buy, and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/blog.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog &mdash; Abel&#8217;s Financial Calculators">
+<meta name="twitter:description" content="Articles on real financial decisions &mdash; gas vs electric, refinancing, rent vs buy, and more.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Blog","name":"Abel&#8217;s Financial Calculators Blog","description":"Articles on real financial decisions.","url":"https://abelscalculators.com/blog.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f0c;
+    --surface: #16180f;
+    --surface2: #1e2115;
+    --border: #2e3320;
+    --accent: #c8f060;
+    --accent-dim: #8aaa2a;
+    --text: #e8ead8;
+    --text-muted: #7a8060;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; min-height: 100vh; }
+  header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
+  header p { color: var(--text-muted); font-size: 12px; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .header-nav a:hover { color: var(--text); border-color: var(--accent-dim); }
+  .header-nav a.active { color: var(--accent); border-color: var(--accent-dim); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  @keyframes abel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .abel-logo { animation: abel-spin 5s linear infinite; display: inline-block; vertical-align: middle; flex-shrink: 0; height: 56px; width: auto; }
+  .abel-logo-l { margin-right: 10px; }
+  .abel-logo-r { margin-left: 10px; animation-direction: reverse; }
+  .content { max-width: 800px; margin: 0 auto; padding: 48px 40px 80px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 32px; font-style: italic; color: var(--text); margin-bottom: 8px; }
+  .page-sub { color: var(--text-muted); font-size: 12px; margin-bottom: 40px; line-height: 1.6; }
+  .blog-list { display: flex; flex-direction: column; gap: 20px; }
+  .blog-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .blog-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+  .blog-card-date { font-size: 10px; color: var(--text-muted); margin-bottom: 8px; }
+  .blog-card-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+  .blog-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+  .blog-card-cta { font-size: 12px; color: var(--accent); font-weight: 500; }
+  .blog-card:hover .blog-card-cta { text-decoration: underline; }
+  .blog-card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .blog-card-tag { font-size: 10px; padding: 3px 8px; border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); }
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) {
+    header { padding: 18px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    header h1 { font-size: 22px; }
+    .header-nav { margin-left: 0; }
+    .content { padding: 32px 20px 60px; }
+    .blog-card { padding: 20px 22px; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1><img class="abel-logo abel-logo-l" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel&rsquo;s Calculators</a><img class="abel-logo abel-logo-r" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
+    <p>Smarter math for real financial decisions</p>
+  </div>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="refinance.html">Refinance</a>
+    <a href="rent-vs-buy.html">Rent vs Buy</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="vehicle-cost.html">Vehicle Cost</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<div class="content">
+  <h2 class="page-title">Blog</h2>
+  <p class="page-sub">Deep dives into the financial decisions that matter &mdash; with the math to back them up.</p>
+
+  <div class="blog-list">
+    <a href="blog/gas-vs-electric.html" class="blog-card">
+      <div class="blog-card-date">March 5, 2026</div>
+      <div class="blog-card-title">Gas vs Electric: What Actually Costs Less to Own?</div>
+      <div class="blog-card-desc">EVs have lower running costs but higher sticker prices. The answer depends on how much you drive, where you live, and how long you keep the car.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Vehicles</span>
+        <span class="blog-card-tag">Gas vs EV</span>
+        <span class="blog-card-tag">Cost of ownership</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+    <a href="blog/is-refinancing-worth-it.html" class="blog-card">
+      <div class="blog-card-date">March 4, 2026</div>
+      <div class="blog-card-title">Is Refinancing Your Mortgage Worth It?</div>
+      <div class="blog-card-desc">Most refinance advice focuses on monthly savings. Here&rsquo;s how to evaluate a refinance by its real impact on your net worth.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Mortgage</span>
+        <span class="blog-card-tag">Refinance</span>
+        <span class="blog-card-tag">Net worth</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Not financial advice.</p>
+  <nav class="site-footer-nav">
+    <a href="refinance.html">Refinance</a>
+    <a href="rent-vs-buy.html">Rent vs Buy</a>
+    <a href="vehicle-cost.html">Vehicle Cost</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+</body>
+</html>
