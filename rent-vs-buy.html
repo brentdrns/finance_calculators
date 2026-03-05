@@ -442,9 +442,16 @@
         <div class="hint">2025 standard deduction used</div>
       </div>
       <div class="field">
+        <label>SALT Deduction Cap ($/yr)</label>
+        <input type="number" id="saltCap" value="10000" min="0" step="1000">
+        <div class="hint">Max deduction for state/local + property taxes (currently $10k)</div>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
         <label>Other Itemized Ded. ($/yr)</label>
         <input type="number" id="otherDeductions" value="0" min="0" step="1000" oninput="updateStdDedHint()">
-        <div class="hint">SALT, charitable, etc.</div>
+        <div class="hint">Charitable, medical, etc. (non-SALT)</div>
       </div>
     </div>
     <div class="hint" id="stdDedHint" style="margin-bottom:4px;padding:5px 8px;background:var(--surface2);border-radius:var(--radius)"></div>
@@ -570,6 +577,7 @@ function calculate() {
 
   const appreciation = gv('homeAppreciation') / 100;
   const investReturnRate = gv('investReturn') / 100;
+  const saltCap = gv('saltCap');
   const taxRate = gv('taxRate') / 100;
   const years = Math.round(gv('timeHorizon'));
   const stdDeduction = parseFloat(document.getElementById('filingStatus')?.value) || 30000;
@@ -643,8 +651,9 @@ function calculate() {
     // Tax benefit: mortgage interest deduction (only if itemizing beats standard deduction)
     // Standard deduction excess = portion of std deduction NOT already used by other itemized deductions
     const stdExcess = Math.max(0, stdDeduction - otherDeductions);
-    const deductibleInterest = yearInterest + yearPropTax; // Mortgage interest + property tax
-    const taxBenefit = deductibleInterest > stdExcess ? (deductibleInterest - stdExcess) * taxRate : 0;
+    const saltCappedPropTax = Math.min(yearPropTax, saltCap);
+    const deductibleAmount = yearInterest + saltCappedPropTax;
+    const taxBenefit = deductibleAmount > stdExcess ? (deductibleAmount - stdExcess) * taxRate : 0;
 
     // Savings difference: renter invests the difference if renting is cheaper monthly
     const rentMonthly = yearRentCost / 12;
@@ -955,7 +964,8 @@ function saveSettings() {
     homeAppreciation: gv('homeAppreciation'), investReturn: gv('investReturn'),
     taxRate: gv('taxRate'), timeHorizon: gv('timeHorizon'),
     filingStatus: document.getElementById('filingStatus')?.value,
-    otherDeductions: gv('otherDeductions')
+    otherDeductions: gv('otherDeductions'),
+    saltCap: gv('saltCap')
   };
   const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(settings))));
   const url = new URL(window.location.href);
@@ -984,7 +994,7 @@ function loadSettingsFromHash() {
      'homePrice','downPaymentPct','mortgageRate','loanTerm','closingCostsPct',
      'propertyTax','propTaxIncrease','homeInsurance','homeInsIncrease','hoaFee','hoaIncrease',
      'maintenancePct','pmiRate','sellingCostsPct',
-     'homeAppreciation','investReturn','taxRate','timeHorizon','otherDeductions'
+     'homeAppreciation','investReturn','taxRate','timeHorizon','otherDeductions','saltCap'
     ].forEach(k => setVal(k, settings[k]));
     if (settings.filingStatus) { const el = document.getElementById('filingStatus'); if (el) el.value = settings.filingStatus; }
     if (settings.upgradeOn) {
