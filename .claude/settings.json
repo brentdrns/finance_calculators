@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i 's|<div class=\"\"legend-dot\"\" style=\"\"background:#8aaa2a\"\"></div>Buy: Investment Portfolio</div>|<div class=\"\"legend-dot\"\" style=\"\"background:#8aaa2a\"\"></div>Buy: Investment Portfolio \\(savings from lower costs + tax benefits, invested\\)</div>|' rent-vs-buy.html)",
+      "Bash(sed -i 's|<div class=\"\"legend-dot\"\" style=\"\"background:var\\(--blue\\)\"\"></div>Rent: Investment Portfolio</div>|<div class=\"\"legend-dot\"\" style=\"\"background:var\\(--blue\\)\"\"></div>Rent: Investment Portfolio \\(down payment + savings from lower costs, invested\\)</div>|' rent-vs-buy.html)"
+    ]
+  }
+}
