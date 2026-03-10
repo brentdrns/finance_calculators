@@ -29,34 +29,41 @@
   gtag('js', new Date());
   gtag('config', 'G-GXEPDJH5VC');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0f0c;
-    --surface: #16180f;
-    --surface2: #1e2115;
-    --border: #2e3320;
-    --accent: #c8f060;
-    --accent-dim: #8aaa2a;
-    --text: #e8ead8;
-    --text-muted: #7a8060;
-    --blue: #60a0f0;
-    --red: #f06060;
-    --radius: 8px;
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --red: #dc2626;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; min-height: 100vh; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
 
   header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
   header p { color: var(--text-muted); font-size: 12px; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
-  .header-nav a:hover { color: var(--text); border-color: var(--accent-dim); }
-  .header-nav a.active { color: var(--accent); border-color: var(--accent-dim); }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
   .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
-  .share-btn { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .share-btn { background: var(--surface2); border: none; border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .share-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
 
   .layout { display: grid; grid-template-columns: 390px 1fr; min-height: calc(100vh - 73px); align-items: start; }
 
@@ -75,10 +82,10 @@
   .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
   .field input, .field select {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace;
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
     font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s;
   }
-  .field input:focus, .field select:focus { border-color: var(--accent-dim); }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .hint { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
 
@@ -101,7 +108,7 @@
 
   .calc-btn {
     width: 100%; background: var(--accent); color: var(--bg); border: none;
-    border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 13px;
+    border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 13px;
     font-weight: 500; padding: 11px; cursor: pointer; letter-spacing: 0.05em;
     transition: opacity 0.15s, transform 0.1s; margin-top: 8px;
   }
@@ -111,13 +118,13 @@
   /* Main */
   .main { padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
 
   .verdict-header { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 10px; }
-  .pos { color: var(--accent); } .neg { color: var(--red); } .neu { color: var(--blue); }
+  .pos { color: #16a34a; } .neg { color: var(--red); } .neu { color: var(--blue); }
 
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
-  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-box { background: var(--surface2); border: none; box-shadow: 0 1px 2px rgba(0,0,0,0.04); border-radius: var(--radius); padding: 11px 13px; }
   .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
   .stat-value { font-size: 16px; font-family: 'DM Serif Display', serif; }
   .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
@@ -201,15 +208,15 @@
   .fb-field label { font-size: 11px; color: var(--text-muted); }
   .fb-field input, .fb-field textarea {
     background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
-    color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px;
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;
     padding: 8px 10px; outline: none; transition: border-color 0.15s; width: 100%;
   }
   .fb-field input:focus, .fb-field textarea:focus { border-color: var(--accent-dim); }
   .fb-field textarea { resize: vertical; min-height: 90px; }
   .fb-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
-  .fb-submit { background: var(--accent); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 9px 20px; cursor: pointer; transition: opacity 0.15s; }
+  .fb-submit { background: var(--accent); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; cursor: pointer; transition: opacity 0.15s; }
   .fb-submit:hover { opacity: 0.85; }
-  .fb-csv { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; padding: 8px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .fb-csv { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; padding: 8px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .fb-csv:hover { color: var(--text); border-color: var(--accent-dim); }
   .fb-success { display: none; font-size: 12px; color: var(--accent); }
 
@@ -262,6 +269,14 @@
     .feedback-card { padding: 16px 18px; }
   }
 </style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 </head>
 <body>
 
@@ -281,6 +296,8 @@
     <a href="blog.html">Blog</a>
     <span class="nav-sep">&middot;</span>
     <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
   </nav>
 </header>
 
@@ -443,7 +460,7 @@
     <div class="field-row">
       <div class="field">
         <label>Filing Status</label>
-        <select id="filingStatus" onchange="updateStdDedHint()" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:7px 10px;outline:none">
+        <select id="filingStatus" onchange="updateStdDedHint()" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;padding:7px 10px;outline:none">
           <option value="30000">Married Filing Jointly</option>
           <option value="15000">Single / MFS</option>
           <option value="22500">Head of Household</option>
@@ -527,6 +544,16 @@ function fmt(n) {
 function fmtFull(n) {
   const a = Math.abs(n), s = n < 0 ? '-' : '';
   return s + '$' + a.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function getThemeColors() {
+  var s = getComputedStyle(document.documentElement);
+  return {
+    text: s.getPropertyValue('--text').trim(),
+    textMuted: s.getPropertyValue('--text-muted').trim(),
+    border: s.getPropertyValue('--border').trim(),
+    bg: s.getPropertyValue('--bg').trim(),
+  };
 }
 
 let chart = null;
@@ -856,6 +883,7 @@ function renderChart(yearData) {
 
   const labels = yearData.map(d => 'Yr ' + d.year);
 
+  const tc = getThemeColors();
   chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -864,7 +892,7 @@ function renderChart(yearData) {
         {
           label: 'Buy: Home Equity (net)',
           data: yearData.map(d => d.netHomeEquity),
-          backgroundColor: '#c8f060',
+          backgroundColor: '#006aff',
           stack: 'buy',
           order: 2
         },
@@ -891,13 +919,13 @@ function renderChart(yearData) {
       plugins: {
         legend: { display: false },
         tooltip: {
-          backgroundColor: '#16180f',
-          titleColor: '#e8ead8',
-          bodyColor: '#e8ead8',
-          borderColor: '#2e3320',
+          backgroundColor: tc.bg,
+          titleColor: tc.text,
+          bodyColor: tc.text,
+          borderColor: tc.border,
           borderWidth: 1,
-          bodyFont: { family: "'DM Mono', monospace", size: 11 },
-          titleFont: { family: "'DM Mono', monospace", size: 11 },
+          bodyFont: { family: "'Inter', sans-serif", size: 11 },
+          titleFont: { family: "'Inter', sans-serif", size: 11 },
           callbacks: {
             label: function(item) {
               return item.dataset.label + ': ' + fmtFull(item.raw);
@@ -918,15 +946,15 @@ function renderChart(yearData) {
       scales: {
         x: {
           stacked: true,
-          grid: { color: '#2e3320' },
-          ticks: { color: '#7a8060', font: { family: "'DM Mono', monospace", size: 10 } }
+          grid: { color: tc.border },
+          ticks: { color: tc.textMuted, font: { family: "'Inter', sans-serif", size: 10 } }
         },
         y: {
           stacked: true,
-          grid: { color: '#2e3320' },
+          grid: { color: tc.border },
           ticks: {
-            color: '#7a8060',
-            font: { family: "'DM Mono', monospace", size: 10 },
+            color: tc.textMuted,
+            font: { family: "'Inter', sans-serif", size: 10 },
             callback: v => fmt(v)
           }
         }
@@ -1034,6 +1062,32 @@ async function submitFeedback(e) {
   form.reset();
   setTimeout(() => { document.getElementById('fbSuccess').style.display = 'none'; }, 4000);
 }
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+    if (typeof calculateAll === 'function') calculateAll();
+  });
+  updateUI();
+})();
 </script>
 
 </body>
