@@ -29,34 +29,49 @@
   gtag('js', new Date());
   gtag('config', 'G-GXEPDJH5VC');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0e0f0c;
-    --surface: #16180f;
-    --surface2: #1e2115;
-    --border: #2e3320;
-    --accent: #c8f060;
-    --accent-dim: #8aaa2a;
-    --text: #e8ead8;
-    --text-muted: #7a8060;
-    --blue: #60a0f0;
-    --red: #f06060;
-    --radius: 8px;
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --red: #dc2626;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218;
+    --surface: #1a1a24;
+    --surface2: #24242f;
+    --border: #2e2e3a;
+    --accent: #4d8eff;
+    --accent-dim: #6ba0e6;
+    --text: #e4e4ea;
+    --text-muted: #9395a1;
+    --blue: #5b8def;
+    --red: #ef4444;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; min-height: 100vh; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
 
   header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
   header p { color: var(--text-muted); font-size: 12px; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
-  .header-nav a:hover { color: var(--text); border-color: var(--accent-dim); }
-  .header-nav a.active { color: var(--accent); border-color: var(--accent-dim); }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
   .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
-  .share-btn { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .share-btn { background: var(--surface2); border: none; border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .share-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
 
   .layout { display: grid; grid-template-columns: 390px 1fr; min-height: calc(100vh - 73px); align-items: start; }
 
@@ -75,10 +90,10 @@
   .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
   .field input {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--radius); color: var(--text); font-family: 'DM Mono', monospace;
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
     font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s;
   }
-  .field input:focus { border-color: var(--accent-dim); }
+  .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .hint { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
 
@@ -122,7 +137,7 @@
   .delete-btn:hover { color: var(--red); }
 
   .bal-type-btn {
-    flex: 1; padding: 7px 4px; font-size: 11px; font-family: 'DM Mono', monospace;
+    flex: 1; padding: 7px 4px; font-size: 11px; font-family: 'Inter', sans-serif;
     background: var(--surface2); border: none; border-right: 1px solid var(--border);
     color: var(--text-muted); cursor: pointer; transition: background 0.15s, color 0.15s;
   }
@@ -132,8 +147,8 @@
 
   .shared-settings { padding: 16px 22px; border-top: 1px solid var(--border); flex-shrink: 0; }
   .calc-btn {
-    width: 100%; background: var(--accent); color: var(--bg); border: none;
-    border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 13px;
+    width: 100%; background: var(--accent); color: #fff; border: none;
+    border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 13px;
     font-weight: 500; padding: 11px; cursor: pointer; letter-spacing: 0.05em;
     transition: opacity 0.15s, transform 0.1s; margin-top: 8px;
   }
@@ -155,13 +170,13 @@
 
   .results-section { flex-direction: column; gap: 20px; }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
 
   .verdict-header { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 10px; }
-  .pos { color: var(--accent); } .neg { color: var(--red); } .neu { color: var(--blue); }
+  .pos { color: #16a34a; } .neg { color: var(--red); } .neu { color: var(--blue); }
 
   .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
-  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-box { background: var(--surface2); border: none; box-shadow: 0 1px 2px rgba(0,0,0,0.04); border-radius: var(--radius); padding: 11px 13px; }
   .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
   .stat-value { font-size: 16px; font-family: 'DM Serif Display', serif; }
   .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
@@ -278,15 +293,15 @@
   .fb-field label { font-size: 11px; color: var(--text-muted); }
   .fb-field input, .fb-field textarea {
     background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
-    color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px;
+    color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px;
     padding: 8px 10px; outline: none; transition: border-color 0.15s; width: 100%;
   }
   .fb-field input:focus, .fb-field textarea:focus { border-color: var(--accent-dim); }
   .fb-field textarea { resize: vertical; min-height: 90px; }
   .fb-actions { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
-  .fb-submit { background: var(--accent); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 9px 20px; cursor: pointer; transition: opacity 0.15s; }
+  .fb-submit { background: var(--accent); color: var(--bg); border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 20px; cursor: pointer; transition: opacity 0.15s; }
   .fb-submit:hover { opacity: 0.85; }
-  .fb-csv { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; padding: 8px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .fb-csv { background: none; border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; padding: 8px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
   .fb-csv:hover { color: var(--text); border-color: var(--accent-dim); }
   .fb-success { display: none; font-size: 12px; color: var(--accent); }
 
@@ -323,12 +338,20 @@
     .feedback-card { padding: 16px 18px; }
   }
 </style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
 </head>
 <body>
 
 <header>
   <div>
-    <h1><img class="abel-logo abel-logo-l" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="refinance.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
+    <h1><img class="abel-logo abel-logo-l" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
     <p>Refinance Calculator — net worth impact including equity, taxes, PMI &amp; investments</p>
   </div>
   <nav class="header-nav" aria-label="Site navigation">
@@ -342,6 +365,8 @@
     <a href="blog.html">Blog</a>
     <span class="nav-sep">&middot;</span>
     <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
   </nav>
 </header>
 
@@ -499,13 +524,24 @@
 </div>
 
 <script>
+// ── Theme helpers ──
+function getThemeColors() {
+  var s = getComputedStyle(document.documentElement);
+  return {
+    text: s.getPropertyValue('--text').trim(),
+    textMuted: s.getPropertyValue('--text-muted').trim(),
+    border: s.getPropertyValue('--border').trim(),
+    bg: s.getPropertyValue('--bg').trim(),
+  };
+}
+
 // ── State ──
 let scenarios = [
   { id: 1, name: 'Option A', newRate: 5.75, newTerm: 360, refiCost: 6000 },
   { id: 2, name: 'Option B', newRate: 5.5, newTerm: 180, refiCost: 6000 },
 ];
 let nextId = 3;
-const COLORS = ['#c8f060','#60a0f0','#f0a060','#b060f0','#f06060','#60f0d0'];
+const COLORS = ['#006aff','#60a0f0','#f0a060','#b060f0','#f06060','#60f0d0'];
 const scColor = i => COLORS[i % COLORS.length];
 
 // ── Amortization ──
@@ -1088,7 +1124,7 @@ function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigT
       <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Equity Δ (refi − current)</div>
       <div class="legend-item"><div class="legend-dot" style="background:${color}"></div>Portfolio Δ (positive)</div>
       <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Portfolio Δ (negative)</div>
-      <div class="legend-item"><div class="legend-line" style="background:#fff"></div>Net total</div>
+      <div class="legend-item"><div class="legend-line" style="background:#1a1a2e"></div>Net total</div>
     </div>
   `;
   container.appendChild(cc);
@@ -1106,13 +1142,13 @@ function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigT
         else return isSelected ? negColorNeg.replace(/[\d.]+\)$/, '0.9)') : negColorNeg;
       });
 
-    const buildDatasets = () => [
+    const buildDatasets = () => { const tc = getThemeColors(); return [
       { type:'line', label:'Net', data:yearlyDelta,
-        borderColor:'#fff', backgroundColor:'transparent', borderWidth:2,
+        borderColor:tc.text, backgroundColor:'transparent', borderWidth:2,
         pointRadius: yearlyDelta.map((_,i) => i===selectedIdx ? 5 : 2),
-        pointBackgroundColor: yearlyDelta.map((_,i) => i===selectedIdx ? '#fff' : '#fff'),
+        pointBackgroundColor: yearlyDelta.map((_,i) => tc.text),
         pointBorderWidth: yearlyDelta.map((_,i) => i===selectedIdx ? 2 : 0),
-        pointBorderColor: '#c8f060',
+        pointBorderColor: '#006aff',
         tension:0.3, order:1 },
       { type:'bar', label:'Equity Δ', data:eqD, stack:'d', order:2,
         backgroundColor: eqD.map((v,i) => {
@@ -1126,7 +1162,7 @@ function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigT
         backgroundColor: ptD.map((v,i) => v>=0 ? (i===selectedIdx?color:'rgba('+hexToRgb(color)+',0.73)') : (i===selectedIdx?'rgba(240,96,96,0.9)':'rgba(240,96,96,0.65)')),
         borderColor: ptD.map((v,i) => v>=0 ? color : '#f06060'),
         borderWidth: ptD.map((_,i) => i===selectedIdx ? 2 : 1) },
-    ];
+    ]; };
 
     charts[s.id]=new Chart(ctx,{
       type:'bar',
@@ -1155,8 +1191,8 @@ function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigT
         plugins:{
           legend:{display:false},
           tooltip:{
-            backgroundColor:'#16180f', borderColor:'#2e3320', borderWidth:1,
-            titleColor:'#e8ead8', bodyColor:'#7a8060',
+            backgroundColor:getThemeColors().bg, borderColor:getThemeColors().border, borderWidth:1,
+            titleColor:getThemeColors().text, bodyColor:getThemeColors().text,
             callbacks:{
               label:(item)=>{
                 const i=item.dataIndex,bd=yearlyBD[i];
@@ -1168,8 +1204,8 @@ function renderResult(container, s, r, idx, curBal, curMonths, curRate, curOrigT
           }
         },
         scales:{
-          x:{stacked:true,grid:{color:'#2e3320'},ticks:{color:'#7a8060',font:{family:'DM Mono',size:11},maxTicksLimit:15}},
-          y:{stacked:true,grid:{color:'#2e3320'},ticks:{color:'#7a8060',font:{family:'DM Mono',size:11},callback:v=>fmt(v)}}
+          x:{stacked:true,grid:{color:getThemeColors().border},ticks:{color:getThemeColors().textMuted,font:{family:"'Inter',sans-serif",size:11},maxTicksLimit:15}},
+          y:{stacked:true,grid:{color:getThemeColors().border},ticks:{color:getThemeColors().textMuted,font:{family:"'Inter',sans-serif",size:11},callback:v=>fmt(v)}}
         }
       }
     });
@@ -1575,6 +1611,31 @@ calculateAll();
 if (new URLSearchParams(window.location.search).has('admin')) {
   document.getElementById('fbCsvBtn').style.display = '';
 }
+
+// ── Dark mode toggle ──
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+    if (typeof calculateAll === 'function') calculateAll();
+  });
+  updateUI();
+})();
 </script>
 
 <section class="feedback-section">

@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Samples — Abel's Calculators</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; font-size: 14px; background: #f0f0f0; color: #333; }
+
+  .page-header {
+    background: #fff; border-bottom: 1px solid #ddd; padding: 32px 40px;
+    text-align: center;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .page-header p { color: #666; font-size: 15px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+  .samples-grid {
+    display: grid; grid-template-columns: 1fr; gap: 48px;
+    max-width: 1200px; margin: 40px auto; padding: 0 24px 80px;
+  }
+
+  .sample-section {
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .sample-label {
+    padding: 20px 28px; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    background: #1a1a1a; color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sample-label .tag {
+    font-size: 11px; font-weight: 500; padding: 4px 10px;
+    border-radius: 20px; background: rgba(255,255,255,0.15);
+    text-transform: none; letter-spacing: 0;
+  }
+
+  /* ========== THEME CONTAINERS ========== */
+  .theme-wrap { padding: 0; }
+  .theme-wrap header,
+  .theme-wrap .hero,
+  .theme-wrap .cards-section,
+  .theme-wrap .form-section,
+  .theme-wrap footer { transition: all 0.2s; }
+
+
+  /* ====================================================================
+     THEME 1: CURRENT (for reference)
+     ==================================================================== */
+  .t-current {
+    --bg: #0e0f0c; --surface: #16180f; --surface2: #1e2115;
+    --border: #2e3320; --accent: #c8f060; --accent-dim: #8aaa2a;
+    --text: #e8ead8; --text-muted: #7a8060; --radius: 8px;
+    --font-heading: 'DM Serif Display', serif;
+    --font-body: 'DM Mono', monospace;
+    background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 13px;
+  }
+
+  /* ====================================================================
+     THEME 2: CLEAN LIGHT — Zillow / NerdWallet inspired
+     ==================================================================== */
+  .t-clean {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4;
+    --border: #e2e5eb; --accent: #006aff; --accent-dim: #4a90d9;
+    --text: #1a1a2e; --text-muted: #6b7280; --radius: 12px;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px;
+  }
+
+  /* ====================================================================
+     THEME 3: WARM MODERN — Redfin / Airbnb inspired
+     ==================================================================== */
+  .t-warm {
+    --bg: #faf9f7; --surface: #ffffff; --surface2: #f3f1ed;
+    --border: #e8e4dd; --accent: #d93025; --accent-dim: #c1453b;
+    --text: #222222; --text-muted: #717171; --radius: 14px;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px;
+  }
+
+  /* ====================================================================
+     THEME 4: SOFT DARK — Modern fintech / Linear inspired
+     ==================================================================== */
+  .t-fintech {
+    --bg: #0f0f12; --surface: #18181d; --surface2: #222228;
+    --border: #2e2e38; --accent: #8b5cf6; --accent-dim: #6d48cc;
+    --text: #ededf0; --text-muted: #8888a0; --radius: 12px;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px;
+  }
+
+  /* ====================================================================
+     THEME 5: GLASS — Frosted / Apple inspired
+     ==================================================================== */
+  .t-glass {
+    --bg: #f2f2f7; --surface: rgba(255,255,255,0.72); --surface2: rgba(255,255,255,0.5);
+    --border: rgba(0,0,0,0.08); --accent: #007aff; --accent-dim: #0a84ff;
+    --text: #1c1c1e; --text-muted: #8e8e93; --radius: 16px;
+    --font-heading: 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #667eea22 0%, #764ba222 50%, #f093fb22 100%), var(--bg);
+    color: var(--text); font-family: var(--font-body); font-size: 14px;
+  }
+
+  /* ====================================================================
+     THEME 6: DARK GREEN REFINED — Your theme, but polished
+     ==================================================================== */
+  .t-refined {
+    --bg: #0c1008; --surface: #141a10; --surface2: #1c2418;
+    --border: #2a3520; --accent: #a8e040; --accent-dim: #6d9e28;
+    --text: #e4e8d8; --text-muted: #788860; --radius: 12px;
+    --font-heading: 'DM Serif Display', serif;
+    --font-body: 'Inter', sans-serif;
+    background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 14px;
+  }
+
+
+  /* ====================================================================
+     SHARED COMPONENT STYLES (use CSS vars so they adapt to each theme)
+     ==================================================================== */
+
+  /* Header */
+  .demo-header {
+    padding: 20px 28px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .demo-header h2 {
+    font-family: var(--font-heading); font-size: 22px;
+    color: var(--accent); letter-spacing: -0.5px;
+  }
+  .t-current .demo-header h2,
+  .t-refined .demo-header h2 { font-style: italic; }
+  .demo-header .tagline { color: var(--text-muted); font-size: 12px; }
+  .demo-nav { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
+  .demo-nav a {
+    color: var(--text-muted); font-size: 12px; text-decoration: none;
+    padding: 5px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+    transition: all 0.15s;
+  }
+  .demo-nav a:hover { color: var(--text); border-color: var(--accent-dim); }
+  .demo-nav a.active { color: var(--accent); border-color: var(--accent-dim); }
+
+  /* Clean/Warm/Glass nav: no border style, more modern */
+  .t-clean .demo-nav a,
+  .t-warm .demo-nav a,
+  .t-glass .demo-nav a {
+    border: none; padding: 6px 14px; border-radius: 8px;
+    font-weight: 500; background: transparent;
+  }
+  .t-clean .demo-nav a:hover,
+  .t-warm .demo-nav a:hover,
+  .t-glass .demo-nav a:hover { background: var(--surface2); color: var(--text); }
+  .t-clean .demo-nav a.active { background: var(--accent); color: #fff; border: none; }
+  .t-warm .demo-nav a.active { background: var(--accent); color: #fff; border: none; }
+  .t-glass .demo-nav a.active { background: var(--accent); color: #fff; border: none; }
+
+  /* Hero */
+  .demo-hero {
+    padding: 36px 28px; border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .demo-hero-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-dim); margin-bottom: 6px;
+  }
+  .demo-hero h3 {
+    font-family: var(--font-heading); font-size: 26px; color: var(--text);
+    line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.3px;
+  }
+  .t-current .demo-hero h3,
+  .t-refined .demo-hero h3 { font-style: italic; }
+  .demo-hero h3 span { color: var(--accent); }
+  .demo-hero p { color: var(--text-muted); font-size: 13px; line-height: 1.7; max-width: 600px; }
+
+  .t-glass .demo-hero {
+    background: var(--surface); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Calculator Cards */
+  .demo-cards { padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+
+  .demo-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit;
+  }
+  .demo-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+  .demo-card-title {
+    font-family: var(--font-heading); font-size: 17px; color: var(--text); margin-bottom: 8px;
+  }
+  .t-current .demo-card-title,
+  .t-refined .demo-card-title { font-style: italic; }
+  .demo-card-desc { color: var(--text-muted); font-size: 12px; line-height: 1.65; margin-bottom: 14px; }
+  .demo-card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .demo-card-tag {
+    font-size: 10px; padding: 3px 8px; border: 1px solid var(--border);
+    border-radius: 4px; color: var(--text-muted);
+  }
+  .demo-card-cta { font-size: 12px; color: var(--accent); font-weight: 500; }
+
+  /* Light themes: card shadows instead of borders */
+  .t-clean .demo-card,
+  .t-warm .demo-card {
+    border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .t-clean .demo-card:hover,
+  .t-warm .demo-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08); transform: translateY(-3px); border: none;
+  }
+  .t-glass .demo-card {
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  }
+  .t-glass .demo-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); transform: translateY(-3px); }
+
+  .t-clean .demo-card-tag,
+  .t-warm .demo-card-tag,
+  .t-glass .demo-card-tag {
+    border: none; background: var(--surface2); border-radius: 6px; padding: 4px 10px;
+  }
+
+  /* Form Section */
+  .demo-form {
+    padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .demo-form-col { display: flex; flex-direction: column; gap: 12px; }
+  .demo-form-heading {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent-dim); margin-bottom: 4px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .demo-form-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .demo-field label {
+    display: block; color: var(--text-muted); font-size: 12px; margin-bottom: 4px; font-weight: 500;
+  }
+  .demo-field input, .demo-field select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: inherit;
+    font-size: 13px; padding: 10px 12px; outline: none; transition: border-color 0.15s;
+  }
+  .demo-field input:focus, .demo-field select:focus { border-color: var(--accent-dim); }
+  .demo-field .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+  .demo-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* Light theme inputs */
+  .t-clean .demo-field input,
+  .t-clean .demo-field select,
+  .t-warm .demo-field input,
+  .t-warm .demo-field select,
+  .t-glass .demo-field input,
+  .t-glass .demo-field select {
+    background: var(--bg); border: 1.5px solid var(--border);
+  }
+  .t-clean .demo-field input:focus,
+  .t-clean .demo-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .t-warm .demo-field input:focus,
+  .t-warm .demo-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,48,37,0.1); }
+  .t-glass .demo-field input,
+  .t-glass .demo-field select {
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(8px);
+  }
+  .t-glass .demo-field input:focus,
+  .t-glass .demo-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,122,255,0.12); }
+
+  /* Buttons */
+  .demo-btn {
+    width: 100%; padding: 12px; border: none; border-radius: var(--radius);
+    font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+    transition: all 0.15s; letter-spacing: 0.02em;
+  }
+  .demo-btn-primary { background: var(--accent); color: var(--bg); }
+  .demo-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .t-current .demo-btn-primary { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+
+  .t-clean .demo-btn-primary,
+  .t-glass .demo-btn-primary { color: #fff; }
+  .t-warm .demo-btn-primary { color: #fff; border-radius: 10px; }
+
+  .demo-btn-secondary {
+    background: transparent; border: 1px solid var(--border); color: var(--text-muted);
+    margin-top: 8px;
+  }
+  .demo-btn-secondary:hover { border-color: var(--accent-dim); color: var(--text); }
+
+  /* Stats Row */
+  .demo-stats {
+    padding: 0 28px 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .demo-stat {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 16px; text-align: center;
+  }
+  .demo-stat-value {
+    font-family: var(--font-heading); font-size: 22px; color: var(--accent); margin-bottom: 4px;
+  }
+  .t-current .demo-stat-value,
+  .t-refined .demo-stat-value { font-style: italic; }
+  .demo-stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .t-clean .demo-stat,
+  .t-warm .demo-stat { border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .t-glass .demo-stat {
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  /* Footer */
+  .demo-footer {
+    padding: 16px 28px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 11px; color: var(--text-muted);
+  }
+  .demo-footer a { color: var(--text-muted); text-decoration: none; margin-left: 16px; }
+  .demo-footer a:hover { color: var(--accent-dim); }
+
+
+  /* ====================================================================
+     RESPONSIVE
+     ==================================================================== */
+  @media (max-width: 700px) {
+    .demo-form { grid-template-columns: 1fr; }
+    .demo-stats { grid-template-columns: 1fr; }
+    .demo-cards { grid-template-columns: 1fr; }
+    .samples-grid { gap: 32px; }
+    .page-header { padding: 24px 20px; }
+    .page-header h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Style Samples</h1>
+  <p>Your actual UI components rendered in different visual styles. Compare and pick what feels right — or mix and match ideas.</p>
+</div>
+
+<div class="samples-grid">
+
+  <!-- ============================================================ -->
+  <!-- THEME 1: CURRENT -->
+  <!-- ============================================================ -->
+  <div class="sample-section">
+    <div class="sample-label">
+      1. Current Design
+      <span class="tag">Your existing look</span>
+    </div>
+    <div class="theme-wrap t-current">
+      <header class="demo-header">
+        <div>
+          <h2>Abel's Calculators</h2>
+          <div class="tagline">Smarter math for real decisions</div>
+        </div>
+        <nav class="demo-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Refinance</a>
+          <a href="#">Rent vs Buy</a>
+          <a href="#">Vehicle Cost</a>
+        </nav>
+      </header>
+      <div class="demo-hero">
+        <div class="demo-hero-label">Built by a dog, for humans</div>
+        <h3>We factor in <span>more than the others.</span></h3>
+        <p>Most calculators give you a number. We give you the full picture — modeling taxes, investment opportunity cost, equity, depreciation, and more.</p>
+      </div>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-title">Mortgage Refinance Calculator</div>
+          <div class="demo-card-desc">Compare rate reductions, cash-out, and pay-down scenarios — modeled as real net worth impact.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Equity trajectory</span>
+            <span class="demo-card-tag">PMI modeling</span>
+            <span class="demo-card-tag">Opportunity cost</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-title">Vehicle Cost of Ownership</div>
+          <div class="demo-card-desc">Compare up to 3 vehicles side by side — buy new, used, or lease with full cost modeling.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Gas vs EV</span>
+            <span class="demo-card-tag">Buy vs lease</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+      </div>
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-value">$47,200</div><div class="demo-stat-label">Net Worth Impact</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">Month 18</div><div class="demo-stat-label">Break Even</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">$312/mo</div><div class="demo-stat-label">Monthly Savings</div></div>
+      </div>
+      <div class="demo-form">
+        <div class="demo-form-col">
+          <div class="demo-form-heading">Current Loan</div>
+          <div class="demo-field"><label>Original Loan Amount</label><input type="text" value="$450,000"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Interest Rate</label><input type="text" value="6.875%"></div>
+            <div class="demo-field"><label>Loan Term</label><input type="text" value="30 years"></div>
+          </div>
+          <div class="demo-field"><label>Monthly Payment</label><input type="text" value="$2,955"></div>
+        </div>
+        <div class="demo-form-col">
+          <div class="demo-form-heading">New Scenario</div>
+          <div class="demo-field"><label>New Interest Rate</label><input type="text" value="5.75%"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Closing Costs</label><input type="text" value="$8,500"></div>
+            <div class="demo-field"><label>New Term</label><input type="text" value="30 years"></div>
+          </div>
+          <button class="demo-btn demo-btn-primary">Calculate Net Worth Impact</button>
+          <button class="demo-btn demo-btn-secondary">Share Results</button>
+        </div>
+      </div>
+      <div class="demo-footer">
+        <span>For informational purposes only. Not financial advice.</span>
+        <div><a href="#">Refinance</a><a href="#">Rent vs Buy</a><a href="#">About</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- THEME 2: CLEAN LIGHT -->
+  <!-- ============================================================ -->
+  <div class="sample-section">
+    <div class="sample-label">
+      2. Clean Light
+      <span class="tag">Zillow / NerdWallet vibe</span>
+    </div>
+    <div class="theme-wrap t-clean">
+      <header class="demo-header">
+        <div>
+          <h2>Abel's Calculators</h2>
+          <div class="tagline">Smarter math for real decisions</div>
+        </div>
+        <nav class="demo-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Refinance</a>
+          <a href="#">Rent vs Buy</a>
+          <a href="#">Vehicle Cost</a>
+        </nav>
+      </header>
+      <div class="demo-hero">
+        <div class="demo-hero-label">Built by a dog, for humans</div>
+        <h3>We factor in <span>more than the others.</span></h3>
+        <p>Most calculators give you a number. We give you the full picture — modeling taxes, investment opportunity cost, equity, depreciation, and more.</p>
+      </div>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-title">Mortgage Refinance Calculator</div>
+          <div class="demo-card-desc">Compare rate reductions, cash-out, and pay-down scenarios — modeled as real net worth impact.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Equity trajectory</span>
+            <span class="demo-card-tag">PMI modeling</span>
+            <span class="demo-card-tag">Opportunity cost</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-title">Vehicle Cost of Ownership</div>
+          <div class="demo-card-desc">Compare up to 3 vehicles side by side — buy new, used, or lease with full cost modeling.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Gas vs EV</span>
+            <span class="demo-card-tag">Buy vs lease</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+      </div>
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-value">$47,200</div><div class="demo-stat-label">Net Worth Impact</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">Month 18</div><div class="demo-stat-label">Break Even</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">$312/mo</div><div class="demo-stat-label">Monthly Savings</div></div>
+      </div>
+      <div class="demo-form">
+        <div class="demo-form-col">
+          <div class="demo-form-heading">Current Loan</div>
+          <div class="demo-field"><label>Original Loan Amount</label><input type="text" value="$450,000"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Interest Rate</label><input type="text" value="6.875%"></div>
+            <div class="demo-field"><label>Loan Term</label><input type="text" value="30 years"></div>
+          </div>
+          <div class="demo-field"><label>Monthly Payment</label><input type="text" value="$2,955"></div>
+        </div>
+        <div class="demo-form-col">
+          <div class="demo-form-heading">New Scenario</div>
+          <div class="demo-field"><label>New Interest Rate</label><input type="text" value="5.75%"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Closing Costs</label><input type="text" value="$8,500"></div>
+            <div class="demo-field"><label>New Term</label><input type="text" value="30 years"></div>
+          </div>
+          <button class="demo-btn demo-btn-primary">Calculate Net Worth Impact</button>
+          <button class="demo-btn demo-btn-secondary">Share Results</button>
+        </div>
+      </div>
+      <div class="demo-footer">
+        <span>For informational purposes only. Not financial advice.</span>
+        <div><a href="#">Refinance</a><a href="#">Rent vs Buy</a><a href="#">About</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- THEME 3: WARM MODERN -->
+  <!-- ============================================================ -->
+  <div class="sample-section">
+    <div class="sample-label">
+      3. Warm Modern
+      <span class="tag">Redfin / Airbnb vibe</span>
+    </div>
+    <div class="theme-wrap t-warm">
+      <header class="demo-header">
+        <div>
+          <h2>Abel's Calculators</h2>
+          <div class="tagline">Smarter math for real decisions</div>
+        </div>
+        <nav class="demo-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Refinance</a>
+          <a href="#">Rent vs Buy</a>
+          <a href="#">Vehicle Cost</a>
+        </nav>
+      </header>
+      <div class="demo-hero">
+        <div class="demo-hero-label">Built by a dog, for humans</div>
+        <h3>We factor in <span>more than the others.</span></h3>
+        <p>Most calculators give you a number. We give you the full picture — modeling taxes, investment opportunity cost, equity, depreciation, and more.</p>
+      </div>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-title">Mortgage Refinance Calculator</div>
+          <div class="demo-card-desc">Compare rate reductions, cash-out, and pay-down scenarios — modeled as real net worth impact.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Equity trajectory</span>
+            <span class="demo-card-tag">PMI modeling</span>
+            <span class="demo-card-tag">Opportunity cost</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-title">Vehicle Cost of Ownership</div>
+          <div class="demo-card-desc">Compare up to 3 vehicles side by side — buy new, used, or lease with full cost modeling.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Gas vs EV</span>
+            <span class="demo-card-tag">Buy vs lease</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+      </div>
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-value">$47,200</div><div class="demo-stat-label">Net Worth Impact</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">Month 18</div><div class="demo-stat-label">Break Even</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">$312/mo</div><div class="demo-stat-label">Monthly Savings</div></div>
+      </div>
+      <div class="demo-form">
+        <div class="demo-form-col">
+          <div class="demo-form-heading">Current Loan</div>
+          <div class="demo-field"><label>Original Loan Amount</label><input type="text" value="$450,000"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Interest Rate</label><input type="text" value="6.875%"></div>
+            <div class="demo-field"><label>Loan Term</label><input type="text" value="30 years"></div>
+          </div>
+          <div class="demo-field"><label>Monthly Payment</label><input type="text" value="$2,955"></div>
+        </div>
+        <div class="demo-form-col">
+          <div class="demo-form-heading">New Scenario</div>
+          <div class="demo-field"><label>New Interest Rate</label><input type="text" value="5.75%"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Closing Costs</label><input type="text" value="$8,500"></div>
+            <div class="demo-field"><label>New Term</label><input type="text" value="30 years"></div>
+          </div>
+          <button class="demo-btn demo-btn-primary">Calculate Net Worth Impact</button>
+          <button class="demo-btn demo-btn-secondary">Share Results</button>
+        </div>
+      </div>
+      <div class="demo-footer">
+        <span>For informational purposes only. Not financial advice.</span>
+        <div><a href="#">Refinance</a><a href="#">Rent vs Buy</a><a href="#">About</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- THEME 4: SOFT DARK / FINTECH -->
+  <!-- ============================================================ -->
+  <div class="sample-section">
+    <div class="sample-label">
+      4. Soft Dark
+      <span class="tag">Linear / Stripe vibe</span>
+    </div>
+    <div class="theme-wrap t-fintech">
+      <header class="demo-header">
+        <div>
+          <h2>Abel's Calculators</h2>
+          <div class="tagline">Smarter math for real decisions</div>
+        </div>
+        <nav class="demo-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Refinance</a>
+          <a href="#">Rent vs Buy</a>
+          <a href="#">Vehicle Cost</a>
+        </nav>
+      </header>
+      <div class="demo-hero">
+        <div class="demo-hero-label">Built by a dog, for humans</div>
+        <h3>We factor in <span>more than the others.</span></h3>
+        <p>Most calculators give you a number. We give you the full picture — modeling taxes, investment opportunity cost, equity, depreciation, and more.</p>
+      </div>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-title">Mortgage Refinance Calculator</div>
+          <div class="demo-card-desc">Compare rate reductions, cash-out, and pay-down scenarios — modeled as real net worth impact.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Equity trajectory</span>
+            <span class="demo-card-tag">PMI modeling</span>
+            <span class="demo-card-tag">Opportunity cost</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-title">Vehicle Cost of Ownership</div>
+          <div class="demo-card-desc">Compare up to 3 vehicles side by side — buy new, used, or lease with full cost modeling.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Gas vs EV</span>
+            <span class="demo-card-tag">Buy vs lease</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+      </div>
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-value">$47,200</div><div class="demo-stat-label">Net Worth Impact</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">Month 18</div><div class="demo-stat-label">Break Even</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">$312/mo</div><div class="demo-stat-label">Monthly Savings</div></div>
+      </div>
+      <div class="demo-form">
+        <div class="demo-form-col">
+          <div class="demo-form-heading">Current Loan</div>
+          <div class="demo-field"><label>Original Loan Amount</label><input type="text" value="$450,000"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Interest Rate</label><input type="text" value="6.875%"></div>
+            <div class="demo-field"><label>Loan Term</label><input type="text" value="30 years"></div>
+          </div>
+          <div class="demo-field"><label>Monthly Payment</label><input type="text" value="$2,955"></div>
+        </div>
+        <div class="demo-form-col">
+          <div class="demo-form-heading">New Scenario</div>
+          <div class="demo-field"><label>New Interest Rate</label><input type="text" value="5.75%"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Closing Costs</label><input type="text" value="$8,500"></div>
+            <div class="demo-field"><label>New Term</label><input type="text" value="30 years"></div>
+          </div>
+          <button class="demo-btn demo-btn-primary">Calculate Net Worth Impact</button>
+          <button class="demo-btn demo-btn-secondary">Share Results</button>
+        </div>
+      </div>
+      <div class="demo-footer">
+        <span>For informational purposes only. Not financial advice.</span>
+        <div><a href="#">Refinance</a><a href="#">Rent vs Buy</a><a href="#">About</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- THEME 5: GLASS -->
+  <!-- ============================================================ -->
+  <div class="sample-section">
+    <div class="sample-label">
+      5. Glass
+      <span class="tag">Apple / Fintech vibe</span>
+    </div>
+    <div class="theme-wrap t-glass">
+      <header class="demo-header">
+        <div>
+          <h2>Abel's Calculators</h2>
+          <div class="tagline">Smarter math for real decisions</div>
+        </div>
+        <nav class="demo-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Refinance</a>
+          <a href="#">Rent vs Buy</a>
+          <a href="#">Vehicle Cost</a>
+        </nav>
+      </header>
+      <div class="demo-hero">
+        <div class="demo-hero-label">Built by a dog, for humans</div>
+        <h3>We factor in <span>more than the others.</span></h3>
+        <p>Most calculators give you a number. We give you the full picture — modeling taxes, investment opportunity cost, equity, depreciation, and more.</p>
+      </div>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-title">Mortgage Refinance Calculator</div>
+          <div class="demo-card-desc">Compare rate reductions, cash-out, and pay-down scenarios — modeled as real net worth impact.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Equity trajectory</span>
+            <span class="demo-card-tag">PMI modeling</span>
+            <span class="demo-card-tag">Opportunity cost</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-title">Vehicle Cost of Ownership</div>
+          <div class="demo-card-desc">Compare up to 3 vehicles side by side — buy new, used, or lease with full cost modeling.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Gas vs EV</span>
+            <span class="demo-card-tag">Buy vs lease</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+      </div>
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-value">$47,200</div><div class="demo-stat-label">Net Worth Impact</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">Month 18</div><div class="demo-stat-label">Break Even</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">$312/mo</div><div class="demo-stat-label">Monthly Savings</div></div>
+      </div>
+      <div class="demo-form">
+        <div class="demo-form-col">
+          <div class="demo-form-heading">Current Loan</div>
+          <div class="demo-field"><label>Original Loan Amount</label><input type="text" value="$450,000"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Interest Rate</label><input type="text" value="6.875%"></div>
+            <div class="demo-field"><label>Loan Term</label><input type="text" value="30 years"></div>
+          </div>
+          <div class="demo-field"><label>Monthly Payment</label><input type="text" value="$2,955"></div>
+        </div>
+        <div class="demo-form-col">
+          <div class="demo-form-heading">New Scenario</div>
+          <div class="demo-field"><label>New Interest Rate</label><input type="text" value="5.75%"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Closing Costs</label><input type="text" value="$8,500"></div>
+            <div class="demo-field"><label>New Term</label><input type="text" value="30 years"></div>
+          </div>
+          <button class="demo-btn demo-btn-primary">Calculate Net Worth Impact</button>
+          <button class="demo-btn demo-btn-secondary">Share Results</button>
+        </div>
+      </div>
+      <div class="demo-footer">
+        <span>For informational purposes only. Not financial advice.</span>
+        <div><a href="#">Refinance</a><a href="#">Rent vs Buy</a><a href="#">About</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- THEME 6: REFINED GREEN -->
+  <!-- ============================================================ -->
+  <div class="sample-section">
+    <div class="sample-label">
+      6. Refined Green
+      <span class="tag">Your theme, modernized</span>
+    </div>
+    <div class="theme-wrap t-refined">
+      <header class="demo-header">
+        <div>
+          <h2>Abel's Calculators</h2>
+          <div class="tagline">Smarter math for real decisions</div>
+        </div>
+        <nav class="demo-nav">
+          <a href="#" class="active">Home</a>
+          <a href="#">Refinance</a>
+          <a href="#">Rent vs Buy</a>
+          <a href="#">Vehicle Cost</a>
+        </nav>
+      </header>
+      <div class="demo-hero">
+        <div class="demo-hero-label">Built by a dog, for humans</div>
+        <h3>We factor in <span>more than the others.</span></h3>
+        <p>Most calculators give you a number. We give you the full picture — modeling taxes, investment opportunity cost, equity, depreciation, and more.</p>
+      </div>
+      <div class="demo-cards">
+        <div class="demo-card">
+          <div class="demo-card-title">Mortgage Refinance Calculator</div>
+          <div class="demo-card-desc">Compare rate reductions, cash-out, and pay-down scenarios — modeled as real net worth impact.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Equity trajectory</span>
+            <span class="demo-card-tag">PMI modeling</span>
+            <span class="demo-card-tag">Opportunity cost</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-card-title">Vehicle Cost of Ownership</div>
+          <div class="demo-card-desc">Compare up to 3 vehicles side by side — buy new, used, or lease with full cost modeling.</div>
+          <div class="demo-card-tags">
+            <span class="demo-card-tag">Gas vs EV</span>
+            <span class="demo-card-tag">Buy vs lease</span>
+          </div>
+          <div class="demo-card-cta">Open calculator &rarr;</div>
+        </div>
+      </div>
+      <div class="demo-stats">
+        <div class="demo-stat"><div class="demo-stat-value">$47,200</div><div class="demo-stat-label">Net Worth Impact</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">Month 18</div><div class="demo-stat-label">Break Even</div></div>
+        <div class="demo-stat"><div class="demo-stat-value">$312/mo</div><div class="demo-stat-label">Monthly Savings</div></div>
+      </div>
+      <div class="demo-form">
+        <div class="demo-form-col">
+          <div class="demo-form-heading">Current Loan</div>
+          <div class="demo-field"><label>Original Loan Amount</label><input type="text" value="$450,000"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Interest Rate</label><input type="text" value="6.875%"></div>
+            <div class="demo-field"><label>Loan Term</label><input type="text" value="30 years"></div>
+          </div>
+          <div class="demo-field"><label>Monthly Payment</label><input type="text" value="$2,955"></div>
+        </div>
+        <div class="demo-form-col">
+          <div class="demo-form-heading">New Scenario</div>
+          <div class="demo-field"><label>New Interest Rate</label><input type="text" value="5.75%"></div>
+          <div class="demo-field-row">
+            <div class="demo-field"><label>Closing Costs</label><input type="text" value="$8,500"></div>
+            <div class="demo-field"><label>New Term</label><input type="text" value="30 years"></div>
+          </div>
+          <button class="demo-btn demo-btn-primary">Calculate Net Worth Impact</button>
+          <button class="demo-btn demo-btn-secondary">Share Results</button>
+        </div>
+      </div>
+      <div class="demo-footer">
+        <span>For informational purposes only. Not financial advice.</span>
+        <div><a href="#">Refinance</a><a href="#">Rent vs Buy</a><a href="#">About</a></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
