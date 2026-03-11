@@ -22,6 +22,7 @@
 <meta name="twitter:title" content="Income &amp; Wealth Percentile Calculator">
 <meta name="twitter:description" content="Find your income and net worth percentile rank among US households.">
 <meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="keywords" content="income percentile calculator, wealth percentile calculator, net worth percentile by age, where do I rank income, household income percentile, top 1% income, top 10% net worth, income ranking United States, wealth distribution calculator, census income data">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Income & Wealth Percentile Calculator","description":"Income and net worth percentile calculator based on Census Bureau CPS 2023 and Federal Reserve SCF 2022 data.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/wealth-percentile.html"}
 </script>
@@ -200,16 +201,27 @@
   @media (max-width: 960px) {
     .layout { grid-template-columns: 1fr; }
     .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
-    header { padding: 0 20px; }
+    header { padding: 0 20px; flex-direction: column; gap: 4px; }
+    .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; }
+    .hero-band-divider { display: none; }
     .main { padding: 20px; }
     .result-pct { font-size: 60px; }
     .result-stats { grid-template-columns: repeat(3, 1fr); }
     .insight-grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 560px) {
-    .result-hero { gap: 20px; }
+  @media (max-width: 600px) {
+    .header-banner { max-width: 100%; }
+    .header-nav { flex-wrap: wrap; justify-content: flex-start; }
+    .sidebar { padding: 14px; }
+    .main { padding: 12px; }
+    .card { padding: 14px 16px; }
+    .field-row { grid-template-columns: 1fr; }
+    .result-pct { font-size: 48px; }
+    .result-hero { gap: 12px; }
     .result-stats { grid-template-columns: 1fr 1fr; }
-    .dist-label { width: 80px; font-size: 10px; }
+    .dist-label { width: 70px; font-size: 9px; }
+    .insight-grid { grid-template-columns: 1fr; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>

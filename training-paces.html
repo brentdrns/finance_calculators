@@ -507,7 +507,7 @@ var ZONES = [
     desc: 'VO₂max development, 3–5 min repeat efforts',
     effort: 'Hard — breathing is labored, sustainable for ~10–15 min total',
     hr: '93–100% max HR',
-    frac: 0.98,
+    refDist: 5000, // I-pace = 5K race pace (Jack Daniels)
     type: 'repeat',
     repeatDists: [400, 1000],
     workouts: ['6×1000m at I pace w/ 3-min jog', '5×1200m at I pace w/ 3-min recovery']
@@ -519,7 +519,7 @@ var ZONES = [
     desc: 'Speed and economy, short fast reps with full recovery',
     effort: 'Very hard — sprint effort, fully recovered between reps',
     hr: '100%+ max HR (anaerobic)',
-    frac: 1.10,
+    refDist: 1609.344, // R-pace = mile race pace (Jack Daniels)
     type: 'repeat',
     repeatDists: [200, 400],
     workouts: ['10×400m at R pace w/ 2-min rest', '8×200m at R pace w/ 90-sec rest']
@@ -629,16 +629,17 @@ function zonePaces(vdot, zone) {
     pacePerMile = { val: fmtPace(tMile), isRange: false };
     pacePerKm   = { val: fmtPace(tKm), isRange: false };
   } else {
-    // repeat — compute per-mile/km pace and also per-repeat times
-    var tMile2 = timeFromVdot(vdot * zone.frac, MILE_M);
-    var tKm2   = timeFromVdot(vdot * zone.frac, KM_M);
+    // repeat — pace based on reference race distance (I = 5K pace, R = mile pace)
+    var refT = timeFromVdot(vdot, zone.refDist);
+    var pacePerMeter = refT / zone.refDist;
+    var tMile2 = pacePerMeter * MILE_M;
+    var tKm2   = pacePerMeter * KM_M;
     pacePerMile = { val: fmtPace(tMile2), isRange: false };
     pacePerKm   = { val: fmtPace(tKm2), isRange: false };
 
     // compute split times for each repeat distance
     var splits = zone.repeatDists.map(function(d){
-      var t = timeFromVdot(vdot * zone.frac, d);
-      return { dist: d, time: fmtTime(t) };
+      return { dist: d, time: fmtTime(pacePerMeter * d) };
     });
     return { pacePerMile: pacePerMile, pacePerKm: pacePerKm, splits: splits };
   }
