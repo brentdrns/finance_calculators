@@ -22,8 +22,15 @@
 <meta name="twitter:title" content="Rent or Sell Calculator">
 <meta name="twitter:description" content="Should you sell your home or keep it as a rental? Model cash flow, capital gains, depreciation, and long-term wealth.">
 <meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="keywords" content="rent or sell calculator, should I rent or sell my house, keep house as rental, capital gains exclusion calculator, depreciation recapture, passive loss rules, rental property cash flow, sell vs rent home calculator, primary residence exclusion, real estate investment calculator">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Rent or Sell Calculator","description":"Compare the long-term financial impact of selling your home versus converting it to a rental property, factoring in capital gains taxes, depreciation, cash flow, and appreciation.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/rent-or-sell.html"}
+[{"@context":"https://schema.org","@type":"WebApplication","name":"Rent or Sell Calculator","description":"Compare the long-term financial impact of selling your home versus converting it to a rental property, factoring in capital gains taxes, depreciation, cash flow, and appreciation.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/rent-or-sell.html"},
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Should I sell my house or rent it out?","acceptedAnswer":{"@type":"Answer","text":"It depends on your cash flow, the capital gains tax situation, and your long-term goals. If you've lived in the home for 2 of the last 5 years you may qualify for up to $500,000 in tax-free gain (married) — an exclusion you lose once you've rented it for more than 3 years. This calculator models both paths side by side. For educational purposes only; consult a CPA before deciding."}},
+{"@type":"Question","name":"What is depreciation recapture and will I owe it?","acceptedAnswer":{"@type":"Answer","text":"When you sell a rental property, the IRS taxes the depreciation you claimed (or could have claimed) at up to 25% — this is called unrecaptured Section 1250 gain. For a home with an $800 annual depreciation over 10 years of renting, that could mean $20,000 in recapture tax at sale. This calculator estimates that amount. Consult a tax professional for your specific situation."}},
+{"@type":"Question","name":"What are passive activity loss rules for rental property?","acceptedAnswer":{"@type":"Answer","text":"Under IRC §469, rental losses are generally 'passive' and can only offset passive income. If your adjusted gross income is under $100,000, you can deduct up to $25,000 in rental losses against ordinary income. This phases out completely at $150,000 AGI. Suspended losses carry forward and are released when you sell the property."}},
+{"@type":"Question","name":"Is this calculator financial or tax advice?","acceptedAnswer":{"@type":"Answer","text":"No. This calculator provides estimates for educational and planning purposes only. Tax rules are complex and individual circumstances vary. Consult a qualified CPA or financial advisor before making decisions about selling or renting your property."}}
+]}]
 </script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
@@ -232,14 +239,33 @@
     .layout { grid-template-columns: 1fr; }
     .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
     header { padding: 0 20px; }
-    .main { padding: 20px; }
+    .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; }
+    .hero-band-divider { display: none; }
+    .main { padding: 20px; overflow-x: hidden; }
     .summary-stats { grid-template-columns: 1fr 1fr; }
     .gain-rows { grid-template-columns: 1fr 1fr; }
     .tax-grid { grid-template-columns: 1fr; }
+    .analysis-stat-row { grid-template-columns: 1fr 1fr; }
+    .year-table-wrap { max-width: 100%; }
   }
-  @media (max-width: 480px) {
-    .summary-stats { grid-template-columns: 1fr; }
+  @media (max-width: 600px) {
+    .header-banner { max-width: 100%; }
+    .header-nav { flex-wrap: wrap; justify-content: flex-start; }
+    .sidebar { padding: 14px; }
+    .main { padding: 12px; overflow-x: hidden; }
+    .card { padding: 14px 16px; overflow: hidden; }
+    .field-row { grid-template-columns: 1fr; }
+    .summary-stats { grid-template-columns: 1fr 1fr; }
     .gain-rows { grid-template-columns: 1fr; }
+    .tax-grid { grid-template-columns: 1fr; }
+    .chart-wrap { height: 220px; }
+    .analysis-stat-row { grid-template-columns: 1fr 1fr; }
+    .analysis-stat-val { font-size: 16px; }
+    .year-table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .year-table { font-size: 11px; }
+    .year-table th { padding: 5px 6px; font-size: 9px; letter-spacing: 0; }
+    .year-table td { padding: 4px 6px; font-size: 11px; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
