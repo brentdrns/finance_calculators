@@ -140,6 +140,13 @@
   .blog-card-date { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
   .blog-card-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
   .blog-card-desc { font-size: 11px; color: var(--text-muted); line-height: 1.65; }
+  .blog-card.hidden { display: none; }
+
+  .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filter-btn { font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; padding: 5px 13px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface); color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+  .filter-btn:hover { border-color: var(--accent-dim); color: var(--text); }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .blog-no-results { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; display: none; }
 
 
   .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
@@ -199,6 +206,7 @@
         <a href="refinance.html">Refinance Calculator</a>
         <a href="rent-vs-buy.html">Rent vs Buy</a>
         <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
       </div>
     </div>
     <div class="nav-dropdown">
@@ -214,6 +222,7 @@
         <a href="tax-brackets.html">Tax Bracket Visualizer</a>
         <a href="social-security.html">Social Security Break-Even</a>
         <a href="life-expectancy.html">Life Expectancy</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
       </div>
     </div>
     <div class="nav-dropdown">
@@ -288,6 +297,12 @@
       Pay extra on your mortgage or invest the difference? See the net worth impact of both paths.
       <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
     </a>
+    <a href="rent-or-sell.html" class="calc-secondary-link">
+      <span class="csl-title">Rent or Sell Your Home</span>
+      <span class="csl-sep">&mdash;</span>
+      Moving out? Compare selling now (and the capital gains tax exclusion) vs. keeping it as a rental.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
   </div>
 
   <div class="section-label">Investing</div>
@@ -351,6 +366,12 @@
       See your survival probability curve from SSA actuarial data. Adjust for smoking, exercise, BMI, and education.
       <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
     </a>
+    <a href="wealth-percentile.html" class="calc-secondary-link">
+      <span class="csl-title">Income &amp; Wealth Percentile</span>
+      <span class="csl-sep">&mdash;</span>
+      See where your household income or net worth ranks among all Americans, with age-adjusted wealth comparisons.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
   </div>
 
   <div class="section-label">Running</div>
@@ -370,53 +391,69 @@
   </div>
 
   <div class="section-label" id="blog">Blog</div>
-  <div class="blog-grid">
-    <a href="blog/how-monte-carlo-works.html" class="blog-card">
+  <div class="filter-bar" id="blogFilterBar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="retirement">Retirement</button>
+    <button class="filter-btn" data-filter="investing">Investing</button>
+    <button class="filter-btn" data-filter="housing">Housing</button>
+    <button class="filter-btn" data-filter="real-estate">Real Estate</button>
+    <button class="filter-btn" data-filter="taxes">Taxes</button>
+    <button class="filter-btn" data-filter="vehicles">Vehicles</button>
+    <button class="filter-btn" data-filter="running">Running</button>
+  </div>
+  <div class="blog-grid" id="blogGrid">
+    <a href="blog/best-cities-landlord.html" class="blog-card" data-tags="housing real-estate">
+      <div class="blog-card-date">March 11, 2026</div>
+      <div class="blog-card-title">The Best (and Worst) Cities to Be a Landlord in 2025</div>
+      <div class="blog-card-desc">Cash flow, cap rates, appreciation, and tax benefits across 30 US markets. Where should rental property investors look &mdash; and which cities are a money pit?</div>
+    </a>
+    <a href="blog/how-monte-carlo-works.html" class="blog-card" data-tags="investing retirement">
       <div class="blog-card-date">March 11, 2026</div>
       <div class="blog-card-title">How Monte Carlo Simulators Actually Work</div>
       <div class="blog-card-desc">Average returns are a lie. Here&rsquo;s how Monte Carlo simulators model the real distribution of outcomes &mdash; and why the sequence of returns matters more than the average.</div>
     </a>
-    <a href="blog/four-percent-rule.html" class="blog-card">
+    <a href="blog/four-percent-rule.html" class="blog-card" data-tags="retirement investing">
       <div class="blog-card-date">March 9, 2026</div>
       <div class="blog-card-title">The 4% Rule: What It Gets Right (and Wrong)</div>
       <div class="blog-card-desc">The Trinity Study&rsquo;s 4% rule has held up for 30 years &mdash; but sequence of returns risk, high valuations, and longer retirements mean it&rsquo;s not a guarantee.</div>
     </a>
-    <a href="blog/rent-vs-buy-real-math.html" class="blog-card">
+    <a href="blog/rent-vs-buy-real-math.html" class="blog-card" data-tags="housing">
       <div class="blog-card-date">March 7, 2026</div>
       <div class="blog-card-title">Rent vs Buy: The Real Math Most Articles Skip</div>
       <div class="blog-card-desc">Most rent vs buy comparisons ignore the opportunity cost of the down payment and the price-to-rent ratio. Here&rsquo;s how to actually compare the two paths.</div>
     </a>
-    <a href="blog/gas-vs-electric.html" class="blog-card">
+    <a href="blog/gas-vs-electric.html" class="blog-card" data-tags="vehicles">
       <div class="blog-card-date">March 5, 2026</div>
       <div class="blog-card-title">Gas vs Electric: What Actually Costs Less to Own?</div>
       <div class="blog-card-desc">EVs have lower running costs but higher sticker prices. The answer depends on how much you drive, where you live, and how long you keep the car.</div>
     </a>
-    <a href="blog/is-refinancing-worth-it.html" class="blog-card">
+    <a href="blog/is-refinancing-worth-it.html" class="blog-card" data-tags="housing">
       <div class="blog-card-date">March 4, 2026</div>
       <div class="blog-card-title">Is Refinancing Your Mortgage Worth It?</div>
       <div class="blog-card-desc">Most refinance advice focuses on monthly savings. Here&rsquo;s how to evaluate a refinance by its real impact on your net worth.</div>
     </a>
-    <a href="blog/when-to-claim-social-security.html" class="blog-card">
+    <a href="blog/when-to-claim-social-security.html" class="blog-card" data-tags="retirement taxes">
       <div class="blog-card-date">March 11, 2026</div>
       <div class="blog-card-title">When Should You Claim Social Security?</div>
       <div class="blog-card-desc">Claiming at 62 vs 70 is a break-even math problem &mdash; but it&rsquo;s also about your health, other income sources, and spouse strategy. Here&rsquo;s how to think through it.</div>
     </a>
-    <a href="blog/understanding-tax-brackets.html" class="blog-card">
+    <a href="blog/understanding-tax-brackets.html" class="blog-card" data-tags="taxes">
       <div class="blog-card-date">March 11, 2026</div>
       <div class="blog-card-title">How Tax Brackets Actually Work</div>
       <div class="blog-card-desc">You don&rsquo;t pay your top rate on all your income. Here&rsquo;s how marginal brackets stack, why your effective rate is lower than you think, and how capital gains layer on top.</div>
     </a>
-    <a href="blog/how-to-build-a-running-base.html" class="blog-card">
+    <a href="blog/how-to-build-a-running-base.html" class="blog-card" data-tags="running">
       <div class="blog-card-date">March 11, 2026</div>
       <div class="blog-card-title">How to Build a Running Base Without Getting Injured</div>
       <div class="blog-card-desc">The 10% rule is oversimplified &mdash; and following it blindly can still get you hurt. Here&rsquo;s what the research actually says about safe mileage progression.</div>
     </a>
-    <a href="blog/real-cost-of-a-new-car.html" class="blog-card">
+    <a href="blog/real-cost-of-a-new-car.html" class="blog-card" data-tags="vehicles">
       <div class="blog-card-date">March 11, 2026</div>
       <div class="blog-card-title">The Real Cost of a New Car</div>
       <div class="blog-card-desc">The sticker price is just the beginning. Depreciation, financing, insurance, and opportunity cost add up fast &mdash; here&rsquo;s how to see the full picture before you buy.</div>
     </a>
   </div>
+  <p class="blog-no-results" id="blogNoResults">No posts in this category yet.</p>
 
 </div>
 
@@ -452,6 +489,26 @@
     updateUI();
   });
   updateUI();
+
+  // Blog filter
+  var filterBtns = document.querySelectorAll('#blogFilterBar .filter-btn');
+  var blogCards = document.querySelectorAll('#blogGrid .blog-card');
+  var noResults = document.getElementById('blogNoResults');
+  filterBtns.forEach(function(fb) {
+    fb.addEventListener('click', function() {
+      var filter = this.getAttribute('data-filter');
+      filterBtns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      var visible = 0;
+      blogCards.forEach(function(card) {
+        var tags = card.getAttribute('data-tags') || '';
+        var show = filter === 'all' || tags.indexOf(filter) !== -1;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
 })();
 </script>
 

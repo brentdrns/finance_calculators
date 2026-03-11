@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Rent or Sell Calculator — Should I Keep My House as a Rental?</title>
+<meta name="description" content="Compare the long-term wealth impact of selling your home vs. renting it out. Models capital gains exclusion, depreciation tax benefits, cash flow, and appreciation.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/rent-or-sell.html">
+<meta property="og:title" content="Rent or Sell Calculator — Should I Keep My House as a Rental?">
+<meta property="og:description" content="Model the sell vs. rent decision for your home. Factors in capital gains taxes, depreciation, cash flow, and long-term wealth comparison.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/rent-or-sell.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rent or Sell Calculator">
+<meta name="twitter:description" content="Should you sell your home or keep it as a rental? Model cash flow, capital gains, depreciation, and long-term wealth.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Rent or Sell Calculator","description":"Compare the long-term financial impact of selling your home versus converting it to a rental property, factoring in capital gains taxes, depreciation, cash flow, and appreciation.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/rent-or-sell.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --orange: #ea580c; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80; --orange: #fb923c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  .layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); position: sticky; top: 0; max-height: 100vh; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 18px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+  .sidebar-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 10px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
+  .field input[type="number"], .field select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
+    -moz-appearance: textfield;
+  }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .radio-group { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .radio-group input[type="radio"] { display: none; }
+  .radio-group label { flex: 1; text-align: center; padding: 7px 8px; font-size: 11px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: background 0.15s, color 0.15s; }
+  .radio-group input[type="radio"]:checked + label { background: var(--accent); color: #fff; }
+  .radio-group label:hover { background: var(--surface2); color: var(--text); }
+  .radio-group input[type="radio"]:checked + label:hover { background: var(--accent); color: #fff; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .checkbox-row input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .checkbox-row label { color: var(--text); font-size: 12px; cursor: pointer; margin: 0; }
+  .move-out-row { display: none; }
+  .move-out-row.visible { display: block; }
+  .mgmt-fee-row { display: none; }
+  .mgmt-fee-row.visible { display: block; }
+
+  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; }
+  .card { background: var(--surface); border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+  .card-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Summary stats */
+  .summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .sstat { background: var(--surface2); border-radius: 10px; padding: 16px 18px; }
+  .sstat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .sstat-val { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--text); line-height: 1.2; }
+  .sstat-desc { font-size: 10px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .sstat.green .sstat-val { color: var(--green); }
+  .sstat.red .sstat-val { color: var(--red); }
+  .sstat.blue .sstat-val { color: var(--blue); }
+  .sstat.orange .sstat-val { color: var(--orange); }
+  .sstat.accent-border { border: 1px solid var(--accent); }
+  .sstat.accent-border .sstat-val { color: var(--accent); }
+
+  /* Exclusion alert */
+  .excl-banner { border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+  .excl-banner.green { background: rgba(22,163,74,0.1); border: 1px solid rgba(22,163,74,0.3); }
+  .excl-banner.orange { background: rgba(234,88,12,0.1); border: 1px solid rgba(234,88,12,0.3); }
+  .excl-banner.red { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3); }
+  .excl-banner-icon { font-size: 20px; flex-shrink: 0; line-height: 1; margin-top: 1px; }
+  .excl-banner-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .excl-banner.green .excl-banner-title { color: var(--green); }
+  .excl-banner.orange .excl-banner-title { color: var(--orange); }
+  .excl-banner.red .excl-banner-title { color: var(--red); }
+  .excl-banner-body { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .excl-banner-body strong { color: var(--text); }
+
+  .gain-rows { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .gain-row-box { background: var(--surface2); border-radius: 8px; padding: 12px 14px; }
+  .gain-row-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .gain-row-val { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; color: var(--text); }
+  .gain-row-val.green { color: var(--green); }
+  .gain-row-val.red { color: var(--red); }
+
+  /* Share button */
+  .share-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 7px 14px; cursor: pointer; transition: color 0.15s, border-color 0.15s; width: 100%; text-align: left; }
+  .share-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Chart */
+  .chart-wrap { position: relative; height: 340px; }
+  .crossover-note { font-size: 12px; color: var(--text-muted); margin-top: 12px; line-height: 1.6; padding: 10px 14px; background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; }
+  .crossover-note strong { color: var(--text); }
+
+  /* Year-by-year table */
+  .year-table-wrap { margin-top: 20px; overflow-x: auto; }
+  .year-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 640px; }
+  .year-table th { background: var(--surface2); color: var(--text-muted); font-weight: 600; text-align: right; padding: 7px 12px; border-bottom: 2px solid var(--border); white-space: nowrap; font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; }
+  .year-table th:first-child { text-align: left; }
+  .year-table td { padding: 5px 12px; text-align: right; border-bottom: 1px solid var(--border); white-space: nowrap; font-size: 12px; color: var(--text); font-family: 'DM Mono', monospace; }
+  .year-table td:first-child { text-align: left; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 12px; }
+  .year-table tbody tr:hover { background: var(--surface2); }
+  .year-table .win { color: var(--green); font-weight: 600; }
+  .year-table .lose { color: var(--red); }
+  .year-table .payoff-row td { background: var(--surface2); color: var(--green); font-family: 'Inter', sans-serif; font-weight: 600; font-size: 11px; text-align: center; border-top: 2px solid var(--green); border-bottom: 2px solid var(--green); padding: 4px 12px; letter-spacing: 0.03em; }
+  .hold-insight { margin-top: 14px; font-size: 12px; color: var(--text-muted); line-height: 1.7; padding: 12px 16px; background: var(--surface2); border-left: 3px solid var(--orange); border-radius: 0 var(--radius) var(--radius) 0; }
+  .hold-insight strong { color: var(--text); }
+
+  /* Analysis card */
+  .analysis-milestone { background: var(--surface2); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 4px; border: 1px solid var(--border); }
+  .analysis-milestone-title { font-weight: 700; font-size: 13px; color: var(--green); margin-bottom: 4px; }
+  .analysis-milestone-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
+  .analysis-stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 12px; }
+  .analysis-stat { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .analysis-stat-val { font-size: 20px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text); margin-bottom: 3px; }
+  .analysis-stat-val.green { color: var(--green); }
+  .analysis-stat-val.red { color: var(--red); }
+  .analysis-stat-label { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .analysis-stat-hint { font-size: 10px; color: var(--text-muted); line-height: 1.4; }
+  .analysis-caprate-row { font-size: 11px; color: var(--text-muted); padding-top: 8px; border-top: 1px solid var(--border); }
+  .analysis-caprate-row strong { color: var(--text); }
+
+  /* Cash flow waterfall */
+  .cf-rows { display: flex; flex-direction: column; gap: 6px; }
+  .cf-row { display: flex; align-items: center; gap: 10px; }
+  .cf-row-label { font-size: 12px; color: var(--text-muted); flex: 1; }
+  .cf-row-label.total { font-weight: 600; color: var(--text); }
+  .cf-row-val { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; width: 90px; text-align: right; flex-shrink: 0; }
+  .cf-row-val.positive { color: var(--green); }
+  .cf-row-val.negative { color: var(--red); }
+  .cf-divider { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+  .cf-bar-outer { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .cf-bar-inner { height: 100%; border-radius: 3px; }
+
+  /* Tax benefits */
+  .tax-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .tax-box { background: var(--surface2); border-radius: 10px; padding: 16px 18px; }
+  .tax-box-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-dim); margin-bottom: 8px; }
+  .tax-box-val { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+  .tax-box-desc { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+  .tax-box-desc strong { color: var(--text); }
+  .passive-loss-note { margin-top: 12px; padding: 12px 14px; background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+  .passive-loss-note strong { color: var(--text); }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 700px; margin: 0 auto 14px; }
+  .site-footer-nav { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    header { padding: 0 20px; }
+    .main { padding: 20px; }
+    .summary-stats { grid-template-columns: 1fr 1fr; }
+    .gain-rows { grid-template-columns: 1fr 1fr; }
+    .tax-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .summary-stats { grid-template-columns: 1fr; }
+    .gain-rows { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html" class="active">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Real Estate Decision Tool</div>
+      <div class="hero-band-title">Rent or <span>Sell?</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      Moving out of your home? Compare the long-term wealth of <strong>selling now</strong> versus
+      <strong>keeping it as a rental</strong>. Factors in the <strong>primary residence tax exclusion</strong>
+      (up to $500K tax-free), depreciation deductions, cash flow, appreciation, and leverage.
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div style="padding:0 0 4px">
+      <button class="share-btn" id="saveSettingsBtn" onclick="saveSettings()" title="Generate a shareable link with your current inputs">&#x2B21; Share Settings</button>
+    </div>
+    <div>
+      <div class="sidebar-title">Your Property</div>
+      <div class="sidebar-subtitle">Enter your home's details to model the sell vs. rent decision.</div>
+    </div>
+
+    <div>
+      <div class="section-label">Property</div>
+      <div class="field">
+        <label for="homeValue">Current Home Value ($)</label>
+        <input type="number" id="homeValue" value="450000" step="1000">
+        <div class="hint">Check Zillow, Redfin, or your county assessor for recent comps.</div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="purchasePrice">Purchase Price ($)</label>
+          <input type="number" id="purchasePrice" value="290000" step="1000">
+        </div>
+        <div class="field">
+          <label for="yearPurchased">Year Purchased</label>
+          <input type="number" id="yearPurchased" value="2016" min="1970" max="2025">
+        </div>
+      </div>
+      <div class="field">
+        <label for="sellingCosts">Selling Costs (%)</label>
+        <input type="number" id="sellingCosts" value="5.5" step="0.1" min="0" max="15">
+        <div class="hint">Typically 5–6% (agent commissions + closing costs).</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Mortgage</div>
+      <div class="field">
+        <label for="mortgageBalance">Remaining Balance ($)</label>
+        <input type="number" id="mortgageBalance" value="240000" step="1000">
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="monthlyPnI">Monthly P&amp;I ($)</label>
+          <input type="number" id="monthlyPnI" value="1580" step="10">
+        </div>
+        <div class="field">
+          <label for="mortgageRate">Rate (%)</label>
+          <input type="number" id="mortgageRate" value="4.25" step="0.05" min="0" max="20">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="annualTaxes">Annual Taxes ($)</label>
+          <input type="number" id="annualTaxes" value="5400" step="100">
+        </div>
+        <div class="field">
+          <label for="annualInsurance">Annual Insurance ($)</label>
+          <input type="number" id="annualInsurance" value="1500" step="100">
+        </div>
+      </div>
+      <div class="field">
+        <label for="annualHoa">Annual HOA Fees ($)</label>
+        <input type="number" id="annualHoa" value="0" step="100" min="0">
+        <div class="hint">HOA fees are fully deductible as a rental expense.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Your Situation</div>
+      <div class="field">
+        <label>Filing Status</label>
+        <div class="radio-group">
+          <input type="radio" name="filing" id="filingMfj" value="mfj" checked>
+          <label for="filingMfj">Married / MFJ</label>
+          <input type="radio" name="filing" id="filingSingle" value="single">
+          <label for="filingSingle">Single</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Are you currently living there?</label>
+        <div class="radio-group">
+          <input type="radio" name="living" id="livingYes" value="yes" checked>
+          <label for="livingYes">Yes</label>
+          <input type="radio" name="living" id="livingNo" value="no">
+          <label for="livingNo">No</label>
+        </div>
+      </div>
+      <div class="field move-out-row" id="moveOutRow">
+        <label for="moveOutMonths">Months Since You Moved Out</label>
+        <input type="number" id="moveOutMonths" value="6" min="0" max="120" step="1">
+      </div>
+      <div class="field">
+        <label for="householdIncome">Household Income ($)</label>
+        <input type="number" id="householdIncome" value="130000" step="1000">
+        <div class="hint">Used to determine capital gains rate and passive loss eligibility.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Rental Plan</div>
+      <div class="field">
+        <label for="monthlyRent">Expected Monthly Rent ($)</label>
+        <input type="number" id="monthlyRent" value="2400" step="50">
+        <div class="hint">A rough rule of thumb: 0.6–0.8% of home value per month.</div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="rentIncrease">Annual Rent Increase (%)</label>
+          <input type="number" id="rentIncrease" value="3.0" step="0.1" min="0" max="15">
+        </div>
+        <div class="field">
+          <label for="vacancyRate">Vacancy Rate (%)</label>
+          <input type="number" id="vacancyRate" value="5" step="0.5" min="0" max="30">
+        </div>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="usePropertyMgmt" checked>
+        <label for="usePropertyMgmt">Use a property manager</label>
+      </div>
+      <div class="field mgmt-fee-row visible" id="mgmtFeeRow">
+        <label for="mgmtFee">Management Fee (% of rent)</label>
+        <input type="number" id="mgmtFee" value="9" step="0.5" min="0" max="25">
+      </div>
+      <div class="field">
+        <label for="maintenancePct">Annual Maintenance (% of value)</label>
+        <input type="number" id="maintenancePct" value="1.0" step="0.1" min="0" max="5">
+        <div class="hint">Repairs, upkeep. 1% is a common rule of thumb.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Assumptions</div>
+      <div class="field-row">
+        <div class="field">
+          <label for="appreciationRate">Home Appreciation (%/yr)</label>
+          <input type="number" id="appreciationRate" value="3.0" step="0.1" min="-5" max="15">
+        </div>
+        <div class="field">
+          <label for="investReturn">Invest Return (%/yr)</label>
+          <input type="number" id="investReturn" value="7.0" step="0.1" min="0" max="20">
+        </div>
+      </div>
+      <div class="field">
+        <label for="horizonYears">Analysis Horizon</label>
+        <select id="horizonYears">
+          <option value="5">5 years</option>
+          <option value="10" selected>10 years</option>
+          <option value="15">15 years</option>
+          <option value="20">20 years</option>
+          <option value="25">25 years</option>
+          <option value="30">30 years</option>
+          <option value="35">35 years</option>
+          <option value="40">40 years</option>
+          <option value="50">50 years</option>
+        </select>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- Summary stats -->
+    <div class="card">
+      <div class="card-title">At a Glance</div>
+      <div class="summary-stats">
+        <div class="sstat accent-border">
+          <div class="sstat-label">Net Sale Proceeds</div>
+          <div class="sstat-val" id="statNetProceeds">—</div>
+          <div class="sstat-desc" id="statNetProceedsDesc">after selling costs &amp; mortgage</div>
+        </div>
+        <div class="sstat" id="sstatCF">
+          <div class="sstat-label">Monthly Rental Cash Flow</div>
+          <div class="sstat-val" id="statCashFlow">—</div>
+          <div class="sstat-desc" id="statCashFlowDesc">before taxes, year 1</div>
+        </div>
+        <div class="sstat">
+          <div class="sstat-label">Current Home Equity</div>
+          <div class="sstat-val" id="statEquity">—</div>
+          <div class="sstat-desc">value minus mortgage balance</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Capital gains & exclusion -->
+    <div class="card">
+      <div class="card-title">Capital Gains &amp; Tax Exclusion</div>
+      <div id="exclusionBanner"></div>
+      <div class="gain-rows">
+        <div class="gain-row-box">
+          <div class="gain-row-label">Estimated Gain</div>
+          <div class="gain-row-val" id="gainVal">—</div>
+        </div>
+        <div class="gain-row-box">
+          <div class="gain-row-label">Exclusion Limit</div>
+          <div class="gain-row-val" id="exclusionAmt">—</div>
+        </div>
+        <div class="gain-row-box">
+          <div class="gain-row-label">Taxable Gain (if selling now)</div>
+          <div class="gain-row-val" id="taxableGainNow">—</div>
+        </div>
+        <div class="gain-row-box">
+          <div class="gain-row-label">Est. Capital Gains Tax</div>
+          <div class="gain-row-val" id="capitalGainsTax">—</div>
+        </div>
+        <div class="gain-row-box">
+          <div class="gain-row-label">Taxable Gain (no exclusion)</div>
+          <div class="gain-row-val" id="taxableGainNoExcl">—</div>
+        </div>
+        <div class="gain-row-box">
+          <div class="gain-row-label">Tax if Exclusion Expires</div>
+          <div class="gain-row-val" id="capitalGainsTaxNoExcl">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wealth comparison chart -->
+    <div class="card">
+      <div class="card-title" id="chartTitle">Wealth Comparison Over 10 Years</div>
+      <div class="chart-wrap"><canvas id="wealthChart"></canvas></div>
+      <div class="crossover-note" id="crossoverNote"></div>
+      <div class="year-table-wrap" id="yearTableWrap"></div>
+      <div class="hold-insight" id="holdInsight" style="display:none"></div>
+    </div>
+
+    <!-- Cash flow breakdown -->
+    <div class="card">
+      <div class="card-title">Rental Cash Flow Breakdown (Year 1, Monthly)</div>
+      <div class="cf-rows" id="cfRows"></div>
+    </div>
+
+    <!-- Long-term analysis -->
+    <div class="card">
+      <div class="card-title">Long-Term Rental Analysis</div>
+      <div id="analysisContent"></div>
+    </div>
+
+    <!-- Tax benefits -->
+    <div class="card">
+      <div class="card-title">Tax Benefits of Renting</div>
+      <div class="tax-grid" id="taxBenefitGrid"></div>
+      <div class="passive-loss-note" id="passiveLossNote"></div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">This calculator provides estimates for educational and planning purposes only. Tax rules are complex and individual circumstances vary significantly. Capital gains calculations assume the property is your primary residence (or was). Consult a qualified CPA or financial advisor before making decisions about selling or renting your property. This is not tax or financial advice.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function fmt(v, decimals) {
+  if (!isFinite(v)) return '—';
+  var abs = Math.abs(v);
+  var sign = v < 0 ? '-' : '';
+  if (abs >= 1e6) return sign + '$' + (abs / 1e6).toFixed(decimals !== undefined ? decimals : (abs >= 10e6 ? 1 : 2)) + 'M';
+  if (abs >= 1000) return sign + '$' + Math.round(abs / 1000) + 'K';
+  return sign + '$' + abs.toFixed(0);
+}
+
+function fmtFull(v) {
+  if (!isFinite(v)) return '—';
+  return (v < 0 ? '-$' : '$') + Math.abs(Math.round(v)).toLocaleString();
+}
+
+function fmtMonthly(v) {
+  if (!isFinite(v)) return '—';
+  return (v < 0 ? '-$' : '+$') + Math.abs(Math.round(v)).toLocaleString() + '/mo';
+}
+
+// ── Capital gains tax rate ────────────────────────────────────────────────────
+// 2024 long-term capital gains rates
+function ltcgRate(income, filing) {
+  if (filing === 'mfj') {
+    if (income <= 94050)  return 0;
+    if (income <= 583750) return 0.15;
+    return 0.20;
+  } else {
+    if (income <= 47025)  return 0;
+    if (income <= 518900) return 0.15;
+    return 0.20;
+  }
+}
+
+// Net Investment Income Tax (3.8%) applies above these thresholds
+function niit(income, filing) {
+  var threshold = filing === 'mfj' ? 250000 : 200000;
+  return income > threshold ? 0.038 : 0;
+}
+
+// Ordinary income marginal rate (approximation for rental income)
+function marginalRate(income, filing) {
+  var brackets = filing === 'mfj'
+    ? [[23200,0.10],[94300,0.12],[201050,0.22],[383900,0.24],[487450,0.32],[731200,0.35]]
+    : [[11600,0.10],[47150,0.12],[100525,0.22],[191950,0.24],[243725,0.32],[609350,0.35]];
+  for (var i = 0; i < brackets.length; i++) {
+    if (income <= brackets[i][0]) return brackets[i][1];
+  }
+  return 0.37;
+}
+
+// ── Mortgage amortization ─────────────────────────────────────────────────────
+function mortgageBalanceAtYear(balance, annualRate, monthlyPayment, years) {
+  var r = annualRate / 12;
+  var bal = balance;
+  for (var m = 0; m < years * 12; m++) {
+    if (bal <= 0) return 0;
+    var interest = bal * r;
+    var principal = monthlyPayment - interest;
+    if (principal <= 0) return bal; // interest-only / negative amortization guard
+    bal -= principal;
+  }
+  return Math.max(0, bal);
+}
+
+function mortgageInterestInYear(balance, annualRate, monthlyPayment, year) {
+  var bal = mortgageBalanceAtYear(balance, annualRate, monthlyPayment, year - 1);
+  var r = annualRate / 12;
+  var totalInterest = 0;
+  for (var m = 0; m < 12; m++) {
+    if (bal <= 0) break;
+    var interest = bal * r;
+    totalInterest += interest;
+    var principal = monthlyPayment - interest;
+    bal -= Math.max(0, principal);
+  }
+  return totalInterest;
+}
+
+// Actual P&I paid in a given year — drops to 0 after payoff, partial in payoff year
+function mortgagePnIInYear(balance, annualRate, monthlyPayment, year) {
+  var bal = mortgageBalanceAtYear(balance, annualRate, monthlyPayment, year - 1);
+  if (bal <= 0) return 0;
+  var r = annualRate / 12;
+  var totalPaid = 0;
+  for (var m = 0; m < 12; m++) {
+    if (bal <= 0) break;
+    var interest = bal * r;
+    var principal = monthlyPayment - interest;
+    if (principal <= 0) break; // interest-only / negative amortization guard
+    var actualPayment = Math.min(monthlyPayment, bal + interest);
+    totalPaid += actualPayment;
+    bal = Math.max(0, bal - (actualPayment - interest));
+  }
+  return totalPaid;
+}
+
+// ── Core calculations ─────────────────────────────────────────────────────────
+
+function getInputs() {
+  function n(id) { return parseFloat(document.getElementById(id).value) || 0; }
+  function s(id) { return document.getElementById(id).value; }
+  var living = document.querySelector('input[name="living"]:checked').value;
+  var filing = document.querySelector('input[name="filing"]:checked').value;
+  return {
+    homeValue:       n('homeValue'),
+    purchasePrice:   n('purchasePrice'),
+    yearPurchased:   n('yearPurchased'),
+    sellingCostsPct: n('sellingCosts') / 100,
+    mortgageBalance: n('mortgageBalance'),
+    monthlyPnI:      n('monthlyPnI'),
+    mortgageRate:    n('mortgageRate') / 100,
+    annualTaxes:     n('annualTaxes'),
+    annualInsurance: n('annualInsurance'),
+    annualHoa:       n('annualHoa'),
+    filing:          filing,
+    livingThere:     living === 'yes',
+    moveOutMonths:   living === 'no' ? n('moveOutMonths') : 0,
+    householdIncome: n('householdIncome'),
+    monthlyRent:     n('monthlyRent'),
+    rentIncrease:    n('rentIncrease') / 100,
+    vacancyRate:     n('vacancyRate') / 100,
+    usePropertyMgmt: document.getElementById('usePropertyMgmt').checked,
+    mgmtFee:         n('mgmtFee') / 100,
+    maintenancePct:  n('maintenancePct') / 100,
+    appreciation:    n('appreciationRate') / 100,
+    investReturn:    n('investReturn') / 100,
+    horizonYears:    parseInt(s('horizonYears')),
+  };
+}
+
+function calcExclusion(inp) {
+  var exclusionAmt = inp.filing === 'mfj' ? 500000 : 250000;
+  var yearsOwned = new Date().getFullYear() - inp.yearPurchased;
+  var qualifies = false;
+  var reason = '';
+  var monthsLeft = 0;
+
+  if (yearsOwned < 2) {
+    qualifies = false;
+    reason = 'notlong';
+  } else if (inp.livingThere) {
+    qualifies = true;
+    reason = 'living';
+  } else if (inp.moveOutMonths <= 36) {
+    qualifies = true;
+    reason = 'window';
+    monthsLeft = 36 - inp.moveOutMonths;
+  } else {
+    qualifies = false;
+    reason = 'expired';
+  }
+
+  var gain = Math.max(0, inp.homeValue - inp.purchasePrice);
+  var taxableGainWith    = Math.max(0, gain - (qualifies ? exclusionAmt : 0));
+  var taxableGainWithout = gain; // no exclusion
+
+  var cgRate = ltcgRate(inp.householdIncome, inp.filing) + niit(inp.householdIncome, inp.filing);
+  var taxNow    = taxableGainWith    * cgRate;
+  var taxNoExcl = taxableGainWithout * cgRate;
+
+  return { exclusionAmt, qualifies, reason, monthsLeft, gain, taxableGainWith, taxableGainWithout, taxNow, taxNoExcl, cgRate };
+}
+
+function calcSellScenario(inp, excl) {
+  var salePrice   = inp.homeValue * (1 - inp.sellingCostsPct);
+  var netProceeds = salePrice - inp.mortgageBalance - excl.taxNow;
+  return { salePrice, netProceeds };
+}
+
+function calcAnnualRentalCF(inp, year) {
+  var monthlyRentY = inp.monthlyRent * Math.pow(1 + inp.rentIncrease, year - 1);
+  var grossRent    = monthlyRentY * 12 * (1 - inp.vacancyRate);
+  var mgmt         = inp.usePropertyMgmt ? grossRent * inp.mgmtFee : 0;
+  var maintenance  = inp.homeValue * inp.maintenancePct;
+  var mortgagePnI  = mortgagePnIInYear(inp.mortgageBalance, inp.mortgageRate, inp.monthlyPnI, year);
+
+  // Pre-tax cash flow
+  var cashFlow = grossRent - mortgagePnI - inp.annualTaxes - inp.annualInsurance - inp.annualHoa - mgmt - maintenance;
+
+  // Tax calculation — interest deductible (not full P&I)
+  var interestY = mortgageInterestInYear(inp.mortgageBalance, inp.mortgageRate, inp.monthlyPnI, year);
+  var depreciation = (inp.homeValue * 0.80) / 27.5;
+  var taxableRentalIncome = grossRent - interestY - inp.annualTaxes - inp.annualInsurance - inp.annualHoa - mgmt - maintenance - depreciation;
+
+  var mRate = marginalRate(inp.householdIncome, inp.filing);
+  var agi = inp.householdIncome;
+  var taxEffect = 0;
+
+  if (taxableRentalIncome < 0) {
+    // Passive activity loss rules (§469)
+    var loss = -taxableRentalIncome;
+    var allowedLoss = 0;
+    if (agi <= 100000) {
+      allowedLoss = Math.min(loss, 25000);
+    } else if (agi <= 150000) {
+      allowedLoss = Math.min(loss, Math.max(0, 25000 - 0.5 * (agi - 100000)));
+    }
+    taxEffect = allowedLoss * mRate; // positive → tax savings
+  } else {
+    taxEffect = -taxableRentalIncome * mRate; // negative → tax owed
+  }
+
+  return { cashFlow, taxEffect, afterTaxCF: cashFlow + taxEffect, grossRent, mortgagePnI, mgmt, maintenance, interestY, depreciation, taxableRentalIncome };
+}
+
+// Rent path total wealth at year N = home equity + cumulative reinvested after-tax CFs
+function rentPathWealth(inp, year) {
+  var propValue = inp.homeValue * Math.pow(1 + inp.appreciation, year);
+  var mortBal   = mortgageBalanceAtYear(inp.mortgageBalance, inp.mortgageRate, inp.monthlyPnI, year);
+  var equity    = propValue - mortBal;
+
+  var cumCF = 0;
+  for (var y = 1; y <= year; y++) {
+    var cf = calcAnnualRentalCF(inp, y).afterTaxCF;
+    cumCF = cumCF * (1 + inp.investReturn) + cf;
+  }
+  return equity + cumCF;
+}
+
+// Sell path total wealth at year N = net proceeds compounded at investReturn
+function sellPathWealth(netProceeds, investReturn, year) {
+  return netProceeds * Math.pow(1 + investReturn, year);
+}
+
+// Net wealth if rental is sold at year N (after selling costs, cap gains, depr. recapture, + cumul CFs)
+function calcSellRentalAtYear(inp, year) {
+  var propValue    = inp.homeValue * Math.pow(1 + inp.appreciation, year);
+  var mortBal      = mortgageBalanceAtYear(inp.mortgageBalance, inp.mortgageRate, inp.monthlyPnI, year);
+  var sellingCosts = propValue * inp.sellingCostsPct;
+  var deprecPerYear = (inp.homeValue * 0.80) / 27.5;
+  var accumDepr    = deprecPerYear * Math.min(year, 27.5);
+  var adjustedBasis = Math.max(0, inp.purchasePrice - accumDepr);
+  var gainOnSale   = Math.max(0, propValue - sellingCosts - adjustedBasis);
+
+  // Suspended passive losses released at sale (for AGI > $100K)
+  var agi = inp.householdIncome;
+  var suspendedLosses = 0;
+  for (var y = 1; y <= year; y++) {
+    var cf = calcAnnualRentalCF(inp, y);
+    if (cf.taxableRentalIncome < 0) {
+      var loss = -cf.taxableRentalIncome;
+      var allowed = 0;
+      if (agi <= 100000) allowed = Math.min(loss, 25000);
+      else if (agi <= 150000) allowed = Math.min(loss, Math.max(0, 25000 - 0.5 * (agi - 100000)));
+      suspendedLosses += (loss - allowed);
+    }
+  }
+  var netGain = Math.max(0, gainOnSale - suspendedLosses);
+
+  // Depreciation recapture at 25%
+  var recaptureAmt  = Math.min(accumDepr, netGain);
+  var recaptureTax  = recaptureAmt * 0.25;
+  // LTCG on remainder
+  var ltcgGain = Math.max(0, netGain - recaptureAmt);
+  var cgRate   = ltcgRate(inp.householdIncome, inp.filing) + niit(inp.householdIncome, inp.filing);
+  var cgTax    = ltcgGain * cgRate;
+  var totalTax = recaptureTax + cgTax;
+
+  var netSaleProceeds = propValue - sellingCosts - mortBal - totalTax;
+
+  // Cumulative reinvested after-tax cash flows up to this year
+  var cumCF = 0;
+  for (var y2 = 1; y2 <= year; y2++) {
+    cumCF = cumCF * (1 + inp.investReturn) + calcAnnualRentalCF(inp, y2).afterTaxCF;
+  }
+
+  return {
+    propValue: propValue,
+    mortBal: mortBal,
+    equity: propValue - mortBal,
+    sellingCosts: sellingCosts,
+    accumDepr: accumDepr,
+    recaptureTax: recaptureTax,
+    cgTax: cgTax,
+    totalTax: totalTax,
+    netSaleProceeds: netSaleProceeds,
+    cumCF: cumCF,
+    totalNetWealth: netSaleProceeds + cumCF
+  };
+}
+
+// ── Chart ─────────────────────────────────────────────────────────────────────
+var wealthChartInst = null;
+
+function renderChart(inp, netSellProceeds) {
+  var labels   = [];
+  var sellData = [];
+  var rentData = [];
+  var netSaleData = [];
+
+  for (var y = 0; y <= inp.horizonYears; y++) {
+    labels.push('Yr ' + y);
+    sellData.push(Math.round(sellPathWealth(netSellProceeds, inp.investReturn, y)));
+    rentData.push(Math.round(rentPathWealth(inp, y)));
+    // Year 0: use current sell net proceeds (may have exclusion); Year 1+: no exclusion (been renting)
+    netSaleData.push(y === 0 ? Math.round(netSellProceeds) : Math.round(calcSellRentalAtYear(inp, y).totalNetWealth));
+  }
+
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+  var textColor = isDark ? '#9395a1' : '#6b7280';
+
+  if (wealthChartInst) wealthChartInst.destroy();
+  var ctx = document.getElementById('wealthChart').getContext('2d');
+  wealthChartInst = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Sell & Invest',
+          data: sellData,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37,99,235,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          tension: 0.3,
+          fill: false
+        },
+        {
+          label: 'Keep & Rent (gross equity + CFs)',
+          data: rentData,
+          borderColor: '#16a34a',
+          backgroundColor: 'rgba(22,163,74,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          tension: 0.3,
+          borderDash: [5, 3],
+          fill: false
+        },
+        {
+          label: 'Net If You Rented Until Year X, Then Sold',
+          data: netSaleData,
+          borderColor: '#d97706',
+          backgroundColor: 'rgba(217,119,6,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          tension: 0.3,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color: textColor, font: { family: 'Inter', size: 12 }, boxWidth: 14 } },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.dataset.label + ': $' + ctx.raw.toLocaleString();
+            }
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color: textColor, font: { size: 11 } }, grid: { color: gridColor } },
+        y: {
+          ticks: {
+            color: textColor, font: { size: 11 },
+            callback: function(v) { return v >= 1e6 ? '$' + (v/1e6).toFixed(1) + 'M' : '$' + (v/1000).toFixed(0) + 'K'; }
+          },
+          grid: { color: gridColor }
+        }
+      }
+    }
+  });
+
+  // Find crossover between Sell & Invest and Rent Then Sell at That Year (the apples-to-apples comparison)
+  var crossover = -1;
+  for (var i = 1; i <= inp.horizonYears; i++) {
+    if (netSaleData[i] >= sellData[i] && netSaleData[i-1] < sellData[i-1]) { crossover = i; break; }
+    if (netSaleData[i] <= sellData[i] && netSaleData[i-1] > sellData[i-1]) { crossover = i; break; }
+  }
+
+  var noteEl = document.getElementById('crossoverNote');
+  var finalSell    = sellData[inp.horizonYears];
+  var finalNetSale = netSaleData[inp.horizonYears];
+  var diff = Math.abs(finalNetSale - finalSell);
+
+  if (crossover > 0) {
+    if (finalNetSale > finalSell) {
+      noteEl.innerHTML = 'The <strong>Rent Then Sell at That Year</strong> path (after all taxes &amp; fees) overtakes Sell &amp; Invest around <strong>year ' + crossover + '</strong>, ending the ' + inp.horizonYears + '-year window ahead by <strong>' + fmt(diff) + '</strong>. The dashed green line shows gross equity before sale costs.';
+    } else {
+      noteEl.innerHTML = 'The <strong>Sell &amp; Invest</strong> path regains the lead around <strong>year ' + crossover + '</strong>, ending the ' + inp.horizonYears + '-year window ahead by <strong>' + fmt(diff) + '</strong>. The dashed line shows gross equity; the orange shows what you\'d actually net after sale.';
+    }
+  } else if (finalNetSale > finalSell) {
+    noteEl.innerHTML = 'Over ' + inp.horizonYears + ' years, <strong>Rent Then Sell at That Year</strong> nets <strong>' + fmt(diff) + '</strong> more than selling now and investing — even after all taxes, depreciation recapture, and selling costs.';
+  } else {
+    noteEl.innerHTML = 'Over ' + inp.horizonYears + ' years, <strong>Sell Now &amp; Invest</strong> comes out ahead by <strong>' + fmt(diff) + '</strong> compared to the net proceeds you\'d pocket after renting then selling. The dashed green line shows gross equity, which doesn\'t account for selling costs and recapture.';
+  }
+
+  document.getElementById('chartTitle').textContent = 'Wealth Comparison Over ' + inp.horizonYears + ' Years';
+}
+
+// ── Year-by-year table ────────────────────────────────────────────────────────
+function renderYearTable(inp, netSellProceeds) {
+  var wrap = document.getElementById('yearTableWrap');
+  var insightEl = document.getElementById('holdInsight');
+
+  // Find mortgage payoff year
+  var payoffYear = null;
+  if (inp.mortgageBalance > 0 && inp.monthlyPnI > 0) {
+    for (var py = 1; py <= inp.horizonYears; py++) {
+      if (mortgageBalanceAtYear(inp.mortgageBalance, inp.mortgageRate, inp.monthlyPnI, py) <= 0) {
+        payoffYear = py;
+        break;
+      }
+    }
+  }
+
+  var html = '<table class="year-table"><thead><tr>'
+    + '<th>Year</th>'
+    + '<th>Home Value</th>'
+    + '<th>Equity</th>'
+    + '<th>Accum. CFs</th>'
+    + '<th>Sell Costs + Taxes</th>'
+    + '<th>Net If Rented → Sold This Year</th>'
+    + '<th>Sell Now &amp; Invest</th>'
+    + '</tr></thead><tbody>';
+
+  for (var y = 0; y <= inp.horizonYears; y++) {
+    var sellInvest = Math.round(sellPathWealth(netSellProceeds, inp.investReturn, y));
+    var s, netSale, equity, cumCF, friction;
+    if (y === 0) {
+      equity    = Math.round(inp.homeValue - inp.mortgageBalance);
+      netSale   = Math.round(netSellProceeds);
+      cumCF     = 0;
+      friction  = Math.round(inp.homeValue * inp.sellingCostsPct);
+    } else {
+      s        = calcSellRentalAtYear(inp, y);
+      equity   = Math.round(s.equity);
+      netSale  = Math.round(s.totalNetWealth);
+      cumCF    = Math.round(s.cumCF);
+      friction = Math.round(s.sellingCosts + s.totalTax);
+    }
+    var winner = netSale >= sellInvest ? 'win' : 'lose';
+
+    if (payoffYear !== null && y === payoffYear) {
+      html += '<tr class="payoff-row"><td colspan="7">&#x2713; Mortgage paid off — cash flow jumps</td></tr>';
+    }
+
+    html += '<tr>'
+      + '<td>Yr ' + y + '</td>'
+      + '<td>' + fmt(y === 0 ? inp.homeValue : Math.round(s.propValue)) + '</td>'
+      + '<td>' + fmt(equity) + '</td>'
+      + '<td>' + (cumCF >= 0 ? '+' : '') + fmt(cumCF) + '</td>'
+      + '<td style="color:var(--red)">' + fmt(friction) + '</td>'
+      + '<td class="' + winner + '">' + fmt(netSale) + '</td>'
+      + '<td>' + fmt(sellInvest) + '</td>'
+      + '</tr>';
+  }
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+
+  // Hold-forever insight
+  var annualPnIAtPayoff = payoffYear ? inp.monthlyPnI * 12 : 0;
+  var insightHtml = '<strong>Why "never sell" often wins:</strong> Every time you sell, you forfeit ~'
+    + Math.round(inp.sellingCostsPct * 100) + '% in selling costs'
+    + (inp.purchasePrice < inp.homeValue ? ' plus capital gains & depreciation recapture taxes' : '')
+    + ' — a drag you permanently avoid by holding. Your leveraged equity compounds at the appreciation rate, '
+    + 'and' + (payoffYear ? ' once the mortgage pays off around year ' + payoffYear + ', your annual cash flow improves by roughly '
+      + fmt(Math.round(annualPnIAtPayoff)) + '/yr.' : ' rent covers more of your costs each year as rents rise.')
+    + ' If you ever need to redeploy capital without triggering a taxable sale, consider a <strong>cash-out refinance</strong> or a <strong>1031 exchange</strong>.';
+  insightEl.innerHTML = insightHtml;
+  insightEl.style.display = 'block';
+}
+
+// ── Cash flow card ────────────────────────────────────────────────────────────
+function renderCashFlow(inp) {
+  var cf = calcAnnualRentalCF(inp, 1);
+  var monthly = {
+    rent:   cf.grossRent / 12,
+    pni:    -(cf.mortgagePnI / 12),
+    taxes:  -(inp.annualTaxes / 12),
+    ins:    -(inp.annualInsurance / 12),
+    mgmt:   inp.usePropertyMgmt ? -(cf.grossRent / 12 * inp.mgmtFee) : 0,
+    maint:  -(inp.homeValue * inp.maintenancePct / 12),
+    total:  cf.cashFlow / 12
+  };
+
+  var rows = [
+    { label: 'Gross rental income', val: monthly.rent, bar: true },
+    { label: 'Mortgage (P&I)', val: monthly.pni, bar: true },
+    { label: 'Property taxes', val: monthly.taxes, bar: true },
+    { label: 'Homeowners insurance', val: monthly.ins, bar: true },
+  ];
+  if (inp.annualHoa > 0) rows.push({ label: 'HOA fees', val: -(inp.annualHoa / 12), bar: true });
+  if (inp.usePropertyMgmt) rows.push({ label: 'Property management (' + Math.round(inp.mgmtFee * 100) + '%)', val: monthly.mgmt, bar: true });
+  rows.push({ label: 'Maintenance & repairs', val: monthly.maint, bar: true });
+
+  var el = document.getElementById('cfRows');
+  el.innerHTML = '';
+
+  var maxAbs = Math.max.apply(null, rows.map(function(r){ return Math.abs(r.val); }));
+
+  rows.forEach(function(row) {
+    var div = document.createElement('div');
+    div.className = 'cf-row';
+    var color = row.val >= 0 ? '#16a34a' : '#dc2626';
+    var barW = Math.round(Math.abs(row.val) / maxAbs * 100);
+    div.innerHTML = '<div class="cf-row-label">' + row.label + '</div>'
+      + '<div class="cf-bar-outer"><div class="cf-bar-inner" style="width:' + barW + '%;background:' + color + ';opacity:0.5;"></div></div>'
+      + '<div class="cf-row-val ' + (row.val >= 0 ? 'positive' : 'negative') + '">' + (row.val >= 0 ? '+' : '') + '$' + Math.abs(Math.round(row.val)).toLocaleString() + '</div>';
+    el.appendChild(div);
+  });
+
+  // Divider
+  var hr = document.createElement('hr');
+  hr.className = 'cf-divider';
+  el.appendChild(hr);
+
+  var totalRow = document.createElement('div');
+  totalRow.className = 'cf-row';
+  var totalColor = monthly.total >= 0 ? 'positive' : 'negative';
+  var totalSign = monthly.total >= 0 ? '+' : '';
+  totalRow.innerHTML = '<div class="cf-row-label total">Monthly cash flow (pre-tax)</div>'
+    + '<div class="cf-bar-outer"></div>'
+    + '<div class="cf-row-val ' + totalColor + '">' + totalSign + '$' + Math.abs(Math.round(monthly.total)).toLocaleString() + '</div>';
+  el.appendChild(totalRow);
+
+  var atRow = document.createElement('div');
+  atRow.className = 'cf-row';
+  var atMonthly = (cf.cashFlow + cf.taxEffect) / 12;
+  var atColor = atMonthly >= 0 ? 'positive' : 'negative';
+  atRow.innerHTML = '<div class="cf-row-label total" style="color:var(--text-muted);font-weight:400;">After-tax cash flow (est.)</div>'
+    + '<div class="cf-bar-outer"></div>'
+    + '<div class="cf-row-val ' + atColor + '">' + (atMonthly >= 0 ? '+' : '') + '$' + Math.abs(Math.round(atMonthly)).toLocaleString() + '</div>';
+  el.appendChild(atRow);
+
+  // Update summary card
+  document.getElementById('statCashFlow').textContent = (monthly.total >= 0 ? '+' : '') + '$' + Math.abs(Math.round(monthly.total)).toLocaleString();
+  var cfStat = document.getElementById('sstatCF');
+  cfStat.className = 'sstat ' + (monthly.total >= 0 ? 'green' : 'red');
+  document.getElementById('statCashFlowDesc').textContent = monthly.total >= 0 ? 'positive before-tax cash flow' : 'negative before-tax cash flow';
+}
+
+// ── Long-term analysis card ───────────────────────────────────────────────────
+function renderAnalysis(inp, netSellProceeds) {
+  var el = document.getElementById('analysisContent');
+  if (!el) return;
+
+  // Find payoff year (search up to 40 yrs regardless of horizon)
+  var payoffYear = null;
+  if (inp.mortgageBalance <= 0) {
+    payoffYear = 0;
+  } else if (inp.monthlyPnI > 0) {
+    for (var py = 1; py <= 40; py++) {
+      if (mortgageBalanceAtYear(inp.mortgageBalance, inp.mortgageRate, inp.monthlyPnI, py) <= 0) {
+        payoffYear = py; break;
+      }
+    }
+  }
+
+  // Year-1 NOI for cap rate (no mortgage, just operating expenses)
+  var cf1 = calcAnnualRentalCF(inp, 1);
+  var noi1 = cf1.grossRent - inp.annualTaxes - inp.annualInsurance - inp.annualHoa
+    - (inp.usePropertyMgmt ? cf1.grossRent * inp.mgmtFee : 0)
+    - inp.homeValue * inp.maintenancePct;
+  var capRate = noi1 / inp.homeValue;
+
+  // Investment yield now (sell proceeds × return rate)
+  var investMonthlyNow = netSellProceeds > 0 ? netSellProceeds * inp.investReturn / 12 : 0;
+
+  // Build payoff milestone stats
+  var payoffSection = '';
+  if (payoffYear !== null) {
+    var cfP = payoffYear === 0 ? cf1 : calcAnnualRentalCF(inp, payoffYear);
+    var propValueP = payoffYear === 0 ? inp.homeValue : inp.homeValue * Math.pow(1 + inp.appreciation, payoffYear);
+    var grossRentMonthP = cfP.grossRent / 12;
+    var netCFMonthP = cfP.cashFlow / 12; // P&I = 0 after payoff via mortgagePnIInYear
+    var noiP = cfP.grossRent - inp.annualTaxes - inp.annualInsurance - inp.annualHoa
+      - (inp.usePropertyMgmt ? cfP.grossRent * inp.mgmtFee : 0)
+      - inp.homeValue * inp.maintenancePct;
+    var projCapRate = noiP / propValueP;
+    // What sell+invest portfolio would be worth and yield at payoff year
+    var investPortfolioAtPayoff = payoffYear === 0 ? netSellProceeds : sellPathWealth(netSellProceeds, inp.investReturn, payoffYear);
+    var investMonthlyAtPayoff = investPortfolioAtPayoff * inp.investReturn / 12;
+    var payoffLabel = payoffYear === 0 ? 'Already Paid Off' : 'Mortgage Paid Off — Year ' + payoffYear;
+    var payoffSubtitle = payoffYear === 0
+      ? 'Your property is free and clear. Every dollar of NOI goes straight to you.'
+      : 'After ' + payoffYear + ' years of payments your property is fully owned — no more P&I. Here\'s how the two paths compare at that point.';
+
+    payoffSection = '<div class="analysis-milestone">'
+      + '<div class="analysis-milestone-title">&#x2713; ' + payoffLabel + '</div>'
+      + '<div class="analysis-milestone-sub">' + payoffSubtitle + '</div>'
+      + '<div class="analysis-stat-row">'
+      + '<div class="analysis-stat"><div class="analysis-stat-val">' + fmt(Math.round(grossRentMonthP)) + '/mo</div><div class="analysis-stat-label">Gross monthly rent</div><div class="analysis-stat-hint">With ' + Math.round(inp.rentIncrease * 100) + '%/yr increases</div></div>'
+      + '<div class="analysis-stat"><div class="analysis-stat-val ' + (netCFMonthP >= 0 ? 'green' : 'red') + '">' + (netCFMonthP >= 0 ? '+' : '') + fmt(Math.round(netCFMonthP)) + '/mo</div><div class="analysis-stat-label">Net pre-tax cash flow</div><div class="analysis-stat-hint">Rent minus taxes, ins., HOA, mgmt, maint.</div></div>'
+      + '<div class="analysis-stat"><div class="analysis-stat-val">' + fmt(Math.round(investMonthlyAtPayoff)) + '/mo</div><div class="analysis-stat-label">Invest alt. at same point</div><div class="analysis-stat-hint">Sell proceeds compounded ' + Math.round(inp.investReturn * 100) + '%/yr, drawn as income</div></div>'
+      + '<div class="analysis-stat"><div class="analysis-stat-val">' + fmt(Math.round(propValueP)) + '</div><div class="analysis-stat-label">Property value</div><div class="analysis-stat-hint">Your equity = full value, no mortgage</div></div>'
+      + '</div>'
+      + '<div class="analysis-caprate-row">Cap rate at payoff: <strong>' + (projCapRate * 100).toFixed(1) + '%</strong> &nbsp;|&nbsp; Current cap rate: <strong>' + (capRate * 100).toFixed(1) + '%</strong> &nbsp;|&nbsp; Investment yield assumed: <strong>' + Math.round(inp.investReturn * 100) + '%</strong></div>'
+      + '</div>';
+  }
+
+  // Year-by-year cash flow table
+  var maxYears = Math.max(inp.horizonYears, payoffYear ? Math.min(payoffYear + 2, 40) : inp.horizonYears);
+  maxYears = Math.min(maxYears, 40);
+
+  // Determine if any losses will be suspended (income > $100K)
+  var agi = inp.householdIncome;
+  var showSuspended = agi > 100000; // partial phase-out starts at $100K, full suspension at $150K
+
+  var tableHtml = '<div class="year-table-wrap" style="margin-top:20px"><table class="year-table">'
+    + '<thead><tr>'
+    + '<th>Year</th>'
+    + '<th>Monthly Rent</th>'
+    + '<th>P&amp;I</th>'
+    + '<th>Other Exp.</th>'
+    + '<th>Pre-tax CF/mo</th>'
+    + '<th title="Tax benefit used this year (deductible losses or income tax owed). Suspended losses show $0 — they carry forward and release at sale.">Tax Effect/mo</th>'
+    + '<th>After-tax CF/mo</th>'
+    + (showSuspended ? '<th title="Cumulative passive losses suspended under §469. These carry forward and reduce your taxable gain when you sell.">Cumul. Susp. Losses</th>' : '')
+    + '<th>Cumul. After-tax</th>'
+    + '</tr></thead><tbody>';
+
+  var cumCF = 0;
+  var cumSuspended = 0;
+  for (var y = 1; y <= maxYears; y++) {
+    var cf = calcAnnualRentalCF(inp, y);
+    var pni = cf.mortgagePnI / 12;
+    var otherExp = (inp.annualTaxes + inp.annualInsurance + inp.annualHoa
+      + (inp.usePropertyMgmt ? cf.grossRent * inp.mgmtFee : 0)
+      + inp.homeValue * inp.maintenancePct) / 12;
+    var pretaxMo = cf.cashFlow / 12;
+    var taxMo = cf.taxEffect / 12;
+    var afterMo = (cf.cashFlow + cf.taxEffect) / 12;
+    cumCF += cf.cashFlow + cf.taxEffect;
+
+    // Track suspended losses this year
+    if (cf.taxableRentalIncome < 0) {
+      var loss = -cf.taxableRentalIncome;
+      var allowed = 0;
+      if (agi <= 100000) allowed = Math.min(loss, 25000);
+      else if (agi <= 150000) allowed = Math.min(loss, Math.max(0, 25000 - 0.5 * (agi - 100000)));
+      cumSuspended += (loss - allowed);
+    }
+
+    if (payoffYear && y === payoffYear) {
+      tableHtml += '<tr class="payoff-row"><td colspan="' + (showSuspended ? 9 : 8) + '">&#x2713; Mortgage paid off — cash flow jumps by ' + fmt(Math.round(inp.monthlyPnI)) + '/mo</td></tr>';
+    }
+
+    tableHtml += '<tr>'
+      + '<td>Yr ' + y + '</td>'
+      + '<td>' + fmt(Math.round(cf.grossRent / 12)) + '</td>'
+      + '<td style="color:var(--red)">' + (pni > 0 ? '-' + fmt(Math.round(pni)) : '—') + '</td>'
+      + '<td style="color:var(--red)">-' + fmt(Math.round(otherExp)) + '</td>'
+      + '<td class="' + (pretaxMo >= 0 ? 'win' : 'lose') + '">' + (pretaxMo >= 0 ? '+' : '') + fmt(Math.round(pretaxMo)) + '</td>'
+      + '<td style="color:' + (taxMo >= 0 ? 'var(--green)' : 'var(--red)') + '">' + (taxMo >= 0 ? '+' : '') + fmt(Math.round(taxMo)) + '</td>'
+      + '<td class="' + (afterMo >= 0 ? 'win' : 'lose') + '">' + (afterMo >= 0 ? '+' : '') + fmt(Math.round(afterMo)) + '</td>'
+      + (showSuspended ? '<td style="color:var(--orange)" title="Losses carried forward — offset your taxable gain at sale">' + (cumSuspended > 0 ? fmt(Math.round(cumSuspended)) : '—') + '</td>' : '')
+      + '<td>' + (cumCF >= 0 ? '+' : '') + fmt(Math.round(cumCF)) + '</td>'
+      + '</tr>';
+  }
+  tableHtml += '</tbody></table></div>';
+
+  // Footnote about suspended losses
+  var suspendedNote = '';
+  if (showSuspended && cumSuspended > 0) {
+    var mRate = marginalRate(inp.householdIncome, inp.filing);
+    var taxValue = Math.round(cumSuspended * mRate);
+    suspendedNote = '<p style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.6;">'
+      + '<strong style="color:var(--orange)">Suspended losses (§469):</strong> With your income above $'
+      + (agi >= 150000 ? '150K, all' : '100K, most')
+      + ' rental losses are suspended — they don\'t reduce your taxes this year but carry forward indefinitely. '
+      + 'The <em>Cumul. Susp. Losses</em> column shows this growing tax asset. At sale, these losses are released against your taxable gain first, '
+      + 'potentially saving you ~<strong>' + fmt(taxValue) + '</strong> in taxes by year ' + maxYears + ' (at your ~' + Math.round(mRate * 100) + '% marginal rate). '
+      + 'This is already reflected in the "Net If Rented → Sold" column of the wealth table above.</p>';
+  }
+
+  el.innerHTML = payoffSection + tableHtml + suspendedNote;
+}
+
+// ── Tax benefits card ─────────────────────────────────────────────────────────
+function renderTaxBenefits(inp) {
+  var cf = calcAnnualRentalCF(inp, 1);
+  var mRate = marginalRate(inp.householdIncome, inp.filing);
+  var agi = inp.householdIncome;
+
+  var depreciation = cf.depreciation;
+  var depTaxSavings = depreciation * mRate; // if able to use it
+  var interestDeduction = cf.interestY;
+  var interestSavings = interestDeduction * mRate;
+  var totalDeductions = interestDeduction + inp.annualTaxes + inp.annualInsurance + inp.annualHoa
+    + (inp.usePropertyMgmt ? cf.grossRent * inp.mgmtFee : 0) + inp.homeValue * inp.maintenancePct + depreciation;
+
+  var items = [
+    {
+      label: 'Annual Depreciation',
+      val: fmtFull(depreciation),
+      desc: 'Building value (' + fmtFull(inp.homeValue * 0.80) + ') ÷ 27.5 years = <strong>' + fmtFull(depreciation) + '/yr</strong> deductible paper loss — no cash out of pocket.'
+    },
+    {
+      label: 'Est. Tax Savings from Depreciation',
+      val: fmtFull(depTaxSavings) + '/yr',
+      desc: 'At your ~' + Math.round(mRate * 100) + '% marginal rate, the depreciation deduction could save you roughly <strong>' + fmtFull(depTaxSavings) + ' per year</strong> in taxes.'
+    },
+    {
+      label: 'Mortgage Interest Deduction',
+      val: fmtFull(interestDeduction) + '/yr',
+      desc: 'Year 1 mortgage interest is fully deductible against rental income. Saves roughly <strong>' + fmtFull(interestSavings) + '/yr</strong> at your rate.'
+    },
+    {
+      label: 'Total Annual Deductions',
+      val: fmtFull(totalDeductions),
+      desc: 'Depreciation + interest + taxes + insurance + management + maintenance. All deductible from rental income for federal tax purposes.'
+    }
+  ];
+
+  var grid = document.getElementById('taxBenefitGrid');
+  grid.innerHTML = '';
+  items.forEach(function(item) {
+    var box = document.createElement('div');
+    box.className = 'tax-box';
+    box.innerHTML = '<div class="tax-box-label">' + item.label + '</div>'
+      + '<div class="tax-box-val">' + item.val + '</div>'
+      + '<div class="tax-box-desc">' + item.desc + '</div>';
+    grid.appendChild(box);
+  });
+
+  // Passive loss note
+  var noteEl = document.getElementById('passiveLossNote');
+  var taxableIncome = cf.taxableRentalIncome;
+  var allowedLoss = 0;
+  var status = '';
+  if (taxableIncome >= 0) {
+    status = 'Your rental generates <strong>taxable income of ' + fmtFull(taxableIncome) + '/yr</strong> after all deductions — you\'ll owe ordinary income tax on this amount.';
+  } else {
+    var loss = -taxableIncome;
+    if (agi <= 100000) {
+      allowedLoss = Math.min(loss, 25000);
+      status = 'Your rental shows a <strong>paper loss of ' + fmtFull(loss) + '/yr</strong> (mostly from depreciation). Since your AGI is under $100K, you can deduct up to $25,000 of passive rental losses against your ordinary income — saving roughly <strong>' + fmtFull(allowedLoss * mRate) + '/yr</strong> in taxes.';
+    } else if (agi <= 150000) {
+      allowedLoss = Math.max(0, 25000 - 0.5 * (agi - 100000));
+      status = 'Your rental shows a <strong>paper loss of ' + fmtFull(loss) + '/yr</strong>. The $25K passive loss allowance phases out between $100K–$150K AGI. At your income, roughly <strong>' + fmtFull(allowedLoss) + '</strong> is currently deductible.';
+    } else {
+      status = 'Your rental shows a <strong>paper loss of ' + fmtFull(loss) + '/yr</strong>. However, with AGI above $150K, passive rental losses are <strong>suspended</strong> under §469 — they carry forward and reduce your gain when you eventually sell.';
+    }
+  }
+  noteEl.innerHTML = '<strong>Passive Activity Loss Rules (§469): </strong>' + status
+    + ' <strong>Depreciation recapture note:</strong> When you eventually sell a rental, accumulated depreciation is taxed at 25% (unrecaptured §1250 gain). Over 10 years: ~' + fmtFull(depreciation * 10 * 0.25) + ' in potential recapture tax.';
+}
+
+// ── Main update ───────────────────────────────────────────────────────────────
+function update() {
+  var inp = getInputs();
+  var excl = calcExclusion(inp);
+  var sell = calcSellScenario(inp, excl);
+
+  // Summary stats
+  document.getElementById('statNetProceeds').textContent = fmt(sell.netProceeds);
+  document.getElementById('statNetProceedsDesc').textContent = excl.qualifies
+    ? 'after costs, mortgage & 0 cap gains tax'
+    : 'after costs, mortgage & cap gains tax';
+  document.getElementById('statEquity').textContent = fmt(inp.homeValue - inp.mortgageBalance);
+
+  // Capital gains card
+  var exclEl = document.getElementById('exclusionBanner');
+  var excAmt = fmtFull(excl.exclusionAmt);
+  if (excl.reason === 'notlong') {
+    exclEl.innerHTML = '<div class="excl-banner orange"><div class="excl-banner-icon">&#9888;</div><div><div class="excl-banner-title">Exclusion Not Yet Available</div><div class="excl-banner-body">You\'ve owned the property for less than 2 years. You must own <strong>and</strong> use it as a primary residence for at least 2 of the last 5 years to qualify for the ' + excAmt + ' exclusion.</div></div></div>';
+  } else if (excl.reason === 'living') {
+    exclEl.innerHTML = '<div class="excl-banner green"><div class="excl-banner-icon">&#10003;</div><div><div class="excl-banner-title">You Qualify for the ' + excAmt + ' Primary Residence Exclusion</div><div class="excl-banner-body">You\'re currently living there — you meet the 2-of-5-year use test. If you sell now, up to ' + excAmt + ' of your gain is <strong>completely tax-free</strong>.</div></div></div>';
+  } else if (excl.reason === 'window') {
+    var urgency = excl.monthsLeft <= 6 ? 'red' : 'orange';
+    exclEl.innerHTML = '<div class="excl-banner ' + urgency + '"><div class="excl-banner-icon">&#9201;</div><div><div class="excl-banner-title">Exclusion Still Active — ' + excl.monthsLeft + ' Months Left to Sell Tax-Free</div><div class="excl-banner-body">You moved out ' + inp.moveOutMonths + ' months ago. The exclusion expires once you\'ve been out <strong>36 months</strong>. If you sell within the next <strong>' + excl.monthsLeft + ' months</strong>, you can still exclude up to ' + excAmt + ' of gain. After that, the full gain becomes taxable at capital gains rates.</div></div></div>';
+  } else {
+    exclEl.innerHTML = '<div class="excl-banner red"><div class="excl-banner-icon">&#10007;</div><div><div class="excl-banner-title">Primary Residence Exclusion Has Expired</div><div class="excl-banner-body">You moved out ' + inp.moveOutMonths + ' months ago — more than the 36-month window. The full gain of <strong>' + fmtFull(excl.gain) + '</strong> is now subject to capital gains tax when you sell.</div></div></div>';
+  }
+
+  document.getElementById('gainVal').textContent        = fmtFull(excl.gain);
+  document.getElementById('exclusionAmt').innerHTML     = excAmt + ' <span style="color:var(--text-muted);font-size:11px">(' + (inp.filing === 'mfj' ? 'married' : 'single') + ')</span>';
+  document.getElementById('taxableGainNow').className   = 'gain-row-val ' + (excl.taxableGainWith === 0 ? 'green' : 'red');
+  document.getElementById('taxableGainNow').textContent = fmtFull(excl.taxableGainWith);
+  document.getElementById('capitalGainsTax').className  = 'gain-row-val ' + (excl.taxNow === 0 ? 'green' : 'red');
+  document.getElementById('capitalGainsTax').textContent = excl.taxNow === 0 ? '$0 — tax-free!' : fmtFull(excl.taxNow);
+  document.getElementById('taxableGainNoExcl').textContent = fmtFull(excl.taxableGainWithout);
+  document.getElementById('taxableGainNoExcl').className = 'gain-row-val red';
+  document.getElementById('capitalGainsTaxNoExcl').textContent = fmtFull(excl.taxNoExcl);
+  document.getElementById('capitalGainsTaxNoExcl').className = 'gain-row-val red';
+
+  // Cash flow
+  renderCashFlow(inp);
+
+  // Chart + year table
+  renderChart(inp, sell.netProceeds);
+  renderYearTable(inp, sell.netProceeds);
+
+  // Long-term analysis
+  renderAnalysis(inp, sell.netProceeds);
+
+  // Tax benefits
+  renderTaxBenefits(inp);
+
+  // Show/hide move-out field
+  document.getElementById('moveOutRow').classList.toggle('visible',
+    document.querySelector('input[name="living"]:checked').value === 'no');
+}
+
+// ── Save / Share link ─────────────────────────────────────────────────────────
+function saveSettings() {
+  var ids = ['homeValue','purchasePrice','yearPurchased','sellingCosts','mortgageBalance','monthlyPnI',
+             'mortgageRate','annualTaxes','annualInsurance','annualHoa','householdIncome','moveOutMonths',
+             'monthlyRent','rentIncrease','vacancyRate','mgmtFee','maintenancePct',
+             'appreciationRate','investReturn','horizonYears'];
+  var settings = {};
+  ids.forEach(function(id) { var el = document.getElementById(id); if (el) settings[id] = el.value; });
+  settings.filing  = document.querySelector('input[name="filing"]:checked').value;
+  settings.living  = document.querySelector('input[name="living"]:checked').value;
+  settings.useMgmt = document.getElementById('usePropertyMgmt').checked;
+  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(settings))));
+  var url = new URL(window.location.href);
+  url.hash = 's=' + encoded;
+  window.history.pushState({}, '', url.toString());
+  var btn = document.getElementById('saveSettingsBtn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url.toString()).then(function() {
+      var orig = btn.textContent; btn.textContent = '\u2713 Link copied!';
+      setTimeout(function() { btn.textContent = orig; }, 2500);
+    }).catch(function() { prompt('Copy this link:', url.toString()); });
+  } else {
+    prompt('Copy this link:', url.toString());
+  }
+}
+
+function loadSettingsFromHash() {
+  var hash = window.location.hash;
+  if (!hash.startsWith('#s=')) return;
+  try {
+    var settings = JSON.parse(decodeURIComponent(escape(atob(hash.slice(3)))));
+    var setVal = function(id, val) { var el = document.getElementById(id); if (el && val != null) el.value = val; };
+    ['homeValue','purchasePrice','yearPurchased','sellingCosts','mortgageBalance','monthlyPnI',
+     'mortgageRate','annualTaxes','annualInsurance','annualHoa','householdIncome','moveOutMonths',
+     'monthlyRent','rentIncrease','vacancyRate','mgmtFee','maintenancePct',
+     'appreciationRate','investReturn','horizonYears'].forEach(function(k) { setVal(k, settings[k]); });
+    if (settings.filing) {
+      var r = document.querySelector('input[name="filing"][value="' + settings.filing + '"]');
+      if (r) r.checked = true;
+    }
+    if (settings.living) {
+      var r2 = document.querySelector('input[name="living"][value="' + settings.living + '"]');
+      if (r2) r2.checked = true;
+      document.getElementById('moveOutRow').classList.toggle('visible', settings.living === 'no');
+    }
+    if (settings.useMgmt != null) {
+      document.getElementById('usePropertyMgmt').checked = settings.useMgmt;
+      document.getElementById('mgmtFeeRow').classList.toggle('visible', settings.useMgmt);
+    }
+  } catch(e) { console.error('Failed to load settings from URL:', e); }
+}
+
+// ── Events ────────────────────────────────────────────────────────────────────
+document.querySelectorAll('input[type="number"], select').forEach(function(el) {
+  el.addEventListener('input', update);
+});
+document.querySelectorAll('input[type="radio"]').forEach(function(el) {
+  el.addEventListener('change', update);
+});
+document.getElementById('usePropertyMgmt').addEventListener('change', function() {
+  document.getElementById('mgmtFeeRow').classList.toggle('visible', this.checked);
+  update();
+});
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+(function() {
+  var toggle = document.getElementById('themeToggle');
+  var icon   = document.getElementById('themeIcon');
+  var label  = document.getElementById('themeLabel');
+  function applyTheme(dark) {
+    if (dark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      icon.textContent = '☀'; label.textContent = 'Light';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      icon.textContent = '☾'; label.textContent = 'Dark';
+      localStorage.setItem('theme', 'light');
+    }
+    if (wealthChartInst) { var inp = getInputs(); var excl = calcExclusion(inp); var sell = calcSellScenario(inp, excl); renderChart(inp, sell.netProceeds); }
+  }
+  toggle.addEventListener('click', function() {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  });
+  try { applyTheme(localStorage.getItem('theme') === 'dark'); } catch(e) { applyTheme(false); }
+})();
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadSettingsFromHash();
+update();
+</script>
+</body>
+</html>
