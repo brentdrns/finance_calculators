@@ -68,9 +68,10 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
 
-  header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
-  header p { color: var(--text-muted); font-size: 12px; }
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
   .header-nav a:hover { color: var(--text); background: var(--surface2); }
@@ -160,6 +161,8 @@
   .alloc-info strong { color: var(--text); }
   .alloc-warn { font-size: 11px; color: var(--red); margin-top: 4px; }
 
+  .analysis-mode-toggle { display: flex; gap: 4px; margin-bottom: 12px; }
+
   .bottom-panel { padding: 16px 22px; border-top: 1px solid var(--border); flex-shrink: 0; }
   .calc-btn {
     width: 100%; background: var(--accent); color: #fff; border: none;
@@ -239,10 +242,6 @@
   .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
   .hero-band-body strong { color: var(--text); }
 
-  @keyframes abel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  .abel-logo { animation: abel-spin 5s linear infinite; display: inline-block; vertical-align: middle; flex-shrink: 0; height: 56px; width: auto; }
-  .abel-logo-l { margin-right: 10px; }
-  .abel-logo-r { margin-left: 10px; animation-direction: reverse; }
 
   .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
@@ -255,13 +254,13 @@
     .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .main { padding: 20px; }
-    header { padding: 18px 20px; flex-direction: column; gap: 4px; }
+    header { padding: 0 20px; flex-direction: column; gap: 4px; }
     .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; }
     .hero-band-divider { display: none; }
     .hero-band-title { white-space: normal; font-size: 22px; }
   }
   @media (max-width: 600px) {
-    header h1 { font-size: 22px; }
+    .header-banner { max-width: 100%; }
     .header-nav { flex-wrap: wrap; justify-content: flex-start; }
     .stats-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
     .field-row { grid-template-columns: 1fr; }
@@ -287,10 +286,7 @@
 <body>
 
 <header>
-  <div>
-    <h1><img class="abel-logo abel-logo-l" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
-    <p>Investment Return Monte Carlo Simulator &mdash; see the full range of outcomes</p>
-  </div>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
   <nav class="header-nav" aria-label="Site navigation">
     <a href="index.html">Home</a>
     <span class="nav-sep">&middot;</span>
@@ -330,6 +326,14 @@
   <div style="padding:12px 22px;border-bottom:1px solid var(--border)"><button class="share-btn" id="saveSettingsBtn" onclick="saveSettings()" title="Generate a shareable link with your current settings">&#x2B21; Share Settings</button></div>
 
   <div class="shared-panel">
+    <div class="section-label">Analysis Mode</div>
+    <div class="analysis-mode-toggle">
+      <button class="mode-btn active" id="modeGrowthBtn" onclick="setAnalysisMode('growth')">Portfolio Growth</button>
+      <button class="mode-btn" id="modeRetireBtn" onclick="setAnalysisMode('retirement')">Retirement Target</button>
+    </div>
+    <div id="growthModeHint" class="hint" style="margin-bottom:12px">Project portfolio value over a fixed time horizon.</div>
+    <div id="retireModeHint" class="hint" style="display:none;margin-bottom:12px">Forecast how many years until your portfolio reaches a target amount.</div>
+
     <div class="section-label">Portfolio Settings</div>
     <div class="field-row">
       <div class="field">
@@ -341,7 +345,7 @@
         <input type="text" id="monthlyContrib" value="500">
       </div>
     </div>
-    <div class="field-row">
+    <div class="field-row" id="growthFields">
       <div class="field">
         <label>Time Horizon (years)</label>
         <input type="number" id="years" value="30" min="1" max="60">
@@ -351,7 +355,28 @@
         <input type="number" id="numSims" value="1000" min="100" max="10000" step="100">
       </div>
     </div>
-    <div class="hint">More simulations = smoother results but slower. 1,000 is a good default.</div>
+    <div id="retireFields" style="display:none">
+      <div class="field-row">
+        <div class="field">
+          <label>Retirement Target ($)</label>
+          <input type="text" id="retireTarget" value="1,000,000">
+        </div>
+        <div class="field">
+          <label>Simulations</label>
+          <input type="number" id="numSimsRetire" value="1000" min="100" max="10000" step="100">
+        </div>
+      </div>
+      <div class="field" style="margin-top:8px">
+        <label>Confidence Bands</label>
+        <select id="retireConfidence" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-family:'Inter',sans-serif;font-size:12px;">
+          <option value="90">90/10 (optimistic/pessimistic)</option>
+          <option value="95">95/5 (wider range)</option>
+          <option value="80">80/20 (narrower range)</option>
+        </select>
+      </div>
+    </div>
+    <div id="growthHint" class="hint">More simulations = smoother results but slower. 1,000 is a good default.</div>
+    <div id="retireHint" class="hint" style="display:none">Simulations run up to 60 years. Each path is checked for when it first crosses your target.</div>
     <div style="margin-top:12px">
       <div class="section-label" style="margin-bottom:6px">Contribution Growth</div>
       <select id="contribGrowth" onchange="toggleContribGrowth()" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font-family:'Inter',sans-serif;font-size:12px;">
@@ -572,6 +597,20 @@ let activeScenario = 1;
 let results = {};
 let charts = {};
 let simMode = 'statistical';
+let analysisMode = 'growth'; // 'growth' or 'retirement'
+
+// ── Analysis Mode Toggle ──
+function setAnalysisMode(mode) {
+  analysisMode = mode;
+  $('modeGrowthBtn').classList.toggle('active', mode === 'growth');
+  $('modeRetireBtn').classList.toggle('active', mode === 'retirement');
+  $('growthFields').style.display = mode === 'growth' ? 'grid' : 'none';
+  $('retireFields').style.display = mode === 'retirement' ? 'grid' : 'none';
+  $('growthModeHint').style.display = mode === 'growth' ? 'block' : 'none';
+  $('retireModeHint').style.display = mode === 'retirement' ? 'block' : 'none';
+  $('growthHint').style.display = mode === 'growth' ? 'block' : 'none';
+  $('retireHint').style.display = mode === 'retirement' ? 'block' : 'none';
+}
 
 // ── Helpers ──
 function $(id) { return document.getElementById(id); }
@@ -739,6 +778,149 @@ function runSimulation(startBal, monthlyContrib, years, alloc, numSims, inflOpts
     expReturn, expRisk,
     years,
     inflationAdjusted: useInflation,
+  };
+}
+
+// ── Retirement Target Simulation ──
+function runRetirementSimulation(startBal, monthlyContrib, target, alloc, numSims, inflOpts, bootOpts, contribOpts, confidence) {
+  const MAX_YEARS = 60;
+  const baseAnnualContrib = monthlyContrib * 12;
+  const contribMode = contribOpts ? contribOpts.mode : 'fixed';
+  const contribCustomRate = contribOpts ? contribOpts.customRate : 0;
+  const weights = {
+    usStocks:   alloc.usStocks / 100,
+    intlStocks: alloc.intlStocks / 100,
+    bonds:      alloc.bonds / 100,
+    cash:       alloc.cash / 100,
+  };
+  const useInflation = inflOpts && inflOpts.enabled;
+  const inflMean = useInflation ? inflOpts.mean : 0;
+  const inflStd = useInflation ? inflOpts.std : 0;
+
+  const allPaths = [];
+  const yearsToTarget = [];
+
+  for (let sim = 0; sim < numSims; sim++) {
+    const path = [startBal];
+    let bal = startBal;
+    let cumInflation = 1;
+    let currentAnnualContrib = baseAnnualContrib;
+    let hitYear = null;
+
+    for (let yr = 0; yr < MAX_YEARS; yr++) {
+      let yearInflRate = 0;
+      let portfolioReturn = 0;
+
+      if (bootOpts && bootOpts.enabled) {
+        const yearPool = bootOpts.yearPool;
+        const sampledYear = yearPool[Math.floor(Math.random() * yearPool.length)];
+        const hist = HISTORICAL_RETURNS[sampledYear];
+        for (const key of Object.keys(weights)) {
+          if (weights[key] > 0) {
+            let r = hist[key];
+            if (r === undefined) r = hist.usStocks || 0;
+            portfolioReturn += weights[key] * r;
+          }
+        }
+        if (useInflation && hist.cpi !== undefined) {
+          yearInflRate = hist.cpi;
+          cumInflation *= (1 + yearInflRate);
+        } else if (useInflation) {
+          yearInflRate = randNormal(inflMean, inflStd);
+          yearInflRate = Math.max(yearInflRate, -0.05);
+          cumInflation *= (1 + yearInflRate);
+        }
+      } else {
+        for (const [key, asset] of Object.entries(ASSETS)) {
+          if (weights[key] > 0) {
+            const r = randNormal(asset.mean, asset.std);
+            portfolioReturn += weights[key] * r;
+          }
+        }
+        if (useInflation) {
+          yearInflRate = randNormal(inflMean, inflStd);
+          yearInflRate = Math.max(yearInflRate, -0.05);
+          cumInflation *= (1 + yearInflRate);
+        }
+      }
+
+      if (yr > 0) {
+        if (contribMode === 'inflation') {
+          currentAnnualContrib *= (1 + yearInflRate);
+        } else if (contribMode === 'custom') {
+          currentAnnualContrib *= (1 + contribCustomRate);
+        }
+      }
+
+      bal = bal * (1 + portfolioReturn) + currentAnnualContrib;
+      if (bal < 0) bal = 0;
+      const realBal = useInflation ? bal / cumInflation : bal;
+      path.push(realBal);
+
+      if (hitYear === null && realBal >= target) {
+        hitYear = yr + 1;
+      }
+    }
+    allPaths.push(path);
+    yearsToTarget.push(hitYear); // null if never reached
+  }
+
+  // Compute percentiles of portfolio value at each year (for fan chart)
+  const percentiles = [5, 10, 25, 50, 75, 90, 95];
+  const yearlyPercentiles = {};
+  percentiles.forEach(p => yearlyPercentiles[p] = []);
+  for (let yr = 0; yr <= MAX_YEARS; yr++) {
+    const vals = allPaths.map(p => p[yr]).sort((a, b) => a - b);
+    percentiles.forEach(p => {
+      const idx = Math.floor(p / 100 * vals.length);
+      yearlyPercentiles[p].push(vals[Math.min(idx, vals.length - 1)]);
+    });
+  }
+
+  // Years-to-target stats
+  const conf = confidence || 90;
+  const optPctile = (100 - conf) / 100; // e.g. 90 -> 0.10
+  const pessPctile = conf / 100;         // e.g. 90 -> 0.90
+  const reached = yearsToTarget.filter(y => y !== null);
+  const neverReached = yearsToTarget.filter(y => y === null).length;
+  const pctReached = reached.length / numSims;
+
+  reached.sort((a, b) => a - b);
+  const medianYears = reached.length > 0 ? reached[Math.floor(reached.length / 2)] : null;
+  const optimisticYears = reached.length > 0 ? reached[Math.floor(optPctile * reached.length)] : null;
+  const pessimisticYears = reached.length > 0 ? reached[Math.floor(pessPctile * reached.length)] : null;
+  const p25Years = reached.length > 0 ? reached[Math.floor(0.25 * reached.length)] : null;
+  const p75Years = reached.length > 0 ? reached[Math.floor(0.75 * reached.length)] : null;
+
+  // Compute display years: pessimistic + 50% buffer, capped at MAX_YEARS
+  const worstDisplay = pessimisticYears !== null ? pessimisticYears : MAX_YEARS;
+  const displayYears = Math.min(Math.ceil(worstDisplay * 1.5), MAX_YEARS);
+
+  // Expected return & risk
+  let expReturn = 0, expVar = 0;
+  for (const [key, asset] of Object.entries(ASSETS)) {
+    expReturn += weights[key] * asset.mean;
+    expVar += (weights[key] ** 2) * (asset.std ** 2);
+  }
+
+  return {
+    yearlyPercentiles,
+    yearsToTarget: reached,
+    medianYears,
+    optimisticYears,
+    pessimisticYears,
+    p25Years,
+    p75Years,
+    pctReached,
+    neverReached,
+    numSims,
+    target,
+    maxYears: MAX_YEARS,
+    displayYears,
+    confidence: conf,
+    inflationAdjusted: useInflation,
+    expReturn,
+    expRisk: Math.sqrt(expVar),
   };
 }
 
@@ -987,9 +1169,18 @@ function calculateAll() {
   results = {};
 
   // Run simulations
-  scenarios.forEach(s => {
-    results[s.id] = runSimulation(startBal, monthly, years, s, numSims, inflOpts, bootOpts, contribOpts);
-  });
+  if (analysisMode === 'retirement') {
+    const targetVal = parseFloat($('retireTarget').value.replace(/,/g, '')) || 1000000;
+    const numSimsR = parseInt($('numSimsRetire').value) || 1000;
+    const retireConf = parseInt($('retireConfidence').value) || 90;
+    scenarios.forEach(s => {
+      results[s.id] = runRetirementSimulation(startBal, monthly, targetVal, s, numSimsR, inflOpts, bootOpts, contribOpts, retireConf);
+    });
+  } else {
+    scenarios.forEach(s => {
+      results[s.id] = runSimulation(startBal, monthly, years, s, numSims, inflOpts, bootOpts, contribOpts);
+    });
+  }
 
   renderAllResults();
 }
@@ -1015,7 +1206,12 @@ function renderAllResults() {
     const tab = document.createElement('div');
     tab.className = 'results-tab' + (s.id === activeResult ? ' active' : '');
     if (s.id === activeResult) tab.style.background = scColor(idx);
-    tab.innerHTML = `<span>${s.name}</span><span class="rtab-sub">${fmtK(r.median)}</span>`;
+    if (analysisMode === 'retirement') {
+      const label = r.medianYears !== null ? r.medianYears + ' yrs' : '60+ yrs';
+      tab.innerHTML = `<span>${s.name}</span><span class="rtab-sub">${label}</span>`;
+    } else {
+      tab.innerHTML = `<span>${s.name}</span><span class="rtab-sub">${fmtK(r.median)}</span>`;
+    }
     tab.onclick = () => { activeResult = s.id; renderAllResults(); };
     tabsDiv.appendChild(tab);
   });
@@ -1036,97 +1232,201 @@ function renderAllResults() {
   panel.style.gap = '20px';
 
   const totalLabel = `${s.usStocks}/${s.intlStocks}/${s.bonds}/${s.cash}`;
-
-  // Summary card
-  const summaryCard = document.createElement('div');
-  summaryCard.className = 'card';
-  summaryCard.innerHTML = `
-    <div class="verdict-header" style="color:${color}">${s.name} &mdash; ${totalLabel}</div>
-    <div style="font-size:12px;color:var(--text-muted);line-height:1.7;margin-bottom:4px">
-      Starting with <strong style="color:var(--text)">${fmt(r.totalInvested - parseNum('monthlyContrib') * 12 * r.years)}</strong>,
-      contributing <strong style="color:var(--text)">${fmt(parseNum('monthlyContrib'))}/mo</strong> over
-      <strong style="color:var(--text)">${r.years} years</strong>
-      (${fmt(r.totalInvested)} total invested).
-      ${r.inflationAdjusted ? '<br><span style="color:var(--accent)">Values shown in today&rsquo;s dollars (inflation-adjusted)</span>' : ''}
-    </div>
-    <div class="stats-grid">
-      <div class="stat-box">
-        <div class="stat-label">Median Value</div>
-        <div class="stat-value" style="color:${color}">${fmtK(r.median)}</div>
-        <div class="stat-sub">50th percentile</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Worst Case</div>
-        <div class="stat-value">${fmtK(r.p5)}</div>
-        <div class="stat-sub">5th percentile</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Best Case</div>
-        <div class="stat-value">${fmtK(r.p95)}</div>
-        <div class="stat-sub">95th percentile</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Median Growth</div>
-        <div class="stat-value">${(r.median / r.totalInvested).toFixed(1)}x</div>
-        <div class="stat-sub">of total invested</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Total Invested</div>
-        <div class="stat-value">${fmtK(r.totalInvested)}</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Prob. of Real Loss</div>
-        <div class="stat-value">${(r.probLoss * 100).toFixed(1)}%</div>
-        <div class="stat-sub">ending below invested</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Exp. Return</div>
-        <div class="stat-value">${pct(r.expReturn)}</div>
-        <div class="stat-sub">annual</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Exp. Risk</div>
-        <div class="stat-value">${pct(r.expRisk)}</div>
-        <div class="stat-sub">annual std dev</div>
-      </div>
-    </div>
-  `;
-  panel.appendChild(summaryCard);
-
-  // Fan chart card
-  const fanCard = document.createElement('div');
-  fanCard.className = 'card';
-  fanCard.innerHTML = `
-    <div class="chart-title">Growth Projection &mdash; Percentile Bands</div>
-    <div class="chart-wrap"><canvas id="fanChart_${s.id}"></canvas></div>
-    <div class="legend">
-      <div class="legend-item"><div class="legend-line" style="background:${color}"></div>Median (50th)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(${rgb},0.25)"></div>25th&ndash;75th</div>
-      <div class="legend-item"><div class="legend-dot" style="background:rgba(${rgb},0.10)"></div>5th&ndash;95th</div>
-    </div>
-  `;
-  panel.appendChild(fanCard);
-
-  // Histogram card
-  const histCard = document.createElement('div');
-  histCard.className = 'card';
-  histCard.innerHTML = `
-    <div class="chart-title">Distribution of Final Portfolio Values</div>
-    <div class="chart-wrap" style="height:220px"><canvas id="histChart_${s.id}"></canvas></div>
-  `;
-  panel.appendChild(histCard);
-
-  // Combined overlay histogram (when 2+ scenarios)
   const scenariosWithResults = scenarios.filter(sc => results[sc.id]);
-  if (scenariosWithResults.length >= 2) {
-    const compareCard = document.createElement('div');
-    compareCard.className = 'card';
-    compareCard.innerHTML = `
-      <div class="chart-title">Distribution Comparison &mdash; All Scenarios</div>
-      <div class="chart-wrap compare-chart-wrap"><canvas id="compareHist"></canvas></div>
-      <div class="legend" id="compareLegend"></div>
+
+  if (analysisMode === 'retirement') {
+    // ── Retirement Target Results ──
+    const summaryCard = document.createElement('div');
+    summaryCard.className = 'card';
+    const medLabel = r.medianYears !== null ? r.medianYears + ' years' : '60+ years';
+    const optLabel = r.optimisticYears !== null ? r.optimisticYears + ' years' : 'N/A';
+    const pessLabel = r.pessimisticYears !== null ? r.pessimisticYears + ' years' : 'N/A';
+    const p25Label = r.p25Years !== null ? r.p25Years + ' years' : 'N/A';
+    const p75Label = r.p75Years !== null ? r.p75Years + ' years' : 'N/A';
+    const neverPct = ((r.neverReached / r.numSims) * 100).toFixed(1);
+    const optPctLabel = (100 - r.confidence) + 'th';
+    const pessPctLabel = r.confidence + 'th';
+    summaryCard.innerHTML = `
+      <div class="verdict-header" style="color:${color}">${s.name} &mdash; ${totalLabel}</div>
+      <div style="font-size:12px;color:var(--text-muted);line-height:1.7;margin-bottom:4px">
+        Starting with <strong style="color:var(--text)">${fmt(parseNum('startBal'))}</strong>,
+        contributing <strong style="color:var(--text)">${fmt(parseNum('monthlyContrib'))}/mo</strong>,
+        targeting <strong style="color:var(--text)">${fmt(r.target)}</strong>.
+        ${r.inflationAdjusted ? '<br><span style="color:var(--accent)">Target is in today&rsquo;s dollars (inflation-adjusted)</span>' : ''}
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Median</div>
+          <div class="stat-value" style="color:${color}">${medLabel}</div>
+          <div class="stat-sub">50th percentile</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Optimistic</div>
+          <div class="stat-value" style="color:#22c55e">${optLabel}</div>
+          <div class="stat-sub">${optPctLabel} percentile (fast)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Pessimistic</div>
+          <div class="stat-value">${pessLabel}</div>
+          <div class="stat-sub">${pessPctLabel} percentile (slow)</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Likely Range</div>
+          <div class="stat-value">${p25Label !== 'N/A' && p75Label !== 'N/A' ? r.p25Years + '&ndash;' + r.p75Years + ' yrs' : 'N/A'}</div>
+          <div class="stat-sub">25th&ndash;75th percentile</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Success Rate</div>
+          <div class="stat-value" style="color:${r.pctReached >= 0.9 ? '#22c55e' : r.pctReached >= 0.5 ? 'var(--text)' : 'var(--red)'}">${(r.pctReached * 100).toFixed(1)}%</div>
+          <div class="stat-sub">reached target in 60 yrs</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Never Reached</div>
+          <div class="stat-value">${neverPct}%</div>
+          <div class="stat-sub">${r.neverReached} of ${r.numSims} sims</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Exp. Return</div>
+          <div class="stat-value">${pct(r.expReturn)}</div>
+          <div class="stat-sub">annual</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Exp. Risk</div>
+          <div class="stat-value">${pct(r.expRisk)}</div>
+          <div class="stat-sub">annual std dev</div>
+        </div>
+      </div>
     `;
-    panel.appendChild(compareCard);
+    panel.appendChild(summaryCard);
+
+    // Fan chart with target line
+    const fanCard = document.createElement('div');
+    fanCard.className = 'card';
+    fanCard.innerHTML = `
+      <div class="chart-title">Growth Projection &mdash; Target at ${fmtK(r.target)}</div>
+      <div class="chart-wrap"><canvas id="fanChart_${s.id}"></canvas></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-line" style="background:${color}"></div>Median (50th)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(${rgb},0.25)"></div>25th&ndash;75th</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(${rgb},0.10)"></div>5th&ndash;95th</div>
+        <div class="legend-item"><div class="legend-line" style="background:var(--red);border-top:2px dashed var(--red);height:0"></div>Target</div>
+      </div>
+    `;
+    panel.appendChild(fanCard);
+
+    // Years-to-target histogram
+    if (r.yearsToTarget.length > 0) {
+      const histCard = document.createElement('div');
+      histCard.className = 'card';
+      histCard.innerHTML = `
+        <div class="chart-title">Distribution of Years to Reach ${fmtK(r.target)}</div>
+        <div class="chart-wrap" style="height:220px"><canvas id="retireHist_${s.id}"></canvas></div>
+      `;
+      panel.appendChild(histCard);
+    }
+
+    // Comparison chart for 2+ scenarios
+    if (scenariosWithResults.length >= 2) {
+      const compareCard = document.createElement('div');
+      compareCard.className = 'card';
+      compareCard.innerHTML = `
+        <div class="chart-title">Years-to-Target Comparison &mdash; All Scenarios</div>
+        <div class="chart-wrap compare-chart-wrap"><canvas id="compareHist"></canvas></div>
+        <div class="legend" id="compareLegend"></div>
+      `;
+      panel.appendChild(compareCard);
+    }
+  } else {
+    // ── Portfolio Growth Results (original) ──
+    const summaryCard = document.createElement('div');
+    summaryCard.className = 'card';
+    summaryCard.innerHTML = `
+      <div class="verdict-header" style="color:${color}">${s.name} &mdash; ${totalLabel}</div>
+      <div style="font-size:12px;color:var(--text-muted);line-height:1.7;margin-bottom:4px">
+        Starting with <strong style="color:var(--text)">${fmt(r.totalInvested - parseNum('monthlyContrib') * 12 * r.years)}</strong>,
+        contributing <strong style="color:var(--text)">${fmt(parseNum('monthlyContrib'))}/mo</strong> over
+        <strong style="color:var(--text)">${r.years} years</strong>
+        (${fmt(r.totalInvested)} total invested).
+        ${r.inflationAdjusted ? '<br><span style="color:var(--accent)">Values shown in today&rsquo;s dollars (inflation-adjusted)</span>' : ''}
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Median Value</div>
+          <div class="stat-value" style="color:${color}">${fmtK(r.median)}</div>
+          <div class="stat-sub">50th percentile</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Worst Case</div>
+          <div class="stat-value">${fmtK(r.p5)}</div>
+          <div class="stat-sub">5th percentile</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Best Case</div>
+          <div class="stat-value">${fmtK(r.p95)}</div>
+          <div class="stat-sub">95th percentile</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Median Growth</div>
+          <div class="stat-value">${(r.median / r.totalInvested).toFixed(1)}x</div>
+          <div class="stat-sub">of total invested</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Total Invested</div>
+          <div class="stat-value">${fmtK(r.totalInvested)}</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Prob. of Real Loss</div>
+          <div class="stat-value">${(r.probLoss * 100).toFixed(1)}%</div>
+          <div class="stat-sub">ending below invested</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Exp. Return</div>
+          <div class="stat-value">${pct(r.expReturn)}</div>
+          <div class="stat-sub">annual</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Exp. Risk</div>
+          <div class="stat-value">${pct(r.expRisk)}</div>
+          <div class="stat-sub">annual std dev</div>
+        </div>
+      </div>
+    `;
+    panel.appendChild(summaryCard);
+
+    // Fan chart card
+    const fanCard = document.createElement('div');
+    fanCard.className = 'card';
+    fanCard.innerHTML = `
+      <div class="chart-title">Growth Projection &mdash; Percentile Bands</div>
+      <div class="chart-wrap"><canvas id="fanChart_${s.id}"></canvas></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-line" style="background:${color}"></div>Median (50th)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(${rgb},0.25)"></div>25th&ndash;75th</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(${rgb},0.10)"></div>5th&ndash;95th</div>
+      </div>
+    `;
+    panel.appendChild(fanCard);
+
+    // Histogram card
+    const histCard = document.createElement('div');
+    histCard.className = 'card';
+    histCard.innerHTML = `
+      <div class="chart-title">Distribution of Final Portfolio Values</div>
+      <div class="chart-wrap" style="height:220px"><canvas id="histChart_${s.id}"></canvas></div>
+    `;
+    panel.appendChild(histCard);
+
+    // Combined overlay histogram (when 2+ scenarios)
+    if (scenariosWithResults.length >= 2) {
+      const compareCard = document.createElement('div');
+      compareCard.className = 'card';
+      compareCard.innerHTML = `
+        <div class="chart-title">Distribution Comparison &mdash; All Scenarios</div>
+        <div class="chart-wrap compare-chart-wrap"><canvas id="compareHist"></canvas></div>
+        <div class="legend" id="compareLegend"></div>
+      `;
+      panel.appendChild(compareCard);
+    }
   }
 
   // Explanation
@@ -1158,11 +1458,23 @@ function renderAllResults() {
 
   // Render charts (defer to allow DOM update)
   const _sid = s.id, _r = r, _color = color, _rgb = rgb, _swrLen = scenariosWithResults.length;
+  const _mode = analysisMode;
   setTimeout(() => {
     try {
-      renderFanChart(_sid, _r, _color, _rgb);
-      renderHistogram(_sid, _r, _color, _rgb);
-      if (_swrLen >= 2) renderCompareHistogram();
+      if (_mode === 'retirement') {
+        // Compute global displayYears across all scenarios
+        let globalDisplayYears = 0;
+        scenariosWithResults.forEach(sc => {
+          globalDisplayYears = Math.max(globalDisplayYears, results[sc.id].displayYears);
+        });
+        renderRetirementFanChart(_sid, _r, _color, _rgb, globalDisplayYears);
+        if (_r.yearsToTarget.length > 0) renderRetirementHistogram(_sid, _r, _color, _rgb);
+        if (_swrLen >= 2) renderRetirementCompareHistogram();
+      } else {
+        renderFanChart(_sid, _r, _color, _rgb);
+        renderHistogram(_sid, _r, _color, _rgb);
+        if (_swrLen >= 2) renderCompareHistogram();
+      }
     } catch(e) { console.error('Chart render error:', e); }
   }, 0);
 }
@@ -1447,8 +1759,300 @@ function renderCompareHistogram() {
   });
 }
 
+// ── Retirement Mode Charts ──
+function renderRetirementFanChart(id, r, color, rgb, displayYears) {
+  const ctx = $('fanChart_' + id);
+  if (!ctx) return;
+
+  if (charts[id]?.fan) charts[id].fan.destroy();
+  if (!charts[id]) charts[id] = {};
+
+  const yrsToShow = displayYears || r.displayYears || r.maxYears;
+  const labels = Array.from({ length: yrsToShow + 1 }, (_, i) => 'Yr ' + i);
+  const tc = getThemeColors();
+
+  // Target line dataset
+  const targetLine = Array(yrsToShow + 1).fill(r.target);
+
+  charts[id].fan = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Target',
+          data: targetLine,
+          borderColor: tc.text === '#e4e4ea' ? '#ef4444' : '#dc2626',
+          borderWidth: 2,
+          borderDash: [8, 4],
+          pointRadius: 0,
+          fill: false,
+          tension: 0,
+          order: 0,
+        },
+        {
+          label: '95th',
+          data: r.yearlyPercentiles[95].slice(0, yrsToShow + 1),
+          borderColor: `rgba(${rgb},0.2)`,
+          borderWidth: 1,
+          pointRadius: 0,
+          fill: false,
+          tension: 0.3,
+        },
+        {
+          label: '75th',
+          data: r.yearlyPercentiles[75].slice(0, yrsToShow + 1),
+          borderColor: `rgba(${rgb},0.3)`,
+          borderWidth: 1,
+          pointRadius: 0,
+          fill: '-1',
+          backgroundColor: `rgba(${rgb},0.08)`,
+          tension: 0.3,
+        },
+        {
+          label: 'Median',
+          data: r.yearlyPercentiles[50].slice(0, yrsToShow + 1),
+          borderColor: color,
+          borderWidth: 2.5,
+          pointRadius: 0,
+          fill: '-1',
+          backgroundColor: `rgba(${rgb},0.18)`,
+          tension: 0.3,
+        },
+        {
+          label: '25th',
+          data: r.yearlyPercentiles[25].slice(0, yrsToShow + 1),
+          borderColor: `rgba(${rgb},0.3)`,
+          borderWidth: 1,
+          pointRadius: 0,
+          fill: '-1',
+          backgroundColor: `rgba(${rgb},0.18)`,
+          tension: 0.3,
+        },
+        {
+          label: '5th',
+          data: r.yearlyPercentiles[5].slice(0, yrsToShow + 1),
+          borderColor: `rgba(${rgb},0.2)`,
+          borderWidth: 1,
+          pointRadius: 0,
+          fill: '-1',
+          backgroundColor: `rgba(${rgb},0.08)`,
+          tension: 0.3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: tc.bg,
+          borderColor: tc.border,
+          borderWidth: 1,
+          titleColor: tc.text,
+          bodyColor: tc.text,
+          callbacks: {
+            label: (item) => {
+              const labels = ['Target', '95th', '75th', 'Median', '25th', '5th'];
+              return ` ${labels[item.datasetIndex]}: ${fmt(item.raw)}`;
+            }
+          }
+        },
+        filler: { propagate: true },
+      },
+      scales: {
+        x: {
+          grid: { color: tc.border },
+          ticks: { color: tc.textMuted, font: { family: "'Inter',sans-serif", size: 11 }, maxTicksLimit: 15 },
+        },
+        y: {
+          grid: { color: tc.border },
+          ticks: { color: tc.textMuted, font: { family: "'Inter',sans-serif", size: 11 }, callback: v => fmtK(v) },
+        },
+      },
+    },
+  });
+}
+
+function renderRetirementHistogram(id, r, color, rgb) {
+  const ctx = $('retireHist_' + id);
+  if (!ctx) return;
+
+  if (charts[id]?.retireHist) charts[id].retireHist.destroy();
+  if (!charts[id]) charts[id] = {};
+
+  const vals = r.yearsToTarget;
+  if (vals.length === 0) return;
+
+  // Use 1-year bins since years-to-target are integers
+  const min = vals[0];
+  const max = vals[vals.length - 1];
+  const numBins = max - min + 1;
+  const bins = Array(numBins).fill(0);
+  const binLabels = [];
+
+  for (let i = 0; i < numBins; i++) {
+    binLabels.push((min + i) + ' yrs');
+  }
+  vals.forEach(v => {
+    bins[v - min]++;
+  });
+
+  const total = r.numSims; // use total sims including never-reached
+  const binPcts = bins.map(b => (b / total * 100));
+
+  // Find median bin
+  const medianBin = r.medianYears !== null ? r.medianYears - min : -1;
+
+  const tc = getThemeColors();
+
+  charts[id].retireHist = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: binLabels,
+      datasets: [{
+        data: binPcts,
+        backgroundColor: bins.map((_, i) => i === medianBin ? color : `rgba(${rgb},0.5)`),
+        borderColor: bins.map((_, i) => i === medianBin ? color : `rgba(${rgb},0.7)`),
+        borderWidth: 1,
+        borderRadius: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: tc.bg,
+          borderColor: tc.border,
+          borderWidth: 1,
+          titleColor: tc.text,
+          bodyColor: tc.text,
+          callbacks: {
+            title: (items) => items[0].label,
+            label: (item) => ` ${item.raw.toFixed(1)}% of simulations`,
+          }
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: tc.textMuted, font: { family: "'Inter',sans-serif", size: 10 }, maxTicksLimit: 12, maxRotation: 0 },
+        },
+        y: {
+          grid: { color: tc.border },
+          ticks: { color: tc.textMuted, font: { family: "'Inter',sans-serif", size: 11 }, callback: v => v.toFixed(0) + '%' },
+        },
+      },
+    },
+  });
+}
+
+function renderRetirementCompareHistogram() {
+  const ctx = $('compareHist');
+  if (!ctx) return;
+
+  if (charts._compare) charts._compare.destroy();
+
+  const scenariosWithResults = scenarios.filter(sc => results[sc.id]);
+
+  // Find global min/max years across all scenarios
+  let globalMin = Infinity, globalMax = 0;
+  scenariosWithResults.forEach(sc => {
+    const yrs = results[sc.id].yearsToTarget;
+    if (yrs.length > 0) {
+      if (yrs[0] < globalMin) globalMin = yrs[0];
+      if (yrs[yrs.length - 1] > globalMax) globalMax = yrs[yrs.length - 1];
+    }
+  });
+  if (globalMin === Infinity) return;
+
+  // Use 1-year bins since years are integers
+  const numBins = globalMax - globalMin + 1;
+  const binLabels = [];
+  for (let i = 0; i < numBins; i++) {
+    binLabels.push((globalMin + i) + ' yrs');
+  }
+
+  const datasets = [];
+  const legendEl = $('compareLegend');
+  if (legendEl) legendEl.innerHTML = '';
+
+  scenariosWithResults.forEach((sc) => {
+    const r = results[sc.id];
+    const scIdx = scenarios.indexOf(sc);
+    const clr = scColor(scIdx);
+    const rgbC = hexToRgb(clr);
+    const bins = Array(numBins).fill(0);
+    r.yearsToTarget.forEach(v => {
+      bins[v - globalMin]++;
+    });
+    const binPcts = bins.map(b => (b / r.numSims * 100));
+
+    datasets.push({
+      label: sc.name,
+      data: binPcts,
+      borderColor: clr,
+      backgroundColor: `rgba(${rgbC},0.15)`,
+      borderWidth: 2,
+      fill: 'origin',
+      tension: 0.4,
+      pointRadius: 0,
+      pointHitRadius: 8,
+    });
+
+    if (legendEl) {
+      legendEl.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${clr}"></div>${sc.name}</div>`;
+    }
+  });
+
+  const tc = getThemeColors();
+  const peaksByDataset = datasets.map(ds => Math.max(...ds.data));
+  peaksByDataset.sort((a, b) => a - b);
+  const medianPeak = peaksByDataset[Math.floor(peaksByDataset.length / 2)];
+  const yMax = Math.ceil(Math.max(medianPeak * 1.5, 5));
+
+  charts._compare = new Chart(ctx, {
+    type: 'line',
+    data: { labels: binLabels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: tc.bg,
+          borderColor: tc.border,
+          borderWidth: 1,
+          titleColor: tc.text,
+          bodyColor: tc.text,
+          callbacks: {
+            title: (items) => items[0].label,
+            label: (item) => ` ${item.dataset.label}: ${item.raw.toFixed(1)}%`,
+          }
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: tc.textMuted, font: { family: "'Inter',sans-serif", size: 10 }, maxTicksLimit: 12, maxRotation: 0 },
+        },
+        y: {
+          max: yMax,
+          grid: { color: tc.border },
+          ticks: { color: tc.textMuted, font: { family: "'Inter',sans-serif", size: 11 }, callback: v => v.toFixed(0) + '%' },
+        },
+      },
+    },
+  });
+}
+
 // ── Format inputs ──
-['startBal', 'monthlyContrib'].forEach(id => {
+['startBal', 'monthlyContrib', 'retireTarget'].forEach(id => {
   $(id).addEventListener('blur', function() {
     const v = parseFloat(this.value.replace(/,/g, ''));
     if (!isNaN(v)) this.value = v.toLocaleString('en-US');
@@ -1468,6 +2072,10 @@ function saveSettings() {
     contribGrowth: $('contribGrowth').value,
     contribGrowthRate: $('contribGrowthRate').value,
     simMode: simMode,
+    analysisMode: analysisMode,
+    retireTarget: $('retireTarget').value,
+    numSimsRetire: $('numSimsRetire').value,
+    retireConfidence: $('retireConfidence').value,
     bootStartYear: $('bootStartYear').value,
     bootEndYear: $('bootEndYear').value,
     scenarios: scenarios.map(s => ({
@@ -1517,6 +2125,12 @@ function loadSettingsFromHash() {
     if (settings.simMode) {
       setSimMode(settings.simMode);
     }
+    if (settings.analysisMode) {
+      setAnalysisMode(settings.analysisMode);
+    }
+    setVal('retireTarget', settings.retireTarget);
+    setVal('numSimsRetire', settings.numSimsRetire);
+    if (settings.retireConfidence) $('retireConfidence').value = settings.retireConfidence;
     setVal('bootStartYear', settings.bootStartYear);
     setVal('bootEndYear', settings.bootEndYear);
     if (settings.scenarios?.length) {

@@ -46,9 +46,10 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
 
-  header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--accent); letter-spacing: -1px; }
-  header p { color: var(--text-muted); font-size: 12px; }
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
   .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
   .header-nav a:hover { color: var(--text); background: var(--surface2); }
@@ -84,13 +85,8 @@
   .cta a { display: inline-block; background: var(--accent); color: #fff; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; transition: opacity 0.15s; }
   .cta a:hover { opacity: 0.85; }
 
-  @keyframes abel-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  .abel-logo { animation: abel-spin 5s linear infinite; display: inline-block; vertical-align: middle; flex-shrink: 0; height: 56px; width: auto; }
-  .abel-logo-l { margin-right: 10px; }
-  .abel-logo-r { margin-left: 10px; animation-direction: reverse; }
-
   @media (max-width: 640px) {
-    header { padding: 18px 20px; }
+    header { padding: 0 20px; }
     main { padding: 32px 16px 60px; }
     .team-grid { grid-template-columns: 1fr; }
     .page-title { font-size: 28px; }
@@ -118,10 +114,7 @@
 <body>
 
 <header>
-  <div>
-    <h1><img class="abel-logo abel-logo-l" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"><a href="index.html" style="color:inherit;text-decoration:none;">Abel's Calculators</a><img class="abel-logo abel-logo-r" src="images/dog_head_transparent.webp" alt="" aria-hidden="true"></h1>
-    <p>Smarter math for real financial decisions</p>
-  </div>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
   <nav class="header-nav">
     <a href="index.html">Home</a>
     <span class="nav-sep">&middot;</span>
