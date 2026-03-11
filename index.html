@@ -113,6 +113,18 @@
   .calc-card-cta { font-size: 12px; color: var(--accent); font-weight: 500; }
   .calc-card:hover .calc-card-cta { text-decoration: underline; }
 
+  /* Compact secondary calculator links */
+  .calc-secondary { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+  .calc-secondary-link {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 18px; text-decoration: none; color: var(--text-muted); font-size: 12px;
+    font-weight: 500; transition: color 0.15s, background 0.15s, border-color 0.15s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .calc-secondary-link:hover { color: var(--text); background: var(--surface2); border-color: var(--accent-dim); }
+  .calc-secondary-link .csl-title { color: var(--text); font-weight: 600; }
+  .calc-secondary-link .csl-sep { color: var(--border); }
+
   .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 56px; }
   .blog-card {
     background: var(--surface);
@@ -151,6 +163,18 @@
     .blog-grid { grid-template-columns: 1fr; }
     .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
   }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
 </style>
 <script>
   (function(){
@@ -168,12 +192,23 @@
   <nav class="header-nav" aria-label="Site navigation">
     <a href="index.html" class="active">Home</a>
     <span class="nav-sep">&middot;</span>
-    <a href="refinance.html">Refinance</a>
-    <a href="rent-vs-buy.html">Rent vs Buy</a>
-    <span class="nav-sep">&middot;</span>
-    <a href="vehicle-cost.html">Vehicle Cost</a>
-    <a href="monte-carlo.html">Investment</a>
-    <a href="withdrawal.html">Withdrawal</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <a href="vehicle-cost.html">Cars</a>
+    <a href="race-predictor.html">Race Predictor</a>
     <span class="nav-sep">&middot;</span>
     <a href="blog.html">Blog</a>
     <span class="nav-sep">&middot;</span>
@@ -225,6 +260,15 @@
     </a>
   </div>
 
+  <div class="calc-secondary">
+    <a href="extra-payment.html" class="calc-secondary-link">
+      <span class="csl-title">Extra Payment vs Invest</span>
+      <span class="csl-sep">&mdash;</span>
+      Pay extra on your mortgage or invest the difference? See the net worth impact of both paths.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+  </div>
+
   <div class="section-label">Investing</div>
   <div class="calc-grid">
     <a href="monte-carlo.html" class="calc-card">
@@ -266,8 +310,33 @@
     </a>
   </div>
 
+  <div class="section-label">Other Tools</div>
+  <div class="calc-secondary">
+    <a href="race-predictor.html" class="calc-secondary-link">
+      <span class="csl-title">Running Race Predictor</span>
+      <span class="csl-sep">&mdash;</span>
+      VDOT-based race time predictions adjusted for weekly mileage and course elevation.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+  </div>
+
   <div class="section-label" id="blog">Blog</div>
   <div class="blog-grid">
+    <a href="blog/how-monte-carlo-works.html" class="blog-card">
+      <div class="blog-card-date">March 11, 2026</div>
+      <div class="blog-card-title">How Monte Carlo Simulators Actually Work</div>
+      <div class="blog-card-desc">Average returns are a lie. Here&rsquo;s how Monte Carlo simulators model the real distribution of outcomes &mdash; and why the sequence of returns matters more than the average.</div>
+    </a>
+    <a href="blog/four-percent-rule.html" class="blog-card">
+      <div class="blog-card-date">March 9, 2026</div>
+      <div class="blog-card-title">The 4% Rule: What It Gets Right (and Wrong)</div>
+      <div class="blog-card-desc">The Trinity Study&rsquo;s 4% rule has held up for 30 years &mdash; but sequence of returns risk, high valuations, and longer retirements mean it&rsquo;s not a guarantee.</div>
+    </a>
+    <a href="blog/rent-vs-buy-real-math.html" class="blog-card">
+      <div class="blog-card-date">March 7, 2026</div>
+      <div class="blog-card-title">Rent vs Buy: The Real Math Most Articles Skip</div>
+      <div class="blog-card-desc">Most rent vs buy comparisons ignore the opportunity cost of the down payment and the price-to-rent ratio. Here&rsquo;s how to actually compare the two paths.</div>
+    </a>
     <a href="blog/gas-vs-electric.html" class="blog-card">
       <div class="blog-card-date">March 5, 2026</div>
       <div class="blog-card-title">Gas vs Electric: What Actually Costs Less to Own?</div>

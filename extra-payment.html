@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Extra Mortgage Payment vs Invest Calculator — Abel's Financial Calculators</title>
+<meta name="description" content="Should you pay extra on your mortgage or invest the difference? Model both paths by net worth impact — including interest saved, investment growth, early payoff, and opportunity cost.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/extra-payment.html">
+<meta property="og:title" content="Extra Mortgage Payment vs Invest — Which Builds More Wealth?">
+<meta property="og:description" content="Model both paths by net worth impact: interest saved vs investment growth. See exactly when each strategy wins.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/extra-payment.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Extra Mortgage Payment vs Invest Calculator">
+<meta name="twitter:description" content="Should you pay extra on your mortgage or invest? Model the full net worth impact of both paths.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Extra Mortgage Payment vs Invest Calculator","description":"Compare paying extra on your mortgage vs investing by net worth impact — modeling interest saved, investment growth, early payoff timing, and opportunity cost.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --red: #dc2626;
+    --green: #16a34a;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 360px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+  .panel { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input, .field select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
+  .checkbox-row input[type=checkbox] { width: auto; accent-color: var(--accent); cursor: pointer; }
+  .checkbox-row label { font-size: 12px; color: var(--text-muted); cursor: pointer; margin: 0; }
+  .derived-display { padding: 7px 10px; background: var(--bg); border: 1px solid var(--accent-dim); border-radius: var(--radius); font-size: 14px; color: var(--accent); font-family: 'DM Serif Display', serif; margin-bottom: 9px; }
+  .derived-label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+
+  /* Main */
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+
+  .verdict-badge { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; margin-bottom: 8px; font-weight: 500; }
+  .badge-invest { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .badge-paydown { background: rgba(22,163,74,0.12); color: var(--green); }
+  .badge-neutral { background: var(--surface2); color: var(--text-muted); }
+  .verdict-header { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 8px; line-height: 1.3; }
+  .verdict-sub { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .stat-box { background: var(--surface2); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-value { font-size: 17px; font-family: 'DM Serif Display', serif; }
+  .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .pos { color: var(--green); } .neg { color: var(--red); } .neu { color: var(--blue); }
+
+  .chart-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 280px; }
+  .legend { display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Rate comparison card */
+  .rate-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; align-items: center; margin: 14px 0 0; }
+  .rate-box { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; text-align: center; }
+  .rate-box-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 4px; }
+  .rate-box-value { font-family: 'DM Serif Display', serif; font-size: 26px; }
+  .rate-box-sub { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+  .rate-vs { text-align: center; font-size: 11px; color: var(--text-muted); padding: 0 12px; }
+
+  /* Breakdown table */
+  .breakdown-scroll { overflow-x: auto; }
+  .breakdown-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .breakdown-table th { text-align: left; padding: 7px 10px; background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 500; border-bottom: 1px solid var(--border); }
+  .breakdown-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; }
+  .breakdown-table tr:last-child td { border-bottom: none; }
+  .breakdown-table .winner-a { color: var(--green); font-weight: 500; }
+  .breakdown-table .winner-b { color: var(--blue); font-weight: 500; }
+  .breakdown-table tr:hover td { background: var(--surface2); }
+
+  /* Explain toggle */
+  .explain-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); user-select: none; padding: 4px 0; margin-top: 12px; }
+  .explain-toggle:hover { color: var(--text); }
+  .explain-arrow { transition: transform 0.2s; display: inline-block; font-size: 9px; }
+  .explain-toggle.open .explain-arrow { transform: rotate(90deg); }
+  .explain-body { display: none; margin-top: 10px; padding: 16px 18px; background: var(--surface2); border-radius: var(--radius); font-size: 12px; line-height: 1.95; color: var(--text-muted); border: 1px solid var(--border); }
+  .explain-body.open { display: block; }
+  .explain-body strong { color: var(--text); }
+  .explain-body .hl { color: var(--accent); font-family: 'DM Serif Display', serif; font-size: 14px; }
+  .explain-body .hl-g { color: var(--green); font-family: 'DM Serif Display', serif; font-size: 14px; }
+  .explain-body .hl-b { color: var(--blue); font-family: 'DM Serif Display', serif; font-size: 14px; }
+
+  .callout-note { background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; padding: 10px 14px; font-size: 12px; color: var(--text-muted); line-height: 1.65; margin-top: 12px; }
+  .callout-note strong { color: var(--text); }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .main { padding: 18px; }
+    header { padding: 0 20px; }
+  }
+  @media (max-width: 600px) {
+    .header-banner { max-width: 100%; }
+    .header-nav { flex-wrap: wrap; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+    .main { padding: 12px; }
+    .card { padding: 14px 16px; }
+    .chart-wrap { height: 220px; }
+    .rate-compare { grid-template-columns: 1fr; }
+    .rate-vs { padding: 8px 0; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+  }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <a href="vehicle-cost.html">Cars</a>
+    <a href="race-predictor.html">Race Predictor</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<section class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Mortgage vs Market</div>
+      <h2 class="hero-band-title">Pay down or <span>invest?</span></h2>
+    </div>
+    <div class="hero-band-divider"></div>
+    <p class="hero-band-body">
+      The answer isn't always "invest." At <strong>high mortgage rates</strong>, paying down is a guaranteed return that's hard for the market to beat on a risk-adjusted basis. At <strong>low rates</strong>, investing usually wins. This calculator models the full net worth impact of both paths — so you can see exactly which one builds more wealth, and when.
+    </p>
+  </div>
+</section>
+
+<div class="layout">
+<aside class="sidebar">
+
+  <div class="panel">
+    <div class="section-label">Your Mortgage</div>
+    <div class="field">
+      <label>Current Loan Balance ($)</label>
+      <input type="number" id="loanBalance" value="350000" min="0" step="1000" oninput="calc()">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Interest Rate (%)</label>
+        <input type="number" id="mortgageRate" value="6.75" min="0" max="20" step="0.05" oninput="calc()">
+      </div>
+      <div class="field">
+        <label>Years Remaining</label>
+        <input type="number" id="remainingYears" value="25" min="1" max="40" step="1" oninput="calc()">
+      </div>
+    </div>
+    <div class="derived-label">Monthly payment (P&amp;I)</div>
+    <div class="derived-display" id="normalPaymentDisplay">—</div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">The Extra Money</div>
+    <div class="field">
+      <label>Extra Amount per Month ($)</label>
+      <input type="number" id="extraPayment" value="400" min="0" step="50" oninput="calc()">
+    </div>
+    <div class="hint">This is the amount you'd either put toward your mortgage or invest each month.</div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Investment Assumptions</div>
+    <div class="field">
+      <label>Expected Annual Return (%)</label>
+      <input type="number" id="investReturn" value="7.0" min="0" max="20" step="0.25" oninput="calc()">
+    </div>
+    <div class="hint">Historical US stock market average: ~10% nominal, ~7% real (inflation-adjusted). Use a lower number for a more conservative assumption.</div>
+    <div class="field" style="margin-top:10px">
+      <label>Time Horizon (years)</label>
+      <input type="number" id="horizonYears" value="15" min="1" max="40" step="1" oninput="calc()">
+    </div>
+    <div class="hint">How far out to compare the two paths. Usually best to set this to your remaining loan term or your planned stay in the home.</div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Tax Adjustments <span style="font-size:9px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+    <label class="checkbox-row">
+      <input type="checkbox" id="itemizes" onchange="calc()">
+      <label for="itemizes">I itemize deductions (deduct mortgage interest)</label>
+    </label>
+    <div id="taxBracketRow" class="field" style="display:none">
+      <label>Marginal Tax Bracket (%)</label>
+      <select id="taxBracket" onchange="calc()">
+        <option value="10">10%</option>
+        <option value="12">12%</option>
+        <option value="22" selected>22%</option>
+        <option value="24">24%</option>
+        <option value="32">32%</option>
+        <option value="35">35%</option>
+        <option value="37">37%</option>
+      </select>
+    </div>
+    <div class="hint">If you itemize, your mortgage interest deduction reduces the effective cost of your mortgage, making investing slightly more attractive.</div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Investment Taxes <span style="font-size:9px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+    <div class="field">
+      <label>Capital Gains Tax Rate (%)</label>
+      <select id="capitalGainsRate" onchange="calc()">
+        <option value="0">0% — tax-advantaged account (IRA / 401k / Roth)</option>
+        <option value="15" selected>15% — most investors (long-term gains)</option>
+        <option value="18.8">18.8% — 15% + 3.8% NIIT</option>
+        <option value="20">20% — high earners</option>
+        <option value="23.8">23.8% — 20% + 3.8% NIIT</option>
+      </select>
+    </div>
+    <div class="hint">Applied as an annual drag on investment returns. Use 0% if investing in a tax-advantaged account. Long-term capital gains rates apply to assets held over a year.</div>
+  </div>
+
+</aside>
+
+<main class="main" id="mainContent">
+
+  <!-- Verdict -->
+  <div class="card" id="verdictCard">
+    <div class="verdict-badge" id="verdictBadge">Loading…</div>
+    <div class="verdict-header" id="verdictHeader">Enter your details to see results.</div>
+    <div class="verdict-sub" id="verdictSub"></div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Pay-off Date</div>
+        <div class="stat-value" id="statPayoff">—</div>
+        <div class="stat-sub" id="statPayoffSub"></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Interest Saved</div>
+        <div class="stat-value pos" id="statInterest">—</div>
+        <div class="stat-sub">by paying extra</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Net Worth Gap</div>
+        <div class="stat-value" id="statGap">—</div>
+        <div class="stat-sub" id="statGapSub"></div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Break-even</div>
+        <div class="stat-value" id="statBreakeven">—</div>
+        <div class="stat-sub" id="statBreakevenSub"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rate comparison -->
+  <div class="card">
+    <div class="chart-title">The Core Trade-off</div>
+    <div class="rate-compare">
+      <div class="rate-box">
+        <div class="rate-box-label">Pay-down return</div>
+        <div class="rate-box-value" id="ratePaydown">—</div>
+        <div class="rate-box-sub" id="ratePaydownSub">guaranteed, risk-free</div>
+      </div>
+      <div class="rate-vs">vs</div>
+      <div class="rate-box">
+        <div class="rate-box-label">Invest return</div>
+        <div class="rate-box-value" id="rateInvest">—</div>
+        <div class="rate-box-sub" id="rateInvestSub">expected, variable</div>
+      </div>
+    </div>
+    <div class="callout-note" id="tradeoffNote">
+      <strong>Risk-adjusted context:</strong> Paying down your mortgage is a guaranteed return equal to your interest rate. Stock market returns average higher over the long run, but with significant year-to-year volatility. Whether you value certainty over expected value changes which option is right for you.
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="card">
+    <div class="chart-title">Net Worth Advantage Over Time</div>
+    <div class="chart-wrap">
+      <canvas id="mainChart"></canvas>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div> Pay extra on mortgage</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div> Invest the difference</div>
+    </div>
+    <div class="callout-note" style="margin-top:14px">Chart shows the cumulative extra wealth built by each strategy — relative to making no extra payments and doing no extra investing. The higher line wins at each year.</div>
+  </div>
+
+  <!-- Breakdown table -->
+  <div class="card">
+    <div class="chart-title">Year-by-Year Breakdown</div>
+    <div class="breakdown-scroll">
+      <table class="breakdown-table" id="breakdownTable">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Extra Payment Path</th>
+            <th>Invest Extra Path</th>
+            <th>Difference</th>
+            <th>Mortgage Balance (Extra)</th>
+            <th>Interest Saved (Cumulative)</th>
+          </tr>
+        </thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+    </div>
+
+    <div class="explain-toggle" id="explainToggle" onclick="toggleExplain()">
+      <span class="explain-arrow">&#9654;</span> How the math works
+    </div>
+    <div class="explain-body" id="explainBody">
+      <p><strong>Extra Payment Path</strong> net worth = equity advantage (lower remaining balance) + post-payoff investment portfolio. Once the mortgage is fully paid off, the entire freed payment — principal + interest + extra — is redirected to investments.</p>
+      <p style="margin-top:10px"><strong>Invest Extra Path</strong> net worth = investment portfolio of the extra monthly amount, compounding at the expected return. Normal mortgage continues on schedule.</p>
+      <p style="margin-top:10px">The comparison is fair because both paths share the same baseline (normal mortgage payments). After the normal mortgage pays off in the invest path, the freed payment is also invested. The only thing being compared is what happens to the <em>extra</em> dollars — and how the knock-on effect of early payoff changes the math.</p>
+      <p style="margin-top:10px"><strong>Tax note:</strong> If you itemize, your effective mortgage rate is reduced by your tax bracket (e.g. a 7% mortgage at a 22% bracket = 5.46% effective). This makes investing slightly more competitive since you're paying less in true mortgage interest per dollar.</p>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on inputs provided and simplified assumptions. Does not account for taxes on investment gains, inflation, changing interest rates, or individual financial circumstances. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="refinance.html">Refinance</a>
+    <a href="rent-vs-buy.html">Rent vs Buy</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─── Theme toggle ──────────────────────────────────────────────
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+    if (window._chart) {
+      window._chartNeedsRebuild = true;
+      calc();
+    }
+  });
+  updateUI();
+})();
+
+// ─── Tax bracket toggle ────────────────────────────────────────
+document.getElementById('itemizes').addEventListener('change', function() {
+  document.getElementById('taxBracketRow').style.display = this.checked ? 'block' : 'none';
+});
+
+// ─── Helpers ───────────────────────────────────────────────────
+function fmt(n, decimals) {
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals||0, maximumFractionDigits: decimals||0 });
+}
+function fmtPct(n) { return n.toFixed(2) + '%'; }
+function pct(n) { return parseFloat(n) / 100; }
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+// ─── Simulation ────────────────────────────────────────────────
+function simulate(balance, annualRate, remainingYears, extra, investReturnAnnual, horizonYears, itemizes, taxBracketPct, capitalGainsPct) {
+  const mr = annualRate / 12;                         // monthly mortgage rate
+  const remainingMonths = Math.round(remainingYears * 12);
+  const horizonMonths = Math.round(horizonYears * 12);
+
+  // Effective mortgage rate (reduces if itemizing)
+  const effectiveAnnualRate = itemizes ? annualRate * (1 - taxBracketPct) : annualRate;
+
+  // After-tax investment return (capital gains drag each year ≈ applied monthly)
+  const afterTaxInvestAnnual = investReturnAnnual * (1 - capitalGainsPct);
+  const ir = afterTaxInvestAnnual / 12;               // monthly after-tax invest rate
+
+  // Normal monthly payment (P&I)
+  const normalPayment = mr === 0 ? balance / remainingMonths
+    : balance * mr / (1 - Math.pow(1 + mr, -remainingMonths));
+
+  let balA = balance;   // extra-payment path balance
+  let balB = balance;   // invest-extra path balance (normal amortization)
+  let portA = 0;        // extra-payment path: post-payoff investment portfolio
+  let portB = 0;        // invest-extra path: ongoing investment portfolio
+  let payoffMonth = null;
+  let totalIntA = 0;
+  let totalIntB = 0;
+  // When itemizing, Path A loses the mortgage interest deduction on interest it no longer pays.
+  // This cumulative lost deduction value reduces Path A's true net worth advantage.
+  let cumulativeTaxDisadvantage = 0;
+
+  const yearly = [];
+
+  for (let m = 1; m <= horizonMonths; m++) {
+    // ── Path A: pay extra ──
+    let intA = 0;
+    if (balA > 0) {
+      intA = balA * mr;
+      totalIntA += intA;
+      const principalA = Math.min(balA, normalPayment - intA + extra);
+      balA = Math.max(0, balA - principalA);
+      if (balA <= 0 && payoffMonth === null) payoffMonth = m;
+    } else {
+      // Mortgage paid off — invest the entire freed payment
+      portA = portA * (1 + ir) + normalPayment + extra;
+    }
+
+    // ── Path B: invest extra, normal amortization ──
+    let intB = 0;
+    if (balB > 0) {
+      intB = balB * mr;
+      totalIntB += intB;
+      const principalB = Math.min(balB, normalPayment - intB);
+      balB = Math.max(0, balB - principalB);
+      portB = portB * (1 + ir) + extra;
+    } else {
+      // Normal mortgage paid off — invest freed payment too
+      portB = portB * (1 + ir) + normalPayment + extra;
+    }
+
+    // Track the tax cost of lost deductions for Path A (it pays less interest → smaller deduction)
+    if (itemizes && taxBracketPct > 0) {
+      cumulativeTaxDisadvantage += (intB - intA) * taxBracketPct;
+    }
+
+    // ── Yearly snapshot ──
+    if (m % 12 === 0) {
+      // Net worth delta:
+      // NW_A - NW_B = (home - balA + portA) - (home - balB + portB)
+      //             = (balB - balA) + (portA - portB)
+      // When itemizing, subtract Path A's cumulative lost deduction value.
+      const equityAdv = Math.max(0, balB - balA);
+      const nwA = equityAdv + portA - (itemizes ? cumulativeTaxDisadvantage : 0);
+      const nwB = portB;               // extra wealth built via invest path
+
+      // Interest saved: show after-tax value when itemizing (lost deduction reduces the benefit)
+      const rawInterestSaved = totalIntB - totalIntA;
+      const effectiveInterestSaved = itemizes ? rawInterestSaved * (1 - taxBracketPct) : rawInterestSaved;
+
+      yearly.push({
+        year: m / 12,
+        nwA,
+        nwB,
+        gap: nwA - nwB,
+        balA: Math.max(0, balA),
+        balB: Math.max(0, balB),
+        portA,
+        portB,
+        interestSaved: effectiveInterestSaved,
+      });
+    }
+  }
+
+  return { yearly, payoffMonth, normalPayment, effectiveAnnualRate, afterTaxInvestAnnual };
+}
+
+// ─── Main calc ─────────────────────────────────────────────────
+var chartInstance = null;
+
+function calc() {
+  const balance    = parseFloat(document.getElementById('loanBalance').value)  || 0;
+  const rate       = pct(document.getElementById('mortgageRate').value)        || 0;
+  const remYears   = parseFloat(document.getElementById('remainingYears').value) || 1;
+  const extra      = parseFloat(document.getElementById('extraPayment').value) || 0;
+  const investRet  = pct(document.getElementById('investReturn').value)        || 0;
+  const horizon    = parseFloat(document.getElementById('horizonYears').value) || 10;
+  const itemizes   = document.getElementById('itemizes').checked;
+  const bracket    = pct(document.getElementById('taxBracket').value)          || 0;
+  const cgRate     = pct(document.getElementById('capitalGainsRate').value)    || 0;
+
+  if (balance <= 0 || rate <= 0 || remYears <= 0 || extra <= 0) {
+    document.getElementById('normalPaymentDisplay').textContent = '—';
+    return;
+  }
+
+  const { yearly, payoffMonth, normalPayment, effectiveAnnualRate, afterTaxInvestAnnual } = simulate(
+    balance, rate, remYears, extra, investRet, horizon, itemizes, bracket, cgRate
+  );
+
+  // Display normal payment
+  document.getElementById('normalPaymentDisplay').textContent = fmt(normalPayment);
+
+  if (!yearly.length) return;
+
+  const last = yearly[yearly.length - 1];
+
+  // ── Verdict ──
+  const winner = last.gap > 500 ? 'paydown' : last.gap < -500 ? 'invest' : 'tied';
+  const badge = document.getElementById('verdictBadge');
+  const header = document.getElementById('verdictHeader');
+  const sub = document.getElementById('verdictSub');
+
+  badge.className = 'verdict-badge ' + (winner === 'paydown' ? 'badge-paydown' : winner === 'invest' ? 'badge-invest' : 'badge-neutral');
+  badge.textContent = winner === 'paydown' ? 'Pay Extra Wins' : winner === 'invest' ? 'Investing Wins' : 'Too Close to Call';
+
+  const rateWinner = effectiveAnnualRate >= afterTaxInvestAnnual ? 'paydown' : 'invest';
+  const investRetAfterTaxPct = fmtPct(afterTaxInvestAnnual * 100);
+  const mortgageRatePct = fmtPct(effectiveAnnualRate * 100);
+
+  if (winner === 'paydown') {
+    header.innerHTML = 'Paying extra on your mortgage leads by <span class="pos">' + fmt(last.gap) + '</span> at year ' + horizon + '.';
+    if (rateWinner === 'paydown') {
+      sub.textContent = 'Your effective mortgage rate (' + mortgageRatePct + ') meets or exceeds your after-tax investment return (' + investRetAfterTaxPct + '). Paying extra gives you a guaranteed return the market doesn\'t beat here.';
+    } else {
+      sub.textContent = 'Even though your after-tax investment return (' + investRetAfterTaxPct + ') exceeds your effective mortgage rate (' + mortgageRatePct + '), paying extra wins here because early payoff frees up your entire monthly payment (' + fmt(normalPayment) + '/mo) for investing. That cash flow boost — compounding over the remaining years — outweighs the rate disadvantage.';
+    }
+  } else if (winner === 'invest') {
+    header.innerHTML = 'Investing the difference leads by <span class="neu">' + fmt(Math.abs(last.gap)) + '</span> at year ' + horizon + '.';
+    if (rateWinner === 'invest') {
+      sub.textContent = 'Your after-tax investment return (' + investRetAfterTaxPct + ') exceeds your effective mortgage rate (' + mortgageRatePct + '). Over ' + horizon + ' years, compound growth on the invested extra exceeds the interest savings from early payoff.';
+    } else {
+      sub.textContent = 'Even though your effective mortgage rate (' + mortgageRatePct + ') exceeds your after-tax investment return (' + investRetAfterTaxPct + '), the investing path leads at year ' + horizon + '. Try extending the horizon — the freed-payment effect from early payoff often takes over in later years.';
+    }
+  } else {
+    header.textContent = 'The two paths are very close at year ' + horizon + '.';
+    sub.textContent = 'Non-financial factors — your risk tolerance, desire to be debt-free, and liquidity needs — should guide the decision here.';
+  }
+
+  // ── Stats ──
+  if (payoffMonth) {
+    const yrs = Math.floor(payoffMonth / 12);
+    const mos = payoffMonth % 12;
+    const savedMonths = Math.round(remYears * 12) - payoffMonth;
+    document.getElementById('statPayoff').textContent = yrs + 'y ' + (mos ? mos + 'm' : '');
+    document.getElementById('statPayoffSub').textContent = savedYearsLabel(savedMonths) + ' early';
+  } else {
+    document.getElementById('statPayoff').textContent = 'Not paid off';
+    document.getElementById('statPayoffSub').textContent = 'within horizon';
+  }
+
+  document.getElementById('statInterest').textContent = fmt(last.interestSaved);
+
+  const gapAbs = Math.abs(last.gap);
+  document.getElementById('statGap').textContent = fmt(gapAbs);
+  document.getElementById('statGap').className = 'stat-value ' + (winner === 'paydown' ? 'pos' : winner === 'invest' ? 'neu' : '');
+  document.getElementById('statGapSub').textContent = winner === 'paydown' ? 'pay-extra leads' : winner === 'invest' ? 'invest leads' : 'nearly tied';
+
+  // Break-even: find year where gap crosses zero
+  let bYear = null;
+  for (let i = 1; i < yearly.length; i++) {
+    if ((yearly[i-1].gap > 0 && yearly[i].gap <= 0) || (yearly[i-1].gap <= 0 && yearly[i].gap > 0)) {
+      bYear = yearly[i].year;
+      break;
+    }
+  }
+  if (bYear) {
+    document.getElementById('statBreakeven').textContent = 'Year ' + bYear;
+    document.getElementById('statBreakevenSub').textContent = winner === 'invest' ? 'invest took lead' : 'pay-extra took lead';
+  } else {
+    document.getElementById('statBreakeven').textContent = winner === 'paydown' ? 'Always ahead' : winner === 'invest' ? 'Always ahead' : '—';
+    document.getElementById('statBreakevenSub').textContent = winner !== 'tied' ? 'within horizon' : '';
+  }
+
+  // ── Rate comparison ──
+  document.getElementById('ratePaydown').textContent = mortgageRatePct;
+  document.getElementById('ratePaydown').className = 'rate-box-value ' + (effectiveAnnualRate >= afterTaxInvestAnnual ? 'pos' : '');
+  document.getElementById('ratePaydownSub').textContent = itemizes ? 'after-tax, guaranteed' : 'guaranteed, risk-free';
+  document.getElementById('rateInvest').textContent = investRetAfterTaxPct;
+  document.getElementById('rateInvest').className = 'rate-box-value ' + (afterTaxInvestAnnual > effectiveAnnualRate ? 'neu' : '');
+  const investSubEl = document.getElementById('rateInvestSub');
+  if (investSubEl) investSubEl.textContent = cgRate > 0 ? 'after ' + fmtPct(cgRate * 100) + ' capital gains tax' : 'expected, variable';
+
+  const margin = ((afterTaxInvestAnnual - effectiveAnnualRate) * 100).toFixed(2);
+  const noteEl = document.getElementById('tradeoffNote');
+  if (effectiveAnnualRate >= afterTaxInvestAnnual) {
+    noteEl.innerHTML = '<strong>Pay-down wins on rate</strong> — and wins in the simulation too. Your effective mortgage rate (' + mortgageRatePct + ') equals or exceeds your after-tax investment return (' + investRetAfterTaxPct + '). Paying extra is a guaranteed return that investing doesn\'t beat here — on rate <em>or</em> in the full model.';
+  } else if (winner === 'paydown') {
+    noteEl.innerHTML = '<strong>Invest has a ' + margin + 'pp after-tax rate edge, but pay-down wins the full model.</strong> Your after-tax return (' + investRetAfterTaxPct + ') exceeds your mortgage rate (' + mortgageRatePct + '), so the pure rate comparison favors investing. But early payoff frees up your full monthly payment (' + fmt(normalPayment) + '/mo) to invest from that point forward — a cash flow surge that outweighs the rate difference over your ' + horizon + '-year horizon.';
+  } else {
+    noteEl.innerHTML = '<strong>Invest has a ' + margin + 'pp after-tax edge — and wins the full model too.</strong> Your after-tax return (' + investRetAfterTaxPct + ') exceeds your effective mortgage rate (' + mortgageRatePct + '). Compound growth on invested dollars outpaces the interest savings from early payoff over this horizon. Note: paying extra is still a <em>guaranteed</em> ' + mortgageRatePct + ' return with no market risk.';
+  }
+
+  // ── Chart ──
+  const labels = yearly.map(d => 'Yr ' + d.year);
+  const dataA = yearly.map(d => Math.round(d.nwA));
+  const dataB = yearly.map(d => Math.round(d.nwB));
+
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  const textColor = isDark ? '#9395a1' : '#6b7280';
+
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Pay extra on mortgage',
+          data: dataA,
+          borderColor: '#16a34a',
+          backgroundColor: 'rgba(22,163,74,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: false,
+          tension: 0.3,
+        },
+        {
+          label: 'Invest the difference',
+          data: dataB,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37,99,235,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointHoverRadius: 5,
+          fill: false,
+          tension: 0.3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: isDark ? '#1a1a24' : '#fff',
+          borderColor: isDark ? '#2e2e3a' : '#e2e5eb',
+          borderWidth: 1,
+          titleColor: isDark ? '#e4e4ea' : '#1a1a2e',
+          bodyColor: isDark ? '#9395a1' : '#6b7280',
+          padding: 10,
+          callbacks: {
+            label: function(ctx) {
+              return ' ' + ctx.dataset.label + ': ' + fmt(ctx.parsed.y);
+            }
+          }
+        },
+      },
+      scales: {
+        x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 10 } } },
+        y: {
+          grid: { color: gridColor },
+          ticks: {
+            color: textColor,
+            font: { size: 10 },
+            callback: v => '$' + (Math.abs(v) >= 1000 ? (v/1000).toFixed(0) + 'k' : v),
+          },
+        },
+      },
+    },
+  });
+
+  // ── Breakdown table ──
+  const tbody = document.getElementById('breakdownBody');
+  tbody.innerHTML = '';
+  yearly.forEach(d => {
+    const aWins = d.gap > 0;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${d.year}</td>
+      <td class="${aWins ? 'winner-a' : ''}">${fmt(d.nwA)}</td>
+      <td class="${!aWins && d.gap !== 0 ? 'winner-b' : ''}">${fmt(d.nwB)}</td>
+      <td class="${d.gap > 0 ? 'winner-a' : d.gap < 0 ? 'winner-b' : ''}">${d.gap > 0 ? '+' : ''}${fmt(d.gap)} ${d.gap > 0 ? '↑ extra pmt' : d.gap < 0 ? '↑ invest' : ''}</td>
+      <td>${d.balA > 0 ? fmt(d.balA) : '<span style="color:var(--green)">Paid off ✓</span>'}</td>
+      <td class="pos">${fmt(d.interestSaved)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function savedYearsLabel(months) {
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  if (y && m) return y + 'y ' + m + 'm';
+  if (y) return y + ' yr' + (y !== 1 ? 's' : '');
+  return m + ' mo';
+}
+
+function toggleExplain() {
+  const toggle = document.getElementById('explainToggle');
+  const body = document.getElementById('explainBody');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// Run on load
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>How Monte Carlo Simulators Actually Work &mdash; Abel's Financial Calculators</title>
+<meta name="description" content="Monte Carlo simulation is one of the most useful tools in financial planning. Here's what it actually does under the hood, why it beats historical averages, and how to read the results.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/how-monte-carlo-works.html">
+<meta property="og:title" content="How Monte Carlo Simulators Actually Work">
+<meta property="og:description" content="Monte Carlo simulation is one of the most useful tools in financial planning. Here's what it actually does under the hood, and how to read the results.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/how-monte-carlo-works.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Monte Carlo Simulators Actually Work">
+<meta name="twitter:description" content="Monte Carlo simulation is one of the most useful tools in financial planning. Here's what it actually does under the hood, and how to read the results.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How Monte Carlo Simulators Actually Work",
+  "description": "Monte Carlo simulation is one of the most useful tools in financial planning. Here's what it actually does under the hood, why it beats historical averages, and how to read the results.",
+  "author": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "datePublished": "2026-03-11",
+  "dateModified": "2026-03-11",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/how-monte-carlo-works.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Monte Carlo simulation in finance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monte Carlo simulation is a method that runs thousands of possible future scenarios using randomly generated market returns, then reports how often a given financial plan succeeds across all of them. Instead of projecting one average outcome, it shows a distribution of outcomes — giving you a probability of success rather than a single number."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Monte Carlo simulation accurate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monte Carlo simulation is more accurate than simple average-return projections because it captures the variability and sequence of returns, not just the mean. However, it's only as good as its assumptions. Most simulators model returns as normally distributed, which underestimates the frequency of extreme events. The results should be treated as probability estimates, not guarantees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does 90% probability of success mean in a Monte Carlo simulation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 90% probability of success means that in 90% of the simulated scenarios, your portfolio lasted as long as your planned retirement. In 10% of scenarios, it ran out of money before the end. It does not mean you have a 90% chance of dying with money left over — it means 90% of the thousands of random market sequences that were tested resulted in a surviving portfolio."
+      }
+    }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+
+  .callout { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+
+  /* Scenario comparison cards */
+  .scenario-compare { margin: 32px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-col-basic .sc-row-value { color: var(--text); }
+  .sc-col-full .sc-row-value { color: var(--text); }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-verdict strong { font-size: 13px; }
+  .sc-highlight { color: var(--accent); }
+  .sc-negative { color: #f06060; }
+  .sc-missed { font-size: 11px; color: var(--text-muted); font-style: italic; padding: 10px 24px; border-top: 1px solid var(--border); background: var(--surface2); line-height: 1.6; }
+  @media (max-width: 640px) {
+    .scenario-compare-body { grid-template-columns: 1fr; }
+    .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* Step diagram */
+  .steps { margin: 32px 0; display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; gap: 20px; align-items: flex-start; }
+  .step-connector { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-line { width: 2px; flex-grow: 1; min-height: 24px; background: var(--border); margin: 4px 0; }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding: 4px 0 28px; }
+  .step-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); margin-bottom: 6px; }
+  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+  .step-desc strong { color: var(--text); }
+
+  /* Distribution bar */
+  .dist-table { margin: 28px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.07); border-radius: 14px; overflow: hidden; }
+  .dist-header { background: var(--surface2); padding: 14px 20px; border-bottom: 1px solid var(--border); }
+  .dist-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .dist-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); }
+  .dist-row { display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .dist-row:last-child { border-bottom: none; }
+  .dist-label { font-size: 11px; color: var(--text-muted); width: 140px; flex-shrink: 0; }
+  .dist-bar-wrap { flex-grow: 1; background: var(--surface2); border-radius: 4px; height: 8px; overflow: hidden; }
+  .dist-bar { height: 100%; border-radius: 4px; }
+  .dist-bar-green { background: var(--accent); }
+  .dist-bar-yellow { background: #f59e0b; }
+  .dist-bar-red { background: #f06060; }
+  .dist-value { font-family: 'DM Serif Display', serif; font-size: 14px; color: var(--text); width: 48px; text-align: right; flex-shrink: 0; }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    main { padding: 32px 16px 60px; }
+    .page-title { font-size: 28px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <a href="../vehicle-cost.html">Cars</a>
+    <a href="../race-predictor.html">Race Predictor</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">Blog</div>
+  <h2 class="page-title">How Monte Carlo Simulators Actually Work</h2>
+  <p class="page-sub">It's not magic. It's just running thousands of possible futures and counting the outcomes. Here's the whole mechanism, plainly.</p>
+  <p class="page-date">March 11, 2026</p>
+
+  <article>
+    <p>If you've used a retirement calculator recently, you've probably seen a "Monte Carlo simulation" button or a "probability of success" number. These tools are genuinely useful &mdash; far more useful than simple average-return projections &mdash; but most people who use them don't actually understand what's happening under the hood.</p>
+
+    <p>That matters, because understanding the mechanism helps you interpret the results correctly. A "92% probability of success" means something specific, and if you misread it you'll make different decisions than you should.</p>
+
+    <p>Here's how it works, from the ground up.</p>
+
+    <h2>The Problem with Average Returns</h2>
+
+    <p>The standard way to project an investment portfolio is to assume a fixed annual return &mdash; say, 7% &mdash; and compound it forward. Put in $500,000 today, withdraw $25,000 per year, and at 7% you run out of money in... year 47. Simple.</p>
+
+    <p>The problem is that markets don't return 7% every year. They return +28% one year, &minus;18% the next, +14% the year after. The average might be 7%, but the path matters &mdash; especially when you're withdrawing money.</p>
+
+    <p>Here's a stark illustration. Imagine two investors who both earn an average of 5% per year over 10 years:</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Why Average Returns Mislead</div>
+        <div class="sc-title">Same 5% average return, two different paths</div>
+        <div class="sc-params">$500,000 starting portfolio &bull; $30,000/yr withdrawal &bull; 10-year window</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> Investor A &mdash; smooth 5%/yr</div>
+          <div class="sc-row"><span class="sc-row-label">Year 1 return</span> <span class="sc-row-value">+5%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Year 2 return</span> <span class="sc-row-value">+5%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Year 3 return</span> <span class="sc-row-value">+5%</span></div>
+          <div class="sc-row"><span class="sc-row-label">&hellip;every year</span> <span class="sc-row-value">+5%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at year 10</span> <span class="sc-row-value sc-highlight">$514k</span></div>
+          <div class="sc-verdict"><strong>Outcome:</strong> Portfolio intact. Average-return model says this is fine.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Investor B &mdash; volatile, same avg</div>
+          <div class="sc-row"><span class="sc-row-label">Year 1 return</span> <span class="sc-row-value sc-negative">&minus;28%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Year 2 return</span> <span class="sc-row-value sc-negative">&minus;15%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Year 3 return</span> <span class="sc-row-value sc-highlight">+22%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Years 4&ndash;10 avg</span> <span class="sc-row-value sc-highlight">+14%/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at year 10</span> <span class="sc-row-value sc-negative">$0 (depleted yr 7)</span></div>
+          <div class="sc-verdict"><strong>Outcome:</strong> <span class="sc-negative">Ran out of money 3 years early.</span> Same average return, catastrophic sequence.</div>
+        </div>
+      </div>
+      <div class="sc-missed">This is why a single average-return projection is dangerous for withdrawal planning. It can show a healthy portfolio while hiding the real risk. Monte Carlo simulation is the solution: instead of one smooth path, it generates thousands of volatile paths and tells you how often things go wrong.</div>
+    </div>
+
+    <h2>What a Monte Carlo Simulator Actually Does</h2>
+
+    <p>The name comes from the Monte Carlo casino in Monaco &mdash; a nod to randomness and probability. The technique was developed in the 1940s by physicists working on the Manhattan Project who needed to model neutron behavior using random sampling. It migrated into finance decades later for the same reason: some systems are too complex to solve with a formula, but easy to simulate.</p>
+
+    <p>In financial planning, the process looks like this:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-connector"><div class="step-num">1</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">Define the inputs</div>
+          <div class="step-desc">Starting portfolio value, annual withdrawal amount, time horizon, and asset allocation. The allocation determines two parameters that drive the simulation: <strong>expected return</strong> (mean) and <strong>volatility</strong> (standard deviation). A 60/40 stock/bond portfolio might have an expected return of ~7% with a standard deviation of ~12%.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-num">2</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">Generate a random return for each year</div>
+          <div class="step-desc">The simulator draws a random annual return from a bell curve (normal distribution) centered on the expected return, with spread equal to the volatility. With a 7% mean and 12% standard deviation, most draws land between &minus;5% and +19%, with rarer draws reaching &minus;25% or +40%. This mimics how real markets behave.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-num">3</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">Run one full simulation</div>
+          <div class="step-desc">Apply those random returns year by year for the full retirement horizon &mdash; say, 30 years. Each year: apply that year's random return to the portfolio, then subtract the withdrawal. If the portfolio hits zero before year 30, this simulation <strong>failed</strong>. If it survives, it <strong>succeeded</strong>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-num">4</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">Repeat thousands of times</div>
+          <div class="step-desc">The simulator runs this process 5,000 or 10,000 times, each time drawing a completely different random sequence of annual returns. Every run produces a different outcome — some portfolios grow enormously, some survive comfortably, some run out of money in year 12.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-connector"><div class="step-num">5</div><div class="step-line"></div></div>
+        <div class="step-body">
+          <div class="step-title">Count the results</div>
+          <div class="step-desc">Out of 10,000 simulations, how many succeeded? If 8,700 did, your probability of success is <strong>87%</strong>. The simulator also reports the distribution of ending balances &mdash; the median outcome, the 10th percentile (a bad but not catastrophic scenario), and the 90th percentile (a great scenario).</div>
+        </div>
+      </div>
+    </div>
+
+    <p>That's the whole mechanism. Random returns, applied year by year, repeated thousands of times, with the results tallied. No black box, no magic.</p>
+
+    <h2>How to Read the Results</h2>
+
+    <p>The output of a Monte Carlo simulation is a probability distribution, not a prediction. Understanding this distinction is important.</p>
+
+    <h3>Probability of success</h3>
+    <p>This is the percentage of simulations where the portfolio didn't run out of money. It's <em>not</em> a guarantee. An 87% success rate means that in 13% of the 10,000 simulated market sequences &mdash; roughly 1,300 of them &mdash; the portfolio was depleted before the end of the planned retirement.</p>
+
+    <p>What counts as "good enough" is a personal question. Many financial planners target 85&ndash;90% as a reasonable range. Going for 99% usually means withdrawing so little that you'll almost certainly leave a large unspent estate. Going for 70% means accepting meaningful ruin risk.</p>
+
+    <h3>The percentile fan</h3>
+    <p>Most simulators also show a range of outcomes at each future year &mdash; the 10th, 50th, and 90th percentile portfolio values. This is more useful than success rate alone, because it shows you <em>how bad</em> failure looks and <em>how good</em> success looks.</p>
+
+    <div class="dist-table">
+      <div class="dist-header">
+        <div class="sc-label">Example output &mdash; $1M portfolio, $45k/yr withdrawal, 30 years</div>
+        <div class="sc-title">Distribution of portfolio values at year 30 (10,000 simulations)</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label">90th percentile</div>
+        <div class="dist-bar-wrap"><div class="dist-bar dist-bar-green" style="width:95%"></div></div>
+        <div class="dist-value">$3.8M</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label">75th percentile</div>
+        <div class="dist-bar-wrap"><div class="dist-bar dist-bar-green" style="width:70%"></div></div>
+        <div class="dist-value">$2.8M</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label">Median (50th)</div>
+        <div class="dist-bar-wrap"><div class="dist-bar dist-bar-green" style="width:48%"></div></div>
+        <div class="dist-value">$1.9M</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label">25th percentile</div>
+        <div class="dist-bar-wrap"><div class="dist-bar dist-bar-yellow" style="width:22%"></div></div>
+        <div class="dist-value">$870k</div>
+      </div>
+      <div class="dist-row">
+        <div class="dist-label">10th percentile</div>
+        <div class="dist-bar-wrap"><div class="dist-bar dist-bar-red" style="width:0%"></div></div>
+        <div class="dist-value">$0</div>
+      </div>
+    </div>
+
+    <p>In this example, the median retiree ends up with nearly double their starting portfolio &mdash; the plan is conservative for most futures. But the 10th percentile result is zero, meaning about 10% of simulations resulted in portfolio depletion. That's the risk number to focus on.</p>
+
+    <div class="callout">
+      <p><strong>A key insight:</strong> In the median historical scenario, a 4% withdrawal rate leaves the retiree with more money than they started with. The 4% rule isn't calibrated to the average case &mdash; it's calibrated to survive the worst historical cases. Monte Carlo lets you see the full distribution, so you can decide how much risk you're actually comfortable with.</p>
+    </div>
+
+    <h2>What Monte Carlo Gets Wrong</h2>
+
+    <p>Monte Carlo simulation is a significant improvement over average-return projections, but it's not perfect. A few limitations worth knowing:</p>
+
+    <h3>Returns aren't normally distributed</h3>
+    <p>Most Monte Carlo simulators model annual returns as a normal distribution (bell curve). Real markets have "fat tails" &mdash; extreme crashes happen more often than a normal distribution predicts. The 2008 financial crisis, the 2020 COVID crash, and the 1987 Black Monday were all statistically "impossible" events under a normal distribution model. This means Monte Carlo can underestimate true tail risk.</p>
+
+    <h3>Returns aren't independent year-to-year</h3>
+    <p>The simulator treats each year's return as a fresh random draw, independent of the previous year. In reality, markets have momentum, mean reversion, and correlation to economic cycles. A standard Monte Carlo model doesn't capture the fact that a terrible year is sometimes followed by a bounce, or that valuations matter for forward returns.</p>
+
+    <h3>It's only as good as its assumptions</h3>
+    <p>The expected return and volatility figures that feed the simulation are typically drawn from historical averages. If the future has lower returns than the past &mdash; which some analysts argue is likely given current market valuations &mdash; the simulation will be too optimistic. Changing the expected return assumption by just 1&ndash;2% can move the probability of success by 10+ percentage points.</p>
+
+    <h3>It ignores spending flexibility</h3>
+    <p>Standard simulations model rigid withdrawals: the same inflation-adjusted amount every year, no matter what the market does. Real retirees adapt &mdash; they spend less during downturns, delay big purchases, or pick up part-time income. A plan that looks like it has an 80% success rate under rigid withdrawal assumptions might have a 95% success rate if you'd realistically cut spending by 15% in a bad year. Some advanced simulators model this flexibility; many don't.</p>
+
+    <h2>Historical Simulation vs Monte Carlo</h2>
+
+    <p>There's a related but different approach called <strong>historical (backtesting) simulation</strong>, which uses actual historical return sequences instead of randomly generated ones. The Trinity Study used this method &mdash; it tested every rolling 30-year period in US market history and asked "did the portfolio survive?"</p>
+
+    <p>The advantage of historical simulation is that it uses real market sequences, including real crashes and recoveries. The disadvantage is that there are only so many non-overlapping 30-year periods in history &mdash; the sample size is small. Monte Carlo generates thousands of scenarios, giving you much more statistical coverage, but at the cost of the real-sequence fidelity.</p>
+
+    <p>Neither is strictly better. They're different tools with different trade-offs. A good retirement plan uses both.</p>
+
+    <h2>What to Actually Do With This</h2>
+
+    <p>Monte Carlo simulation is most useful not as a single number to optimize, but as a tool for testing your plan under stress.</p>
+
+    <p>Instead of asking "Is my plan safe?", ask:</p>
+
+    <ul>
+      <li><strong>"What happens if I delay Social Security by 3 years?"</strong> Run both versions and compare the probability of success.</li>
+      <li><strong>"How much does a 10% spending cut in down years improve my odds?"</strong> Most simulations let you model spending flexibility.</li>
+      <li><strong>"What's my break-even asset allocation?"</strong> More stocks increases expected return but also volatility. Where's the sweet spot for your specific plan?</li>
+      <li><strong>"How does my plan change if expected returns are 1% lower than historical averages?"</strong> This sensitivity test tells you how dependent your plan is on optimistic assumptions.</li>
+    </ul>
+
+    <p>The number itself &mdash; "87% probability of success" &mdash; is less important than the direction it moves when you change your inputs. That's where the insight lives.</p>
+
+    <div class="cta">
+      <p>Our free Monte Carlo simulator lets you model your investment or retirement plan across thousands of scenarios &mdash; adjusting return assumptions, volatility, withdrawals, and time horizon &mdash; and see the full distribution of outcomes, not just an average projection.</p>
+      <a class="cta-btn" href="../monte-carlo.html">Try the Monte Carlo Simulator &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on the inputs you provide and do not account for all financial variables. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../monte-carlo.html">Investment</a>
+    <a href="../withdrawal.html">Withdrawal</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+  });
+  updateUI();
+})();
+</script>
+</body>
+</html>

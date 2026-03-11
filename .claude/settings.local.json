@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs sed:*)",
+      "Read(//c/Users/brent/.claude/projects/c--Users-brent-OneDrive-Documents-GitHub-finance-calculators/memory/**)"
+    ]
+  }
+}
