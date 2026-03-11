@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>Rent vs Buy: The Calculation Most People Get Wrong &mdash; Abel's Financial Calculators</title>
+<meta name="description" content="Comparing rent to a mortgage payment is the wrong way to evaluate buying a home. Here's how to think about rent vs buy in terms of actual wealth impact.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/rent-vs-buy-real-math.html">
+<meta property="og:title" content="Rent vs Buy: The Calculation Most People Get Wrong">
+<meta property="og:description" content="Comparing rent to a mortgage payment is the wrong way to evaluate buying a home. Here's how to think about it in terms of actual wealth impact.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/rent-vs-buy-real-math.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rent vs Buy: The Calculation Most People Get Wrong">
+<meta name="twitter:description" content="Comparing rent to a mortgage payment is the wrong way to evaluate buying a home.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Rent vs Buy: The Calculation Most People Get Wrong",
+  "description": "Comparing rent to a mortgage payment is the wrong way to evaluate buying a home. Here's how to think about rent vs buy in terms of actual wealth impact.",
+  "author": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "datePublished": "2026-03-07",
+  "dateModified": "2026-03-07",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/rent-vs-buy-real-math.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it better to rent or buy a home?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on how long you plan to stay, local home prices and rent levels, and what you'd do with the down payment if you kept renting. Buying builds equity but has high transaction costs and ties up capital. Renting offers flexibility and the ability to invest the down payment. A full analysis should compare net worth under both scenarios, not just monthly payments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long do you need to stay in a home to make buying worth it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The common rule of thumb is 5 years, but the real answer depends on your local market. Transaction costs (agent fees, closing costs) typically total 8-10% of the home's value when buying and selling. In a high-appreciation market you might break even sooner; in a flat market it can take 7+ years. A break-even analysis that accounts for opportunity cost on the down payment gives a more accurate answer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the price-to-rent ratio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The price-to-rent ratio divides a home's purchase price by its annual rent. A ratio under 15 generally favors buying; over 20 generally favors renting. Above 25 means renting is almost always better financially unless you have strong reasons to expect above-average appreciation. Major coastal cities often have ratios of 30-40+, meaning you can invest a down payment and come out well ahead financially even over long periods."
+      }
+    }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: none; background: var(--surface2); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); background: var(--surface); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+
+  .callout { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+
+  .scenario-compare { margin: 32px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-col-basic .sc-row-value { color: var(--text); }
+  .sc-col-full .sc-row-value { color: var(--text); }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-verdict strong { font-size: 13px; }
+  .sc-highlight { color: var(--accent); }
+  .sc-negative { color: #f06060; }
+  .sc-missed { font-size: 11px; color: var(--text-muted); font-style: italic; padding: 10px 24px; border-top: 1px solid var(--border); background: var(--surface2); line-height: 1.6; }
+  @media (max-width: 640px) {
+    .scenario-compare-body { grid-template-columns: 1fr; }
+    .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    main { padding: 32px 16px 60px; }
+    .page-title { font-size: 28px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <a href="../vehicle-cost.html">Cars</a>
+    <a href="../race-predictor.html">Race Predictor</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">Blog</div>
+  <h2 class="page-title">Rent vs Buy: The Calculation Most People Get Wrong</h2>
+  <p class="page-sub">Comparing your rent to a mortgage payment isn't the right question. Here's what actually matters.</p>
+  <p class="page-date">March 7, 2026</p>
+
+  <article>
+    <p>There's a version of the rent vs buy debate that goes like this: <em>"My rent is $2,200 a month. I could be building equity instead of throwing money away."</em> It sounds right. It's not the whole story.</p>
+
+    <p>The "throwing money away on rent" framing ignores the fact that homeowners also throw money away &mdash; on mortgage interest, property taxes, insurance, maintenance, and transaction costs. None of those build equity. And it ignores the single biggest variable in the whole comparison: what you'd do with your down payment if you didn't tie it up in a house.</p>
+
+    <p>Here's a cleaner way to think about it.</p>
+
+    <h2>The Real Question Isn't Payment vs Payment</h2>
+
+    <p>The right question isn't "Is my mortgage payment lower than my rent?" It's: <strong>"Under which path &mdash; buying or continuing to rent &mdash; will I have more wealth in 10 years?"</strong></p>
+
+    <p>To answer that, you need to track everything that changes under each scenario:</p>
+
+    <ul>
+      <li><strong>Buying:</strong> Down payment, closing costs, mortgage payments (split between interest and principal), property taxes, insurance, maintenance, HOA fees, and eventual transaction costs when you sell (typically 5&ndash;6% in agent commissions alone).</li>
+      <li><strong>Renting:</strong> Monthly rent payments, renter's insurance &mdash; and critically, the invested down payment growing in the market over the same period.</li>
+    </ul>
+
+    <p>When you model both paths completely, three things become clear: buying isn't always better, renting isn't always "throwing money away," and the answer is highly sensitive to a few key variables.</p>
+
+    <h2>The Down Payment Is the Hidden Variable</h2>
+
+    <p>This is the piece that most people skip entirely. A $80,000 down payment on a $400,000 home isn't free money &mdash; it's $80,000 that could have been invested instead. Over 10 years at a 7% average annual return, that $80,000 grows to roughly $157,000.</p>
+
+    <p>That opportunity cost doesn't mean you shouldn't buy. But it means the home needs to either appreciate significantly, or the total cost of renting needs to exceed the total cost of owning by enough to overcome it. Often it does &mdash; but only in markets where the math actually works.</p>
+
+    <div class="callout">
+      <p><strong>The price-to-rent ratio</strong> is a useful first filter. Divide the home price by annual rent for a comparable property. Under 15: buying likely wins. 15&ndash;20: depends on your specific situation. Above 20: renting is often better financially, especially in the near term. Above 25: renting almost always wins unless you're planning a very long stay and expect above-average appreciation.</p>
+      <p>Many coastal cities (San Francisco, Seattle, New York) have price-to-rent ratios of 30&ndash;40+. Some Midwest and Sun Belt markets are under 15.</p>
+    </div>
+
+    <h2>What the Comparison Actually Looks Like</h2>
+
+    <p>Here's the same situation evaluated two ways &mdash; the way most people think about it, and the full picture.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Scenario &mdash; Moderate Market</div>
+        <div class="sc-title">Buy at $420k vs rent a comparable unit at $2,100/mo</div>
+        <div class="sc-params">$84k down payment (20%) &bull; 6.5% mortgage rate &bull; 3% annual home appreciation &bull; 3% annual rent increases &bull; 10-year horizon</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> How people usually compare</div>
+          <div class="sc-row"><span class="sc-row-label">Monthly rent</span> <span class="sc-row-value">$2,100</span></div>
+          <div class="sc-row"><span class="sc-row-label">Monthly mortgage (P&amp;I)</span> <span class="sc-row-value">$2,123</span></div>
+          <div class="sc-row"><span class="sc-row-label">Difference</span> <span class="sc-row-value">$23/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">10yr equity built</span> <span class="sc-row-value">~$130k</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> &ldquo;About the same monthly, but buying builds equity. Buy.&rdquo;</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Full net worth picture</div>
+          <div class="sc-row"><span class="sc-row-label">Home equity (10yr)</span> <span class="sc-row-value sc-highlight">+$186k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Less: interest paid</span> <span class="sc-row-value sc-negative">&minus;$211k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Less: taxes, insurance, maint.</span> <span class="sc-row-value sc-negative">&minus;$112k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Less: transaction costs (sale)</span> <span class="sc-row-value sc-negative">&minus;$32k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Renter's invested down payment</span> <span class="sc-row-value sc-highlight">+$157k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Renter's rent surplus invested</span> <span class="sc-row-value sc-highlight">+$18k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Net worth advantage: Buy</span> <span class="sc-row-value sc-highlight">+$14k</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> Buying still wins &mdash; but barely, and only because of appreciation. The interest, taxes, and maintenance nearly swallow the equity gain.</div>
+        </div>
+      </div>
+      <div class="sc-missed">What the basic comparison missed: the $84k down payment growing in the market to $157k, $112k in carrying costs beyond the mortgage payment, and $32k in transaction costs on the eventual sale. Buying wins here, but not by as much as "building equity" implies &mdash; and the renter would be nearly as wealthy if they invested consistently.</div>
+    </div>
+
+    <p>Now change one variable &mdash; the price-to-rent ratio &mdash; and the result flips:</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Scenario &mdash; Expensive Market (High Price-to-Rent)</div>
+        <div class="sc-title">Buy at $700k vs rent a comparable unit at $2,600/mo</div>
+        <div class="sc-params">$140k down payment (20%) &bull; 6.5% mortgage rate &bull; 3% annual appreciation &bull; 3% annual rent increases &bull; 10-year horizon</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> How people usually compare</div>
+          <div class="sc-row"><span class="sc-row-label">Monthly rent</span> <span class="sc-row-value">$2,600</span></div>
+          <div class="sc-row"><span class="sc-row-label">Monthly mortgage (P&amp;I)</span> <span class="sc-row-value">$3,538</span></div>
+          <div class="sc-row"><span class="sc-row-label">Difference</span> <span class="sc-row-value sc-negative">&minus;$938/mo</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> &ldquo;Mortgage is way more expensive. Rent for now.&rdquo;</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Full net worth picture</div>
+          <div class="sc-row"><span class="sc-row-label">Home equity (10yr)</span> <span class="sc-row-value sc-highlight">+$311k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Less: interest, taxes, maint.</span> <span class="sc-row-value sc-negative">&minus;$527k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Less: transaction costs (sale)</span> <span class="sc-row-value sc-negative">&minus;$53k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Renter's invested down payment</span> <span class="sc-row-value sc-highlight">+$275k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Renter's payment surplus invested</span> <span class="sc-row-value sc-highlight">+$155k</span></div>
+          <div class="sc-row"><span class="sc-row-label">Net worth advantage: Rent</span> <span class="sc-row-value sc-highlight">+$159k</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> Renting wins decisively. The invested down payment and payment surplus compound far beyond the home equity gain.</div>
+        </div>
+      </div>
+      <div class="sc-missed">In expensive markets, the high mortgage payment forces you to put money into a single, illiquid asset with 3% appreciation. The renter who invests the difference in a diversified portfolio at 7% comes out $159k ahead after 10 years. The home would need to appreciate at 6%+ annually for buying to compete.</div>
+    </div>
+
+    <h2>The Time Horizon Problem</h2>
+
+    <p>The most consistent finding in rent vs buy math is this: <strong>the shorter your timeline, the worse buying looks.</strong> Transaction costs alone &mdash; closing costs when you buy, agent commissions when you sell &mdash; typically total 8&ndash;10% of the home's value. On a $400,000 home, that's $32,000&ndash;$40,000 that has to be earned back through appreciation and equity before you even break even.</p>
+
+    <p>In a market appreciating at 3% per year, a $400,000 home takes roughly <strong>4&ndash;5 years just to recover transaction costs</strong>. Before that point, you'd have been financially better off renting.</p>
+
+    <p>Most financial advisors use 5 years as the rough minimum for buying to make sense. But that's a national average. In a high-price-to-rent market, the break-even can be 7&ndash;10 years. In a low-price-to-rent market with strong appreciation, it might be 2&ndash;3 years.</p>
+
+    <h2>What Actually Tips the Balance</h2>
+
+    <p>When you run the numbers across many scenarios, a few factors reliably determine which path wins:</p>
+
+    <h3>Factors that favor buying</h3>
+    <ul>
+      <li><strong>Low price-to-rent ratio</strong> (under 15). When homes are cheap relative to rent, the mortgage + carrying costs are comparable to rent, and equity builds faster relative to the investment alternative.</li>
+      <li><strong>Long time horizon</strong> (7+ years). Transaction costs amortize over more years, and equity compounds.</li>
+      <li><strong>Strong local appreciation.</strong> If home values grow at 5%+ annually, equity gain can outpace invested alternatives. This is market-specific and hard to predict.</li>
+      <li><strong>Discipline risk.</strong> Some people won't invest the difference if they rent. For them, forced savings through a mortgage is genuinely valuable, even if the math slightly favors renting.</li>
+    </ul>
+
+    <h3>Factors that favor renting</h3>
+    <ul>
+      <li><strong>High price-to-rent ratio</strong> (over 20&ndash;25). The math rarely works in your favor as a buyer, especially in the near term.</li>
+      <li><strong>Short or uncertain timeline.</strong> If there's a meaningful chance you move in under 5 years, the transaction cost risk is high.</li>
+      <li><strong>High carrying costs.</strong> Some markets have high property taxes, HOA fees, or insurance costs that eat into the buyer's financial advantage.</li>
+      <li><strong>The invested-down-payment advantage.</strong> If you'd genuinely invest the down payment in index funds, a long-run market return of 7&ndash;10% is a tough benchmark for home appreciation to beat, especially after carrying costs.</li>
+    </ul>
+
+    <h2>The Things That Aren't in the Math</h2>
+
+    <p>The financial calculation isn't the whole picture, and it doesn't have to be.</p>
+
+    <p>Homeownership gives you stability, control over your space, the ability to renovate, and a fixed housing cost (if on a fixed-rate mortgage) that doesn't rise with rent inflation. These are real benefits. For a lot of people, they're worth paying a financial premium for.</p>
+
+    <p>But it's worth knowing what that premium is, and choosing intentionally &mdash; rather than assuming buying is always financially superior when it often isn't, or that renting is always "throwing money away" when it often makes you wealthier.</p>
+
+    <div class="cta">
+      <p>We built a free rent vs buy calculator that models both paths completely &mdash; equity, invested down payment, carrying costs, transaction costs, and net worth over time &mdash; so you can compare by actual wealth impact, not just monthly payment.</p>
+      <a class="cta-btn" href="../rent-vs-buy.html">Try the Rent vs Buy Calculator &rarr;</a>
+    </div>
+
+    <h2>A Quick Checklist Before You Decide</h2>
+
+    <ol>
+      <li><strong>What's the price-to-rent ratio?</strong> Divide the home price by 12 months of comparable rent. Under 15 favors buying; over 20 favors renting.</li>
+      <li><strong>How long will you stay?</strong> Under 5 years, buying is almost never the better financial choice.</li>
+      <li><strong>What would you actually do with the down payment?</strong> If you'd invest it, model the opportunity cost. If it would sit in a savings account, that changes the calculus.</li>
+      <li><strong>What are the carrying costs?</strong> Property taxes, insurance, maintenance, and HOA vary enormously. Include them.</li>
+      <li><strong>What does the full 10-year net worth picture look like?</strong> Not just the monthly payment comparison &mdash; the full model, with both paths run out to the same horizon.</li>
+    </ol>
+
+    <p>The math will sometimes confirm your instinct to buy. Sometimes it will surprise you. Either way, it's worth knowing what you're actually deciding before you commit.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on the inputs you provide and do not account for all financial variables. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../rent-vs-buy.html">Rent vs Buy</a>
+    <a href="../extra-payment.html">Extra Payment</a>
+    <a href="../refinance.html">Refinance</a>
+    <a href="../withdrawal.html">Withdrawal</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+  });
+  updateUI();
+})();
+</script>
+</body>
+</html>

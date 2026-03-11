@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Running Race Time Predictor — Abel's Calculators</title>
+<meta name="description" content="Predict your race finish time using Jack Daniels' VDOT system with mileage adjustment and elevation grade correction. Enter a recent PR and get accurate predictions for any distance.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/race-predictor.html">
+<meta property="og:title" content="Running Race Time Predictor — VDOT-Based Predictions">
+<meta property="og:description" content="Use Jack Daniels' VDOT system to predict race times at any distance. Accounts for weekly mileage and course elevation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/race-predictor.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Running Race Time Predictor">
+<meta name="twitter:description" content="Predict race times using VDOT. Accounts for training mileage and course elevation.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Running Race Time Predictor","description":"Predict your race finish time using Jack Daniels' VDOT system with mileage adjustment and elevation grade correction.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/race-predictor.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --red: #dc2626;
+    --green: #16a34a;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 360px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+  .panel { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input, .field select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .field-row { display: grid; gap: 8px; }
+  .field-row-2 { grid-template-columns: 1fr 1fr; }
+  .field-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
+  .checkbox-row input[type=checkbox] { width: auto; accent-color: var(--accent); cursor: pointer; }
+  .checkbox-row label { font-size: 12px; color: var(--text-muted); cursor: pointer; margin: 0; }
+  .time-sep { display: flex; align-items: flex-end; padding-bottom: 8px; color: var(--text-muted); font-size: 16px; font-weight: 300; justify-content: center; }
+  .time-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 4px; align-items: end; }
+  .time-row .field { margin-bottom: 0; }
+  .elev-section { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+  .elev-group-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
+
+  /* Main */
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+
+  .verdict-badge { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; margin-bottom: 8px; font-weight: 500; }
+  .badge-blue { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .badge-green { background: rgba(22,163,74,0.12); color: var(--green); }
+  .badge-neutral { background: var(--surface2); color: var(--text-muted); }
+  .verdict-header { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 8px; line-height: 1.3; }
+  .verdict-sub { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+  .stats-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .stat-box { background: var(--surface2); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-value { font-size: 17px; font-family: 'DM Serif Display', serif; }
+  .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .pos { color: var(--green); } .neg { color: var(--red); } .neu { color: var(--blue); }
+
+  /* Big VDOT display */
+  .vdot-hero { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 14px; }
+  .vdot-number { font-family: 'DM Serif Display', serif; font-size: 72px; line-height: 1; color: var(--accent); }
+  .vdot-info { padding-bottom: 8px; }
+  .vdot-level { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .vdot-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Predicted time hero */
+  .pred-time-hero { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 10px; }
+  .pred-time-big { font-family: 'DM Serif Display', serif; font-size: 56px; line-height: 1; color: var(--text); }
+  .pred-time-info { padding-bottom: 6px; }
+  .pred-distance-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+  .pred-comparison { margin: 10px 0; padding: 10px 14px; background: var(--surface2); border-radius: var(--radius); }
+  .pred-comparison-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; padding: 3px 0; }
+  .pred-comparison-label { color: var(--text-muted); }
+  .pred-comparison-value { font-family: 'DM Mono', monospace; color: var(--text); font-size: 13px; }
+  .pred-pace-row { display: flex; gap: 14px; margin-top: 8px; }
+  .pred-pace-item { background: var(--surface2); border-radius: 8px; padding: 8px 12px; flex: 1; }
+  .pred-pace-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+  .pred-pace-value { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--text); }
+  .penalty-note { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-top: 8px; padding: 8px 12px; background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; }
+  .penalty-note strong { color: var(--text); }
+
+  /* Predictions table */
+  .breakdown-scroll { overflow-x: auto; }
+  .breakdown-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .breakdown-table th { text-align: left; padding: 7px 10px; background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 500; border-bottom: 1px solid var(--border); }
+  .breakdown-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; }
+  .breakdown-table tr:last-child td { border-bottom: none; }
+  .breakdown-table tr:hover td { background: var(--surface2); }
+  .breakdown-table tr.target-row td { background: rgba(0,106,255,0.07); color: var(--text); font-weight: 500; }
+  .breakdown-table tr.target-row td:first-child { border-left: 3px solid var(--accent); }
+  .elev-matrix-selected { background: rgba(0,106,255,0.18) !important; color: var(--text) !important; font-weight: 600 !important; outline: 2px solid var(--accent); outline-offset: -2px; }
+  .elev-matrix-header { background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 500; text-align: center; }
+  .elev-matrix-rowlabel { background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 500; white-space: nowrap; }
+  .breakdown-table .time-col { color: var(--text); }
+  .breakdown-table .adj-col { color: var(--blue); }
+
+  /* Explain toggle */
+  .explain-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); user-select: none; padding: 4px 0; margin-top: 12px; }
+  .explain-toggle:hover { color: var(--text); }
+  .explain-arrow { transition: transform 0.2s; display: inline-block; font-size: 9px; }
+  .explain-toggle.open .explain-arrow { transform: rotate(90deg); }
+  .explain-body { display: none; margin-top: 10px; padding: 16px 18px; background: var(--surface2); border-radius: var(--radius); font-size: 12px; line-height: 1.95; color: var(--text-muted); border: 1px solid var(--border); }
+  .explain-body.open { display: block; }
+  .explain-body strong { color: var(--text); }
+  .explain-body .hl { color: var(--accent); font-family: 'DM Serif Display', serif; font-size: 14px; }
+  .explain-body .hl-g { color: var(--green); font-family: 'DM Serif Display', serif; font-size: 14px; }
+  .explain-body p + p { margin-top: 10px; }
+
+  .callout-note { background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; padding: 10px 14px; font-size: 12px; color: var(--text-muted); line-height: 1.65; margin-top: 12px; }
+  .callout-note strong { color: var(--text); }
+
+  .chart-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+
+  /* Empty state */
+  .empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); }
+  .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+  .empty-state-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); margin-bottom: 6px; }
+  .empty-state-body { font-size: 12px; line-height: 1.7; }
+
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .main { padding: 18px; }
+    header { padding: 0 20px; }
+  }
+  @media (max-width: 600px) {
+    .header-banner { max-width: 100%; }
+    .header-nav { flex-wrap: wrap; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+    .main { padding: 12px; }
+    .card { padding: 14px 16px; }
+    .vdot-number { font-size: 52px; }
+    .pred-time-big { font-size: 40px; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <a href="vehicle-cost.html">Cars</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<section class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Race Predictor</div>
+      <h2 class="hero-band-title">Your race, <span>predicted.</span></h2>
+    </div>
+    <div class="hero-band-divider"></div>
+    <p class="hero-band-body">
+      Based on <strong>Jack Daniels' VDOT system</strong> — the gold standard for translating a known race performance into predictions at any distance. Enter a recent PR, your training mileage, and optional elevation data to get scientifically grounded race time predictions. <strong>VDOT</strong> is your aerobic capacity expressed as a single number — the higher, the faster.
+    </p>
+  </div>
+</section>
+
+<div class="layout">
+<aside class="sidebar">
+
+  <div class="panel">
+    <div class="section-label">Your PR</div>
+    <div class="field">
+      <label for="prDistance">PR Distance</label>
+      <select id="prDistance" onchange="onPrDistanceChange(); calc()">
+        <option value="1609.34">1 Mile</option>
+        <option value="5000" selected>5K</option>
+        <option value="8000">8K</option>
+        <option value="10000">10K</option>
+        <option value="15000">15K</option>
+        <option value="16093.4">10 Miles</option>
+        <option value="21097.5">Half Marathon</option>
+        <option value="42195">Marathon</option>
+        <option value="50000">50K</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div id="prCustomRow" style="display:none">
+      <div class="field-row field-row-2">
+        <div class="field">
+          <label for="prCustomDist">Distance</label>
+          <input type="number" id="prCustomDist" value="10" min="0.1" step="0.1" oninput="calc()">
+        </div>
+        <div class="field">
+          <label for="prCustomUnit">Unit</label>
+          <select id="prCustomUnit" onchange="calc()">
+            <option value="km">km</option>
+            <option value="miles">miles</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>PR Time (HH : MM : SS)</label>
+      <div class="time-row">
+        <div class="field">
+          <input type="number" id="prHH" value="0" min="0" max="23" step="1" placeholder="HH" oninput="calc()">
+        </div>
+        <div class="time-sep">:</div>
+        <div class="field">
+          <input type="number" id="prMM" value="22" min="0" max="59" step="1" placeholder="MM" oninput="calc()">
+        </div>
+        <div class="time-sep">:</div>
+        <div class="field">
+          <input type="number" id="prSS" value="30" min="0" max="59" step="1" placeholder="SS" oninput="calc()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Training</div>
+    <div class="field">
+      <label for="weeklyMileage">Weekly Mileage (miles)</label>
+      <input type="number" id="weeklyMileage" value="30" min="1" max="200" step="1" oninput="calc()">
+    </div>
+    <div class="hint">Used to adjust predictions for longer races. Higher mileage = closer to your VDOT ceiling at marathon distances.</div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Target Race</div>
+    <div class="field">
+      <label for="targetDistance">Race Distance</label>
+      <select id="targetDistance" onchange="onTargetDistanceChange(); calc()">
+        <option value="1609.34">1 Mile</option>
+        <option value="5000">5K</option>
+        <option value="8000">8K</option>
+        <option value="10000">10K</option>
+        <option value="15000">15K</option>
+        <option value="16093.4">10 Miles</option>
+        <option value="21097.5">Half Marathon</option>
+        <option value="42195" selected>Marathon</option>
+        <option value="50000">50K</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div id="targetCustomRow" style="display:none">
+      <div class="field-row field-row-2">
+        <div class="field">
+          <label for="targetCustomDist">Distance</label>
+          <input type="number" id="targetCustomDist" value="10" min="0.1" step="0.1" oninput="calc()">
+        </div>
+        <div class="field">
+          <label for="targetCustomUnit">Unit</label>
+          <select id="targetCustomUnit" onchange="calc()">
+            <option value="km">km</option>
+            <option value="miles">miles</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Elevation <span style="font-size:9px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+    <label class="checkbox-row">
+      <input type="checkbox" id="elevToggle" onchange="onElevToggle(); calc()">
+      <label for="elevToggle">Adjust for course elevation</label>
+    </label>
+    <div id="elevFields" style="display:none">
+      <div class="elev-section">
+        <div class="elev-group-label">PR Course</div>
+        <div class="field-row field-row-2">
+          <div class="field">
+            <label for="prGain">Elev. Gain (ft)</label>
+            <input type="number" id="prGain" value="0" min="0" step="50" oninput="calc()">
+          </div>
+          <div class="field">
+            <label for="prLoss">Elev. Loss (ft)</label>
+            <input type="number" id="prLoss" value="0" min="0" step="50" oninput="calc()">
+          </div>
+        </div>
+      </div>
+      <div class="elev-section">
+        <div class="elev-group-label">Target Course</div>
+        <div class="field-row field-row-2">
+          <div class="field">
+            <label for="targetGain">Elev. Gain (ft)</label>
+            <input type="number" id="targetGain" value="0" min="0" step="50" oninput="calc()">
+          </div>
+          <div class="field">
+            <label for="targetLoss">Elev. Loss (ft)</label>
+            <input type="number" id="targetLoss" value="0" min="0" step="50" oninput="calc()">
+          </div>
+        </div>
+      </div>
+      <div class="elev-section">
+        <div class="elev-group-label" style="cursor:pointer;user-select:none;display:flex;align-items:center;gap:4px" onclick="toggleElevAdvanced()">
+          <span id="elevAdvancedArrow" style="font-size:9px">▶</span> Sensitivity Settings
+        </div>
+        <div id="elevAdvanced" style="display:none;margin-top:8px">
+          <div class="field" style="margin-bottom:8px">
+            <label for="gainCoeff" style="display:flex;justify-content:space-between">
+              <span>Gain sensitivity</span>
+              <span id="gainCoeffVal" style="font-family:var(--mono);color:var(--accent)">1.0×</span>
+            </label>
+            <input type="range" id="gainCoeff" min="0.25" max="2.5" step="0.05" value="1" oninput="onCoeffChange()">
+          </div>
+          <div class="field" style="margin-bottom:4px">
+            <label for="lossCoeff" style="display:flex;justify-content:space-between">
+              <span>Loss sensitivity</span>
+              <span id="lossCoeffVal" style="font-family:var(--mono);color:var(--accent)">1.0×</span>
+            </label>
+            <input type="range" id="lossCoeff" min="0.25" max="2.5" step="0.05" value="1" oninput="onCoeffChange()">
+          </div>
+          <div id="elevCoeffHint" class="hint" style="margin-top:6px">Scaled to your VDOT. Elites ~20s/100ft; 10-min milers ~40s/100ft. Raise for trail/mountain runs.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hint">Hilly courses slow you down on the uphills more than the downhills help. Enter gain and loss for both courses to normalize to equivalent flat efforts.</div>
+  </div>
+
+</aside>
+
+<main class="main" id="mainContent">
+
+  <div id="emptyState" class="card empty-state">
+    <div class="empty-state-icon">&#127939;</div>
+    <div class="empty-state-title">Enter a PR to see your predictions</div>
+    <div class="empty-state-body">Fill in your PR distance and time in the sidebar. Your VDOT score and predicted times will appear here.</div>
+  </div>
+
+  <!-- VDOT Card -->
+  <div class="card" id="vdotCard" style="display:none">
+    <div class="chart-title">Your Fitness Score</div>
+    <div class="vdot-hero">
+      <div class="vdot-number" id="vdotDisplay">—</div>
+      <div class="vdot-info">
+        <div class="vdot-level" id="vdotLevel">—</div>
+        <div class="vdot-desc" id="vdotDesc">—</div>
+      </div>
+    </div>
+    <div class="stats-grid stats-grid-2">
+      <div class="stat-box">
+        <div class="stat-label">PR Pace / Mile</div>
+        <div class="stat-value" id="prPaceMile">—</div>
+        <div class="stat-sub">min/mile</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label" id="flatVdotLabel">Equivalent Flat VDOT</div>
+        <div class="stat-value neu" id="flatVdotDisplay">—</div>
+        <div class="stat-sub" id="flatVdotSub">after elevation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Predicted Time Card -->
+  <div class="card" id="predCard" style="display:none">
+    <div class="chart-title">Predicted Finish Time</div>
+    <div class="pred-time-hero">
+      <div class="pred-time-big" id="predTimeBig">—</div>
+      <div class="pred-time-info">
+        <div class="pred-distance-label" id="predDistanceLabel">—</div>
+      </div>
+    </div>
+    <div class="pred-comparison" id="predComparison" style="display:none">
+      <div class="pred-comparison-row">
+        <span class="pred-comparison-label">VDOT prediction (flat equivalent)</span>
+        <span class="pred-comparison-value" id="predVdotTime">—</span>
+      </div>
+      <div class="pred-comparison-row">
+        <span class="pred-comparison-label">Training-adjusted</span>
+        <span class="pred-comparison-value adj-col" id="predAdjTime">—</span>
+      </div>
+    </div>
+    <div class="pred-pace-row">
+      <div class="pred-pace-item">
+        <div class="pred-pace-label">Pace / Mile</div>
+        <div class="pred-pace-value" id="predPaceMile">—</div>
+      </div>
+      <div class="pred-pace-item">
+        <div class="pred-pace-label">Pace / km</div>
+        <div class="pred-pace-value" id="predPaceKm">—</div>
+      </div>
+    </div>
+    <div class="penalty-note" id="penaltyNote" style="display:none"></div>
+  </div>
+
+  <!-- All Distances Table Card -->
+  <div class="card" id="tableCard" style="display:none">
+    <div class="chart-title">Predictions at Common Distances</div>
+    <div class="breakdown-scroll">
+      <table class="breakdown-table" id="predTable">
+        <thead>
+          <tr>
+            <th>Distance</th>
+            <th>VDOT Time</th>
+            <th>Training-Adjusted</th>
+            <th>Pace / Mile</th>
+            <th>Pace / km</th>
+          </tr>
+        </thead>
+        <tbody id="predTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="explain-toggle" id="explainToggle" onclick="toggleExplain()">
+      <span class="explain-arrow">&#9654;</span> How this works
+    </div>
+    <div class="explain-body" id="explainBody">
+      <p><strong>VDOT (Jack Daniels)</strong> is your aerobic capacity expressed as an equivalent VO2max value derived from a race performance. It's calculated from both your pace (how fast you ran relative to the distance) and the fractional utilization of VO2max at that effort level. Two runners with the same VDOT are aerobically equivalent and should predict nearly identical times at any distance — differences in results come from specificity of training, pacing, and course conditions.</p>
+      <p><strong>Mileage adjustment</strong> accounts for the fact that VDOT from a 5K doesn't perfectly translate to marathon performance unless you're training at marathon-specific mileage. Under-trained runners see a larger gap between VDOT-predicted times and actual performance at longer distances. The penalty scales with how much your weekly mileage falls below the ideal for your target race, and how much longer the target is vs your PR distance. It's capped at 10% and only applies when the target is longer than the PR and both are beyond 10K.</p>
+      <p><strong>Elevation adjustment</strong> normalizes race times to a flat-equivalent effort. Each 1% average uphill grade adds roughly <span class="hl">+1.2%</span> to your pace, while each 1% average downhill grade saves only <span class="hl-g">-0.6%</span> — uphills hurt more than downhills help. Your PR time is converted to a flat-equivalent time using your PR course's elevation, then VDOT is computed from that. The predicted time is then adjusted upward by your target course's elevation factor.</p>
+      <p><strong>Formula source:</strong> Jack Daniels, <em>Daniels' Running Formula</em>. The VDOT model was originally published in <em>Medicine &amp; Science in Sports</em> (Daniels &amp; Gilbert, 1979). Predictions are estimates — individual performance varies based on pacing, weather, course, and race-day conditions.</p>
+    </div>
+  </div>
+
+  <!-- Elevation matrix -->
+  <div class="card" id="elevMatrixCard" style="display:none">
+    <div class="chart-title">Elevation Sensitivity Matrix — <span id="elevMatrixDistLabel"></span></div>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:14px;line-height:1.6;">Predicted finish time for your target distance across different combinations of course elevation gain and loss. Your current selection is highlighted.</p>
+    <div class="breakdown-scroll">
+      <table class="breakdown-table" id="elevMatrixTable" style="min-width:520px"></table>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and training purposes only. Predictions are estimates based on Jack Daniels' VDOT model and simplified heuristics. Individual performance depends on pacing strategy, weather, terrain, training specificity, and many other factors. Not a substitute for guidance from a qualified running coach.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="refinance.html">Refinance</a>
+    <a href="monte-carlo.html">Investing</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─── Theme toggle ───────────────────────────────────────────────────────────
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+  });
+  updateUI();
+})();
+
+// ─── Standard distances ─────────────────────────────────────────────────────
+const DISTANCES = [
+  { name: '1 Mile',        meters: 1609.34 },
+  { name: '5K',            meters: 5000 },
+  { name: '8K',            meters: 8000 },
+  { name: '10K',           meters: 10000 },
+  { name: '15K',           meters: 15000 },
+  { name: '10 Miles',      meters: 16093.4 },
+  { name: 'Half Marathon', meters: 21097.5 },
+  { name: 'Marathon',      meters: 42195 },
+  { name: '50K',           meters: 50000 },
+];
+
+// ─── VDOT math ──────────────────────────────────────────────────────────────
+function vdotFromTime(distanceMeters, timeMinutes) {
+  if (timeMinutes <= 0 || distanceMeters <= 0) return 0;
+  const v = distanceMeters / timeMinutes; // meters per minute
+  const vo2 = -4.60 + 0.182258 * v + 0.000104 * v * v;
+  const pvo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
+                   + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
+  return vo2 / pvo2;
+}
+
+function timeFromVdot(vdot, distanceMeters) {
+  if (vdot <= 0 || distanceMeters <= 0) return 0;
+  // vdotFromTime is DECREASING in t: faster time → higher VDOT.
+  // So when f(mid) > vdot, mid is too fast (t too small) → need larger t → lo = mid.
+  // When f(mid) ≤ vdot, mid is too slow (t too large) → need smaller t → hi = mid.
+  let lo = 0.5, hi = 2000;
+  for (let i = 0; i < 100; i++) {
+    const mid = (lo + hi) / 2;
+    if (vdotFromTime(distanceMeters, mid) > vdot) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+// ─── Elevation factor ───────────────────────────────────────────────────────
+// Base coefficients derived from running literature: elites (~VDOT 66) lose ~20 sec/100ft,
+// 10-min milers (~VDOT 37) lose ~40 sec/100ft on a marathon.
+// gc = sec_per_100ft * distMiles / (T_min * 60) → linear from 5.3% at VDOT 66 to 6.7% at VDOT 37
+let _elevState = { vdot: 50, flatMinutes: 240, targetDistM: 42195 };
+
+function elevCoeffs(vdot) {
+  const baseGc = Math.max(4.5, Math.min(9.0, 5.3 + (66 - vdot) * 0.048));
+  const gainMult = parseFloat(document.getElementById('gainCoeff')?.value) || 1.0;
+  const lossMult = parseFloat(document.getElementById('lossCoeff')?.value) || 1.0;
+  return { gc: baseGc * gainMult / 100, lc: (baseGc / 2) * lossMult / 100 };
+}
+
+function elevFactor(gainFt, lossFt, distanceMeters, vdot) {
+  const distMiles = distanceMeters / 1609.34;
+  if (distMiles <= 0) return 1;
+  const { gc, lc } = elevCoeffs(vdot ?? _elevState.vdot);
+  const gainFactor = 1 + (gainFt / distMiles / 100) * gc;
+  const lossFactor = 1 - (lossFt / distMiles / 100) * lc;
+  return gainFactor * lossFactor;
+}
+
+// ─── Mileage penalty ────────────────────────────────────────────────────────
+// VDOT is calibrated from athletes running 60–100+ mpw. At lower mileage,
+// aerobic base and glycogen efficiency degrade — especially at longer distances.
+//
+// Penalty reference points (based on coaching consensus and runner survey data):
+//   Marathon @ 20 mpw: ~15% slower than VDOT predicts (3:47 vs 3:17 for VDOT 50)
+//   Marathon @ 30 mpw: ~11% slower
+//   Marathon @ 40 mpw: ~7% slower
+//   Half     @ 20 mpw: ~8% slower
+//   15K/10M  @ 20 mpw: ~4% slower
+//   10K and shorter: VDOT is reliable regardless of mileage
+function mileagePenalty(weeklyMiles, targetDistanceM, vdot) {
+  const targetDistanceMi = targetDistanceM / 1609.34;
+
+  // No meaningful penalty for 10K or shorter
+  if (targetDistanceMi <= 6.3) return 0;
+
+  // Ideal mileage scales with VDOT: faster runners need higher volume to reach their ceiling
+  // because they're running at a greater fraction of VO2max and need a larger aerobic base.
+  // Formula: idealMiles = clamp(vdot × distanceFactor, min, max)
+  // Anchored at VDOT 50: marathon=55, half=35, 15K/10mi=22 — consistent with coaching literature.
+  let vdotFactor, minMiles, maxMiles, maxPenalty;
+  if (targetDistanceMi >= 31) {           // 50K+
+    vdotFactor = 1.40; minMiles = 35; maxMiles = 140; maxPenalty = 0.30;
+  } else if (targetDistanceMi >= 26.2) {  // Marathon
+    vdotFactor = 1.10; minMiles = 22; maxMiles = 120; maxPenalty = 0.22;
+  } else if (targetDistanceMi >= 13.1) {  // Half Marathon
+    vdotFactor = 0.70; minMiles = 14; maxMiles = 75;  maxPenalty = 0.14;
+  } else {                                // 15K, 10 Miles
+    vdotFactor = 0.44; minMiles = 10; maxMiles = 50;  maxPenalty = 0.08;
+  }
+
+  const idealMiles = Math.max(minMiles, Math.min(maxMiles, vdot * vdotFactor));
+  if (weeklyMiles >= idealMiles) return 0;
+
+  // Power-law curve: hits hardest at very low mileage ratios
+  const baseRatio = weeklyMiles / idealMiles;
+  return maxPenalty * Math.pow(1 - baseRatio, 0.75);
+}
+
+function idealMilesForDisplay(targetDistanceM, vdot) {
+  const tmi = targetDistanceM / 1609.34;
+  if (tmi >= 31)   return Math.round(Math.max(35,  Math.min(140, vdot * 1.40)));
+  if (tmi >= 26.2) return Math.round(Math.max(22,  Math.min(120, vdot * 1.10)));
+  if (tmi >= 13.1) return Math.round(Math.max(14,  Math.min(75,  vdot * 0.70)));
+  return                  Math.round(Math.max(10,  Math.min(50,  vdot * 0.44)));
+}
+
+// ─── VDOT level descriptions ─────────────────────────────────────────────────
+function vdotLevel(v) {
+  if (v < 30) return { level: 'Beginner', desc: 'Just starting out — every training cycle will bring rapid gains.' };
+  if (v < 40) return { level: 'Recreational Runner', desc: 'Building a solid aerobic base. Consistent training will move this number quickly.' };
+  if (v < 50) return { level: 'Competitive Age-Grouper', desc: 'Racing competitively in local events and finishing in the top half of most fields.' };
+  if (v < 55) return { level: 'Strong Club Runner', desc: 'Placing in the top quartile at most races. Quality training is paying off.' };
+  if (v < 60) return { level: 'Regional Competitor', desc: 'Competitive at the regional level. Near the top of your age group in most events.' };
+  if (v < 65) return { level: 'National Class', desc: 'Competing at a high level nationally. Most runners never reach this threshold.' };
+  return { level: 'Elite / Sub-Elite', desc: 'World-class aerobic fitness. You belong at the front of any race.' };
+}
+
+// ─── Formatting helpers ──────────────────────────────────────────────────────
+function formatTime(totalMinutes) {
+  if (!isFinite(totalMinutes) || totalMinutes <= 0) return '—';
+  const totalSecs = Math.round(totalMinutes * 60);
+  const h = Math.floor(totalSecs / 3600);
+  const m = Math.floor((totalSecs % 3600) / 60);
+  const s = totalSecs % 60;
+  if (h > 0) {
+    return h + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+function formatPace(totalMinutes, distanceMeters, perMeters) {
+  // perMeters: 1609.34 for mile, 1000 for km
+  if (!isFinite(totalMinutes) || totalMinutes <= 0 || distanceMeters <= 0) return '—';
+  const paceMin = totalMinutes / (distanceMeters / perMeters);
+  const m = Math.floor(paceMin);
+  const s = Math.round((paceMin - m) * 60);
+  if (s === 60) return (m + 1) + ':00';
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+// ─── UI show/hide helpers ────────────────────────────────────────────────────
+function onPrDistanceChange() {
+  const val = document.getElementById('prDistance').value;
+  document.getElementById('prCustomRow').style.display = val === 'custom' ? 'block' : 'none';
+}
+
+function onTargetDistanceChange() {
+  const val = document.getElementById('targetDistance').value;
+  document.getElementById('targetCustomRow').style.display = val === 'custom' ? 'block' : 'none';
+}
+
+function onElevToggle() {
+  const checked = document.getElementById('elevToggle').checked;
+  document.getElementById('elevFields').style.display = checked ? 'block' : 'none';
+}
+
+function toggleElevAdvanced() {
+  const panel = document.getElementById('elevAdvanced');
+  const arrow = document.getElementById('elevAdvancedArrow');
+  const open = panel.style.display === 'none';
+  panel.style.display = open ? 'block' : 'none';
+  arrow.textContent = open ? '▼' : '▶';
+}
+
+function onCoeffChange() {
+  calc(); // calc() will update the sec/100ft display
+}
+
+function updateElevSensDisplay() {
+  const { vdot, flatMinutes, targetDistM } = _elevState;
+  const { gc, lc } = elevCoeffs(vdot);
+  const distMiles = targetDistM / 1609.34;
+  const secGain = Math.round(gc * flatMinutes * 60 / distMiles);
+  const secLoss = Math.round(lc * flatMinutes * 60 / distMiles);
+  const gainMult = parseFloat(document.getElementById('gainCoeff').value).toFixed(2);
+  const lossMult = parseFloat(document.getElementById('lossCoeff').value).toFixed(2);
+  document.getElementById('gainCoeffVal').textContent = gainMult + '× (~' + secGain + 's/100ft)';
+  document.getElementById('lossCoeffVal').textContent = lossMult + '× (~' + secLoss + 's/100ft)';
+}
+
+// ─── Resolve distance in meters ─────────────────────────────────────────────
+function resolveDistance(selectId, customDistId, customUnitId) {
+  const val = document.getElementById(selectId).value;
+  if (val !== 'custom') return parseFloat(val);
+  const dist = parseFloat(document.getElementById(customDistId).value) || 0;
+  const unit = document.getElementById(customUnitId).value;
+  return unit === 'km' ? dist * 1000 : dist * 1609.34;
+}
+
+// ─── Resolve distance name ──────────────────────────────────────────────────
+function resolveDistanceName(selectId, customDistId, customUnitId) {
+  const selectEl = document.getElementById(selectId);
+  const val = selectEl.value;
+  if (val !== 'custom') return selectEl.options[selectEl.selectedIndex].text;
+  const dist = parseFloat(document.getElementById(customDistId).value) || 0;
+  const unit = document.getElementById(customUnitId).value;
+  return dist + ' ' + unit;
+}
+
+// ─── Main calculation ────────────────────────────────────────────────────────
+function calc() {
+  const prDistM    = resolveDistance('prDistance', 'prCustomDist', 'prCustomUnit');
+  const targetDistM = resolveDistance('targetDistance', 'targetCustomDist', 'targetCustomUnit');
+  const targetName = resolveDistanceName('targetDistance', 'targetCustomDist', 'targetCustomUnit');
+
+  const hh = parseInt(document.getElementById('prHH').value) || 0;
+  const mm = parseInt(document.getElementById('prMM').value) || 0;
+  const ss = parseInt(document.getElementById('prSS').value) || 0;
+  const prTimeMinutes = hh * 60 + mm + ss / 60;
+
+  const weeklyMiles = parseFloat(document.getElementById('weeklyMileage').value) || 0;
+  const useElev = document.getElementById('elevToggle').checked;
+
+  // Validate
+  if (prDistM <= 0 || prTimeMinutes <= 0 || targetDistM <= 0) {
+    showEmpty(true);
+    return;
+  }
+  showEmpty(false);
+
+  // Elevation factors — need a raw VDOT estimate first so the coefficient can scale with pace
+  const rawVdot = vdotFromTime(prDistM, prTimeMinutes);
+
+  let prElevFactor = 1;
+  let targetElevFactor = 1;
+  let elevationActive = false;
+  let tgGainStored = 0, tgLossStored = 0;
+
+  if (useElev) {
+    const prGain   = parseFloat(document.getElementById('prGain').value)    || 0;
+    const prLoss   = parseFloat(document.getElementById('prLoss').value)    || 0;
+    const tgGain   = parseFloat(document.getElementById('targetGain').value) || 0;
+    const tgLoss   = parseFloat(document.getElementById('targetLoss').value) || 0;
+    tgGainStored = tgGain; tgLossStored = tgLoss;
+
+    prElevFactor     = elevFactor(prGain, prLoss, prDistM, rawVdot);
+    targetElevFactor = elevFactor(tgGain, tgLoss, targetDistM, rawVdot);
+
+    // Only mark elevation as active if any gains/losses were entered
+    elevationActive = (prGain + prLoss + tgGain + tgLoss) > 0;
+  }
+
+  // Flat-equivalent PR time
+  const prFlatTime = prTimeMinutes / prElevFactor;
+
+  // VDOT from flat PR time
+  const vdot = vdotFromTime(prDistM, prFlatTime);
+
+  // Flat predicted time for target distance
+  const predFlatMinutes = timeFromVdot(vdot, targetDistM);
+
+  // Store state for elevation sensitivity display updates
+  _elevState = { vdot, flatMinutes: predFlatMinutes, targetDistM };
+  if (useElev) updateElevSensDisplay();
+
+  // Apply target elevation factor
+  const predVdotTime = predFlatMinutes * targetElevFactor;
+
+  // Mileage penalty
+  const penalty = mileagePenalty(weeklyMiles, targetDistM, vdot);
+  const predAdjTime = predVdotTime * (1 + penalty);
+
+  // Final displayed time (adjusted if penalty > 0, else pure vdot)
+  const hasPenalty = penalty > 0.0001;
+  const predFinal = hasPenalty ? predAdjTime : predVdotTime;
+
+  // ── VDOT card ──
+  const { level, desc } = vdotLevel(vdot);
+  document.getElementById('vdotDisplay').textContent = vdot.toFixed(1);
+  document.getElementById('vdotLevel').textContent = level;
+  document.getElementById('vdotDesc').textContent = desc;
+
+  // PR pace/mile
+  document.getElementById('prPaceMile').textContent = formatPace(prTimeMinutes, prDistM, 1609.34);
+
+  // Flat VDOT stat (show flat-equivalent VDOT when elevation data changes things)
+  if (elevationActive && Math.abs(prElevFactor - 1) > 0.001) {
+    const rawVdot = vdotFromTime(prDistM, prTimeMinutes);
+    document.getElementById('flatVdotLabel').textContent = 'Flat-Equivalent VDOT';
+    document.getElementById('flatVdotDisplay').textContent = vdot.toFixed(1);
+    document.getElementById('flatVdotSub').textContent = 'raw VDOT: ' + rawVdot.toFixed(1);
+  } else {
+    document.getElementById('flatVdotLabel').textContent = 'VDOT';
+    document.getElementById('flatVdotDisplay').textContent = vdot.toFixed(1);
+    document.getElementById('flatVdotSub').textContent = 'aerobic fitness score';
+  }
+
+  // ── Predicted time card ──
+  document.getElementById('predTimeBig').textContent = formatTime(predFinal);
+  document.getElementById('predDistanceLabel').textContent = targetName;
+
+  if (hasPenalty) {
+    document.getElementById('predComparison').style.display = 'block';
+    document.getElementById('predVdotTime').textContent = formatTime(predVdotTime);
+    document.getElementById('predAdjTime').textContent = formatTime(predAdjTime);
+
+    const pctStr = (penalty * 100).toFixed(1);
+    const idealMi = idealMilesForDisplay(targetDistM, vdot);
+    const noteEl = document.getElementById('penaltyNote');
+    noteEl.style.display = 'block';
+    noteEl.innerHTML = '<strong>Mileage adjustment applied (+' + pctStr + '%):</strong> At ' + weeklyMiles + ' mi/week, your aerobic base is below the ~' + idealMi + ' mi/week a VDOT ' + vdot.toFixed(0) + ' runner typically needs to reach their ceiling at this distance. The adjusted time reflects the endurance deficit. Most of this gap closes with consistent higher-mileage training.';
+  } else {
+    document.getElementById('predComparison').style.display = 'none';
+    document.getElementById('penaltyNote').style.display = 'none';
+  }
+
+  document.getElementById('predPaceMile').textContent = formatPace(predFinal, targetDistM, 1609.34) + ' /mi';
+  document.getElementById('predPaceKm').textContent   = formatPace(predFinal, targetDistM, 1000)    + ' /km';
+
+  // ── Predictions table ──
+  const tbody = document.getElementById('predTableBody');
+  tbody.innerHTML = '';
+
+  DISTANCES.forEach(d => {
+    const flatTime   = timeFromVdot(vdot, d.meters);
+    const vdotTime   = flatTime * targetElevFactor; // elevation only applies to target; table uses flat
+    // For table, apply elevation to target row only; other rows use flat VDOT
+    const rowFlatTime = timeFromVdot(vdot, d.meters);
+    const isTarget = Math.abs(d.meters - targetDistM) < 1;
+    const pen      = mileagePenalty(weeklyMiles, d.meters, vdot);
+    const adjTime  = rowFlatTime * (1 + pen);
+    const hasPen   = pen > 0.0001;
+
+    const tr = document.createElement('tr');
+    if (isTarget) tr.className = 'target-row';
+
+    const vdotCell = formatTime(rowFlatTime);
+    const adjCell  = hasPen ? formatTime(adjTime) : '<span style="color:var(--text-muted)">—</span>';
+    const paceMile = formatPace(hasPen ? adjTime : rowFlatTime, d.meters, 1609.34);
+    const paceKm   = formatPace(hasPen ? adjTime : rowFlatTime, d.meters, 1000);
+
+    tr.innerHTML = `
+      <td style="color:var(--text);font-family:'Inter',sans-serif">${d.name}${isTarget ? ' ★' : ''}</td>
+      <td class="time-col">${vdotCell}</td>
+      <td class="adj-col">${adjCell}</td>
+      <td>${paceMile}</td>
+      <td>${paceKm}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Show cards
+  document.getElementById('vdotCard').style.display = 'block';
+  document.getElementById('predCard').style.display = 'block';
+  document.getElementById('tableCard').style.display = 'block';
+
+  // Elevation matrix
+  const useElev2 = document.getElementById('elevToggle').checked;
+  const elevMatrixCard = document.getElementById('elevMatrixCard');
+  if (useElev2) {
+    const curTgGain = parseFloat(document.getElementById('targetGain').value) || 0;
+    const curTgLoss = parseFloat(document.getElementById('targetLoss').value) || 0;
+    buildElevMatrix(vdot, predFlatMinutes, targetDistM, targetName, penalty, curTgGain, curTgLoss);
+    elevMatrixCard.style.display = 'block';
+  } else {
+    elevMatrixCard.style.display = 'none';
+  }
+}
+
+function makeElevSteps(selected) {
+  const step = 50;
+  if (selected <= 100) return [0, 50, 100, 200, 300, 500];
+  const snapped = Math.round(selected / step) * step;
+  const start = Math.max(0, snapped - 2 * step);
+  return Array.from({ length: 6 }, (_, i) => start + i * step);
+}
+
+function buildElevMatrix(vdot, flatMinutes, distM, distName, mileagePen, selectedGain, selectedLoss) {
+  const gainSteps = makeElevSteps(selectedGain);
+  const lossSteps = makeElevSteps(selectedLoss);
+
+  document.getElementById('elevMatrixDistLabel').textContent = distName;
+
+  const table = document.getElementById('elevMatrixTable');
+  table.innerHTML = '';
+
+  // Header row: gain values across columns
+  const thead = document.createElement('thead');
+  let headerHTML = '<tr><th class="elev-matrix-rowlabel" style="text-align:left">Loss \\ Gain</th>';
+  gainSteps.forEach(g => {
+    headerHTML += `<th class="elev-matrix-header">${g === 0 ? 'Flat' : '+' + g.toLocaleString() + 'ft'}</th>`;
+  });
+  headerHTML += '</tr>';
+  thead.innerHTML = headerHTML;
+  table.appendChild(thead);
+
+  // Body: loss values down rows
+  const tbody = document.createElement('tbody');
+  lossSteps.forEach(loss => {
+    const tr = document.createElement('tr');
+    let rowHTML = `<td class="elev-matrix-rowlabel" style="padding:7px 10px">${loss === 0 ? 'Flat' : '-' + loss.toLocaleString() + 'ft'}</td>`;
+    gainSteps.forEach(gain => {
+      const ef = elevFactor(gain, loss, distM, vdot);
+      const rawTime = flatMinutes * ef * (1 + mileagePen);
+      const timeStr = formatTime(rawTime);
+      const isSelected = (gain === selectedGain && loss === selectedLoss);
+      rowHTML += `<td class="time-col${isSelected ? ' elev-matrix-selected' : ''}" style="text-align:center">${timeStr}</td>`;
+    });
+    tr.innerHTML = rowHTML;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+}
+
+function showEmpty(show) {
+  document.getElementById('emptyState').style.display = show ? 'block' : 'none';
+  document.getElementById('vdotCard').style.display   = show ? 'none' : 'block';
+  document.getElementById('predCard').style.display   = show ? 'none' : 'block';
+  document.getElementById('tableCard').style.display  = show ? 'none' : 'block';
+  if (show) document.getElementById('elevMatrixCard').style.display = 'none';
+}
+
+function toggleExplain() {
+  const toggle = document.getElementById('explainToggle');
+  const body   = document.getElementById('explainBody');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// Run on load
+calc();
+</script>
+</body>
+</html>
