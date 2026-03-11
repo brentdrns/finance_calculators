@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Income &amp; Wealth Percentile Calculator — Where Do You Rank?</title>
+<meta name="description" content="Find out your income and net worth percentile rank in the US. Based on Census Bureau and Federal Reserve SCF 2022 data. See how you compare to all Americans.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/wealth-percentile.html">
+<meta property="og:title" content="Income &amp; Wealth Percentile Calculator — Where Do You Rank?">
+<meta property="og:description" content="See your income and net worth percentile rank among US households. Powered by Census Bureau and Federal Reserve SCF data.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/wealth-percentile.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Income &amp; Wealth Percentile Calculator">
+<meta name="twitter:description" content="Find your income and net worth percentile rank among US households.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Income & Wealth Percentile Calculator","description":"Income and net worth percentile calculator based on Census Bureau CPS 2023 and Federal Reserve SCF 2022 data.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/wealth-percentile.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); position: sticky; top: 0; max-height: 100vh; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+  .sidebar-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .field { margin-bottom: 12px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
+  .field input[type="number"], .field select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
+    -moz-appearance: textfield;
+  }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+  /* Mode toggle */
+  .mode-toggle { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 4px; }
+  .mode-toggle input[type="radio"] { display: none; }
+  .mode-toggle label { flex: 1; text-align: center; padding: 8px 10px; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: background 0.15s, color 0.15s; }
+  .mode-toggle input[type="radio"]:checked + label { background: var(--accent); color: #fff; }
+  .mode-toggle label:hover { background: var(--surface2); color: var(--text); }
+  .mode-toggle input[type="radio"]:checked + label:hover { background: var(--accent); color: #fff; }
+
+  .age-group-row { display: block; }
+
+  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; }
+  .card { background: var(--surface); border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+  .card-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Hero result */
+  .result-hero { display: flex; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin-bottom: 20px; }
+  .result-main { display: flex; flex-direction: column; }
+  .result-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+  .result-pct { font-family: 'DM Serif Display', serif; font-size: 80px; line-height: 1; color: var(--accent); }
+  .result-pct-suffix { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--accent); line-height: 1; }
+  .result-sub { font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.6; max-width: 340px; }
+  .result-sub strong { color: var(--text); }
+
+  .result-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; flex: 1; min-width: 260px; }
+  .rstat { background: var(--surface2); border-radius: 10px; padding: 14px 16px; }
+  .rstat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+  .rstat-val { font-family: 'DM Mono', monospace; font-size: 18px; font-weight: 500; color: var(--text); }
+  .rstat-desc { font-size: 10px; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+  .rstat.accent { border: 1px solid var(--accent); }
+  .rstat.accent .rstat-val { color: var(--accent); }
+  .rstat.green .rstat-val { color: var(--green); }
+  .rstat.red .rstat-val { color: var(--red); }
+
+  /* Percentile position bar */
+  .pct-bar-wrap { margin-top: 4px; }
+  .pct-bar-track { height: 18px; border-radius: 9px; background: linear-gradient(to right, #ef4444 0%, #f97316 20%, #eab308 40%, #22c55e 60%, #0ea5e9 80%, #8b5cf6 100%); position: relative; overflow: visible; }
+  .pct-bar-marker { position: absolute; top: -7px; width: 5px; height: 32px; background: var(--text); border-radius: 3px; transform: translateX(-50%); box-shadow: 0 0 0 2px var(--bg); transition: left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .pct-bar-labels { display: flex; justify-content: space-between; margin-top: 8px; position: relative; }
+  .pct-bar-tick { display: flex; flex-direction: column; align-items: center; }
+  .pct-bar-tick-line { width: 1px; height: 6px; background: var(--border); margin-bottom: 3px; }
+  .pct-bar-tick-pct { font-size: 9px; color: var(--text-muted); font-weight: 600; }
+  .pct-bar-tick-val { font-size: 9px; color: var(--text-muted); margin-top: 1px; white-space: nowrap; }
+
+  .benchmarks { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+  .benchmark-chip { background: var(--surface2); border-radius: 8px; padding: 8px 14px; font-size: 11px; }
+  .benchmark-chip-label { color: var(--text-muted); margin-bottom: 2px; }
+  .benchmark-chip-val { font-family: 'DM Mono', monospace; font-weight: 500; color: var(--text); font-size: 13px; }
+  .benchmark-chip.user { border: 1px solid var(--accent); }
+  .benchmark-chip.user .benchmark-chip-val { color: var(--accent); }
+
+  /* Distribution chart */
+  .dist-chart { display: flex; flex-direction: column; gap: 6px; }
+  .dist-row { display: flex; align-items: center; gap: 10px; }
+  .dist-label { font-size: 11px; color: var(--text-muted); width: 120px; flex-shrink: 0; text-align: right; }
+  .dist-bar-outer { flex: 1; height: 22px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .dist-bar-inner { height: 100%; border-radius: 4px; background: var(--accent-dim); transition: width 0.4s; display: flex; align-items: center; justify-content: flex-end; padding-right: 6px; }
+  .dist-bar-inner.active { background: var(--accent); }
+  .dist-bar-inner.active-adjacent { background: #93c5fd; }
+  .dist-pct { font-size: 10px; font-weight: 600; color: #fff; white-space: nowrap; }
+  .dist-population { font-size: 10px; color: var(--text-muted); width: 80px; flex-shrink: 0; }
+
+  /* Context insight */
+  .insight-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .insight-box { background: var(--surface2); border-radius: 10px; padding: 16px 18px; }
+  .insight-box-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-dim); margin-bottom: 8px; }
+  .insight-box-val { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+  .insight-box-desc { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+  .insight-box-desc strong { color: var(--text); }
+
+  /* Inequality note */
+  .inequality-bar { margin-top: 6px; }
+  .ineq-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .ineq-segment-label { font-size: 11px; color: var(--text-muted); width: 100px; flex-shrink: 0; }
+  .ineq-bar-outer { flex: 1; height: 16px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .ineq-bar-inner { height: 100%; border-radius: 3px; }
+  .ineq-share { font-size: 11px; color: var(--text-muted); width: 40px; text-align: right; }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 700px; margin: 0 auto 14px; }
+  .site-footer-nav { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    header { padding: 0 20px; }
+    .main { padding: 20px; }
+    .result-pct { font-size: 60px; }
+    .result-stats { grid-template-columns: repeat(3, 1fr); }
+    .insight-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .result-hero { gap: 20px; }
+    .result-stats { grid-template-columns: 1fr 1fr; }
+    .dist-label { width: 80px; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+        <a href="wealth-percentile.html" class="active">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Census Bureau &amp; Federal Reserve SCF</div>
+      <div class="hero-band-title">Income &amp; Wealth <span>Percentile</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      See where your <strong>household income</strong> or <strong>net worth</strong> ranks among all Americans.
+      Filter by <strong>age group</strong> for a fair comparison — a $200K net worth means something very
+      different at 28 than at 58. Each mode keeps its own independent value.
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-title">Your Numbers</div>
+      <div class="sidebar-subtitle">Enter your income or net worth to see your percentile rank.</div>
+    </div>
+
+    <div>
+      <div class="section-label">What to compare</div>
+      <div class="mode-toggle">
+        <input type="radio" name="mode" id="modeIncome" value="income" checked>
+        <label for="modeIncome">Household Income</label>
+        <input type="radio" name="mode" id="modeWealth" value="wealth">
+        <label for="modeWealth">Net Worth</label>
+      </div>
+      <div class="hint" id="modeHint">Annual household income before taxes. Source: U.S. Census Bureau CPS 2023.</div>
+    </div>
+
+    <div>
+      <div class="section-label">Enter your amount</div>
+      <div class="field" id="incomeField">
+        <label for="incomeAmount">Household Income ($)</label>
+        <input type="number" id="incomeAmount" value="80000" min="-5000000" max="100000000" step="1000">
+      </div>
+      <div class="field" id="wealthField" style="display:none;">
+        <label for="wealthAmount">Net Worth ($)</label>
+        <input type="number" id="wealthAmount" value="192700" min="-5000000" max="100000000" step="1000">
+      </div>
+      <div class="field age-group-row" id="ageGroupRow">
+        <label for="ageGroup" id="ageGroupLabel">Age Group</label>
+        <select id="ageGroup">
+          <option value="all">All ages (national average)</option>
+          <option value="lt35">Under 35</option>
+          <option value="35-44">35–44</option>
+          <option value="45-54">45–54</option>
+          <option value="55-64">55–64</option>
+          <option value="65-74">65–74</option>
+          <option value="gt74">75 and older</option>
+        </select>
+        <div class="hint" id="ageGroupHint">Comparing to your age group gives more context.</div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface2);border-radius:10px;padding:14px 16px;">
+      <div style="font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px;">Data Sources</div>
+      <div style="font-size:11px;color:var(--text-muted);line-height:1.7;">
+        <strong style="color:var(--text)">Income:</strong> Census Bureau CPS ASEC 2024 (2023 income year). Household income before taxes.<br><br>
+        <strong style="color:var(--text)">Wealth:</strong> Federal Reserve Survey of Consumer Finances 2022. Net worth = assets minus debts.
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- Hero result card -->
+    <div class="card">
+      <div class="card-title" id="resultCardTitle">Your Income Percentile</div>
+      <div class="result-hero">
+        <div class="result-main">
+          <div class="result-label" id="resultLabel">Percentile Rank</div>
+          <div style="display:flex;align-items:baseline;gap:4px;">
+            <div class="result-pct" id="resultPct">—</div>
+            <div class="result-pct-suffix">th</div>
+          </div>
+          <div class="result-sub" id="resultSub">&nbsp;</div>
+        </div>
+        <div class="result-stats">
+          <div class="rstat">
+            <div class="rstat-label">US Median</div>
+            <div class="rstat-val" id="statMedian">—</div>
+            <div class="rstat-desc" id="statMedianDesc">50th percentile</div>
+          </div>
+          <div class="rstat accent">
+            <div class="rstat-label">Your Amount</div>
+            <div class="rstat-val" id="statYours">—</div>
+            <div class="rstat-desc" id="statYoursDesc">entered above</div>
+          </div>
+          <div class="rstat">
+            <div class="rstat-label">Top 10%</div>
+            <div class="rstat-val" id="statTop10">—</div>
+            <div class="rstat-desc" id="statTop10Desc">90th percentile threshold</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Percentile bar -->
+      <div class="pct-bar-wrap">
+        <div class="pct-bar-track">
+          <div class="pct-bar-marker" id="pctMarker" style="left:50%"></div>
+        </div>
+        <div class="pct-bar-labels" id="pctBarLabels"></div>
+      </div>
+
+      <!-- Benchmark chips -->
+      <div class="benchmarks" id="benchmarkChips"></div>
+    </div>
+
+    <!-- Distribution chart -->
+    <div class="card">
+      <div class="card-title" id="distCardTitle">Distribution: Where Americans Fall</div>
+      <div class="dist-chart" id="distChart"></div>
+      <div class="hint" style="margin-top:12px;" id="distNote"></div>
+    </div>
+
+    <!-- Insights -->
+    <div class="card">
+      <div class="card-title">Context &amp; Perspective</div>
+      <div class="insight-grid" id="insightGrid"></div>
+    </div>
+
+    <!-- Wealth inequality (wealth mode only) -->
+    <div class="card" id="inequalityCard" style="display:none;">
+      <div class="card-title">How US Wealth Is Distributed</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">
+        These bars show what share of <em>total US wealth</em> each group holds — not how many people are in each group.
+        Every group contains exactly 10% of households, but their share of national wealth is wildly unequal.
+      </div>
+      <div class="inequality-bar" id="inequalityBars"></div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">Percentile estimates are based on population-level survey data and involve interpolation between anchor points. Individual results are approximate. Income data: U.S. Census Bureau CPS ASEC 2024 (reporting 2023 income). Wealth data: Federal Reserve Survey of Consumer Finances 2022. This is not financial advice.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+
+// Household income percentiles — Census CPS 2023 (reported in 2024 ASEC)
+// Each entry: [percentile, income_threshold]
+const INC_TABLE = [
+  [5,  12000], [10, 15700], [15, 21000], [20, 27000], [25, 34000],
+  [30, 41000], [35, 49000], [40, 57000], [45, 68000], [50, 80610],
+  [55, 90500], [60, 101000],[65, 113000],[70, 126000],[75, 140000],
+  [80, 158000],[85, 183000],[90, 220000],[95, 318000],[99, 680000]
+];
+
+// Net worth percentiles — Federal Reserve SCF 2022 (all ages)
+const WEALTH_TABLE_ALL = [
+  [5,  -8000], [10, -1800],[15, 3000], [20, 8000], [25, 15000],
+  [30, 32000], [35, 55000],[40, 85000],[45, 130000],[50, 192700],
+  [55, 265000],[60, 360000],[65, 490000],[70, 630000],[75, 803000],
+  [80,1060000],[85,1460000],[90,2100000],[95,3900000],[99,11500000]
+];
+
+// Net worth by age group — Federal Reserve SCF 2022
+// Each entry: [value, percentile]. Includes p95/p99 estimates for top-end interpolation.
+const WEALTH_BY_AGE = {
+  'lt35':  [[-3000,10],  [4000,20],  [11000,30],  [30000,40],  [39040,50],  [85000,60],  [165000,70],  [280000,80],  [430000,90],  [800000,95],  [2400000,99]],
+  '35-44': [[800,10],   [18000,20], [55000,30],  [95000,40],  [135639,50], [260000,60], [461000,70],  [710000,80],  [1020000,90], [1900000,95], [5600000,99]],
+  '45-54': [[5000,10],  [28000,20], [90000,30],  [165000,40], [247236,50], [430000,60], [716000,70],  [1100000,80], [1600000,90], [3000000,95], [8800000,99]],
+  '55-64': [[14000,10], [56000,20], [155000,30], [255000,40], [364472,50], [600000,60], [1013000,70], [1520000,80], [2200000,90], [4100000,95], [12000000,99]],
+  '65-74': [[27000,10], [80000,20], [195000,30], [300000,40], [409898,50], [660000,60], [1145000,70], [1700000,80], [2500000,90], [4700000,95], [13700000,99]],
+  'gt74':  [[12000,10], [50000,20], [145000,30], [240000,40], [335632,50], [560000,60], [1020000,70], [1460000,80], [2000000,90], [3700000,95], [11000000,99]]
+};
+
+// Household income by age of householder — Census ACS / CPS 2022–2023
+// Each entry: [value, percentile].
+const INC_BY_AGE = {
+  'lt35':  [[10000,10], [26000,20], [40000,30], [50000,40], [55000,50], [72000,60], [89000,70], [112000,80], [142000,90], [196000,95], [350000,99]],
+  '35-44': [[25000,10], [48000,20], [67000,30], [79000,40], [88000,50], [107000,60], [130000,70], [163000,80], [205000,90], [290000,95], [580000,99]],
+  '45-54': [[24000,10], [47000,20], [68000,30], [80000,40], [91000,50], [113000,60], [138000,70], [174000,80], [215000,90], [305000,95], [620000,99]],
+  '55-64': [[17000,10], [37000,20], [54000,30], [66000,40], [75000,50], [95000,60], [118000,70], [150000,80], [190000,90], [268000,95], [540000,99]],
+  '65-74': [[15000,10], [30000,20], [43000,30], [50000,40], [57000,50], [72000,60], [90000,70], [115000,80], [155000,90], [220000,95], [450000,99]],
+  'gt74':  [[12000,10], [21000,20], [30000,30], [37000,40], [42000,50], [53000,60], [66000,70], [84000,80], [110000,90], [155000,95], [310000,99]]
+};
+
+// State median household income — Census ACS 2022 1-year estimates
+const STATE_INCOME_MEDIAN = {
+  'AL':59600,'AK':84000,'AZ':72600,'AR':56000,'CA':91100,
+  'CO':87600,'CT':90200,'DE':79300,'FL':67700,'GA':71700,
+  'HI':91000,'ID':70400,'IL':78500,'IN':67600,'IA':72000,
+  'KS':69900,'KY':60200,'LA':57900,'ME':68300,'MD':99100,
+  'MA':99000,'MI':70800,'MN':85200,'MS':52200,'MO':65700,
+  'MT':64900,'NE':75600,'NV':71600,'NH':95000,'NJ':102500,
+  'NM':58700,'NY':78800,'NC':68200,'ND':75800,'OH':67000,
+  'OK':62200,'OR':78800,'PA':72600,'RI':77800,'SC':66400,
+  'SD':69900,'TN':65100,'TX':72800,'UT':89900,'VT':75800,
+  'VA':91900,'WA':94300,'WV':54300,'WI':74900,'WY':72700,'DC':101400
+};
+const STATES = [
+  ['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],
+  ['CO','Colorado'],['CT','Connecticut'],['DE','Delaware'],['FL','Florida'],['GA','Georgia'],
+  ['HI','Hawaii'],['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],
+  ['KS','Kansas'],['KY','Kentucky'],['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],
+  ['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],['MS','Mississippi'],['MO','Missouri'],
+  ['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],['NJ','New Jersey'],
+  ['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],
+  ['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],
+  ['SD','South Dakota'],['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],
+  ['VA','Virginia'],['WA','Washington'],['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming'],
+  ['DC','Washington D.C.']
+];
+
+// Income distribution: [label, minVal, maxVal, approx % of households]
+const INC_DIST = [
+  ['Under $15K',      0,       15000,  9.0],
+  ['$15K – $25K',    15000,   25000,  7.5],
+  ['$25K – $35K',    25000,   35000,  7.5],
+  ['$35K – $50K',    35000,   50000, 11.0],
+  ['$50K – $75K',    50000,   75000, 16.0],
+  ['$75K – $100K',   75000,  100000, 12.0],
+  ['$100K – $150K', 100000,  150000, 16.0],
+  ['$150K – $200K', 150000,  200000,  8.0],
+  ['$200K – $300K', 200000,  300000,  6.5],
+  ['$300K+',        300000, Infinity, 6.5]
+];
+
+// Wealth distribution: [label, minVal, maxVal, approx % of households]
+const WEALTH_DIST = [
+  ['Negative',         -Infinity, 0,        10.0],
+  ['$0 – $10K',        0,         10000,     8.5],
+  ['$10K – $50K',      10000,     50000,     9.5],
+  ['$50K – $100K',     50000,     100000,    7.0],
+  ['$100K – $250K',    100000,    250000,   12.0],
+  ['$250K – $500K',    250000,    500000,   13.0],
+  ['$500K – $1M',      500000,    1000000,  13.5],
+  ['$1M – $2M',       1000000,   2000000,  10.0],
+  ['$2M – $5M',       2000000,   5000000,   9.5],
+  ['$5M+',            5000000,   Infinity,   7.0]
+];
+
+// Wealth share of total US wealth by decile (SCF 2022, top-to-bottom)
+const WEALTH_SHARES = [
+  { label: 'Top 1%',     share: 30.0, color: '#7c3aed' },
+  { label: 'Next 9%',    share: 36.5, color: '#2563eb' },
+  { label: '80th–90th',  share: 13.5, color: '#0891b2' },
+  { label: '60th–80th',  share: 11.5, color: '#16a34a' },
+  { label: '40th–60th',  share: 5.5,  color: '#d97706' },
+  { label: 'Bottom 40%', share: 3.0,  color: '#dc2626' }
+];
+
+const US_HOUSEHOLDS = 133; // millions
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function fmt(v) {
+  var abs = Math.abs(v);
+  var sign = v < 0 ? '-' : '';
+  if (abs >= 1e6) return sign + '$' + (abs / 1e6).toFixed(abs >= 10e6 ? 1 : 2) + 'M';
+  if (abs >= 1000) return sign + '$' + Math.round(abs / 1000) + 'K';
+  return sign + '$' + abs.toFixed(0);
+}
+
+function fmtFull(v) {
+  return (v < 0 ? '-$' : '$') + Math.abs(Math.round(v)).toLocaleString();
+}
+
+// Interpolate percentile from table: [[pct, threshold], ...]
+// Handles negative values (wealth can be negative)
+function getPercentile(value, table) {
+  // Below lowest entry
+  if (value <= table[0][1]) {
+    var ratio = table[0][1] !== 0 ? Math.max(0, value / table[0][1]) : 0;
+    return Math.max(0.1, table[0][0] * ratio);
+  }
+  // Above highest entry: log-extrapolate
+  if (value >= table[table.length - 1][1]) {
+    var last = table[table.length - 1];
+    var prev = table[table.length - 2];
+    var logRange = Math.log(last[1] / prev[1]);
+    var logPos   = Math.log(value / prev[1]);
+    var frac = logRange > 0 ? Math.min(1.5, logPos / logRange) : 1;
+    return Math.min(99.9, prev[0] + (last[0] - prev[0]) * frac);
+  }
+  // Within table
+  for (var i = 1; i < table.length; i++) {
+    if (value <= table[i][1]) {
+      var p0 = table[i-1][0], t0 = table[i-1][1];
+      var p1 = table[i][0],   t1 = table[i][1];
+      var span = t1 - t0;
+      var frac2 = span !== 0 ? (value - t0) / span : 0;
+      return p0 + (p1 - p0) * frac2;
+    }
+  }
+  return 99.9;
+}
+
+// Build age-specific table from anchor data [[value, pct], ...]
+function buildAgeTable(ageKey, isWealth) {
+  var src = isWealth ? WEALTH_BY_AGE[ageKey] : INC_BY_AGE[ageKey];
+  if (!src) return isWealth ? WEALTH_TABLE_ALL : INC_TABLE;
+  return src.map(function(a) { return [a[1], a[0]]; });
+}
+
+
+// Lookup a threshold value from a percentile table (reverse lookup)
+function getThreshold(pct, table) {
+  if (pct <= table[0][0]) {
+    return table[0][1] * (pct / table[0][0]);
+  }
+  if (pct >= table[table.length-1][0]) return table[table.length-1][1];
+  for (var i = 1; i < table.length; i++) {
+    if (pct <= table[i][0]) {
+      var p0 = table[i-1][0], t0 = table[i-1][1];
+      var p1 = table[i][0],   t1 = table[i][1];
+      var frac = (pct - p0) / (p1 - p0);
+      return t0 + (t1 - t0) * frac;
+    }
+  }
+  return table[table.length-1][1];
+}
+
+// ── Render ─────────────────────────────────────────────────────────────────────
+
+function update() {
+  var mode    = document.querySelector('input[name="mode"]:checked').value;
+  var isWealth = mode === 'wealth';
+  var amount  = parseFloat(document.getElementById(isWealth ? 'wealthAmount' : 'incomeAmount').value) || 0;
+  var ageKey  = document.getElementById('ageGroup').value;
+
+  document.getElementById('incomeField').style.display = isWealth ? 'none' : '';
+  document.getElementById('wealthField').style.display = isWealth ? '' : 'none';
+  document.getElementById('modeHint').textContent = isWealth
+    ? 'Total assets minus all debts. Source: Federal Reserve SCF 2022.'
+    : 'Annual household income before taxes. Source: U.S. Census Bureau CPS 2023.';
+  document.getElementById('ageGroupHint').textContent = isWealth
+    ? 'Wealth varies dramatically by age. Comparing to your peers gives more context.'
+    : 'Income peaks in the 45–54 range. Compare yourself to your age group for a fairer read.';
+
+  var table = ageKey === 'all'
+    ? (isWealth ? WEALTH_TABLE_ALL : INC_TABLE)
+    : buildAgeTable(ageKey, isWealth);
+
+  var pct = getPercentile(amount, table);
+  var pctRound = Math.round(pct * 10) / 10;
+  var pctDisplay = pct < 1 ? '<1' : (pct > 99.4 ? '>99' : Math.round(pct).toString());
+
+  // Suffix: 1st, 2nd, 3rd, Nth
+  var pctInt = Math.round(pct);
+  var suffix = (pctInt === 11 || pctInt === 12 || pctInt === 13) ? 'th'
+    : (pctInt % 10 === 1) ? 'st'
+    : (pctInt % 10 === 2) ? 'nd'
+    : (pctInt % 10 === 3) ? 'rd' : 'th';
+
+  var ageLabel = document.getElementById('ageGroup').options[document.getElementById('ageGroup').selectedIndex].text;
+  document.getElementById('resultCardTitle').textContent = isWealth
+    ? (ageKey === 'all' ? 'Your Net Worth Percentile (All Ages)' : 'Your Net Worth Percentile (' + ageLabel + ')')
+    : (ageKey === 'all' ? 'Your Income Percentile (All Ages)' : 'Your Income Percentile (' + ageLabel + ')');
+
+  document.getElementById('resultPct').textContent = pctDisplay;
+  document.getElementById('resultPct').nextElementSibling.textContent = suffix;
+
+  var outearned = Math.round(US_HOUSEHOLDS * pct / 100);
+  document.getElementById('resultSub').innerHTML = isWealth
+    ? 'Your net worth of <strong>' + fmtFull(amount) + '</strong> is higher than roughly <strong>' + outearned + ' million</strong> American households.'
+    : 'Your household income of <strong>' + fmtFull(amount) + '</strong> is higher than roughly <strong>' + outearned + ' million</strong> American households.';
+
+  // Stats
+  var median = getThreshold(50, table);
+  var top10  = getThreshold(90, table);
+  document.getElementById('statMedian').textContent = fmt(median);
+  document.getElementById('statMedianDesc').textContent = isWealth ? (ageKey === 'all' ? 'US median net worth' : 'Median for age group') : 'US median household income';
+  document.getElementById('statYours').textContent = fmt(amount);
+  document.getElementById('statYoursDesc').textContent = pctDisplay + suffix + ' percentile';
+  document.getElementById('statTop10').textContent = fmt(top10);
+  document.getElementById('statTop10Desc').textContent = isWealth ? 'Top 10% net worth' : 'Top 10% income threshold';
+
+  // Percentile bar
+  var markerPct = Math.min(99.5, Math.max(0.5, pct));
+  document.getElementById('pctMarker').style.left = markerPct + '%';
+
+  // Bar labels
+  var benchmarks = isWealth
+    ? [[25, table], [50, table], [75, table], [90, table]]
+    : [[25, table], [50, table], [75, table], [90, table]];
+
+  var labelsEl = document.getElementById('pctBarLabels');
+  labelsEl.innerHTML = '';
+  [[10,table],[25,table],[50,table],[75,table],[90,table]].forEach(function(b) {
+    var val = getThreshold(b[0], b[1]);
+    var tick = document.createElement('div');
+    tick.className = 'pct-bar-tick';
+    tick.style.position = 'absolute';
+    tick.style.left = b[0] + '%';
+    tick.style.transform = 'translateX(-50%)';
+    tick.innerHTML = '<div class="pct-bar-tick-line"></div>'
+      + '<div class="pct-bar-tick-pct">' + b[0] + 'th</div>'
+      + '<div class="pct-bar-tick-val">' + fmt(val) + '</div>';
+    labelsEl.appendChild(tick);
+  });
+  labelsEl.style.position = 'relative';
+  labelsEl.style.height = '44px';
+
+  // Benchmark chips
+  var chips = document.getElementById('benchmarkChips');
+  chips.innerHTML = '';
+  var chipData = isWealth
+    ? [{label:'Poverty line',val:fmt(0)},{label:'US median',val:fmt(median)},{label:'Top 10%',val:fmt(top10)},{label:'Top 1%',val:fmt(getThreshold(99,table))}]
+    : [{label:'Poverty line',val:'~$30K'},{label:'US median',val:fmt(median)},{label:'Top 10%',val:fmt(top10)},{label:'Top 1%',val:fmt(getThreshold(99,table))}];
+
+  chipData.forEach(function(c) {
+    var d = document.createElement('div');
+    d.className = 'benchmark-chip';
+    d.innerHTML = '<div class="benchmark-chip-label">' + c.label + '</div><div class="benchmark-chip-val">' + c.val + '</div>';
+    chips.appendChild(d);
+  });
+  // User chip
+  var uc = document.createElement('div');
+  uc.className = 'benchmark-chip user';
+  uc.innerHTML = '<div class="benchmark-chip-label">You</div><div class="benchmark-chip-val">' + fmt(amount) + '</div>';
+  chips.appendChild(uc);
+
+  // Distribution chart
+  renderDist(amount, isWealth);
+
+  // Insights
+  renderInsights(amount, pct, isWealth, ageKey, median, top10, table);
+
+  // Inequality card
+  document.getElementById('inequalityCard').style.display = isWealth ? '' : 'none';
+  if (isWealth) renderInequality();
+}
+
+function renderDist(amount, isWealth) {
+  var dist = isWealth ? WEALTH_DIST : INC_DIST;
+  var maxPct = Math.max.apply(null, dist.map(function(d){ return d[3]; }));
+  var el = document.getElementById('distChart');
+  el.innerHTML = '';
+
+  // Find user's bracket
+  var userBracket = -1;
+  for (var i = 0; i < dist.length; i++) {
+    if (amount >= dist[i][1] && amount < dist[i][2]) { userBracket = i; break; }
+  }
+
+  var popNote = '';
+  dist.forEach(function(d, i) {
+    var households = Math.round(d[3] / 100 * US_HOUSEHOLDS * 10) / 10;
+    var barPct = (d[3] / maxPct) * 100;
+    var isActive = i === userBracket;
+    var isAdjacent = i === userBracket - 1 || i === userBracket + 1;
+
+    var row = document.createElement('div');
+    row.className = 'dist-row';
+
+    var lbl = document.createElement('div');
+    lbl.className = 'dist-label';
+    lbl.textContent = d[0];
+    if (isActive) lbl.style.color = 'var(--accent)';
+    if (isActive) lbl.style.fontWeight = '600';
+
+    var outer = document.createElement('div');
+    outer.className = 'dist-bar-outer';
+
+    var inner = document.createElement('div');
+    inner.className = 'dist-bar-inner' + (isActive ? ' active' : (isAdjacent ? ' active-adjacent' : ''));
+    inner.style.width = barPct + '%';
+    inner.innerHTML = '<span class="dist-pct">' + d[3] + '%</span>';
+
+    outer.appendChild(inner);
+
+    var pop = document.createElement('div');
+    pop.className = 'dist-population';
+    pop.textContent = '~' + households + 'M HH';
+    if (isActive) pop.style.color = 'var(--accent)';
+
+    row.appendChild(lbl);
+    row.appendChild(outer);
+    row.appendChild(pop);
+    el.appendChild(row);
+
+    if (isActive) popNote = 'Your bracket (' + d[0] + ') contains roughly ' + households + ' million US households — about ' + d[3] + '% of all households.';
+  });
+
+  document.getElementById('distNote').textContent = popNote;
+  document.getElementById('distCardTitle').textContent = isWealth
+    ? 'Net Worth Distribution: Where Americans Fall'
+    : 'Income Distribution: Where Americans Fall';
+}
+
+function renderInsights(amount, pct, isWealth, ageKey, median, top10, table) {
+  var grid = document.getElementById('insightGrid');
+  grid.innerHTML = '';
+
+  var outearned = Math.round(US_HOUSEHOLDS * pct / 100);
+  var aboveMedian = amount - median;
+  var toTop10 = top10 - amount;
+
+  var items = [];
+
+  if (isWealth) {
+    items.push({
+      label: 'More wealth than',
+      val: outearned + 'M households',
+      desc: 'That\'s ' + Math.round(pct) + '% of the ~133 million US households. The median net worth is ' + fmtFull(median) + '.'
+    });
+    items.push({
+      label: aboveMedian >= 0 ? 'Above median by' : 'Below median by',
+      val: fmtFull(Math.abs(aboveMedian)),
+      desc: aboveMedian >= 0
+        ? 'You\'re above the US median net worth of ' + fmtFull(median) + '.'
+        : 'To reach the US median net worth of ' + fmtFull(median) + ', you\'d need to add ' + fmtFull(Math.abs(aboveMedian)) + '.'
+    });
+    items.push({
+      label: toTop10 > 0 ? 'Gap to top 10%' : 'In the top 10%!',
+      val: toTop10 > 0 ? fmtFull(toTop10) : 'You\'re here',
+      desc: toTop10 > 0
+        ? 'The 90th percentile threshold is ' + fmtFull(top10) + '. ' + fmtFull(toTop10) + ' more would get you there.'
+        : 'Your net worth of ' + fmtFull(amount) + ' exceeds the 90th percentile threshold of ' + fmtFull(top10) + '.'
+    });
+    var top1 = getThreshold(99, table);
+    items.push({
+      label: 'Top 1% threshold',
+      val: fmt(top1),
+      desc: (ageKey === 'all' ? 'Nationally' : 'For this age group') + ', entering the top 1% requires roughly ' + fmtFull(top1) + ' in net worth.'
+    });
+  } else {
+    items.push({
+      label: 'More income than',
+      val: outearned + 'M households',
+      desc: 'That\'s ' + Math.round(pct) + '% of the ~133 million US households. The median is ' + fmtFull(median) + '.'
+    });
+    items.push({
+      label: aboveMedian >= 0 ? 'Above median by' : 'Below median by',
+      val: fmtFull(Math.abs(aboveMedian)),
+      desc: aboveMedian >= 0
+        ? 'You earn above the US median household income of ' + fmtFull(median) + '.'
+        : 'To reach the US median income of ' + fmtFull(median) + ', you\'d need an additional ' + fmtFull(Math.abs(aboveMedian)) + '.'
+    });
+    items.push({
+      label: toTop10 > 0 ? 'Gap to top 10%' : 'In the top 10%!',
+      val: toTop10 > 0 ? fmtFull(toTop10) : 'You\'re here',
+      desc: toTop10 > 0
+        ? 'The top 10% income threshold is ' + fmtFull(top10) + '. That\'s ' + fmtFull(toTop10) + ' more per year.'
+        : 'Your household income exceeds the 90th percentile threshold of ' + fmtFull(top10) + '.'
+    });
+    items.push({
+      label: 'Income vs. wealth',
+      val: 'Tip',
+      desc: 'High income doesn\'t equal high wealth. Many high earners carry little net worth — and vice versa. Try the Net Worth tab to compare both.'
+    });
+  }
+
+  items.forEach(function(item) {
+    var box = document.createElement('div');
+    box.className = 'insight-box';
+    box.innerHTML = '<div class="insight-box-label">' + item.label + '</div>'
+      + '<div class="insight-box-val">' + item.val + '</div>'
+      + '<div class="insight-box-desc">' + item.desc + '</div>';
+    grid.appendChild(box);
+  });
+}
+
+function renderInequality() {
+  var el = document.getElementById('inequalityBars');
+  el.innerHTML = '';
+  var maxShare = Math.max.apply(null, WEALTH_SHARES.map(function(w){ return w.share; }));
+
+  WEALTH_SHARES.forEach(function(w) {
+    var row = document.createElement('div');
+    row.className = 'ineq-row';
+
+    var lbl = document.createElement('div');
+    lbl.className = 'ineq-segment-label';
+    lbl.textContent = w.label;
+
+    var outer = document.createElement('div');
+    outer.className = 'ineq-bar-outer';
+
+    var inner = document.createElement('div');
+    inner.className = 'ineq-bar-inner';
+    inner.style.width = (w.share / maxShare * 100) + '%';
+    inner.style.background = w.color;
+
+    outer.appendChild(inner);
+
+    var share = document.createElement('div');
+    share.className = 'ineq-share';
+    share.textContent = w.share + '%';
+
+    row.appendChild(lbl);
+    row.appendChild(outer);
+    row.appendChild(share);
+    el.appendChild(row);
+  });
+}
+
+// ── Events ────────────────────────────────────────────────────────────────────
+
+document.querySelectorAll('input[name="mode"]').forEach(function(r) {
+  r.addEventListener('change', update);
+});
+document.getElementById('incomeAmount').addEventListener('input', update);
+document.getElementById('wealthAmount').addEventListener('input', update);
+document.getElementById('ageGroup').addEventListener('change', update);
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+
+(function() {
+  var toggle = document.getElementById('themeToggle');
+  var icon   = document.getElementById('themeIcon');
+  var label  = document.getElementById('themeLabel');
+  function applyTheme(dark) {
+    if (dark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      icon.textContent = '☀'; label.textContent = 'Light';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      icon.textContent = '☾'; label.textContent = 'Dark';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  toggle.addEventListener('click', function() {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  });
+  try {
+    var saved = localStorage.getItem('theme');
+    applyTheme(saved === 'dark');
+  } catch(e) { applyTheme(false); }
+})();
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+update();
+</script>
+</body>
+</html>

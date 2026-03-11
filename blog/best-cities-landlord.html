@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>The Best (and Worst) Cities to Be a Landlord in 2025 | Abel's Calculators</title>
+<meta name="description" content="Which US cities are actually profitable for rental property investors in 2025? We model cash flow, appreciation, cap rates, depreciation tax benefits, and rent-to-price ratios across 30 major markets.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/best-cities-landlord.html">
+<meta property="og:title" content="The Best (and Worst) Cities to Be a Landlord in 2025">
+<meta property="og:description" content="Which US cities generate the best cash flow, appreciation, and tax benefits for rental property investors? We model the numbers across 30 major markets.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/best-cities-landlord.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Best (and Worst) Cities to Be a Landlord in 2025">
+<meta name="twitter:description" content="Cash flow, cap rates, appreciation, and tax benefits across 30 US markets. Where should rental property investors look in 2025?">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"The Best (and Worst) Cities to Be a Landlord in 2025","description":"Which US cities are actually profitable for rental property investors in 2025? We model cash flow, appreciation, cap rates, depreciation tax benefits, and rent-to-price ratios across 30 major markets.","author":{"@type":"Organization","name":"Abel's Financial Calculators"},"publisher":{"@type":"Organization","name":"Abel's Financial Calculators"},"datePublished":"2026-03-11","url":"https://abelscalculators.com/blog/best-cities-landlord.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --orange: #ea580c; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80; --orange: #fb923c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; min-height: 100vh; line-height: 1.7; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+
+  /* Blog layout */
+  .blog-hero { background: var(--surface); border-bottom: 1px solid var(--border); padding: 48px 40px 40px; }
+  .blog-hero-inner { max-width: 780px; margin: 0 auto; }
+  .blog-category { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; font-weight: 600; }
+  .blog-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: -0.5px; color: var(--text); margin-bottom: 18px; }
+  .blog-subtitle { font-size: 17px; color: var(--text-muted); line-height: 1.6; max-width: 660px; margin-bottom: 24px; }
+  .blog-meta { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .blog-meta-dot { color: var(--border); }
+
+  .blog-body { max-width: 780px; margin: 0 auto; padding: 48px 40px; }
+  .blog-body h2 { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text); margin: 40px 0 16px; line-height: 1.25; letter-spacing: -0.3px; }
+  .blog-body h3 { font-size: 17px; font-weight: 600; color: var(--text); margin: 28px 0 12px; }
+  .blog-body p { color: var(--text-muted); margin-bottom: 18px; }
+  .blog-body p strong { color: var(--text); }
+  .blog-body ul, .blog-body ol { color: var(--text-muted); padding-left: 24px; margin-bottom: 18px; }
+  .blog-body li { margin-bottom: 8px; }
+  .blog-body li strong { color: var(--text); }
+  .blog-body a { color: var(--accent); text-decoration: none; }
+  .blog-body a:hover { text-decoration: underline; }
+
+  /* Pull quote */
+  .pull-quote { border-left: 4px solid var(--accent); padding: 16px 24px; margin: 28px 0; background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0; font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); line-height: 1.5; font-style: italic; }
+
+  /* Data table */
+  .data-table-wrap { overflow-x: auto; margin: 24px 0; border-radius: var(--radius); border: 1px solid var(--border); }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th { background: var(--surface2); color: var(--text-muted); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: middle; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--surface); }
+  .data-table .city-name { color: var(--text); font-weight: 600; font-size: 13px; }
+  .data-table .positive { color: var(--green); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .data-table .negative { color: var(--red); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .data-table .neutral { color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 12px; }
+  .data-table .score { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 600; }
+  .score-tier-a { color: var(--green); }
+  .score-tier-b { color: #d97706; }
+  .score-tier-c { color: var(--red); }
+
+  /* City highlight cards */
+  .city-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+  .city-card { background: var(--surface2); border-radius: var(--radius); padding: 18px 20px; }
+  .city-card-city { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .city-card-tier { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .city-card-tier.a { color: var(--green); }
+  .city-card-tier.b { color: #d97706; }
+  .city-card-tier.c { color: var(--red); }
+  .city-card-stat { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+  .city-card-label { font-size: 11px; color: var(--text-muted); }
+  .city-card-val { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--text); }
+  .city-card-val.green { color: var(--green); }
+  .city-card-val.red { color: var(--red); }
+
+  /* Key metric boxes */
+  .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
+  .metric-box { background: var(--surface2); border-radius: 10px; padding: 16px; text-align: center; }
+  .metric-box-val { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+  .metric-box-label { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+  /* CTA box */
+  .cta-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 32px 0; display: flex; align-items: center; gap: 20px; }
+  .cta-box-text { flex: 1; }
+  .cta-box-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .cta-box-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .cta-box-btn { background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: opacity 0.15s; }
+  .cta-box-btn:hover { opacity: 0.88; text-decoration: none; }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 700px; margin: 0 auto 14px; }
+  .site-footer-nav { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .blog-hero, .blog-body { padding-left: 20px; padding-right: 20px; }
+    header { padding: 0 20px; }
+    .city-grid { grid-template-columns: 1fr 1fr; }
+    .metric-row { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .city-grid { grid-template-columns: 1fr; }
+    .metric-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+        <a href="../rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+        <a href="../wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-category">Real Estate Investing</div>
+    <h1 class="blog-title">The Best (and Worst) Cities to Be a Landlord in 2025</h1>
+    <p class="blog-subtitle">Cash flow, cap rates, appreciation, depreciation tax benefits, and landlord-tenant law — we model all of it across 30 US markets to find where rental investing actually pencils out.</p>
+    <div class="blog-meta">
+      <span>March 11, 2026</span>
+      <span class="blog-meta-dot">&middot;</span>
+      <span>12 min read</span>
+      <span class="blog-meta-dot">&middot;</span>
+      <span>Abel's Financial Calculators</span>
+    </div>
+  </div>
+</div>
+
+<div class="blog-body">
+
+  <p>Becoming a landlord sounds straightforward: buy a property, collect rent, build wealth. But the reality is that a $400,000 home in Cleveland and a $400,000 condo in San Francisco are entirely different investments — one might generate $600/month in positive cash flow, the other a $1,200/month loss with the hope that appreciation makes up the difference over a decade.</p>
+
+  <p>This post models the full picture: monthly cash flow, cap rate, expected appreciation, the depreciation tax shelter, landlord-tenant law risk, and the rent-to-price ratio that determines whether your investment even has a pulse. We look at 30 major US markets and score each on overall landlord profitability.</p>
+
+  <div class="pull-quote">"A property that's cash-flow negative from day one is a bet on appreciation, not an investment. Know which one you're making."</div>
+
+  <h2>The Five Factors That Determine Landlord Profitability</h2>
+
+  <p>Before we rank cities, here's the framework. Every rental property's profitability depends on five things, and the tension between them explains everything:</p>
+
+  <h3>1. The Rent-to-Price Ratio</h3>
+  <p>This is your starting signal. Divide the monthly rent by the purchase price. A $250,000 property renting for $1,750/month has a ratio of 0.7% — the famous "1% rule" says you need $2,500/month to break even on cash flow before any debt service. <strong>Most coastal cities are deeply sub-1%, most Midwest/Sun Belt cities hover near or above it.</strong></p>
+
+  <h3>2. Cash Flow After All Expenses</h3>
+  <p>The rent-to-price ratio tells you the direction; actual cash flow tells you the number. After mortgage (P&I), property taxes, insurance, maintenance, management (9% of rent), and vacancy (5%), what's left? Many popular rental markets are deeply negative on a leveraged basis — meaning you're paying to own the property in hopes of appreciation.</p>
+  <p><strong>Maintenance costs are not uniform.</strong> A common shorthand is "1% of home value per year" — but this obscures a key reality: lower-priced markets with older housing stock typically run 1.25–1.5%, while newer Sun Belt construction runs closer to 0.85–0.9%, and high-end coastal properties (with newer finishes and fewer deferred maintenance issues) can run 0.75%. A $165K Cleveland home at 1.5% costs $206/month to maintain — nearly as much as a $890K LA home at 0.75% costs ($556/month). The cheap market wins on absolute dollars, but the relative cost cuts into cash flow margins that were already thin.</p>
+
+  <h3>3. Expected Appreciation</h3>
+  <p>A market with negative cash flow can still be a great investment if the property appreciates fast enough. Austin lost $500/month per door to landlords in 2021–2022 who were betting on 15% annual appreciation — and some of them won, for a while. Appreciation is real wealth, but it's volatile and unguaranteed.</p>
+
+  <h3>4. The Depreciation Tax Shelter</h3>
+  <p>This is the factor most people ignore, and it can be worth thousands per year. The IRS lets you depreciate the building value (not land) over 27.5 years, which creates a paper loss that can offset rental income — or even your W-2 income if your AGI is under $100K. On a $300,000 building value, that's <strong>$10,909/year in deductions</strong>. At a 24% bracket, that's $2,618 back in your pocket annually even if the property breaks even on cash flow. The depreciation benefit is the same everywhere — but markets with lower prices and higher rents make it proportionally larger relative to your investment.</p>
+
+  <h3>5. Landlord-Tenant Law &amp; Landlord Friendliness</h3>
+  <p>This is the wild card. A property in California or New York can look great on paper until you spend $8,000 and nine months evicting a non-paying tenant under rent control. States like Texas, Georgia, and Indiana have landlord-friendly laws where evictions take weeks, not months, and cities can't impose rent control. This is a real cost and a real risk that should factor into your return expectations.</p>
+
+  <div class="metric-row">
+    <div class="metric-box">
+      <div class="metric-box-val">1%</div>
+      <div class="metric-box-label">Rule of thumb rent-to-price ratio for break-even cash flow</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-box-val">27.5</div>
+      <div class="metric-box-label">Years the IRS lets you depreciate residential rental property</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-box-val">$25K</div>
+      <div class="metric-box-label">Passive loss deduction if AGI ≤ $100K (phases out to $150K)</div>
+    </div>
+    <div class="metric-box">
+      <div class="metric-box-val">25%</div>
+      <div class="metric-box-label">Depreciation recapture tax rate when you eventually sell a rental</div>
+    </div>
+  </div>
+
+  <h2>The Data: 30 Markets Scored</h2>
+
+  <p>The table below models a typical single-family rental in each market: a median-priced home, rented at the local median rent for a 3-bedroom, financed at 7.0% with 25% down on a 30-year mortgage. Expenses include 1% maintenance, 9% management, 5% vacancy, median property tax rate, and estimated insurance. The "Annual After-Tax CF" column adds back the depreciation tax benefit assuming a 24% bracket and AGI under $100K.</p>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>City / Market</th>
+          <th>Median Home Price</th>
+          <th>Median Rent (3BR)</th>
+          <th>Rent/Price</th>
+          <th>Monthly CF (Pre-Tax)</th>
+          <th>Cap Rate</th>
+          <th>Maint. Rate</th>
+          <th>5-Yr Apprec. (est.)</th>
+          <th>Annual Depr. Benefit</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="city-name">Cleveland, OH</td>
+          <td class="neutral">$165K</td>
+          <td class="neutral">$1,450</td>
+          <td class="positive">0.88%</td>
+          <td class="positive">+$341</td>
+          <td class="positive">7.8%</td>
+          <td class="negative">1.5%</td>
+          <td class="neutral">3.1%/yr</td>
+          <td class="positive">$3,636/yr</td>
+          <td class="score score-tier-a">A</td>
+        </tr>
+        <tr>
+          <td class="city-name">Memphis, TN</td>
+          <td class="neutral">$195K</td>
+          <td class="neutral">$1,600</td>
+          <td class="positive">0.82%</td>
+          <td class="positive">+$259</td>
+          <td class="positive">7.2%</td>
+          <td class="negative">1.5%</td>
+          <td class="neutral">3.4%/yr</td>
+          <td class="positive">$4,291/yr</td>
+          <td class="score score-tier-a">A</td>
+        </tr>
+        <tr>
+          <td class="city-name">Indianapolis, IN</td>
+          <td class="neutral">$270K</td>
+          <td class="neutral">$1,850</td>
+          <td class="positive">0.69%</td>
+          <td class="positive">+$139</td>
+          <td class="positive">6.1%</td>
+          <td class="neutral">1.25%</td>
+          <td class="neutral">4.2%/yr</td>
+          <td class="positive">$5,945/yr</td>
+          <td class="score score-tier-a">A</td>
+        </tr>
+        <tr>
+          <td class="city-name">Kansas City, MO</td>
+          <td class="neutral">$245K</td>
+          <td class="neutral">$1,750</td>
+          <td class="neutral">0.71%</td>
+          <td class="positive">+$114</td>
+          <td class="positive">6.3%</td>
+          <td class="neutral">1.25%</td>
+          <td class="neutral">4.0%/yr</td>
+          <td class="positive">$5,382/yr</td>
+          <td class="score score-tier-a">A</td>
+        </tr>
+        <tr>
+          <td class="city-name">Birmingham, AL</td>
+          <td class="neutral">$220K</td>
+          <td class="neutral">$1,550</td>
+          <td class="neutral">0.70%</td>
+          <td class="positive">+$38</td>
+          <td class="positive">6.0%</td>
+          <td class="negative">1.5%</td>
+          <td class="neutral">3.6%/yr</td>
+          <td class="positive">$4,800/yr</td>
+          <td class="score score-tier-a">A</td>
+        </tr>
+        <tr>
+          <td class="city-name">Columbus, OH</td>
+          <td class="neutral">$295K</td>
+          <td class="neutral">$1,900</td>
+          <td class="neutral">0.64%</td>
+          <td class="positive">+$80</td>
+          <td class="neutral">5.7%</td>
+          <td class="neutral">1.0%</td>
+          <td class="neutral">4.5%/yr</td>
+          <td class="positive">$6,473/yr</td>
+          <td class="score score-tier-a">A−</td>
+        </tr>
+        <tr>
+          <td class="city-name">Charlotte, NC</td>
+          <td class="neutral">$375K</td>
+          <td class="neutral">$2,100</td>
+          <td class="neutral">0.56%</td>
+          <td class="negative">−$59</td>
+          <td class="neutral">5.0%</td>
+          <td class="positive">0.9%</td>
+          <td class="positive">5.2%/yr</td>
+          <td class="positive">$8,182/yr</td>
+          <td class="score score-tier-b">B+</td>
+        </tr>
+        <tr>
+          <td class="city-name">Atlanta, GA</td>
+          <td class="neutral">$380K</td>
+          <td class="neutral">$2,150</td>
+          <td class="neutral">0.57%</td>
+          <td class="negative">−$89</td>
+          <td class="neutral">5.0%</td>
+          <td class="positive">0.9%</td>
+          <td class="positive">5.5%/yr</td>
+          <td class="positive">$8,291/yr</td>
+          <td class="score score-tier-b">B+</td>
+        </tr>
+        <tr>
+          <td class="city-name">Tampa, FL</td>
+          <td class="neutral">$390K</td>
+          <td class="neutral">$2,200</td>
+          <td class="neutral">0.56%</td>
+          <td class="negative">−$180</td>
+          <td class="neutral">4.8%</td>
+          <td class="neutral">1.0%</td>
+          <td class="positive">4.8%/yr</td>
+          <td class="positive">$8,509/yr</td>
+          <td class="score score-tier-b">B</td>
+        </tr>
+        <tr>
+          <td class="city-name">Dallas, TX</td>
+          <td class="neutral">$410K</td>
+          <td class="neutral">$2,200</td>
+          <td class="neutral">0.54%</td>
+          <td class="negative">−$216</td>
+          <td class="neutral">4.6%</td>
+          <td class="positive">0.9%</td>
+          <td class="positive">4.9%/yr</td>
+          <td class="positive">$8,945/yr</td>
+          <td class="score score-tier-b">B</td>
+        </tr>
+        <tr>
+          <td class="city-name">Phoenix, AZ</td>
+          <td class="neutral">$420K</td>
+          <td class="neutral">$2,150</td>
+          <td class="neutral">0.51%</td>
+          <td class="negative">−$297</td>
+          <td class="neutral">4.4%</td>
+          <td class="positive">0.85%</td>
+          <td class="positive">4.5%/yr</td>
+          <td class="positive">$9,164/yr</td>
+          <td class="score score-tier-b">B</td>
+        </tr>
+        <tr>
+          <td class="city-name">Nashville, TN</td>
+          <td class="neutral">$480K</td>
+          <td class="neutral">$2,350</td>
+          <td class="neutral">0.49%</td>
+          <td class="negative">−$450</td>
+          <td class="neutral">4.2%</td>
+          <td class="positive">0.9%</td>
+          <td class="positive">5.1%/yr</td>
+          <td class="positive">$10,473/yr</td>
+          <td class="score score-tier-b">B−</td>
+        </tr>
+        <tr>
+          <td class="city-name">Denver, CO</td>
+          <td class="neutral">$550K</td>
+          <td class="neutral">$2,500</td>
+          <td class="neutral">0.45%</td>
+          <td class="negative">−$641</td>
+          <td class="neutral">3.8%</td>
+          <td class="positive">0.85%</td>
+          <td class="positive">4.0%/yr</td>
+          <td class="positive">$12,000/yr</td>
+          <td class="score score-tier-b">C+</td>
+        </tr>
+        <tr>
+          <td class="city-name">Austin, TX</td>
+          <td class="neutral">$500K</td>
+          <td class="neutral">$2,300</td>
+          <td class="neutral">0.46%</td>
+          <td class="negative">−$657</td>
+          <td class="neutral">3.9%</td>
+          <td class="positive">0.85%</td>
+          <td class="neutral">3.2%/yr</td>
+          <td class="positive">$10,909/yr</td>
+          <td class="score score-tier-b">C+</td>
+        </tr>
+        <tr>
+          <td class="city-name">Miami, FL</td>
+          <td class="neutral">$620K</td>
+          <td class="neutral">$2,800</td>
+          <td class="neutral">0.45%</td>
+          <td class="negative">−$950</td>
+          <td class="neutral">3.7%</td>
+          <td class="neutral">1.0%</td>
+          <td class="positive">5.0%/yr</td>
+          <td class="positive">$13,527/yr</td>
+          <td class="score score-tier-b">C+</td>
+        </tr>
+        <tr>
+          <td class="city-name">Portland, OR</td>
+          <td class="neutral">$520K</td>
+          <td class="neutral">$2,200</td>
+          <td class="negative">0.42%</td>
+          <td class="negative">−$1,007</td>
+          <td class="negative">3.5%</td>
+          <td class="positive">0.9%</td>
+          <td class="neutral">2.8%/yr</td>
+          <td class="positive">$11,345/yr</td>
+          <td class="score score-tier-c">C</td>
+        </tr>
+        <tr>
+          <td class="city-name">Chicago, IL</td>
+          <td class="neutral">$330K</td>
+          <td class="neutral">$1,900</td>
+          <td class="neutral">0.58%</td>
+          <td class="negative">−$349</td>
+          <td class="neutral">4.9%</td>
+          <td class="neutral">1.25%</td>
+          <td class="negative">2.1%/yr</td>
+          <td class="positive">$7,200/yr</td>
+          <td class="score score-tier-b">C+</td>
+        </tr>
+        <tr>
+          <td class="city-name">Seattle, WA</td>
+          <td class="neutral">$780K</td>
+          <td class="neutral">$2,900</td>
+          <td class="negative">0.37%</td>
+          <td class="negative">−$1,652</td>
+          <td class="negative">3.0%</td>
+          <td class="positive">0.85%</td>
+          <td class="positive">4.5%/yr</td>
+          <td class="positive">$17,018/yr</td>
+          <td class="score score-tier-c">C</td>
+        </tr>
+        <tr>
+          <td class="city-name">Los Angeles, CA</td>
+          <td class="neutral">$890K</td>
+          <td class="neutral">$3,100</td>
+          <td class="negative">0.35%</td>
+          <td class="negative">−$2,015</td>
+          <td class="negative">2.7%</td>
+          <td class="positive">0.75%</td>
+          <td class="neutral">3.8%/yr</td>
+          <td class="positive">$19,418/yr</td>
+          <td class="score score-tier-c">C−</td>
+        </tr>
+        <tr>
+          <td class="city-name">New York City, NY</td>
+          <td class="neutral">$950K</td>
+          <td class="neutral">$3,400</td>
+          <td class="negative">0.36%</td>
+          <td class="negative">−$1,902</td>
+          <td class="negative">2.8%</td>
+          <td class="positive">0.75%</td>
+          <td class="neutral">3.2%/yr</td>
+          <td class="positive">$20,727/yr</td>
+          <td class="score score-tier-c">C−</td>
+        </tr>
+        <tr>
+          <td class="city-name">San Francisco, CA</td>
+          <td class="neutral">$1,250K</td>
+          <td class="neutral">$3,800</td>
+          <td class="negative">0.30%</td>
+          <td class="negative">−$2,840</td>
+          <td class="negative">2.2%</td>
+          <td class="positive">0.75%</td>
+          <td class="neutral">2.5%/yr</td>
+          <td class="positive">$27,273/yr</td>
+          <td class="score score-tier-c">D</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--text-muted);margin-top:-14px;">Cash flow modeled with 25% down, 7.0% 30-yr mortgage, market-specific maintenance rate (see column), 9% management, 5% vacancy, median local property tax. <strong>Maintenance rate varies by market:</strong> older/cheaper housing stock (Midwest, Mid-South) modeled at 1.25–1.5%; newer Sun Belt construction at 0.85–0.9%; luxury coastal at 0.75%. Scores weight cash flow (40%), appreciation (25%), cap rate (20%), landlord-friendliness (15%). Data: Zillow, ATTOM, Census ACS 2022–2023. For illustrative purposes — run your specific numbers in the calculator.</p>
+
+  <h2>The Winners: Midwest and Mid-South Cash Flow Markets</h2>
+
+  <div class="city-grid">
+    <div class="city-card">
+      <div class="city-card-city">Cleveland, OH</div>
+      <div class="city-card-tier a">A — Best Cash Flow</div>
+      <div class="city-card-stat"><span class="city-card-label">Median price</span><span class="city-card-val">$165K</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Median rent (3BR)</span><span class="city-card-val">$1,450/mo</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Monthly cash flow</span><span class="city-card-val green">+$341/mo</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Cap rate</span><span class="city-card-val green">7.8%</span></div>
+    </div>
+    <div class="city-card">
+      <div class="city-card-city">Indianapolis, IN</div>
+      <div class="city-card-tier a">A — Strong All-Around</div>
+      <div class="city-card-stat"><span class="city-card-label">Median price</span><span class="city-card-val">$270K</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Median rent (3BR)</span><span class="city-card-val">$1,850/mo</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Monthly cash flow</span><span class="city-card-val green">+$139/mo</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Cap rate</span><span class="city-card-val green">6.1%</span></div>
+    </div>
+    <div class="city-card">
+      <div class="city-card-city">Memphis, TN</div>
+      <div class="city-card-tier a">A — High Yield</div>
+      <div class="city-card-stat"><span class="city-card-label">Median price</span><span class="city-card-val">$195K</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Median rent (3BR)</span><span class="city-card-val">$1,600/mo</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Monthly cash flow</span><span class="city-card-val green">+$259/mo</span></div>
+      <div class="city-card-stat"><span class="city-card-label">Cap rate</span><span class="city-card-val green">7.2%</span></div>
+    </div>
+  </div>
+
+  <p>These three markets share a common profile: <strong>entry prices low enough that the 1% rent-to-price ratio is actually achievable</strong>, landlord-friendly state laws (Indiana especially — evictions can be completed in under 30 days), and steady population inflows. They're not glamorous. You're not buying in a hot market your friends talk about. But they generate real, positive cash flow from month one — something that's genuinely rare in today's environment.</p>
+
+  <p>Cleveland deserves special mention. Yes, it has a shrinking population and a complicated political environment. But at 0.88% rent-to-price, a $165K property generating $341/month in pre-tax cash flow (modeled at 1.5% maintenance for older housing stock) — plus a $3,636 annual depreciation deduction — is genuinely difficult to find anywhere in America right now. The property taxes are high for Ohio, but rents have grown 8% annually over 2021–2024 as remote workers and retirees price-shop alternatives to coastal markets.</p>
+
+  <h2>The Middle Ground: Sun Belt Growth Markets</h2>
+
+  <p>Charlotte, Atlanta, Tampa, and Dallas are the classic "negative cash flow but strong appreciation" story. You're typically paying $100–300/month to carry these properties — but in exchange, you're getting 5–6% annual appreciation in growing metros with diversified economies and decades of migration tailwinds.</p>
+
+  <p>The math can work, but you need to be honest about what you're doing. <strong>You're not buying a cash flow investment — you're buying a leveraged appreciation bet.</strong> A $380K Atlanta home that appreciates at 5.5%/year gains $20,900 in value in year one. Against a $120/month loss ($1,440/year), that's a net $19,460 gain in equity — a 20%+ return on your $95K down payment. That's excellent if the appreciation holds. If it slows to 2%, you're losing money.</p>
+
+  <p>These markets also benefit from landlord-friendly law (especially Georgia and Texas), strong job growth, and no state income tax in Florida and Texas — which means your rental income is taxed only federally.</p>
+
+  <h2>The Warning: High-Cost Markets</h2>
+
+  <p>San Francisco, New York, Los Angeles, and Seattle are almost impossible to make work as rental investments on a leveraged cash flow basis. A $1.25M San Francisco home at 7% with 25% down means a $6,644/month mortgage on a property renting for $3,800. You're losing $3,100+/month <em>before</em> you pay taxes, maintenance, or management. Your depreciation deduction ($27,273/year) helps, but even $6,500 in annual tax savings doesn't come close to offsetting a $37,200/year operating loss.</p>
+
+  <div class="pull-quote">"In San Francisco, you need 15%+ annual appreciation just to break even on a leveraged rental. That happened in 2013–2019. It has not happened since."</div>
+
+  <p>This doesn't mean you can't make money owning property in these cities — but it likely means owning it free and clear (no mortgage) or as part of a rent-controlled portfolio you purchased decades ago. For new investors entering today at these prices, the math is deeply unfavorable.</p>
+
+  <p>California and New York also have among the most tenant-protective laws in the country. Strong rent control in many jurisdictions, eviction moratoriums that can stretch 6–18 months in a dispute, and mandatory relocation assistance payments make the practical risk substantially higher than the numbers suggest.</p>
+
+  <h2>The Depreciation Angle: A Often-Overlooked Factor</h2>
+
+  <p>One thing the table makes clear: the absolute dollar value of the depreciation deduction is highest in expensive markets, not cheap ones. San Francisco's $27,273 annual deduction dwarfs Cleveland's $3,636. But in expensive markets, that deduction is a drop in the bucket against massive operating losses. In cheap markets, it can swing a marginally cash-flow-negative property to after-tax positive.</p>
+
+  <p>Consider Indianapolis: a $270K home with $139/month pre-tax cash flow ($1,668/year) modeled at 1.25% maintenance for its mix of housing stock. Add the $5,945/year depreciation deduction at 24%: that's $1,427/year in tax savings, bringing total annual return to ~$3,095. On a $67,500 down payment (25%), that's a 5.6% after-tax cash-on-cash return before appreciation. Add 4.2% appreciation and you're looking at ~16% total annual return in a good year.</p>
+
+  <p>The passive loss rules matter too. <strong>If your income is under $100,000</strong>, you can deduct up to $25,000/year in passive rental losses directly against your ordinary income. This phases out to $150K. Above that, losses are suspended and carry forward. For a physician or tech worker buying their first rental with a $200K household income, most of these benefits are locked up until they sell — something to model carefully before buying.</p>
+
+  <h2>What About Airbnb and Short-Term Rentals?</h2>
+
+  <p>Short-term rental (STR) yields can be 2–3x higher than long-term rentals in the right market, but the risk and operational complexity are 5–10x higher. Zoning regulations that permit STRs can change overnight — Nashville, New York, San Francisco, and dozens of other cities have passed or proposed STR bans or severe restrictions. Before underwriting a deal on Airbnb income, check the local ordinance and assume it may not survive the next election cycle.</p>
+
+  <p>If you can run a legitimate STR, markets like Gatlinburg TN, Destin FL, Scottsdale AZ, and mountain towns in Colorado and Utah can generate 8–12% cap rates. But plan for 25–30% operating expense ratios (cleaning, turnover, platform fees), seasonal vacancy, and the reality that you're running a small hospitality business, not a passive investment.</p>
+
+  <h2>If You Bought a $500K Property: An Apples-to-Apples Comparison</h2>
+
+  <p>The table above models each city's actual median-priced property — but that makes direct comparison tricky. A Cleveland property costs $165K and a San Francisco property costs $1.25M; of course they cash flow differently. To level the playing field, the table below standardizes everything to a single $500K purchase price: <strong>25% down ($125K), $375K mortgage at 7.0% for 30 years = $2,495/month P&amp;I.</strong> This lets you see how each city's cap rate and appreciation rate would perform on the exact same investment.</p>
+
+  <p>Monthly cash flow = (Cap Rate × $500K / 12) − $2,495 P&amp;I. Total Year 1 return adds estimated appreciation plus a <strong>$3,491 depreciation tax benefit</strong> ($500K × 80% building value / 27.5 years × 24% bracket) — identical for all cities since the purchase price is the same.</p>
+
+  <div class="data-table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>City</th>
+          <th>Cap Rate</th>
+          <th>Monthly CF (Pre-Tax)</th>
+          <th>Annual CF</th>
+          <th>Est. Yr1 Appreciation</th>
+          <th>Depr. Benefit</th>
+          <th>Total Yr1 Return</th>
+          <th>Cash-on-Cash</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="city-name">Cleveland, OH</td>
+          <td class="positive">7.8%</td>
+          <td class="positive">+$755</td>
+          <td class="positive">+$9,060</td>
+          <td class="neutral">$15,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$28,051</td>
+          <td class="positive">+7.2%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Memphis, TN</td>
+          <td class="positive">7.2%</td>
+          <td class="positive">+$505</td>
+          <td class="positive">+$6,060</td>
+          <td class="neutral">$17,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$26,551</td>
+          <td class="positive">+4.8%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Kansas City, MO</td>
+          <td class="positive">6.3%</td>
+          <td class="positive">+$130</td>
+          <td class="positive">+$1,560</td>
+          <td class="neutral">$20,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$25,051</td>
+          <td class="positive">+1.2%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Indianapolis, IN</td>
+          <td class="positive">6.1%</td>
+          <td class="positive">+$47</td>
+          <td class="positive">+$564</td>
+          <td class="neutral">$21,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$25,055</td>
+          <td class="positive">+0.5%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Birmingham, AL</td>
+          <td class="positive">6.0%</td>
+          <td class="neutral">+$5</td>
+          <td class="neutral">+$60</td>
+          <td class="neutral">$18,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$21,551</td>
+          <td class="neutral">+0.0%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Columbus, OH</td>
+          <td class="neutral">5.7%</td>
+          <td class="negative">−$120</td>
+          <td class="negative">−$1,440</td>
+          <td class="neutral">$22,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$24,551</td>
+          <td class="negative">−1.2%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Chicago, IL</td>
+          <td class="neutral">4.9%</td>
+          <td class="negative">−$453</td>
+          <td class="negative">−$5,436</td>
+          <td class="neutral">$10,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$8,555</td>
+          <td class="negative">−4.3%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Tampa, FL</td>
+          <td class="neutral">4.8%</td>
+          <td class="negative">−$495</td>
+          <td class="negative">−$5,940</td>
+          <td class="neutral">$24,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$21,551</td>
+          <td class="negative">−4.8%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Charlotte, NC</td>
+          <td class="neutral">5.0%</td>
+          <td class="negative">−$412</td>
+          <td class="negative">−$4,944</td>
+          <td class="neutral">$26,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$24,547</td>
+          <td class="negative">−4.0%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Atlanta, GA</td>
+          <td class="neutral">5.0%</td>
+          <td class="negative">−$412</td>
+          <td class="negative">−$4,944</td>
+          <td class="neutral">$27,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$26,047</td>
+          <td class="negative">−4.0%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Dallas, TX</td>
+          <td class="neutral">4.6%</td>
+          <td class="negative">−$578</td>
+          <td class="negative">−$6,936</td>
+          <td class="neutral">$24,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$21,055</td>
+          <td class="negative">−5.5%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Phoenix, AZ</td>
+          <td class="neutral">4.4%</td>
+          <td class="negative">−$662</td>
+          <td class="negative">−$7,944</td>
+          <td class="neutral">$22,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$18,047</td>
+          <td class="negative">−6.4%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Nashville, TN</td>
+          <td class="neutral">4.2%</td>
+          <td class="negative">−$745</td>
+          <td class="negative">−$8,940</td>
+          <td class="neutral">$25,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$20,051</td>
+          <td class="negative">−7.2%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Austin, TX</td>
+          <td class="neutral">3.9%</td>
+          <td class="negative">−$870</td>
+          <td class="negative">−$10,440</td>
+          <td class="neutral">$16,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$9,051</td>
+          <td class="negative">−8.4%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Denver, CO</td>
+          <td class="neutral">3.8%</td>
+          <td class="negative">−$912</td>
+          <td class="negative">−$10,944</td>
+          <td class="neutral">$20,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$12,547</td>
+          <td class="negative">−8.8%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Miami, FL</td>
+          <td class="neutral">3.7%</td>
+          <td class="negative">−$953</td>
+          <td class="negative">−$11,436</td>
+          <td class="neutral">$25,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$17,055</td>
+          <td class="negative">−9.2%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Portland, OR</td>
+          <td class="negative">3.5%</td>
+          <td class="negative">−$1,037</td>
+          <td class="negative">−$12,444</td>
+          <td class="neutral">$14,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$5,047</td>
+          <td class="negative">−10.0%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Seattle, WA</td>
+          <td class="negative">3.0%</td>
+          <td class="negative">−$1,245</td>
+          <td class="negative">−$14,940</td>
+          <td class="neutral">$22,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$11,051</td>
+          <td class="negative">−12.0%</td>
+        </tr>
+        <tr>
+          <td class="city-name">Los Angeles, CA</td>
+          <td class="negative">2.7%</td>
+          <td class="negative">−$1,370</td>
+          <td class="negative">−$16,440</td>
+          <td class="neutral">$19,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$6,051</td>
+          <td class="negative">−13.2%</td>
+        </tr>
+        <tr>
+          <td class="city-name">New York City, NY</td>
+          <td class="negative">2.8%</td>
+          <td class="negative">−$1,328</td>
+          <td class="negative">−$15,936</td>
+          <td class="neutral">$16,000</td>
+          <td class="neutral">$3,491</td>
+          <td class="positive">+$3,555</td>
+          <td class="negative">−12.7%</td>
+        </tr>
+        <tr>
+          <td class="city-name">San Francisco, CA</td>
+          <td class="negative">2.2%</td>
+          <td class="negative">−$1,578</td>
+          <td class="negative">−$18,936</td>
+          <td class="neutral">$12,500</td>
+          <td class="neutral">$3,491</td>
+          <td class="negative">−$2,945</td>
+          <td class="negative">−15.1%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--text-muted);margin-top:-14px;">$500K purchase, 25% down ($125K), $375K at 7.0% 30-yr = $2,495/mo P&amp;I. Monthly CF = (Cap Rate × $500K / 12) − P&amp;I. Total Year 1 return = Annual CF + estimated appreciation + $3,491 depreciation tax benefit (24% bracket). Cash-on-cash = Annual CF / $125K down payment. Appreciation uses market-specific annual rates from table above.</p>
+
+  <p>A few key takeaways from this standardized view:</p>
+  <ul>
+    <li><strong>Cleveland, Memphis, and Kansas City generate positive monthly cash flow even at $500K</strong> — something that is extremely rare in today's market. Their high cap rates mean the income covers the debt service and then some.</li>
+    <li><strong>San Francisco is the only market where the total economic return is negative</strong> even after including estimated appreciation and the depreciation tax benefit. At a 2.2% cap rate, no amount of paper benefits overcome the operating loss at this price point.</li>
+    <li><strong>Atlanta and Charlotte produce better total Year 1 returns than Cleveland</strong> despite negative monthly cash flow, because their stronger appreciation rates ($27,500 and $26,000 vs. $15,500) more than compensate. Total return is not the same as cash flow.</li>
+    <li><strong>Chicago is a surprisingly weak total return despite a decent 4.9% cap rate.</strong> Its low estimated appreciation (2.1%/yr) — the lowest of any market in this table — drags the total Year 1 return down to just $8,555, well below Sun Belt markets with comparable or lower cap rates.</li>
+    <li><strong>The monthly cash flow column shows your out-of-pocket funding requirement each month.</strong> A −$1,578 figure for San Francisco means you need to write a check for $1,578 every month on top of your down payment — a real budgeting consideration that appreciation estimates do not solve in the short term.</li>
+  </ul>
+
+  <h2>The Bottom Line: Where to Invest in 2025</h2>
+
+  <p>If you're a new investor looking for your first rental property with a goal of positive cash flow from day one, the Midwest and Mid-South are your best options: Cleveland, Memphis, Indianapolis, Kansas City, Birmingham. They're not exciting, but they work as investments rather than speculation.</p>
+
+  <p>If you're willing to absorb modest negative cash flow for appreciation upside, the Southeast Sun Belt (Charlotte, Atlanta, Tampa) is the best risk-adjusted bet — landlord-friendly laws, population growth, diversifying economies. Texas cities (Dallas, Austin, Houston) are similar but watch the property tax burden, which is among the highest in the country due to no state income tax.</p>
+
+  <p>If you already own a home in an expensive market and are deciding whether to keep it as a rental when you move, the calculation changes entirely — you don't have the transaction costs of a new purchase, and your basis and mortgage rate may be far better than anything available today. Our <a href="../rent-or-sell.html">Rent or Sell Calculator</a> is built exactly for that decision, including the primary residence capital gains exclusion that expires 3 years after you move out.</p>
+
+  <div class="cta-box">
+    <div class="cta-box-text">
+      <div class="cta-box-title">Moving Out of Your Home? Model the Sell vs. Rent Decision</div>
+      <div class="cta-box-desc">Our Rent or Sell Calculator factors in your capital gains tax exclusion (up to $500K tax-free if you qualify), monthly cash flow, depreciation benefit, and a 10-20 year wealth comparison of selling now vs. keeping it as a rental.</div>
+    </div>
+    <a href="../rent-or-sell.html" class="cta-box-btn">Open Calculator &rarr;</a>
+  </div>
+
+  <h2>A Note on the Numbers</h2>
+  <p>The figures in this post use 2024–2025 median home prices and rents, a 7.0% 30-year fixed mortgage rate with 25% down, standard expense assumptions (1% maintenance, 9% management, 5% vacancy), and median property tax rates by city. Individual properties, neighborhoods, and circumstances vary enormously. A $165K median price in Cleveland includes properties ranging from $80K to $400K — and a $80K property in the wrong neighborhood can have far worse economics than the averages suggest. Always run the numbers on the specific property, not the market average. This post is for directional guidance, not investment advice.</p>
+
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">This article is for educational and informational purposes only. Real estate market conditions, tax laws, and local regulations change frequently. All figures are estimates based on publicly available data and standard assumptions. Consult a qualified financial advisor, CPA, and real estate professional before making investment decisions.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function() {
+  var toggle = document.getElementById('themeToggle');
+  var icon   = document.getElementById('themeIcon');
+  var label  = document.getElementById('themeLabel');
+  function applyTheme(dark) {
+    if (dark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      icon.textContent = '☀'; label.textContent = 'Light';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      icon.textContent = '☾'; label.textContent = 'Dark';
+      localStorage.setItem('theme', 'light');
+    }
+  }
+  toggle.addEventListener('click', function() {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  });
+  try { applyTheme(localStorage.getItem('theme') === 'dark'); } catch(e) { applyTheme(false); }
+})();
+</script>
+</body>
+</html>
