@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>When Should You Claim Social Security? The Math Behind 62, 67, or 70 &mdash; Abel's Financial Calculators</title>
+<meta name="description" content="Claiming Social Security at 62, 67, or 70 is one of the biggest financial decisions you'll make. Here's the break-even math, the spousal benefit angle, and a decision framework for real people.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/when-to-claim-social-security.html">
+<meta property="og:title" content="When Should You Claim Social Security? The Math Behind 62, 67, or 70">
+<meta property="og:description" content="Claiming Social Security at 62, 67, or 70 is one of the biggest financial decisions you'll make. Here's the break-even math and a decision framework.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/when-to-claim-social-security.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="When Should You Claim Social Security? The Math Behind 62, 67, or 70">
+<meta name="twitter:description" content="Claiming Social Security at 62, 67, or 70 is one of the biggest financial decisions you'll make. Here's the break-even math and a decision framework.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "When Should You Claim Social Security? The Math Behind Claiming at 62, 67, or 70",
+  "description": "Claiming Social Security at 62, 67, or 70 is one of the biggest financial decisions you'll make. Here's the break-even math, the spousal benefit angle, and a decision framework for real people.",
+  "author": {"@type": "Organization", "name": "Abel's Financial Calculators", "url": "https://abelscalculators.com"},
+  "publisher": {"@type": "Organization", "name": "Abel's Financial Calculators", "url": "https://abelscalculators.com"},
+  "datePublished": "2026-03-11",
+  "dateModified": "2026-03-11",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/when-to-claim-social-security.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "At what age should I claim Social Security?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There is no single right answer. Claiming at 62 maximizes total payments if you live a shorter-than-average life, while delaying to 70 maximizes your monthly income and protects against longevity risk. The break-even age for claiming at 67 vs. 62 is typically around 78-79. Your health, need for income, and spousal situation are all key factors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does claiming Social Security early reduce my benefit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claiming at 62 permanently reduces your benefit by approximately 30% compared to your Full Retirement Age (FRA) benefit, which is age 67 for anyone born in 1960 or later. Each month you claim early results in a permanent reduction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does delaying Social Security to 70 make sense?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delaying to age 70 increases your benefit by 8% per year beyond FRA, adding up to a 24% increase over the FRA benefit. It makes the most sense for people in good health, those with a longer life expectancy, and married high earners whose spouse would inherit the larger survivor benefit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I claim Social Security and still work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, but if you claim before your Full Retirement Age and continue working, Social Security will withhold $1 in benefits for every $2 you earn above roughly $22,320 (2024 limit). After you reach FRA, there is no earnings test and you can earn any amount without reduction."
+      }
+    }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: none; background: var(--surface2); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); background: var(--surface); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+  .callout { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+  .scenario-compare { margin: 32px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-highlight { color: var(--accent); }
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+  .cta-pair { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 640px) { header { padding: 0 20px; } main { padding: 32px 16px 60px; } .page-title { font-size: 28px; } .scenario-compare-body { grid-template-columns: 1fr; } .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); } .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+</style>
+<script>(function(){ var s=localStorage.getItem('theme'); if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');} })();</script>
+</head>
+<body>
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators"><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+<main>
+  <div class="page-label">Retirement Planning</div>
+  <h1 class="page-title">When Should You Claim Social Security? The Math Behind 62, 67, or 70</h1>
+  <p class="page-sub">Claiming early gets you more years of checks. Claiming late gets you bigger checks. Here's how to figure out which math works for you — and why the answer isn't always "wait as long as possible."</p>
+  <p class="page-date">March 11, 2026</p>
+  <article>
+
+    <h2>The Basic Tradeoff</h2>
+    <p>Social Security gives you a choice: claim early and get a permanently reduced benefit for more years, or wait and get a permanently larger benefit for fewer years. The system is designed so that — in theory — the total lifetime payout is roughly the same regardless of when you claim, assuming you live to the average life expectancy. But "in theory" and "for your specific situation" are often very different things.</p>
+    <p>Here are the hard numbers. Your <strong>Full Retirement Age (FRA)</strong> is 67 if you were born in 1960 or later. If you claim at 62 — the earliest possible age — your benefit is permanently reduced by about <strong>30%</strong> compared to what you'd receive at FRA. If you wait until 70, you earn delayed retirement credits of 8% per year beyond FRA, which adds up to a <strong>24% increase</strong> over your FRA benefit. The range from 62 to 70 is therefore roughly a 54-percentage-point spread in monthly income.</p>
+    <p>That's not a rounding error. On a $2,000/month FRA benefit, the difference between claiming at 62 ($1,400/month) and claiming at 70 ($2,480/month) is over $1,000 per month — for the rest of your life.</p>
+
+    <h2>The Break-Even Math</h2>
+    <p>The most common framing is the break-even analysis: at what age does the higher payment from delaying finally overtake the cumulative advantage of starting earlier? Let's work through a concrete example.</p>
+    <p>Suppose your FRA benefit is $2,143/month. Claiming at 62, you receive about 70% of that: <strong>$1,500/month</strong>. By waiting until 67, you get the full $2,143. The tradeoff is that you forgo 60 months of $1,500 payments — a total of <strong>$90,000</strong> in missed income.</p>
+    <p>Once you start at 67, the extra $643/month starts closing that gap. Divide $90,000 by $643 and you get roughly <strong>140 months</strong>, or about 11.7 years. Add that to age 67 and you break even at approximately <strong>age 78 to 79</strong>. If you live past 79, the 67-claim wins. If you die before 79, the 62-claim collected more in total.</p>
+
+    <div class="callout">
+      <p><strong>The break-even rule of thumb:</strong> Claiming at FRA (67) instead of 62 breaks even around age 78-79. Claiming at 70 instead of 67 breaks even around age 80-81. These ages shift slightly depending on your exact benefit amount and whether you'd invest early payments — but they're remarkably stable across most scenarios.</p>
+    </div>
+
+    <p>The median life expectancy for a 62-year-old American today is roughly 83 for men and 86 for women. That means the average person crosses both break-even thresholds — though averages hide enormous individual variation. A 62-year-old in excellent health with a family history of longevity is playing a very different game than someone managing serious chronic illness.</p>
+
+    <h2>Cumulative Benefits: Claiming at 62 vs. 70</h2>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Scenario Comparison</div>
+        <div class="sc-title">Claiming at 62 vs. Waiting Until 70</div>
+        <div class="sc-params">FRA benefit: $2,000/mo &middot; Healthy 62-year-old &middot; No investment of early payments &middot; Inflation adjustments excluded for simplicity</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span>Claim at 62</div>
+          <div class="sc-row"><span class="sc-row-label">Monthly benefit</span><span class="sc-row-value">$1,400</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 75</span><span class="sc-row-value">$226,800</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 80</span><span class="sc-row-value">$310,800</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 85</span><span class="sc-row-value">$394,800</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 90</span><span class="sc-row-value">$478,800</span></div>
+          <div class="sc-verdict">Ahead through roughly age 80. Better outcome if you don't live into your mid-80s.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span>Wait Until 70</div>
+          <div class="sc-row"><span class="sc-row-label">Monthly benefit</span><span class="sc-row-value sc-highlight">$2,480</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 75</span><span class="sc-row-value">$148,800</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 80</span><span class="sc-row-value">$297,600</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 85</span><span class="sc-row-value sc-highlight">$446,400</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total by age 90</span><span class="sc-row-value sc-highlight">$595,200</span></div>
+          <div class="sc-verdict sc-highlight">Breaks even around age 80-81. Every year after that, the gap widens — by age 90, you're $116,400 ahead.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>When Early Claiming Makes Sense</h2>
+    <p>The conventional wisdom is "delay as long as possible," but that's not universally correct. There are real scenarios where claiming at 62 or 63 is the financially sound choice.</p>
+
+    <h3>Health and Life Expectancy</h3>
+    <p>If you have a serious health condition, a family history of shorter lifespans, or reason to believe you won't reach your late 70s, early claiming is rational. There's nothing wrong with doing the math honestly. The actuarially "fair" design of Social Security assumes average longevity — if you have good reason to expect below-average longevity, the calculus shifts meaningfully in favor of early claiming.</p>
+
+    <h3>You Need the Income Now</h3>
+    <p>If you stop working at 62 and need income to cover living expenses, the choice may not be entirely voluntary. Claiming early to avoid drawing down your investment portfolio at a 4-5% rate can make sense, particularly in volatile markets where sequence-of-returns risk is real. Taking Social Security early to let your portfolio compound for a few more years isn't obviously wrong.</p>
+
+    <h3>The Investment Argument (and Its Limits)</h3>
+    <p>Some people argue: claim early, invest the proceeds, and come out ahead. In theory, if you invest every payment and earn strong returns, you can beat the actuarial math. In practice, this requires consistently earning <strong>7-8% real returns</strong> — after inflation — over the delay period. That's achievable in the long run with an equity-heavy portfolio, but it requires the discipline to actually invest (rather than spend) the payments, the stomach to stay invested through downturns, and the willingness to accept market risk in exchange for what is otherwise a guaranteed, inflation-adjusted income stream.</p>
+
+    <div class="callout">
+      <p><strong>The investment hurdle rate:</strong> To make claiming at 62 and investing all payments match the lifetime value of waiting until 70, you'd need to earn roughly 7-8% annually, in real (inflation-adjusted) terms, consistently. That's close to the historical equity premium — possible, but far from guaranteed, and a risky bet to make with what is essentially your income floor in retirement.</p>
+    </div>
+
+    <h2>Why Delaying Often Wins</h2>
+    <p>Beyond the pure break-even math, there are structural reasons why delaying tends to favor most retirees.</p>
+
+    <h3>It's an Inflation-Adjusted Annuity</h3>
+    <p>Social Security benefits are <strong>inflation-adjusted</strong> each year via the COLA (cost-of-living adjustment). A larger benefit at 70 means a larger base that gets inflation-adjusted every year going forward. In an environment where inflation compounds over a 20-to-30-year retirement, the difference between a $1,400/month base and a $2,480/month base grows substantially in real terms. Private annuities with inflation protection are expensive to purchase — the Social Security delay effectively buys you more of that protection for free.</p>
+
+    <h3>Longevity Insurance</h3>
+    <p>The risk most retirees underestimate isn't dying too early — it's living longer than expected and outlasting their money. A larger Social Security benefit is income you literally cannot outlive. Every dollar of guaranteed lifetime income reduces the pressure on your investment portfolio and your exposure to late-life sequence-of-returns risk. For people with modest savings, maximizing Social Security is often more important than optimizing investment allocation.</p>
+
+    <h3>Still Working? The Earnings Test</h3>
+    <p>If you claim benefits before FRA and continue working, Social Security will <strong>withhold $1 of benefits for every $2 you earn above roughly $22,320</strong> (the 2024 exempt amount; it adjusts annually). In the year you reach FRA, a more lenient threshold applies. After FRA, there's no earnings test at all — you can earn any amount with no reduction.</p>
+    <p>The withheld benefits aren't entirely lost: Social Security recalculates your benefit upward at FRA to account for the withheld months. But the recalculation is complicated, the money is tied up in the interim, and if you're still earning a solid income before FRA, there's a strong argument to simply wait rather than deal with the offset mechanics.</p>
+
+    <h2>The Spousal Survivor Benefit: The Most Overlooked Factor</h2>
+    <p>For married couples, the break-even analysis misses something critical: when one spouse dies, the surviving spouse inherits the <strong>higher</strong> of the two benefits. The lower benefit simply goes away. This asymmetry makes the claiming decision for the higher earner in a couple far more consequential than any individual break-even calculation suggests.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Scenario Comparison</div>
+        <div class="sc-title">Spousal Survivor Benefit: High Earner Claims at 62 vs. 70</div>
+        <div class="sc-params">Higher earner's FRA benefit: $2,500/mo &middot; Lower earner's benefit: $1,200/mo &middot; Survivor lives to 88</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span>High Earner Claims at 62</div>
+          <div class="sc-row"><span class="sc-row-label">High earner's benefit</span><span class="sc-row-value">$1,750/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">Survivor's inherited benefit</span><span class="sc-row-value">$1,750/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">Survivor's own benefit lost</span><span class="sc-row-value">$1,200/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">Survivor's monthly income</span><span class="sc-row-value">$1,750/mo</span></div>
+          <div class="sc-verdict">Survivor is locked into a reduced benefit for the remainder of their life — potentially 20+ years at a lower income floor.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span>High Earner Waits Until 70</div>
+          <div class="sc-row"><span class="sc-row-label">High earner's benefit</span><span class="sc-row-value sc-highlight">$3,100/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">Survivor's inherited benefit</span><span class="sc-row-value sc-highlight">$3,100/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">Survivor's own benefit lost</span><span class="sc-row-value">$1,200/mo</span></div>
+          <div class="sc-row"><span class="sc-row-label">Survivor's monthly income</span><span class="sc-row-value sc-highlight">$3,100/mo</span></div>
+          <div class="sc-verdict sc-highlight">Survivor receives $1,350/mo more — over $16,000/year more — for every year of widowhood. Over 15 years, that's $243,000.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>This dynamic is the single strongest argument for the higher earner in a couple to delay claiming. The lower earner's benefit disappears when they die; the higher earner's benefit becomes the survivor's sole Social Security income. In a marriage where one spouse significantly out-earned the other — and where the lower earner is likely to live longer — delaying the higher earner's claim is essentially purchasing survivorship protection at no direct cost.</p>
+
+    <div class="callout">
+      <p><strong>A common couple's strategy:</strong> The lower earner claims at 62 or FRA to bring in income while the household bridges to retirement. The higher earner delays to 70 to maximize the survivor benefit. This lets the couple take advantage of early payments while still protecting the surviving spouse's long-term income floor.</p>
+    </div>
+
+    <h2>A Decision Framework</h2>
+    <p>There is no universally correct answer. But here's a practical way to think through the decision:</p>
+    <ul>
+      <li><strong>Lean toward delaying</strong> if you're in good health, have a family history of longevity, are married and the higher earner, have other income to bridge the gap, or are still working near FRA.</li>
+      <li><strong>Lean toward claiming earlier</strong> if you have health concerns or limited life expectancy, need the income to cover expenses, have no spouse depending on your survivor benefit, or have the genuine discipline and risk tolerance to invest every payment at equity-like returns.</li>
+      <li><strong>Run your own break-even number.</strong> Your actual benefit amounts matter enormously. The SSA's "my Social Security" portal shows your projected benefits at 62, FRA, and 70. Plug those into a break-even calculator to find your crossover age, then compare it honestly to your health and family history.</li>
+      <li><strong>Don't ignore the spousal picture.</strong> If you're married, the claiming decision for both spouses should be modeled together. A joint optimization almost always looks different from two individual optimizations.</li>
+    </ul>
+    <p>The Social Security decision is one of the few retirement choices that is truly irreversible — once you claim, your reduction or increase is locked in for life. It deserves more careful analysis than most people give it. Spending a few hours with a calculator and your actual benefit estimates is almost certainly worth your time.</p>
+
+  </article>
+  <div class="cta">
+    <p>See exactly how your break-even age shifts based on your benefit amount, life expectancy, and investment return assumptions.</p>
+    <div class="cta-pair">
+      <a href="../social-security.html" class="cta-btn">Social Security Break-Even Calculator &rarr;</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For educational purposes only. Not financial advice. Consult a qualified advisor before making Social Security claiming decisions.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+<script>
+(function(){
+  var btn=document.getElementById('themeToggle');
+  var icon=document.getElementById('themeIcon');
+  var label=document.getElementById('themeLabel');
+  function updateUI(){var d=document.documentElement.getAttribute('data-theme')==='dark';icon.innerHTML=d?'&#9788;':'&#9790;';label.textContent=d?'Light':'Dark';}
+  btn.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('theme','light');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}updateUI();});
+  updateUI();
+})();
+</script>
+</body>
+</html>

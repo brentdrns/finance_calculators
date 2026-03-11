@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Life Expectancy Calculator — Survival Probability &amp; Longevity Insights</title>
+<meta name="description" content="Free life expectancy calculator based on 2021 SSA actuarial data. See your survival probability curve, median life expectancy, and how lifestyle factors like smoking, exercise, and BMI affect your longevity.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/life-expectancy.html">
+<meta property="og:title" content="Life Expectancy Calculator — Survival Probability &amp; Longevity Insights">
+<meta property="og:description" content="Explore your survival probability curve and median life expectancy using 2021 SSA actuarial data. Adjust for lifestyle factors to see their impact.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/life-expectancy.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Life Expectancy Calculator">
+<meta name="twitter:description" content="See your survival probability curve based on SSA actuarial data. Adjust for smoking, exercise, BMI, and education.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Life Expectancy Calculator","description":"Life expectancy and survival probability calculator based on 2021 SSA Period Life Table data with lifestyle factor adjustments.","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/life-expectancy.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* Header */
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); position: sticky; top: 0; max-height: 100vh; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+  .sidebar-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .field { margin-bottom: 12px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
+  .field input[type="number"], .field select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
+    -moz-appearance: textfield;
+  }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .checkbox-row input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .checkbox-row label { color: var(--text); font-size: 12px; cursor: pointer; margin: 0; }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+  /* Radio group */
+  .radio-group { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .radio-group input[type="radio"] { display: none; }
+  .radio-group label { flex: 1; text-align: center; padding: 7px 8px; font-size: 11px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: background 0.15s, color 0.15s; background: transparent; }
+  .radio-group input[type="radio"]:checked + label { background: var(--accent); color: #fff; }
+  .radio-group label:hover { background: var(--surface2); color: var(--text); }
+  .radio-group input[type="radio"]:checked + label:hover { background: var(--accent); color: #fff; }
+
+  /* Main */
+  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; }
+
+  /* Cards */
+  .card { background: var(--surface); border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+  .card-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Expectancy hero */
+  .expectancy-hero { display: flex; align-items: flex-start; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
+  .expectancy-main-stat { display: flex; flex-direction: column; }
+  .expectancy-main-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .expectancy-main-number { font-family: 'DM Serif Display', serif; font-size: 72px; line-height: 1; color: var(--accent); }
+  .expectancy-main-sub { font-size: 13px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+  .expectancy-main-sub strong { color: var(--text); }
+
+  /* Percentile boxes */
+  .percentile-boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pct-box { background: var(--surface2); border-radius: 10px; padding: 14px 16px; }
+  .pct-box-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .pct-box-value { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--text); }
+  .pct-box-desc { font-size: 10px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .pct-box.accent { border: 1px solid var(--accent); }
+  .pct-box.accent .pct-box-value { color: var(--accent); }
+
+  /* Adjusted callout */
+  .adjusted-callout { background: var(--surface2); border-radius: 10px; padding: 14px 16px; border-left: 4px solid var(--accent-dim); margin-top: 16px; display: none; }
+  .adjusted-callout.visible { display: block; }
+  .adjusted-callout-title { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .adjusted-callout-text { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .adjusted-callout-text strong { color: var(--text); }
+
+  /* Chart container */
+  .chart-wrap { position: relative; height: 340px; }
+
+  /* Longevity correlates */
+  .correlates-grid { display: flex; flex-direction: column; gap: 10px; }
+  .correlate-row { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--surface2); border-radius: 10px; }
+  .correlate-icon { font-size: 22px; flex-shrink: 0; width: 36px; text-align: center; }
+  .correlate-body { flex: 1; }
+  .correlate-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .correlate-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .correlate-years { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; color: var(--green); flex-shrink: 0; white-space: nowrap; }
+  .correlate-note { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-top: 14px; padding: 10px 14px; background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 700px; margin: 0 auto 14px; }
+  .site-footer-nav { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    .percentile-boxes { grid-template-columns: 1fr 1fr; }
+    header { padding: 0 20px; }
+    .main { padding: 20px; }
+    .expectancy-main-number { font-size: 54px; }
+  }
+  @media (max-width: 480px) {
+    .percentile-boxes { grid-template-columns: 1fr; }
+    .expectancy-hero { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">2021 SSA Period Life Table</div>
+      <div class="hero-band-title">Life Expectancy <span>Calculator</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      See your <strong>survival probability curve</strong> and <strong>median life expectancy</strong> based on
+      US actuarial data. Adjust for <strong>lifestyle factors</strong> like smoking, exercise, BMI, and education
+      to see how your choices could affect your longevity.
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-title">Your Profile</div>
+      <div class="sidebar-subtitle">Enter your details to see your personalized survival curve and life expectancy estimates.</div>
+    </div>
+
+    <div>
+      <div class="section-label">Demographics</div>
+
+      <div class="field">
+        <label for="currentAge">Current Age</label>
+        <input type="number" id="currentAge" value="40" min="0" max="100" step="1" oninput="calculate()">
+      </div>
+
+      <div class="field">
+        <label>Sex</label>
+        <div class="radio-group">
+          <input type="radio" name="sex" id="sexMale" value="male" checked onchange="calculate()">
+          <label for="sexMale">Male</label>
+          <input type="radio" name="sex" id="sexFemale" value="female" onchange="calculate()">
+          <label for="sexFemale">Female</label>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Lifestyle Factors</div>
+      <div class="hint" style="margin-bottom: 12px;">These adjustments shift your estimated life expectancy based on population-level research correlations.</div>
+
+      <div class="field">
+        <label for="smoker">Smoking Status</label>
+        <select id="smoker" onchange="calculate()">
+          <option value="0">Non-smoker</option>
+          <option value="-10">Current smoker &nbsp;(−10 years)</option>
+          <option value="-5">Former smoker &nbsp;(−5 years)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="exercise">Exercise Frequency</label>
+        <select id="exercise" onchange="calculate()">
+          <option value="2">3+ times / week &nbsp;(baseline)</option>
+          <option value="0">1–2 times / week &nbsp;(−2 years)</option>
+          <option value="-3">Rarely / never &nbsp;(−5 years)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="bmi">BMI Category</label>
+        <select id="bmi" onchange="calculate()">
+          <option value="0">Normal weight (18.5–25) &nbsp;(baseline)</option>
+          <option value="-1">Underweight (&lt;18.5) &nbsp;(−1 year)</option>
+          <option value="-2">Overweight (25–30) &nbsp;(−2 years)</option>
+          <option value="-5">Obese (30+) &nbsp;(−5 years)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="education">Education Level</label>
+        <select id="education" onchange="calculate()">
+          <option value="2">College degree or higher &nbsp;(baseline)</option>
+          <option value="0">High school graduate &nbsp;(−2 years)</option>
+          <option value="-3">Less than high school &nbsp;(−5 years)</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Chart Display</div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="showBothSexes" onchange="calculate()">
+        <label for="showBothSexes">Show both male &amp; female curves</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="showAdjusted" checked onchange="calculate()">
+        <label for="showAdjusted">Show adjusted curve (lifestyle + cohort)</label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Key Stats Card -->
+    <div class="card">
+      <div class="card-title">Your Estimated Life Expectancy</div>
+
+      <div class="expectancy-hero">
+        <div class="expectancy-main-stat">
+          <div class="expectancy-main-label">Median Life Expectancy</div>
+          <div class="expectancy-main-number" id="medianAge">—</div>
+          <div class="expectancy-main-sub" id="medianDesc">Enter your age above to see your estimate.</div>
+        </div>
+      </div>
+
+      <div class="percentile-boxes">
+        <div class="pct-box">
+          <div class="pct-box-label">25th Percentile</div>
+          <div class="pct-box-value" id="pct25">—</div>
+          <div class="pct-box-desc">25% chance of dying before this age</div>
+        </div>
+        <div class="pct-box accent">
+          <div class="pct-box-label">Median (50th pct)</div>
+          <div class="pct-box-value" id="pct50">—</div>
+          <div class="pct-box-desc">50% chance of surviving to this age</div>
+        </div>
+        <div class="pct-box">
+          <div class="pct-box-label">75th Percentile</div>
+          <div class="pct-box-value" id="pct75">—</div>
+          <div class="pct-box-desc">25% chance of living beyond this age</div>
+        </div>
+      </div>
+
+      <div class="adjusted-callout" id="adjustedCallout">
+        <div class="adjusted-callout-title">Lifestyle-Adjusted Estimate</div>
+        <div class="adjusted-callout-text" id="adjustedText"></div>
+      </div>
+    </div>
+
+    <!-- Survival Curve Card -->
+    <div class="card">
+      <div class="card-title">Survival Probability Curve</div>
+      <div class="chart-wrap">
+        <canvas id="survivalChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Longevity Correlates Card -->
+    <div class="card">
+      <div class="card-title">Key Correlates of Longevity</div>
+      <div class="correlates-grid">
+        <div class="correlate-row">
+          <div class="correlate-icon">🚭</div>
+          <div class="correlate-body">
+            <div class="correlate-name">Not Smoking</div>
+            <div class="correlate-desc">Smokers lose on average 10 years of life expectancy. Quitting even in middle age substantially recovers lost years.</div>
+          </div>
+          <div class="correlate-years">+10 yrs</div>
+        </div>
+        <div class="correlate-row">
+          <div class="correlate-icon">🏃</div>
+          <div class="correlate-body">
+            <div class="correlate-name">Regular Exercise (3+ times/week)</div>
+            <div class="correlate-desc">Consistent moderate exercise correlates with 3–5 additional years and dramatically better quality of life.</div>
+          </div>
+          <div class="correlate-years">+3–5 yrs</div>
+        </div>
+        <div class="correlate-row">
+          <div class="correlate-icon">⚖️</div>
+          <div class="correlate-body">
+            <div class="correlate-name">Healthy Weight (BMI 18.5–25)</div>
+            <div class="correlate-desc">Obesity (BMI 30+) is associated with 5–8 fewer years, driven by cardiovascular disease, diabetes, and other comorbidities.</div>
+          </div>
+          <div class="correlate-years">+3–5 yrs</div>
+        </div>
+        <div class="correlate-row">
+          <div class="correlate-icon">🎓</div>
+          <div class="correlate-body">
+            <div class="correlate-name">Higher Education</div>
+            <div class="correlate-desc">College graduates live 3–5 years longer on average, likely due to better healthcare access, income, lower-stress jobs, and health literacy.</div>
+          </div>
+          <div class="correlate-years">+3–5 yrs</div>
+        </div>
+        <div class="correlate-row">
+          <div class="correlate-icon">🤝</div>
+          <div class="correlate-body">
+            <div class="correlate-name">Strong Social Connections</div>
+            <div class="correlate-desc">Social isolation is a major risk factor. Strong relationships and community ties correlate with 5–7 additional years of life.</div>
+          </div>
+          <div class="correlate-years">+5–7 yrs</div>
+        </div>
+      </div>
+      <div class="correlate-note">
+        <strong>Note:</strong> These figures reflect population-level correlations from epidemiological research, not pure individual causation. Genetics, environment, healthcare access, and luck also play significant roles. Improving any single factor is beneficial; the greatest gains come from combining multiple healthy behaviors.
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">Life expectancy estimates are based on population-level actuarial data (2021 SSA Period Life Table) and lifestyle correlation research. Individual outcomes vary significantly. This is not medical advice. Lifestyle adjustment figures are approximate research correlates, not causal guarantees.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ── Theme toggle ──────────────────────────────────────────────────────────────
+(function() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+
+  function syncTheme() {
+    var dark = html.getAttribute('data-theme') === 'dark';
+    icon.textContent = dark ? '☀' : '☽';
+    label.textContent = dark ? 'Light' : 'Dark';
+  }
+  syncTheme();
+
+  btn.addEventListener('click', function() {
+    var dark = html.getAttribute('data-theme') === 'dark';
+    if (dark) {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    syncTheme();
+    if (survivalChart) updateChartColors();
+  });
+})();
+
+// ── Actuarial data — 2021 SSA Period Life Table q(x) values ──────────────────
+// q(x) = probability of dying at exact age x
+// Given at key ages; we interpolate linearly between them.
+
+// 2021 SSA Period Life Table — q(x) = probability of dying within the year at exact age x
+// Source: ssa.gov/oact/STATS/table4c6.html
+var MALE_QX_ANCHOR = [
+  [0, 0.00556], [1, 0.00038], [5, 0.00012], [10, 0.00011], [15, 0.00033],
+  [20, 0.00083], [25, 0.00097], [30, 0.00115], [35, 0.00152], [40, 0.00224],
+  [45, 0.00348], [50, 0.00554], [55, 0.00858], [60, 0.01304], [65, 0.01967],
+  [70, 0.02972], [75, 0.04689], [80, 0.07489], [85, 0.11674], [90, 0.17509],
+  [95, 0.24598], [100, 0.32909], [105, 0.43000], [110, 1.00000]
+];
+
+var FEMALE_QX_ANCHOR = [
+  [0, 0.00474], [1, 0.00029], [5, 0.00008], [10, 0.00008], [15, 0.00021],
+  [20, 0.00044], [25, 0.00055], [30, 0.00072], [35, 0.00102], [40, 0.00159],
+  [45, 0.00254], [50, 0.00394], [55, 0.00598], [60, 0.00888], [65, 0.01347],
+  [70, 0.02069], [75, 0.03305], [80, 0.05515], [85, 0.09028], [90, 0.13998],
+  [95, 0.20678], [100, 0.29108], [105, 0.39000], [110, 1.00000]
+];
+
+// Interpolate q(x) for any integer age using anchor points
+function buildQxTable(anchors, maxAge) {
+  var qx = [];
+  for (var age = 0; age <= maxAge; age++) {
+    // Find surrounding anchor points
+    var lo = anchors[0], hi = anchors[anchors.length - 1];
+    for (var i = 0; i < anchors.length - 1; i++) {
+      if (age >= anchors[i][0] && age <= anchors[i + 1][0]) {
+        lo = anchors[i];
+        hi = anchors[i + 1];
+        break;
+      }
+    }
+    if (age <= anchors[0][0]) {
+      qx[age] = anchors[0][1];
+    } else if (age >= anchors[anchors.length - 1][0]) {
+      qx[age] = 1.0;
+    } else {
+      var t = (age - lo[0]) / (hi[0] - lo[0]);
+      qx[age] = lo[1] + t * (hi[1] - lo[1]);
+    }
+    qx[age] = Math.min(qx[age], 1.0);
+  }
+  return qx;
+}
+
+var MAX_AGE = 110;
+var MALE_QX   = buildQxTable(MALE_QX_ANCHOR, MAX_AGE);
+var FEMALE_QX = buildQxTable(FEMALE_QX_ANCHOR, MAX_AGE);
+
+// Build l(x) survival table: l(0) = 100000, l(x+1) = l(x) * (1 - q(x))
+function buildLxTable(qx, maxAge) {
+  var lx = [];
+  lx[0] = 100000;
+  for (var x = 0; x < maxAge; x++) {
+    lx[x + 1] = lx[x] * (1 - qx[x]);
+  }
+  return lx;
+}
+
+var MALE_LX   = buildLxTable(MALE_QX, MAX_AGE);
+var FEMALE_LX = buildLxTable(FEMALE_QX, MAX_AGE);
+
+// Conditional survival: probability of surviving from currentAge to age x
+// S(x | currentAge) = l(x) / l(currentAge)
+function survivalCurve(lx, currentAge, maxAge) {
+  var lCurrent = lx[currentAge];
+  var curve = [];
+  for (var x = currentAge; x <= maxAge; x++) {
+    curve.push(lCurrent > 0 ? (lx[x] / lCurrent) * 100 : 0);
+  }
+  return curve;
+}
+
+// Find the age at which survival probability crosses a given percentile threshold
+// (i.e., the age at which P(survive) = targetPct% conditional on currentAge)
+function findPercentileAge(lx, currentAge, targetPct) {
+  var lCurrent = lx[currentAge];
+  var target = (targetPct / 100) * lCurrent;
+  for (var x = currentAge; x <= MAX_AGE; x++) {
+    if (lx[x] <= target) return x;
+  }
+  return MAX_AGE;
+}
+
+// ── Adjustments: lifestyle + cohort ──────────────────────────────────────────
+// Returns { lifestyle, cohort, total } year adjustments vs the 2021 period table
+function getAdjustments(currentAge) {
+  var smoker   = parseFloat(document.getElementById('smoker').value)   || 0;
+  var exercise = parseFloat(document.getElementById('exercise').value) || 0;
+  var bmi      = parseFloat(document.getElementById('bmi').value)      || 0;
+  var edu      = parseFloat(document.getElementById('education').value)|| 0;
+
+  // Lifestyle delta vs actuarial average (negative only — table is the population baseline)
+  // exercise baseline = +2, edu baseline = +2; others are direct deltas
+  var lifestyle = smoker + (exercise - 2) + bmi + (edu - 2);
+  lifestyle = Math.max(-25, Math.min(0, lifestyle));
+
+  // Cohort improvement: the 2021 SSA *period* table reflects 2021 mortality rates.
+  // People born later will benefit from future medical advances. SSA cohort projections
+  // suggest roughly +0.15 yrs per birth year after 1960, capped at ~+5 years.
+  var birthYear = new Date().getFullYear() - currentAge;
+  var cohort = birthYear > 1960 ? Math.min(5, Math.round(0.15 * (birthYear - 1960) * 10) / 10) : 0;
+
+  return { lifestyle: lifestyle, cohort: cohort, total: lifestyle + cohort, birthYear: birthYear };
+}
+
+// Shift survival curve by yearShift: delay or accelerate mortality
+// We implement this by treating adjusted median = base median + yearShift,
+// then scaling the curve accordingly.
+function applyAdjustmentToCurve(baseCurve, currentAge, yearShift) {
+  if (yearShift === 0) return baseCurve;
+  // For each age in baseCurve, shift the x-axis by yearShift
+  // adjusted[i] corresponds to probability of surviving to (currentAge + i)
+  // We map: adjusted probability at age x = base probability at age (x - yearShift)
+  var adjusted = [];
+  for (var i = 0; i < baseCurve.length; i++) {
+    var sourceI = i - yearShift; // e.g. if yearShift=-5, sourceI = i+5 (die sooner)
+    if (sourceI < 0) {
+      adjusted.push(100);
+    } else if (sourceI >= baseCurve.length) {
+      adjusted.push(0);
+    } else {
+      // Linear interpolation for fractional shifts
+      var floor = Math.floor(sourceI);
+      var frac  = sourceI - floor;
+      var v0 = baseCurve[floor];
+      var v1 = floor + 1 < baseCurve.length ? baseCurve[floor + 1] : 0;
+      adjusted.push(v0 + frac * (v1 - v0));
+    }
+  }
+  return adjusted;
+}
+
+// ── Chart ─────────────────────────────────────────────────────────────────────
+var survivalChart = null;
+
+function getCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function buildChartData(currentAge, sex, showBoth, showAdjusted) {
+  var lx = sex === 'male' ? MALE_LX : FEMALE_LX;
+  var oppLx = sex === 'male' ? FEMALE_LX : MALE_LX;
+  var oppLabel = sex === 'male' ? 'Female (actuarial)' : 'Male (actuarial)';
+
+  var baseLabel = sex === 'male' ? 'Male (actuarial)' : 'Female (actuarial)';
+  var baseCurve = survivalCurve(lx, currentAge, MAX_AGE);
+  var labels = [];
+  for (var a = currentAge; a <= MAX_AGE; a++) labels.push(a);
+
+  var adjs = getAdjustments(currentAge);
+  var yearShift = adjs.total;
+  var adjustedCurve = showAdjusted ? applyAdjustmentToCurve(baseCurve, currentAge, yearShift) : null;
+
+  var datasets = [];
+
+  // Base actuarial curve
+  datasets.push({
+    label: baseLabel,
+    data: baseCurve,
+    borderColor: sex === 'male' ? '#3b82f6' : '#ec4899',
+    backgroundColor: sex === 'male' ? 'rgba(59,130,246,0.08)' : 'rgba(236,72,153,0.08)',
+    borderWidth: 2.5,
+    fill: true,
+    tension: 0.4,
+    pointRadius: 0,
+    pointHoverRadius: 4
+  });
+
+  // Opposite sex curve
+  if (showBoth) {
+    var oppCurve = survivalCurve(oppLx, currentAge, MAX_AGE);
+    datasets.push({
+      label: oppLabel,
+      data: oppCurve,
+      borderColor: sex === 'male' ? '#ec4899' : '#3b82f6',
+      backgroundColor: 'transparent',
+      borderWidth: 1.5,
+      borderDash: [6, 4],
+      fill: false,
+      tension: 0.4,
+      pointRadius: 0,
+      pointHoverRadius: 4
+    });
+  }
+
+  // Adjusted curve
+  if (showAdjusted && yearShift !== 0 && adjustedCurve) {
+    datasets.push({
+      label: 'Adjusted (lifestyle + cohort)',
+      data: adjustedCurve,
+      borderColor: '#f97316',
+      backgroundColor: 'rgba(249,115,22,0.06)',
+      borderWidth: 2,
+      borderDash: [4, 3],
+      fill: true,
+      tension: 0.4,
+      pointRadius: 0,
+      pointHoverRadius: 4
+    });
+  }
+
+  return { labels: labels, datasets: datasets };
+}
+
+function getChartAnnotations(currentAge, sex) {
+  var lx = sex === 'male' ? MALE_LX : FEMALE_LX;
+  var median = findPercentileAge(lx, currentAge, 50);
+  var p25 = findPercentileAge(lx, currentAge, 75); // 75% survival = 25th mortality percentile
+  var p75 = findPercentileAge(lx, currentAge, 25); // 25% survival = 75th mortality percentile
+  return { median: median, p25: p25, p75: p75 };
+}
+
+function renderChart(currentAge, sex, showBoth, showAdjusted) {
+  var data = buildChartData(currentAge, sex, showBoth, showAdjusted);
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  var textColor = isDark ? '#9395a1' : '#6b7280';
+  var ann = getChartAnnotations(currentAge, sex);
+
+  // Build annotation plugin config for reference lines
+  var annotationPlugin = window['chartjs-plugin-annotation'];
+
+  var config = {
+    type: 'line',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: textColor,
+            font: { family: 'Inter', size: 11 },
+            usePointStyle: true,
+            pointStyleWidth: 16,
+            boxHeight: 8
+          }
+        },
+        tooltip: {
+          callbacks: {
+            title: function(items) { return 'Age ' + items[0].label; },
+            label: function(item) {
+              return item.dataset.label + ': ' + item.parsed.y.toFixed(1) + '% survival probability';
+            }
+          },
+          titleFont: { family: 'Inter', size: 11 },
+          bodyFont: { family: 'Inter', size: 11 }
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age',
+            color: textColor,
+            font: { family: 'Inter', size: 11 }
+          },
+          ticks: {
+            color: textColor,
+            font: { family: 'Inter', size: 10 },
+            maxTicksLimit: 20
+          },
+          grid: { color: gridColor }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Probability of Surviving to This Age (%)',
+            color: textColor,
+            font: { family: 'Inter', size: 11 }
+          },
+          min: 0,
+          max: 100,
+          ticks: {
+            color: textColor,
+            font: { family: 'Inter', size: 10 },
+            callback: function(v) { return v + '%'; }
+          },
+          grid: { color: gridColor }
+        }
+      }
+    },
+    plugins: [{
+      id: 'referenceLines',
+      afterDraw: function(chart) {
+        var ctx = chart.ctx;
+        var xAxis = chart.scales.x;
+        var yAxis = chart.scales.y;
+        var isDarkNow = document.documentElement.getAttribute('data-theme') === 'dark';
+
+        function drawVLine(age, color, dashPattern, labelText) {
+          var idx = age - currentAge;
+          if (idx < 0 || idx >= data.labels.length) return;
+          var x = xAxis.getPixelForValue(idx);
+          ctx.save();
+          ctx.setLineDash(dashPattern);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(x, yAxis.top);
+          ctx.lineTo(x, yAxis.bottom);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          // Label
+          ctx.fillStyle = color;
+          ctx.font = '10px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(labelText, x, yAxis.top - 4);
+          ctx.restore();
+        }
+
+        function drawHLine(pct, color, dashPattern) {
+          var y = yAxis.getPixelForValue(pct);
+          ctx.save();
+          ctx.setLineDash(dashPattern);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 1;
+          ctx.globalAlpha = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(xAxis.left, y);
+          ctx.lineTo(xAxis.right, y);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        var accentColor = isDarkNow ? '#4d8eff' : '#006aff';
+        var mutedColor  = isDarkNow ? '#9395a1' : '#6b7280';
+
+        // Current age marker (leftmost — age itself)
+        drawVLine(currentAge, accentColor, [4, 3], 'You (age ' + currentAge + ')');
+
+        // Horizontal reference at 50%
+        drawHLine(50, mutedColor, [4, 3]);
+        drawHLine(25, mutedColor, [2, 4]);
+        drawHLine(75, mutedColor, [2, 4]);
+
+        // Median line
+        drawVLine(ann.median, accentColor, [6, 4], 'Median: ' + ann.median);
+      }
+    }]
+  };
+
+  var canvas = document.getElementById('survivalChart');
+  var ctx = canvas.getContext('2d');
+
+  if (survivalChart) {
+    survivalChart.destroy();
+  }
+  survivalChart = new Chart(ctx, config);
+}
+
+function updateChartColors() {
+  if (!survivalChart) return;
+  var age  = parseInt(document.getElementById('currentAge').value) || 40;
+  var sex  = document.querySelector('input[name="sex"]:checked').value;
+  var both = document.getElementById('showBothSexes').checked;
+  var adj  = document.getElementById('showAdjusted').checked;
+  renderChart(age, sex, both, adj);
+}
+
+// ── Stats update ──────────────────────────────────────────────────────────────
+function updateStats(currentAge, sex) {
+  var lx  = sex === 'male' ? MALE_LX : FEMALE_LX;
+  var adj = getAdjustments(currentAge);
+
+  // Base actuarial (period table)
+  var baseP25 = findPercentileAge(lx, currentAge, 75);
+  var baseP50 = findPercentileAge(lx, currentAge, 50);
+  var baseP75 = findPercentileAge(lx, currentAge, 25);
+
+  // Adjusted (lifestyle + cohort)
+  var adjP25 = Math.round(baseP25 + adj.total);
+  var adjP50 = Math.round(baseP50 + adj.total);
+  var adjP75 = Math.round(baseP75 + adj.total);
+
+  // Main display: show adjusted as primary
+  document.getElementById('medianAge').textContent = adjP50;
+  var remaining = adjP50 - currentAge;
+  var baseNote = adj.total !== 0
+    ? ' <span style="color:var(--text-muted);font-size:12px;">(period table baseline: age ' + baseP50 + ')</span>'
+    : '';
+  document.getElementById('medianDesc').innerHTML =
+    'A ' + currentAge + '-year-old ' + sex + ' — estimated median life expectancy: ' +
+    '<strong>' + remaining + ' more years</strong>, to age <strong>' + adjP50 + '</strong>.' + baseNote;
+
+  document.getElementById('pct25').textContent = 'Age ' + adjP25;
+  document.getElementById('pct50').textContent = 'Age ' + adjP50;
+  document.getElementById('pct75').textContent = 'Age ' + adjP75;
+
+  // Adjustment breakdown callout
+  var callout = document.getElementById('adjustedCallout');
+  var adjText  = document.getElementById('adjustedText');
+  var hasAdj   = adj.lifestyle !== 0 || adj.cohort > 0;
+
+  if (hasAdj) {
+    callout.classList.add('visible');
+    var parts = [];
+    if (adj.cohort > 0) {
+      parts.push('Born ~' + adj.birthYear + ': <strong>+' + adj.cohort + ' yr' + (adj.cohort !== 1 ? 's' : '') + '</strong> — projected medical improvements over your lifetime (cohort vs period table)');
+    }
+    if (adj.lifestyle < 0) {
+      var lifeParts = [];
+      var smokerVal = parseFloat(document.getElementById('smoker').value) || 0;
+      var exVal     = parseFloat(document.getElementById('exercise').value) || 0;
+      var bmiVal    = parseFloat(document.getElementById('bmi').value) || 0;
+      var eduVal    = parseFloat(document.getElementById('education').value) || 0;
+      if (smokerVal < 0)      lifeParts.push('smoking (' + smokerVal + ' yrs)');
+      if (exVal - 2 < 0)      lifeParts.push('exercise (' + (exVal - 2) + ' yrs)');
+      if (bmiVal < 0)         lifeParts.push('BMI (' + bmiVal + ' yrs)');
+      if (eduVal - 2 < 0)     lifeParts.push('education (' + (eduVal - 2) + ' yrs)');
+      parts.push('Lifestyle: <strong>' + adj.lifestyle + ' yrs</strong>' + (lifeParts.length ? ' (' + lifeParts.join(', ') + ')' : ''));
+    }
+    var netSign = adj.total >= 0 ? '+' : '';
+    parts.push('Net: <strong>' + netSign + (Math.round(adj.total * 10) / 10) + ' yrs</strong> vs 2021 period table → estimated median age <strong>' + adjP50 + '</strong>');
+    adjText.innerHTML = parts.join('<br>');
+  } else {
+    callout.classList.remove('visible');
+  }
+}
+
+// ── Main calculate ─────────────────────────────────────────────────────────────
+function calculate() {
+  var currentAge = parseInt(document.getElementById('currentAge').value);
+  if (isNaN(currentAge) || currentAge < 0 || currentAge > 100) return;
+
+  var sex      = document.querySelector('input[name="sex"]:checked').value;
+  var showBoth = document.getElementById('showBothSexes').checked;
+  var showAdj  = document.getElementById('showAdjusted').checked;
+
+  updateStats(currentAge, sex);
+  renderChart(currentAge, sex, showBoth, showAdj);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+calculate();
+</script>
+</body>
+</html>

@@ -17,6 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://abelscalculators.com/extra-payment.html">
 <meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Extra Mortgage Payment vs Invest Calculator">
 <meta name="twitter:description" content="Should you pay extra on your mortgage or invest? Model the full net worth impact of both paths.">
@@ -96,6 +97,12 @@
   .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; cursor: pointer; }
   .checkbox-row input[type=checkbox] { width: auto; accent-color: var(--accent); cursor: pointer; }
   .checkbox-row label { font-size: 12px; color: var(--text-muted); cursor: pointer; margin: 0; }
+  .deduction-callout { background: rgba(0,106,255,0.06); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
+  .deduction-callout strong { color: var(--accent); display: block; margin-bottom: 3px; font-size: 12px; }
+  .effective-rate-box { background: var(--surface2); border: 1px solid var(--accent-dim); border-radius: 8px; padding: 10px 14px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .erb-left { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+  .erb-right { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--accent); white-space: nowrap; }
+  .erb-right span { font-size: 11px; font-family: 'Inter', sans-serif; color: var(--text-muted); display: block; text-align: right; margin-top: 1px; }
   .derived-display { padding: 7px 10px; background: var(--bg); border: 1px solid var(--accent-dim); border-radius: var(--radius); font-size: 14px; color: var(--accent); font-family: 'DM Serif Display', serif; margin-bottom: 9px; }
   .derived-label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
 
@@ -225,8 +232,28 @@
         <a href="withdrawal.html">Withdrawal Simulator</a>
       </div>
     </div>
-    <a href="vehicle-cost.html">Cars</a>
-    <a href="race-predictor.html">Race Predictor</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
     <span class="nav-sep">&middot;</span>
     <a href="blog.html">Blog</a>
     <span class="nav-sep">&middot;</span>
@@ -296,7 +323,11 @@
   </div>
 
   <div class="panel">
-    <div class="section-label">Tax Adjustments <span style="font-size:9px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+    <div class="section-label">Mortgage Interest Deduction</div>
+    <div class="deduction-callout">
+      <strong>Often the deciding factor.</strong>
+      If you itemize, the government subsidizes your mortgage interest — your effective rate drops by your tax bracket. A 7% mortgage at 22% costs only 5.46% after tax. At 32%, it's 4.76%. That shift can flip the outcome.
+    </div>
     <label class="checkbox-row">
       <input type="checkbox" id="itemizes" onchange="calc()">
       <label for="itemizes">I itemize deductions (deduct mortgage interest)</label>
@@ -313,7 +344,11 @@
         <option value="37">37%</option>
       </select>
     </div>
-    <div class="hint">If you itemize, your mortgage interest deduction reduces the effective cost of your mortgage, making investing slightly more attractive.</div>
+    <div id="effectiveRateBox" class="effective-rate-box" style="display:none">
+      <div class="erb-left">Your effective<br>mortgage rate<br>(after deduction)</div>
+      <div class="erb-right"><span id="effectiveRateVal">—</span><span>vs <span id="nominalRateVal">—</span> nominal</span></div>
+    </div>
+    <div class="hint" style="margin-top:10px">Not sure if you itemize? Your total deductions (mortgage interest + state/local taxes + charitable giving) must exceed the standard deduction — $14,600 single or $29,200 married filing jointly (2024) — for itemizing to help you. Many homeowners don't clear that threshold and receive no tax benefit from their mortgage interest.</div>
   </div>
 
   <div class="panel">
@@ -424,7 +459,8 @@
       <p><strong>Extra Payment Path</strong> net worth = equity advantage (lower remaining balance) + post-payoff investment portfolio. Once the mortgage is fully paid off, the entire freed payment — principal + interest + extra — is redirected to investments.</p>
       <p style="margin-top:10px"><strong>Invest Extra Path</strong> net worth = investment portfolio of the extra monthly amount, compounding at the expected return. Normal mortgage continues on schedule.</p>
       <p style="margin-top:10px">The comparison is fair because both paths share the same baseline (normal mortgage payments). After the normal mortgage pays off in the invest path, the freed payment is also invested. The only thing being compared is what happens to the <em>extra</em> dollars — and how the knock-on effect of early payoff changes the math.</p>
-      <p style="margin-top:10px"><strong>Tax note:</strong> If you itemize, your effective mortgage rate is reduced by your tax bracket (e.g. a 7% mortgage at a 22% bracket = 5.46% effective). This makes investing slightly more competitive since you're paying less in true mortgage interest per dollar.</p>
+      <p style="margin-top:10px"><strong>The deduction factor — often the deciding variable:</strong> If you itemize deductions, the government effectively subsidizes your mortgage interest. Your effective rate = nominal rate × (1 − tax bracket). A 7% mortgage at a 22% bracket costs only 5.46% after tax; at 32%, it's 4.76%. This lower effective rate makes paying down your mortgage less compelling — because the rate you're "beating" is now significantly lower. It also penalizes Path A (extra payments) because paying down faster means losing more of the interest deduction each year. Whether you itemize — and at what bracket — is frequently what tips the comparison from "pay down" to "invest."</p>
+      <p style="margin-top:10px"><strong>Do you actually itemize?</strong> Only about 10–15% of taxpayers currently itemize (post-2017 TCJA, which nearly doubled the standard deduction). You itemize only if your total deductible expenses — mortgage interest, state and local taxes (capped at $10,000), charitable contributions — exceed $14,600 (single) or $29,200 (married, 2024). Many homeowners assume they get the deduction but don't clear this threshold, especially as their mortgage matures and interest shrinks.</p>
     </div>
   </div>
 
@@ -435,8 +471,6 @@
   <p class="site-footer-disclaimer">For informational purposes only. Not financial advice. Results are estimates based on inputs provided and simplified assumptions. Does not account for taxes on investment gains, inflation, changing interest rates, or individual financial circumstances. Consult a licensed financial professional before making any financial decision.</p>
   <nav class="site-footer-nav">
     <a href="index.html">Home</a>
-    <a href="refinance.html">Refinance</a>
-    <a href="rent-vs-buy.html">Rent vs Buy</a>
     <a href="blog.html">Blog</a>
     <a href="about.html">About</a>
     <a href="privacy.html">Privacy Policy</a>
@@ -475,6 +509,7 @@
 // ─── Tax bracket toggle ────────────────────────────────────────
 document.getElementById('itemizes').addEventListener('change', function() {
   document.getElementById('taxBracketRow').style.display = this.checked ? 'block' : 'none';
+  document.getElementById('effectiveRateBox').style.display = this.checked ? 'flex' : 'none';
 });
 
 // ─── Helpers ───────────────────────────────────────────────────
@@ -622,6 +657,12 @@ function calc() {
   const investRetAfterTaxPct = fmtPct(afterTaxInvestAnnual * 100);
   const mortgageRatePct = fmtPct(effectiveAnnualRate * 100);
 
+  // ── Effective rate display in sidebar ──
+  if (itemizes && bracket > 0) {
+    document.getElementById('effectiveRateVal').textContent = mortgageRatePct;
+    document.getElementById('nominalRateVal').textContent = fmtPct(rate * 100);
+  }
+
   if (winner === 'paydown') {
     header.innerHTML = 'Paying extra on your mortgage leads by <span class="pos">' + fmt(last.gap) + '</span> at year ' + horizon + '.';
     if (rateWinner === 'paydown') {
@@ -687,12 +728,15 @@ function calc() {
 
   const margin = ((afterTaxInvestAnnual - effectiveAnnualRate) * 100).toFixed(2);
   const noteEl = document.getElementById('tradeoffNote');
+  const deductionNote = itemizes && bracket > 0
+    ? ' The mortgage interest deduction — reducing your rate from ' + fmtPct(rate * 100) + ' to ' + mortgageRatePct + ' — is a key part of why investing looks more competitive here.'
+    : ' If you itemize deductions, your effective mortgage rate would drop further, making investing even more attractive.';
   if (effectiveAnnualRate >= afterTaxInvestAnnual) {
-    noteEl.innerHTML = '<strong>Pay-down wins on rate</strong> — and wins in the simulation too. Your effective mortgage rate (' + mortgageRatePct + ') equals or exceeds your after-tax investment return (' + investRetAfterTaxPct + '). Paying extra is a guaranteed return that investing doesn\'t beat here — on rate <em>or</em> in the full model.';
+    noteEl.innerHTML = '<strong>Pay-down wins on rate</strong> — and wins in the simulation too. Your effective mortgage rate (' + mortgageRatePct + ') equals or exceeds your after-tax investment return (' + investRetAfterTaxPct + '). Paying extra is a guaranteed return that investing doesn\'t beat here — on rate <em>or</em> in the full model.' + (itemizes ? '' : ' Note: if you itemize deductions, your effective rate would be lower, potentially shifting this outcome.');
   } else if (winner === 'paydown') {
-    noteEl.innerHTML = '<strong>Invest has a ' + margin + 'pp after-tax rate edge, but pay-down wins the full model.</strong> Your after-tax return (' + investRetAfterTaxPct + ') exceeds your mortgage rate (' + mortgageRatePct + '), so the pure rate comparison favors investing. But early payoff frees up your full monthly payment (' + fmt(normalPayment) + '/mo) to invest from that point forward — a cash flow surge that outweighs the rate difference over your ' + horizon + '-year horizon.';
+    noteEl.innerHTML = '<strong>Invest has a ' + margin + 'pp after-tax rate edge, but pay-down wins the full model.</strong> Your after-tax return (' + investRetAfterTaxPct + ') exceeds your mortgage rate (' + mortgageRatePct + '), so the pure rate comparison favors investing.' + deductionNote + ' But early payoff frees up your full monthly payment (' + fmt(normalPayment) + '/mo) to invest from that point forward — a cash flow surge that outweighs the rate difference over your ' + horizon + '-year horizon.';
   } else {
-    noteEl.innerHTML = '<strong>Invest has a ' + margin + 'pp after-tax edge — and wins the full model too.</strong> Your after-tax return (' + investRetAfterTaxPct + ') exceeds your effective mortgage rate (' + mortgageRatePct + '). Compound growth on invested dollars outpaces the interest savings from early payoff over this horizon. Note: paying extra is still a <em>guaranteed</em> ' + mortgageRatePct + ' return with no market risk.';
+    noteEl.innerHTML = '<strong>Invest has a ' + margin + 'pp after-tax edge — and wins the full model too.</strong> Your after-tax return (' + investRetAfterTaxPct + ') exceeds your effective mortgage rate (' + mortgageRatePct + ').' + deductionNote + ' Compound growth on invested dollars outpaces the interest savings from early payoff over this horizon. Note: paying extra is still a <em>guaranteed</em> ' + mortgageRatePct + ' return with no market risk.';
   }
 
   // ── Chart ──

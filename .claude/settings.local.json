@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(xargs sed:*)",
-      "Read(//c/Users/brent/.claude/projects/c--Users-brent-OneDrive-Documents-GitHub-finance-calculators/memory/**)"
+      "Read(//c/Users/brent/.claude/projects/c--Users-brent-OneDrive-Documents-GitHub-finance-calculators/memory/**)",
+      "WebSearch",
+      "Bash(grep -l 'href=\"\"race-predictor.html\"\">Race Predictor' c:UsersbrentOneDriveDocumentsGitHubfinance_calculators*.html)",
+      "Bash(python3 -c \":*)"
     ]
   }
 }

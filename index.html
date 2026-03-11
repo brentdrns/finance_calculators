@@ -17,6 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://abelscalculators.com/">
 <meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Abel's Financial Calculators">
 <meta name="twitter:description" content="Free financial calculators that factor in more than the others.">
@@ -207,8 +208,28 @@
         <a href="withdrawal.html">Withdrawal Simulator</a>
       </div>
     </div>
-    <a href="vehicle-cost.html">Cars</a>
-    <a href="race-predictor.html">Race Predictor</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
     <span class="nav-sep">&middot;</span>
     <a href="blog.html">Blog</a>
     <span class="nav-sep">&middot;</span>
@@ -310,12 +331,40 @@
     </a>
   </div>
 
-  <div class="section-label">Other Tools</div>
+  <div class="section-label">Taxes &amp; More</div>
+  <div class="calc-secondary">
+    <a href="tax-brackets.html" class="calc-secondary-link">
+      <span class="csl-title">Tax Bracket Visualizer</span>
+      <span class="csl-sep">&mdash;</span>
+      See exactly how federal income tax brackets stack &mdash; including capital gains, standard deduction, and filing status.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+    <a href="social-security.html" class="calc-secondary-link">
+      <span class="csl-title">Social Security Break-Even</span>
+      <span class="csl-sep">&mdash;</span>
+      Should you claim at 62, 67, or 70? Model the break-even crossover and lifetime benefit under different scenarios.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+    <a href="life-expectancy.html" class="calc-secondary-link">
+      <span class="csl-title">Life Expectancy Calculator</span>
+      <span class="csl-sep">&mdash;</span>
+      See your survival probability curve from SSA actuarial data. Adjust for smoking, exercise, BMI, and education.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+  </div>
+
+  <div class="section-label">Running</div>
   <div class="calc-secondary">
     <a href="race-predictor.html" class="calc-secondary-link">
-      <span class="csl-title">Running Race Predictor</span>
+      <span class="csl-title">Race Time Predictor</span>
       <span class="csl-sep">&mdash;</span>
       VDOT-based race time predictions adjusted for weekly mileage and course elevation.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+    <a href="training-paces.html" class="calc-secondary-link">
+      <span class="csl-title">Training Pace Calculator</span>
+      <span class="csl-sep">&mdash;</span>
+      Get your easy, tempo, interval, and race-pace zones based on a recent PR using Jack Daniels&rsquo; VDOT system.
       <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
     </a>
   </div>
@@ -347,6 +396,26 @@
       <div class="blog-card-title">Is Refinancing Your Mortgage Worth It?</div>
       <div class="blog-card-desc">Most refinance advice focuses on monthly savings. Here&rsquo;s how to evaluate a refinance by its real impact on your net worth.</div>
     </a>
+    <a href="blog/when-to-claim-social-security.html" class="blog-card">
+      <div class="blog-card-date">March 11, 2026</div>
+      <div class="blog-card-title">When Should You Claim Social Security?</div>
+      <div class="blog-card-desc">Claiming at 62 vs 70 is a break-even math problem &mdash; but it&rsquo;s also about your health, other income sources, and spouse strategy. Here&rsquo;s how to think through it.</div>
+    </a>
+    <a href="blog/understanding-tax-brackets.html" class="blog-card">
+      <div class="blog-card-date">March 11, 2026</div>
+      <div class="blog-card-title">How Tax Brackets Actually Work</div>
+      <div class="blog-card-desc">You don&rsquo;t pay your top rate on all your income. Here&rsquo;s how marginal brackets stack, why your effective rate is lower than you think, and how capital gains layer on top.</div>
+    </a>
+    <a href="blog/how-to-build-a-running-base.html" class="blog-card">
+      <div class="blog-card-date">March 11, 2026</div>
+      <div class="blog-card-title">How to Build a Running Base Without Getting Injured</div>
+      <div class="blog-card-desc">The 10% rule is oversimplified &mdash; and following it blindly can still get you hurt. Here&rsquo;s what the research actually says about safe mileage progression.</div>
+    </a>
+    <a href="blog/real-cost-of-a-new-car.html" class="blog-card">
+      <div class="blog-card-date">March 11, 2026</div>
+      <div class="blog-card-title">The Real Cost of a New Car</div>
+      <div class="blog-card-desc">The sticker price is just the beginning. Depreciation, financing, insurance, and opportunity cost add up fast &mdash; here&rsquo;s how to see the full picture before you buy.</div>
+    </a>
   </div>
 
 </div>
@@ -354,10 +423,8 @@
 <footer class="site-footer">
   <p class="site-footer-disclaimer">For informational purposes only. Not financial advice.</p>
   <nav class="site-footer-nav">
-    <a href="refinance.html">Refinance</a>
-    <a href="rent-vs-buy.html">Rent vs Buy</a>
-    <a href="vehicle-cost.html">Vehicle Cost</a>
-    <a href="withdrawal.html">Withdrawal</a>
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
     <a href="about.html">About</a>
     <a href="privacy.html">Privacy Policy</a>
   </nav>
