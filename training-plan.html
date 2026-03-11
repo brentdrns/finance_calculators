@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Running Training Plan Builder — Abel's Calculators</title>
+<meta name="description" content="Build a personalized running training plan using Jack Daniels' VDOT methodology. Export to Google Calendar. 5K, 10K, half marathon, and marathon plans.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/training-plan.html">
+<meta property="og:title" content="Running Training Plan Builder — VDOT-Based Plans">
+<meta property="og:description" content="Generate a personalized running training plan with Google Calendar export. Based on Jack Daniels' VDOT system.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/training-plan.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Running Training Plan Builder">
+<meta name="twitter:description" content="Generate a personalized running training plan with Google Calendar export.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Running Training Plan Builder","description":"Generate a personalized running training plan based on Jack Daniels' VDOT methodology with Google Calendar export.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/training-plan.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      const t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+  /* Layout */
+  .page-wrap { max-width: 1100px; margin: 0 auto; padding: 28px 32px; }
+
+  /* Hero */
+  .page-hero { margin-bottom: 28px; }
+  .page-hero-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-hero-title { font-family: 'DM Serif Display', serif; font-size: 30px; font-style: italic; color: var(--text); line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .page-hero-title span { color: var(--accent); }
+  .page-hero-sub { font-size: 13px; color: var(--text-muted); line-height: 1.7; max-width: 680px; }
+
+  /* Card */
+  .card { background: var(--surface); border-radius: var(--radius); padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 20px; }
+  .card-title { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Inputs grid */
+  .inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .inputs-grid { grid-template-columns: 1fr; } }
+
+  .field { margin-bottom: 12px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
+  .field input, .field select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .field input[type="number"] { -moz-appearance: textfield; }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+  .time-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 4px; align-items: end; }
+  .time-row .field { margin-bottom: 0; }
+  .time-sep { display: flex; align-items: flex-end; padding-bottom: 9px; color: var(--text-muted); font-size: 16px; font-weight: 300; justify-content: center; }
+
+  .days-checkboxes { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 4px; }
+  .day-check { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .day-check input[type="checkbox"] { accent-color: var(--accent); width: 16px; height: 16px; cursor: pointer; }
+  .day-check label { font-size: 10px; color: var(--text-muted); cursor: pointer; font-weight: 500; user-select: none; }
+
+  /* Build button */
+  .build-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: #fff; border: none; border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+    padding: 13px 32px; cursor: pointer; transition: opacity 0.15s, transform 0.1s;
+    margin-top: 8px;
+  }
+  .build-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .build-btn:active { transform: translateY(0); }
+  .build-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+  .btn-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+  /* Alerts */
+  .alert { border-radius: 10px; padding: 14px 18px; font-size: 13px; line-height: 1.6; margin-bottom: 18px; display: flex; gap: 10px; align-items: flex-start; }
+  .alert-error { background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.25); color: var(--red); }
+  .alert-warning { background: rgba(249,115,22,0.10); border: 1px solid rgba(249,115,22,0.25); color: #f97316; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Plan summary card */
+  .summary-card { background: var(--surface); border-radius: var(--radius); padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 24px; }
+  .summary-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; margin-bottom: 16px; line-height: 1.2; }
+  .summary-title span { color: var(--accent); }
+  .summary-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .stat-box { background: var(--surface2); border-radius: 10px; padding: 12px 14px; }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-value { font-size: 18px; font-family: 'DM Serif Display', serif; color: var(--text); }
+  .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Phase legend */
+  .phase-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+  .phase-dot { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+  .phase-dot-color { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Week cards */
+  .week-card {
+    border-radius: var(--radius); margin-bottom: 14px;
+    background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--border); overflow: hidden;
+  }
+  .week-card.phase-base { border-left-color: #16a34a; }
+  .week-card.phase-build { border-left-color: #f97316; }
+  .week-card.phase-peak { border-left-color: #ef4444; }
+  .week-card.phase-taper { border-left-color: #8b5cf6; }
+  .week-card.recovery-week { background: var(--surface2); }
+
+  .week-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 18px; cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .week-header:hover { background: var(--surface2); }
+  .week-num { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .week-phase-badge {
+    font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 5px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .badge-base { background: rgba(22,163,74,0.15); color: #16a34a; }
+  .badge-build { background: rgba(249,115,22,0.15); color: #f97316; }
+  .badge-peak { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .badge-taper { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+  .badge-recovery { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+  .week-miles-badge { margin-left: auto; font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text-muted); background: var(--surface2); border-radius: 6px; padding: 3px 9px; }
+  .week-toggle-icon { color: var(--text-muted); font-size: 11px; transition: transform 0.2s; }
+  .week-card.collapsed .week-toggle-icon { transform: rotate(-90deg); }
+
+  .week-body { padding: 0; }
+  .week-card.collapsed .week-body { display: none; }
+
+  /* Day grid */
+  .day-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .day-cell {
+    padding: 12px 10px; border-right: 1px solid var(--border);
+    min-height: 120px; display: flex; flex-direction: column; gap: 6px;
+  }
+  .day-cell:last-child { border-right: none; }
+  .day-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .day-date-label { font-size: 10px; color: var(--text-muted); margin-top: -2px; }
+
+  /* Workout badges */
+  .workout-badge {
+    display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 7px;
+    border-radius: 5px; text-transform: uppercase; letter-spacing: 0.07em; flex-shrink: 0;
+    white-space: nowrap; align-self: flex-start; margin-bottom: 2px;
+  }
+  .wb-rest { background: var(--surface2); color: var(--text-muted); }
+  .wb-easy { background: rgba(22,163,74,0.12); color: #16a34a; }
+  .wb-long { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .wb-tempo { background: rgba(249,115,22,0.12); color: #f97316; }
+  .wb-intervals { background: rgba(239,68,68,0.12); color: var(--red); }
+  .wb-racepace { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+  .wb-strides { background: rgba(14,165,233,0.12); color: #0ea5e9; }
+  .wb-race { background: var(--accent); color: #fff; }
+  .wb-cruise { background: rgba(249,115,22,0.12); color: #f97316; }
+
+  .day-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .day-miles { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text); font-weight: 500; margin-top: auto; }
+
+  @media (max-width: 768px) {
+    .day-grid { grid-template-columns: 1fr; }
+    .day-cell { border-right: none; border-bottom: 1px solid var(--border); min-height: auto; flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
+    .day-cell:last-child { border-bottom: none; }
+    .day-label { width: 30px; flex-shrink: 0; padding-top: 2px; }
+    .day-cell-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .day-miles { margin-top: 0; }
+  }
+
+  /* Export / print buttons */
+  .export-bar {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    margin: 28px 0 16px; padding: 20px 24px; background: var(--surface);
+    border-radius: var(--radius); box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .export-bar-text { flex: 1; min-width: 200px; }
+  .export-bar-text h3 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+  .export-bar-text p { font-size: 12px; color: var(--text-muted); }
+  .export-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff; border: none; border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+    padding: 11px 22px; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+  }
+  .export-btn:hover { opacity: 0.88; }
+  .print-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface2); color: var(--text); border: 1px solid var(--border); border-radius: 10px;
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+    padding: 11px 22px; cursor: pointer; transition: background 0.15s; white-space: nowrap;
+  }
+  .print-btn:hover { background: var(--border); }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 28px 32px; margin-top: 48px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.7; max-width: 820px; margin-bottom: 14px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
+  .site-footer-nav a:hover { color: var(--text); }
+
+  /* Loading */
+  .loading-spinner {
+    display: inline-block; width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Paces reference card */
+  .paces-card { background: var(--surface); border-radius: var(--radius); padding: 18px 22px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); margin-bottom: 20px; }
+  .paces-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 12px; }
+  .pace-box { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
+  .pace-box-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 3px; }
+  .pace-box-value { font-size: 15px; font-family: 'DM Mono', monospace; color: var(--text); }
+  .pace-box-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* You are here */
+  .current-week-marker { background: rgba(0,106,255,0.08); border: 1px solid rgba(0,106,255,0.25); border-left-color: var(--accent) !important; }
+
+  /* Print styles */
+  @media print {
+    header, .inputs-section, .export-bar, .site-footer, .build-btn, .print-btn, .export-btn { display: none !important; }
+    .week-card.collapsed .week-body { display: block !important; }
+    .page-wrap { padding: 0; max-width: 100%; }
+    .week-card { page-break-inside: avoid; }
+  }
+
+  /* Other miles input */
+  #otherDistWrap { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <a href="vehicle-cost.html">Cars</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+        <a href="training-plan.html" class="active">Training Plan Builder</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-label">Running Tools</div>
+    <h2 class="page-hero-title">Training Plan <span>Builder</span></h2>
+    <p class="page-hero-sub">Enter a recent race PR and your goal race, and we'll generate a personalized week-by-week training plan based on Jack Daniels' VDOT methodology. Export directly to Google Calendar.</p>
+  </div>
+
+  <!-- Input card -->
+  <div class="card inputs-section">
+    <div class="inputs-grid">
+
+      <!-- Left: Current Fitness -->
+      <div>
+        <div class="card-title">Current Fitness</div>
+
+        <div class="field">
+          <label for="prDist">PR Distance</label>
+          <select id="prDist">
+            <option value="5000">5K</option>
+            <option value="10000">10K</option>
+            <option value="21097.5" selected>Half Marathon</option>
+            <option value="42195">Marathon</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div id="otherDistWrap" class="field">
+          <label for="otherDistMiles">Other Distance (miles)</label>
+          <input type="number" id="otherDistMiles" min="0.5" max="100" step="0.1" value="6.2" placeholder="6.2">
+        </div>
+
+        <div class="field">
+          <label>PR Time (HH:MM:SS)</label>
+          <div class="time-row">
+            <div class="field"><input type="number" id="prHH" min="0" max="99" placeholder="0" value="1"></div>
+            <div class="time-sep">:</div>
+            <div class="field"><input type="number" id="prMM" min="0" max="59" placeholder="MM" value="45"></div>
+            <div class="time-sep">:</div>
+            <div class="field"><input type="number" id="prSS" min="0" max="59" placeholder="SS" value="00"></div>
+          </div>
+          <div class="hint">Your best recent effort for the selected distance</div>
+        </div>
+
+        <div class="field">
+          <label for="currentMiles">Current Weekly Mileage (miles)</label>
+          <input type="number" id="currentMiles" min="0" max="200" step="1" value="25" placeholder="25">
+          <div class="hint">Average miles per week over the last 4 weeks</div>
+        </div>
+
+        <div class="field">
+          <label for="qualityDays">Quality Days / Week Currently</label>
+          <input type="number" id="qualityDays" min="0" max="6" step="1" value="2" placeholder="2">
+          <div class="hint">Workouts above Zone 2 (tempo, intervals, etc.)</div>
+        </div>
+      </div>
+
+      <!-- Right: Goal -->
+      <div>
+        <div class="card-title">Goal Race</div>
+
+        <div class="field">
+          <label for="goalDist">Goal Race Distance</label>
+          <select id="goalDist">
+            <option value="5000">5K</option>
+            <option value="10000">10K</option>
+            <option value="21097.5" selected>Half Marathon</option>
+            <option value="42195">Marathon</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="raceDate">Goal Race Date</label>
+          <input type="date" id="raceDate">
+        </div>
+
+        <div class="field">
+          <label>Goal Time — optional (HH:MM:SS)</label>
+          <div class="time-row">
+            <div class="field"><input type="number" id="goalHH" min="0" max="99" placeholder="HH"></div>
+            <div class="time-sep">:</div>
+            <div class="field"><input type="number" id="goalMM" min="0" max="59" placeholder="MM"></div>
+            <div class="time-sep">:</div>
+            <div class="field"><input type="number" id="goalSS" min="0" max="59" placeholder="SS"></div>
+          </div>
+          <div class="hint">Leave blank to use VDOT-predicted finish time</div>
+        </div>
+
+        <div class="field">
+          <label for="daysPerWeek">Days Available to Run / Week</label>
+          <input type="number" id="daysPerWeek" min="2" max="7" step="1" value="5" placeholder="5">
+        </div>
+
+        <div class="field">
+          <label>Which Days</label>
+          <div class="days-checkboxes">
+            <div class="day-check"><input type="checkbox" id="dMon" checked><label for="dMon">Mon</label></div>
+            <div class="day-check"><input type="checkbox" id="dTue" checked><label for="dTue">Tue</label></div>
+            <div class="day-check"><input type="checkbox" id="dWed" checked><label for="dWed">Wed</label></div>
+            <div class="day-check"><input type="checkbox" id="dThu" checked><label for="dThu">Thu</label></div>
+            <div class="day-check"><input type="checkbox" id="dFri" checked><label for="dFri">Fri</label></div>
+            <div class="day-check"><input type="checkbox" id="dSat" checked><label for="dSat">Sat</label></div>
+            <div class="day-check"><input type="checkbox" id="dSun"><label for="dSun">Sun</label></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="build-btn" id="buildBtn" onclick="buildPlan()">
+        <span id="buildBtnText">Build My Plan</span>
+        <span id="buildBtnSpinner" style="display:none;"><span class="loading-spinner"></span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Output area -->
+  <div id="outputArea" style="display:none;">
+
+    <div id="alertArea"></div>
+
+    <!-- Summary card -->
+    <div class="summary-card" id="summaryCard"></div>
+
+    <!-- Paces reference -->
+    <div class="paces-card" id="pacesCard"></div>
+
+    <!-- Phase legend -->
+    <div class="phase-legend">
+      <div class="phase-dot"><div class="phase-dot-color" style="background:#16a34a"></div> Base</div>
+      <div class="phase-dot"><div class="phase-dot-color" style="background:#f97316"></div> Build</div>
+      <div class="phase-dot"><div class="phase-dot-color" style="background:#ef4444"></div> Peak</div>
+      <div class="phase-dot"><div class="phase-dot-color" style="background:#8b5cf6"></div> Taper</div>
+    </div>
+
+    <!-- Week cards container -->
+    <div id="planContainer"></div>
+
+    <!-- Export bar -->
+    <div class="export-bar">
+      <div class="export-bar-text">
+        <h3>Export Your Plan</h3>
+        <p>Download as an .ics file to import into Google Calendar, Apple Calendar, or Outlook.</p>
+      </div>
+      <button class="export-btn" onclick="doExport()">&#128197; Export to Calendar</button>
+      <button class="print-btn" onclick="window.print()">&#128438; Print Plan</button>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">Training plans are generated algorithmically based on Jack Daniels' VDOT methodology and general periodization principles. Individual response to training varies significantly. Consult a certified running coach before beginning any structured training program, especially if you have injury history.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="race-predictor.html">Race Predictor</a>
+    <a href="training-paces.html">Training Paces</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─── Theme toggle ────────────────────────────────────────────────────────────
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon   = document.getElementById('themeIcon');
+const themeLabel  = document.getElementById('themeLabel');
+
+function applyTheme(dark) {
+  if (dark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeIcon.textContent = '☀';
+    themeLabel.textContent = 'Light';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    themeIcon.textContent = '☾';
+    themeLabel.textContent = 'Dark';
+  }
+}
+applyTheme(localStorage.getItem('theme') === 'dark');
+themeToggle.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  localStorage.setItem('theme', isDark ? '' : 'dark');
+  applyTheme(!isDark);
+});
+
+// ─── Show/hide other distance ─────────────────────────────────────────────────
+document.getElementById('prDist').addEventListener('change', function() {
+  document.getElementById('otherDistWrap').style.display = this.value === 'other' ? 'block' : 'none';
+});
+
+// ─── Default race date (16 weeks out) ────────────────────────────────────────
+(function() {
+  const d = new Date();
+  d.setDate(d.getDate() + 16 * 7);
+  document.getElementById('raceDate').value = d.toISOString().slice(0, 10);
+})();
+
+// ─── VDOT math ───────────────────────────────────────────────────────────────
+function vdotFromTime(distMeters, timeMinutes) {
+  const v = distMeters / timeMinutes;
+  const vo2  = -4.60 + 0.182258 * v + 0.000104 * v * v;
+  const pvo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
+                   + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
+  return vo2 / pvo2;
+}
+
+function vdotToTime(vdot, distMeters) {
+  // vdotFromTime is decreasing in t — when f(mid) > vdot, lo = mid
+  let lo = 0.5, hi = 2000;
+  for (let i = 0; i < 100; i++) {
+    const mid = (lo + hi) / 2;
+    if (vdotFromTime(distMeters, mid) > vdot) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+function formatPace(minutes) {
+  const m = Math.floor(minutes);
+  const s = Math.round((minutes - m) * 60);
+  return m + ':' + String(s).padStart(2, '0');
+}
+
+function formatTime(totalMinutes) {
+  const h = Math.floor(totalMinutes / 60);
+  const m = Math.floor(totalMinutes % 60);
+  const s = Math.round((totalMinutes - Math.floor(totalMinutes)) * 60);
+  if (h > 0) return h + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  return m + ':' + String(s).padStart(2,'0');
+}
+
+function zonePaces(vdot) {
+  const mile = 1609.34;
+  return {
+    easyLo:   vdotToTime(vdot * 0.59, mile),
+    easyHi:   vdotToTime(vdot * 0.74, mile),
+    marathon:  vdotToTime(vdot * 0.79, mile),
+    tempo:     vdotToTime(vdot * 0.86, mile),
+    interval:  vdotToTime(vdot * 0.98, mile),
+    rep400:    vdotToTime(vdot * 1.10, 400),
+  };
+}
+
+// ─── Stored plan for export ───────────────────────────────────────────────────
+let generatedPlan = null;
+
+// ─── Main build function ──────────────────────────────────────────────────────
+function buildPlan() {
+  // Show loading state
+  const btn = document.getElementById('buildBtn');
+  document.getElementById('buildBtnText').textContent = 'Building…';
+  document.getElementById('buildBtnSpinner').style.display = 'inline-block';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    try {
+      _doBuildPlan();
+    } catch(e) {
+      console.error(e);
+      showError('An unexpected error occurred. Please check your inputs and try again.');
+    }
+    document.getElementById('buildBtnText').textContent = 'Rebuild Plan';
+    document.getElementById('buildBtnSpinner').style.display = 'none';
+    btn.disabled = false;
+  }, 400);
+}
+
+function showError(msg) {
+  document.getElementById('alertArea').innerHTML = `<div class="alert alert-error"><span class="alert-icon">✕</span><span>${msg}</span></div>`;
+  document.getElementById('outputArea').style.display = 'block';
+  document.getElementById('summaryCard').style.display = 'none';
+  document.getElementById('pacesCard').style.display = 'none';
+  document.getElementById('planContainer').innerHTML = '';
+  document.querySelector('.export-bar').style.display = 'none';
+  document.querySelector('.phase-legend').style.display = 'none';
+}
+
+function _doBuildPlan() {
+  // ── Read inputs ──
+  let prDistM = parseFloat(document.getElementById('prDist').value);
+  if (isNaN(prDistM) || prDistM === 0) {
+    // "other"
+    const mi = parseFloat(document.getElementById('otherDistMiles').value);
+    if (isNaN(mi) || mi <= 0) { showError('Please enter a valid PR distance.'); return; }
+    prDistM = mi * 1609.34;
+  }
+
+  const prHH = parseInt(document.getElementById('prHH').value) || 0;
+  const prMM = parseInt(document.getElementById('prMM').value) || 0;
+  const prSS = parseInt(document.getElementById('prSS').value) || 0;
+  const prTimeMin = prHH * 60 + prMM + prSS / 60;
+  if (prTimeMin <= 0) { showError('Please enter a valid PR time.'); return; }
+
+  const currentMiles = parseFloat(document.getElementById('currentMiles').value) || 0;
+
+  const goalDistM = parseFloat(document.getElementById('goalDist').value);
+  const goalDistSel = document.getElementById('goalDist');
+  const goalDistLabel = goalDistSel.options[goalDistSel.selectedIndex].text;
+
+  const raceDateStr = document.getElementById('raceDate').value;
+  if (!raceDateStr) { showError('Please select a goal race date.'); return; }
+  const raceDate = new Date(raceDateStr + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const weeksUntilRace = Math.floor((raceDate - today) / (7 * 24 * 3600 * 1000));
+  if (weeksUntilRace < 8) {
+    showError('Not enough time to build a structured plan. We need at least 8 weeks. Your race is ' + weeksUntilRace + ' week(s) away.');
+    return;
+  }
+
+  const daysAvail = parseInt(document.getElementById('daysPerWeek').value) || 5;
+  const dayNames = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const dayIds   = ['dMon','dTue','dWed','dThu','dFri','dSat','dSun'];
+  const selectedDays = dayIds.map((id,i) => ({ idx: i, name: dayNames[i], checked: document.getElementById(id).checked })).filter(d => d.checked).map(d => d.idx);
+  if (selectedDays.length < 2) { showError('Please select at least 2 days to run.'); return; }
+
+  // Optional goal time
+  const gHH = document.getElementById('goalHH').value.trim();
+  const gMM = document.getElementById('goalMM').value.trim();
+  const gSS = document.getElementById('goalSS').value.trim();
+  let goalTimeMin = null;
+  if (gHH !== '' || gMM !== '' || gSS !== '') {
+    const gh = parseInt(gHH) || 0;
+    const gm = parseInt(gMM) || 0;
+    const gs = parseInt(gSS) || 0;
+    goalTimeMin = gh * 60 + gm + gs / 60;
+    if (goalTimeMin <= 0) goalTimeMin = null;
+  }
+
+  // ── VDOT calculations ──
+  const currentVdot = vdotFromTime(prDistM, prTimeMin);
+  if (currentVdot < 20 || currentVdot > 85) { showError('VDOT out of range. Please check your PR time and distance.'); return; }
+
+  const weeks = Math.min(weeksUntilRace, 24);
+  const predictedTimeMin = vdotToTime(currentVdot, goalDistM);
+
+  let goalVdot, goalTimeDisplay;
+  let ambitionWarning = false;
+  if (goalTimeMin) {
+    goalVdot = vdotFromTime(goalDistM, goalTimeMin);
+    goalTimeDisplay = goalTimeMin;
+    if (goalTimeMin < predictedTimeMin * 0.90) {
+      ambitionWarning = true;
+    }
+  } else {
+    // Improve VDOT based on weeks of training (rough: ~0.5 per 4 weeks, capped)
+    const vdotGain = Math.min((weeks / 4) * 0.4, 4.0);
+    goalVdot = currentVdot + vdotGain;
+    goalTimeDisplay = vdotToTime(goalVdot, goalDistM);
+  }
+
+  const zp = zonePaces(goalVdot);
+
+  // ── Peak mileage ──
+  const distPeakMap = { 5000: 35, 10000: 45, 21097.5: 55, 42195: 70 };
+  const distPeakLookup = Object.entries(distPeakMap).reduce((acc, [k, v]) => { acc[parseFloat(k)] = v; return acc; }, {});
+  const distPeakMiles = distPeakLookup[goalDistM] || 45;
+  const peakMiles = Math.min(Math.max(currentMiles, 15) * 1.5, distPeakMiles);
+
+  // ── Phase assignment ──
+  let phases;
+  if (weeks >= 16) {
+    phases = assignPhases(weeks, [0.25, 0.40, 0.20, 0.15]);
+  } else if (weeks >= 10) {
+    phases = assignPhases(weeks, [0.20, 0.45, 0.20, 0.15]);
+  } else {
+    // 8-9 weeks: no base
+    phases = assignPhasesShort(weeks);
+  }
+  // phases[i] = 'base'|'build'|'peak'|'taper' for week i (0-indexed)
+
+  // ── Weekly mileage ──
+  const weeklyMiles = computeWeeklyMiles(weeks, phases, currentMiles, peakMiles);
+  const totalPlanMiles = Math.round(weeklyMiles.reduce((a, b) => a + b, 0));
+
+  // ── Build week data ──
+  // Monday of the first week: today's Monday
+  const planStart = getMondayOf(today);
+  const planWeeks = [];
+
+  for (let w = 0; w < weeks; w++) {
+    const phase = phases[w];
+    const miles = weeklyMiles[w];
+    const isRecovery = (w > 0) && (w + 1) % 4 === 0 && phase !== 'taper';
+    const weekMon = addDays(planStart, w * 7);
+    const weekDays = buildWeek(w, weeks, phase, isRecovery, miles, peakMiles, selectedDays, weekMon, zp, goalTimeDisplay, goalDistM, goalDistLabel, raceDate);
+    planWeeks.push({
+      weekNum: w + 1,
+      phase,
+      isRecovery,
+      miles: Math.round(miles * 10) / 10,
+      weekMon,
+      days: weekDays,
+    });
+  }
+
+  // Add race day if it falls in the plan
+  markRaceDay(planWeeks, raceDate, goalDistLabel);
+
+  generatedPlan = planWeeks;
+
+  // ── Render ──
+  document.getElementById('outputArea').style.display = 'block';
+  document.querySelector('.export-bar').style.display = 'flex';
+  document.querySelector('.phase-legend').style.display = 'flex';
+  document.getElementById('summaryCard').style.display = '';
+  document.getElementById('pacesCard').style.display = '';
+
+  // Alerts
+  let alertHtml = '';
+  if (ambitionWarning) {
+    alertHtml += `<div class="alert alert-warning"><span class="alert-icon">⚠</span><span><strong>Your goal is ambitious.</strong> Your current VDOT predicts a ${formatTime(predictedTimeMin)} finish. Your goal time is more than 10% faster. The plan will push you toward this goal, but consider whether it's realistic given your training history.</span></div>`;
+  }
+  document.getElementById('alertArea').innerHTML = alertHtml;
+
+  // Summary
+  renderSummary(currentVdot, goalVdot, goalTimeDisplay, goalDistLabel, weeks, peakMiles, totalPlanMiles, goalTimeMin ? false : true, predictedTimeMin);
+
+  // Paces card
+  renderPaces(zp);
+
+  // Plan
+  renderPlan(planWeeks, today);
+
+  // Scroll to output
+  document.getElementById('outputArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── Phase helpers ────────────────────────────────────────────────────────────
+function assignPhases(weeks, ratios) {
+  const phases = [];
+  const counts = ratios.map(r => Math.max(1, Math.round(r * weeks)));
+  // Adjust last bucket to fill exactly
+  const sum = counts.reduce((a,b) => a+b, 0);
+  counts[counts.length - 1] += weeks - sum;
+  const labels = ['base', 'build', 'peak', 'taper'];
+  for (let i = 0; i < labels.length; i++) {
+    for (let j = 0; j < counts[i]; j++) phases.push(labels[i]);
+  }
+  return phases.slice(0, weeks);
+}
+
+function assignPhasesShort(weeks) {
+  const phases = [];
+  const buildW = Math.round(weeks * 0.60);
+  const peakW  = Math.round(weeks * 0.25);
+  const taperW = weeks - buildW - peakW;
+  for (let i = 0; i < buildW; i++) phases.push('build');
+  for (let i = 0; i < peakW; i++) phases.push('peak');
+  for (let i = 0; i < taperW; i++) phases.push('taper');
+  return phases;
+}
+
+// ─── Weekly mileage ───────────────────────────────────────────────────────────
+function computeWeeklyMiles(weeks, phases, startMiles, peakMiles) {
+  const miles = [];
+  // Find build-up weeks (everything before taper)
+  const firstTaper = phases.indexOf('taper');
+  const buildUpWeeks = firstTaper === -1 ? weeks : firstTaper;
+  const taperWeeks = weeks - buildUpWeeks;
+
+  for (let w = 0; w < buildUpWeeks; w++) {
+    let m;
+    const progress = buildUpWeeks <= 1 ? 1 : w / (buildUpWeeks - 1);
+    m = startMiles + (peakMiles - startMiles) * progress;
+    // 10% weekly increase rule — enforce cap relative to previous
+    if (w > 0) {
+      m = Math.min(m, miles[w - 1] * 1.10);
+    }
+    // Cutback every 4th week (80% of previous)
+    if ((w + 1) % 4 === 0 && w < buildUpWeeks - 1) {
+      m = miles[w > 0 ? w - 1 : 0] * 0.80;
+    }
+    miles.push(Math.max(m, startMiles * 0.7));
+  }
+  // Taper
+  const taperRatios = [0.80, 0.65, 0.45, 0.35];
+  for (let t = 0; t < taperWeeks; t++) {
+    const ratio = taperRatios[Math.min(t, taperRatios.length - 1)];
+    miles.push(peakMiles * ratio);
+  }
+  return miles;
+}
+
+// ─── Build a single week ──────────────────────────────────────────────────────
+function buildWeek(weekIdx, totalWeeks, phase, isRecovery, weekMiles, peakMiles, selectedDays, weekMon, zp, goalTimeMin, goalDistM, goalDistLabel, raceDate) {
+  // selectedDays: array of 0-6 (0=Mon)
+  // Assign roles to days
+  const longDayPref  = [5, 6, 4, 3, 2, 1, 0]; // prefer Sat, then Sun, etc.
+  const q1DayPref    = [1, 2, 0, 3, 4];        // prefer Tue, Wed, Mon, Thu, Fri
+  const q2DayPref    = [3, 2, 4, 0, 1];        // prefer Thu, Wed, Fri, Mon, Tue
+
+  const longDay = firstAvail(longDayPref, selectedDays);
+  const q1DayPool = selectedDays.filter(d => d !== longDay && Math.abs(d - longDay) > 1);
+  const q1Day = firstAvail(q1DayPref, q1DayPool.length ? q1DayPool : selectedDays.filter(d => d !== longDay));
+  const q2DayPool = selectedDays.filter(d => d !== longDay && d !== q1Day && Math.abs(d - q1Day) > 0);
+  const q2Day = firstAvail(q2DayPref, q2DayPool.length ? q2DayPool : selectedDays.filter(d => d !== longDay && d !== q1Day));
+
+  // Figure out how many quality days
+  let numQuality = 0;
+  if (!isRecovery) {
+    if (phase === 'base') numQuality = Math.min(1, selectedDays.length - 1);
+    else if (phase === 'taper') numQuality = 1;
+    else numQuality = Math.min(2, selectedDays.length - 1);
+  }
+
+  // Long run miles
+  const longRunPct = (phase === 'peak') ? 0.32 : (phase === 'taper') ? 0.28 : 0.30;
+  let longMiles = weekMiles * longRunPct;
+  if (goalDistM === 42195 && phase === 'peak') longMiles = Math.min(longMiles, 22);
+  longMiles = Math.round(longMiles * 2) / 2;
+
+  const weekNum1 = weekIdx + 1;
+  const weekAB   = weekNum1 % 2 === 1 ? 'A' : 'B';
+
+  // Assign day roles
+  const dayRoles = {};
+  if (selectedDays.includes(longDay)) dayRoles[longDay] = 'long';
+  if (numQuality >= 1 && q1Day !== null && q1Day !== undefined) dayRoles[q1Day] = 'q1';
+  if (numQuality >= 2 && q2Day !== null && q2Day !== undefined) dayRoles[q2Day] = 'q2';
+
+  // Build all 7 days
+  const days = [];
+  for (let d = 0; d < 7; d++) {
+    const dayDate = addDays(weekMon, d);
+    const isSelected = selectedDays.includes(d);
+    let role = dayRoles[d] || (isSelected ? 'easy' : 'rest');
+
+    const wo = assignWorkout(role, phase, isRecovery, weekAB, weekMiles, longMiles, peakMiles, weekIdx, totalWeeks, zp, goalTimeMin, goalDistM, dayDate, raceDate, weekNum1);
+    days.push({ dayIdx: d, dayName: dayNames[d], date: dayDate, ...wo });
+  }
+  return days;
+}
+
+const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+function firstAvail(pref, pool) {
+  for (const p of pref) if (pool.includes(p)) return p;
+  return pool[0] ?? null;
+}
+
+// ─── Assign workout ───────────────────────────────────────────────────────────
+function assignWorkout(role, phase, isRecovery, weekAB, weekMiles, longMiles, peakMiles, weekIdx, totalWeeks, zp, goalTimeMin, goalDistM, dayDate, raceDate, weekNum) {
+  const ep = `${formatPace(zp.easyLo)}–${formatPace(zp.easyHi)}/mi`;
+  const tp = `${formatPace(zp.tempo)}/mi`;
+  const ip = `${formatPace(zp.interval)}/mi`;
+  const rp = `${formatPace(zp.rep400 * 4)}/mi`; // convert per 400m to per mile
+  const mp = `${formatPace(zp.marathon)}/mi`;
+  const gp = goalTimeMin ? `${formatPace(goalTimeMin / (goalDistM / 1609.34))}/mi` : mp;
+
+  // Remaining easy miles for context
+  const easyMiles = Math.max(2, Math.round((weekMiles * 0.12) * 2) / 2);
+
+  if (role === 'rest') {
+    return { type: 'Rest', badgeClass: 'wb-rest', shortTitle: 'Rest', description: 'Rest or cross-training', miles: 0 };
+  }
+
+  if (role === 'long') {
+    return {
+      type: 'Long Run', badgeClass: 'wb-long',
+      shortTitle: `Long Run ${longMiles}mi`,
+      description: `${longMiles} miles at easy pace (${ep}) — conversational effort throughout`,
+      miles: longMiles,
+    };
+  }
+
+  if (role === 'easy') {
+    return {
+      type: 'Easy Run', badgeClass: 'wb-easy',
+      shortTitle: `Easy ${easyMiles}mi`,
+      description: `${easyMiles} miles at easy pace (${ep})`,
+      miles: easyMiles,
+    };
+  }
+
+  // Quality workouts
+  if (role === 'q1' || role === 'q2') {
+    if (isRecovery || phase === 'base') {
+      // Strides on easy day
+      return {
+        type: 'Strides', badgeClass: 'wb-strides',
+        shortTitle: `Easy + Strides`,
+        description: `Easy ${easyMiles + 1} miles + 6×20-sec strides at controlled fast effort`,
+        miles: easyMiles + 1,
+      };
+    }
+
+    if (phase === 'taper') {
+      return {
+        type: 'Tempo', badgeClass: 'wb-tempo',
+        shortTitle: `Tune-up Tempo`,
+        description: `1 mi warmup + 2 mi at tempo pace (${tp}) + 1 mi cooldown — short confidence-builder`,
+        miles: 4,
+      };
+    }
+
+    // Build and peak phase quality workouts
+    if (phase === 'build') {
+      if (weekAB === 'A') {
+        // Q1: Cruise Intervals, Q2: Easy Track Intervals
+        if (role === 'q1') {
+          return {
+            type: 'Cruise Intervals', badgeClass: 'wb-cruise',
+            shortTitle: `Cruise Intervals`,
+            description: `1 mi WU + 3×[2 mi at T pace (${tp}) w/ 1-min jog recovery] + 1 mi CD`,
+            miles: 9,
+          };
+        } else {
+          const nReps = Math.max(4, Math.min(8, Math.round(peakMiles / 8)));
+          return {
+            type: 'Track Intervals', badgeClass: 'wb-intervals',
+            shortTitle: `${nReps}×1000m Intervals`,
+            description: `1 mi WU + ${nReps}×1000m at I pace (${ip}) w/ 3-min jog recovery + 1 mi CD`,
+            miles: Math.round((2 + nReps * 0.621 + nReps * 0.3) * 2) / 2,
+          };
+        }
+      } else {
+        // Q1: Marathon pace, Q2: Tempo
+        if (role === 'q1') {
+          const mpMiles = Math.max(3, Math.round(weekMiles * 0.18));
+          return {
+            type: 'Race Pace', badgeClass: 'wb-racepace',
+            shortTitle: `Marathon Pace Run`,
+            description: `2 mi WU + ${mpMiles} mi at marathon pace (${mp}) + 2 mi CD`,
+            miles: mpMiles + 4,
+          };
+        } else {
+          const tempoMiles = Math.max(2, Math.round(weekMiles * 0.15));
+          return {
+            type: 'Tempo', badgeClass: 'wb-tempo',
+            shortTitle: `Tempo Run`,
+            description: `1 mi warmup + ${tempoMiles} mi at tempo pace (${tp}) + 1 mi cooldown`,
+            miles: tempoMiles + 2,
+          };
+        }
+      }
+    }
+
+    if (phase === 'peak') {
+      if (role === 'q1') {
+        // Race-specific intervals at goal pace
+        const gpMiles = Math.max(2, Math.round(weekMiles * 0.16));
+        return {
+          type: 'Race Pace', badgeClass: 'wb-racepace',
+          shortTitle: `Goal Pace Run`,
+          description: `2 mi WU + ${gpMiles} mi at goal race pace (${gp}) + 2 mi CD`,
+          miles: gpMiles + 4,
+        };
+      } else {
+        return {
+          type: 'Cruise Intervals', badgeClass: 'wb-cruise',
+          shortTitle: `Threshold Work`,
+          description: `1 mi WU + 4×[1.5 mi at T pace (${tp}) w/ 1-min jog recovery] + 1 mi CD`,
+          miles: 10,
+        };
+      }
+    }
+  }
+
+  // Fallback
+  return {
+    type: 'Easy Run', badgeClass: 'wb-easy',
+    shortTitle: `Easy ${easyMiles}mi`,
+    description: `${easyMiles} miles at easy pace (${ep})`,
+    miles: easyMiles,
+  };
+}
+
+// ─── Mark race day ────────────────────────────────────────────────────────────
+function markRaceDay(planWeeks, raceDate, goalDistLabel) {
+  const rd = raceDate.toDateString();
+  for (const week of planWeeks) {
+    for (const day of week.days) {
+      if (day.date.toDateString() === rd) {
+        day.type = 'Race Day';
+        day.badgeClass = 'wb-race';
+        day.shortTitle = `Race Day — ${goalDistLabel}`;
+        day.description = `${goalDistLabel} — Race Day! Trust your training, run your plan, and enjoy every mile.`;
+        day.miles = Math.round((goalDistLabel.includes('Marathon') ? 26.2 : goalDistLabel.includes('Half') ? 13.1 : goalDistLabel === '10K' ? 6.2 : 3.1) * 10) / 10;
+      }
+    }
+  }
+}
+
+// ─── Render summary ───────────────────────────────────────────────────────────
+function renderSummary(currentVdot, goalVdot, goalTimeMin, goalDistLabel, weeks, peakMiles, totalMiles, goalWasPredicted, predictedTimeMin) {
+  const sc = document.getElementById('summaryCard');
+  sc.innerHTML = `
+    <div class="summary-title">Your <span>${goalDistLabel}</span> Training Plan — <span>${weeks} Weeks</span></div>
+    <div class="summary-stats">
+      <div class="stat-box">
+        <div class="stat-label">Current VDOT</div>
+        <div class="stat-value">${currentVdot.toFixed(1)}</div>
+        <div class="stat-sub">From your PR</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Goal VDOT</div>
+        <div class="stat-value">${goalVdot.toFixed(1)}</div>
+        <div class="stat-sub">${goalWasPredicted ? 'Predicted' : 'From goal time'}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Goal Finish</div>
+        <div class="stat-value">${formatTime(goalTimeMin)}</div>
+        <div class="stat-sub">${goalWasPredicted ? 'VDOT predicted' : 'Your target'}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Plan Length</div>
+        <div class="stat-value">${weeks}</div>
+        <div class="stat-sub">weeks</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Peak Mileage</div>
+        <div class="stat-value">${Math.round(peakMiles)}</div>
+        <div class="stat-sub">miles / week</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Plan Total</div>
+        <div class="stat-value">${totalMiles}</div>
+        <div class="stat-sub">total miles</div>
+      </div>
+    </div>
+  `;
+}
+
+// ─── Render paces ─────────────────────────────────────────────────────────────
+function renderPaces(zp) {
+  const pc = document.getElementById('pacesCard');
+  pc.innerHTML = `
+    <div class="card-title" style="margin-bottom:12px;">Training Zone Paces</div>
+    <div class="paces-grid">
+      <div class="pace-box">
+        <div class="pace-box-label">Easy (E)</div>
+        <div class="pace-box-value">${formatPace(zp.easyLo)}–${formatPace(zp.easyHi)}</div>
+        <div class="pace-box-sub">per mile</div>
+      </div>
+      <div class="pace-box">
+        <div class="pace-box-label">Marathon (M)</div>
+        <div class="pace-box-value">${formatPace(zp.marathon)}</div>
+        <div class="pace-box-sub">per mile</div>
+      </div>
+      <div class="pace-box">
+        <div class="pace-box-label">Threshold (T)</div>
+        <div class="pace-box-value">${formatPace(zp.tempo)}</div>
+        <div class="pace-box-sub">per mile</div>
+      </div>
+      <div class="pace-box">
+        <div class="pace-box-label">Interval (I)</div>
+        <div class="pace-box-value">${formatPace(zp.interval)}</div>
+        <div class="pace-box-sub">per mile</div>
+      </div>
+      <div class="pace-box">
+        <div class="pace-box-label">Rep (R)</div>
+        <div class="pace-box-value">${formatPace(zp.rep400)}</div>
+        <div class="pace-box-sub">per 400m</div>
+      </div>
+    </div>
+  `;
+}
+
+// ─── Render plan ──────────────────────────────────────────────────────────────
+function renderPlan(planWeeks, today) {
+  const container = document.getElementById('planContainer');
+  container.innerHTML = '';
+  const todayStr = today.toDateString();
+
+  planWeeks.forEach((week, wi) => {
+    const weekEndDate = addDays(week.weekMon, 6);
+    const isCurrentWeek = today >= week.weekMon && today <= weekEndDate;
+
+    const card = document.createElement('div');
+    card.className = `week-card phase-${week.phase}${week.isRecovery ? ' recovery-week' : ''}${isCurrentWeek ? ' current-week-marker' : ''}`;
+
+    const phaseBadge = week.isRecovery
+      ? `<span class="week-phase-badge badge-recovery">Recovery</span>`
+      : `<span class="week-phase-badge badge-${week.phase}">${week.phase.charAt(0).toUpperCase() + week.phase.slice(1)}</span>`;
+
+    const currentMarker = isCurrentWeek ? `<span style="font-size:10px;color:var(--accent);font-weight:600;margin-left:4px;">← You are here</span>` : '';
+
+    card.innerHTML = `
+      <div class="week-header" onclick="toggleWeek(this)">
+        <span class="week-num">Week ${week.weekNum}</span>
+        ${phaseBadge}
+        ${currentMarker}
+        <span class="week-miles-badge">${week.miles} mi</span>
+        <span class="week-toggle-icon">&#9660;</span>
+      </div>
+      <div class="week-body">
+        <div class="day-grid">
+          ${week.days.map(day => renderDayCell(day, todayStr)).join('')}
+        </div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function renderDayCell(day, todayStr) {
+  const isToday = day.date.toDateString() === todayStr;
+  const todayStyle = isToday ? 'background:rgba(0,106,255,0.06);' : '';
+  const milesStr = day.miles > 0 ? `<div class="day-miles">${day.miles} mi</div>` : '';
+  const dateStr = `${day.date.getMonth() + 1}/${day.date.getDate()}`;
+  return `
+    <div class="day-cell" style="${todayStyle}">
+      <div class="day-label">${day.dayName}</div>
+      <div class="day-date-label">${dateStr}</div>
+      <span class="workout-badge ${day.badgeClass}">${day.type}</span>
+      <div class="day-desc">${day.description}</div>
+      ${milesStr}
+    </div>
+  `;
+}
+
+function toggleWeek(header) {
+  const card = header.parentElement;
+  card.classList.toggle('collapsed');
+}
+
+// ─── Google Calendar export ───────────────────────────────────────────────────
+function doExport() {
+  if (!generatedPlan) return;
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Abels Calculators//Training Plan//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'X-WR-CALNAME:Running Training Plan',
+  ];
+
+  generatedPlan.forEach(week => {
+    week.days.forEach(day => {
+      if (day.type === 'Rest') return;
+      const dateStr = formatDateICS(day.date);
+      const uid = `training-${dateStr}-${day.type.replace(/\s/g,'')}@abelscalculators.com`;
+      const safeDesc = day.description.replace(/,/g, '\\,').replace(/\n/g, '\\n');
+      lines.push('BEGIN:VEVENT');
+      lines.push(`DTSTART;VALUE=DATE:${dateStr}`);
+      lines.push(`DTEND;VALUE=DATE:${dateStr}`);
+      lines.push(`SUMMARY:${day.shortTitle}`);
+      lines.push(`DESCRIPTION:${safeDesc}`);
+      lines.push(`CATEGORIES:Training`);
+      lines.push(`UID:${uid}`);
+      lines.push('END:VEVENT');
+    });
+  });
+
+  lines.push('END:VCALENDAR');
+
+  const blob = new Blob([lines.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'training-plan.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function formatDateICS(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}${m}${d}`;
+}
+
+// ─── Date utilities ───────────────────────────────────────────────────────────
+function getMondayOf(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // 0=Sun
+  const diff = (day === 0) ? -6 : 1 - day; // Mon=1
+  d.setDate(d.getDate() + diff);
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function addDays(date, n) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+</script>
+</body>
+</html>

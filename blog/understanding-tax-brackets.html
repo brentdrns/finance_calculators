@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>You're Probably Wrong About Your Tax Bracket (And It's Costing You) &mdash; Abel's Financial Calculators</title>
+<meta name="description" content="Most people think being in the 22% bracket means they pay 22% on all their income. They don't. Here's how marginal tax brackets actually work, with real 2025 numbers.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/understanding-tax-brackets.html">
+<meta property="og:title" content="You're Probably Wrong About Your Tax Bracket (And It's Costing You)">
+<meta property="og:description" content="Most people think being in the 22% bracket means they pay 22% on all their income. They don't. Here's how marginal tax brackets actually work, with real 2025 numbers.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/understanding-tax-brackets.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="You're Probably Wrong About Your Tax Bracket (And It's Costing You)">
+<meta name="twitter:description" content="Most people think being in the 22% bracket means they pay 22% on all their income. They don't. Here's how marginal tax brackets actually work, with real 2025 numbers.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "You're Probably Wrong About Your Tax Bracket (And It's Costing You)",
+  "description": "Most people think being in the 22% bracket means they pay 22% on all their income. They don't. Here's how marginal tax brackets actually work, with real 2025 numbers.",
+  "author": {"@type": "Organization", "name": "Abel's Financial Calculators", "url": "https://abelscalculators.com"},
+  "publisher": {"@type": "Organization", "name": "Abel's Financial Calculators", "url": "https://abelscalculators.com"},
+  "datePublished": "2026-03-11",
+  "dateModified": "2026-03-11",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/understanding-tax-brackets.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does being in the 22% tax bracket mean I pay 22% on all my income?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The U.S. uses a progressive tax system, so you only pay 22% on the portion of your taxable income that falls within the 22% bracket. Income in lower brackets is still taxed at those lower rates. For most people in the 22% bracket, the effective (average) tax rate ends up somewhere between 12% and 18%."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can getting a raise push me into a higher bracket and make me take home less money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. With a progressive tax system this is mathematically impossible. Only the dollars above the bracket threshold are taxed at the higher rate. The rest of your income continues to be taxed at the same rates it was before the raise. A higher bracket never reduces the take-home pay you were already earning."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the standard deduction for 2025?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For 2025, the standard deduction is $15,000 for single filers and $30,000 for married filing jointly. This amount is subtracted from your gross income before any bracket math applies, meaning the first $15,000 of a single filer's income is effectively tax-free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use my marginal rate or effective rate when making financial decisions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the decision. Use your marginal rate when evaluating the tax cost of an incremental action — like a Roth conversion, a pre-tax contribution, or a bonus. Use your effective rate when measuring your overall tax burden or comparing your total tax load year over year."
+      }
+    }
+  ]
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GXEPDJH5VC');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#ffffff;--surface:#f7f8fa;--surface2:#eef0f4;--border:#e2e5eb;--accent:#006aff;--accent-dim:#4a90d9;--text:#1a1a2e;--text-muted:#6b7280;--blue:#2563eb;--radius:12px; }
+  [data-theme="dark"] { --bg:#121218;--surface:#1a1a24;--surface2:#24242f;--border:#2e2e3a;--accent:#4d8eff;--accent-dim:#6ba0e6;--text:#e4e4ea;--text-muted:#9395a1;--blue:#5b8def; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;min-height:100vh;}
+  header{padding:0 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  header h1{margin:0;line-height:0;}
+  .header-banner{max-height:360px;width:auto;max-width:650px;display:block;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  .header-nav{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .theme-toggle{background:var(--surface2);border:1px solid var(--border);border-radius:20px;color:var(--text-muted);font-family:'Inter',sans-serif;font-size:12px;padding:5px 12px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;display:flex;align-items:center;gap:5px;}
+  .theme-toggle:hover{color:var(--text);border-color:var(--accent-dim);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+  .page-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:8px;}
+  .page-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);margin-bottom:10px;line-height:1.2;}
+  .page-sub{color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:12px;max-width:560px;}
+  .page-date{color:var(--text-muted);font-size:11px;margin-bottom:48px;}
+  article h2{font-family:'DM Serif Display',serif;font-size:24px;color:var(--text);margin:40px 0 16px;}
+  article h3{font-family:'DM Serif Display',serif;font-size:19px;color:var(--text);margin:32px 0 12px;}
+  article p{color:var(--text-muted);font-size:13px;line-height:1.85;margin-bottom:18px;}
+  article strong{color:var(--text);}
+  article a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);transition:border-color 0.15s;}
+  article a:hover{border-color:var(--accent);}
+  article ul,article ol{color:var(--text-muted);font-size:13px;line-height:1.85;margin:0 0 18px 20px;}
+  article li{margin-bottom:6px;}
+  .callout{background:var(--surface);border:none;box-shadow:0 1px 3px rgba(0,0,0,.06);border-left:3px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
+  .callout p{margin-bottom:0;}
+  .callout p+p{margin-top:10px;}
+  .scenario-compare{margin:32px 0;border:none;box-shadow:0 1px 4px rgba(0,0,0,.08);border-radius:14px;overflow:hidden;}
+  .scenario-compare-header{background:var(--surface2);padding:16px 24px;border-bottom:1px solid var(--border);}
+  .scenario-compare-header .sc-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:4px;}
+  .scenario-compare-header .sc-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);}
+  .scenario-compare-header .sc-params{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.6;}
+  .scenario-compare-body{display:grid;grid-template-columns:1fr 1fr;}
+  .sc-col{padding:20px 24px;}
+  .sc-col-basic{background:var(--surface);border-right:1px solid var(--border);}
+  .sc-col-full{background:var(--bg);}
+  .sc-col-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .sc-col-basic .sc-col-label{color:var(--text-muted);}
+  .sc-col-full .sc-col-label{color:var(--accent);}
+  .sc-col-label .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .sc-col-basic .dot{background:var(--text-muted);}
+  .sc-col-full .dot{background:var(--accent);}
+  .sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+  .sc-row:last-child{border-bottom:none;}
+  .sc-row-label{color:var(--text-muted);}
+  .sc-row-value{font-family:'DM Serif Display',serif;font-size:15px;}
+  .sc-verdict{padding:14px 24px;border-top:1px solid var(--border);font-size:12px;line-height:1.7;}
+  .sc-col-basic .sc-verdict{color:var(--text-muted);background:var(--surface2);}
+  .sc-col-full .sc-verdict{color:var(--accent);background:var(--surface);}
+  .sc-highlight{color:var(--accent);}
+  .cta{margin-top:48px;padding:28px 32px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:center;}
+  .cta p{color:var(--text-muted);font-size:13px;margin-bottom:16px;line-height:1.7;}
+  .cta a.cta-btn{display:inline-block;background:var(--accent);color:var(--bg);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;padding:11px 28px;border-radius:var(--radius);text-decoration:none;border:none;transition:opacity 0.15s;}
+  .cta a.cta-btn:hover{opacity:.85;}
+  .cta-pair{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .nav-dropdown{position:relative;display:flex;align-items:center;}
+  .nav-dropdown-btn{color:var(--text-muted);font-size:12px;padding:6px 14px;border:none;border-radius:8px;font-weight:500;background:transparent;transition:color 0.15s,background 0.15s;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:3px;line-height:1;}
+  .nav-dropdown-btn:hover{color:var(--text);background:var(--surface2);}
+  .nav-caret{font-size:9px;opacity:.6;}
+  .nav-dropdown-menu{display:none;position:absolute;top:100%;padding-top:4px;left:0;background:var(--bg);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:6px;min-width:200px;z-index:100;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:flex;flex-direction:column;}
+  .nav-dropdown-menu a{color:var(--text-muted);font-size:12px;text-decoration:none;padding:8px 12px;border-radius:7px;font-weight:500;white-space:nowrap;transition:color 0.15s,background 0.15s;}
+  .nav-dropdown-menu a:hover{color:var(--text);background:var(--surface2);}
+  .header-nav a{color:var(--text-muted);font-size:12px;text-decoration:none;padding:6px 14px;border-radius:8px;font-weight:500;transition:color 0.15s,background 0.15s;}
+  .header-nav a:hover{color:var(--text);background:var(--surface2);}
+  .nav-sep{color:var(--border);font-size:14px;margin:0 2px;user-select:none;}
+  .site-footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .site-footer-disclaimer{font-size:11px;color:var(--text-muted);line-height:1.6;max-width:640px;}
+  .site-footer-nav{display:flex;gap:16px;flex-shrink:0;}
+  .site-footer-nav a{font-size:11px;color:var(--text-muted);text-decoration:none;transition:color 0.15s;}
+  .site-footer-nav a:hover{color:var(--accent-dim);}
+  @media(max-width:640px){header{padding:0 20px;}main{padding:32px 16px 60px;}.page-title{font-size:28px;}.scenario-compare-body{grid-template-columns:1fr;}.sc-col-basic{border-right:none;border-bottom:1px solid var(--border);}.site-footer{padding:16px 20px;flex-direction:column;align-items:flex-start;}}
+</style>
+<script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+</head>
+<body>
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators"><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+<main>
+  <div class="page-label">Taxes</div>
+  <h1 class="page-title">You're Probably Wrong About Your Tax Bracket (And It's Costing You)</h1>
+  <p class="page-sub">Most people think "being in the 22% bracket" means they pay 22% on all their income. They don't. Here's how marginal tax brackets actually work — with real 2025 numbers — and why understanding the difference can change the way you make financial decisions.</p>
+  <p class="page-date">March 11, 2026</p>
+  <article>
+
+    <h2>The Most Expensive Misconception in Personal Finance</h2>
+    <p>Ask ten people what tax bracket they're in. Most will answer with a number — "22%" or "24%" — and secretly believe that's the percentage they hand over to the IRS on their entire paycheck. It's not. Not even close. And this misunderstanding leads to real, measurable mistakes: avoiding raises, skipping pre-tax contributions, and making Roth conversion decisions based on the wrong rate.</p>
+    <p>The U.S. uses a <strong>progressive</strong> tax system. That means different chunks of your income are taxed at different rates. You don't pay 22% on everything — you pay 10% on the first slice, 12% on the next, 22% on whatever lands in that range, and so on. The bracket you're "in" is just the rate that applies to your last dollar of income.</p>
+
+    <h2>Let's Do the Actual Math</h2>
+    <p>Here's a concrete example. Single filer, $80,000 gross income, 2025 tax year. Before any bracket calculation happens, you subtract the <strong>standard deduction of $15,000</strong>. That leaves $65,000 of taxable income.</p>
+    <p>Now you run it through the 2025 brackets:</p>
+    <ul>
+      <li><strong>10% bracket:</strong> $0 – $11,925 &rarr; $11,925 &times; 10% = <strong>$1,193</strong></li>
+      <li><strong>12% bracket:</strong> $11,925 – $48,475 &rarr; $36,550 &times; 12% = <strong>$4,386</strong></li>
+      <li><strong>22% bracket:</strong> $48,475 – $65,000 &rarr; $16,525 &times; 22% = <strong>$3,636</strong></li>
+    </ul>
+    <p>Total federal income tax: <strong>$9,215</strong>. Divide that by gross income of $80,000 and you get an <strong>effective rate of about 11.5%</strong> — or about 14.2% of taxable income. Either way, nowhere near 22%.</p>
+    <p>The 22% rate applied to roughly $16,500 of that $80,000. The rest was taxed at 10% or 12%. This person is "in" the 22% bracket, but they're paying an average rate that's almost half that.</p>
+
+    <div class="callout">
+      <p><strong>Your effective rate is your real tax burden.</strong> The marginal rate is just the rate on your last dollar. For a single filer earning $80,000 in 2025, that gap is about 10 percentage points. For higher earners, it can be even larger.</p>
+    </div>
+
+    <h2>The Standard Deduction Does More Than You Think</h2>
+    <p>The standard deduction often gets treated as a footnote, but it's actually the first and largest tax break most people receive. For 2025, it's <strong>$15,000 for single filers</strong> and <strong>$30,000 for married filing jointly</strong>. This comes off the top before any bracket math applies.</p>
+    <p>What that means practically: the first $15,000 of a single filer's income is completely tax-free. If you earn $50,000, you're only being taxed on $35,000. The 10% bracket doesn't even start until after the standard deduction is gone.</p>
+    <p>Most people know this conceptually, but underestimate the magnitude. Someone who tells you they "pay 22% in taxes" on a $70,000 salary is either wrong or choosing to be dramatic — their taxable income is $55,000 and the effective rate is closer to 13%.</p>
+
+    <h2>The Raise That "Bumps You Into a Higher Bracket"</h2>
+    <p>This is the one that causes real harm. People turn down bonuses. They worry a raise will cost them money. They're wrong, and the math proves it instantly.</p>
+    <p>Imagine you're at $47,000 taxable income — just inside the 12% bracket. You get a $5,000 raise, pushing you to $52,000. Part of that raise — specifically the $3,525 above the $48,475 threshold — now gets taxed at 22% instead of 12%. The rest of the raise is still taxed at 12%. Your pre-raise income? Still taxed exactly as before.</p>
+    <p>You cannot take home less money because of a higher marginal rate. That would require the government to retroactively raise the rate on income you already earned. That's not how it works. <strong>A higher bracket means you pay more tax on the new dollars, not on the old ones.</strong></p>
+
+    <div class="callout">
+      <p><strong>Never turn down a raise because of bracket fear.</strong> The worst case scenario is that you keep 78 cents of every dollar that crosses the 22% threshold instead of 88 cents. You still keep more than you had before.</p>
+    </div>
+
+    <h2>Pre-Tax Contributions Are Bracket Management in Disguise</h2>
+    <p>Once you understand how brackets work, pre-tax contributions — 401(k), traditional IRA, HSA — take on a different meaning. They're not just "saving for retirement." They're reducing your taxable income, potentially keeping some of your dollars in a lower bracket.</p>
+    <p>Consider someone earning $52,000 as a single filer. After the $15,000 standard deduction, taxable income is $37,000 — entirely in the 12% bracket. Now suppose they contribute $7,000 to a traditional 401(k). Taxable income drops to $30,000. They've just cut their tax bill by $840 ($7,000 &times; 12%), while also putting that $7,000 to work in a retirement account.</p>
+    <p>Now flip the scenario: someone earning $58,000 single, $43,000 taxable after the standard deduction. They're in the 22% bracket for $43,000 &minus; $48,475... wait, no — $43,000 is still below the $48,475 threshold. All of it is taxed at 12%. A $6,000 401(k) contribution saves them $720 in taxes. Totally worth it, but the marginal rate matters for sizing the benefit correctly.</p>
+    <p>The real value of pre-tax contributions is highest when your marginal rate is highest. If you're solidly in the 22% bracket, every $1,000 you contribute to a traditional 401(k) saves you $220 in federal income tax this year.</p>
+
+    <h2>Two Rates, Two Different Decisions</h2>
+    <p>Here's a practical distinction that trips people up constantly: <strong>when do you use the marginal rate, and when do you use the effective rate?</strong></p>
+    <p>Use your <strong>marginal rate</strong> when you're evaluating the tax cost of an additional action. Converting $20,000 from a traditional IRA to a Roth? That $20,000 gets added to your taxable income and taxed at your marginal rate. It doesn't get averaged across all your income — it sits on top. If you're in the 22% bracket, a $20,000 Roth conversion costs you roughly $4,400 in federal tax. That's the right number to use when weighing the conversion.</p>
+    <p>Use your <strong>effective rate</strong> when you're measuring your overall burden. Comparing your tax load year over year? Benchmarking how much of your income goes to the IRS? That's an effective rate conversation. It's a more honest picture of what taxes actually cost you as a percentage of earnings.</p>
+    <p>Using the marginal rate to measure total burden makes you feel overtaxed. Using the effective rate to evaluate a Roth conversion makes the conversion look cheaper than it is. Each rate has its role.</p>
+
+    <h2>The 401(k) Difference: A Side-by-Side</h2>
+    <p>Same salary, same filing status. The only difference is whether they contribute $10,000 to a traditional 401(k).</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Scenario Comparison</div>
+        <div class="sc-title">401(k) Contribution vs. No Contribution</div>
+        <div class="sc-params">Single filer &middot; $75,000 gross income &middot; 2025 standard deduction ($15,000) &middot; Federal income tax only</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span>No 401(k) Contribution</div>
+          <div class="sc-row"><span class="sc-row-label">Gross income</span><span class="sc-row-value">$75,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Standard deduction</span><span class="sc-row-value">&minus;$15,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">401(k) contribution</span><span class="sc-row-value">$0</span></div>
+          <div class="sc-row"><span class="sc-row-label">Taxable income</span><span class="sc-row-value">$60,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax at 10% (first $11,925)</span><span class="sc-row-value">$1,193</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax at 12% (next $36,550)</span><span class="sc-row-value">$4,386</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax at 22% (remaining $11,525)</span><span class="sc-row-value">$2,536</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total federal income tax</span><span class="sc-row-value">$8,115</span></div>
+          <div class="sc-row"><span class="sc-row-label">Effective rate</span><span class="sc-row-value">10.8%</span></div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span>$10,000 401(k) Contribution</div>
+          <div class="sc-row"><span class="sc-row-label">Gross income</span><span class="sc-row-value">$75,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Standard deduction</span><span class="sc-row-value">&minus;$15,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">401(k) contribution</span><span class="sc-row-value">&minus;$10,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Taxable income</span><span class="sc-row-value">$50,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax at 10% (first $11,925)</span><span class="sc-row-value">$1,193</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax at 12% (next $36,550)</span><span class="sc-row-value">$4,386</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax at 22% (remaining $1,525)</span><span class="sc-row-value">$336</span></div>
+          <div class="sc-row"><span class="sc-row-label">Total federal income tax</span><span class="sc-row-value">$5,915</span></div>
+          <div class="sc-row"><span class="sc-row-label">Effective rate</span><span class="sc-row-value">7.9%</span></div>
+        </div>
+      </div>
+      <div class="scenario-compare-body" style="border-top:1px solid var(--border);">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-verdict">Pays <strong>$2,200 more</strong> in federal income tax. That $10,000 stays in a taxable account, growing with no upfront tax shield.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-verdict sc-highlight">Saves <strong>$2,200 in federal taxes</strong> this year alone. The $10,000 goes to retirement <em>and</em> the government subsidized it at 22 cents on the dollar.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>That $2,200 in tax savings is real money — and it doesn't account for decades of tax-deferred compounding on the $10,000 in the 401(k). The contribution also drops this person almost entirely out of the 22% bracket, so nearly all their income is taxed at 12% or less.</p>
+
+    <h2>Two More Taxes Nobody Puts in the Bracket Conversation</h2>
+    <p>FICA taxes — Social Security and Medicare — are deducted from every paycheck before you ever see it, and they don't interact with the income tax brackets at all. For 2025, employees pay <strong>6.2% for Social Security</strong> (on wages up to $176,100) and <strong>1.45% for Medicare</strong> on all wages. That's a combined 7.65% off the top of every earned dollar.</p>
+    <p>For someone earning $75,000, that's roughly $5,738 in FICA taxes on top of their income tax bill. Add those together and the true effective rate on total income is meaningfully higher than the income-tax-only number. If you're budgeting or trying to understand your actual take-home pay, you need to factor FICA in — not just the bracket rate you found on a chart.</p>
+    <p>Note: FICA doesn't apply to investment income, which is one of the reasons high earners with significant capital gains often have lower overall effective rates than their bracket suggests.</p>
+
+    <h2>Capital Gains: A Completely Different Rate Schedule</h2>
+    <p>Long-term capital gains — profits on investments held more than a year — and qualified dividends are taxed under a separate, lower rate schedule. For 2025, the rates are <strong>0%, 15%, or 20%</strong> depending on your taxable income. A single filer with taxable income under $48,350 pays <strong>zero federal tax</strong> on long-term gains.</p>
+    <p>This matters for decisions around selling investments, timing dividend income, and structuring a portfolio in retirement. Someone in the 22% ordinary income bracket might only owe 15% on gains from selling appreciated stock. Someone in early retirement with low ordinary income might owe nothing. The capital gains rate system runs in parallel to — but separate from — the ordinary income brackets.</p>
+
+    <div class="callout">
+      <p><strong>The bracket number on your tax return is just one number.</strong> Your actual tax situation involves ordinary income brackets, FICA taxes, and potentially capital gains rates all at once. Understanding which applies to which type of income is where the real planning happens.</p>
+    </div>
+
+    <h2>What to Do With All of This</h2>
+    <p>The practical takeaways are straightforward. First, calculate your <strong>actual effective rate</strong> — divide your total federal income tax by your gross income. If you've been mentally using your marginal bracket rate, you've probably been overestimating your tax burden by a significant margin.</p>
+    <p>Second, take pre-tax retirement contributions seriously as a tax tool, not just a savings tool. The immediate tax savings are real, especially if you're in the 22% bracket or higher. Third, don't let bracket fear drive decisions about raises, bonuses, or investment sales. Run the actual numbers — they're almost always less scary than the bracket rate implies.</p>
+    <p>And if you want to see exactly how your income stacks up across each bracket, what your true effective rate is, and how a 401(k) contribution would shift the numbers — the <a href="../tax-brackets.html">Tax Bracket Visualizer</a> does all of that in real time.</p>
+
+  </article>
+  <div class="cta">
+    <p>See exactly how your income breaks down across brackets — and what your actual effective rate is.</p>
+    <div class="cta-pair">
+      <a href="../tax-brackets.html" class="cta-btn">Tax Bracket Visualizer &rarr;</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For educational purposes only. Tax laws change. Consult a qualified tax professional for personalized advice.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+<script>(function(){var btn=document.getElementById('themeToggle');var icon=document.getElementById('themeIcon');var label=document.getElementById('themeLabel');function updateUI(){var d=document.documentElement.getAttribute('data-theme')==='dark';icon.innerHTML=d?'&#9788;':'&#9790;';label.textContent=d?'Light':'Dark';}btn.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('theme','light');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}updateUI();});updateUI();})();</script>
+</body>
+</html>

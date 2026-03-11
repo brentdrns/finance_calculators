@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Federal Income Tax Bracket Visualizer — See Exactly How Your Taxes Are Calculated</title>
+<meta name="description" content="Free US federal income tax bracket visualizer. See how much tax you pay in each bracket, your effective vs marginal rate, and your take-home pay. Supports 2024 and 2025 tax years for all filing statuses.">
+<meta name="keywords" content="tax bracket calculator, federal income tax calculator, effective tax rate, marginal tax rate, 2024 tax brackets, 2025 tax brackets, income tax visualizer">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/tax-brackets.html">
+<meta property="og:title" content="Federal Income Tax Bracket Visualizer — See How Your Taxes Are Calculated">
+<meta property="og:description" content="Free US federal income tax bracket visualizer. See how much tax you pay in each bracket, your effective vs marginal rate, and your take-home pay for 2024 and 2025.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/tax-brackets.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Federal Income Tax Bracket Visualizer">
+<meta name="twitter:description" content="Free US federal income tax bracket visualizer for 2024 and 2025. See effective rate, marginal rate, and bracket breakdown.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Federal Income Tax Bracket Visualizer","description":"Free US federal income tax bracket visualizer for 2024 and 2025 tax years. See effective vs marginal rate, bracket-by-bracket breakdown, and take-home pay. For educational purposes only.","applicationCategory":"FinanceApplication","operatingSystem":"Any","url":"https://abelscalculators.com/tax-brackets.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* ── Header ── */
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* ── Layout ── */
+  .layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+
+  /* ── Sidebar ── */
+  .sidebar { border-right: 1px solid var(--border); position: sticky; top: 0; max-height: 100vh; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+  .sidebar-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .section-label {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent-dim); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .field { margin-bottom: 12px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
+  .field input[type="number"], .field select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
+    -moz-appearance: textfield;
+  }
+  .field input[type="number"]::-webkit-outer-spin-button,
+  .field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+
+  .input-prefix-wrap { position: relative; }
+  .input-prefix-wrap .prefix { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; pointer-events: none; }
+  .input-prefix-wrap input[type="number"] { padding-left: 22px; }
+
+  .checkbox-row { display: flex; align-items: center; gap: 8px; }
+  .checkbox-row input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+  .checkbox-row label { color: var(--text); font-size: 12px; cursor: pointer; margin: 0; }
+
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+  /* ── Main ── */
+  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; }
+
+  /* ── Cards ── */
+  .card { background: var(--surface); border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+  .card-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 18px; }
+
+  /* ── Summary card ── */
+  .summary-top { display: flex; align-items: flex-end; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+  .effective-rate-display { display: flex; flex-direction: column; }
+  .effective-rate-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .effective-rate-number { font-family: 'DM Serif Display', serif; font-size: 64px; line-height: 1; color: var(--accent); }
+  .effective-rate-pct { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--accent); vertical-align: top; line-height: 1.2; }
+  .marginal-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+  .marginal-note strong { color: var(--text); }
+
+  .stat-boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-box { background: var(--surface2); border-radius: 10px; padding: 14px 16px; }
+  .stat-box-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .stat-box-value { font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 500; color: var(--text); }
+  .stat-box-value.green { color: var(--green); }
+
+  /* ── Bracket bar ── */
+  .bracket-bar-wrap { margin-bottom: 20px; }
+  .bracket-bar { display: flex; height: 36px; border-radius: 8px; overflow: hidden; gap: 2px; }
+  .bracket-seg { flex-shrink: 0; transition: width 0.3s; position: relative; cursor: default; }
+  .bracket-seg:hover::after {
+    content: attr(data-tip);
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    background: var(--text); color: var(--bg); font-size: 11px; padding: 4px 8px;
+    border-radius: 6px; white-space: nowrap; pointer-events: none; z-index: 10;
+  }
+
+  .bracket-bar-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
+  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── Bracket table ── */
+  .bracket-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .bracket-table th { text-align: left; color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 10px 10px; font-weight: 600; }
+  .bracket-table th:not(:first-child) { text-align: right; }
+  .bracket-table td { padding: 10px; border-top: 1px solid var(--border); }
+  .bracket-table td:not(:first-child) { text-align: right; font-family: 'DM Mono', monospace; font-size: 12px; }
+  .bracket-table tr.active-row td { background: var(--surface2); }
+  .bracket-table tr.active-row td:first-child { border-radius: 6px 0 0 6px; }
+  .bracket-table tr.active-row td:last-child { border-radius: 0 6px 6px 0; }
+
+  .rate-cell { display: flex; align-items: center; gap: 8px; }
+  .rate-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .rate-badge { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+  .marginal-badge { font-size: 9px; background: var(--accent); color: #fff; padding: 2px 5px; border-radius: 4px; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.05em; }
+
+  /* ── Explainer card ── */
+  .explainer-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .explainer-rate-label { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; }
+  .explainer-bar-wrap { flex: 1; margin: 0 16px; }
+  .explainer-bar-track { background: var(--surface2); border-radius: 4px; height: 8px; overflow: hidden; }
+  .explainer-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .explainer-pct { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); min-width: 44px; text-align: right; }
+  .explainer-amt { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); min-width: 90px; text-align: right; }
+  .explainer-note { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-top: 16px; padding: 12px 16px; background: var(--surface2); border-radius: 8px; border-left: 3px solid var(--accent-dim); }
+
+  /* ── Sankey ── */
+  .sankey-wrap { overflow-x: auto; }
+  .sankey-svg { width: 100%; min-width: 500px; overflow: visible; display: block; }
+  .sankey-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+  .sankey-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
+  .sankey-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── Footer ── */
+  .site-footer { border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 700px; margin: 0 auto 14px; }
+  .site-footer-nav { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent); }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-boxes { grid-template-columns: repeat(2, 1fr); }
+    header { padding: 0 20px; }
+    .main { padding: 20px; }
+    .effective-rate-number { font-size: 48px; }
+  }
+  @media (max-width: 480px) {
+    .stat-boxes { grid-template-columns: 1fr 1fr; }
+    .summary-top { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html" class="active">Tax Bracket Visualizer</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="layout">
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div>
+      <div class="sidebar-title">Tax Bracket Visualizer</div>
+      <div class="sidebar-subtitle" id="sidebarSubtitle">See exactly how your federal income tax is calculated — bracket by bracket.</div>
+    </div>
+
+    <div>
+      <div class="section-label">Filing Details</div>
+
+      <div class="field">
+        <label for="taxYear">Tax Year</label>
+        <select id="taxYear" onchange="calculate()">
+          <option value="2025" selected>2025</option>
+          <option value="2024">2024</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="filingStatus">Filing Status</label>
+        <select id="filingStatus" onchange="calculate()">
+          <option value="single">Single</option>
+          <option value="mfj">Married Filing Jointly</option>
+          <option value="mfs">Married Filing Separately</option>
+          <option value="hoh">Head of Household</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="stateSelect">State Income Tax</label>
+        <select id="stateSelect" onchange="calculate()">
+          <option value="">— Select state (optional) —</option>
+          <optgroup label="No State Income Tax">
+            <option value="AK">Alaska (none)</option>
+            <option value="FL">Florida (none)</option>
+            <option value="NV">Nevada (none)</option>
+            <option value="NH">New Hampshire (none)</option>
+            <option value="SD">South Dakota (none)</option>
+            <option value="TN">Tennessee (none)</option>
+            <option value="TX">Texas (none)</option>
+            <option value="WA">Washington (none)</option>
+            <option value="WY">Wyoming (none)</option>
+          </optgroup>
+          <optgroup label="Flat Rate States">
+            <option value="AZ">Arizona (2.5%)</option>
+            <option value="CO">Colorado (4.4%)</option>
+            <option value="GA">Georgia (5.49%)</option>
+            <option value="ID">Idaho (5.8%)</option>
+            <option value="IL">Illinois (4.95%)</option>
+            <option value="IN">Indiana (3.05%)</option>
+            <option value="IA">Iowa (3.8%)</option>
+            <option value="KY">Kentucky (4.0%)</option>
+            <option value="MI">Michigan (4.25%)</option>
+            <option value="MS">Mississippi (4.7%)</option>
+            <option value="NC">North Carolina (4.5%)</option>
+            <option value="PA">Pennsylvania (3.07%)</option>
+            <option value="UT">Utah (4.55%)</option>
+          </optgroup>
+          <optgroup label="Progressive States">
+            <option value="AL">Alabama</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CT">Connecticut</option>
+            <option value="DC">D.C.</option>
+            <option value="DE">Delaware</option>
+            <option value="HI">Hawaii</option>
+            <option value="KS">Kansas</option>
+            <option value="LA">Louisiana</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MD">Maryland</option>
+            <option value="ME">Maine</option>
+            <option value="MN">Minnesota</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="VA">Virginia</option>
+            <option value="VT">Vermont</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WV">West Virginia</option>
+          </optgroup>
+        </select>
+        <div class="hint">Approximate. Uses standard deduction where applicable. Excludes local taxes, credits, and surcharges.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Income</div>
+
+      <div class="field">
+        <label for="grossIncome">Gross Income</label>
+        <div class="input-prefix-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="grossIncome" value="75000" min="0" max="100000000" step="1" oninput="calculate()">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="preTaxDed">Pre-Tax Deductions (401k, HSA, etc.)</label>
+        <div class="input-prefix-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="preTaxDed" value="0" min="0" max="100000000" step="1" oninput="calculate()">
+        </div>
+        <div class="hint">Reduces your taxable income before deductions are applied.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Deductions</div>
+
+      <div class="field">
+        <div class="checkbox-row">
+          <input type="checkbox" id="useStdDed" checked onchange="toggleDeduction()">
+          <label for="useStdDed">Use standard deduction</label>
+        </div>
+        <div class="hint" id="stdDedHint"></div>
+      </div>
+
+      <div class="field" id="itemizedField" style="display:none;">
+        <label for="itemizedDed">Itemized Deduction Amount</label>
+        <div class="input-prefix-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="itemizedDed" value="0" min="0" max="100000000" step="1" oninput="calculate()">
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Capital Gains</div>
+      <div class="field">
+        <label for="ltcg">Long-Term Gains / Qualified Dividends</label>
+        <div class="input-prefix-wrap">
+          <span class="prefix">$</span>
+          <input type="number" id="ltcg" value="0" min="0" max="100000000" step="1" oninput="calculate()">
+        </div>
+        <div class="hint">Taxed at 0%, 15%, or 20% depending on total income. Stacked on top of ordinary income to find your rate.</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- Summary Card -->
+    <div class="card" id="summaryCard">
+      <div class="card-title">Your Tax Summary</div>
+      <div class="summary-top">
+        <div class="effective-rate-display">
+          <div class="effective-rate-label" id="effectiveRateLabel">Effective Tax Rate</div>
+          <div>
+            <span class="effective-rate-number" id="effectiveRateNum">0</span><span class="effective-rate-pct">%</span>
+          </div>
+          <div class="marginal-note" id="marginalNote"></div>
+        </div>
+      </div>
+      <div class="stat-boxes">
+        <div class="stat-box">
+          <div class="stat-box-label">Gross Income</div>
+          <div class="stat-box-value" id="statGross">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-label">Taxable Income</div>
+          <div class="stat-box-value" id="statTaxable">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-label" id="fedTaxLabel">Federal Income Tax</div>
+          <div class="stat-box-value" id="statTax">—</div>
+        </div>
+        <div class="stat-box" id="statCapGainsRow" style="display:none">
+          <div class="stat-box-label">Cap Gains Tax</div>
+          <div class="stat-box-value" id="statCapGainsTax">—</div>
+        </div>
+        <div class="stat-box" id="statStateTaxRow" style="display:none">
+          <div class="stat-box-label">State Income Tax</div>
+          <div class="stat-box-value" id="statStateTax">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-box-label">Take-Home</div>
+          <div class="stat-box-value green" id="statTakeHome">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sankey Flow Card -->
+    <div class="card">
+      <div class="card-title">Where Your Income Goes</div>
+      <div class="sankey-wrap">
+        <svg class="sankey-svg" id="sankeyChart" height="270"></svg>
+      </div>
+      <div class="sankey-legend" id="sankeyLegend"></div>
+    </div>
+
+    <!-- Bracket Breakdown Card -->
+    <div class="card">
+      <div class="card-title">Federal Bracket Breakdown</div>
+
+      <div class="bracket-bar-wrap">
+        <div class="bracket-bar" id="bracketBar"></div>
+        <div class="bracket-bar-legend" id="bracketLegend"></div>
+      </div>
+
+      <table class="bracket-table">
+        <thead>
+          <tr>
+            <th>Rate</th>
+            <th>Bracket Range</th>
+            <th>Income in Bracket</th>
+            <th>Tax Paid</th>
+            <th>Cumulative Tax</th>
+          </tr>
+        </thead>
+        <tbody id="bracketTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- State Bracket Breakdown Card -->
+    <div class="card" id="stateBracketCard" style="display:none">
+      <div class="card-title" id="stateBracketTitle">State Bracket Breakdown</div>
+      <div class="hint" id="stateBracketTaxable" style="margin-bottom:16px;"></div>
+
+      <div class="bracket-bar-wrap">
+        <div class="bracket-bar" id="stateBracketBar"></div>
+        <div class="bracket-bar-legend" id="stateBracketLegend"></div>
+      </div>
+
+      <table class="bracket-table">
+        <thead>
+          <tr>
+            <th>Rate</th>
+            <th>Bracket Range</th>
+            <th>Income in Bracket</th>
+            <th>Tax Paid</th>
+            <th>Cumulative Tax</th>
+          </tr>
+        </thead>
+        <tbody id="stateBracketTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Explainer Card -->
+    <div class="card">
+      <div class="card-title">Marginal vs. Effective Rate — What Does It Mean?</div>
+      <div id="explainerRows"></div>
+      <div class="explainer-note" id="explainerNote"></div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Federal income tax calculations use 2024–2025 IRS bracket data (accurate as of the respective filing years). State income tax estimates are approximate and exclude local taxes, surcharges, credits, and phase-outs. Does not include FICA, AMT, the Net Investment Income Tax (3.8% on high earners), or other adjustments. Consult a tax professional for personalized advice.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ── Tax data ──────────────────────────────────────────────────────────────────
+const TAX_DATA = {
+  2024: {
+    single: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 11600 },
+        { rate: 0.12, min: 11601,   max: 47150 },
+        { rate: 0.22, min: 47151,   max: 100525 },
+        { rate: 0.24, min: 100526,  max: 191950 },
+        { rate: 0.32, min: 191951,  max: 243725 },
+        { rate: 0.35, min: 243726,  max: 609350 },
+        { rate: 0.37, min: 609351,  max: Infinity },
+      ],
+      standardDeduction: 14600
+    },
+    mfj: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 23200 },
+        { rate: 0.12, min: 23201,   max: 94300 },
+        { rate: 0.22, min: 94301,   max: 201050 },
+        { rate: 0.24, min: 201051,  max: 383900 },
+        { rate: 0.32, min: 383901,  max: 487450 },
+        { rate: 0.35, min: 487451,  max: 731200 },
+        { rate: 0.37, min: 731201,  max: Infinity },
+      ],
+      standardDeduction: 29200
+    },
+    mfs: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 11600 },
+        { rate: 0.12, min: 11601,   max: 47150 },
+        { rate: 0.22, min: 47151,   max: 100525 },
+        { rate: 0.24, min: 100526,  max: 191950 },
+        { rate: 0.32, min: 191951,  max: 243725 },
+        { rate: 0.35, min: 243726,  max: 609350 },
+        { rate: 0.37, min: 609351,  max: Infinity },
+      ],
+      standardDeduction: 14600
+    },
+    hoh: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 16550 },
+        { rate: 0.12, min: 16551,   max: 63100 },
+        { rate: 0.22, min: 63101,   max: 100500 },
+        { rate: 0.24, min: 100501,  max: 191950 },
+        { rate: 0.32, min: 191951,  max: 243700 },
+        { rate: 0.35, min: 243701,  max: 609350 },
+        { rate: 0.37, min: 609351,  max: Infinity },
+      ],
+      standardDeduction: 21900
+    }
+  },
+  2025: {
+    single: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 11925 },
+        { rate: 0.12, min: 11926,   max: 48475 },
+        { rate: 0.22, min: 48476,   max: 103350 },
+        { rate: 0.24, min: 103351,  max: 197300 },
+        { rate: 0.32, min: 197301,  max: 250525 },
+        { rate: 0.35, min: 250526,  max: 626350 },
+        { rate: 0.37, min: 626351,  max: Infinity },
+      ],
+      standardDeduction: 15000
+    },
+    mfj: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 23850 },
+        { rate: 0.12, min: 23851,   max: 96950 },
+        { rate: 0.22, min: 96951,   max: 206700 },
+        { rate: 0.24, min: 206701,  max: 394600 },
+        { rate: 0.32, min: 394601,  max: 501050 },
+        { rate: 0.35, min: 501051,  max: 751600 },
+        { rate: 0.37, min: 751601,  max: Infinity },
+      ],
+      standardDeduction: 30000
+    },
+    mfs: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 11925 },
+        { rate: 0.12, min: 11926,   max: 48475 },
+        { rate: 0.22, min: 48476,   max: 103350 },
+        { rate: 0.24, min: 103351,  max: 197300 },
+        { rate: 0.32, min: 197301,  max: 250525 },
+        { rate: 0.35, min: 250526,  max: 626350 },
+        { rate: 0.37, min: 626351,  max: Infinity },
+      ],
+      standardDeduction: 15000
+    },
+    hoh: {
+      brackets: [
+        { rate: 0.10, min: 0,       max: 17000 },
+        { rate: 0.12, min: 17001,   max: 64850 },
+        { rate: 0.22, min: 64851,   max: 103350 },
+        { rate: 0.24, min: 103351,  max: 197300 },
+        { rate: 0.32, min: 197301,  max: 250500 },
+        { rate: 0.35, min: 250501,  max: 626350 },
+        { rate: 0.37, min: 626351,  max: Infinity },
+      ],
+      standardDeduction: 22500
+    }
+  }
+};
+
+// Long-term capital gains thresholds (taxable income including LTCG)
+// 0% up to threshold, 15% up to threshold2, 20% above
+const LTCG_THRESHOLDS = {
+  2024: {
+    single: { t0: 47025,  t15: 518900 },
+    mfj:    { t0: 94050,  t15: 583750 },
+    mfs:    { t0: 47025,  t15: 291850 },
+    hoh:    { t0: 63000,  t15: 551350 }
+  },
+  2025: {
+    single: { t0: 48350,  t15: 533400 },
+    mfj:    { t0: 96700,  t15: 600050 },
+    mfs:    { t0: 48350,  t15: 300000 },
+    hoh:    { t0: 64750,  t15: 566700 }
+  }
+};
+
+const BRACKET_COLORS = {
+  0.10: '#94a3b8',
+  0.12: '#60a5fa',
+  0.22: '#3b82f6',
+  0.24: '#8b5cf6',
+  0.32: '#f97316',
+  0.35: '#ef4444',
+  0.37: '#991b1b'
+};
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmt(n) {
+  if (n < 0) return '-$' + Math.abs(Math.round(n)).toLocaleString();
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function fmtPct(n, decimals) {
+  return n.toFixed(decimals !== undefined ? decimals : 1) + '%';
+}
+
+function pctRate(r) {
+  return (r * 100) + '%';
+}
+
+// ── State tax data ─────────────────────────────────────────────────────────────
+// null = no income tax. flat = {flat, std}. progressive = {br:[{r,max},...], std:{s,m}}
+// Brackets: taxable = income - std deduction. Rates on income in each band.
+// std: {s: single, m: mfj}. All values approximate 2024/2025.
+const STATE_TAX = {
+  AK:null, FL:null, NV:null, NH:null, SD:null, TN:null, TX:null, WA:null, WY:null,
+  AZ:{flat:0.025, std:{s:14600, m:29200}},
+  CO:{flat:0.044, std:{s:14600, m:29200}},
+  GA:{flat:0.0549,std:{s:12000, m:24000}},
+  ID:{flat:0.058, std:{s:14600, m:29200}},
+  IL:{flat:0.0495,std:{s:0,     m:0}},
+  IN:{flat:0.0305,std:{s:1000,  m:2000}},
+  IA:{flat:0.038, std:{s:14600, m:29200}},
+  KY:{flat:0.04,  std:{s:3160,  m:3160}},
+  MI:{flat:0.0425,std:{s:5400,  m:10800}},
+  MS:{flat:0.047, std:{s:2300,  m:4600}},
+  NC:{flat:0.045, std:{s:12750, m:25500}},
+  PA:{flat:0.0307,std:{s:0,     m:0}},
+  UT:{flat:0.0455,std:{s:14600, m:29200}},
+  // Progressive states — brackets: [{r: rate, max: upper bound (Inf for top)}]
+  AL:{br:[{r:0.02,max:500},{r:0.04,max:3000},{r:0.05,max:1e9}], std:{s:3000,m:8500}},
+  AR:{br:[{r:0.02,max:4999},{r:0.04,max:9999},{r:0.044,max:1e9}], std:{s:2340,m:4680}},
+  CA:{br:[{r:0.01,max:10412},{r:0.02,max:24684},{r:0.04,max:38959},{r:0.06,max:54081},{r:0.08,max:68350},{r:0.093,max:349137},{r:0.103,max:418961},{r:0.113,max:698274},{r:0.123,max:1000000},{r:0.133,max:1e9}], std:{s:5202,m:10404}},
+  CT:{br:[{r:0.03,max:10000},{r:0.05,max:50000},{r:0.055,max:100000},{r:0.06,max:200000},{r:0.065,max:250000},{r:0.069,max:500000},{r:0.0699,max:1e9}], std:{s:15000,m:24000}},
+  DC:{br:[{r:0.04,max:10000},{r:0.06,max:40000},{r:0.065,max:60000},{r:0.085,max:250000},{r:0.0925,max:500000},{r:0.0975,max:1000000},{r:0.1075,max:1e9}], std:{s:12950,m:25900}},
+  DE:{br:[{r:0.022,max:5000},{r:0.039,max:10000},{r:0.048,max:20000},{r:0.052,max:25000},{r:0.0555,max:60000},{r:0.066,max:1e9}], std:{s:3250,m:6500}},
+  HI:{br:[{r:0.014,max:2400},{r:0.032,max:4800},{r:0.055,max:9600},{r:0.064,max:14400},{r:0.068,max:19200},{r:0.072,max:24000},{r:0.076,max:36000},{r:0.079,max:48000},{r:0.0825,max:150000},{r:0.09,max:175000},{r:0.1,max:200000},{r:0.11,max:1e9}], std:{s:2200,m:4400}},
+  KS:{br:[{r:0.031,max:15000},{r:0.0525,max:30000},{r:0.057,max:1e9}], std:{s:3500,m:8000}},
+  LA:{br:[{r:0.0185,max:12500},{r:0.035,max:50000},{r:0.0425,max:1e9}], std:{s:4500,m:9000}},
+  MA:{br:[{r:0.05,max:1000000},{r:0.09,max:1e9}], std:{s:0,m:0}},
+  MD:{br:[{r:0.02,max:1000},{r:0.03,max:2000},{r:0.04,max:3000},{r:0.0475,max:100000},{r:0.05,max:125000},{r:0.0525,max:150000},{r:0.055,max:250000},{r:0.0575,max:1e9}], std:{s:2400,m:4850}},
+  ME:{br:[{r:0.058,max:24500},{r:0.0675,max:58050},{r:0.0715,max:1e9}], std:{s:14600,m:29200}},
+  MN:{br:[{r:0.0535,max:30070},{r:0.068,max:98760},{r:0.0785,max:183340},{r:0.0985,max:1e9}], std:{s:14575,m:29150}},
+  MO:{br:[{r:0.02,max:1121},{r:0.025,max:2242},{r:0.03,max:3363},{r:0.035,max:4484},{r:0.04,max:5605},{r:0.045,max:6726},{r:0.048,max:1e9}], std:{s:14600,m:29200}},
+  MT:{br:[{r:0.01,max:3600},{r:0.02,max:6300},{r:0.03,max:9700},{r:0.04,max:13000},{r:0.05,max:16800},{r:0.06,max:21600},{r:0.0675,max:1e9}], std:{s:5540,m:11080}},
+  NE:{br:[{r:0.0246,max:3700},{r:0.0351,max:22170},{r:0.0501,max:35730},{r:0.0664,max:1e9}], std:{s:7900,m:15800}},
+  NJ:{br:[{r:0.014,max:20000},{r:0.0175,max:35000},{r:0.035,max:40000},{r:0.05525,max:75000},{r:0.0637,max:500000},{r:0.0897,max:1000000},{r:0.1075,max:1e9}], std:{s:0,m:0}},
+  NM:{br:[{r:0.017,max:5500},{r:0.032,max:11000},{r:0.047,max:16000},{r:0.049,max:210000},{r:0.059,max:1e9}], std:{s:14600,m:29200}},
+  NY:{br:[{r:0.04,max:17150},{r:0.045,max:23600},{r:0.0525,max:27900},{r:0.055,max:161550},{r:0.06,max:323200},{r:0.0685,max:2155350},{r:0.0965,max:5000000},{r:0.103,max:25000000},{r:0.109,max:1e9}], std:{s:8000,m:16050}},
+  ND:{br:[{r:0.011,max:44725},{r:0.0204,max:225975},{r:0.0227,max:275925},{r:0.0264,max:1e9}], std:{s:14600,m:29200}},
+  OH:{br:[{r:0.0,max:26050},{r:0.02765,max:46100},{r:0.03226,max:92150},{r:0.03688,max:115300},{r:0.03990,max:1e9}], std:{s:0,m:0}},
+  OK:{br:[{r:0.005,max:1000},{r:0.01,max:2500},{r:0.02,max:3750},{r:0.03,max:4900},{r:0.04,max:7200},{r:0.0475,max:1e9}], std:{s:6350,m:12700}},
+  OR:{br:[{r:0.0475,max:18400},{r:0.0675,max:46200},{r:0.0875,max:250000},{r:0.099,max:1e9}], std:{s:2745,m:5495}},
+  RI:{br:[{r:0.0375,max:73450},{r:0.0475,max:166950},{r:0.0599,max:1e9}], std:{s:10550,m:21150}},
+  SC:{br:[{r:0.0,max:3200},{r:0.03,max:6410},{r:0.064,max:1e9}], std:{s:13850,m:27700}},
+  VA:{br:[{r:0.02,max:3000},{r:0.03,max:5000},{r:0.05,max:17000},{r:0.0575,max:1e9}], std:{s:8000,m:16000}},
+  VT:{br:[{r:0.0335,max:45400},{r:0.066,max:110050},{r:0.076,max:229550},{r:0.0875,max:1e9}], std:{s:6500,m:13000}},
+  WI:{br:[{r:0.035,max:13810},{r:0.044,max:27630},{r:0.053,max:304170},{r:0.0765,max:1e9}], std:{s:12760,m:23620}},
+  WV:{br:[{r:0.03,max:10000},{r:0.04,max:25000},{r:0.045,max:40000},{r:0.06,max:60000},{r:0.065,max:1e9}], std:{s:0,m:0}}
+};
+
+function calcStateTax(stateKey, gross, preTax, filingStatus) {
+  if (!stateKey) return 0;
+  const s = STATE_TAX[stateKey];
+  if (!s) return 0; // no-tax state
+  const isMfj = filingStatus === 'mfj';
+  const stdDed = s.std ? (isMfj ? s.std.m : s.std.s) : 0;
+  const taxable = Math.max(0, gross - preTax - stdDed);
+  if (taxable <= 0) return 0;
+  if (s.flat !== undefined) return taxable * s.flat;
+  // Progressive
+  let tax = 0, prev = 0;
+  for (const b of s.br) {
+    if (taxable <= prev) break;
+    const inBand = Math.min(taxable, b.max) - prev;
+    if (inBand <= 0) break;
+    tax += inBand * b.r;
+    prev = b.max;
+  }
+  return tax;
+}
+
+// ── Sankey chart ───────────────────────────────────────────────────────────────
+function fmtShort(n) {
+  if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1000) return '$' + Math.round(n / 1000) + 'K';
+  return '$' + Math.round(n);
+}
+
+function renderSankey(gross, preTax, deduction, bracketResults, ltcgTax, fedTax, stateTax) {
+  const svg = document.getElementById('sankeyChart');
+  const legend = document.getElementById('sankeyLegend');
+  if (!svg) return;
+  svg.innerHTML = '';
+  if (legend) legend.innerHTML = '';
+  if (gross <= 0) return;
+
+  const ns = 'http://www.w3.org/2000/svg';
+  const VW = 560, GAP = 5;
+  const BAR = 38, RX = 320;
+
+  // Build segments. The deduction reduces taxable income (already reflected in fedTax),
+  // it's not a separate cash outflow — so we don't show it as its own bar.
+  const items = [];
+  const ordinaryFedTax = fedTax - ltcgTax;
+  if (preTax > 0)         items.push({ label: 'Pre-tax contributions', amt: preTax,         color: '#64748b' });
+  if (ordinaryFedTax > 0) items.push({ label: 'Federal income tax',    amt: ordinaryFedTax, color: '#3b82f6' });
+  if (ltcgTax > 0)        items.push({ label: 'Cap gains tax',          amt: ltcgTax,        color: '#f97316' });
+  if (stateTax > 0)       items.push({ label: 'State income tax',       amt: stateTax,       color: '#f59e0b' });
+  const thome = Math.max(0, gross - preTax - fedTax - stateTax);
+  items.push({ label: 'Take-home', amt: thome, color: '#16a34a' });
+
+  const n = items.length;
+  const H = 240;
+  items.forEach(it => { it.h = Math.max(0, (it.amt / gross) * H); });
+
+  const VH = H + (n - 1) * GAP + 28;
+  svg.setAttribute('viewBox', '0 0 ' + VW + ' ' + VH);
+  svg.setAttribute('height', VH);
+
+  // Y positions: left (no gaps), right (gaps between segments)
+  let ly = 0, ry = 0;
+  items.forEach(it => {
+    it.ly = ly; ly += it.h;
+    it.ry = ry; ry += it.h + GAP;
+  });
+
+  const cx = (BAR + RX) / 2;
+
+  // Draw paths behind bars
+  items.forEach(it => {
+    if (it.h < 0.5) return;
+    const p = document.createElementNS(ns, 'path');
+    p.setAttribute('d',
+      'M' + BAR + ' ' + it.ly +
+      ' C' + cx + ' ' + it.ly + ',' + cx + ' ' + it.ry + ',' + RX + ' ' + it.ry +
+      ' L' + RX + ' ' + (it.ry + it.h) +
+      ' C' + cx + ' ' + (it.ry + it.h) + ',' + cx + ' ' + (it.ly + it.h) + ',' + BAR + ' ' + (it.ly + it.h) + ' Z'
+    );
+    p.setAttribute('fill', it.color);
+    p.setAttribute('opacity', '0.18');
+    svg.appendChild(p);
+  });
+
+  // Draw left bar segments
+  items.forEach(it => {
+    if (it.h < 0.5) return;
+    const r = document.createElementNS(ns, 'rect');
+    r.setAttribute('x', 0); r.setAttribute('y', it.ly);
+    r.setAttribute('width', BAR); r.setAttribute('height', it.h);
+    r.setAttribute('fill', it.color);
+    svg.appendChild(r);
+  });
+
+  // Draw right segments + labels
+  items.forEach(it => {
+    if (it.h < 0.5) return;
+    const r = document.createElementNS(ns, 'rect');
+    r.setAttribute('x', RX); r.setAttribute('y', it.ry + 1);
+    r.setAttribute('width', BAR); r.setAttribute('height', Math.max(0, it.h - 2));
+    r.setAttribute('fill', it.color); r.setAttribute('rx', '2');
+    svg.appendChild(r);
+
+    if (it.h >= 12) {
+      const midY = it.ry + it.h / 2 + 4;
+      const t = document.createElementNS(ns, 'text');
+      t.setAttribute('x', RX + BAR + 8);
+      t.setAttribute('y', midY);
+      t.setAttribute('fill', it.color === '#16a34a' ? '#16a34a' : 'currentColor');
+      t.setAttribute('opacity', it.color === '#16a34a' ? '1' : '0.75');
+      t.setAttribute('font-size', '11');
+      t.setAttribute('font-family', 'Inter,sans-serif');
+      t.textContent = it.label + '  ' + fmtShort(it.amt);
+      svg.appendChild(t);
+    }
+  });
+
+  // Left bar label
+  const lt = document.createElementNS(ns, 'text');
+  lt.setAttribute('x', BAR / 2); lt.setAttribute('y', H + 18);
+  lt.setAttribute('text-anchor', 'middle');
+  lt.setAttribute('font-size', '11'); lt.setAttribute('font-family', 'Inter,sans-serif');
+  lt.setAttribute('opacity', '0.6');
+  lt.textContent = 'Gross ' + fmtShort(gross);
+  svg.appendChild(lt);
+}
+
+// ── State bracket colors ───────────────────────────────────────────────────────
+const STATE_BRACKET_COLORS = ['#0e7490','#0284c7','#1d4ed8','#4f46e5','#7c3aed','#9333ea','#c026d3','#db2777','#e11d48','#dc2626','#b91c1c','#7f1d1d'];
+
+// ── Render state bracket breakdown ────────────────────────────────────────────
+function renderStateBrackets(stateKey, gross, preTax, filingStatus, stateTax) {
+  const card = document.getElementById('stateBracketCard');
+  if (!card) return;
+
+  if (!stateKey) { card.style.display = 'none'; return; }
+  const s = STATE_TAX[stateKey];
+  if (!s) { card.style.display = 'none'; return; } // no-tax state
+
+  card.style.display = '';
+
+  const isMfj = filingStatus === 'mfj';
+  const stdDed = s.std ? (isMfj ? s.std.m : s.std.s) : 0;
+  const taxable = Math.max(0, gross - preTax - stdDed);
+
+  // State name from select
+  const sel = document.getElementById('stateSelect');
+  const stateName = sel.options[sel.selectedIndex].text.replace(/\s*\(.*\)$/, '');
+  document.getElementById('stateBracketTitle').textContent = stateName + ' — State Tax Breakdown';
+  document.getElementById('stateBracketTaxable').textContent =
+    'State taxable income: ' + fmt(taxable) +
+    (stdDed > 0 ? ' (after ' + fmt(stdDed) + ' state standard deduction)' : '');
+
+  const bar    = document.getElementById('stateBracketBar');
+  const legend = document.getElementById('stateBracketLegend');
+  const tbody  = document.getElementById('stateBracketTableBody');
+  bar.innerHTML = ''; legend.innerHTML = ''; tbody.innerHTML = '';
+
+  if (s.flat !== undefined) {
+    // Flat-rate state
+    bar.innerHTML = `<div class="bracket-seg" style="width:100%;background:#0e7490;border-radius:6px;" data-tip="${(s.flat*100).toFixed(2)}% flat rate → ${fmt(stateTax)}"></div>`;
+    const tr = document.createElement('tr');
+    tr.className = 'active-row';
+    tr.innerHTML = `
+      <td><div class="rate-cell"><span class="rate-swatch" style="background:#0e7490"></span><span class="rate-badge">${(s.flat*100).toFixed(2).replace(/\.?0+$/,'')}% flat</span></div></td>
+      <td>All taxable income</td>
+      <td>${fmt(taxable)}</td>
+      <td>${fmt(stateTax)}</td>
+      <td>${fmt(stateTax)}</td>
+    `;
+    tbody.appendChild(tr);
+  } else {
+    // Progressive state
+    const bracketResults = [];
+    let cumTax = 0, prev = 0;
+    for (let i = 0; i < s.br.length; i++) {
+      const b = s.br[i];
+      if (taxable <= prev) break;
+      const inBand = Math.min(taxable, b.max) - prev;
+      if (inBand <= 0) break;
+      const tax = inBand * b.r;
+      cumTax += tax;
+      bracketResults.push({
+        rate: b.r, min: prev, max: b.max,
+        inBracket: inBand, tax: tax, cumTax: cumTax,
+        color: STATE_BRACKET_COLORS[i % STATE_BRACKET_COLORS.length]
+      });
+      prev = b.max;
+    }
+
+    // Legend
+    bracketResults.forEach(b => {
+      const li = document.createElement('div');
+      li.className = 'legend-item';
+      li.innerHTML = `<span class="legend-swatch" style="background:${b.color}"></span>${(b.rate*100).toFixed(2).replace(/\.?0+$/,'')}%`;
+      legend.appendChild(li);
+    });
+
+    // Bar
+    if (taxable > 0 && bracketResults.length > 0) {
+      bracketResults.forEach(b => {
+        const seg = document.createElement('div');
+        seg.className = 'bracket-seg';
+        seg.style.width = ((b.inBracket / taxable) * 100) + '%';
+        seg.style.background = b.color;
+        seg.style.borderRadius = '6px';
+        seg.setAttribute('data-tip', `${(b.rate*100).toFixed(1)}% bracket: ${fmt(b.inBracket)} → ${fmt(b.tax)}`);
+        bar.appendChild(seg);
+      });
+    } else {
+      bar.innerHTML = `<div style="flex:1;background:var(--surface2);border-radius:6px;"></div>`;
+    }
+
+    // Table
+    if (bracketResults.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:20px;">No taxable state income after deductions.</td></tr>`;
+    } else {
+      bracketResults.forEach((b, i) => {
+        const isMarginal = i === bracketResults.length - 1;
+        const rangeStr = b.max >= 1e9 ? `${fmt(b.min)}+` : `${fmt(b.min)} – ${fmt(b.max)}`;
+        const tr = document.createElement('tr');
+        if (isMarginal) tr.className = 'active-row';
+        tr.innerHTML = `
+          <td><div class="rate-cell"><span class="rate-swatch" style="background:${b.color}"></span><span class="rate-badge">${(b.rate*100).toFixed(2).replace(/\.?0+$/,'')}%</span>${isMarginal ? '<span class="marginal-badge">MARGINAL</span>' : ''}</div></td>
+          <td>${rangeStr}</td>
+          <td>${fmt(b.inBracket)}</td>
+          <td>${fmt(b.tax)}</td>
+          <td>${fmt(b.cumTax)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+  }
+}
+
+// ── Toggle deduction UI ───────────────────────────────────────────────────────
+function toggleDeduction() {
+  const useStd = document.getElementById('useStdDed').checked;
+  document.getElementById('itemizedField').style.display = useStd ? 'none' : 'block';
+  calculate();
+}
+
+// ── Main calculation ──────────────────────────────────────────────────────────
+function calculate() {
+  const year   = parseInt(document.getElementById('taxYear').value);
+  const status = document.getElementById('filingStatus').value;
+  const gross  = Math.max(0, parseFloat(document.getElementById('grossIncome').value) || 0);
+  const preTax = Math.max(0, parseFloat(document.getElementById('preTaxDed').value) || 0);
+  const useStd = document.getElementById('useStdDed').checked;
+  const stateKey = document.getElementById('stateSelect').value;
+
+  const data = TAX_DATA[year][status];
+  const stdDed = data.standardDeduction;
+
+  // Update standard deduction hint
+  document.getElementById('stdDedHint').textContent =
+    useStd ? `Standard deduction for ${year}: ${fmt(stdDed)}` : '';
+
+  const deduction = useStd
+    ? stdDed
+    : Math.max(0, parseFloat(document.getElementById('itemizedDed').value) || 0);
+
+  const taxable = Math.max(0, gross - preTax - deduction);
+
+  // Walk brackets
+  let totalTax = 0;
+  let marginalRate = 0;
+  const bracketResults = [];
+
+  for (let i = 0; i < data.brackets.length; i++) {
+    const b = data.brackets[i];
+    if (taxable <= 0) break;
+    if (taxable < b.min) break;
+
+    const upperBound = b.max === Infinity ? taxable : Math.min(taxable, b.max);
+    const incomeInBracket = upperBound - b.min + (i === 0 ? 0 : 1);
+    // Simpler: amount of taxable income that falls in this bracket
+    const low  = b.min;
+    const high = b.max === Infinity ? taxable : b.max;
+    const inBracket = Math.min(taxable, high) - low + (i === 0 ? 0 : 0);
+
+    // Recalculate cleanly
+    const bracketLow  = b.min;
+    const bracketHigh = b.max === Infinity ? taxable : b.max;
+    const inThis = Math.max(0, Math.min(taxable, bracketHigh) - bracketLow);
+
+    if (inThis <= 0) break;
+
+    const tax = inThis * b.rate;
+    totalTax += tax;
+    marginalRate = b.rate;
+
+    bracketResults.push({
+      rate: b.rate,
+      min: b.min,
+      max: b.max,
+      inBracket: inThis,
+      tax: tax,
+      cumTax: totalTax,
+      color: BRACKET_COLORS[b.rate]
+    });
+  }
+
+  // ── Capital gains tax ─────────────────────────────────────────────────────
+  const ltcg = Math.max(0, parseFloat(document.getElementById('ltcg').value) || 0);
+  let ltcgTax = 0;
+  let ltcgRate = 0;
+  if (ltcg > 0) {
+    const thr = LTCG_THRESHOLDS[year][status];
+    // LTCG stacks on top of ordinary taxable income
+    const stackedTop = taxable + ltcg;
+    const stackedBase = taxable;
+    // Calculate how much of the LTCG falls in each cap-gains bracket
+    // 0% bucket: income up to t0
+    const in0 = Math.max(0, Math.min(stackedTop, thr.t0) - Math.min(stackedBase, thr.t0));
+    // 15% bucket: income from t0 to t15
+    const in15 = Math.max(0, Math.min(stackedTop, thr.t15) - Math.max(stackedBase, thr.t0));
+    // 20% bucket: income above t15
+    const in20 = Math.max(0, stackedTop - Math.max(stackedBase, thr.t15));
+    ltcgTax = in15 * 0.15 + in20 * 0.20;
+    // Marginal cap gains rate
+    if (in20 > 0) ltcgRate = 0.20;
+    else if (in15 > 0) ltcgRate = 0.15;
+    else ltcgRate = 0.00;
+  }
+
+  // ── State tax ──────────────────────────────────────────────────────────────
+  const stateTax = calcStateTax(stateKey, gross, preTax, status);
+
+  const totalTaxAll = totalTax + ltcgTax + stateTax;
+  const grossTotal = gross + ltcg;
+  const effectiveRate = grossTotal > 0 ? (totalTaxAll / grossTotal) * 100 : 0;
+  const takeHome = grossTotal - totalTaxAll;
+
+  // ── Compute state marginal rate ────────────────────────────────────────────
+  let stateMarginalRate = 0;
+  if (stateKey) {
+    const sData = STATE_TAX[stateKey];
+    if (sData) {
+      if (sData.flat !== undefined) {
+        stateMarginalRate = sData.flat;
+      } else {
+        const isMfj2 = status === 'mfj';
+        const sStdDed = sData.std ? (isMfj2 ? sData.std.m : sData.std.s) : 0;
+        const sTaxable = Math.max(0, gross - preTax - sStdDed);
+        if (sTaxable > 0) {
+          let prev2 = 0;
+          for (const b of sData.br) {
+            if (sTaxable <= b.max) { stateMarginalRate = b.r; break; }
+            prev2 = b.max;
+          }
+          if (stateMarginalRate === 0 && sTaxable > prev2) {
+            stateMarginalRate = sData.br[sData.br.length - 1].r;
+          }
+        }
+      }
+    }
+  }
+
+  // ── State marginal rate for cap gains (flat rate applies; progressive uses ordinary) ──
+  // For combined cap gains marginal: federal cap gains rate + state marginal rate on ordinary income
+  const combinedMarginal = marginalRate + stateMarginalRate;
+  const combinedCapGainsMarginal = ltcgRate + stateMarginalRate;
+  const hasState = stateTax > 0;
+
+  // ── Update dynamic labels ──────────────────────────────────────────────────
+  document.getElementById('effectiveRateLabel').textContent =
+    hasState ? 'Combined Effective Rate' : 'Effective Tax Rate';
+  document.getElementById('sidebarSubtitle').textContent =
+    hasState
+      ? 'See exactly how your federal and state income taxes are calculated — bracket by bracket.'
+      : 'See exactly how your federal income tax is calculated — bracket by bracket.';
+  document.getElementById('fedTaxLabel').textContent =
+    'Federal Income Tax' + (ltcg > 0 ? ' + Cap Gains' : '');
+
+  // ── Render Summary ────────────────────────────────────────────────────────
+  document.getElementById('effectiveRateNum').textContent = effectiveRate.toFixed(1);
+
+  if (taxable > 0) {
+    let margNote = '';
+    if (hasState) {
+      const fedPct = pctRate(marginalRate);
+      const stPct = (stateMarginalRate * 100).toFixed(2).replace(/\.?0+$/, '') + '%';
+      const combPct = (combinedMarginal * 100).toFixed(1) + '%';
+      margNote = `Federal marginal: <strong>${fedPct}</strong> + State: <strong>${stPct}</strong> = <strong>${combPct} combined</strong> on each additional dollar of ordinary income`;
+      if (ltcg > 0 && ltcgRate > 0) {
+        const combCGPct = (combinedCapGainsMarginal * 100).toFixed(1) + '%';
+        margNote += `. Cap gains marginal: <strong>${(ltcgRate*100).toFixed(0)}%</strong> federal + <strong>${stPct}</strong> state = <strong>${combCGPct}</strong>`;
+      }
+    } else {
+      margNote = `Your marginal rate is <strong>${pctRate(marginalRate)}</strong> — every additional dollar of ordinary income is taxed at ${pctRate(marginalRate)}`;
+      if (ltcg > 0 && ltcgRate > 0) {
+        margNote += `. Capital gains marginal rate: <strong>${(ltcgRate*100).toFixed(0)}%</strong>`;
+      }
+    }
+    document.getElementById('marginalNote').innerHTML = margNote;
+  } else {
+    document.getElementById('marginalNote').textContent = 'No taxable income after deductions.';
+  }
+
+  document.getElementById('statGross').textContent     = fmt(grossTotal);
+  document.getElementById('statTaxable').textContent   = fmt(taxable);
+  document.getElementById('statTax').textContent       = fmt(totalTax + ltcgTax);
+  document.getElementById('statTakeHome').textContent  = fmt(takeHome);
+
+  // Cap gains stat row — show/hide
+  const cgRow = document.getElementById('statCapGainsRow');
+  if (ltcg > 0) {
+    cgRow.style.display = '';
+    document.getElementById('statCapGainsTax').textContent =
+      fmt(ltcgTax) + (ltcgTax === 0 ? ' (0% rate)' : ` (${(ltcgRate*100).toFixed(0)}% rate)`);
+  } else {
+    cgRow.style.display = 'none';
+  }
+
+  // State tax stat row
+  const stRow = document.getElementById('statStateTaxRow');
+  if (stateTax > 0) {
+    stRow.style.display = '';
+    document.getElementById('statStateTax').textContent = fmt(stateTax);
+  } else {
+    stRow.style.display = 'none';
+  }
+
+  // ── Sankey chart ──────────────────────────────────────────────────────────
+  renderSankey(gross, preTax, deduction, bracketResults, ltcgTax, totalTax + ltcgTax, stateTax);
+
+  // ── State bracket breakdown ────────────────────────────────────────────────
+  renderStateBrackets(stateKey, gross, preTax, status, stateTax);
+
+  // ── Render Bracket Bar ────────────────────────────────────────────────────
+  const bar    = document.getElementById('bracketBar');
+  const legend = document.getElementById('bracketLegend');
+  bar.innerHTML    = '';
+  legend.innerHTML = '';
+
+  if (taxable > 0) {
+    bracketResults.forEach(b => {
+      const widthPct = (b.inBracket / taxable) * 100;
+      const seg = document.createElement('div');
+      seg.className = 'bracket-seg';
+      seg.style.width = widthPct + '%';
+      seg.style.background = b.color;
+      seg.style.borderRadius = '6px';
+      const tipRange = b.max === Infinity
+        ? `${fmt(b.min)}+`
+        : `${fmt(b.min)} – ${fmt(b.max)}`;
+      seg.setAttribute('data-tip', `${pctRate(b.rate)} bracket: ${fmt(b.inBracket)} taxed → ${fmt(b.tax)}`);
+      bar.appendChild(seg);
+
+      const li = document.createElement('div');
+      li.className = 'legend-item';
+      li.innerHTML = `<span class="legend-swatch" style="background:${b.color}"></span>${pctRate(b.rate)}`;
+      legend.appendChild(li);
+    });
+  } else {
+    bar.innerHTML = `<div style="flex:1;background:var(--surface2);border-radius:6px;"></div>`;
+  }
+
+  // ── Render Bracket Table ──────────────────────────────────────────────────
+  const tbody = document.getElementById('bracketTableBody');
+  tbody.innerHTML = '';
+
+  bracketResults.forEach((b, i) => {
+    const isMarginal = i === bracketResults.length - 1 && taxable > 0;
+    const rangeStr = b.max === Infinity
+      ? `${fmt(b.min)}+`
+      : `${fmt(b.min)} – ${fmt(b.max)}`;
+
+    const tr = document.createElement('tr');
+    if (isMarginal) tr.className = 'active-row';
+
+    tr.innerHTML = `
+      <td>
+        <div class="rate-cell">
+          <span class="rate-swatch" style="background:${b.color}"></span>
+          <span class="rate-badge">${pctRate(b.rate)}</span>
+          ${isMarginal ? '<span class="marginal-badge">MARGINAL</span>' : ''}
+        </div>
+      </td>
+      <td>${rangeStr}</td>
+      <td>${fmt(b.inBracket)}</td>
+      <td>${fmt(b.tax)}</td>
+      <td>${fmt(b.cumTax)}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  if (bracketResults.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--text-muted);padding:20px;">No taxable income — enter a gross income above your deductions.</td></tr>`;
+  }
+
+  // ── Render Explainer ──────────────────────────────────────────────────────
+  const explainerRows = document.getElementById('explainerRows');
+  const explainerNote = document.getElementById('explainerNote');
+  explainerRows.innerHTML = '';
+
+  if (taxable > 0 && bracketResults.length > 0) {
+    bracketResults.forEach((b, i) => {
+      const pctOfGross = gross > 0 ? (b.inBracket / gross) * 100 : 0;
+      const isMarginal = i === bracketResults.length - 1;
+
+      const row = document.createElement('div');
+      row.className = 'explainer-row';
+      row.style.marginBottom = '10px';
+      row.innerHTML = `
+        <div class="explainer-rate-label" style="min-width:60px;">
+          <span class="legend-swatch" style="background:${b.color};width:10px;height:10px;border-radius:2px;display:inline-block;"></span>
+          ${pctRate(b.rate)}
+        </div>
+        <div class="explainer-bar-wrap">
+          <div class="explainer-bar-track">
+            <div class="explainer-bar-fill" style="width:${pctOfGross}%;background:${b.color};"></div>
+          </div>
+        </div>
+        <div class="explainer-pct">${pctOfGross.toFixed(1)}%</div>
+        <div class="explainer-amt">${fmt(b.inBracket)}</div>
+      `;
+      explainerRows.appendChild(row);
+    });
+
+    // Deduction/pre-tax row
+    const deductionTotal = gross - taxable;
+    if (deductionTotal > 0) {
+      const pctDed = gross > 0 ? (deductionTotal / gross) * 100 : 0;
+      const row = document.createElement('div');
+      row.className = 'explainer-row';
+      row.style.marginBottom = '10px';
+      row.innerHTML = `
+        <div class="explainer-rate-label" style="min-width:60px;color:var(--text-muted);">
+          <span class="legend-swatch" style="background:var(--surface2);border:1px solid var(--border);width:10px;height:10px;border-radius:2px;display:inline-block;"></span>
+          Deductions
+        </div>
+        <div class="explainer-bar-wrap">
+          <div class="explainer-bar-track">
+            <div class="explainer-bar-fill" style="width:${pctDed}%;background:var(--border);"></div>
+          </div>
+        </div>
+        <div class="explainer-pct" style="color:var(--text-muted);">${pctDed.toFixed(1)}%</div>
+        <div class="explainer-amt" style="color:var(--text-muted);">${fmt(deductionTotal)}</div>
+      `;
+      explainerRows.appendChild(row);
+    }
+
+    const margB = bracketResults[bracketResults.length - 1];
+    const pctMargOfIncome = taxable > 0 ? (margB.inBracket / taxable) * 100 : 0;
+
+    explainerNote.innerHTML = `
+      You're in the <strong>${pctRate(marginalRate)} marginal bracket</strong>, but only
+      <strong>${fmt(margB.inBracket)}</strong> (${pctMargOfIncome.toFixed(1)}% of taxable income)
+      is actually taxed at that rate. The rest is taxed at lower rates, which is why your
+      effective rate of <strong>${effectiveRate.toFixed(1)}%</strong> is much lower than
+      your marginal rate of <strong>${pctRate(marginalRate)}</strong>.
+    `;
+  } else {
+    explainerNote.textContent = 'Enter a gross income greater than your deductions to see the breakdown.';
+  }
+}
+
+// ── Dark mode toggle ──────────────────────────────────────────────────────────
+document.getElementById('themeToggle').addEventListener('click', function() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    document.getElementById('themeIcon').textContent  = '☾';
+    document.getElementById('themeLabel').textContent = 'Dark';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    document.getElementById('themeIcon').textContent  = '☀';
+    document.getElementById('themeLabel').textContent = 'Light';
+  }
+});
+
+// Set initial theme toggle label
+(function() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.getElementById('themeIcon').textContent  = '☀';
+    document.getElementById('themeLabel').textContent = 'Light';
+  }
+})();
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+calculate();
+</script>
+</body>
+</html>

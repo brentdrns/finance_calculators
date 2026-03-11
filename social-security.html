@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Social Security Break-Even Calculator — When Should You Claim?</title>
+<meta name="description" content="Free Social Security claiming break-even calculator. Find the age where delaying beats claiming early. Compare cumulative benefits, model COLA, investment returns, and taxes. For educational purposes only.">
+<meta name="keywords" content="social security break even calculator, when to claim social security, social security claiming age, delay social security, early social security calculator, social security 62 vs 67 vs 70, PIA calculator">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/social-security.html">
+<meta property="og:title" content="Social Security Break-Even Calculator — When Should You Claim?">
+<meta property="og:description" content="Find the break-even age between claiming Social Security at 62, 67, or 70. Model COLA, investment returns, taxes, and life expectancy. Free educational tool.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/social-security.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Social Security Break-Even Calculator — When Should You Claim?">
+<meta name="twitter:description" content="Find the break-even age for Social Security claiming. Compare cumulative benefits at 62, 67, 70 with COLA and investment return modeling.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Social Security Break-Even Calculator","description":"Free educational Social Security claiming break-even calculator. Compare cumulative lifetime benefits at different claiming ages, model COLA and investment returns. For educational purposes only — not financial advice.","applicationCategory":"FinanceApplication","operatingSystem":"Any","url":"https://abelscalculators.com/social-security.html","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    } catch(e){}
+  })();
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+  --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+  --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+}
+[data-theme="dark"] {
+  --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+  --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+  --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+/* ── Header ── */
+header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+header h1 { margin: 0; line-height: 0; }
+.header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+.header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.header-nav > a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+.header-nav > a:hover { color: var(--text); background: var(--surface2); }
+.header-nav > a.active { color: #fff; background: var(--accent); }
+.nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+
+/* ── Nav dropdowns ── */
+.nav-dropdown { position: relative; display: flex; align-items: center; }
+.nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+.nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+.nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+.nav-caret { font-size: 9px; opacity: 0.6; }
+.nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+.nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+.nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+.nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+.nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+
+/* ── Theme toggle ── */
+.theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+.theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+/* ── Hero band ── */
+.hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+.hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+.hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+.hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; white-space: nowrap; }
+.hero-band-title span { color: var(--accent); }
+.hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+.hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+.hero-band-body strong { color: var(--text); }
+
+/* ── Layout ── */
+.layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+
+/* ── Sidebar ── */
+.sidebar { border-right: 1px solid var(--border); position: sticky; top: 0; max-height: 100vh; overflow-y: auto; padding: 20px 18px; display: flex; flex-direction: column; gap: 0; }
+
+.section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.field { margin-bottom: 10px; }
+.field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; font-weight: 500; }
+.field input[type="number"], .field input[type="range"] { width: 100%; }
+.field input[type="number"] { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+.field input[type="number"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+.field input[type="range"] { accent-color: var(--accent); cursor: pointer; margin-top: 4px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+
+.slider-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+.slider-label label { color: var(--text-muted); font-size: 11px; font-weight: 500; }
+.slider-val { font-size: 13px; font-family: 'DM Mono', monospace; color: var(--text); font-weight: 500; }
+
+.checkbox-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.cb-label { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-muted); cursor: pointer; padding: 4px 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; transition: all 0.15s; user-select: none; }
+.cb-label:hover { color: var(--text); border-color: var(--accent-dim); }
+.cb-label input { accent-color: var(--accent); }
+
+.toggle-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.toggle-switch { position: relative; width: 34px; height: 18px; flex-shrink: 0; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; inset: 0; background: var(--border); border-radius: 18px; cursor: pointer; transition: background 0.2s; }
+.toggle-slider:before { content: ''; position: absolute; width: 12px; height: 12px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: transform 0.2s; }
+.toggle-switch input:checked + .toggle-slider { background: var(--accent); }
+.toggle-switch input:checked + .toggle-slider:before { transform: translateX(16px); }
+.toggle-label { font-size: 11px; color: var(--text-muted); }
+
+.sidebar-divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+/* ── Main ── */
+.main { padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Cards ── */
+.card { background: var(--surface); border-radius: 14px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+
+.verdict-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; }
+.verdict-headline { font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.35; margin-bottom: 6px; color: var(--text); }
+.verdict-sub { font-size: 12px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-box { background: var(--surface2); border-radius: var(--radius); padding: 12px 14px; }
+.stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.stat-value { font-size: 18px; font-family: 'DM Serif Display', serif; color: var(--text); }
+.stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+/* ── Chart ── */
+.chart-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+.chart-wrap { position: relative; height: 380px; }
+
+/* ── Break-even table ── */
+.be-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.be-table th { text-align: left; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: 500; }
+.be-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
+.be-table tr:last-child td { border-bottom: none; }
+.be-table tr:hover td { background: var(--surface2); }
+.be-age { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--accent); }
+.be-badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; }
+.be-badge.good { background: rgba(22,163,74,0.12); color: var(--green); }
+.be-badge.caution { background: rgba(220,38,38,0.1); color: var(--red); }
+
+/* ── Investment comparison ── */
+.inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.inv-card { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; }
+.inv-card-title { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
+.inv-amount { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); }
+.inv-sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+.inv-winner { background: rgba(22,163,74,0.1); border: 1px solid rgba(22,163,74,0.25); }
+.inv-winner .inv-amount { color: var(--green); }
+.inv-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+
+/* ── Footer ── */
+.site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+.site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+.site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+.site-footer-nav a:hover { color: var(--accent-dim); }
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
+  .main { padding: 20px; }
+  header { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
+  .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; }
+  .hero-band-divider { display: none; }
+  .hero-band-title { white-space: normal; font-size: 22px; }
+}
+@media (max-width: 600px) {
+  .header-banner { max-width: 100%; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .inv-grid { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .main { padding: 12px; }
+  .card { padding: 14px 16px; }
+  .chart-wrap { height: 280px; }
+  .site-footer { padding: 16px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="social-security.html" class="active">Social Security Break-Even</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Retirement Planning</div>
+      <div class="hero-band-title">Social Security <span>Break-Even</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      <strong>When does waiting pay off?</strong> Claiming Social Security later means higher monthly checks — but you collect for fewer years.
+      This calculator finds the exact age where delaying starts coming out ahead, and models what happens if you invest early benefits instead.
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="section-label">Your Situation</div>
+
+    <div class="field">
+      <label for="birthYear">Birth year</label>
+      <input type="number" id="birthYear" min="1943" max="1975" value="1965" step="1" oninput="updateFRAHint(); calculate()">
+      <div class="hint" id="fraHint">Your full retirement age (FRA) is <strong id="fraDisplay">67</strong>.</div>
+    </div>
+
+    <div class="field">
+      <label for="fraBenefit">Estimated benefit at your FRA <span style="font-size:10px;color:var(--accent-dim)">your PIA</span></label>
+      <input type="number" id="fraBenefit" min="100" max="10000" value="2000" step="50">
+      <div class="hint">Find your PIA on your Social Security statement at <a href="https://ssa.gov/myaccount" target="_blank" rel="noopener" style="color:var(--accent-dim)">ssa.gov</a></div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+    <div class="section-label">Assumptions</div>
+
+    <div class="field">
+      <label for="cola">Annual COLA (cost-of-living adjustment) %</label>
+      <input type="number" id="cola" min="0" max="10" value="2.5" step="0.1">
+      <div class="hint">Historical average ~2.6%. SSA applies this automatically each year.</div>
+    </div>
+
+    <div class="field">
+      <label for="investReturn">Expected investment return %</label>
+      <input type="number" id="investReturn" min="0" max="20" value="7" step="0.1">
+      <div class="hint">If you claim early and invest the difference, what annual return do you expect?</div>
+    </div>
+
+    <div class="toggle-row">
+      <label class="toggle-switch">
+        <input type="checkbox" id="taxToggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+      <span class="toggle-label">Include income tax on benefits</span>
+    </div>
+
+    <div class="field" id="taxRateField">
+      <label for="taxRate">Effective tax rate on benefits %</label>
+      <input type="number" id="taxRate" min="0" max="50" value="15" step="1">
+      <div class="hint">At higher incomes, up to 85% of benefits are included in taxable income — then taxed at your bracket. A 15% effective rate on benefits is a common middle-ground assumption.</div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+    <div class="section-label">Life Expectancy &amp; Ages</div>
+
+    <div class="field">
+      <div class="slider-label">
+        <label for="lifeExpectancy">Life expectancy</label>
+        <span class="slider-val" id="lifeExpectancyVal">85</span>
+      </div>
+      <input type="range" id="lifeExpectancy" min="70" max="100" value="85" step="1">
+      <div class="hint">Average U.S. life expectancy at 65 is ~84–87. Use your best estimate.</div>
+    </div>
+
+    <div class="field">
+      <label>Claiming ages to compare</label>
+      <div class="checkbox-group" id="ageCheckboxes">
+        <label class="cb-label"><input type="checkbox" value="62" checked> 62</label>
+        <label class="cb-label"><input type="checkbox" value="64"> 64</label>
+        <label class="cb-label"><input type="checkbox" value="66"> 66</label>
+        <label class="cb-label"><input type="checkbox" value="67" checked> 67 (FRA)</label>
+        <label class="cb-label"><input type="checkbox" value="68"> 68</label>
+        <label class="cb-label"><input type="checkbox" value="70" checked> 70</label>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Verdict card -->
+    <div class="card" id="verdictCard">
+      <div class="verdict-label">Break-Even Summary</div>
+      <div class="verdict-headline" id="verdictHeadline">Calculating…</div>
+      <div class="verdict-sub" id="verdictSub"></div>
+      <div class="stats-grid" id="statsGrid"></div>
+    </div>
+
+    <!-- Chart -->
+    <div class="card">
+      <div class="chart-title">Cumulative Lifetime Benefits by Claiming Age</div>
+      <div class="chart-wrap">
+        <canvas id="benefitsChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Break-even table -->
+    <div class="card">
+      <div class="chart-title">Break-Even Analysis</div>
+      <table class="be-table" id="beTable">
+        <thead>
+          <tr>
+            <th>Comparison</th>
+            <th>Break-even age</th>
+            <th>Monthly difference</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody id="beTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Investment comparison card -->
+    <div class="card" id="investCard">
+      <div class="chart-title">Investment Comparison</div>
+      <div class="inv-desc" id="invDesc"></div>
+      <div class="inv-grid" id="invGrid"></div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For educational purposes only. Social Security rules are complex and change over time. This calculator uses simplified assumptions. Consult the SSA (<a href="https://ssa.gov" target="_blank" rel="noopener" style="color:var(--accent-dim)">ssa.gov</a>) and a financial advisor before making claiming decisions.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+// Theme toggle
+// ─────────────────────────────────────────────
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function applyTheme(dark){
+    if(dark){
+      document.documentElement.setAttribute('data-theme','dark');
+      icon.textContent = '☀';
+      label.textContent = 'Light';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      icon.textContent = '☾';
+      label.textContent = 'Dark';
+    }
+  }
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'dark');
+  btn.addEventListener('click', function(){
+    var dark = document.documentElement.getAttribute('data-theme') !== 'dark';
+    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch(e){}
+    applyTheme(dark);
+    renderChart();
+  });
+})();
+
+// ─────────────────────────────────────────────
+// SS Math
+// ─────────────────────────────────────────────
+// FRA by birth year per SSA rules
+function getFRA(birthYear) {
+  if (birthYear <= 1954) return 66;
+  if (birthYear === 1955) return 66 + 2/12;
+  if (birthYear === 1956) return 66 + 4/12;
+  if (birthYear === 1957) return 66 + 6/12;
+  if (birthYear === 1958) return 66 + 8/12;
+  if (birthYear === 1959) return 66 + 10/12;
+  return 67; // 1960+
+}
+
+function getFRALabel(birthYear) {
+  if (birthYear <= 1954) return '66';
+  if (birthYear === 1955) return '66 and 2 months';
+  if (birthYear === 1956) return '66 and 4 months';
+  if (birthYear === 1957) return '66 and 6 months';
+  if (birthYear === 1958) return '66 and 8 months';
+  if (birthYear === 1959) return '66 and 10 months';
+  return '67';
+}
+
+function updateFRAHint() {
+  var by = parseInt(document.getElementById('birthYear').value) || 1965;
+  var lbl = getFRALabel(by);
+  var el = document.getElementById('fraDisplay');
+  if (el) el.textContent = lbl;
+}
+
+function benefitFactor(claimAgeYears, fra) {
+  var fraMonths = Math.round(fra * 12);
+  var claimMonths = Math.round(claimAgeYears * 12);
+  var diff = claimMonths - fraMonths; // negative = before FRA, positive = after
+  if (diff < 0) {
+    // Reduction: first 36 months: 5/9 of 1% per month, beyond: 5/12 of 1% per month
+    var months = -diff;
+    var first36 = Math.min(36, months);
+    var beyond36 = Math.max(0, months - 36);
+    var reduction = (first36 * 5/9/100) + (beyond36 * 5/12/100);
+    return 1 - reduction;
+  } else if (diff > 0) {
+    // Delayed retirement credits: 8% per year = 2/3% per month
+    var years = diff / 12;
+    return 1 + (0.08 * years);
+  }
+  return 1;
+}
+
+function monthlyBenefit(claimAge, fraBenefit, cola, taxRate, useTax, fra) {
+  var factor = benefitFactor(claimAge, fra || 67);
+  var gross = fraBenefit * factor;
+  if (useTax) gross = gross * (1 - taxRate / 100);
+  return gross;
+}
+
+// Returns cumulative benefit array indexed by integer age from claimAge to maxAge
+// Each entry: { age, cumulative }  in today's (nominal) dollars with COLA
+function cumulativeSeries(claimAge, fraBenefit, cola, taxRate, useTax, maxAge, fra) {
+  var base = monthlyBenefit(claimAge, fraBenefit, cola, taxRate, useTax, fra);
+  var result = [];
+  var cumulative = 0;
+  var colaFactor = 1;
+  for (var age = claimAge; age <= maxAge; age++) {
+    var annualBenefit = base * 12 * colaFactor;
+    cumulative += annualBenefit;
+    result.push({ age: age, cumulative: cumulative });
+    colaFactor *= (1 + cola / 100);
+  }
+  return result;
+}
+
+// Get cumulative at a specific age (returns 0 if before claimAge)
+function getCumulativeAtAge(series, claimAge, targetAge) {
+  if (targetAge < claimAge) return 0;
+  var idx = targetAge - claimAge;
+  if (idx >= series.length) return series[series.length - 1].cumulative;
+  return series[idx].cumulative;
+}
+
+// Find break-even age between two claiming ages
+// Returns null if no break-even before maxAge, or 'never' if earlyAge never catches up
+function findBreakEven(earlyAge, lateAge, fraBenefit, cola, taxRate, useTax, maxAge, fra) {
+  var earlySeries = cumulativeSeries(earlyAge, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+  var lateSeries = cumulativeSeries(lateAge, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+  // Start checking from when the later claimer starts receiving benefits
+  for (var age = lateAge; age <= maxAge; age++) {
+    var earlyTotal = getCumulativeAtAge(earlySeries, earlyAge, age);
+    var lateTotal = getCumulativeAtAge(lateSeries, lateAge, age);
+    if (lateTotal >= earlyTotal) return age;
+  }
+  return null;
+}
+
+// Investment comparison: if you claim at earlyAge instead of lateAge,
+// invest the extra monthly payments at investReturn% annually.
+// Returns total (cumulative from earlyAge + portfolio) vs cumulative from lateAge at targetAge
+function investmentComparison(earlyAge, lateAge, fraBenefit, cola, taxRate, useTax, investReturn, targetAge, fra) {
+  var earlyMonthly = monthlyBenefit(earlyAge, fraBenefit, cola, taxRate, useTax, fra);
+  var lateMonthly = monthlyBenefit(lateAge, fraBenefit, cola, taxRate, useTax, fra);
+
+  var monthlyRate = investReturn / 100 / 12;
+  var portfolio = 0;
+  var colaFactor = 1;
+
+  // Phase 1: from earlyAge to lateAge, invest early benefits
+  for (var age = earlyAge; age < lateAge; age++) {
+    for (var m = 0; m < 12; m++) {
+      var contribution = earlyMonthly * colaFactor;
+      portfolio = portfolio * (1 + monthlyRate) + contribution;
+    }
+    colaFactor *= (1 + cola / 100);
+  }
+
+  // Phase 2: from lateAge to targetAge, portfolio grows and early still collects
+  // Track cumulative SS from each strategy
+  var earlySeries = cumulativeSeries(earlyAge, fraBenefit, cola, taxRate, useTax, targetAge, fra);
+  var lateSeries = cumulativeSeries(lateAge, fraBenefit, cola, taxRate, useTax, targetAge, fra);
+
+  // Continue growing portfolio from lateAge to targetAge (no new contributions from the "gap")
+  var yearsToGrow = targetAge - lateAge;
+  for (var y = 0; y < yearsToGrow; y++) {
+    for (var m2 = 0; m2 < 12; m2++) {
+      portfolio = portfolio * (1 + monthlyRate);
+    }
+  }
+
+  var earlyTotal = getCumulativeAtAge(earlySeries, earlyAge, targetAge) + portfolio;
+  var lateTotal = getCumulativeAtAge(lateSeries, lateAge, targetAge);
+
+  return { earlyTotal: earlyTotal, lateTotal: lateTotal, portfolio: portfolio };
+}
+
+// ─────────────────────────────────────────────
+// Chart
+// ─────────────────────────────────────────────
+var chartInstance = null;
+
+var claimColors = {
+  62: { line: '#dc2626', bg: 'rgba(220,38,38,0.12)' },
+  64: { line: '#ea580c', bg: 'rgba(234,88,12,0.12)' },
+  66: { line: '#ca8a04', bg: 'rgba(202,138,4,0.12)' },
+  67: { line: '#2563eb', bg: 'rgba(37,99,235,0.12)' },
+  68: { line: '#0891b2', bg: 'rgba(8,145,178,0.12)' },
+  70: { line: '#16a34a', bg: 'rgba(22,163,74,0.12)' }
+};
+
+function isDark() {
+  return document.documentElement.getAttribute('data-theme') === 'dark';
+}
+
+function getChartColors() {
+  var dark = isDark();
+  return {
+    grid: dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+    tick: dark ? '#9395a1' : '#6b7280',
+    tooltip: dark ? '#1a1a24' : '#ffffff',
+    tooltipBorder: dark ? '#2e2e3a' : '#e2e5eb',
+    tooltipText: dark ? '#e4e4ea' : '#1a1a2e'
+  };
+}
+
+function fmt(n) {
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+
+function renderChart() {
+  var inputs = getInputs();
+  if (!inputs) return;
+
+  var { currentAge, fra, fraBenefit, cola, investReturn, taxRate, useTax, lifeExpectancy, selectedAges } = inputs;
+
+  var maxAge = Math.max(lifeExpectancy + 5, 90);
+  var chartColors = getChartColors();
+
+  // Build labels: integer ages from currentAge to maxAge
+  var labels = [];
+  for (var a = currentAge; a <= maxAge; a++) labels.push(a);
+
+  // Build datasets
+  var datasets = [];
+  selectedAges.forEach(function(claimAge) {
+    var col = claimColors[claimAge] || { line: '#888', bg: 'rgba(128,128,128,0.1)' };
+    var series = cumulativeSeries(claimAge, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+
+    var data = labels.map(function(age) {
+      if (age < claimAge) return null;
+      return getCumulativeAtAge(series, claimAge, age);
+    });
+
+    var fraLabel = getFRALabel(inputs.birthYear);
+    datasets.push({
+      label: 'Claim at ' + claimAge + (Math.abs(claimAge - fra) < 0.1 ? ' (FRA)' : ''),
+      data: data,
+      borderColor: col.line,
+      backgroundColor: col.bg,
+      borderWidth: 2.5,
+      pointRadius: 0,
+      pointHoverRadius: 5,
+      tension: 0.3,
+      spanGaps: false
+    });
+  });
+
+  // Find break-even vertical lines (annotations via afterDraw plugin)
+  var breakEvens = [];
+  for (var i = 0; i < selectedAges.length; i++) {
+    for (var j = i + 1; j < selectedAges.length; j++) {
+      var ea = selectedAges[i];
+      var la = selectedAges[j];
+      var be = findBreakEven(ea, la, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+      if (be !== null) {
+        breakEvens.push({ earlyAge: ea, lateAge: la, breakEven: be });
+      }
+    }
+  }
+
+  var ctx = document.getElementById('benefitsChart').getContext('2d');
+
+  if (chartInstance) {
+    chartInstance.destroy();
+    chartInstance = null;
+  }
+
+  // Custom plugin to draw vertical dashed lines at break-even ages
+  var breakEvenPlugin = {
+    id: 'breakEvenLines',
+    afterDraw: function(chart) {
+      var ctx2 = chart.ctx;
+      var xScale = chart.scales.x;
+      var yScale = chart.scales.y;
+      breakEvens.forEach(function(be, idx) {
+        var xVal = labels.indexOf(be.breakEven);
+        if (xVal < 0) return;
+        var xPx = xScale.getPixelForValue(xVal);
+        ctx2.save();
+        ctx2.setLineDash([5, 4]);
+        ctx2.strokeStyle = isDark() ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.2)';
+        ctx2.lineWidth = 1.5;
+        ctx2.beginPath();
+        ctx2.moveTo(xPx, yScale.top);
+        ctx2.lineTo(xPx, yScale.bottom);
+        ctx2.stroke();
+        // Label
+        ctx2.setLineDash([]);
+        ctx2.fillStyle = isDark() ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.45)';
+        ctx2.font = '10px Inter, sans-serif';
+        ctx2.textAlign = 'center';
+        ctx2.fillText('BE ' + be.breakEven, xPx, yScale.top + 12 + (idx * 14));
+        ctx2.restore();
+      });
+    }
+  };
+
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    plugins: [breakEvenPlugin],
+    data: { labels: labels, datasets: datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          position: 'top',
+          align: 'start',
+          labels: {
+            color: chartColors.tick,
+            font: { family: 'Inter', size: 11 },
+            boxWidth: 14,
+            padding: 14,
+            usePointStyle: true,
+            pointStyle: 'line'
+          }
+        },
+        tooltip: {
+          backgroundColor: chartColors.tooltip,
+          borderColor: chartColors.tooltipBorder,
+          borderWidth: 1,
+          titleColor: chartColors.tooltipText,
+          bodyColor: chartColors.tooltipText,
+          titleFont: { family: 'Inter', size: 12, weight: '600' },
+          bodyFont: { family: 'DM Mono', size: 12 },
+          padding: 12,
+          callbacks: {
+            title: function(items) { return 'Age ' + labels[items[0].dataIndex]; },
+            label: function(item) {
+              if (item.raw === null) return null;
+              return '  ' + item.dataset.label + ': ' + fmt(item.raw);
+            }
+          },
+          filter: function(item) { return item.raw !== null; }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: chartColors.tick,
+            font: { family: 'Inter', size: 11 },
+            maxTicksLimit: 15,
+            callback: function(val) { return labels[val]; }
+          },
+          grid: { color: chartColors.grid },
+          title: { display: true, text: 'Age', color: chartColors.tick, font: { family: 'Inter', size: 11 } }
+        },
+        y: {
+          ticks: {
+            color: chartColors.tick,
+            font: { family: 'DM Mono', size: 11 },
+            callback: function(val) {
+              if (val >= 1000000) return '$' + (val/1000000).toFixed(1) + 'M';
+              if (val >= 1000) return '$' + (val/1000).toFixed(0) + 'K';
+              return '$' + val;
+            }
+          },
+          grid: { color: chartColors.grid },
+          title: { display: true, text: 'Cumulative Benefits', color: chartColors.tick, font: { family: 'Inter', size: 11 } }
+        }
+      }
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// UI / Results
+// ─────────────────────────────────────────────
+function getInputs() {
+  var currentAge = parseInt(document.getElementById('currentAge').value) || 60;
+  var birthYear = parseInt(document.getElementById('birthYear').value) || 1965;
+  var fra = getFRA(birthYear);
+  var fraBenefit = parseFloat(document.getElementById('fraBenefit').value) || 2000;
+  var cola = parseFloat(document.getElementById('cola').value) || 2.5;
+  var investReturn = parseFloat(document.getElementById('investReturn').value) || 7;
+  var taxRate = parseFloat(document.getElementById('taxRate').value) || 15;
+  var useTax = document.getElementById('taxToggle').checked;
+  var lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value) || 85;
+
+  var selectedAges = [];
+  document.querySelectorAll('#ageCheckboxes input[type="checkbox"]:checked').forEach(function(cb) {
+    selectedAges.push(parseInt(cb.value));
+  });
+  selectedAges.sort(function(a,b){ return a-b; });
+
+  if (selectedAges.length < 1) return null;
+  return { currentAge, birthYear, fra, fraBenefit, cola, investReturn, taxRate, useTax, lifeExpectancy, selectedAges };
+}
+
+function renderVerdict(inputs) {
+  var { fra, fraBenefit, cola, taxRate, useTax, lifeExpectancy, selectedAges } = inputs;
+  var maxAge = Math.max(lifeExpectancy + 5, 90);
+
+  // Monthly benefits for common ages
+  var m62 = monthlyBenefit(62, fraBenefit, cola, taxRate, useTax, fra);
+  var fraAge = Math.round(fra * 12) / 12; // numeric FRA age
+  var mFRA = monthlyBenefit(fraAge, fraBenefit, cola, taxRate, useTax, fra);
+  var m70 = monthlyBenefit(70, fraBenefit, cola, taxRate, useTax, fra);
+  // Keep m67 for display compatibility
+  var m67 = monthlyBenefit(67, fraBenefit, cola, taxRate, useTax, fra);
+
+  var be6267 = findBreakEven(62, fra, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+  var be6770 = findBreakEven(fra, 70, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+
+  var lines = [];
+  if (be6267 !== null) {
+    lines.push('Break-even between 62 and 67: age <strong>' + be6267 + '</strong>');
+  }
+  if (be6770 !== null) {
+    lines.push('Break-even between 67 and 70: age <strong>' + be6770 + '</strong>');
+  }
+
+  document.getElementById('verdictHeadline').innerHTML = lines.join('<br>') || 'Select at least two ages to compare.';
+
+  var subParts = [];
+  if (be6267 !== null) {
+    var cmp = be6267 <= lifeExpectancy ? 'which is <strong>within</strong> your life expectancy of ' + lifeExpectancy : 'which is <strong>beyond</strong> your life expectancy of ' + lifeExpectancy;
+    subParts.push('If you claim at 67 instead of 62, you need to live past age <strong>' + be6267 + '</strong> to come out ahead — ' + cmp + '.');
+  }
+  if (be6770 !== null) {
+    var cmp2 = be6770 <= lifeExpectancy ? 'within' : 'beyond';
+    subParts.push('Delaying from 67 to 70 requires living past <strong>' + be6770 + '</strong> (' + cmp2 + ' your life expectancy).');
+  }
+  document.getElementById('verdictSub').innerHTML = subParts.join(' ');
+
+  // Stat boxes
+  var statsHtml = '';
+  var statAges = [62, 67, 70].filter(function(a) { return true; }); // always show these 3
+  var statData = [
+    { label: 'Monthly at 62', value: fmt(m62), sub: Math.round(benefitFactor(62)*100) + '% of FRA benefit' },
+    { label: 'Monthly at 67 (FRA)', value: fmt(m67), sub: '100% of FRA benefit' },
+    { label: 'Monthly at 70', value: fmt(m70), sub: Math.round(benefitFactor(70)*100) + '% of FRA benefit' }
+  ];
+  statData.forEach(function(s) {
+    statsHtml += '<div class="stat-box"><div class="stat-label">' + s.label + '</div><div class="stat-value">' + s.value + '</div><div class="stat-sub">' + s.sub + '</div></div>';
+  });
+  document.getElementById('statsGrid').innerHTML = statsHtml;
+}
+
+function renderBreakEvenTable(inputs) {
+  var { fra, fraBenefit, cola, taxRate, useTax, lifeExpectancy, selectedAges } = inputs;
+  var maxAge = Math.max(lifeExpectancy + 5, 95);
+
+  var rows = '';
+  for (var i = 0; i < selectedAges.length; i++) {
+    for (var j = i + 1; j < selectedAges.length; j++) {
+      var ea = selectedAges[i];
+      var la = selectedAges[j];
+      var be = findBreakEven(ea, la, fraBenefit, cola, taxRate, useTax, maxAge, fra);
+      var earlyM = monthlyBenefit(ea, fraBenefit, cola, taxRate, useTax, fra);
+      var lateM = monthlyBenefit(la, fraBenefit, cola, taxRate, useTax, fra);
+      var diff = lateM - earlyM;
+
+      var verdict, badgeClass;
+      if (be === null) {
+        verdict = 'Never breaks even';
+        badgeClass = 'caution';
+      } else if (be <= lifeExpectancy) {
+        verdict = 'Waiting likely wins';
+        badgeClass = 'good';
+      } else {
+        verdict = 'Claim early may win';
+        badgeClass = 'caution';
+      }
+
+      rows += '<tr>' +
+        '<td>Claim at <strong>' + ea + '</strong> vs <strong>' + la + (la===67?' (FRA)':'') + '</strong></td>' +
+        '<td><span class="be-age">' + (be !== null ? be : '—') + '</span></td>' +
+        '<td style="font-family:\'DM Mono\',monospace;font-size:13px;">' + fmt(diff) + '/mo</td>' +
+        '<td><span class="be-badge ' + badgeClass + '">' + verdict + '</span></td>' +
+        '</tr>';
+    }
+  }
+  document.getElementById('beTableBody').innerHTML = rows || '<tr><td colspan="4" style="color:var(--text-muted);padding:20px 12px;">Select at least two claiming ages to compare.</td></tr>';
+}
+
+function renderInvestmentComparison(inputs) {
+  var { fra, fraBenefit, cola, investReturn, taxRate, useTax, lifeExpectancy, selectedAges } = inputs;
+
+  var earlyAge = selectedAges[0];
+  var lateAge = selectedAges[selectedAges.length - 1];
+  if (selectedAges.length < 2 || earlyAge === lateAge) {
+    document.getElementById('invDesc').textContent = 'Select at least two claiming ages to see the investment comparison.';
+    document.getElementById('invGrid').innerHTML = '';
+    return;
+  }
+
+  var earlyMonthly = monthlyBenefit(earlyAge, fraBenefit, cola, taxRate, useTax, fra);
+  var lateMonthly = monthlyBenefit(lateAge, fraBenefit, cola, taxRate, useTax, fra);
+  var monthlyDiff = lateMonthly - earlyMonthly;
+
+  document.getElementById('invDesc').innerHTML =
+    'If you claim at <strong>' + earlyAge + '</strong> and invest the extra ' + fmt(earlyMonthly) +
+    '/mo at <strong>' + investReturn + '%</strong> annual return, here\'s how you compare to waiting until <strong>' + lateAge + '</strong> — ' +
+    'at your life expectancy of <strong>' + lifeExpectancy + '</strong>:';
+
+  var result = investmentComparison(earlyAge, lateAge, fraBenefit, cola, taxRate, useTax, investReturn, lifeExpectancy, fra);
+
+  var earlyWins = result.earlyTotal >= result.lateTotal;
+
+  var html = '';
+  html += '<div class="inv-card' + (earlyWins ? ' inv-winner' : '') + '">' +
+    '<div class="inv-card-title">Claim at ' + earlyAge + ' + invest</div>' +
+    '<div class="inv-amount">' + fmt(result.earlyTotal) + '</div>' +
+    '<div class="inv-sub">SS benefits + investment portfolio<br>Portfolio value: ' + fmt(result.portfolio) + '</div>' +
+    '</div>';
+
+  html += '<div class="inv-card' + (!earlyWins ? ' inv-winner' : '') + '">' +
+    '<div class="inv-card-title">Wait until ' + lateAge + (lateAge===67?' (FRA)':'') + '</div>' +
+    '<div class="inv-amount">' + fmt(result.lateTotal) + '</div>' +
+    '<div class="inv-sub">Cumulative SS benefits only</div>' +
+    '</div>';
+
+  document.getElementById('invGrid').innerHTML = html;
+}
+
+function recalculate() {
+  var inputs = getInputs();
+  if (!inputs) return;
+  renderVerdict(inputs);
+  renderBreakEvenTable(inputs);
+  renderInvestmentComparison(inputs);
+  renderChart();
+}
+
+// ─────────────────────────────────────────────
+// Wire up inputs
+// ─────────────────────────────────────────────
+document.getElementById('lifeExpectancy').addEventListener('input', function() {
+  document.getElementById('lifeExpectancyVal').textContent = this.value;
+  recalculate();
+});
+
+document.getElementById('taxToggle').addEventListener('change', function() {
+  document.getElementById('taxRateField').style.display = this.checked ? '' : 'none';
+  recalculate();
+});
+
+['currentAge','fraBenefit','cola','investReturn','taxRate'].forEach(function(id) {
+  document.getElementById(id).addEventListener('input', recalculate);
+});
+
+document.querySelectorAll('#ageCheckboxes input[type="checkbox"]').forEach(function(cb) {
+  cb.addEventListener('change', recalculate);
+});
+
+// Initial render
+updateFRAHint();
+recalculate();
+</script>
+</body>
+</html>

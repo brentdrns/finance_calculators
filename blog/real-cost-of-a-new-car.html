@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>The Real Cost of a New Car &mdash; Abel's Calculators</title>
+<meta name="description" content="The sticker price is just the start. Depreciation, financing, insurance, and opportunity cost add up fast. Here's the full math on what a new car actually costs you.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/real-cost-of-a-new-car.html">
+<meta property="og:title" content="The Real Cost of a New Car (It's Much More Than the Sticker Price)">
+<meta property="og:description" content="The sticker price is just the start. Depreciation, financing, insurance, and opportunity cost add up fast. Here's the full math on what a new car actually costs you.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/real-cost-of-a-new-car.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Real Cost of a New Car (It's Much More Than the Sticker Price)">
+<meta name="twitter:description" content="The sticker price is just the start. Depreciation, financing, insurance, and opportunity cost add up fast. Here's the full math on what a new car actually costs you.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"The Real Cost of a New Car (It's Much More Than the Sticker Price)","description":"The sticker price is just the start. Depreciation, financing, insurance, and opportunity cost add up fast. Here's the full math on what a new car actually costs you.","author":{"@type":"Organization","name":"Abel's Financial Calculators","url":"https://abelscalculators.com"},"publisher":{"@type":"Organization","name":"Abel's Financial Calculators","url":"https://abelscalculators.com"},"datePublished":"2026-03-11","dateModified":"2026-03-11","mainEntityOfPage":"https://abelscalculators.com/blog/real-cost-of-a-new-car.html"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does a new car depreciate in the first year?","acceptedAnswer":{"@type":"Answer","text":"Most new cars lose 15–20% of their value in the first year alone. By the end of year three, total depreciation typically reaches 40–50% of the original purchase price."}},{"@type":"Question","name":"What is the true cost per mile to own a new car?","acceptedAnswer":{"@type":"Answer","text":"According to AAA's 2024 estimates, the average new car costs approximately $0.70–$0.75 per mile when you factor in depreciation, financing, insurance, fuel, and maintenance. At 15,000 miles per year, that's roughly $10,500–$11,250 annually."}},{"@type":"Question","name":"Is it cheaper to buy a used car than a new car?","acceptedAnswer":{"@type":"Answer","text":"Generally yes, significantly so. A 3–4 year old certified pre-owned vehicle lets someone else absorb the steepest part of the depreciation curve. On a $40,000 vehicle, that can mean paying $26,000 instead of $40,000 for a car with similar remaining life."}},{"@type":"Question","name":"How much does car financing actually cost over a loan term?","acceptedAnswer":{"@type":"Answer","text":"On a $40,000 vehicle financed at 7% over 60 months, you pay approximately $7,500 in interest — on top of a car that will have lost roughly $24,000 in value over that same period. Total wealth impact: over $31,000 before insurance or maintenance."}}]}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GXEPDJH5VC');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#ffffff;--surface:#f7f8fa;--surface2:#eef0f4;--border:#e2e5eb;--accent:#006aff;--accent-dim:#4a90d9;--text:#1a1a2e;--text-muted:#6b7280;--blue:#2563eb;--radius:12px;}
+  [data-theme="dark"]{--bg:#121218;--surface:#1a1a24;--surface2:#24242f;--border:#2e2e3a;--accent:#4d8eff;--accent-dim:#6ba0e6;--text:#e4e4ea;--text-muted:#9395a1;--blue:#5b8def;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;min-height:100vh;}
+  header{padding:0 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  header h1{margin:0;line-height:0;}
+  .header-banner{max-height:360px;width:auto;max-width:650px;display:block;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  .header-nav{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .theme-toggle{background:var(--surface2);border:1px solid var(--border);border-radius:20px;color:var(--text-muted);font-family:'Inter',sans-serif;font-size:12px;padding:5px 12px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;display:flex;align-items:center;gap:5px;}
+  .theme-toggle:hover{color:var(--text);border-color:var(--accent-dim);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+  .page-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:8px;}
+  .page-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);margin-bottom:10px;line-height:1.2;}
+  .page-sub{color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:12px;max-width:560px;}
+  .page-date{color:var(--text-muted);font-size:11px;margin-bottom:48px;}
+  article h2{font-family:'DM Serif Display',serif;font-size:24px;color:var(--text);margin:40px 0 16px;}
+  article h3{font-family:'DM Serif Display',serif;font-size:19px;color:var(--text);margin:32px 0 12px;}
+  article p{color:var(--text-muted);font-size:13px;line-height:1.85;margin-bottom:18px;}
+  article strong{color:var(--text);}
+  article a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);transition:border-color 0.15s;}
+  article a:hover{border-color:var(--accent);}
+  article ul,article ol{color:var(--text-muted);font-size:13px;line-height:1.85;margin:0 0 18px 20px;}
+  article li{margin-bottom:6px;}
+  .callout{background:var(--surface);border:none;box-shadow:0 1px 3px rgba(0,0,0,.06);border-left:3px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
+  .callout p{margin-bottom:0;}
+  .callout p+p{margin-top:10px;}
+  .scenario-compare{margin:32px 0;border:none;box-shadow:0 1px 4px rgba(0,0,0,.08);border-radius:14px;overflow:hidden;}
+  .scenario-compare-header{background:var(--surface2);padding:16px 24px;border-bottom:1px solid var(--border);}
+  .scenario-compare-header .sc-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:4px;}
+  .scenario-compare-header .sc-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text);}
+  .scenario-compare-header .sc-params{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.6;}
+  .scenario-compare-body{display:grid;grid-template-columns:1fr 1fr;}
+  .sc-col{padding:20px 24px;}
+  .sc-col-basic{background:var(--surface);border-right:1px solid var(--border);}
+  .sc-col-full{background:var(--bg);}
+  .sc-col-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .sc-col-basic .sc-col-label{color:var(--text-muted);}
+  .sc-col-full .sc-col-label{color:var(--accent);}
+  .sc-col-label .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .sc-col-basic .dot{background:var(--text-muted);}
+  .sc-col-full .dot{background:var(--accent);}
+  .sc-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px;}
+  .sc-row:last-child{border-bottom:none;}
+  .sc-row-label{color:var(--text-muted);}
+  .sc-row-value{font-family:'DM Serif Display',serif;font-size:15px;}
+  .sc-verdict{padding:14px 24px;border-top:1px solid var(--border);font-size:12px;line-height:1.7;}
+  .sc-col-basic .sc-verdict{color:var(--text-muted);background:var(--surface2);}
+  .sc-col-full .sc-verdict{color:var(--accent);background:var(--surface);}
+  .sc-highlight{color:var(--accent);}
+  .cta{margin-top:48px;padding:28px 32px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:center;}
+  .cta p{color:var(--text-muted);font-size:13px;margin-bottom:16px;line-height:1.7;}
+  .cta a.cta-btn{display:inline-block;background:var(--accent);color:var(--bg);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;padding:11px 28px;border-radius:var(--radius);text-decoration:none;border:none;transition:opacity 0.15s;}
+  .cta a.cta-btn:hover{opacity:.85;}
+  .cta-pair{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .nav-dropdown{position:relative;display:flex;align-items:center;}
+  .nav-dropdown-btn{color:var(--text-muted);font-size:12px;padding:6px 14px;border:none;border-radius:8px;font-weight:500;background:transparent;transition:color 0.15s,background 0.15s;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:3px;line-height:1;}
+  .nav-dropdown-btn:hover{color:var(--text);background:var(--surface2);}
+  .nav-caret{font-size:9px;opacity:.6;}
+  .nav-dropdown-menu{display:none;position:absolute;top:100%;padding-top:4px;left:0;background:var(--bg);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:6px;min-width:200px;z-index:100;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:flex;flex-direction:column;}
+  .nav-dropdown-menu a{color:var(--text-muted);font-size:12px;text-decoration:none;padding:8px 12px;border-radius:7px;font-weight:500;white-space:nowrap;transition:color 0.15s,background 0.15s;}
+  .nav-dropdown-menu a:hover{color:var(--text);background:var(--surface2);}
+  .header-nav a{color:var(--text-muted);font-size:12px;text-decoration:none;padding:6px 14px;border-radius:8px;font-weight:500;transition:color 0.15s,background 0.15s;}
+  .header-nav a:hover{color:var(--text);background:var(--surface2);}
+  .nav-sep{color:var(--border);font-size:14px;margin:0 2px;user-select:none;}
+  .site-footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .site-footer-disclaimer{font-size:11px;color:var(--text-muted);line-height:1.6;max-width:640px;}
+  .site-footer-nav{display:flex;gap:16px;flex-shrink:0;}
+  .site-footer-nav a{font-size:11px;color:var(--text-muted);text-decoration:none;transition:color 0.15s;}
+  .site-footer-nav a:hover{color:var(--accent-dim);}
+  @media(max-width:640px){header{padding:0 20px;}main{padding:32px 16px 60px;}.page-title{font-size:28px;}.scenario-compare-body{grid-template-columns:1fr;}.sc-col-basic{border-right:none;border-bottom:1px solid var(--border);}.site-footer{padding:16px 20px;flex-direction:column;align-items:flex-start;}}
+</style>
+<script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+</head>
+<body>
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators"><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+<main>
+  <div class="page-label">Cars &amp; Transportation</div>
+  <h1 class="page-title">The Real Cost of a New Car</h1>
+  <p class="page-sub">The sticker price is just the opening bid. By the time you account for depreciation, financing, insurance, and what else you could have done with that money, a $40,000 car costs most people well over $60,000 in five years.</p>
+  <p class="page-date">March 11, 2026</p>
+  <article>
+
+    <p>Walk into a dealership, see a $40,000 price tag, and most people mentally negotiate their way down to $37,500 and call it a win. What they don't calculate — what the dealership is counting on them not calculating — is what that car actually costs to own over the next five years. The number is significantly larger than the sticker.</p>
+
+    <h2>Everything the Sticker Price Doesn't Include</h2>
+
+    <p>Before you even leave the lot, the out-of-pocket figure is higher than MSRP. On a $40,000 vehicle, a realistic purchase-day tally looks like this:</p>
+
+    <ul>
+      <li><strong>Sales tax (8%):</strong> $3,200</li>
+      <li><strong>Title &amp; registration fees:</strong> $300–500</li>
+      <li><strong>Documentation fee:</strong> $300–500 (pure dealership margin, negotiable in some states)</li>
+      <li><strong>Dealer add-ons / destination charge:</strong> $1,000–1,500</li>
+    </ul>
+
+    <p>You're already at $45,000–$46,000 before you've made a single monthly payment. That's the baseline. Now the real costs begin.</p>
+
+    <h2>Depreciation: The Cost Nobody Counts</h2>
+
+    <p>New cars lose roughly <strong>20% of their value the moment you drive off the lot</strong>. That's not a myth — it's a function of the gap between new-car retail and used-car wholesale prices. By year three, total depreciation typically hits 40–50%. By year five, you're looking at 55–60% gone.</p>
+
+    <p>On a $40,000 car, the math is stark. After five years at average depreciation, that car is worth roughly $16,000. You've absorbed $24,000 in depreciation — and that cost doesn't show up anywhere in your monthly budget. It's invisible until you try to sell.</p>
+
+    <div class="callout">
+      <p><strong>$24,000 in depreciation on a $40,000 car over 5 years.</strong> That's $4,800 per year, or $400 per month — just for the privilege of driving a depreciating asset. Most people never count this as a cost at all.</p>
+    </div>
+
+    <p>This is why the financial math almost always favors buying a car that's 3–4 years old. Someone else absorbed the brutal first half of that depreciation curve. You get a vehicle with most of its useful life remaining, at roughly 40–50 cents on the new-car dollar.</p>
+
+    <h2>Financing: The Multiplier Nobody Mentions</h2>
+
+    <p>Most new cars are financed. The average new car loan rate in 2024–2025 hovered around 7–8%. Run the numbers on a $40,000 purchase financed at 7% over 60 months:</p>
+
+    <ul>
+      <li><strong>Monthly payment:</strong> ~$792</li>
+      <li><strong>Total paid over 60 months:</strong> ~$47,500</li>
+      <li><strong>Interest cost:</strong> ~$7,500</li>
+    </ul>
+
+    <p>So you paid $7,500 to borrow money to buy something that simultaneously lost $24,000 in value. Combined wealth impact from depreciation and interest alone: <strong>$31,500 on a $40,000 purchase</strong>. And we haven't touched insurance, fuel, or maintenance yet.</p>
+
+    <div class="callout">
+      <p><strong>The real cost of a 60-month auto loan at 7%:</strong> you're paying nearly 19 cents in interest for every dollar borrowed — on top of an asset losing value the entire time. The combination of interest and depreciation is what makes new cars so expensive relative to what you get.</p>
+    </div>
+
+    <h2>Insurance: The Ongoing Toll</h2>
+
+    <p>Lenders require full coverage (comprehensive + collision) on financed vehicles. Nationally, full coverage averaged $1,700–$2,000 per year in 2024. For SUVs, luxury vehicles, or sports cars, expect $2,500–$4,000/year depending on your location and record.</p>
+
+    <p>Compare that to a paid-off used car where you choose your own coverage level. Liability-only on an older vehicle often runs $600–$800/year. That $1,200–$1,400 annual difference — compounded over five years — is another $6,000–$7,000 gap between new and used.</p>
+
+    <h2>Scenario 1: New vs. Certified Pre-Owned</h2>
+
+    <!-- Scenario Compare: New vs CPO -->
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">5-Year Cost Comparison</div>
+        <div class="sc-title">New $40k Vehicle vs. 3-Year-Old CPO ($26k)</div>
+        <div class="sc-params">15,000 miles/year &middot; 7% financing &middot; 60-month loan &middot; national average insurance</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span>Buy New — $40,000</div>
+          <div class="sc-row"><span class="sc-row-label">Purchase price + tax/fees</span><span class="sc-row-value">$45,500</span></div>
+          <div class="sc-row"><span class="sc-row-label">Interest paid (7%, 60mo)</span><span class="sc-row-value">$7,500</span></div>
+          <div class="sc-row"><span class="sc-row-label">5-yr depreciation</span><span class="sc-row-value">$24,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Insurance (5 yrs @ $1,850/yr)</span><span class="sc-row-value">$9,250</span></div>
+          <div class="sc-row"><span class="sc-row-label">Maintenance &amp; tires</span><span class="sc-row-value">$5,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Fuel (15k mi @ $0.14/mi)</span><span class="sc-row-value">$10,500</span></div>
+          <div class="sc-row"><span class="sc-row-label"><strong>Total cost of ownership</strong></span><span class="sc-row-value"><strong>$56,750</strong></span></div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span>Buy CPO — $26,000</div>
+          <div class="sc-row"><span class="sc-row-label">Purchase price + tax/fees</span><span class="sc-row-value sc-highlight">$30,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Interest paid (7%, 60mo)</span><span class="sc-row-value sc-highlight">$4,900</span></div>
+          <div class="sc-row"><span class="sc-row-label">5-yr depreciation</span><span class="sc-row-value sc-highlight">$12,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Insurance (5 yrs @ $1,600/yr)</span><span class="sc-row-value sc-highlight">$8,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Maintenance &amp; tires</span><span class="sc-row-value sc-highlight">$6,500</span></div>
+          <div class="sc-row"><span class="sc-row-label">Fuel (15k mi @ $0.14/mi)</span><span class="sc-row-value sc-highlight">$10,500</span></div>
+          <div class="sc-row"><span class="sc-row-label"><strong>Total cost of ownership</strong></span><span class="sc-row-value sc-highlight"><strong>$41,900</strong></span></div>
+        </div>
+      </div>
+      <div class="scenario-compare-body" style="grid-template-columns:1fr 1fr;">
+        <div class="sc-col sc-col-basic" style="padding:14px 24px;">
+          <div class="sc-verdict">You're paying more up front and absorbing the steepest depreciation. The "new car" premium is roughly $14,850 over five years — for the same miles driven.</div>
+        </div>
+        <div class="sc-col sc-col-full" style="padding:14px 24px;">
+          <div class="sc-verdict">Someone else took the depreciation hit. You get a similar vehicle with 2–5 years of remaining life for ~$15,000 less in total cost.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>The True Cost Per Mile</h2>
+
+    <p>AAA's annual "Your Driving Costs" study puts the average new car at <strong>$0.70–$0.75 per mile</strong> to own and operate in 2024, factoring in depreciation, financing, insurance, fuel, and maintenance. At 15,000 miles per year, that's <strong>$10,500–$11,250 annually</strong> — just to have the car.</p>
+
+    <p>For perspective: the federal mileage reimbursement rate for 2025 is $0.70/mile, which is essentially the IRS acknowledging what the math says. When your employer pays you $0.70/mile to use your own car, they're roughly breaking even with your actual cost — not padding your pocket.</p>
+
+    <h2>Scenario 2: Car Payment vs. Investing the Difference</h2>
+
+    <!-- Scenario Compare: Pay vs Invest -->
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Opportunity Cost Comparison</div>
+        <div class="sc-title">$792/Month Car Payment vs. Investing That Amount</div>
+        <div class="sc-params">$792/month &middot; 7% average annual return &middot; tax-advantaged account</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span>Make the Car Payment</div>
+          <div class="sc-row"><span class="sc-row-label">Monthly outflow</span><span class="sc-row-value">$792</span></div>
+          <div class="sc-row"><span class="sc-row-label">After 5 years (total paid)</span><span class="sc-row-value">$47,520</span></div>
+          <div class="sc-row"><span class="sc-row-label">Asset value after 5 yrs</span><span class="sc-row-value">~$16,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Net wealth position</span><span class="sc-row-value">-$31,500</span></div>
+          <div class="sc-row"><span class="sc-row-label">After 10 yrs (invested instead)</span><span class="sc-row-value">—</span></div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span>Invest Instead</div>
+          <div class="sc-row"><span class="sc-row-label">Monthly contribution</span><span class="sc-row-value sc-highlight">$792</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio after 5 years</span><span class="sc-row-value sc-highlight">~$56,500</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio after 10 years</span><span class="sc-row-value sc-highlight">~$131,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio after 20 years</span><span class="sc-row-value sc-highlight">~$498,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Net wealth position (5 yr)</span><span class="sc-row-value sc-highlight">+$56,500</span></div>
+        </div>
+      </div>
+      <div class="scenario-compare-body" style="grid-template-columns:1fr 1fr;">
+        <div class="sc-col sc-col-basic" style="padding:14px 24px;">
+          <div class="sc-verdict">The car payment is gone. The car itself is worth a fraction of what you paid. The wealth you could have built didn't get built.</div>
+        </div>
+        <div class="sc-col sc-col-full" style="padding:14px 24px;">
+          <div class="sc-verdict">The car payment you make at 30 has compounding implications for decades. A $131k difference at 10 years is a meaningful retirement number.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>This isn't an argument that you should never own a car. It's a reminder that a $792/month car payment is also a decision to not build $131,000 in wealth over the next decade. Both things are true simultaneously, and most people only think about the first one.</p>
+
+    <h2>When Buying New Actually Makes Sense</h2>
+
+    <p>The math above isn't a blanket condemnation of new cars. There are situations where buying new is genuinely defensible:</p>
+
+    <ul>
+      <li><strong>High mileage drivers (25,000+ miles/year)</strong> who need the reliability guarantee and warranty coverage that CPO can't always match. If you're putting that many miles on, a well-priced new car with a good powertrain warranty can make sense.</li>
+      <li><strong>Long ownership horizon (10+ years).</strong> The depreciation math improves significantly if you're driving the car for a decade. Spread $24,000 in depreciation over 10 years instead of 5, and the annual hit is roughly $2,400 — more manageable.</li>
+      <li><strong>Corporate or affinity discounts.</strong> Some buyers get 5–8% below invoice through employer programs, credit unions, or manufacturer loyalty deals. That closes part of the gap.</li>
+      <li><strong>Specific model unavailability.</strong> If the vehicle you need genuinely doesn't exist in reliable used form — new EVs, low-production models, certain specialty vehicles — new may be your only option.</li>
+    </ul>
+
+    <p>Cars are also not purely financial decisions. People buy new cars for the smell, the warranty peace of mind, the specific color and trim, the technology. Those are real preferences and they're allowed to matter. The point isn't to tell anyone what to value — it's to make sure the actual cost is visible when you're deciding.</p>
+
+    <h2>The Cleanest Moves, Ranked</h2>
+
+    <p>If minimizing transportation cost is a priority, the hierarchy looks like this:</p>
+
+    <ol>
+      <li><strong>Keep a reliable paid-off car as long as it's mechanically sound.</strong> Maintenance on an older car almost never approaches the cost of a new car payment plus depreciation. A $2,000 repair on a paid-off vehicle is still cheaper than 3 months of car payments.</li>
+      <li><strong>Buy 3–4 year old CPO.</strong> Let someone else absorb the depreciation cliff. A 3-year-old version of almost any mainstream vehicle has most of its useful life remaining and costs 35–45% less.</li>
+      <li><strong>Buy new if you meet the criteria above</strong> — long ownership, high miles, specific vehicle need, or a genuinely good deal.</li>
+    </ol>
+
+    <div class="callout">
+      <p><strong>The single best car decision most people can make:</strong> drive a paid-off car 2–3 years longer than feels comfortable. That delay — during which you could be investing what would have been a car payment — is often worth $40,000–$60,000 in long-term wealth.</p>
+    </div>
+
+    <p>None of this is new information. Car salespeople know it. Finance people know it. The numbers have been public for decades. The gap between knowing and acting on it is why the average American car payment hit a record $735/month in 2024 — and why the average new car loan term stretched to 69 months to make those payments feel manageable.</p>
+
+    <p>The car you buy, and how you buy it, is one of the most consequential financial decisions most people make repeatedly throughout their lives. Running the full numbers first costs nothing.</p>
+
+  </article>
+  <div class="cta">
+    <p>See the true 5-year cost of owning any vehicle — including depreciation, insurance, fuel, and financing.</p>
+    <div class="cta-pair">
+      <a href="../vehicle-cost.html" class="cta-btn">Vehicle Cost Calculator &rarr;</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational purposes only. Vehicle costs vary significantly by location, driving habits, and individual circumstances.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+<script>(function(){var btn=document.getElementById('themeToggle');var icon=document.getElementById('themeIcon');var label=document.getElementById('themeLabel');function updateUI(){var d=document.documentElement.getAttribute('data-theme')==='dark';icon.innerHTML=d?'&#9788;':'&#9790;';label.textContent=d?'Light':'Dark';}btn.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('theme','light');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}updateUI();});updateUI();})();</script>
+</body>
+</html>
