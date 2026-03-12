@@ -57,7 +57,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
 
   /* ── Header ── */
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
@@ -187,7 +187,7 @@
 
   /* ── Sankey ── */
   .sankey-wrap { overflow-x: auto; }
-  .sankey-svg { width: 100%; min-width: 500px; overflow: visible; display: block; }
+  .sankey-svg { width: 100%; overflow: visible; display: block; }
   .sankey-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
   .sankey-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-muted); }
   .sankey-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
