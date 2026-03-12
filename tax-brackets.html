@@ -57,6 +57,7 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
 
   /* ── Header ── */
@@ -124,7 +125,7 @@
   .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
 
   /* ── Main ── */
-  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; }
+  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
 
   /* ── Cards ── */
   .card { background: var(--surface); border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
@@ -211,6 +212,10 @@
   @media (max-width: 480px) {
     .stat-boxes { grid-template-columns: 1fr 1fr; }
     .summary-top { gap: 16px; }
+    .card { padding: 16px; }
+    .main { padding: 12px; gap: 14px; }
+    .explainer-amt { min-width: 68px; }
+    .explainer-bar-wrap { margin: 0 8px; }
   }
 </style>
 </head>
@@ -479,18 +484,20 @@
         <div class="bracket-bar-legend" id="bracketLegend"></div>
       </div>
 
-      <table class="bracket-table">
-        <thead>
-          <tr>
-            <th>Rate</th>
-            <th>Bracket Range</th>
-            <th>Income in Bracket</th>
-            <th>Tax Paid</th>
-            <th>Cumulative Tax</th>
-          </tr>
-        </thead>
-        <tbody id="bracketTableBody"></tbody>
-      </table>
+      <div style="overflow-x:auto">
+        <table class="bracket-table">
+          <thead>
+            <tr>
+              <th>Rate</th>
+              <th>Bracket Range</th>
+              <th>Income in Bracket</th>
+              <th>Tax Paid</th>
+              <th>Cumulative Tax</th>
+            </tr>
+          </thead>
+          <tbody id="bracketTableBody"></tbody>
+        </table>
+      </div>
     </div>
 
     <!-- State Bracket Breakdown Card -->
@@ -503,18 +510,20 @@
         <div class="bracket-bar-legend" id="stateBracketLegend"></div>
       </div>
 
-      <table class="bracket-table">
-        <thead>
-          <tr>
-            <th>Rate</th>
-            <th>Bracket Range</th>
-            <th>Income in Bracket</th>
-            <th>Tax Paid</th>
-            <th>Cumulative Tax</th>
-          </tr>
-        </thead>
-        <tbody id="stateBracketTableBody"></tbody>
-      </table>
+      <div style="overflow-x:auto">
+        <table class="bracket-table">
+          <thead>
+            <tr>
+              <th>Rate</th>
+              <th>Bracket Range</th>
+              <th>Income in Bracket</th>
+              <th>Tax Paid</th>
+              <th>Cumulative Tax</th>
+            </tr>
+          </thead>
+          <tbody id="stateBracketTableBody"></tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Explainer Card -->
