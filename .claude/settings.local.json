@@ -5,7 +5,13 @@
       "Read(//c/Users/brent/.claude/projects/c--Users-brent-OneDrive-Documents-GitHub-finance-calculators/memory/**)",
       "WebSearch",
       "Bash(grep -l 'href=\"\"race-predictor.html\"\">Race Predictor' c:UsersbrentOneDriveDocumentsGitHubfinance_calculators*.html)",
-      "Bash(python3 -c \":*)"
+      "Bash(python3 -c \":*)",
+      "Bash(for f:*)",
+      "Bash(do sed:*)",
+      "Bash(done)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\brent\\OneDrive\\Documents\\GitHub\\finance_calculators\\blog"
     ]
   }
 }

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>Roth vs Traditional: When Each One Wins (and the Conversion Ladder) &mdash; Abel's Financial Calculators</title>
+<meta name="description" content="Roth vs Traditional isn't about which is &quot;better&quot; — it's about your tax rate now vs later. Here's the math, plus how a Roth conversion ladder works for early retirees.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/roth-vs-traditional.html">
+<meta property="og:title" content="Roth vs Traditional: When Each One Wins (and the Conversion Ladder)">
+<meta property="og:description" content="Roth vs Traditional isn't about which is better — it's about your tax rate now vs later. Here's the math, plus the conversion ladder strategy.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/roth-vs-traditional.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Roth vs Traditional: When Each One Wins (and the Conversion Ladder)">
+<meta name="twitter:description" content="Roth vs Traditional isn't about which is better — it's about your tax rate now vs later. Here's the math, plus the conversion ladder strategy.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Roth vs Traditional: When Each One Wins (and the Conversion Ladder)",
+  "description": "Roth vs Traditional isn't about which is \"better\" — it's about your tax rate now vs later. Here's the math, plus how a Roth conversion ladder works for early retirees.",
+  "author": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "datePublished": "2026-03-13",
+  "dateModified": "2026-03-13",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/roth-vs-traditional.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I contribute to Roth or Traditional?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your tax rate now vs your expected tax rate in retirement. If you're in the 22% bracket or higher, Traditional contributions typically build more after-tax wealth because you'll likely withdraw at a lower effective rate in retirement. If you're in the 10-12% bracket, Roth is often better. In between, tax diversification (splitting contributions) is a reasonable approach."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a Roth conversion ladder?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A Roth conversion ladder is a strategy where you contribute to Traditional accounts during high-income working years, then convert those funds to Roth during low-income years (typically early retirement before Social Security begins). By converting in years when your income is low, you pay minimal taxes on the conversion and the money then grows and can be withdrawn tax-free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert my Traditional IRA to a Roth?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can convert any amount from a Traditional IRA to a Roth IRA at any time. The converted amount is added to your taxable income for the year. There's no income limit on conversions (unlike Roth contributions). The strategy is to convert in years when your income — and therefore your tax rate — is low."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 5-year rule for Roth conversions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each Roth conversion has its own 5-year clock. You must wait 5 years from January 1 of the year you converted before you can withdraw that specific converted amount penalty-free (if you're under 59½). This means if you plan to live off converted funds, you need to start converting at least 5 years before you'll need the money, or have other funds to cover the gap."
+      }
+    }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: none; background: var(--surface2); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); background: var(--surface); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+
+  .callout { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+
+  .callout-note { background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; padding: 20px 24px; font-size: 13px; color: var(--text-muted); line-height: 1.85; margin: 28px 0; }
+  .callout-note strong { color: var(--text); }
+  .callout-note p { margin-bottom: 0; }
+  .callout-note p + p { margin-top: 10px; }
+
+  .scenario-compare { margin: 32px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-col-basic .sc-row-value { color: var(--text); }
+  .sc-col-full .sc-row-value { color: var(--text); }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-verdict strong { font-size: 13px; }
+  .sc-highlight { color: var(--accent); }
+  .sc-negative { color: #f06060; }
+  .sc-missed { font-size: 11px; color: var(--text-muted); font-style: italic; padding: 10px 24px; border-top: 1px solid var(--border); background: var(--surface2); line-height: 1.6; }
+  @media (max-width: 640px) {
+    .scenario-compare-body { grid-template-columns: 1fr; }
+    .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+  .cta-pair { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    main { padding: 32px 16px 60px; }
+    .page-title { font-size: 28px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+        <a href="../rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+        <a href="../fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../roth-conversion.html">Roth Conversion</a>
+        <a href="../debt-payoff.html">Debt Payoff</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+        <a href="../wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">Blog</div>
+  <h2 class="page-title">Roth vs Traditional: When Each One Wins (and the Conversion Ladder)</h2>
+  <p class="page-sub">The right answer depends on your tax rate now, your expected rate in retirement, and whether you might retire early. Here's how to think through it.</p>
+  <p class="page-date">March 13, 2026</p>
+
+  <article>
+    <h2>The Core Question: Tax Rate Now vs Later</h2>
+
+    <p>Traditional contributions are pre-tax &mdash; you deduct them from your income now and pay taxes when you withdraw in retirement. Roth contributions are after-tax &mdash; you pay taxes now and withdrawals in retirement are tax-free.</p>
+
+    <p>The one that builds more after-tax wealth is the one where you pay taxes at the lower rate. If your tax rate is higher now than it will be in retirement, Traditional wins. If your tax rate is lower now, Roth wins.</p>
+
+    <p>Most people get this wrong because they compare their current <strong>marginal</strong> rate to a vague sense of what "taxes in retirement" means. The relevant comparison is your current marginal rate (the rate on the next dollar you earn) vs your <strong>effective</strong> rate on withdrawals in retirement &mdash; which is almost always lower, because retirement income typically starts from zero and fills up the lower brackets first.</p>
+
+    <h2>Why Traditional Usually Wins During High-Earning Years</h2>
+
+    <p>Consider someone in the 24% federal tax bracket contributing to a Traditional 401(k). Every dollar they contribute saves 24 cents in taxes right now.</p>
+
+    <div class="callout-note">
+      <p><strong>Important: IRA deduction income limits.</strong> The tax deduction for Traditional <em>IRA</em> contributions phases out if you or your spouse are covered by a workplace retirement plan. For 2025, the phase-out range is $79,000&ndash;$89,000 (single) and $126,000&ndash;$146,000 (married filing jointly). Above these ranges, Traditional IRA contributions are not deductible.</p>
+      <p>However, this limit applies only to IRA contributions. Traditional (pre-tax) <strong>401(k)</strong> contributions have no income limit &mdash; you get the full deduction regardless of how much you earn. Since most people in these higher income ranges have access to a 401(k), the Traditional vs Roth analysis in this article primarily applies to their 401(k) contributions.</p>
+      <p>If you're above the IRA deduction phase-out and don't have a 401(k), a <strong>backdoor Roth IRA</strong> is typically the better option. Since you can't deduct Traditional IRA contributions anyway, there's no tax benefit to leaving the money in a Traditional account &mdash; you'd be better off converting it to Roth so future growth is tax-free.</p>
+    </div>
+
+    <p>In retirement, their income picture looks different. They're no longer earning a salary or saving 20&ndash;30% of their income. Their taxable income starts at zero. The first ~$30,000 of income for a married couple filing jointly is covered by the standard deduction &mdash; taxed at 0%. The next ~$24,000 falls in the 10% bracket. The next ~$77,000 falls in the 12% bracket.</p>
+
+    <p>So even if they withdraw $80,000/year from their Traditional accounts, their effective federal tax rate on that income is roughly 10&ndash;12%. They saved at 24%, and they're paying at 10&ndash;12%. That's a significant net benefit for every dollar that went Traditional.</p>
+
+    <p>The standard deduction is what makes this especially powerful. Every retiree gets ~$30,000 (married filing jointly) of tax-free income regardless. Traditional contributions that are later withdrawn within that deduction amount are effectively never taxed at all &mdash; pre-tax going in, tax-free coming out.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Roth vs Traditional Comparison</div>
+        <div class="sc-title">$23,000/yr for 20 years &mdash; Roth vs Traditional</div>
+        <div class="sc-params">24% marginal tax rate now &bull; 15% effective rate in retirement &bull; 7% annual return &bull; 20-year contribution period</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> Roth</div>
+          <div class="sc-row"><span class="sc-row-label">Annual contribution (after tax)</span> <span class="sc-row-value">$23,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax paid upfront</span> <span class="sc-row-value">$0 (already taxed)</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio after 20yr</span> <span class="sc-row-value">$1,065,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax on withdrawal</span> <span class="sc-row-value sc-highlight">$0</span></div>
+          <div class="sc-row"><span class="sc-row-label">Net after-tax wealth</span> <span class="sc-row-value">$1,065,000</span></div>
+          <div class="sc-verdict"><strong>Outcome:</strong> $1,065,000 available tax-free in retirement. Simple, predictable.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Traditional + Invest Tax Savings</div>
+          <div class="sc-row"><span class="sc-row-label">Annual contribution (pre-tax)</span> <span class="sc-row-value">$23,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax savings invested ($5,520/yr)</span> <span class="sc-row-value">Grows to $256,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio after 20yr</span> <span class="sc-row-value">$1,065,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Tax on withdrawal (15% effective)</span> <span class="sc-row-value sc-negative">&minus;$159,750</span></div>
+          <div class="sc-row"><span class="sc-row-label">Plus invested tax savings</span> <span class="sc-row-value sc-highlight">+$256,000</span></div>
+          <div class="sc-row"><span class="sc-row-label">Net after-tax wealth</span> <span class="sc-row-value sc-highlight">$1,161,250</span></div>
+          <div class="sc-verdict"><strong>Outcome:</strong> Traditional + investing the tax savings comes out ~$96k ahead when your retirement tax rate is lower than your current rate.</div>
+        </div>
+      </div>
+      <div class="sc-missed">This comparison assumes you actually invest the tax savings from Traditional contributions. If the tax savings get spent, Roth and Traditional come out roughly even.</div>
+    </div>
+
+    <h2>The Roth Conversion Ladder</h2>
+
+    <p>For early retirees, there's a way to get the best of both worlds: contribute Traditional during your working years (when your tax rate is high), then convert to Roth during early retirement (when your income is low or zero).</p>
+
+    <p>Here's how the mechanics work:</p>
+
+    <p>You retire at, say, 50 with most of your savings in Traditional IRA or 401(k) accounts. Between ages 50 and 67 (before Social Security begins), your earned income is low or nonexistent. During these years, you convert portions of your Traditional balance to Roth each year, strategically filling the lowest tax brackets.</p>
+
+    <p>For a married couple filing jointly, the math looks like this:</p>
+
+    <ul>
+      <li><strong>Standard deduction (~$30,000):</strong> The first $30,000 you convert is taxed at 0% federal tax. It's covered entirely by the deduction.</li>
+      <li><strong>10% bracket (~$24,000):</strong> The next $24,000 you convert is taxed at just 10%, costing $2,400 in federal tax.</li>
+      <li><strong>Total:</strong> You can convert roughly $54,000 per year at an effective federal tax rate of about 4.4%.</li>
+    </ul>
+
+    <p>Compare that to the 24% marginal rate you saved at when you contributed. You saved at 24%, converted at ~4.4%, and now the money is in a Roth where it grows and can be withdrawn completely tax-free for the rest of your life.</p>
+
+    <h3>The 5-year seasoning rule</h3>
+
+    <p>There's one important constraint: each Roth conversion has its own 5-year clock. You must wait 5 years from January 1 of the year you converted before you can withdraw that specific converted amount penalty-free (if you're under 59&frac12;).</p>
+
+    <p>This means you need 5 years of living expenses accessible outside the Roth to bridge the gap. This typically comes from a taxable brokerage account, cash savings, or other accessible funds. Once the first conversion "seasons" after 5 years, each subsequent year's conversion becomes available in sequence &mdash; creating a rolling ladder of accessible funds.</p>
+
+    <h2>When Roth Contributions Make Sense</h2>
+
+    <p>Despite Traditional's advantage during high-earning years, there are several situations where Roth contributions are the better choice:</p>
+
+    <ul>
+      <li><strong>You're early in your career and in a low bracket (10&ndash;12%).</strong> If you're paying 10&ndash;12% now, it's hard to imagine paying less in retirement. Lock in the low rate with Roth.</li>
+      <li><strong>You expect significantly higher income later.</strong> If you're in medical residency, just starting a business, or early in a high-growth career, your current low rate is temporary. Roth lets you pay taxes at today's low rate.</li>
+      <li><strong>Your employer match goes Traditional anyway.</strong> Since employer 401(k) matches are always pre-tax, making your own contributions Roth adds tax diversification to your retirement accounts.</li>
+      <li><strong>You want flexibility in retirement to manage your tax bracket.</strong> Having both Roth and Traditional accounts lets you choose which to draw from in any given year, giving you control over your taxable income.</li>
+      <li><strong>You're already maxing Traditional and have additional money to save.</strong> The backdoor Roth IRA lets high earners contribute to a Roth even above the income limits.</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>A common argument for Roth is that "tax rates will go up in the future."</strong> That may be true at the policy level, but the relevant question is whether <em>your</em> tax rate will be higher in retirement than it is now. Most people's taxable income drops in retirement because they're no longer saving 20&ndash;30% of their income. Even if bracket rates increase somewhat, your effective rate on a lower income is likely still below your current marginal rate.</p>
+    </div>
+
+    <h2>A Decision Framework</h2>
+
+    <ul>
+      <li><strong>Current marginal rate 10&ndash;12%:</strong> Roth is likely better. You're paying a low rate now that's hard to beat in retirement.</li>
+      <li><strong>Current marginal rate 22%:</strong> Close call. Consider splitting contributions between Roth and Traditional for tax diversification.</li>
+      <li><strong>Current marginal rate 24%+:</strong> Traditional usually wins, especially if you plan to do Roth conversions in retirement when your income is lower.</li>
+      <li><strong>Planning to retire early:</strong> Traditional + Roth conversion ladder is often the optimal strategy. Save at high rates, convert at low rates.</li>
+      <li><strong>Unsure:</strong> Split between Roth and Traditional. Tax diversification is a reasonable default when the math is unclear.</li>
+    </ul>
+
+    <div class="cta">
+      <p>See how your current tax bracket compares to what you'd likely pay in retirement, and model different withdrawal strategies to find the right approach for your situation.</p>
+      <div class="cta-pair">
+        <a class="cta-btn" href="../tax-brackets.html">See Your Tax Brackets &rarr;</a>
+        <a class="cta-btn" href="../withdrawal.html">Model Retirement Withdrawals &rarr;</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+  });
+  updateUI();
+})();
+</script>
+</body>
+</html>

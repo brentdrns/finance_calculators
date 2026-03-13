@@ -56,6 +56,11 @@
     <lastmod>2026-03-11</lastmod>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://abelscalculators.com/fire-calculator.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.8</priority>
+  </url>
 
   <!-- Taxes & More calculators -->
   <url>
@@ -76,6 +81,16 @@
   <url>
     <loc>https://abelscalculators.com/wealth-percentile.html</loc>
     <lastmod>2026-03-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/roth-conversion.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/debt-payoff.html</loc>
+    <lastmod>2026-03-13</lastmod>
     <priority>0.8</priority>
   </url>
 
@@ -99,6 +114,21 @@
   </url>
 
   <!-- Blog posts -->
+  <url>
+    <loc>https://abelscalculators.com/blog/extra-payment-vs-invest.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/roth-vs-traditional.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/sequence-of-returns-risk.html</loc>
+    <lastmod>2026-03-13</lastmod>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://abelscalculators.com/blog/is-refinancing-worth-it.html</loc>
     <lastmod>2026-03-11</lastmod>

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Debt Payoff Calculator — Avalanche vs Snowball — Abel's Financial Calculators</title>
+<meta name="description" content="Free debt payoff calculator. Compare avalanche vs snowball strategies, see your payoff timeline, and find out how much interest you can save with extra payments.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/debt-payoff.html">
+<meta property="og:title" content="Debt Payoff Calculator — Avalanche vs Snowball">
+<meta property="og:description" content="Compare avalanche vs snowball strategies side by side. See exactly when each debt gets paid off and how much interest you'll save.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/debt-payoff.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Debt Payoff Calculator — Avalanche vs Snowball">
+<meta name="twitter:description" content="Compare avalanche vs snowball strategies side by side. See exactly when each debt gets paid off and how much interest you'll save.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Debt Payoff Calculator","description":"Compare avalanche vs snowball debt payoff strategies side by side. See your payoff timeline and how much interest you can save with extra payments.","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the debt avalanche method?","acceptedAnswer":{"@type":"Answer","text":"The debt avalanche method prioritizes paying off debts with the highest interest rate first while making minimum payments on all other debts. This strategy minimizes total interest paid over time."}},{"@type":"Question","name":"What is the debt snowball method?","acceptedAnswer":{"@type":"Answer","text":"The debt snowball method prioritizes paying off debts with the smallest balance first while making minimum payments on all other debts. This strategy provides quick psychological wins by eliminating individual debts faster."}},{"@type":"Question","name":"Which is better, avalanche or snowball?","acceptedAnswer":{"@type":"Answer","text":"Mathematically, the avalanche method always saves the most interest. However, the snowball method can be more motivating because you see debts disappear sooner. The best method is the one you will stick with."}},{"@type":"Question","name":"How does extra payment help pay off debt faster?","acceptedAnswer":{"@type":"Answer","text":"Extra payments beyond your minimums are applied to the targeted debt (highest-rate for avalanche, lowest-balance for snowball). Once that debt is paid off, its minimum payment rolls into the next target, creating a snowball effect that accelerates payoff."}}]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --red: #dc2626;
+    --green: #16a34a;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 360px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+  .panel { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input, .field select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+
+  /* Main */
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+
+  .verdict-badge { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; margin-bottom: 8px; font-weight: 500; }
+  .badge-avalanche { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .badge-snowball { background: rgba(22,163,74,0.12); color: var(--green); }
+  .badge-neutral { background: var(--surface2); color: var(--text-muted); }
+  .verdict-header { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 8px; line-height: 1.3; }
+  .verdict-sub { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 14px; }
+  .stat-box { background: var(--surface2); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-value { font-size: 17px; font-family: 'DM Serif Display', serif; }
+  .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .pos { color: var(--green); } .neg { color: var(--red); } .neu { color: var(--blue); }
+
+  .chart-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .chart-wrap { position: relative; height: 280px; }
+  .legend { display: flex; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: var(--text-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Breakdown table */
+  .breakdown-scroll { overflow-x: auto; max-height: 400px; overflow-y: auto; }
+  .breakdown-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .breakdown-table th { text-align: left; padding: 7px 10px; background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 500; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1; }
+  .breakdown-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Mono', monospace; font-size: 11px; }
+  .breakdown-table tr:last-child td { border-bottom: none; }
+  .breakdown-table tr:hover td { background: var(--surface2); }
+
+  /* Explain toggle */
+  .explain-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); user-select: none; padding: 4px 0; margin-top: 0; }
+  .explain-toggle:hover { color: var(--text); }
+  .explain-arrow { transition: transform 0.2s; display: inline-block; font-size: 9px; }
+  .explain-toggle.open .explain-arrow { transform: rotate(90deg); }
+  .explain-body { display: none; margin-top: 10px; padding: 16px 18px; background: var(--surface2); border-radius: var(--radius); font-size: 12px; line-height: 1.95; color: var(--text-muted); border: 1px solid var(--border); }
+  .explain-body.open { display: block; }
+  .explain-body strong { color: var(--text); }
+
+  .callout-note { background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; padding: 10px 14px; font-size: 12px; color: var(--text-muted); line-height: 1.65; margin-top: 12px; }
+  .callout-note strong { color: var(--text); }
+
+  /* Debt entry styling */
+  .debt-entry { background: var(--surface2); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px; position: relative; border: 1px solid var(--border); }
+  .debt-entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .debt-entry-num { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-dim); font-weight: 500; }
+  .btn-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; padding: 2px 6px; border-radius: 4px; line-height: 1; transition: color 0.15s, background 0.15s; }
+  .btn-remove:hover { color: var(--red); background: rgba(220,38,38,0.08); }
+  .btn-add { width: 100%; background: var(--surface2); border: 1px dashed var(--border); border-radius: var(--radius); color: var(--accent-dim); font-family: 'Inter', sans-serif; font-size: 12px; padding: 10px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; font-weight: 500; }
+  .btn-add:hover { color: var(--accent); border-color: var(--accent-dim); background: var(--bg); }
+
+  /* Strategy toggle */
+  .strategy-toggle { display: flex; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+  .strategy-btn { flex: 1; background: var(--surface2); border: none; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 9px 12px; cursor: pointer; transition: color 0.15s, background 0.15s; font-weight: 500; text-align: center; }
+  .strategy-btn:first-child { border-right: 1px solid var(--border); }
+  .strategy-btn.active { background: var(--accent); color: #fff; }
+  .strategy-btn:hover:not(.active) { color: var(--text); background: var(--bg); }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .main { padding: 18px; }
+    header { padding: 0 20px; }
+  }
+  @media (max-width: 600px) {
+    .header-banner { max-width: 100%; }
+    .header-nav { flex-wrap: wrap; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+    .main { padding: 12px; }
+    .card { padding: 14px 16px; }
+    .chart-wrap { height: 220px; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+  }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .share-btn { background: var(--surface2); border: none; border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .share-btn:hover { color: var(--accent); border-color: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+        <a href="fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="roth-conversion.html">Roth Conversion</a>
+        <a href="debt-payoff.html">Debt Payoff</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="life-expectancy.html">Life Expectancy</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<section class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Debt</div>
+      <h2 class="hero-band-title">Debt Payoff <span>Calculator</span></h2>
+    </div>
+    <div class="hero-band-divider"></div>
+    <p class="hero-band-body">
+      Compare <strong>avalanche</strong> and <strong>snowball</strong> strategies side by side. See exactly when each debt gets paid off and how much interest you'll save.
+    </p>
+  </div>
+</section>
+
+<div class="layout">
+<aside class="sidebar">
+<div style="padding:12px 22px;border-bottom:1px solid var(--border)"><button class="share-btn" id="saveSettingsBtn" onclick="saveSettings()" title="Generate a shareable link with your current settings">&#x2B21; Share Settings</button></div>
+
+  <div class="panel">
+    <div class="section-label">Your Debts</div>
+    <div id="debtEntries"></div>
+    <button class="btn-add" id="btnAddDebt" type="button">+ Add Debt</button>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Extra Payment</div>
+    <div class="field">
+      <label>Extra Monthly Payment ($)</label>
+      <input type="number" id="extraPayment" value="200" min="0" step="25" oninput="calc()">
+    </div>
+    <div class="hint">Additional money beyond all minimums to throw at the targeted debt each month.</div>
+  </div>
+
+  <div class="panel">
+    <div class="section-label">Strategy</div>
+    <div class="strategy-toggle" id="strategyToggle">
+      <button class="strategy-btn active" data-strategy="avalanche" type="button">Avalanche</button>
+      <button class="strategy-btn" data-strategy="snowball" type="button">Snowball</button>
+    </div>
+    <div class="hint" style="margin-top:8px" id="strategyHint">Highest interest rate first — minimizes total interest paid.</div>
+  </div>
+
+</aside>
+
+<main class="main" id="mainContent">
+
+  <!-- Verdict -->
+  <div class="card" id="verdictCard">
+    <div class="verdict-badge badge-avalanche" id="verdictBadge">Avalanche</div>
+    <div class="verdict-header" id="verdictHeader">Enter your debts to see results.</div>
+    <div class="verdict-sub" id="verdictSub"></div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-label">Avalanche Months</div>
+        <div class="stat-value neu" id="statAvalancheMonths">--</div>
+        <div class="stat-sub" id="statAvalancheMonthsSub">to debt-free</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Avalanche Interest</div>
+        <div class="stat-value neg" id="statAvalancheInterest">--</div>
+        <div class="stat-sub">total interest paid</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Snowball Months</div>
+        <div class="stat-value pos" id="statSnowballMonths">--</div>
+        <div class="stat-sub" id="statSnowballMonthsSub">to debt-free</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Snowball Interest</div>
+        <div class="stat-value neg" id="statSnowballInterest">--</div>
+        <div class="stat-sub">total interest paid</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Interest Saved</div>
+        <div class="stat-value pos" id="statDifference">--</div>
+        <div class="stat-sub" id="statDifferenceSub">avalanche saves</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart -->
+  <div class="card">
+    <div class="chart-title">Payoff Timeline — Total Remaining Balance</div>
+    <div class="chart-wrap">
+      <canvas id="mainChart"></canvas>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div> Avalanche</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#16a34a"></div> Snowball</div>
+    </div>
+    <div class="callout-note" style="margin-top:14px">Chart shows total remaining debt balance over time for each strategy. The strategy that reaches zero first wins on speed; the one with less area under the curve wins on interest.</div>
+  </div>
+
+  <!-- Payoff order table -->
+  <div class="card">
+    <div class="chart-title" id="payoffOrderTitle">Debt Payoff Order — Avalanche</div>
+    <div class="breakdown-scroll" style="max-height:none;">
+      <table class="breakdown-table" id="payoffOrderTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Debt Name</th>
+            <th>Balance</th>
+            <th>Rate</th>
+            <th>Payoff Month</th>
+            <th>Interest Paid</th>
+          </tr>
+        </thead>
+        <tbody id="payoffOrderBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Month-by-month breakdown -->
+  <div class="card">
+    <div class="explain-toggle" id="monthlyToggle" onclick="toggleMonthly()">
+      <span class="explain-arrow">&#9654;</span> Month-by-Month Breakdown
+    </div>
+    <div class="explain-body" id="monthlyBody" style="padding:0;border:none;background:transparent;">
+      <div class="breakdown-scroll">
+        <table class="breakdown-table" id="monthlyTable">
+          <thead id="monthlyHead"></thead>
+          <tbody id="monthlyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+    calc();
+  });
+  updateUI();
+})();
+
+// Helpers
+function fmt(n, decimals) {
+  if (n === null || n === undefined || isNaN(n)) return '--';
+  return '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: decimals||0, maximumFractionDigits: decimals||0 });
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Debt entries
+var debts = [
+  { name: 'Credit Card', balance: 5000, rate: 22.99, minPayment: 150 },
+  { name: 'Car Loan', balance: 12000, rate: 6.5, minPayment: 300 },
+  { name: 'Student Loan', balance: 8000, rate: 5.0, minPayment: 100 },
+];
+var maxDebts = 8;
+
+function renderDebts() {
+  var container = document.getElementById('debtEntries');
+  container.innerHTML = '';
+  debts.forEach(function(d, i) {
+    var div = document.createElement('div');
+    div.className = 'debt-entry';
+    div.innerHTML =
+      '<div class="debt-entry-header">' +
+        '<span class="debt-entry-num">Debt ' + (i + 1) + '</span>' +
+        (debts.length > 1 ? '<button class="btn-remove" type="button" data-idx="' + i + '" title="Remove debt">&times;</button>' : '') +
+      '</div>' +
+      '<div class="field">' +
+        '<label>Name</label>' +
+        '<input type="text" data-field="name" data-idx="' + i + '" value="' + escHtml(d.name) + '">' +
+      '</div>' +
+      '<div class="field-row">' +
+        '<div class="field">' +
+          '<label>Balance ($)</label>' +
+          '<input type="number" data-field="balance" data-idx="' + i + '" value="' + d.balance + '" min="0" step="100">' +
+        '</div>' +
+        '<div class="field">' +
+          '<label>Rate (%)</label>' +
+          '<input type="number" data-field="rate" data-idx="' + i + '" value="' + d.rate + '" min="0" max="100" step="0.1">' +
+        '</div>' +
+      '</div>' +
+      '<div class="field">' +
+        '<label>Minimum Payment ($)</label>' +
+        '<input type="number" data-field="minPayment" data-idx="' + i + '" value="' + d.minPayment + '" min="0" step="10">' +
+      '</div>';
+    container.appendChild(div);
+  });
+  document.getElementById('btnAddDebt').style.display = debts.length >= maxDebts ? 'none' : '';
+}
+
+// Event delegation for debt inputs
+document.getElementById('debtEntries').addEventListener('input', function(e) {
+  var idx = parseInt(e.target.getAttribute('data-idx'));
+  var field = e.target.getAttribute('data-field');
+  if (field && !isNaN(idx) && debts[idx]) {
+    if (field === 'name') {
+      debts[idx].name = e.target.value;
+    } else {
+      debts[idx][field] = parseFloat(e.target.value) || 0;
+    }
+    calc();
+  }
+});
+
+document.getElementById('debtEntries').addEventListener('click', function(e) {
+  if (e.target.classList.contains('btn-remove')) {
+    var idx = parseInt(e.target.getAttribute('data-idx'));
+    debts.splice(idx, 1);
+    renderDebts();
+    calc();
+  }
+});
+
+document.getElementById('btnAddDebt').addEventListener('click', function() {
+  if (debts.length < maxDebts) {
+    debts.push({ name: 'Debt ' + (debts.length + 1), balance: 1000, rate: 10.0, minPayment: 50 });
+    renderDebts();
+    calc();
+  }
+});
+
+// Strategy toggle
+var selectedStrategy = 'avalanche';
+document.getElementById('strategyToggle').addEventListener('click', function(e) {
+  var btn = e.target.closest('.strategy-btn');
+  if (!btn) return;
+  selectedStrategy = btn.getAttribute('data-strategy');
+  document.querySelectorAll('.strategy-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('strategyHint').textContent = selectedStrategy === 'avalanche'
+    ? 'Highest interest rate first — minimizes total interest paid.'
+    : 'Lowest balance first — fastest psychological wins.';
+  calc();
+});
+
+// Simulation
+function simulateStrategy(debtList, extraPayment, strategy) {
+  var ds = debtList.map(function(d) {
+    return { name: d.name, balance: d.balance, rate: d.rate, minPayment: d.minPayment, interestPaid: 0, payoffMonth: null, origBalance: d.balance };
+  });
+
+  if (strategy === 'avalanche') {
+    ds.sort(function(a, b) { return b.rate - a.rate || a.balance - b.balance; });
+  } else {
+    ds.sort(function(a, b) { return a.balance - b.balance || b.rate - a.rate; });
+  }
+
+  var monthlySnapshots = [];
+  var totalInterest = 0;
+  var maxMonths = 600;
+
+  var initBal = {};
+  var initTotal = 0;
+  ds.forEach(function(d) { initBal[d.name] = d.balance; initTotal += d.balance; });
+  monthlySnapshots.push({ month: 0, balances: Object.assign({}, initBal), totalBalance: initTotal });
+
+  for (var m = 1; m <= maxMonths; m++) {
+    var allPaid = ds.every(function(d) { return d.balance <= 0; });
+    if (allPaid) break;
+
+    var freedPayments = 0;
+    ds.forEach(function(d) {
+      if (d.balance <= 0) {
+        freedPayments += d.minPayment;
+        return;
+      }
+      var monthlyRate = d.rate / 100 / 12;
+      var interest = d.balance * monthlyRate;
+      d.interestPaid += interest;
+      totalInterest += interest;
+      d.balance += interest;
+    });
+
+    ds.forEach(function(d) {
+      if (d.balance <= 0) return;
+      var payment = Math.min(d.balance, d.minPayment);
+      d.balance -= payment;
+      if (d.balance <= 0.005) {
+        d.balance = 0;
+        if (d.payoffMonth === null) d.payoffMonth = m;
+      }
+    });
+
+    var available = extraPayment + freedPayments;
+    for (var t = 0; t < ds.length && available > 0.005; t++) {
+      if (ds[t].balance <= 0) continue;
+      var payment = Math.min(ds[t].balance, available);
+      ds[t].balance -= payment;
+      available -= payment;
+      if (ds[t].balance <= 0.005) {
+        ds[t].balance = 0;
+        if (ds[t].payoffMonth === null) ds[t].payoffMonth = m;
+      }
+    }
+
+    var snap = { month: m, balances: {}, totalBalance: 0 };
+    ds.forEach(function(d) {
+      snap.balances[d.name] = Math.max(0, d.balance);
+      snap.totalBalance += Math.max(0, d.balance);
+    });
+    monthlySnapshots.push(snap);
+  }
+
+  var payoffOrder = ds.map(function(d) {
+    return { name: d.name, origBalance: d.origBalance, rate: d.rate, payoffMonth: d.payoffMonth, interestPaid: d.interestPaid };
+  }).sort(function(a, b) { return (a.payoffMonth || 9999) - (b.payoffMonth || 9999); });
+
+  var totalMonths = 0;
+  ds.forEach(function(d) { if (d.payoffMonth && d.payoffMonth > totalMonths) totalMonths = d.payoffMonth; });
+
+  return {
+    totalMonths: totalMonths,
+    totalInterest: totalInterest,
+    payoffOrder: payoffOrder,
+    monthlySnapshots: monthlySnapshots,
+    debtNames: ds.map(function(d) { return d.name; }),
+  };
+}
+
+// Main calc
+var chartInstance = null;
+
+function calc() {
+  var validDebts = debts.filter(function(d) { return d.balance > 0 && d.minPayment > 0; });
+  if (validDebts.length === 0) {
+    document.getElementById('verdictHeader').textContent = 'Enter your debts to see results.';
+    document.getElementById('verdictSub').textContent = '';
+    return;
+  }
+
+  var extra = parseFloat(document.getElementById('extraPayment').value) || 0;
+
+  var avalanche = simulateStrategy(validDebts, extra, 'avalanche');
+  var snowball = simulateStrategy(validDebts, extra, 'snowball');
+
+  var active = selectedStrategy === 'avalanche' ? avalanche : snowball;
+  var interestDiff = snowball.totalInterest - avalanche.totalInterest;
+
+  // Verdict
+  var badge = document.getElementById('verdictBadge');
+  var header = document.getElementById('verdictHeader');
+  var sub = document.getElementById('verdictSub');
+
+  badge.className = 'verdict-badge ' + (selectedStrategy === 'avalanche' ? 'badge-avalanche' : 'badge-snowball');
+  badge.textContent = selectedStrategy === 'avalanche' ? 'Avalanche Strategy' : 'Snowball Strategy';
+
+  var yearsMonths = Math.floor(active.totalMonths / 12) + 'y ' + (active.totalMonths % 12) + 'm';
+
+  header.innerHTML = 'Debt-free in <span class="pos">' + yearsMonths + '</span> with ' + fmt(active.totalInterest) + ' total interest.';
+
+  if (Math.abs(interestDiff) < 1) {
+    sub.textContent = 'Both strategies cost the same in interest. Choose whichever keeps you motivated.';
+  } else if (interestDiff > 0) {
+    sub.textContent = 'The avalanche method saves ' + fmt(interestDiff) + ' in interest compared to snowball. It targets the highest-rate debt first, reducing the total cost of borrowing. The snowball method pays off smaller debts faster for quicker wins.';
+  } else {
+    sub.textContent = 'In this scenario, snowball saves ' + fmt(Math.abs(interestDiff)) + ' — this can happen when the lowest-balance debt also carries a high rate.';
+  }
+
+  // Stats
+  document.getElementById('statAvalancheMonths').textContent = avalanche.totalMonths;
+  document.getElementById('statAvalancheMonthsSub').textContent = Math.floor(avalanche.totalMonths / 12) + 'y ' + (avalanche.totalMonths % 12) + 'm';
+  document.getElementById('statAvalancheInterest').textContent = fmt(avalanche.totalInterest);
+
+  document.getElementById('statSnowballMonths').textContent = snowball.totalMonths;
+  document.getElementById('statSnowballMonthsSub').textContent = Math.floor(snowball.totalMonths / 12) + 'y ' + (snowball.totalMonths % 12) + 'm';
+  document.getElementById('statSnowballInterest').textContent = fmt(snowball.totalInterest);
+
+  if (Math.abs(interestDiff) < 1) {
+    document.getElementById('statDifference').textContent = '$0';
+    document.getElementById('statDifference').className = 'stat-value pos';
+    document.getElementById('statDifferenceSub').textContent = 'no difference';
+  } else if (interestDiff > 0) {
+    document.getElementById('statDifference').textContent = fmt(interestDiff);
+    document.getElementById('statDifference').className = 'stat-value pos';
+    document.getElementById('statDifferenceSub').textContent = 'avalanche saves';
+  } else {
+    document.getElementById('statDifference').textContent = fmt(Math.abs(interestDiff));
+    document.getElementById('statDifference').className = 'stat-value pos';
+    document.getElementById('statDifferenceSub').textContent = 'snowball saves';
+  }
+
+  // Chart
+  var maxLen = Math.max(avalanche.monthlySnapshots.length, snowball.monthlySnapshots.length);
+  var labels = [];
+  var dataAvalanche = [];
+  var dataSnowball = [];
+  for (var i = 0; i < maxLen; i++) {
+    labels.push('Mo ' + i);
+    dataAvalanche.push(i < avalanche.monthlySnapshots.length ? Math.round(avalanche.monthlySnapshots[i].totalBalance) : 0);
+    dataSnowball.push(i < snowball.monthlySnapshots.length ? Math.round(snowball.monthlySnapshots[i].totalBalance) : 0);
+  }
+
+  var step = Math.max(1, Math.floor(maxLen / 20));
+  var chartLabels = labels.map(function(l, idx) { return idx % step === 0 ? l : ''; });
+
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+  var textColor = isDark ? '#9395a1' : '#6b7280';
+
+  if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
+
+  var ctx = document.getElementById('mainChart').getContext('2d');
+  chartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: chartLabels,
+      datasets: [
+        {
+          label: 'Avalanche',
+          data: dataAvalanche,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37,99,235,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          fill: false,
+          tension: 0.3,
+        },
+        {
+          label: 'Snowball',
+          data: dataSnowball,
+          borderColor: '#16a34a',
+          backgroundColor: 'rgba(22,163,74,0.08)',
+          borderWidth: 2.5,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          fill: false,
+          tension: 0.3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: isDark ? '#1a1a24' : '#fff',
+          borderColor: isDark ? '#2e2e3a' : '#e2e5eb',
+          borderWidth: 1,
+          titleColor: isDark ? '#e4e4ea' : '#1a1a2e',
+          bodyColor: isDark ? '#9395a1' : '#6b7280',
+          padding: 10,
+          callbacks: {
+            title: function(items) { return 'Month ' + items[0].dataIndex; },
+            label: function(ctx) { return ' ' + ctx.dataset.label + ': ' + fmt(ctx.parsed.y); }
+          }
+        },
+      },
+      scales: {
+        x: {
+          grid: { color: gridColor },
+          ticks: { color: textColor, font: { size: 10 }, maxRotation: 0 },
+        },
+        y: {
+          grid: { color: gridColor },
+          ticks: {
+            color: textColor,
+            font: { size: 10 },
+            callback: function(v) { return '$' + (Math.abs(v) >= 1000 ? (v/1000).toFixed(0) + 'k' : v); },
+          },
+        },
+      },
+    },
+  });
+
+  // Payoff order table
+  document.getElementById('payoffOrderTitle').textContent = 'Debt Payoff Order — ' + (selectedStrategy === 'avalanche' ? 'Avalanche' : 'Snowball');
+  var tbody = document.getElementById('payoffOrderBody');
+  tbody.innerHTML = '';
+  active.payoffOrder.forEach(function(d, i) {
+    var tr = document.createElement('tr');
+    var monthLabel = d.payoffMonth ? d.payoffMonth : '--';
+    var monthDetail = d.payoffMonth ? (Math.floor(d.payoffMonth / 12) + 'y ' + (d.payoffMonth % 12) + 'm') : '';
+    tr.innerHTML =
+      '<td>' + (i + 1) + '</td>' +
+      '<td style="color:var(--text);font-family:Inter,sans-serif;">' + escHtml(d.name) + '</td>' +
+      '<td>' + fmt(d.origBalance) + '</td>' +
+      '<td>' + d.rate.toFixed(2) + '%</td>' +
+      '<td>' + monthLabel + (monthDetail ? ' <span style="color:var(--text-muted);font-size:10px;">(' + monthDetail + ')</span>' : '') + '</td>' +
+      '<td class="neg">' + fmt(d.interestPaid) + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  // Monthly breakdown
+  renderMonthlyBreakdown(active);
+}
+
+function renderMonthlyBreakdown(result) {
+  var thead = document.getElementById('monthlyHead');
+  var tbody = document.getElementById('monthlyTableBody');
+  var names = result.debtNames;
+
+  var headerHtml = '<tr><th>Month</th>';
+  names.forEach(function(n) { headerHtml += '<th>' + escHtml(n) + '</th>'; });
+  headerHtml += '<th>Total</th></tr>';
+  thead.innerHTML = headerHtml;
+
+  tbody.innerHTML = '';
+  var snapshots = result.monthlySnapshots;
+  var showEvery = snapshots.length > 120 ? 3 : (snapshots.length > 60 ? 2 : 1);
+
+  for (var i = 0; i < snapshots.length; i++) {
+    if (i > 0 && i < snapshots.length - 1 && i % showEvery !== 0) continue;
+    var s = snapshots[i];
+    var tr = document.createElement('tr');
+    var html = '<td>' + s.month + '</td>';
+    names.forEach(function(n) {
+      var bal = s.balances[n];
+      if (bal === undefined) bal = 0;
+      html += '<td' + (bal <= 0 && s.month > 0 ? ' style="color:var(--green)"' : '') + '>' + (bal <= 0 && s.month > 0 ? 'Paid off' : fmt(bal)) + '</td>';
+    });
+    html += '<td style="color:var(--text);font-weight:500;">' + fmt(s.totalBalance) + '</td>';
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  }
+}
+
+function toggleMonthly() {
+  var toggle = document.getElementById('monthlyToggle');
+  var body = document.getElementById('monthlyBody');
+  toggle.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function saveSettings() {
+  var settings = {
+    debts: debts,
+    extraPayment: document.getElementById('extraPayment').value,
+    strategy: selectedStrategy
+  };
+  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(settings))));
+  var url = new URL(window.location.href);
+  url.hash = 's=' + encoded;
+  window.history.pushState({}, '', url.toString());
+  var btn = document.getElementById('saveSettingsBtn');
+  var urlStr = url.toString();
+  function showCopied() {
+    var orig = btn.innerHTML; btn.textContent = '\u2713 Link copied!';
+    setTimeout(function() { btn.innerHTML = orig; }, 2500);
+  }
+  function fallbackCopy() {
+    var textarea = document.createElement('textarea');
+    textarea.value = urlStr;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand('copy'); showCopied(); } catch(e) { prompt('Copy this link:', urlStr); }
+    document.body.removeChild(textarea);
+  }
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(urlStr).then(showCopied).catch(fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
+}
+
+function loadSettingsFromHash() {
+  var hash = window.location.hash;
+  if (hash.indexOf('#s=') !== 0) return;
+  try {
+    var settings = JSON.parse(decodeURIComponent(escape(atob(hash.slice(3)))));
+    if (settings.debts && settings.debts.length) {
+      debts = settings.debts;
+      renderDebts();
+    }
+    if (settings.extraPayment != null) document.getElementById('extraPayment').value = settings.extraPayment;
+    if (settings.strategy) {
+      selectedStrategy = settings.strategy;
+      document.querySelectorAll('.strategy-btn').forEach(function(b) { b.classList.remove('active'); });
+      var activeBtn = document.querySelector('.strategy-btn[data-strategy="' + settings.strategy + '"]');
+      if (activeBtn) activeBtn.classList.add('active');
+      document.getElementById('strategyHint').textContent = selectedStrategy === 'avalanche'
+        ? 'Highest interest rate first — minimizes total interest paid.'
+        : 'Lowest balance first — fastest psychological wins.';
+    }
+  } catch(e) {}
+}
+
+// Init
+renderDebts();
+loadSettingsFromHash();
+calc();
+</script>
+</body>
+</html>
