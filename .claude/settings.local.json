@@ -9,6 +9,9 @@
       "Bash(for f:*)",
       "Bash(do sed:*)",
       "Bash(done)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\brent\\OneDrive\\Documents\\GitHub\\finance_calculators\\blog"
     ]
   }
 }
