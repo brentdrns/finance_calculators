@@ -292,7 +292,7 @@
     <div class="section-label">Extra Payment</div>
     <div class="field">
       <label>Extra Monthly Payment ($)</label>
-      <input type="number" id="extraPayment" value="200" min="0" step="25" oninput="calc()">
+      <input type="text" inputmode="decimal" id="extraPayment" value="200" min="0" step="25" oninput="calc()">
     </div>
     <div class="hint">Additional money beyond all minimums to throw at the targeted debt each month.</div>
   </div>
@@ -467,7 +467,7 @@ function renderDebts() {
       '<div class="field-row">' +
         '<div class="field">' +
           '<label>Balance ($)</label>' +
-          '<input type="number" data-field="balance" data-idx="' + i + '" value="' + d.balance + '" min="0" step="100">' +
+          '<input type="text" inputmode="decimal" data-field="balance" data-idx="' + i + '" value="' + Number(d.balance).toLocaleString('en-US') + '" min="0" step="100">' +
         '</div>' +
         '<div class="field">' +
           '<label>Rate (%)</label>' +
@@ -476,7 +476,7 @@ function renderDebts() {
       '</div>' +
       '<div class="field">' +
         '<label>Minimum Payment ($)</label>' +
-        '<input type="number" data-field="minPayment" data-idx="' + i + '" value="' + d.minPayment + '" min="0" step="10">' +
+        '<input type="text" inputmode="decimal" data-field="minPayment" data-idx="' + i + '" value="' + Number(d.minPayment).toLocaleString('en-US') + '" min="0" step="10">' +
       '</div>';
     container.appendChild(div);
   });
@@ -878,6 +878,33 @@ function loadSettingsFromHash() {
 renderDebts();
 loadSettingsFromHash();
 calc();
+</script>
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.addEventListener('input', function(e) {
+    if (e.target.matches && e.target.matches('input[inputmode="decimal"]')) commaFmt(e.target);
+  });
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
 </script>
 </body>
 </html>

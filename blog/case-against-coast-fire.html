@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>The Case Against Coast FIRE &mdash; Abel's Calculators</title>
+<meta name="description" content="Coast FIRE assumes median market returns. In bottom-decile scenarios, the person who kept saving retires years earlier. Here's why the safety margin matters.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/case-against-coast-fire.html">
+<meta property="og:title" content="The Case Against Coast FIRE: When Stopping Savings Backfires">
+<meta property="og:description" content="Coast FIRE assumes median market returns. In bottom-decile scenarios, the person who kept saving retires years earlier. Here's why the safety margin matters.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/case-against-coast-fire.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Case Against Coast FIRE: When Stopping Savings Backfires">
+<meta name="twitter:description" content="Coast FIRE assumes median market returns. In bottom-decile scenarios, the person who kept saving retires years earlier.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Case Against Coast FIRE: When Stopping Savings Backfires",
+  "description": "Coast FIRE assumes median market returns. In bottom-decile scenarios, the person who kept saving retires years earlier. Here's why the safety margin matters.",
+  "author": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "datePublished": "2026-03-16",
+  "dateModified": "2026-03-16",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/case-against-coast-fire.html",
+  "keywords": ["Retirement", "Investing", "FIRE"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Coast FIRE and how does it work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Coast FIRE is a financial independence strategy where you save aggressively early in your career until your portfolio is large enough that market growth alone — with no further contributions — will carry it to your retirement target by a given age. Once you hit that 'coast number,' the idea is you can stop saving entirely and just cover your living expenses, often by working a lower-stress or part-time job."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the main risks of Coast FIRE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The biggest risk is that Coast FIRE math relies on median or average market returns. In below-average market scenarios (the bottom 10–20% of historical outcomes), a coaster's portfolio may fall far short of their retirement target. Because they've stopped contributing, they have no way to make up the shortfall except by working longer. Career risk compounds this: after years of reduced earning, ramping back up to a high salary is often impractical."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does continued saving help in a bad market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In a 10th-percentile market scenario, the difference between saving $0/year and $20K/year over 20 years can be enormous. A coast FIRE saver starting with $500K at 40 might end up with ~$780K at 60, never reaching a $1.5M target. The same person contributing $20K/year would reach ~$1.18M by 60 and hit their target by around age 63. That continued saving acts as insurance against bad sequences of returns."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a middle ground between Coast FIRE and full saving?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. A 'lean coast' approach means reducing your savings rate to roughly 50% of your previous level instead of stopping entirely. You still get most of the lifestyle benefits — less work pressure, more flexibility — while maintaining a meaningful safety margin. The difference between saving $0 and saving $10K/year is enormous in bad-market scenarios but barely noticeable in good ones."
+      }
+    }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: none; background: var(--surface2); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); background: var(--surface); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+
+  .callout { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+
+  .scenario-compare { margin: 32px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-col-basic .sc-row-value { color: var(--text); }
+  .sc-col-full .sc-row-value { color: var(--text); }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-verdict strong { font-size: 13px; }
+  .sc-highlight { color: var(--accent); }
+  .sc-negative { color: #f06060; }
+  .sc-missed { font-size: 11px; color: var(--text-muted); font-style: italic; padding: 10px 24px; border-top: 1px solid var(--border); background: var(--surface2); line-height: 1.6; }
+  @media (max-width: 640px) {
+    .scenario-compare-body { grid-template-columns: 1fr; }
+    .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+  .cta-pair { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    main { padding: 32px 16px 60px; }
+    .page-title { font-size: 28px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+        <a href="../rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+        <a href="../fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../roth-conversion.html">Roth Conversion</a>
+        <a href="../debt-payoff.html">Debt Payoff</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+        <a href="../wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">Blog</div>
+  <h2 class="page-title">The Case Against Coast FIRE</h2>
+  <p class="page-sub">Coast FIRE is elegant in theory. But it bets your retirement on the market delivering average-or-better returns. Here&rsquo;s what happens when it doesn&rsquo;t.</p>
+  <p class="page-date">March 16, 2026</p>
+
+  <article>
+    <p>Coast FIRE is one of the most appealing ideas in personal finance: save aggressively early, then let compounding do the rest. Stop contributing, coast through your working years at a lower-stress job, and still retire on time. The math works &mdash; in the median scenario. But retirement planning isn&rsquo;t about median scenarios. It&rsquo;s about the bad ones.</p>
+
+    <h2>Quick Recap: What Is Coast FIRE?</h2>
+
+    <p>Coast FIRE means you&rsquo;ve saved enough that, even with zero additional contributions, your portfolio will grow to your retirement target by your desired retirement age &mdash; assuming average market returns. Once you hit that number, the idea is that you only need to earn enough to cover current living expenses. No more aggressive saving. In a <a href="income-near-retirement.html">companion piece</a>, we made the case that your income matters less than you think near retirement &mdash; and that&rsquo;s the logic Coast FIRE builds on. This article stress-tests that logic.</p>
+
+    <h2>The Problem: You Don&rsquo;t Get the Median</h2>
+
+    <p>Monte Carlo simulations show a distribution of outcomes. The median is the 50th percentile &mdash; half the scenarios are better, half are worse. Coast FIRE works beautifully at the 50th percentile. But you don&rsquo;t get to choose your percentile. You get exactly one sequence of market returns, and you won&rsquo;t know where it falls until it&rsquo;s too late to change course.</p>
+
+    <p>The difference between a median market and a bad market isn&rsquo;t a small adjustment. It&rsquo;s the difference between retiring on time and never reaching your target at all.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Coast FIRE Stress Test</div>
+        <div class="sc-title">Coast FIRE: Median vs 10th Percentile</div>
+        <div class="sc-params">$500K portfolio at age 40 &bull; $0/yr contributions &bull; $1.5M FIRE target &bull; 20-year horizon to age 60</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> Median Market (50th Pctl)</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$500K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual contributions</span> <span class="sc-row-value">$0</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at 60</span> <span class="sc-row-value sc-highlight">~$1.93M</span></div>
+          <div class="sc-row"><span class="sc-row-label">FIRE target reached</span> <span class="sc-row-value sc-highlight">Age 57</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> Coast FIRE works. Compounding carries the portfolio past $1.5M with room to spare.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Bad Market (10th Pctl)</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$500K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual contributions</span> <span class="sc-row-value">$0</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at 60</span> <span class="sc-row-value sc-negative">~$780K</span></div>
+          <div class="sc-row"><span class="sc-row-label">FIRE target reached</span> <span class="sc-row-value sc-negative">Never</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> Coast FIRE fails. The portfolio never reaches $1.5M. The coaster faces an indefinite delay.</div>
+        </div>
+      </div>
+      <div class="sc-missed">In the bottom 10% of market scenarios, a Coast FIRE saver with $500K at 40 never reaches a $1.5M target. They&rsquo;d need to either drastically cut retirement spending, work much longer, or restart saving &mdash; likely at an age where earning power has diminished.</div>
+    </div>
+
+    <h2>What the Continued Saver Gets</h2>
+
+    <p>Now take the same bad market &mdash; 10th percentile returns &mdash; and compare the coaster to someone who kept saving $20K per year. Same starting point, same terrible luck. The only difference is one person kept contributing.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">Bad Market Comparison</div>
+        <div class="sc-title">Coast FIRE vs Continued Saver &mdash; 10th Percentile Returns</div>
+        <div class="sc-params">$500K portfolio at age 40 &bull; 10th percentile market returns &bull; $1.5M FIRE target</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> Coast FIRE ($0/yr)</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$500K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual contributions</span> <span class="sc-row-value">$0</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at 60</span> <span class="sc-row-value sc-negative">~$780K</span></div>
+          <div class="sc-row"><span class="sc-row-label">FIRE target reached</span> <span class="sc-row-value sc-negative">Never</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> Falls $720K short. No path to $1.5M without restarting contributions or working indefinitely.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Continued Saver ($20K/yr)</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$500K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual contributions</span> <span class="sc-row-value sc-highlight">$20K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at 60</span> <span class="sc-row-value sc-highlight">~$1.18M</span></div>
+          <div class="sc-row"><span class="sc-row-label">FIRE target reached</span> <span class="sc-row-value sc-highlight">~Age 63</span></div>
+          <div class="sc-verdict"><strong>Verdict:</strong> Still short at 60, but reaches $1.5M by ~63. Three extra years of work vs potentially never getting there.</div>
+        </div>
+      </div>
+      <div class="sc-missed">In bad markets, $20K/year in continued savings is the difference between retiring at 63 and potentially never reaching your target. The contributions themselves add $400K over 20 years, and even modest compounding on those contributions helps close the gap.</div>
+    </div>
+
+    <h2>The Tail Risk Problem</h2>
+
+    <p>The whole point of FIRE planning is to not run out of money. Coast FIRE optimizes for the expected case but ignores tail risk. It&rsquo;s like driving without a seatbelt because most trips don&rsquo;t involve an accident. The cost of being wrong isn&rsquo;t &ldquo;you have slightly less money&rdquo; &mdash; it&rsquo;s &ldquo;you work an extra decade.&rdquo;</p>
+
+    <p>A 10th-percentile outcome isn&rsquo;t a black swan. It&rsquo;s a 1-in-10 chance. If you lined up ten people who all hit their Coast FIRE number at 40, statistically one of them ends up in a scenario where coasting fails entirely. That&rsquo;s not a rounding error &mdash; it&rsquo;s a real risk that deserves a real hedge.</p>
+
+    <h2>Career Risk Compounds the Problem</h2>
+
+    <p>Coast FIRE often involves stepping back from a high-earning career: going part-time, taking a lower-stress job, freelancing. These are wonderful quality-of-life decisions. But they also make it much harder to ramp savings back up if the market underperforms. You can&rsquo;t easily un-coast.</p>
+
+    <p>The skills you stepped away from atrophy. The industry moves on. The on-ramp back to a $150K salary after 5 years of part-time work may not exist. Your professional network has shifted. The hiring landscape has changed. What looked like a reversible decision turns out to be a one-way door.</p>
+
+    <p>This is the part Coast FIRE proponents tend to wave away: the implicit assumption that if things go badly, you can just &ldquo;go back to earning more.&rdquo; In theory, yes. In practice, it&rsquo;s one of the hardest career transitions there is.</p>
+
+    <div class="callout">
+      <p><strong>Coast FIRE&rsquo;s real risk isn&rsquo;t that the math is wrong</strong> &mdash; it&rsquo;s that the math assumes you can course-correct if things go badly. In practice, once you&rsquo;ve restructured your career around lower earning, course-correcting is much harder than it looks. The safety net you thought you had &mdash; &ldquo;I&rsquo;ll just save more if the market drops&rdquo; &mdash; may not be available when you need it.</p>
+    </div>
+
+    <h2>A Middle Ground: &ldquo;Lean Coast&rdquo;</h2>
+
+    <p>Instead of fully coasting, consider reducing savings to 50% of your previous rate. You still get most of the lifestyle benefits &mdash; less pressure, more flexibility, the ability to take a job you actually enjoy &mdash; while maintaining a meaningful safety margin.</p>
+
+    <p>The difference between saving $0 and saving $10K/year is enormous in bad-market scenarios and barely noticeable in good ones. In a median market, both the coaster and the lean coaster retire comfortably. In a 10th-percentile market, the lean coaster reaches their target years earlier &mdash; or at all.</p>
+
+    <p>This is asymmetric upside. In good markets, the extra savings are a bonus &mdash; retire a year earlier, leave a bigger legacy, have more flexibility. In bad markets, they&rsquo;re the difference between a plan that works and one that doesn&rsquo;t. The cost of the insurance is low. The payout when you need it is massive.</p>
+
+    <h2>The Insurance Framing</h2>
+
+    <p>Think of continued savings not as &ldquo;money you need&rdquo; but as insurance against bad market sequences. You&rsquo;re not saving because the median scenario requires it. You&rsquo;re saving because the bad scenarios are catastrophic without it.</p>
+
+    <p>In good markets, you&rsquo;ll end up with more than you need &mdash; which means more flexibility, earlier retirement, or a bigger legacy. In bad markets, those continued savings are what keep your retirement date from slipping by 5&ndash;10 years. The premium for this insurance is a modest ongoing savings rate. The alternative is betting your retirement timeline on getting average-or-better luck.</p>
+
+    <p>Most people insure their home against fire even though the probability of a house fire is well under 1%. The probability of a bottom-decile market over a 20-year period is 10%. If you&rsquo;d insure against 0.3% risks, it&rsquo;s worth insuring against 10% risks &mdash; especially when the &ldquo;premium&rdquo; is money that&rsquo;s still yours in every scenario.</p>
+
+    <div class="cta">
+      <p>Run your own numbers through our FIRE Calculator to see how different savings rates affect your retirement date across thousands of market scenarios. Or use the Monte Carlo Simulator to visualize the full distribution of outcomes &mdash; including the bad ones.</p>
+      <div class="cta-pair">
+        <a class="cta-btn" href="../fire-calculator.html">Try the FIRE Calculator &rarr;</a>
+        <a class="cta-btn" href="../monte-carlo.html">Run a Monte Carlo Simulation &rarr;</a>
+      </div>
+    </div>
+
+    <h2>Bottom Line</h2>
+
+    <p>Coast FIRE is a useful mental model for understanding when compounding starts to dominate your wealth trajectory. It&rsquo;s genuinely illuminating to see how little your contributions matter relative to market growth once your portfolio is large enough. That insight is valuable.</p>
+
+    <p>But treating it as a strategy &mdash; actually stopping savings &mdash; introduces real risk that many Coast FIRE proponents understate. The market doesn&rsquo;t owe you median returns. A 10th-percentile outcome isn&rsquo;t a freak event &mdash; it&rsquo;s a 1-in-10 chance, and its consequences for a coaster are severe.</p>
+
+    <p><strong>Save a little less if you want. But don&rsquo;t stop.</strong></p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+  });
+  updateUI();
+})();
+</script>
+</body>
+</html>

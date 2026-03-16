@@ -104,7 +104,7 @@
   .field { margin-bottom: 12px; }
   .field:last-child { margin-bottom: 0; }
   .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
-  .field input[type="number"], .field select {
+  .field input[type="number"], .field input[type="text"][inputmode="decimal"], .field select {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
     border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
     font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
@@ -321,11 +321,11 @@
       <div class="section-label">Enter your amount</div>
       <div class="field" id="incomeField">
         <label for="incomeAmount">Household Income ($)</label>
-        <input type="number" id="incomeAmount" value="80000" min="-5000000" max="100000000" step="1000">
+        <input type="text" inputmode="decimal" id="incomeAmount" value="80,000" min="-5000000" max="100000000" step="1000">
       </div>
       <div class="field" id="wealthField" style="display:none;">
         <label for="wealthAmount">Net Worth ($)</label>
-        <input type="number" id="wealthAmount" value="192700" min="-5000000" max="100000000" step="1000">
+        <input type="text" inputmode="decimal" id="wealthAmount" value="192,700" min="-5000000" max="100000000" step="1000">
       </div>
       <div class="field age-group-row" id="ageGroupRow">
         <label for="ageGroup" id="ageGroupLabel">Age Group</label>
@@ -922,6 +922,31 @@ document.getElementById('ageGroup').addEventListener('change', update);
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 update();
+</script>
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
 </script>
 </body>
 </html>

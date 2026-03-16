@@ -445,7 +445,7 @@
     <div class="field-row">
       <div class="field">
         <label>Original Loan Amount ($)</label>
-        <input type="number" id="curBalance" value="500000" min="0" oninput="updateCurrentBalance()">
+        <input type="text" inputmode="decimal" id="curBalance" value="500,000" min="0" oninput="updateCurrentBalance()">
       </div>
       <div class="field">
         <label>Interest Rate (%)</label>
@@ -479,7 +479,7 @@
     <div class="field-row">
       <div class="field">
         <label>Home Value ($)</label>
-        <input type="number" id="homeValue" value="650000" min="0" oninput="updateCurrentBalance()">
+        <input type="text" inputmode="decimal" id="homeValue" value="650,000" min="0" oninput="updateCurrentBalance()">
         <div class="hint" id="ltvHint"></div>
       </div>
       <div class="field">
@@ -490,7 +490,7 @@
     </div>
     <div class="field">
       <label>Current Loan Extra Payment ($/mo)</label>
-      <input type="number" id="curExtraPayment" value="0" min="0">
+      <input type="text" inputmode="decimal" id="curExtraPayment" value="0" min="0">
       <div class="hint">Extra principal paid monthly — shortens payoff and builds equity faster</div>
     </div>
     <div class="field">
@@ -530,7 +530,7 @@
     </div>
     <div class="field">
       <label>Deductible Loan Balance Cap ($)</label>
-      <input type="number" id="deductibleCap" value="750000" min="0">
+      <input type="text" inputmode="decimal" id="deductibleCap" value="750,000" min="0">
       <div class="hint">IRS caps deductibility at $750k for loans after 12/15/2017</div>
     </div>
     <div class="field-row">
@@ -545,7 +545,7 @@
       </div>
       <div class="field">
         <label>Other Itemized Ded. ($/yr)</label>
-        <input type="number" id="otherDeductions" value="0" min="0" step="1000" oninput="updateStdDedHint()">
+        <input type="text" inputmode="decimal" id="otherDeductions" value="0" min="0" step="1000" oninput="updateStdDedHint()">
         <div class="hint">SALT, charitable, etc.</div>
       </div>
     </div>
@@ -716,7 +716,7 @@ function renderScenarioTabs() {
         </div>
         <div id="bal-hint-${s.id}" class="hint" style="margin-bottom:6px">Refinance exactly the remaining balance — no cash taken out or paid in.</div>
         <div id="bal-amount-wrap-${s.id}" style="display:none">
-          <input type="number" id="bal-amount-${s.id}" value="0" min="0" placeholder="Amount ($)" oninput="updateNewLoanDisplay(${s.id})" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:7px 10px;outline:none">
+          <input type="text" inputmode="decimal" id="bal-amount-${s.id}" value="0" min="0" placeholder="Amount ($)" oninput="updateNewLoanDisplay(${s.id})" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;padding:7px 10px;outline:none">
           <div id="bal-amount-fmt-${s.id}" style="font-size:11px;color:var(--text-muted);margin-top:2px;font-family:'DM Mono',monospace"></div>
           <div id="bal-amount-hint-${s.id}" class="hint"></div>
         </div>
@@ -724,7 +724,7 @@ function renderScenarioTabs() {
       </div>
       <div class="field">
         <label>Cost to Refinance ($)</label>
-        <input type="number" id="rc-${s.id}" value="${s.refiCost}" min="0">
+        <input type="text" inputmode="decimal" id="rc-${s.id}" value="${s.refiCost.toLocaleString('en-US')}" min="0">
         <div class="hint">Closing costs and lender fees — treated as an opportunity cost.</div>
       </div>
       <div class="field-row">
@@ -735,7 +735,7 @@ function renderScenarioTabs() {
         </div>
         <div class="field">
           <label>Extra Payment ($/mo)</label>
-          <input type="number" id="ep-${s.id}" value="0" min="0">
+          <input type="text" inputmode="decimal" id="ep-${s.id}" value="0" min="0">
           <div class="hint">Extra principal each month — shortens payoff</div>
         </div>
       </div>
@@ -1727,6 +1727,49 @@ if (new URLSearchParams(window.location.search).has('admin')) {
     <a href="privacy.html">Privacy Policy</a>
   </nav>
 </footer>
+
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+  // Re-apply comma formatting to dynamically created scenario inputs
+  var origRender = window.renderScenarioTabs;
+  if (origRender) {
+    window.renderScenarioTabs = function() {
+      origRender.apply(this, arguments);
+      document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+        if (!input._commaFmtBound) {
+          input._commaFmtBound = true;
+          input.addEventListener('input', function() { commaFmt(this); });
+          if (input.value) {
+            var num = _pf(input.value.replace(/,/g, ''));
+            if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+          }
+        }
+      });
+    };
+  }
+})();
+</script>
 
 </body>
 </html>

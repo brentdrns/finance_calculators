@@ -373,7 +373,7 @@
     <div class="section-label">Renting</div>
     <div class="field">
       <label>Current Monthly Rent ($)</label>
-      <input type="number" id="currentRent" value="2000" min="0" step="50">
+      <input type="text" inputmode="decimal" id="currentRent" value="2,000" min="0" step="50">
     </div>
     <div class="field">
       <label>Expected Annual Rent Increase (%)</label>
@@ -382,7 +382,7 @@
     </div>
     <div class="field">
       <label>Renter's Insurance ($/mo)</label>
-      <input type="number" id="rentersInsurance" value="15" min="0" step="5">
+      <input type="text" inputmode="decimal" id="rentersInsurance" value="15" min="0" step="5">
     </div>
 
     <div class="toggle-row" style="margin-top: 12px;">
@@ -397,7 +397,7 @@
         </div>
         <div class="field">
           <label>New Monthly Rent ($)</label>
-          <input type="number" id="upgradeRent" value="3000" min="0" step="50">
+          <input type="text" inputmode="decimal" id="upgradeRent" value="3,000" min="0" step="50">
         </div>
       </div>
       <div class="hint">After this year, the new rent will increase at the same annual rate</div>
@@ -408,7 +408,7 @@
     <div class="section-label">Buying</div>
     <div class="field">
       <label>Home Price ($)</label>
-      <input type="number" id="homePrice" value="400000" min="0" step="5000">
+      <input type="text" inputmode="decimal" id="homePrice" value="400,000" min="0" step="5000">
     </div>
     <div class="field-row">
       <div class="field">
@@ -434,7 +434,7 @@
     <div class="field-row">
       <div class="field">
         <label>Property Tax ($/yr)</label>
-        <input type="number" id="propertyTax" value="5000" min="0" step="100">
+        <input type="text" inputmode="decimal" id="propertyTax" value="5,000" min="0" step="100">
       </div>
       <div class="field">
         <label>Prop. Tax Increase (%/yr)</label>
@@ -445,7 +445,7 @@
     <div class="field-row">
       <div class="field">
         <label>Home Insurance ($/yr)</label>
-        <input type="number" id="homeInsurance" value="1500" min="0" step="100">
+        <input type="text" inputmode="decimal" id="homeInsurance" value="1,500" min="0" step="100">
       </div>
       <div class="field">
         <label>Insurance Increase (%/yr)</label>
@@ -455,7 +455,7 @@
     <div class="field-row">
       <div class="field">
         <label>HOA ($/mo)</label>
-        <input type="number" id="hoaFee" value="0" min="0" step="25">
+        <input type="text" inputmode="decimal" id="hoaFee" value="0" min="0" step="25">
       </div>
       <div class="field">
         <label>HOA Increase (%/yr)</label>
@@ -520,14 +520,14 @@
       </div>
       <div class="field">
         <label>SALT Deduction Cap ($/yr)</label>
-        <input type="number" id="saltCap" value="10000" min="0" step="1000">
+        <input type="text" inputmode="decimal" id="saltCap" value="10,000" min="0" step="1000">
         <div class="hint">Max deduction for state/local + property taxes (currently $10k)</div>
       </div>
     </div>
     <div class="field-row">
       <div class="field">
         <label>Other Itemized Ded. ($/yr)</label>
-        <input type="number" id="otherDeductions" value="0" min="0" step="1000" oninput="updateStdDedHint()">
+        <input type="text" inputmode="decimal" id="otherDeductions" value="0" min="0" step="1000" oninput="updateStdDedHint()">
         <div class="hint">Charitable, medical, etc. (non-SALT)</div>
       </div>
     </div>
@@ -1138,6 +1138,32 @@ async function submitFeedback(e) {
     if (typeof calculateAll === 'function') calculateAll();
   });
   updateUI();
+})();
+</script>
+
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
 })();
 </script>
 
