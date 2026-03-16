@@ -108,7 +108,7 @@
   .field { margin-bottom: 10px; }
   .field:last-child { margin-bottom: 0; }
   .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
-  .field input[type="number"], .field select {
+  .field input[type="number"], .field input[type="text"][inputmode="decimal"], .field select {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
     border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
     font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
@@ -371,13 +371,13 @@
       <div class="section-label">Property</div>
       <div class="field">
         <label for="homeValue">Current Home Value ($)</label>
-        <input type="number" id="homeValue" value="450000" step="1000">
+        <input type="text" inputmode="decimal" id="homeValue" value="450,000" step="1000">
         <div class="hint">Check Zillow, Redfin, or your county assessor for recent comps.</div>
       </div>
       <div class="field-row">
         <div class="field">
           <label for="purchasePrice">Purchase Price ($)</label>
-          <input type="number" id="purchasePrice" value="290000" step="1000">
+          <input type="text" inputmode="decimal" id="purchasePrice" value="290,000" step="1000">
         </div>
         <div class="field">
           <label for="yearPurchased">Year Purchased</label>
@@ -395,12 +395,12 @@
       <div class="section-label">Mortgage</div>
       <div class="field">
         <label for="mortgageBalance">Remaining Balance ($)</label>
-        <input type="number" id="mortgageBalance" value="240000" step="1000">
+        <input type="text" inputmode="decimal" id="mortgageBalance" value="240,000" step="1000">
       </div>
       <div class="field-row">
         <div class="field">
           <label for="monthlyPnI">Monthly P&amp;I ($)</label>
-          <input type="number" id="monthlyPnI" value="1580" step="10">
+          <input type="text" inputmode="decimal" id="monthlyPnI" value="1,580" step="10">
         </div>
         <div class="field">
           <label for="mortgageRate">Rate (%)</label>
@@ -412,7 +412,7 @@
         <div class="field-row">
           <div class="field">
             <label for="pniLoanAmt">Loan Amount ($)</label>
-            <input type="number" id="pniLoanAmt" placeholder="e.g. 360000" step="1000" min="0">
+            <input type="text" inputmode="decimal" id="pniLoanAmt" placeholder="e.g. 360,000" step="1000" min="0">
           </div>
           <div class="field">
             <label for="pniTermYrs">Term (years)</label>
@@ -423,17 +423,17 @@
       <div class="field-row">
         <div class="field">
           <label for="annualTaxes">Annual Taxes ($)</label>
-          <input type="number" id="annualTaxes" value="5400" step="100">
+          <input type="text" inputmode="decimal" id="annualTaxes" value="5,400" step="100">
         </div>
         <div class="field">
           <label for="annualInsurance">Annual Insurance ($)</label>
-          <input type="number" id="annualInsurance" value="1500" step="100">
+          <input type="text" inputmode="decimal" id="annualInsurance" value="1,500" step="100">
         </div>
       </div>
       <div class="field-row">
         <div class="field">
           <label for="annualHoa">Monthly HOA ($)</label>
-          <input type="number" id="annualHoa" value="0" step="25" min="0">
+          <input type="text" inputmode="decimal" id="annualHoa" value="0" step="25" min="0">
           <div class="hint">Fully deductible as a rental expense.</div>
         </div>
         <div class="field">
@@ -469,7 +469,7 @@
       </div>
       <div class="field">
         <label for="householdIncome">Household Income ($)</label>
-        <input type="number" id="householdIncome" value="130000" step="1000">
+        <input type="text" inputmode="decimal" id="householdIncome" value="130,000" step="1000">
         <div class="hint">Used to determine capital gains rate and passive loss eligibility.</div>
       </div>
     </div>
@@ -478,7 +478,7 @@
       <div class="section-label">Rental Plan</div>
       <div class="field">
         <label for="monthlyRent">Expected Monthly Rent ($)</label>
-        <input type="number" id="monthlyRent" value="2400" step="50">
+        <input type="text" inputmode="decimal" id="monthlyRent" value="2,400" step="50">
         <div class="hint">A rough rule of thumb: 0.6–0.8% of home value per month.</div>
       </div>
       <div class="field-row">
@@ -1636,7 +1636,7 @@ function loadSettingsFromHash() {
 }
 
 // ── Events ────────────────────────────────────────────────────────────────────
-document.querySelectorAll('input[type="number"], select').forEach(function(el) {
+document.querySelectorAll('input[type="number"], input[type="text"][inputmode="decimal"], select').forEach(function(el) {
   el.addEventListener('input', update);
 });
 document.querySelectorAll('input[type="radio"]').forEach(function(el) {
@@ -1673,6 +1673,31 @@ document.getElementById('usePropertyMgmt').addEventListener('change', function()
 // ── Init ──────────────────────────────────────────────────────────────────────
 loadSettingsFromHash();
 update();
+</script>
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
 </script>
 </body>
 </html>

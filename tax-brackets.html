@@ -104,7 +104,7 @@
   .field { margin-bottom: 12px; }
   .field:last-child { margin-bottom: 0; }
   .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
-  .field input[type="number"], .field select {
+  .field input[type="number"], .field input[type="text"], .field select {
     width: 100%; background: var(--surface2); border: 1px solid var(--border);
     border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
     font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
@@ -116,7 +116,7 @@
 
   .input-prefix-wrap { position: relative; }
   .input-prefix-wrap .prefix { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 13px; pointer-events: none; }
-  .input-prefix-wrap input[type="number"] { padding-left: 22px; }
+  .input-prefix-wrap input[type="number"], .input-prefix-wrap input[type="text"] { padding-left: 22px; }
 
   .checkbox-row { display: flex; align-items: center; gap: 8px; }
   .checkbox-row input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
@@ -379,7 +379,7 @@
         <label for="grossIncome">Gross Income</label>
         <div class="input-prefix-wrap">
           <span class="prefix">$</span>
-          <input type="number" id="grossIncome" value="75000" min="0" max="100000000" step="1" oninput="calculate()">
+          <input type="text" inputmode="decimal" id="grossIncome" value="75,000" min="0" max="100000000" step="1" oninput="calculate()">
         </div>
       </div>
 
@@ -387,7 +387,7 @@
         <label for="preTaxDed">Pre-Tax Deductions (401k, HSA, etc.)</label>
         <div class="input-prefix-wrap">
           <span class="prefix">$</span>
-          <input type="number" id="preTaxDed" value="0" min="0" max="100000000" step="1" oninput="calculate()">
+          <input type="text" inputmode="decimal" id="preTaxDed" value="0" min="0" max="100000000" step="1" oninput="calculate()">
         </div>
         <div class="hint">Reduces your taxable income before deductions are applied.</div>
       </div>
@@ -408,7 +408,7 @@
         <label for="itemizedDed">Itemized Deduction Amount</label>
         <div class="input-prefix-wrap">
           <span class="prefix">$</span>
-          <input type="number" id="itemizedDed" value="0" min="0" max="100000000" step="1" oninput="calculate()">
+          <input type="text" inputmode="decimal" id="itemizedDed" value="0" min="0" max="100000000" step="1" oninput="calculate()">
         </div>
       </div>
     </div>
@@ -419,7 +419,7 @@
         <label for="ltcg">Long-Term Gains / Qualified Dividends</label>
         <div class="input-prefix-wrap">
           <span class="prefix">$</span>
-          <input type="number" id="ltcg" value="0" min="0" max="100000000" step="1" oninput="calculate()">
+          <input type="text" inputmode="decimal" id="ltcg" value="0" min="0" max="100000000" step="1" oninput="calculate()">
         </div>
         <div class="hint">Taxed at 0%, 15%, or 20% depending on total income. Stacked on top of ordinary income to find your rate.</div>
       </div>
@@ -1331,6 +1331,31 @@ document.getElementById('themeToggle').addEventListener('click', function() {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 calculate();
+</script>
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
 </script>
 </body>
 </html>

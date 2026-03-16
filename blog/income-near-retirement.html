@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>Your Income Matters Less Near Retirement &mdash; Abel's Calculators</title>
+<meta name="description" content="Within 5-10 years of retirement, market returns dwarf your contributions. Here's the math behind Coast FIRE and why your savings rate matters less.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/income-near-retirement.html">
+<meta property="og:title" content="Your Income Matters Less Than You Think Near Retirement">
+<meta property="og:description" content="Within 5-10 years of retirement, stock market returns dwarf your salary contributions. Here's the math behind Coast FIRE.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/income-near-retirement.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Income Matters Less Than You Think Near Retirement">
+<meta name="twitter:description" content="Within 5-10 years of retirement, stock market returns dwarf your salary contributions. Here's the math behind Coast FIRE.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your Income Matters Less Than You Think Near Retirement",
+  "description": "Within 5-10 years of retirement, stock market returns dwarf your salary contributions. Here's the math behind Coast FIRE — and why your savings rate matters less than you think once your portfolio is large enough.",
+  "author": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Abel's Financial Calculators",
+    "url": "https://abelscalculators.com"
+  },
+  "datePublished": "2026-03-16",
+  "dateModified": "2026-03-16",
+  "mainEntityOfPage": "https://abelscalculators.com/blog/income-near-retirement.html",
+  "keywords": ["Retirement", "Investing", "FIRE"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Coast FIRE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Coast FIRE means you've saved enough that your portfolio will grow to your retirement target through market returns alone, even if you never contribute another dollar. You still work to cover current living expenses, but you no longer need to save. This lets you take a lower-paying job, work part-time, or reduce career stress without jeopardizing your retirement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "At what portfolio size do market returns exceed my annual savings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most people saving $15,000–$25,000 per year, the crossover point happens when the portfolio reaches roughly $200,000–$350,000. At 7% average annual returns, a $300,000 portfolio generates $21,000 in growth — already exceeding a $20,000 annual contribution. After this point, the market moves the needle more than your paycheck does."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does my income still matter in my 50s if I have a large portfolio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your income matters far less than it did in your 20s and 30s. A $1 million portfolio at 7% generates $70,000 in annual growth — more than most people save in 2–3 years. At this stage, your retirement date is being set primarily by the market, not your paycheck. The insight isn't to stop saving entirely, but to recognize that maximizing every dollar of income matters less when compound growth is doing most of the work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the risks of relying on Coast FIRE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The main risk is below-average market returns during your final decade before retirement. Coast FIRE assumes median or better returns. In roughly 1 out of 10 Monte Carlo scenarios, a person who stopped saving retires 5–8 years later than someone who kept contributing. If the market delivers bottom-quartile returns in your final decade, your savings rate suddenly matters a lot more."
+      }
+    }
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8fa;
+    --surface2: #eef0f4;
+    --border: #e2e5eb;
+    --accent: #006aff;
+    --accent-dim: #4a90d9;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --blue: #2563eb;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; min-height: 100vh; }
+
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; gap: 10px; }
+  .back-link { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 12px; border: none; background: var(--surface2); border-radius: var(--radius); transition: color 0.15s, border-color 0.15s; }
+  .back-link:hover { color: var(--text); background: var(--surface); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .page-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 8px; }
+  .page-title { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+  .page-sub { color: var(--text-muted); font-size: 13px; line-height: 1.7; margin-bottom: 12px; max-width: 560px; }
+  .page-date { color: var(--text-muted); font-size: 11px; margin-bottom: 48px; }
+
+  article h2 { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text); margin: 40px 0 16px; }
+  article h3 { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--text); margin: 32px 0 12px; }
+  article p { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin-bottom: 18px; }
+  article strong { color: var(--text); }
+  article a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.15s; }
+  article a:hover { border-color: var(--accent); }
+  article ul, article ol { color: var(--text-muted); font-size: 13px; line-height: 1.85; margin: 0 0 18px 20px; }
+  article li { margin-bottom: 6px; }
+
+  .callout { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin: 28px 0; }
+  .callout p { margin-bottom: 0; }
+  .callout p + p { margin-top: 10px; }
+
+  .scenario-compare { margin: 32px 0; border: none; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden; }
+  .scenario-compare-header { background: var(--surface2); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .scenario-compare-header .sc-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 4px; }
+  .scenario-compare-header .sc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
+  .scenario-compare-header .sc-params { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.6; }
+  .scenario-compare-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .sc-col { padding: 20px 24px; }
+  .sc-col-basic { background: var(--surface); border-right: 1px solid var(--border); }
+  .sc-col-full { background: var(--bg); }
+  .sc-col-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .sc-col-basic .sc-col-label { color: var(--text-muted); }
+  .sc-col-full .sc-col-label { color: var(--accent); }
+  .sc-col-label .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .sc-col-basic .dot { background: var(--text-muted); }
+  .sc-col-full .dot { background: var(--accent); }
+  .sc-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .sc-row:last-child { border-bottom: none; }
+  .sc-row-label { color: var(--text-muted); }
+  .sc-row-value { font-family: 'DM Serif Display', serif; font-size: 15px; }
+  .sc-col-basic .sc-row-value { color: var(--text); }
+  .sc-col-full .sc-row-value { color: var(--text); }
+  .sc-verdict { padding: 14px 24px; border-top: 1px solid var(--border); font-size: 12px; line-height: 1.7; }
+  .sc-col-basic .sc-verdict { color: var(--text-muted); background: var(--surface2); }
+  .sc-col-full .sc-verdict { color: var(--accent); background: var(--surface); }
+  .sc-verdict strong { font-size: 13px; }
+  .sc-highlight { color: var(--accent); }
+  .sc-negative { color: #f06060; }
+  .sc-missed { font-size: 11px; color: var(--text-muted); font-style: italic; padding: 10px 24px; border-top: 1px solid var(--border); background: var(--surface2); line-height: 1.6; }
+  @media (max-width: 640px) {
+    .scenario-compare-body { grid-template-columns: 1fr; }
+    .sc-col-basic { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  .cta { margin-top: 48px; padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .cta p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+  .cta a.cta-btn { display: inline-block; background: var(--accent); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; padding: 11px 28px; border-radius: var(--radius); text-decoration: none; border: none; transition: opacity 0.15s; }
+  .cta a.cta-btn:hover { opacity: 0.85; }
+  .cta-pair { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  @media (max-width: 640px) {
+    header { padding: 0 20px; }
+    main { padding: 32px 16px 60px; }
+    .page-title { font-size: 28px; }
+  }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 600px) { .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; } }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+        <a href="../rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+        <a href="../fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../roth-conversion.html">Roth Conversion</a>
+        <a href="../debt-payoff.html">Debt Payoff</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../life-expectancy.html">Life Expectancy</a>
+        <a href="../wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<main>
+  <div class="page-label">Blog</div>
+  <h2 class="page-title">Your Income Matters Less Than You Think Near Retirement</h2>
+  <p class="page-sub">Once your portfolio crosses a certain size, market returns do more heavy lifting than your paycheck. That&rsquo;s the math behind Coast FIRE.</p>
+  <p class="page-date">March 16, 2026</p>
+
+  <article>
+    <p>People in their 50s stress endlessly about maximizing income. Chasing the next raise, working the extra hours, taking the promotion they don&rsquo;t really want &mdash; all in the name of &ldquo;catching up&rdquo; for retirement. But if you&rsquo;ve been saving consistently since your 20s or 30s, your portfolio is already doing most of the work. You just haven&rsquo;t noticed yet.</p>
+
+    <p>A $900K portfolio at 7% average returns generates roughly $63,000 in growth per year. Your $25K in annual savings? It&rsquo;s a rounding error on top of what the market is already doing for you. And the bigger your portfolio gets, the more irrelevant your paycheck becomes in the retirement math.</p>
+
+    <p>Here&rsquo;s why that matters &mdash; and what you should actually do about it.</p>
+
+    <h2>The Crossover Point</h2>
+
+    <p>There&rsquo;s a moment in every saver&rsquo;s career where annual portfolio returns exceed annual contributions. It&rsquo;s the point where compound growth takes over as the primary engine of wealth building, and your savings become a secondary contributor.</p>
+
+    <p>For most people saving $15,000&ndash;$25,000 per year, this crossover happens when the portfolio reaches roughly <strong>$200,000&ndash;$350,000</strong>. At 7% average returns, a $300K portfolio generates $21,000 in growth &mdash; already exceeding a $20K annual contribution. After that, the market moves the needle more than your paycheck does.</p>
+
+    <p>By the time you&rsquo;re 50 with $600K saved, the gap between &ldquo;keep saving aggressively&rdquo; and &ldquo;stop saving entirely&rdquo; is smaller than most people assume.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">The Crossover in Action</div>
+        <div class="sc-title">Aggressive saver vs. Coast FIRE from age 50</div>
+        <div class="sc-params">Both start with $600K at age 50 &bull; 7% average annual returns &bull; 10-year horizon to age 60</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> Person A &mdash; Keeps saving</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$600K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual savings</span> <span class="sc-row-value">$20K/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual return</span> <span class="sc-row-value">7%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at age 60</span> <span class="sc-row-value sc-highlight">~$1.46M</span></div>
+          <div class="sc-verdict"><strong>Total contributions:</strong> $200K over 10 years. Portfolio growth did the rest.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Person B &mdash; Coast FIRE ($0/yr)</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$600K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual savings</span> <span class="sc-row-value">$0/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual return</span> <span class="sc-row-value">7%</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at age 60</span> <span class="sc-row-value sc-highlight">~$1.18M</span></div>
+          <div class="sc-verdict"><strong>The gap is ~$280K</strong> &mdash; meaningful, but smaller than the $580K the original $600K generated on its own.</div>
+        </div>
+      </div>
+      <div class="sc-missed">Person A&rsquo;s $200K in contributions only created a $280K advantage (with compounding). The original $600K generated $580K in growth regardless. The portfolio did the heavy lifting in both scenarios.</div>
+    </div>
+
+    <h2>What Is Coast FIRE?</h2>
+
+    <p>Coast FIRE is a simple concept: you&rsquo;ve saved enough that, even if you never contribute another dollar, your portfolio will grow to your retirement target through market returns alone. You still work &mdash; but only to cover current living expenses, not to save for the future.</p>
+
+    <p>This is different from full FIRE (Financial Independence, Retire Early), where you stop working entirely. With Coast FIRE, you&rsquo;re still earning income. You&rsquo;re just not funneling it into retirement accounts anymore. That opens up options that most people don&rsquo;t realize they have:</p>
+
+    <ul>
+      <li>Take a lower-paying job you actually enjoy</li>
+      <li>Work part-time or four days a week</li>
+      <li>Say no to the promotion that doubles your hours</li>
+      <li>Start a small business without worrying about retirement contributions</li>
+      <li>Spend more on experiences <em>now</em>, while you&rsquo;re healthy enough to enjoy them</li>
+    </ul>
+
+    <p>The math is straightforward. If you need $1.4M by age 60 and you currently have $600K at age 50, a 7% annual return gets you to roughly $1.18M without saving another cent. You&rsquo;re not quite there &mdash; but you&rsquo;re closer than you think, and the marginal dollar you save at this point has far less impact than the marginal dollar you saved at 30.</p>
+
+    <h2>The Math: Why Returns Dominate</h2>
+
+    <p>Let&rsquo;s walk through a concrete example to see exactly how much work the portfolio does on its own.</p>
+
+    <p>You&rsquo;re 45 years old with $500,000 saved. You plan to retire at 60 &mdash; that&rsquo;s a 15-year runway.</p>
+
+    <ul>
+      <li><strong>Scenario 1: No additional savings.</strong> $500K at 7% for 15 years grows to roughly <strong>$1.38M</strong>.</li>
+      <li><strong>Scenario 2: Save $20K/year on top of that.</strong> $500K at 7% plus $20K/yr for 15 years grows to roughly <strong>$1.88M</strong>.</li>
+    </ul>
+
+    <p>The extra $300K in contributions (15 &times; $20K) added about $500K total once you account for the compounding on those contributions. That&rsquo;s real money. But look at the split: the original $500K generated <strong>$880K</strong> in growth all by itself. The portfolio did 64% of the total work &mdash; even when you were still saving aggressively the entire time.</p>
+
+    <p>And that 64% figure only grows as your portfolio gets larger. At $1M, the market&rsquo;s contribution dwarfs even a $30K annual savings habit. At $1.5M, your contributions barely register.</p>
+
+    <h2>The 5&ndash;10 Year Window</h2>
+
+    <p>Within the last 5&ndash;10 years before retirement, this effect becomes even more extreme &mdash; and it cuts both ways.</p>
+
+    <p>A $1M portfolio that returns 12% in one year gains <strong>$120,000</strong>. That&rsquo;s more than most people save in 3&ndash;4 years of aggressive contributions. A single good year does what half a decade of diligent saving does.</p>
+
+    <p>But a bad year &mdash; say &minus;15% &mdash; erases <strong>$150,000</strong>. That&rsquo;s more than 5 years of savings, wiped out in 12 months. No amount of belt-tightening or overtime work can offset a bad year on a large portfolio.</p>
+
+    <p>This is the uncomfortable truth that nobody talks about at the office: <strong>by your late 50s, your retirement date is being set by the market, not by your paycheck.</strong> A 20% year pulls retirement closer by a year or two. A &minus;20% year pushes it back by the same. Your $25K annual contribution barely shifts the needle in either direction.</p>
+
+    <div class="scenario-compare">
+      <div class="scenario-compare-header">
+        <div class="sc-label">The Last 10 Years: Income vs Returns</div>
+        <div class="sc-title">When the market matters more than the paycheck</div>
+        <div class="sc-params">Both start with $800K at age 55 &bull; 10-year horizon to age 65</div>
+      </div>
+      <div class="scenario-compare-body">
+        <div class="sc-col sc-col-basic">
+          <div class="sc-col-label"><span class="dot"></span> Aggressive Saver &mdash; Bad decade</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$800K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual savings</span> <span class="sc-row-value">$30K/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Market returns (avg)</span> <span class="sc-row-value sc-negative">5%/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at age 65</span> <span class="sc-row-value">~$1.68M</span></div>
+          <div class="sc-verdict"><strong>Saved hard, but the market didn&rsquo;t cooperate.</strong> $300K in contributions over the decade.</div>
+        </div>
+        <div class="sc-col sc-col-full">
+          <div class="sc-col-label"><span class="dot"></span> Coast FIRE &mdash; Good decade</div>
+          <div class="sc-row"><span class="sc-row-label">Starting portfolio</span> <span class="sc-row-value">$800K</span></div>
+          <div class="sc-row"><span class="sc-row-label">Annual savings</span> <span class="sc-row-value">$0/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Market returns (avg)</span> <span class="sc-row-value sc-highlight">9%/yr</span></div>
+          <div class="sc-row"><span class="sc-row-label">Portfolio at age 65</span> <span class="sc-row-value sc-highlight">~$1.89M</span></div>
+          <div class="sc-verdict"><strong>Saved nothing, but the market delivered.</strong> Ended up $210K ahead.</div>
+        </div>
+      </div>
+      <div class="sc-missed">A good market decade beats a decade of aggressive saving on a bad market. The person who saved $0 but got 9% returns ended up with more than the person who saved $30K/yr but only got 5%. At this portfolio size, the market matters more than the paycheck.</div>
+    </div>
+
+    <h2>The Important Caveat</h2>
+
+    <p>Everything above assumes median or better market returns. And that&rsquo;s a big assumption.</p>
+
+    <p>If the market delivers bottom-quartile returns during your final decade &mdash; think the 2000&ndash;2009 &ldquo;lost decade&rdquo; where the S&amp;P 500 returned roughly 0% total &mdash; your savings rate suddenly matters a <em>lot</em> more. In that scenario, the person who kept saving $20K/yr has $200K more than the person who coasted, and that difference could mean retiring at 62 versus 67.</p>
+
+    <p>This is the fundamental argument against relying entirely on Coast FIRE. The risk is real: in roughly <strong>1 out of 10 Monte Carlo scenarios</strong>, the person who stopped saving retires 5&ndash;8 years later than the one who kept going. That&rsquo;s not a tail risk you can ignore &mdash; it&rsquo;s a plausible outcome. For the full analysis, see our companion article on <a href="case-against-coast-fire.html">the case against Coast FIRE</a>.</p>
+
+    <p>The question isn&rsquo;t whether Coast FIRE works in the <em>average</em> scenario. It does. The question is whether you can accept the downside scenarios where it doesn&rsquo;t &mdash; and whether you have the flexibility to adjust if the market doesn&rsquo;t cooperate.</p>
+
+    <div class="callout">
+      <p><strong>The real insight isn&rsquo;t &ldquo;stop saving.&rdquo;</strong> It&rsquo;s &ldquo;stop stressing about maximizing every dollar of income in your 50s.&rdquo; If your portfolio is already large, the marginal value of a higher salary is smaller than you think. Maybe that means taking a less stressful job. Maybe it means working four days a week. Maybe it means saying no to the promotion that doubles your hours for a 15% raise. The math says you can afford to prioritize your quality of life more than you realize &mdash; as long as you understand the trade-offs.</p>
+    </div>
+
+    <div class="cta">
+      <p>Want to see where you stand? Our FIRE Calculator models your specific savings, income, and spending to show when you hit Coast FIRE &mdash; and our Monte Carlo Simulator stress-tests your plan across thousands of market scenarios so you can see the full range of outcomes, not just the average.</p>
+      <div class="cta-pair">
+        <a class="cta-btn" href="../fire-calculator.html">Try the FIRE Calculator &rarr;</a>
+        <a class="cta-btn" href="../monte-carlo.html">Run a Monte Carlo Simulation &rarr;</a>
+      </div>
+    </div>
+
+    <h2>The Bottom Line</h2>
+
+    <p>Your income matters enormously in your 20s and 30s, when your portfolio is small and every dollar you save has decades to compound. But by your late 40s and 50s, the math shifts. Market returns are calling the shots. Your $20K annual contribution is a drop in the bucket compared to the $70K&ndash;$100K your portfolio generates on its own in a decent year.</p>
+
+    <p>Understanding this transition is key to making smart career and lifestyle decisions as you approach retirement. It doesn&rsquo;t mean you should stop saving &mdash; but it does mean the cost of taking your foot off the gas is lower than you think. And the cost of grinding through a miserable job for a few extra thousand dollars a year? That might be higher than you realize.</p>
+
+    <p>Run the numbers for your own situation. You might be closer to Coast FIRE than you think.</p>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateUI();
+  });
+  updateUI();
+})();
+</script>
+</body>
+</html>

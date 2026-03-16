@@ -286,7 +286,7 @@
     </div>
     <div class="field">
       <label>Traditional IRA / 401(k) Balance ($)</label>
-      <input type="number" id="tradBalance" value="500000" min="0" step="1000" oninput="calc()">
+      <input type="text" inputmode="decimal" id="tradBalance" value="500,000" min="0" step="1000" oninput="calc()">
     </div>
     <div class="field">
       <label>Filing Status</label>
@@ -308,7 +308,7 @@
     </div>
     <div class="field" id="fixedAmountField">
       <label>Annual Conversion Amount ($)</label>
-      <input type="number" id="annualConversion" value="40000" min="0" step="1000" oninput="calc()">
+      <input type="text" inputmode="decimal" id="annualConversion" value="40,000" min="0" step="1000" oninput="calc()">
     </div>
     <div class="field" id="bracketField" style="display:none">
       <label>Fill Up To Bracket</label>
@@ -322,7 +322,7 @@
     </div>
     <div class="field">
       <label>Other Taxable Income During Conversion Years ($)</label>
-      <input type="number" id="otherIncome" value="20000" min="0" step="1000" oninput="calc()">
+      <input type="text" inputmode="decimal" id="otherIncome" value="20,000" min="0" step="1000" oninput="calc()">
     </div>
     <div class="hint">Part-time work, pension, rental income, etc. during the years you're converting.</div>
   </div>
@@ -333,15 +333,9 @@
       <label>Expected Annual Return (%)</label>
       <input type="number" id="investReturn" value="7" min="0" max="20" step="0.25" oninput="calc()">
     </div>
-    <div class="field-row">
-      <div class="field">
-        <label>Current Marginal Tax Rate (%)</label>
-        <input type="number" id="currentTaxRate" value="22" min="0" max="50" step="1" oninput="calc()">
-      </div>
-      <div class="field">
-        <label>Expected Retirement Tax Rate (%)</label>
-        <input type="number" id="retirementTaxRate" value="25" min="0" max="50" step="1" oninput="calc()">
-      </div>
+    <div class="field">
+      <label>Expected Retirement Tax Rate (%)</label>
+      <input type="number" id="retirementTaxRate" value="25" min="0" max="50" step="1" oninput="calc()">
     </div>
     <div class="hint">The retirement rate is what you'd pay if you don't convert and instead withdraw from the traditional account later (including RMD-driven income).</div>
     <div class="field" style="margin-top:10px">
@@ -606,7 +600,7 @@ function calc() {
   var targetBracketPct = parseInt(document.getElementById('targetBracket').value) / 100;
   var otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
   var investReturn = (parseFloat(document.getElementById('investReturn').value) || 7) / 100;
-  var currentTaxRate = (parseFloat(document.getElementById('currentTaxRate').value) || 22) / 100;
+  var currentTaxRate = getTopBracketRate(Math.max(0, otherIncome - STD_DEDUCTION[filingStatus]), filingStatus);
   var retireTaxRate = (parseFloat(document.getElementById('retirementTaxRate').value) || 25) / 100;
 
   var stdDed = STD_DEDUCTION[filingStatus];
@@ -1007,5 +1001,30 @@ toggleMode();
 calc();
 </script>
 
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
+</script>
 </body>
 </html>

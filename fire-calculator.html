@@ -312,17 +312,17 @@
     </div>
     <div class="field">
       <label>Annual Expenses ($)</label>
-      <input type="number" id="annualExpenses" value="50000" min="0" step="1000" >
+      <input type="text" inputmode="decimal" id="annualExpenses" value="50,000" min="0" step="1000" >
     </div>
     <div class="hint">Include everything: housing, food, insurance, and estimated taxes you'd owe in retirement.</div>
     <div class="field">
       <label>Annual Savings ($)</label>
-      <input type="number" id="annualSavings" value="25000" min="0" step="1000" >
+      <input type="text" inputmode="decimal" id="annualSavings" value="25,000" min="0" step="1000" >
     </div>
     <div class="hint">How much you invest per year after taxes, expenses, and everything else.</div>
     <div class="field">
       <label>Current Savings / Investments ($)</label>
-      <input type="number" id="currentSavings" value="50000" min="0" step="1000" >
+      <input type="text" inputmode="decimal" id="currentSavings" value="50,000" min="0" step="1000" >
     </div>
   </div>
 
@@ -410,7 +410,7 @@
     <div class="ss-fields" id="ssFields">
       <div class="field">
         <label>Expected Monthly SS Benefit ($)</label>
-        <input type="number" id="ssBenefit" value="2000" min="0" step="100" >
+        <input type="text" inputmode="decimal" id="ssBenefit" value="2,000" min="0" step="100" >
       </div>
       <div class="field">
         <label>SS Start Age</label>
@@ -1292,18 +1292,24 @@ function renderChart(result) {
     }
   ];
 
+  // Store current result for the plugin to reference
+  window._fireChartResult = result;
+  window._fireChartLabels = labels;
+
   // FIRE age range plugin
   var fireAgePlugin = {
     id: 'fireAgeLine',
     afterDraw: function(chart) {
+      var res = window._fireChartResult;
+      var lbls = window._fireChartLabels;
       var xScale = chart.scales.x;
       var yScale = chart.scales.y;
       var drawCtx = chart.ctx;
 
       // Median FIRE age vertical dashed line
-      if (result.medianFireAge !== null) {
-        var fireIndex = result.medianFireAge - result.currentAge;
-        if (fireIndex >= 0 && fireIndex <= labels.length) {
+      if (res.medianFireAge !== null) {
+        var fireIndex = res.medianFireAge - res.currentAge;
+        if (fireIndex >= 0 && fireIndex <= lbls.length) {
           var x = xScale.getPixelForValue(fireIndex);
           drawCtx.save();
           drawCtx.beginPath();
@@ -1319,7 +1325,7 @@ function renderChart(result) {
           drawCtx.fillStyle = '#16a34a';
           drawCtx.font = '11px Inter, sans-serif';
           drawCtx.textAlign = 'center';
-          drawCtx.fillText('FIRE Age ' + result.medianFireAge, x, yScale.top - 6);
+          drawCtx.fillText('FIRE Age ' + res.medianFireAge, x, yScale.top - 6);
           drawCtx.restore();
         }
       }
@@ -1364,7 +1370,7 @@ function renderChart(result) {
             return label === 'Median' || label === 'FIRE Target' || label.indexOf('Percentile') !== -1;
           },
           callbacks: {
-            title: function(items) { return 'Age ' + labels[items[0].dataIndex]; },
+            title: function(items) { return 'Age ' + window._fireChartLabels[items[0].dataIndex]; },
             label: function(item) {
               var label = item.dataset.label;
               if (label === '10th Percentile') label = '10th pctl';
@@ -1590,6 +1596,37 @@ loadSettingsFromHash();
 
 // Initialize
 calc();
+</script>
+
+<script>
+(function(){
+  // Patch parseFloat/parseInt to ignore commas
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+
+  // Comma-format dollar inputs
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    // Format initial value
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
 </script>
 
 </body>

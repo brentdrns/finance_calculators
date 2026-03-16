@@ -108,9 +108,9 @@ header h1 { margin: 0; line-height: 0; }
 
 .field { margin-bottom: 10px; }
 .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; font-weight: 500; }
-.field input[type="number"], .field input[type="range"] { width: 100%; }
-.field input[type="number"] { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
-.field input[type="number"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+.field input[type="number"], .field input[type="text"][inputmode="decimal"], .field input[type="range"] { width: 100%; }
+.field input[type="number"], .field input[type="text"][inputmode="decimal"] { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+.field input[type="number"]:focus, .field input[type="text"][inputmode="decimal"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
 .field input[type="range"] { accent-color: var(--accent); cursor: pointer; margin-top: 4px; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
@@ -290,7 +290,7 @@ header h1 { margin: 0; line-height: 0; }
 
     <div class="field">
       <label for="fraBenefit">Estimated benefit at your FRA <span style="font-size:10px;color:var(--accent-dim)">your PIA</span></label>
-      <input type="number" id="fraBenefit" min="100" max="10000" value="2000" step="50">
+      <input type="text" inputmode="decimal" id="fraBenefit" min="100" max="10000" value="2,000" step="50">
       <div class="hint">Find your PIA on your Social Security statement at <a href="https://ssa.gov/myaccount" target="_blank" rel="noopener" style="color:var(--accent-dim)">ssa.gov</a></div>
     </div>
 
@@ -939,6 +939,31 @@ document.querySelectorAll('#ageCheckboxes input[type="checkbox"]').forEach(funct
 // Initial render
 updateFRAHint();
 recalculate();
+</script>
+<script>
+(function(){
+  var _pf = window.parseFloat, _pi = window.parseInt;
+  window.parseFloat = function(v) { return _pf(typeof v === 'string' ? v.replace(/,/g, '') : v); };
+  window.parseInt = function(v, r) { return _pi(typeof v === 'string' ? v.replace(/,/g, '') : v, r); };
+  function commaFmt(input) {
+    var raw = input.value.replace(/[^0-9.\-]/g, '');
+    if (raw === '' || raw === '-' || raw === '.') return;
+    var parts = raw.split('.');
+    var intPart = parts[0] === '' || parts[0] === '-' ? parts[0] : Number(parts[0]).toLocaleString('en-US');
+    var formatted = parts.length > 1 ? intPart + '.' + parts[1] : intPart;
+    var diff = formatted.length - input.value.length;
+    var cursor = (input.selectionStart || 0) + diff;
+    input.value = formatted;
+    input.setSelectionRange(cursor, cursor);
+  }
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(function(input) {
+    input.addEventListener('input', function() { commaFmt(this); });
+    if (input.value) {
+      var num = _pf(input.value.replace(/,/g, ''));
+      if (!isNaN(num)) input.value = num.toLocaleString('en-US');
+    }
+  });
+})();
 </script>
 </body>
 </html>
