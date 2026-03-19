@@ -82,6 +82,8 @@
   .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
   .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
   .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
 
   .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
   .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
@@ -228,7 +230,6 @@
         <a href="roth-conversion.html" class="active">Roth Conversion Calculator</a>
         <a href="debt-payoff.html">Debt Payoff</a>
         <a href="social-security.html">Social Security Break-Even</a>
-        <a href="life-expectancy.html">Life Expectancy</a>
         <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
       </div>
     </div>
@@ -240,8 +241,11 @@
     </div>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
-      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <button class="nav-dropdown-btn">More <span class="nav-caret">&#9660;</span></button>
       <div class="nav-dropdown-menu">
+        <a href="indian-holidays.html">Indian Holiday Calendar</a>
+        <div class="nav-dropdown-divider"></div>
+        <span class="nav-dropdown-label">Running</span>
         <a href="race-predictor.html">Race Time Predictor</a>
         <a href="training-paces.html">Training Pace Calculator</a>
       </div>

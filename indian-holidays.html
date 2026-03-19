@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Indian Holiday Calendar &mdash; Personalized by Religion, Region &amp; Community</title>
+<meta name="description" content="Interactive Indian holiday calendar personalized by religion, region, and community. See which holidays you celebrate, color-coded by importance, with Google Calendar export.">
+<meta name="keywords" content="Indian holidays, Hindu holidays, Muslim holidays India, Sikh holidays, Christian holidays India, regional holidays India, Indian festival calendar">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/indian-holidays.html">
+<meta property="og:title" content="Indian Holiday Calendar — Personalized by Religion, Region & Community">
+<meta property="og:description" content="Interactive Indian holiday calendar. Select your religion, region, and community to see the holidays you celebrate, with descriptions and Google Calendar export.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/indian-holidays.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Indian Holiday Calendar">
+<meta name="twitter:description" content="Interactive Indian holiday calendar personalized by religion, region, and community.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function() {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch(e) {}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --orange: #ea580c; --green: #16a34a; --radius: 12px;
+    --purple: #7c3aed; --pink: #db2777; --teal: #0d9488; --amber: #d97706;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --orange: #f59e0b; --green: #4ade80;
+    --purple: #a78bfa; --pink: #f472b6; --teal: #2dd4bf; --amber: #fbbf24;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
+
+  /* ── Header ── */
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
+  .share-btn { background: var(--surface2); border: none; border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 6px 12px; cursor: pointer; transition: color 0.15s, border-color 0.15s; }
+  .share-btn:hover { color: var(--accent); border-color: var(--accent); }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* ── Layout ── */
+  .layout { display: grid; grid-template-columns: 340px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+
+  /* ── Sidebar ── */
+  .sidebar { border-right: 1px solid var(--border); position: sticky; top: 0; max-height: 100vh; overflow-y: auto; padding: 24px 20px; display: flex; flex-direction: column; gap: 20px; }
+  .sidebar-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+  .sidebar-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 12px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 4px; font-weight: 500; }
+  .field select, .field input[type="number"] {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif;
+    font-size: 13px; padding: 8px 11px; outline: none; transition: border-color 0.15s;
+  }
+  .field select:focus, .field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .calc-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.1s; }
+  .calc-btn:hover { filter: brightness(1.1); }
+  .calc-btn:active { transform: scale(0.98); }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
+
+  .demo-info { background: var(--surface2); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: var(--text-muted); line-height: 1.6; border-left: 3px solid var(--accent-dim); }
+  .demo-info strong { color: var(--text); }
+
+  /* ── Main ── */
+  .main { padding: 28px 32px; display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+  .card { background: var(--surface); border-radius: 14px; padding: 24px 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
+  .card-title { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 18px; }
+
+  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 400px; color: var(--text-muted); font-size: 14px; gap: 12px; }
+  .empty-icon { font-size: 48px; opacity: 0.4; }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Calendar ── */
+  .calendar-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+  .calendar-toolbar h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); }
+  .toolbar-btns { display: flex; gap: 8px; }
+  .toolbar-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 6px 14px; cursor: pointer; transition: all 0.15s; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
+  .toolbar-btn:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  .month-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .month-card { background: var(--surface); border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .month-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); margin-bottom: 10px; text-align: center; }
+  .month-day-headers { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 4px; }
+  .month-day-headers span { font-size: 9px; color: var(--text-muted); text-align: center; font-weight: 600; text-transform: uppercase; }
+  .month-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+  .day-cell { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 6px; position: relative; cursor: default; color: var(--text-muted); }
+  .day-cell.empty { visibility: hidden; }
+  .day-cell.has-holiday { font-weight: 700; cursor: pointer; position: relative; }
+  .day-cell.has-holiday::after { content: ''; position: absolute; bottom: 2px; width: 4px; height: 4px; border-radius: 50%; }
+  .day-cell.importance-national { background: rgba(220,38,38,0.15); color: var(--red); }
+  .day-cell.importance-national::after { background: var(--red); }
+  .day-cell.importance-major { background: rgba(234,88,12,0.15); color: var(--orange); }
+  .day-cell.importance-major::after { background: var(--orange); }
+  .day-cell.importance-regional { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .day-cell.importance-regional::after { background: var(--blue); }
+  .day-cell.importance-minor { background: rgba(107,114,128,0.1); color: var(--text-muted); }
+  .day-cell.importance-minor::after { background: var(--text-muted); }
+  .day-cell.multi-holiday { box-shadow: inset 0 0 0 2px var(--accent-dim); }
+
+  .day-tooltip { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); font-size: 11px; padding: 6px 10px; border-radius: 8px; z-index: 50; pointer-events: none; max-width: 240px; white-space: normal; text-align: center; line-height: 1.4; }
+  .day-cell.has-holiday:hover .day-tooltip { display: block; }
+
+  /* ── Holiday List ── */
+  .holiday-list { display: flex; flex-direction: column; gap: 8px; }
+  .holiday-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 16px; align-items: start; padding: 14px 16px; border-radius: 10px; background: var(--surface); border-left: 4px solid transparent; transition: background 0.15s; }
+  .holiday-item:hover { background: var(--surface2); }
+  .holiday-item.importance-national { border-left-color: var(--red); }
+  .holiday-item.importance-major { border-left-color: var(--orange); }
+  .holiday-item.importance-regional { border-left-color: var(--blue); }
+  .holiday-item.importance-minor { border-left-color: var(--text-muted); }
+  .holiday-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); padding-top: 2px; }
+  .holiday-date .day-num { font-size: 20px; font-weight: 500; color: var(--text); display: block; line-height: 1; }
+  .holiday-info { min-width: 0; }
+  .holiday-name { font-weight: 600; font-size: 13px; color: var(--text); margin-bottom: 3px; }
+  .holiday-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+  .holiday-tag { font-size: 9px; padding: 2px 7px; border-radius: 4px; background: var(--surface2); color: var(--text-muted); font-weight: 500; }
+  .holiday-tag.religion { background: rgba(124,58,237,0.12); color: var(--purple); }
+  .holiday-tag.importance-national { background: rgba(220,38,38,0.12); color: var(--red); }
+  .holiday-tag.importance-major { background: rgba(234,88,12,0.12); color: var(--orange); }
+  .holiday-tag.importance-regional { background: rgba(37,99,235,0.12); color: var(--blue); }
+  .holiday-desc { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+  .holiday-actions { display: flex; gap: 6px; flex-shrink: 0; padding-top: 2px; }
+  .gcal-btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); font-size: 10px; padding: 4px 8px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s; text-decoration: none; white-space: nowrap; }
+  .gcal-btn:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* ── Stats ── */
+  .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .stat-box { background: var(--surface2); border-radius: 10px; padding: 14px 16px; }
+  .stat-box-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .stat-box-value { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--text); }
+
+  /* ── India Map ── */
+  .map-container { position: relative; width: 100%; max-width: 300px; margin: 0 auto; }
+  .map-container svg { width: 100%; height: auto; }
+  .map-container svg path { fill: var(--surface2); stroke: var(--border); stroke-width: 0.5; cursor: pointer; transition: fill 0.2s; }
+  .map-container svg path:hover { fill: var(--accent-dim); opacity: 0.7; }
+  .map-container svg path.selected { fill: var(--accent); opacity: 0.8; }
+  .map-label { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 8px; }
+
+  /* View toggle */
+  .view-toggle { display: flex; background: var(--surface2); border-radius: 8px; padding: 2px; }
+  .view-toggle button { background: none; border: none; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+  .view-toggle button.active { background: var(--accent); color: #fff; }
+
+  /* ── Footer ── */
+  .site-footer { border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 700px; margin: 0 auto 14px; }
+  .site-footer-nav { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .site-footer-nav a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent); }
+
+  /* ── Responsive ── */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    .month-grid { grid-template-columns: repeat(3, 1fr); }
+    header { padding: 0 20px; }
+    .main { padding: 20px; }
+  }
+  @media (max-width: 700px) {
+    .month-grid { grid-template-columns: repeat(2, 1fr); }
+    .holiday-item { grid-template-columns: 70px 1fr; }
+    .holiday-actions { grid-column: 1 / -1; }
+  }
+  @media (max-width: 480px) {
+    .month-grid { grid-template-columns: 1fr; }
+    .main { padding: 12px; gap: 14px; }
+    .card { padding: 16px; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel&rsquo;s Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+        <a href="fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="roth-conversion.html">Roth Conversion</a>
+        <a href="debt-payoff.html">Debt Payoff</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="indian-holidays.html" class="active">Indian Holiday Calendar</a>
+        <div class="nav-dropdown-divider"></div>
+        <span class="nav-dropdown-label">Running</span>
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div style="padding:12px 22px;border-bottom:1px solid var(--border)"><button class="share-btn" id="saveSettingsBtn" onclick="saveSettings()" title="Generate a shareable link with your current settings">&#x2B21; Share Settings</button></div>
+    <div>
+      <div class="sidebar-title">Indian Holiday Calendar</div>
+      <div class="sidebar-subtitle">Select your religion, community, and region to generate a personalized calendar of the holidays you celebrate.</div>
+    </div>
+
+    <div>
+      <div class="section-label">Year</div>
+      <div class="field">
+        <label for="yearSelect">Calendar Year</label>
+        <select id="yearSelect" onchange="generate()">
+          <option value="2025">2025</option>
+          <option value="2026" selected>2026</option>
+          <option value="2027">2027</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Religion</div>
+      <div class="field">
+        <label for="religionSelect">Primary Religion</label>
+        <select id="religionSelect" onchange="updateCommunityOptions(); generate();">
+          <option value="hindu">Hindu (79.8%)</option>
+          <option value="muslim">Muslim (14.2%)</option>
+          <option value="christian">Christian (2.3%)</option>
+          <option value="sikh">Sikh (1.7%)</option>
+          <option value="buddhist">Buddhist (0.7%)</option>
+          <option value="jain">Jain (0.4%)</option>
+          <option value="all">All Religions</option>
+        </select>
+      </div>
+      <div id="demoInfo" class="demo-info" style="margin-top:8px;"></div>
+    </div>
+
+    <div>
+      <div class="section-label">Community / Sect</div>
+      <div class="field">
+        <label for="communitySelect">Sub-community</label>
+        <select id="communitySelect" onchange="generate()">
+          <option value="all">All Communities</option>
+        </select>
+        <div class="hint" id="communityHint">Choosing a community refines which holidays are shown. Percentages are approximate.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Region</div>
+      <div class="field">
+        <label for="regionSelect">State / Region</label>
+        <select id="regionSelect" onchange="updateMapSelection(); generate();">
+          <option value="all">All India</option>
+          <optgroup label="North India">
+            <option value="JK">Jammu &amp; Kashmir</option>
+            <option value="HP">Himachal Pradesh</option>
+            <option value="PB">Punjab</option>
+            <option value="HR">Haryana</option>
+            <option value="UK">Uttarakhand</option>
+            <option value="DL">Delhi</option>
+            <option value="UP">Uttar Pradesh</option>
+          </optgroup>
+          <optgroup label="West India">
+            <option value="RJ">Rajasthan</option>
+            <option value="GJ">Gujarat</option>
+            <option value="MH">Maharashtra</option>
+            <option value="GA">Goa</option>
+          </optgroup>
+          <optgroup label="Central India">
+            <option value="MP">Madhya Pradesh</option>
+            <option value="CG">Chhattisgarh</option>
+          </optgroup>
+          <optgroup label="East India">
+            <option value="BR">Bihar</option>
+            <option value="JH">Jharkhand</option>
+            <option value="WB">West Bengal</option>
+            <option value="OD">Odisha</option>
+          </optgroup>
+          <optgroup label="South India">
+            <option value="TN">Tamil Nadu</option>
+            <option value="KA">Karnataka</option>
+            <option value="KL">Kerala</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="TG">Telangana</option>
+          </optgroup>
+          <optgroup label="Northeast India">
+            <option value="AS">Assam</option>
+            <option value="ML">Meghalaya</option>
+            <option value="MN">Manipur</option>
+            <option value="NL">Nagaland</option>
+            <option value="MZ">Mizoram</option>
+            <option value="TR">Tripura</option>
+            <option value="AR">Arunachal Pradesh</option>
+            <option value="SK">Sikkim</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="map-container" id="mapContainer">
+        <svg viewBox="0 0 612 696" xmlns="http://www.w3.org/2000/svg" id="indiaMap">
+<path id="map-AP" data-state="AP" data-name="Andhra Pradesh" d="m 295,482 0,0 0,0 0,0 z m 1,0 0,2 -1,-1 0,-1 1,-1 z m -1,0 0,-1 0,0 -1,0 0,-1 -1,1 2,1 0,0 0,1 0,0 1,2 -8,4 -5,2 -4,-1 -3,0 -3,1 -3,6 0,1 -3,3 0,0 0,1 -1,1 -3,0 -1,-1 0,-1 0,0 0,-1 -2,-1 -3,1 -2,1 -2,1 -1,2 -1,4 -2,3 -1,5 1,8 2,3 -1,10 2,7 0,4 2,4 -3,-6 -1,0 0,2 -1,-1 0,-1 0,0 -1,2 2,2 2,0 2,1 0,0 0,1 -1,0 -1,-2 -2,0 -2,-1 -2,0 0,0 1,0 0,0 -1,0 0,1 -1,0 0,1 -1,0 0,1 -1,1 -2,1 -1,0 0,0 -1,0 -1,1 1,1 -1,1 0,-1 -1,0 0,-1 0,0 0,-1 -2,1 -1,0 0,-1 -2,0 -1,0 1,0 0,1 1,0 0,0 0,0 0,0 -2,1 0,1 -1,1 -1,-1 -1,0 -10e-4,1 -1,0 -1,2 -2,0 -2,-1 -1,0 0,1 1,0 -1,0 0,-1 -3,1 -1,0 0,1 -1,0 -1,1 1,1 0,0 -1,3 -1,1 0,1 0,0 0,-1 0,0 0,0 0,0 0,0 0,0 0,1 -1,0 0,1 -2,0 -2,-1 -1,-1 -2,0 1,-1 0,-1 0,0 0,-2 1,0 1,-2 1,1 1,0 0,-1 1,0 0,-1 1,0 0,-1 1,0 0,0 1,-1 -1,-1 1,0 0,-1 0,-1 -1,1 -1,-1 -1,0 0,0 -1,0 -1,0 1,0 -1,0 1,-5 -3,0 -1,1 0,-1 -1,0 0,-1 -2,0 0,-1 0,0 1,0 0,-1 -1,-1 1,-1 0,-1 -2,-1 0,1 -1,0 0,1 0,0 0,-1 1,0 0,-1 -1,1 -1,-1 -1,0 0,1 0,1 -1,1 0,0 -1,0 0,1 0,-1 -1,0 0,-1 0,0 -1,0 1,0 0,0 -1,0 -1,1 -1,-1 0,1 -1,0 0,1 -1,0 0,-3 -1,0 0,-1 -1,0 -1,0 0,-1 -1,0 0,-1 0,1 0,0 -1,0 0,-1 0,0 0,1 -1,0 1,1 0,1 -1,0 -1,0 -1,-1 0,1 0,0 -1,-2 1,-2 1,0 0,-1 -2,-2 1,-1 -1,-1 -1,0 0,-1 1,0 0,-1 2,0 0,2 0,1 2,0 1,1 3,-1 1,1 0,2 1,0 0,0 1,-1 0,-1 0,-1 -1,0 0,-1 -1,0 1,-2 0,0 -1,0 0,-1 1,0 0,-1 2,0 0,-3 -1,0 0,-1 -1,0 0,1 1,2 -1,0 -1,-1 0,-1 -2,0 0,-1 -1,0 -2,-1 -1,1 0,2 -1,0 -1,-1 -2,0 0,-1 1,0 -1,-1 0,-1 1,-1 1,0 0,-1 1,-1 -2,0 -1,-1 -1,0 -1,-2 1,-3 0,-1 1,-1 0,-3 -1,0 -1,0 0,-1 0,-1 0,0 2,1 2,0 0,0 1,0 0,1 1,0 2,-3 0,0 1,0 0,-1 -1,-1 1,-1 0,-1 -1,0 0,-1 -1,0 -1,-2 -1,-1 0,0 1,0 0,-3 1,0 1,1 0,-1 -2,-2 0,-2 -1,0 1,-1 2,-1 2,0 5,1 0,0 2,0 1,1 1,0 2,0 2,-1 2,1 1,-1 1,1 1,0 0,0 1,0 0,-1 1,-1 0,-2 1,0 2,-1 3,1 1,-1 2,2 1,0 1,-1 0,-2 1,0 0,1 1,0 0,-2 0,0 2,-1 3,1 1,0 0,-6 1,-1 3,0 1,-1 3,-1 3,-1 1,1 1,0 1,1 1,0 2,-2 0,-1 -1,-1 -1,0 0,-1 1,-1 2,0 1,-1 0,1 1,0 1,1 0,2 1,0 0,1 1,-1 1,1 0,1 2,1 1,-1 -1,-1 0,-1 0,0 0,-1 -2,0 0,1 -3,-1 1,-1 0,-1 1,0 1,1 1,0 1,-1 0,-1 1,-1 2,1 0,1 2,0 2,1 1,-1 0,-2 1,0 0,-1 2,0 1,-1 2,0 0,-2 2,0 1,-2 1,1 1,0 2,-2 0,-2 0,-1 0,0 1,-2 0,-1 4,-2 0,0 -1,-1 0,0 1,-1 3,-1 2,-1 3,0 0,1 1,1 1,0 0,-1 1,0 0,1 1,0 0,-2 1,0 0,0 -1,-1 1,0 0,-1 1,0 0,-1 -1,0 1,-1 0,-1 2,-3 1,1 1,0 0,2 0,0 0,1 1,0 0,0 -1,1 0,1 1,1 1,-1 2,-1 1,-1 0,-1 0,0 1,1 1,0 0,1 1,0 2,-1 1,0 0,-1 0,0 0,-1 2,-2 -1,0 0,0 1,0 -1,0 0,-1 1,0 2,-3 1,1 0,1 0,-1 1,0 0,-1 2,0 0,-1 1,0 0,-1 -1,-1 1,0 -1,-1 0,1 0,-2 1,0 1,0 1,1 0,-1 1,0 0,0 0,-1 0,0 0,1 0,0 0,1 0,0 0,0 1,0 0,-2 1,1 1,-1 0,-1 1,-1 2,3 1,0 0,1 1,1 1,0 -1,-2 1,-1 2,4 1,0 2,0 1,1 1,0 1,-1 4,0 0,-2 1,0 0,0 0,0 1,0 0,0 1,0 1,-1 0,-1 1,-1 -1,-1 1,1 0,-1 2,-1 0,1 1,-1 1,0 0,-1 -1,0 -1,-1 1,0 0,-1 1,0 0,1 1,1 0,0 1,1 -4,4 -1,2 -2,2 -2,3 -5,5 0,1 -8,4 -3,2 -1,2 -2,2 0,1 -1,2 -3,3 -13,6 -5,4 -1,2 -1,2 0,0 0,1 1,1 1,0 0,2 -1,1 z"/>
+<path id="map-AR" data-state="AR" data-name="Arunachal Pradesh" d="m 586,193 1,1 0,1 1,2 1,0 1,-1 1,1 -1,2 -2,0 -2,2 -1,0 1,1 1,2 -1,1 0,1 2,-1 2,-2 2,0 2,-1 -1,2 0,1 1,0 0,2 2,3 -1,1 -2,1 0,1 -1,1 -1,0 0,1 -1,0 -1,1 1,1 -2,2 1,1 1,0 1,1 0,0 1,-2 1,0 1,-1 2,0 2,1 0,1 2,0 1,0 1,1 1,1 2,-1 2,2 2,1 2,2 -1,0 -1,1 0,1 -1,1 1,0 0,1 1,0 -1,1 0,2 -1,0 0,-1 -1,0 -3,3 0,1 -1,0 -1,2 -1,0 -1,1 1,2 -1,2 5,8 -1,1 -1,0 -1,0 -2,-1 -2,-1 0,-1 1,0 0,-1 0,0 -1,-2 -2,-1 0,0 -2,0 -2,2 -1,0 -5,1 -4,2 -2,3 -1,1 -1,0 -2,3 -1,-1 -1,2 -2,0 -2,3 -3,1 -1,-1 0,0 0,-1 1,-1 -1,0 0,-1 -1,0 1,-1 -1,-4 0,0 1,0 2,-2 2,-1 0,-2 1,-1 2,1 5,-1 1,0 1,1 0,-1 2,-2 -1,-2 0,0 0,0 -1,0 0,1 0,-1 0,1 0,0 1,-2 0,-1 -1,0 0,-1 -1,0 0,-1 0,-1 0,0 -1,-1 1,0 0,0 1,-1 2,-2 1,-2 -3,0 -5,0 -2,2 -3,1 -1,-1 -6,2 -4,1 0,1 -1,0 -1,1 -1,0 0,0 -5,2 -1,-1 -1,1 -1,-1 0,0 0,-1 -1,1 1,1 0,1 -2,1 -2,3 -2,2 -3,4 1,0 0,1 -1,0 -2,2 -4,1 -3,-1 -7,1 -2,-1 0,0 -1,-1 -4,-1 0,0 0,1 -1,1 -3,0 -1,1 -1,0 -2,1 -4,0 0,0 0,-3 -1,-1 0,-2 1,-1 -1,-1 1,0 0,0 -1,-1 0,-2 -1,-2 -2,0 -2,-1 -3,0 -1,-1 -1,0 -2,-2 0,-1 0,-1 1,-2 0,-1 0,-1 -1,0 -1,0 0,-1 2,0 1,1 2,0 1,2 1,1 1,-1 1,0 3,-2 1,0 1,2 1,0 1,-1 1,0 1,-1 1,0 1,-1 1,-1 1,-2 -2,-2 1,-1 2,-2 1,1 1,-1 1,-1 1,1 1,-1 0,-1 4,-1 0,-2 -1,-1 2,-2 1,-1 0,-1 1,0 0,-1 2,-1 1,1 0,-1 1,1 2,0 2,-1 1,0 1,-1 2,1 2,-2 0,-1 0,-1 3,-3 1,-3 2,-2 1,0 0,-1 1,-1 3,0 1,-3 2,1 1,2 0,2 2,0 3,1 -1,-1 2,1 0,1 3,0 0,1 3,1 1,0 1,-1 0,-2 1,0 0,-2 1,0 0,-1 1,0 3,-3 0,0 2,-1 2,0 3,-2 z"/>
+<path id="map-AS" data-state="AS" data-name="Assam" d="m 454,283 0,1 -1,0 0,0 0,-2 z m 47,-32 4,0 2,-1 1,0 1,-1 3,0 1,-1 0,-1 0,0 4,1 1,1 0,0 2,1 7,-1 3,1 4,-1 2,-2 1,0 0,-1 -1,0 3,-4 2,-2 2,-3 2,-1 0,-1 -1,-1 1,-1 0,1 0,0 1,1 1,-1 1,1 5,-2 0,0 1,0 1,-1 1,0 0,-1 4,-1 6,-2 1,1 3,-1 2,-2 5,0 3,0 -1,2 -2,2 -1,1 0,0 -1,0 1,1 0,0 0,1 0,1 1,0 0,1 1,0 0,1 -1,2 0,0 0,-1 0,1 0,-1 1,0 0,0 0,0 1,2 -2,2 0,1 -1,-1 -1,0 -5,1 -2,-1 -1,1 0,2 -2,1 -2,2 -1,0 0,0 -2,2 -2,1 -1,0 -1,-1 -1,0 -2,3 -2,2 -1,0 -1,0 -1,1 -1,0 -2,1 0,1 -1,0 0,2 -1,1 -1,1 0,0 0,-2 0,0 -2,2 0,3 -1,0 -2,4 0,2 -1,2 1,2 -1,1 -1,1 -1,0 -1,1 0,-1 0,-1 -1,-1 0,1 -1,1 0,1 -3,2 -2,2 -2,1 -2,2 1,2 1,1 0,1 -1,1 0,1 0,0 -2,1 -1,3 -1,1 -1,0 0,1 0,2 0,0 0,0 -1,1 -1,0 0,1 -1,0 -1,-1 0,0 0,2 -1,1 1,1 -1,2 1,0 -1,0 0,0 -1,1 0,2 -1,0 0,0 -1,0 -1,0 0,0 -1,0 -1,1 -1,-3 -2,4 -1,1 0,2 -1,0 0,2 -1,0 0,0 -1,0 0,-2 -3,0 0,0 -2,0 1,-3 -1,-2 0,-1 0,0 0,-4 1,-2 -1,-4 1,0 2,2 1,0 0,-1 1,0 0,-1 0,-1 0,0 0,0 0,0 0,0 -1,0 0,-1 0,0 1,0 0,-2 1,0 0,-1 2,1 1,-1 3,-1 -1,-1 1,-1 0,-1 0,0 0,-1 0,0 -1,-1 0,0 0,-1 -1,0 0,-1 -1,0 2,-2 0,-1 -1,1 -1,0 0,-1 -1,0 -1,-1 -1,0 0,-1 -1,-1 -1,1 -2,0 -1,1 0,-3 1,-1 1,-1 -1,0 0,-1 3,-3 -1,0 -1,0 -1,1 -2,0 -1,0 -1,1 -1,-1 0,-1 -1,0 -2,1 0,2 -1,1 -1,-1 1,-1 0,-1 -1,0 -2,3 1,0 -1,1 1,0 0,-1 0,0 -2,1 -1,0 -2,0 -1,2 -1,1 -1,0 0,-1 0,-2 -3,1 0,0 1,-1 -1,0 -1,1 1,-2 -1,0 -1,-1 -1,0 0,1 -1,-1 -1,0 -1,0 -1,1 -1,0 0,-1 -1,0 -1,1 0,0 0,-1 -1,-1 -1,1 0,-1 -1,-1 -1,1 -1,-1 -1,0 -1,1 -3,1 -1,0 -2,2 0,0 0,0 -1,1 0,1 0,1 -1,0 3,3 -3,1 0,0 0,-2 -1,-2 0,-1 -1,-1 2,-3 -1,0 0,0 1,0 -1,-1 0,1 0,0 0,-1 -1,0 1,0 0,-1 -1,-1 0,0 0,-1 -1,0 0,0 0,0 -1,0 1,-1 -1,0 1,0 -1,-1 0,0 0,0 0,-1 1,0 0,-1 1,0 0,-1 2,-1 0,0 0,0 1,-1 0,-1 0,-2 0,0 0,-1 0,-1 0,-1 0,0 0,-1 2,0 4,-1 1,0 0,-1 1,-1 2,0 1,-1 1,0 3,2 3,1 7,0 1,-1 3,0 2,1 2,-1 2,1 3,-1 1,0 2,-1 1,-1 1,0 2,1 1,0 1,0 0,-1 z"/>
+<path id="map-BR" data-state="BR" data-name="Bihar" d="m 417,260 0,0 0,0 0,0 z m -83,-23 1,0 0,1 1,0 0,1 1,0 1,2 7,1 1,3 0,3 -1,1 2,1 0,0 0,1 1,-1 1,1 1,0 0,0 0,1 2,1 -1,1 4,0 0,1 1,1 3,0 2,-1 1,0 4,-2 2,2 0,3 2,1 1,0 0,1 2,-1 0,-1 1,0 2,1 0,1 1,0 1,1 1,-1 2,0 5,2 1,1 3,2 1,-1 1,0 1,-1 0,-1 1,0 0,-1 2,0 1,-1 1,0 0,3 1,1 2,0 0,1 1,0 1,1 1,-1 2,-1 3,1 1,0 1,-1 1,1 1,0 0,-1 1,1 1,-1 1,2 1,1 0,1 1,0 0,-1 1,-1 0,-2 0,0 1,1 0,-1 1,0 0,0 -1,1 0,0 1,0 0,1 1,1 -1,1 0,0 1,0 1,1 -2,2 -1,1 -2,2 -1,0 -1,1 -1,0 0,2 -1,0 0,0 0,-1 -1,1 0,3 -1,1 0,1 2,0 -1,1 1,0 0,1 1,0 1,1 2,1 0,1 0,0 -1,1 0,1 1,1 0,1 -1,0 0,-1 0,0 0,0 0,-1 -1,0 -1,1 0,0 0,1 -1,0 -1,1 -1,0 0,1 0,1 0,0 0,1 2,1 -1,1 0,1 -1,0 0,0 0,-1 -2,0 0,-1 -2,0 -1,-1 -1,0 0,1 -1,0 0,1 0,1 0,1 -2,-1 0,1 -1,0 -1,3 -1,0 -1,0 -1,2 0,3 0,1 -1,0 -1,1 0,0 -1,4 -3,-1 -1,1 0,1 -1,-1 0,0 0,0 -1,0 0,-1 -1,-1 -1,0 0,1 -1,0 -1,-1 -1,2 -1,0 0,2 0,0 0,1 -1,0 -1,-1 -1,0 1,-1 0,-1 0,-1 -1,0 -1,-1 0,1 -1,0 0,-2 -1,-1 -1,0 0,-1 -2,1 -2,-2 -2,0 -1,-1 -1,3 -1,1 0,2 -2,0 0,1 -1,-10e-4 0,1 -1,-1 -4,1 0,1 -3,1 0,1 -2,1 -1,0 0,-1 0,1 -1,0 0,1 -1,0 0,-2 -1,0 0,-1 -1,0 -2,2 0,1 -2,0 0,1 -1,0 0,1 -1,1 -1,-1 -1,0 0,-1 -1,-1 -1,0 0,-1 0,0 -1,0 0,-1 1,-1 -1,-1 0,0 0,0 0,0 0,-1 0,0 -1,0 0,0 0,1 -1,-1 0,1 -1,1 -1,-3 -1,-1 -1,2 -1,0 -3,1 -5,-1 0,0 1,-2 -1,-1 0,-1 -1,-1 0,-1 -1,0 -1,-1 0,-1 -1,-1 0,-3 -1,0 1,-2 0,-1 0,0 1,0 0,-1 1,0 2,-2 1,0 1,0 1,-1 1,0 0,0 0,0 0,0 1,-1 1,1 1,-1 0,0 1,0 -1,-1 1,0 1,-2 3,-2 0,-1 1,-1 1,0 1,1 0,1 2,0 0,0 1,0 0,-2 1,0 0,1 1,0 1,1 1,0 0,-1 0,1 0,0 0,-1 2,0 -1,-1 0,-1 -1,-1 -1,0 0,-1 -2,0 0,-1 -1,-1 -1,0 -2,-1 -1,0 0,-1 -2,-2 -1,0 -1,-1 0,-2 1,0 1,-1 1,0 0,-2 0,-1 -2,0 -1,-1 -1,0 -2,0 0,-2 1,0 0,-1 2,0 1,-1 0,-1 4,1 3,-1 0,-1 -2,0 -1,-2 -1,1 0,0 0,0 1,-1 0,-1 -1,0 -1,1 -1,0 0,-1 -1,0 0,1 -1,0 0,-1 0,0 0,0 0,-2 -1,-1 1,-1 -2,0 1,-3 -1,-1 -1,-1 1,-1 0,0 -1,0 -1,0 1,-1 0,0 1,-1 -1,0 0,-1 1,0 2,0 1,-1 0,-1 0,0 z"/>
+<path id="map-CG" data-state="CG" data-name="Chhattisgarh" d="m 317,317 2,0 0,1 1,0 1,3 1,0 0,0 3,1 1,2 0,2 1,2 3,1 0,-1 1,0 0,2 -1,2 0,2 1,1 1,0 1,1 -1,4 2,1 0,3 1,-1 1,1 1,0 0,1 2,0 0,1 0,2 -1,0 -1,2 -1,0 -1,1 0,2 -1,1 -1,0 -2,2 0,1 0,0 0,0 0,0 1,1 -1,2 -3,1 -2,2 -1,0 -1,0 -2,3 1,1 -1,0 0,2 0,1 1,0 -1,1 0,1 -1,0 0,1 -1,0 0,1 0,1 -1,2 1,1 -1,0 0,-1 -1,1 -1,3 0,1 1,1 0,1 -1,0 -2,-1 0,1 0,1 -1,1 -1,3 -1,1 -2,0 -2,-1 -2,1 -1,0 0,0 -1,0 -2,0 0,1 -1,1 0,1 -1,2 -1,1 -1,2 -1,0 0,-1 -1,0 0,3 1,3 -1,2 1,1 0,1 0,0 0,1 -1,2 1,1 -1,0 0,1 -1,1 0,2 4,2 1,0 2,0 0,2 0,1 0,1 -1,0 -1,1 0,-1 0,-1 -3,-1 -1,0 -1,1 -2,-4 -1,0 -3,-2 -1,1 -2,-2 -2,1 -1,2 0,1 2,1 0,1 2,0 0,2 0,4 0,1 1,0 1,2 1,0 0,1 -1,0 1,1 -1,1 1,2 0,1 1,0 0,1 0,1 1,1 0,2 -1,0 0,2 -1,1 -1,0 0,1 -1,0 -1,1 0,1 -1,0 0,1 1,1 0,1 -1,0 0,1 -1,0 -2,2 0,1 -2,0 0,1 -1,0 -1,1 0,2 0,1 0,1 -1,1 0,1 -1,2 -1,0 0,2 0,0 -3,0 -2,-1 -2,1 -1,0 -2,-6 1,-2 -2,1 0,-1 0,0 -1,-1 -1,1 -1,0 0,-1 1,-1 -1,-1 -1,-2 0,-1 -1,0 0,0 -1,-1 0,-1 -3,-2 -3,1 -2,-3 0,0 -1,-1 1,0 2,-1 -2,-2 0,-1 1,-2 0,-1 1,-1 0,-1 1,0 1,-2 2,-1 1,2 1,0 0,1 1,0 2,-2 -1,-1 2,-1 0,-1 -1,0 0,-1 -1,0 -1,-1 -1,0 0,-2 -3,-2 0,-1 -2,0 0,1 -1,0 -1,0 0,0 1,0 1,-1 0,-1 -2,0 0,-1 1,0 1,1 1,0 1,-1 0,-2 0,-1 -1,-1 -2,0 0,0 1,-1 -1,-1 3,-1 1,-1 2,-1 -1,-1 1,-5 -1,0 -1,1 -1,-1 1,-1 2,-1 -1,-2 0,-4 -2,0 -1,-2 0,-1 0,-1 1,-2 4,-2 1,-1 0,-1 0,0 2,-3 0,-3 0,-3 1,-1 1,0 0,-1 0,-3 0,0 1,0 1,-4 1,0 0,1 1,0 0,-1 -1,0 1,0 0,-2 1,0 1,-1 0,-3 1,-1 1,1 1,-1 1,0 0,-1 1,0 0,1 1,-1 0,0 0,-1 1,0 1,-1 2,0 0,-1 1,0 0,-1 1,0 0,-1 0,1 0,0 0,-1 1,-1 0,-2 0,-1 2,0 0,-1 2,-1 0,-2 0,-1 2,0 1,-1 1,0 1,-1 0,-2 1,-1 0,-1 -1,-1 -1,0 0,-1 -1,0 -1,0 0,-1 -1,0 -1,-3 -2,0 0,-1 -1,0 -1,1 -1,0 -1,1 0,0 0,-1 -1,0 0,-1 1,0 0,-1 1,0 1,-1 0,-1 -1,0 0,-1 -1,-1 0,-1 1,0 1,2 0,0 1,1 1,0 1,-1 1,0 1,0 1,1 2,0 1,-1 0,0 1,1 1,0 2,0 3,0 1,1 1,0 0,-1 1,0 1,-1 0,-1 2,0 1,-1 0,0 3,2 3,0 2,-1 1,-2 1,-1 0,-1 z"/>
+<path id="map-DL" data-state="DL" data-name="Delhi" d="m 188,205 1,1 0,1 1,0 1,2 1,0 0,2 1,1 -1,1 1,1 0,0 -2,1 0,0 0,1 -2,0 -1,-1 0,-1 -1,-1 0,0 -1,-1 0,1 -1,0 -2,0 -1,-1 0,-1 0,0 0,-1 1,0 0,0 1,-1 0,-3 2,0 1,-1 1,0 0,1 z"/>
+<path id="map-GA" data-state="GA" data-name="Goa" d="m 115,504 3,0 1,-1 0,1 1,0 1,2 1,1 1,0 2,-1 0,0 1,0 0,-1 0,1 0,0 0,0 0,1 0,1 1,1 -1,1 1,1 0,1 1,0 0,2 -2,1 1,1 0,1 -1,1 0,1 1,1 -1,1 0,1 -1,1 -1,-1 0,1 -1,0 -1,1 0,0 -1,0 0,-1 -2,-2 -1,0 1,-1 -1,-4 0,-1 -1,0 -1,-1 2,0 0,0 -1,-1 -1,0 0,-1 -1,0 -1,-3 -1,-2 z"/>
+<path id="map-GJ" data-state="GJ" data-name="Gujarat" d="m 30,354 1,1 0,0 -1,-1 1,-1 z m -10,0 0,0 -1,1 0,-1 1,0 z m 18,-3 0,1 -1,0 0,-1 1,0 z m -30,-16 1,0 0,1 -1,0 0,0 -1,-1 1,0 0,-1 z m 1,-1 1,0 0,1 -1,-1 0,0 0,0 z m -2,-2 0,1 0,1 -1,0 0,-1 -1,1 0,0 1,-1 z m 0,-3 0,1 -1,1 0,-1 1,-1 z m -1,-1 0,1 -1,0 0,-1 0,0 z m -2,-4 1,0 1,0 -1,3 -2,2 -1,0 0,0 0,0 -1,0 0,0 -1,0 0,0 L 0,328 0,328 l 0,-1 1,0 1,-2 1,-2 z m -1,0 0,1 -1,1 0,-2 1,0 z m 4,-1 0,2 -2,0 0,-1 0,-1 1,-1 z m -2,-1 1,0 0,1 -1,0 0,-1 1,-1 z m 1,-2 0,1 -1,0 -1,1 0,-1 2,-1 z m 2,0 0,0 1,0 -1,1 -1,0 0,0 1,-1 0,0 z m -1,-1 1,2 -2,2 1,-2 0,0 -1,0 0,-1 1,0 z m -1,0 0,1 -1,1 0,2 0,0 0,0 -1,1 0,2 -1,0 -1,-1 1,-1 0,-1 0,0 1,-2 1,0 1,-1 1,0 1,-1 z m 56,-16 4,2 1,-1 1,1 2,-1 3,0 1,1 3,-1 0,1 1,0 0,-2 1,0 1,1 2,-2 1,0 0,1 2,1 1,0 0,0 2,1 1,0 -1,1 -1,0 -1,0 1,1 1,0 0,0 1,1 1,0 0,0 0,1 1,1 1,0 0,-1 1,-1 1,1 2,0 0,1 1,1 3,0 1,1 1,-1 -1,0 1,-2 0,0 1,0 1,-1 0,2 0,1 2,1 1,-1 0,0 0,1 0,0 0,1 -1,0 -1,3 1,1 2,1 -1,1 1,1 1,0 1,-1 0,-1 1,0 0,1 1,1 0,1 0,1 -1,2 0,2 0,0 1,0 1,2 1,0 0,2 1,-1 2,1 0,2 0,1 -1,1 0,0 1,0 0,1 1,-1 0,1 1,0 1,3 1,0 0,-1 0,0 0,1 1,0 0,1 1,0 1,1 0,2 1,1 1,-1 1,0 1,2 0,1 1,1 0,0 1,2 -1,0 0,1 1,1 1,-1 1,1 -2,3 0,2 -2,0 -2,3 -2,-1 -1,1 0,0 1,0 0,1 1,0 0,1 0,-1 0,1 1,0 0,-1 0,1 1,0 1,1 -1,0 -1,1 0,0 0,1 -1,0 0,-1 -1,0 0,2 1,1 0,0 1,0 0,3 1,0 1,0 -2,2 1,1 0,1 0,0 -7,3 1,1 0,1 1,1 0,1 -2,0 1,1 1,2 4,-1 2,0 0,1 1,0 1,0 1,-1 0,1 0,1 -2,1 0,0 0,0 -2,0 0,0 -1,-1 0,1 -2,1 0,0 0,2 -1,1 -1,0 0,2 -2,0 0,1 -1,0 -1,0 0,-1 -1,0 2,1 2,0 0,1 1,1 1,0 0,1 2,0 0,1 1,2 0,2 -1,0 -1,0 0,1 -1,0 0,1 0,1 -2,1 -1,0 -1,0 -1,0 -1,-1 -1,-1 -1,0 0,-1 -1,0 0,1 -1,0 1,1 1,0 0,1 0,0 -1,3 -1,1 1,1 0,3 -1,0 0,0 0,0 -1,0 0,1 -2,1 0,0 0,0 1,-1 0,0 -1,0 0,1 -1,0 -1,0 0,0 0,-2 1,0 1,-1 0,0 0,-1 -1,0 0,-1 0,1 -1,0 0,1 -1,-1 0,1 -1,0 0,0 -1,0 0,0 1,1 0,0 -2,0 -1,1 0,1 -1,0 0,1 -1,0 0,0 0,-3 1,-2 1,-3 0,-2 -2,-7 0,-1 0,0 -1,-3 1,0 -1,0 0,-2 -1,0 0,2 -1,0 0,-3 -1,-2 1,-2 1,-2 -1,1 1,-2 1,0 0,0 -1,1 -1,-1 1,-1 2,-1 2,0 1,-1 -1,0 -1,-1 -4,1 -1,-1 1,-1 1,-2 -1,-1 0,-2 1,-4 1,-1 1,0 2,1 1,-2 1,1 1,0 0,-1 0,1 -1,0 0,-1 -2,1 -1,0 -1,-1 -2,1 0,-1 -1,2 0,-1 0,0 -1,-1 -1,0 0,-1 -1,-1 0,0 1,0 0,1 1,0 0,2 0,1 -1,-2 0,1 1,1 0,0 0,-1 0,1 0,0 -1,4 -1,-3 1,-1 0,0 0,-1 -1,1 0,1 0,2 1,1 0,4 1,3 -2,4 -2,2 0,1 -1,0 0,1 0,1 1,1 -2,1 0,0 0,-1 -1,1 -3,1 0,0 0,0 -2,0 -3,2 -1,0 0,1 -2,1 -1,0 0,0 -4,1 -1,1 0,0 -1,0 0,0 -2,0 -2,1 0,0 -1,-1 0,0 0,0 0,0 0,0 0,0 0,-1 1,0 0,-1 -2,-1 2,-1 0,-1 -1,-1 -2,0 -1,-1 -1,3 0,2 0,0 -1,0 -4,-2 -7,-6 -8,-10 1,-1 -1,-2 0,0 -1,0 1,1 0,0 1,0 0,1 -10,-9 -6,-7 0,-2 1,-2 2,-1 0,0 -1,1 1,1 3,-1 0,0 -1,2 2,1 2,-1 0,-1 2,0 1,0 1,-1 -1,-1 1,1 0,1 2,0 0,-1 1,0 0,-1 -1,0 1,-1 0,1 0,0 1,1 1,-1 1,0 1,-1 1,0 0,-1 2,-1 1,0 2,0 2,-3 0,-2 1,-1 1,-3 1,-1 1,-3 -1,0 -1,1 0,2 -1,0 -2,-1 0,1 -1,0 -1,0 0,1 -7,2 -1,1 -1,2 -1,-1 -1,0 -1,-1 -2,0 -2,-1 -3,0 -8,-5 -1,0 -4,-3 0,0 2,-1 -1,0 0,-2 -1,-1 -1,0 0,-1 -1,0 -1,-1 0,-4 0,-1 0,0 0,-1 2,-2 1,-1 1,-1 0,0 -2,0 -2,2 0,-2 1,0 1,-1 2,-1 -1,0 -1,-1 0,0 -1,0 0,-1 0,0 4,0 0,-8 1,0 0,2 1,0 1,-2 1,1 2,-1 2,1 2,-1 4,0 2,-1 3,2 6,0 1,-1 1,-2 10,-3 1,0 -1,1 0,1 0,1 2,1 3,0 2,-1 0,-1 2,-1 1,0 1,0 2,-1 0,-1 -2,0 0,-2 0,0 0,-2 2,-1 z"/>
+<path id="map-HR" data-state="HR" data-name="Haryana" d="m 180,156 1,-1 0,1 1,1 1,-1 1,2 1,0 0,0 0,1 1,1 0,0 1,0 2,1 0,2 -1,1 0,1 1,0 0,1 1,0 1,1 1,0 1,1 1,-1 0,1 -1,1 1,0 0,-1 1,1 1,0 0,0 0,0 0,1 -1,1 -1,2 -1,0 -1,1 0,0 -3,1 0,1 -2,2 -1,3 -1,1 1,2 -1,3 1,1 -1,0 1,2 0,1 0,1 -1,0 0,1 1,0 -1,2 0,1 0,0 0,1 0,2 2,2 -1,1 1,1 -1,0 0,1 0,0 -1,1 0,-1 -1,0 -1,1 -2,0 0,3 -1,1 0,0 -1,0 0,1 0,0 0,1 1,1 2,0 1,0 0,-1 1,1 0,0 1,1 0,1 1,1 2,0 0,-1 0,0 2,-1 0,0 3,2 0,1 -1,0 1,1 0,1 -1,0 2,1 -1,0 0,1 -1,0 0,1 1,0 -1,1 0,1 0,0 0,1 0,1 1,1 -1,1 1,0 0,1 -1,0 0,1 -1,0 0,1 -2,0 -1,1 0,0 0,0 -1,1 -1,-1 -1,1 0,-1 -1,0 0,1 -1,0 -2,-1 0,1 1,0 0,1 -2,0 0,2 -1,0 -1,0 0,-1 1,0 -1,-1 0,-2 0,0 0,-2 0,0 0,-2 1,-3 -2,-2 -1,0 0,1 -3,1 0,2 -1,0 -1,1 0,-2 -2,0 1,0 -1,-1 0,0 1,0 -1,-1 -2,0 -1,-1 -1,0 2,1 -1,1 1,1 0,1 -1,0 0,-1 -1,0 -2,0 1,1 -1,1 1,1 0,1 1,0 0,1 1,1 -1,1 -2,-1 -1,0 -2,0 0,-1 -1,0 0,0 0,0 1,0 0,-1 -1,0 1,0 0,0 1,0 0,0 1,0 0,0 -1,1 0,-1 -1,0 2,-2 1,0 0,1 1,0 -1,-1 0,-1 -1,0 0,-1 -1,-1 -1,-1 -1,-1 -2,0 0,-1 -3,-2 0,-1 -1,0 -1,-3 -1,-1 0,-1 -1,-2 1,-1 0,-1 -2,0 0,-1 -1,0 0,-1 -1,0 1,-1 0,-2 -1,0 0,1 -1,0 0,-1 -2,1 -1,-1 -2,1 -1,0 -1,-1 -1,0 -1,0 -1,-2 -2,-1 -2,1 -2,0 0,1 -1,0 0,-1 -1,-1 -1,0 0,-1 0,0 1,0 1,-2 -1,-1 1,-5 0,0 -1,1 -1,0 0,-1 2,-2 0,-1 -1,0 0,-1 0,0 3,1 0,0 1,-1 1,0 2,-1 1,1 1,0 0,1 1,0 2,2 2,-1 0,-1 0,1 0,1 1,1 0,0 1,1 0,-1 1,0 1,2 -1,1 0,1 -1,1 0,1 1,1 0,1 2,-1 0,0 -1,-1 1,-1 1,0 0,-1 1,0 1,-2 1,1 1,0 0,1 1,0 0,-1 2,0 0,-1 1,0 1,0 1,0 1,2 2,0 1,-1 0,0 1,-1 1,0 3,-2 -1,0 0,-1 1,0 0,-2 1,0 0,0 1,-2 -1,-1 0,0 0,-1 1,1 2,0 1,0 0,-1 1,1 0,-1 0,-1 1,0 1,2 1,0 0,0 1,-1 0,1 1,0 1,-1 0,-2 -1,0 0,0 -1,-1 -1,1 0,-1 1,0 1,-1 1,0 0,-1 -1,0 0,-1 1,-1 1,1 1,-1 1,1 0,1 1,-1 -1,-1 0,-1 1,-1 -1,-1 1,-1 -1,-1 0,-1 -1,1 0,-1 0,0 0,-2 0,0 0,-1 0,-1 -1,-1 z"/>
+<path id="map-HP" data-state="HP" data-name="Himachal Pradesh" d="m 161,115 1,-2 -1,-1 0,-2 -1,-1 -2,-1 0,-1 1,0 2,1 3,-2 0,-1 3,-1 1,-2 2,-2 2,0 2,-1 1,0 1,1 2,0 1,-2 0,0 1,0 1,0 -1,2 1,1 1,0 1,2 2,1 1,0 1,1 1,0 0,2 1,0 1,1 0,1 0,0 1,1 0,1 1,0 1,-2 1,1 1,-1 1,0 1,-1 1,0 0,-1 1,0 2,2 -1,1 2,1 1,1 1,0 0,2 2,3 1,0 0,-1 1,0 1,-1 1,0 1,-1 1,0 2,-1 0,-1 2,-1 0,2 1,1 -2,1 0,1 0,1 1,1 2,-1 1,0 0,0 1,0 0,1 2,1 -1,2 0,2 -1,1 2,0 1,1 0,1 0,1 1,0 2,2 1,0 -2,5 1,1 0,1 0,1 1,0 1,2 -3,2 0,1 1,0 1,1 0,1 1,0 0,1 2,2 0,0 0,1 1,1 0,2 -3,0 -1,-1 0,-1 -3,0 0,-1 -1,0 -1,1 -1,0 -1,-1 -1,0 0,0 -1,-1 -1,0 0,1 -1,0 -1,1 -2,0 -1,1 -1,0 0,1 -1,-1 -1,1 -1,2 -1,0 1,1 -1,1 0,0 -1,-1 -1,0 0,1 1,0 0,2 -1,-1 0,1 -1,1 1,1 0,1 1,1 0,1 -1,1 1,1 1,0 0,1 0,1 -3,1 -2,1 0,1 0,0 0,0 0,0 -1,0 -1,-1 0,1 -1,0 1,-1 0,-1 -1,1 -1,-1 -1,0 -1,-1 -1,0 0,-1 -1,0 0,-1 1,-1 0,-2 -2,-1 -1,0 0,0 -1,-1 0,-1 0,0 -1,0 -1,-2 -1,1 -1,-1 0,-1 -1,1 0,0 -1,-1 -2,-1 0,-1 1,-1 -1,0 0,-1 1,-1 0,0 -1,0 0,-1 -1,-1 -1,1 0,-1 0,1 0,-1 -1,0 0,-1 -1,1 0,-1 -1,-2 0,-1 0,1 -1,0 0,1 -1,0 0,1 -3,0 0,-1 -1,0 0,-1 -3,-6 -2,-4 1,0 -2,-3 -2,-1 -2,-2 -1,0 -1,0 0,0 2,-2 -1,-1 0,-1 2,-1 2,-3 2,-1 -2,-2 z"/>
+<path id="map-JK" data-state="JK" data-name="Jammu and Kashmir" d="m 140,1 1,1 2,0 2,0 1,-1 2,-1 2,1 2,3 2,3 3,3 1,2 3,2 3,2 3,3 3,1 3,3 2,1 3,0 2,3 0,2 0,2 1,2 1,2 3,1 3,0 4,1 2,2 1,3 1,2 3,0 4,-2 3,-1 3,0 2,-3 2,-2 3,-1 2,-1 2,-2 3,0 3,1 2,1 1,-1 0,-3 1,-1 2,-1 2,2 1,2 2,0 3,1 2,1 2,-1 1,-1 1,2 1,2 2,1 2,2 1,2 0,2 0,2 0,1 -1,2 0,1 -1,1 0,2 0,3 -1,2 -1,2 -1,1 0,2 -1,1 -2,1 -2,1 0,2 -1,1 -2,0 -2,0 -1,1 0,1 1,2 1,2 -1,4 -2,2 -1,1 -2,-1 -2,-1 -1,1 -2,0 -1,0 0,1 0,2 1,2 1,1 1,2 0,1 -1,1 -1,1 0,1 0,2 0,1 3,3 0,2 2,1 5,0 0,1 -1,3 0,1 2,2 0,2 1,1 1,2 0,2 -2,1 -3,2 -1,-1 -1,0 -2,1 0,2 -1,0 -2,1 -1,-1 -3,-3 0,-2 0,-1 -1,-2 -2,1 -1,1 -2,0 -1,1 -1,0 -1,1 0,1 -1,0 -2,1 -1,-1 0,-1 0,-1 2,-1 -1,-1 0,-2 -2,1 0,1 -2,1 -1,0 -1,1 -1,0 -1,1 -1,0 0,1 -1,0 -2,-3 0,-2 -1,0 -1,-1 -2,-1 1,-1 -2,-2 -1,0 0,1 -1,0 -1,1 -1,0 -1,1 -1,-1 -1,2 -1,0 0,-1 -1,-1 0,0 0,-1 -1,-1 -1,0 0,-2 -1,0 -1,-1 -1,0 -2,-1 -1,-2 -1,0 -1,-1 1,-2 -1,0 -1,0 0,0 -1,2 -2,0 -1,-1 -1,0 -2,1 -2,0 -2,2 -1,2 -3,1 0,1 -3,2 -2,-1 -1,0 0,1 2,1 1,1 0,2 1,1 -1,2 -1,2 -1,0 -1,1 -4,2 -1,2 0,-1 0,0 0,-1 -1,0 -2,0 -3,-2 0,0 -1,0 -1,-2 -1,0 -1,1 -3,-1 -3,0 -1,-3 1,-1 -1,-2 1,-3 -1,0 -1,2 -2,0 -1,1 -3,0 -1,-1 -2,-1 -2,-2 -2,-1 -2,-2 -3,0 -1,-2 -1,-1 -1,-1 1,-3 -1,-2 0,-3 1,-1 -1,-3 0,-1 0,-2 -1,-2 0,-1 1,-1 -1,-3 -1,-2 0,-3 0,-2 -1,-3 0,-3 0,-2 1,-1 2,-1 2,-1 0,-2 1,-2 1,0 3,0 1,-1 1,-3 1,-2 0,-2 -2,-2 -2,-1 -2,-1 -1,-1 -1,-2 0,-2 1,-1 1,-1 -1,-2 -2,0 -2,0 -2,-1 -3,0 -2,-2 -1,-2 -1,-3 -3,-1 -3,-1 -2,1 -2,0 -1,-1 0,-2 0,-1 0,-2 0,-2 1,-2 2,-2 2,-2 2,-3 2,-3 1,-3 2,-1 3,0 4,0 4,0 2,-1 -2,-2 -2,-1 1,-1 2,0 2,2 3,1 1,-2 2,0 2,-1 1,-1 2,-1 1,-1 L 136,0 l 2,0 z"/>
+<path id="map-JH" data-state="JH" data-name="Jharkhand" d="m 321,307 5,1 3,-1 1,0 1,-2 1,1 1,3 1,-1 0,-1 1,1 0,-1 0,0 1,0 0,0 0,1 0,0 0,0 0,0 1,1 -1,1 0,1 1,0 0,0 0,1 1,0 1,1 0,1 1,0 1,1 1,-1 0,-1 1,0 0,-1 2,0 0,-1 2,-2 1,0 0,1 1,0 0,2 1,0 0,-1 1,0 0,-1 0,1 1,0 2,-1 0,-1 3,-1 0,-1 4,-1 1,1 0,-1 1,10e-4 0,-1 2,0 0,-2 1,-1 1,-3 1,1 2,0 2,2 2,-1 0,1 1,0 1,1 0,2 1,0 0,-1 1,1 1,0 0,1 0,1 -1,1 1,0 1,1 1,0 0,-1 0,0 0,-2 1,0 1,-2 1,1 1,0 0,-1 1,0 1,1 0,1 1,0 0,0 0,0 1,1 0,-1 1,-1 3,1 1,-4 0,0 1,-1 1,0 0,-1 0,-3 1,-2 1,0 1,0 1,-3 1,0 0,-1 2,1 0,-1 0,-1 0,-1 1,0 0,-1 1,0 1,1 2,0 0,1 2,0 0,1 0,0 0,3 2,1 2,2 0,1 -2,1 0,1 -1,0 0,1 0,1 0,0 0,-1 0,1 0,1 1,0 0,1 1,0 -1,1 0,0 -1,0 1,0 0,1 -1,0 -2,-1 1,1 0,1 0,0 0,0 -1,2 1,0 -1,2 -1,0 -1,1 -1,0 0,1 1,1 0,1 -3,0 1,1 -1,1 0,0 -2,-1 0,1 0,0 -1,1 -1,0 1,1 -2,-1 -1,0 0,0 0,-1 -2,0 0,2 1,0 0,1 -1,1 0,-1 0,2 -1,0 -1,0 0,0 -1,0 1,1 0,1 -1,0 -3,-2 -1,0 -1,-1 0,0 0,0 -1,1 -1,0 1,2 -1,2 -1,0 0,0 -1,0 -2,1 -1,1 -2,0 0,0 -1,1 0,1 0,1 0,0 -2,1 0,0 0,0 0,0 -1,0 0,0 0,-1 0,0 -2,0 0,-2 -2,0 -1,1 1,1 -2,1 -2,0 0,1 1,1 -1,0 0,1 -1,1 0,2 1,0 1,1 3,0 0,1 2,1 0,1 1,1 2,0 2,1 0,0 2,0 0,1 1,0 0,1 -1,0 0,0 -1,1 1,1 -1,1 0,2 2,2 1,0 2,1 1,2 2,0 1,2 0,1 -1,0 0,1 2,1 0,2 1,1 0,1 -1,0 0,0 0,1 0,1 -1,0 0,0 -1,0 0,0 -1,0 0,-1 -1,0 0,-1 -1,0 -1,-1 -1,0 0,0 -2,-1 -2,-2 -4,-1 -1,-2 0,1 -1,0 0,1 1,1 0,1 -1,1 1,0 0,0 1,0 -2,1 1,1 -1,2 -1,2 -1,0 0,1 -3,-1 1,-2 1,0 -1,-1 -3,1 -1,-1 -1,0 -1,0 -3,-2 -1,0 0,1 -1,0 0,0 -1,2 0,-1 -1,-1 0,0 0,-1 -1,0 0,-1 -1,0 -1,1 0,0 1,-1 1,-4 1,0 0,-1 -1,0 0,-1 0,0 0,-3 -2,1 0,0 -1,1 0,-1 -1,0 -1,0 -1,0 0,1 -5,0 -1,0 0,1 -1,0 0,1 -3,0 -1,-1 -1,0 -1,-1 0,-2 -3,-1 0,0 0,-1 2,-2 1,0 1,-1 0,-2 1,-1 1,0 1,-2 1,0 0,-2 0,-1 -2,0 0,-1 -1,0 -1,-1 -1,1 0,-3 -2,-1 1,-4 -1,-1 -1,0 -1,-1 0,-2 1,-2 0,-2 -1,0 0,1 -3,-1 -1,-2 0,-2 -1,-2 -3,-1 0,0 -1,0 -1,-3 -1,0 0,-1 -2,0 0,0 2,-4 -1,-1 2,-1 0,-1 -1,0 0,-1 0,-1 z"/>
+<path id="map-KA" data-state="KA" data-name="Karnataka" d="m 124,505 -1,0 1,0 0,-1 2,-1 0,-1 0,1 1,0 2,-1 1,-2 -1,0 1,-1 0,1 0,0 0,-1 2,-3 -1,0 -1,0 0,0 1,-1 1,1 0,-1 1,-1 0,-1 -2,-1 0,-1 -1,0 0,1 0,-1 -1,-1 0,-1 0,0 0,1 0,-1 -1,0 0,-1 -1,0 0,-1 -1,1 0,0 1,0 0,-1 1,1 0,-1 1,0 0,0 1,0 0,-1 1,-1 0,-1 0,1 1,0 0,2 1,-1 0,-1 1,0 -1,-1 1,-1 0,-1 3,-1 1,0 0,-2 1,0 0,-1 -1,0 0,0 2,0 0,0 1,-1 1,2 1,0 0,1 1,0 1,-1 0,-2 1,0 1,-1 1,0 1,0 1,1 2,0 0,-1 1,0 0,1 1,0 1,0 0,-2 -1,0 1,-1 0,-1 -1,-2 1,-1 0,-1 -1,-1 0,-1 -1,0 0,-1 1,0 0,-2 1,0 0,1 1,0 1,1 0,-1 1,1 1,-1 0,1 1,1 3,-1 1,1 1,-1 1,1 0,1 0,-1 2,-1 1,1 1,0 0,1 1,0 1,-1 -1,0 0,-1 -1,0 0,-1 1,-1 -1,0 0,-1 -1,0 0,-1 2,0 0,-1 1,0 0,-1 1,0 0,-1 1,0 0,1 1,-1 1,2 1,0 0,-1 1,0 0,-1 1,0 1,-1 -1,-1 0,-1 1,1 2,-1 0,-3 1,0 0,-1 0,-1 -1,0 1,-2 1,0 1,1 0,0 1,1 1,0 0,-1 1,0 0,-1 1,0 0,-1 1,-1 0,-1 2,-1 1,1 1,0 0,1 1,0 -1,2 2,0 1,1 1,0 0,-1 1,0 0,0 1,0 -1,2 1,1 0,1 -1,1 1,1 1,0 0,1 0,1 0,0 0,1 -1,0 0,1 -1,0 0,1 0,0 0,1 0,0 1,0 0,0 -2,1 0,2 1,0 0,1 1,-1 0,1 1,0 0,1 2,1 0,1 -1,0 0,0 0,1 -1,0 0,1 -1,0 0,1 -1,0 1,1 0,1 -1,0 -1,0 0,2 0,0 -2,1 0,0 -1,1 2,1 1,2 -1,2 0,3 -1,0 0,2 1,0 0,1 -1,0 0,1 1,0 0,1 -2,0 1,1 -1,0 0,1 -1,0 0,0 -1,0 1,1 1,1 1,0 2,0 2,1 0,1 -1,0 -1,1 -1,0 0,0 0,1 0,0 -1,1 0,1 0,0 0,2 0,1 0,2 0,0 -5,-1 -2,0 -2,1 -1,1 1,0 0,2 2,2 0,1 -1,-1 -1,0 0,3 -1,0 0,0 1,1 1,2 1,0 0,1 1,0 0,1 -1,1 1,1 0,1 -1,0 0,0 -2,3 -1,0 0,-1 -1,0 0,0 -2,0 -2,-1 0,0 0,1 0,1 1,0 1,0 0,3 -1,1 0,1 -1,3 1,2 1,0 1,1 2,0 -1,1 0,1 -1,0 -1,1 0,1 1,1 -1,0 0,1 2,0 1,1 1,0 0,-2 1,-1 2,1 1,0 0,1 2,0 0,1 1,1 1,0 -1,-2 0,-1 1,0 0,1 1,0 0,3 -2,0 0,1 -1,0 0,1 1,0 0,0 -1,2 1,0 0,1 1,0 0,1 0,1 -1,1 0,0 -1,0 0,-2 -1,-1 -3,1 -1,-1 -2,0 0,-1 0,-2 -2,0 0,1 -1,0 0,1 1,0 1,1 -1,1 2,2 0,1 -1,0 -1,2 1,2 0,0 0,-1 1,1 1,0 1,0 0,-1 -1,-1 1,0 0,-1 0,0 0,1 1,0 0,0 0,-1 0,1 1,0 0,1 1,0 1,0 0,1 1,0 0,3 1,0 0,-1 1,0 0,-1 1,1 1,-1 1,0 0,0 -1,0 1,0 0,0 0,1 1,0 0,1 0,-1 1,0 0,0 1,-1 0,-1 0,-1 1,0 1,1 1,-1 0,1 -1,0 0,1 0,0 0,-1 1,0 0,-1 2,1 0,1 -1,1 1,1 0,1 -1,0 0,0 0,1 2,0 0,1 1,0 0,1 1,-1 3,0 -1,5 1,0 -1,0 1,0 1,0 0,0 1,0 1,1 1,-1 0,1 0,1 -1,0 1,1 -1,1 0,0 -1,0 0,1 -1,0 0,1 -1,0 0,1 -1,0 -1,-1 -1,2 -1,0 0,2 0,0 -2,0 -2,-2 -1,0 0,1 0,0 -1,-1 0,1 0,0 1,-1 0,0 -3,1 0,1 -1,3 -1,0 -1,1 -1,-1 -1,0 0,1 -1,1 0,1 1,0 -1,1 1,0 0,1 0,1 -1,2 -2,0 0,1 5,1 1,1 -2,2 -1,2 -4,0 0,1 -1,0 0,1 -1,2 -1,-1 -1,0 -1,-1 -1,0 0,0 -3,0 0,1 -1,0 0,-1 -1,0 0,0 -1,0 -1,0 0,1 -1,0 -1,3 0,1 0,1 0,0 -1,0 -4,0 0,-1 -1,-1 -1,1 -1,0 0,0 -1,-1 0,0 0,-1 -2,0 -1,-2 -1,0 -1,-1 -2,0 0,-3 -2,1 -2,0 -1,-1 -1,-2 -2,0 0,-1 -1,0 -1,-1 -1,0 -2,-3 -1,0 0,-2 -1,-1 0,-1 1,0 0,-1 -2,1 0,-1 -1,-1 0,-1 1,0 -1,-1 -1,1 0,-1 -1,0 0,0 0,-1 -1,0 0,1 -1,0 0,-1 -1,0 0,0 -1,0 0,-1 0,-1 -3,1 0,0 -1,-2 -3,-11 -1,-6 -1,-5 -1,-2 -1,0 -1,-1 -1,-3 -1,-1 -2,-6 1,-1 -1,0 0,1 -1,0 0,-2 -1,-1 0,0 0,-2 -1,-1 -1,1 -2,-2 1,0 0,-1 0,0 0,-1 0,0 1,-1 1,0 0,-1 1,1 1,-1 0,-1 1,-1 -1,-1 0,-1 1,-1 0,-1 -1,-1 2,-1 0,-2 -1,0 0,-1 -1,-1 1,-1 -1,-1 0,-1 0,-1 0,0 0,0 0,-1 0,1 -1,0 z"/>
+<path id="map-KL" data-state="KL" data-name="Kerala" d="m 140,568 3,-1 0,1 0,1 1,0 0,0 1,0 0,1 1,0 0,-1 1,0 0,1 0,0 1,0 0,1 1,-1 1,1 -1,0 0,1 1,1 0,1 2,-1 0,1 -1,0 0,1 1,1 0,2 1,0 2,3 1,0 1,1 1,0 0,1 2,0 1,2 1,1 2,0 2,-1 0,3 2,0 1,1 1,0 1,2 2,0 0,1 0,0 1,1 0,0 0,1 -1,0 -1,1 -1,0 -1,-1 -1,1 0,2 1,0 1,1 0,0 2,1 1,1 1,1 1,0 0,1 -2,1 0,1 1,0 3,0 2,-1 1,0 -1,1 1,0 0,2 1,0 -2,0 -1,2 4,1 0,1 1,0 0,1 -1,2 0,1 -1,0 1,1 0,4 1,1 0,1 0,0 1,0 0,0 1,1 1,0 1,-1 0,-1 2,-1 1,0 0,1 1,1 0,1 1,0 0,2 -2,1 1,2 0,1 -1,0 -1,2 1,0 0,1 1,1 -1,0 0,1 0,0 -1,2 1,0 1,1 1,-1 0,1 0,-1 0,1 1,1 0,1 -1,0 0,2 -1,0 0,1 0,2 -1,1 0,1 -1,1 0,1 -1,1 1,1 0,1 1,0 1,1 -1,2 -1,1 0,0 2,4 0,1 -1,0 0,1 -2,1 1,1 -1,0 -1,1 0,0 -3,-2 -7,-10 -2,-1 -1,-2 -4,-8 -2,-12 0,0 1,2 1,1 0,3 1,0 -1,3 1,0 0,0 2,0 -2,-1 0,-1 0,-1 0,0 0,-1 -1,0 0,-3 -1,-1 0,0 0,1 0,0 -1,-3 0,-1 -1,-1 1,4 0,0 -3,-9 -4,-9 -1,-5 -3,-7 -1,-2 -1,-1 -2,-4 -3,-3 -1,0 -2,-3 -1,0 -1,0 0,-2 -4,-9 -2,-5 z"/>
+<path id="map-MP" data-state="MP" data-name="Madhya Pradesh" d="m 210,253 1,0 0,-1 1,0 1,1 1,0 1,1 2,1 2,0 1,-1 0,0 0,0 1,1 1,0 1,1 1,0 1,0 0,1 1,-1 0,2 -1,1 0,0 0,1 0,0 1,1 0,1 2,0 0,1 -1,0 0,1 1,0 0,0 0,0 -1,0 0,1 0,0 -1,0 0,1 -1,0 0,1 -1,0 0,1 -1,0 1,1 -1,1 0,2 -1,1 0,1 -1,0 0,1 -1,-1 0,0 0,0 0,0 -2,1 1,2 0,1 -3,1 -1,1 -1,-1 -1,1 -2,0 -1,1 -1,0 0,1 0,1 -1,1 -1,0 0,1 -1,1 1,1 0,1 1,0 0,1 1,1 0,1 1,1 -1,0 1,1 -1,0 -1,1 0,2 -3,3 0,1 1,1 0,2 1,2 0,3 -1,1 1,1 0,1 2,1 -1,1 1,1 1,-1 1,-2 2,1 2,3 1,0 1,0 0,0 0,0 1,2 0,-1 1,0 1,-2 1,-1 0,-2 -2,-1 0,-1 0,0 1,0 -2,-3 -2,1 -1,0 0,-1 1,-1 0,-2 0,0 0,-1 -2,-1 0,-1 -1,0 0,-2 -1,-1 -1,-4 -2,-1 -1,1 -1,0 0,0 1,0 1,-1 0,0 1,0 0,0 0,-1 1,0 0,-1 1,0 0,-1 1,0 1,-1 1,0 0,0 -1,1 0,0 0,1 1,0 0,1 1,0 0,-1 1,0 -1,0 -1,-1 0,-1 1,1 2,0 0,0 -1,0 0,0 0,-1 -1,-1 1,0 0,-1 1,0 0,0 0,0 0,1 -1,0 0,1 -1,1 1,0 1,0 0,1 -1,1 -1,-1 1,0 0,-1 -2,0 -1,1 0,0 -1,0 0,0 1,0 0,1 1,1 1,-3 1,0 1,0 0,2 -1,1 -1,0 0,1 0,0 0,2 2,-1 1,1 0,-1 0,0 1,-1 0,1 1,1 -1,1 0,1 0,0 1,-1 1,1 0,0 0,1 1,0 0,-1 0,0 0,1 1,0 0,-1 -1,0 0,0 0,0 0,1 1,0 0,0 -1,-1 0,-1 1,1 0,0 0,0 0,-1 -1,0 0,-1 -1,0 0,-1 1,-1 1,0 0,1 0,1 0,-1 1,1 1,-1 1,0 -1,0 -1,1 0,0 -1,0 -1,1 0,1 0,-1 0,1 1,-1 0,1 1,0 2,-2 1,1 0,0 0,1 3,0 2,1 0,-1 1,0 -1,-2 1,0 0,1 1,-1 1,0 1,-2 1,0 1,0 1,-1 0,-1 1,0 0,-1 1,1 0,2 2,1 0,0 1,2 -2,1 -2,3 1,1 1,-1 0,0 0,-1 2,-1 1,1 1,0 0,-1 0,0 1,0 1,1 0,-1 1,0 0,-2 1,1 -1,0 1,1 0,0 0,1 1,0 1,0 0,-1 -1,0 0,-1 -1,0 2,0 1,1 0,-2 1,0 1,1 -1,1 0,1 -1,1 0,1 -1,1 0,1 1,0 1,0 0,0 0,0 0,0 0,0 1,0 0,1 1,0 0,-1 1,0 1,1 1,-2 1,1 0,0 1,0 0,-1 1,-2 0,-1 0,-1 1,0 0,1 0,-1 0,0 1,1 1,0 0,1 -1,0 2,1 1,-1 -1,-1 0,0 1,0 0,-1 1,0 0,1 1,0 -1,1 0,1 0,-1 0,0 -1,1 0,0 1,0 0,1 1,0 1,1 1,0 1,1 0,0 0,2 0,1 1,1 1,0 2,1 1,0 1,-1 0,0 1,1 0,0 0,1 1,0 0,-1 0,0 0,0 0,0 0,0 0,2 0,0 0,0 1,0 0,1 1,0 2,1 0,-2 1,-1 0,1 1,0 0,1 3,-1 1,1 0,1 1,0 0,1 1,10e-4 0,1 -1,0 -1,0 0,1 0,0 -1,3 1,0 0,2 0,1 0,0 0,2 -1,0 0,1 1,1 1,0 -1,1 1,0 0,1 0,0 -1,1 -2,0 0,1 -1,1 -1,0 0,1 -1,0 -1,-1 -3,0 -2,0 -1,0 -1,-1 0,0 -1,1 -2,0 -1,-1 -1,0 -1,0 -1,1 -1,0 -1,-1 0,0 -1,-2 -1,0 0,1 1,1 0,1 1,0 0,1 -1,1 -1,0 0,1 -1,0 0,1 1,0 0,1 0,0 1,-1 1,0 1,-1 1,0 0,1 2,0 1,3 1,0 0,1 1,0 1,0 0,1 1,0 1,1 0,1 -1,1 0,2 -1,1 -1,0 -1,1 -2,0 0,1 0,2 -2,1 0,1 -2,0 0,1 0,2 -1,1 0,1 0,0 0,-1 0,1 -1,0 0,1 -1,0 0,1 -2,0 -1,1 -1,0 0,1 0,0 -1,1 0,-1 -1,0 0,1 -1,0 -1,1 -1,-1 -1,1 0,3 -1,1 -1,0 0,2 -1,0 1,0 0,1 -1,0 0,-1 -1,0 -1,4 -1,0 0,0 0,3 0,1 -1,0 -1,1 0,3 0,3 -2,3 0,0 -1,0 -2,-2 -1,0 0,1 -1,0 0,-1 0,-1 -1,-2 -2,-2 -2,0 -2,1 -1,1 -1,0 -1,0 0,1 -1,0 -3,-2 -2,1 -2,0 -1,-3 -2,0 0,0 -1,0 -3,-1 0,2 -2,0 -1,1 -2,0 0,0 -2,1 0,1 0,0 1,1 0,1 -1,0 0,0 -2,0 0,0 -1,-1 -1,1 -3,-1 0,-1 -1,0 -2,1 0,-2 -1,0 0,1 -1,0 -1,0 -1,-1 0,1 -2,0 0,1 -5,3 -1,0 -2,-1 0,0 -1,0 0,0 -1,0 0,-1 0,1 0,0 -1,0 0,1 0,0 -2,0 0,-2 -1,0 0,-1 1,-1 2,1 1,0 -1,0 0,-1 -1,-2 -1,-2 -4,0 0,1 -1,0 0,1 -1,-1 0,0 -2,0 -4,3 -1,0 0,0 -1,0 0,1 -1,0 1,1 0,1 -3,3 1,1 -1,2 -3,0 -1,2 -2,1 -2,0 0,0 -2,0 -1,-2 1,0 0,0 -1,-1 0,0 -1,-3 -1,0 -2,-1 -2,0 -4,0 -1,0 -1,1 -2,0 -1,0 -1,0 -1,0 0,-1 -2,0 -2,-1 -1,-2 -3,-1 -2,0 -5,-2 0,-1 -1,0 0,-2 0,-2 -1,-1 -1,0 0,-1 -1,0 -1,1 -1,0 0,1 -2,0 -1,-1 0,0 0,-1 -1,-1 2,-2 -1,0 -1,0 0,-3 -1,0 0,0 -1,-1 0,-2 1,0 0,1 1,0 0,-1 0,0 1,-1 1,0 -1,-1 -1,0 0,-1 0,1 -1,0 0,-1 0,1 0,-1 -1,0 0,-1 -1,0 0,0 1,-1 2,1 2,-3 2,0 0,-2 2,-3 -1,-1 -1,1 -1,-1 0,-1 1,0 -1,-2 0,0 1,-1 3,1 1,-1 1,0 1,-1 1,0 1,0 0,0 -1,0 1,0 0,-1 -1,0 -2,-1 0,0 -1,-1 1,-1 0,-1 1,-1 1,0 1,-1 1,0 1,-1 0,0 1,0 1,-2 1,0 -1,-1 1,-1 -1,-3 0,-1 2,-2 -2,-4 1,0 0,-1 -1,0 -2,0 1,-1 0,-1 1,-2 -1,0 0,-1 -1,0 -1,-1 1,-1 0,-1 1,0 0,-1 1,-1 -1,0 1,-2 2,3 1,0 0,-1 1,0 0,-1 1,0 0,-1 -2,0 -1,-1 0,0 0,-1 -1,-2 0,-1 0,1 0,0 1,0 0,1 3,1 0,-1 1,0 0,-2 1,-1 0,-1 4,0 0,0 -1,0 0,1 0,1 -1,-2 0,0 1,1 -1,1 1,0 0,0 2,0 0,1 -2,1 -1,-1 -1,0 0,-1 -1,0 0,0 0,1 1,1 -1,1 0,1 1,1 1,0 4,1 3,-1 1,1 3,-2 2,1 0,1 0,0 0,1 0,0 1,0 1,1 0,0 0,0 -1,1 0,0 0,1 -1,1 -1,-1 -1,1 0,0 -1,0 0,1 1,1 1,0 0,1 -1,1 -1,2 1,0 0,1 1,0 0,1 -1,0 0,1 -1,1 -1,-1 -1,1 -1,0 0,-1 -1,-1 -1,2 0,1 2,1 0,0 0,0 1,1 1,0 1,1 0,-1 1,0 0,-1 -1,0 0,-1 1,0 1,1 0,0 1,0 0,0 2,-1 0,-2 2,-1 2,0 0,-2 1,-1 0,-1 1,-1 0,0 0,1 0,2 1,0 1,-1 2,1 0,0 1,0 0,0 1,2 1,0 0,0 1,-1 0,0 1,0 0,0 2,-1 0,1 -1,1 1,1 1,0 1,1 1,0 1,0 0,-1 1,0 -1,-1 -1,-2 0,-3 -1,-2 1,0 0,1 1,0 0,1 1,1 1,0 1,-1 0,0 0,-1 0,-2 -1,-2 -1,0 0,-1 -1,0 -1,0 -1,-2 1,0 2,0 0,-1 -1,0 0,-1 -1,0 -1,-2 3,-2 2,1 1,0 1,-1 2,0 1,1 2,-1 0,-2 1,0 0,-1 -1,-1 0,-1 -1,0 1,-2 -1,-1 0,0 -1,1 0,1 -3,-1 -1,1 -1,0 0,1 -1,-1 -1,0 -2,0 0,-1 -2,0 -2,-1 0,-1 -1,0 -1,-2 0,-3 -1,-1 0,-1 1,0 0,-1 1,-2 1,0 0,-1 2,0 1,0 0,0 1,0 1,-1 0,0 1,-1 2,-1 1,-1 1,0 1,-1 2,0 2,-1 1,-1 2,0 0,-1 2,0 3,-2 1,0 1,-1 1,0 0,-1 1,0 0,-1 1,0 1,-1 2,0 0,-1 1,0 0,-1 2,0 0,-1 z"/>
+<path id="map-MH" data-state="MH" data-name="Maharashtra" d="m 125,366 1,1 2,0 0,-1 1,0 1,-1 1,0 0,1 1,0 1,1 0,2 0,2 1,0 0,1 5,2 2,0 3,1 1,2 2,1 2,0 0,1 1,0 1,0 1,0 2,0 1,-1 1,0 4,0 2,0 2,1 1,0 1,3 0,0 1,1 0,0 -1,0 1,2 2,0 0,0 2,0 2,-1 1,-2 3,0 1,-2 -1,-1 3,-3 0,-1 -1,-1 1,0 0,-1 1,0 0,0 1,0 4,-3 2,0 0,0 1,1 0,-1 1,0 0,-1 4,0 1,2 1,2 0,1 1,0 -1,0 -2,-1 -1,1 0,1 1,0 0,2 2,0 0,0 0,-1 1,0 0,0 1,-1 0,1 1,0 0,0 1,0 0,0 2,1 1,0 5,-3 0,-1 2,0 0,-1 1,1 1,0 1,0 0,-1 1,0 0,2 2,-1 1,0 0,1 3,1 1,-1 1,1 0,0 2,0 0,0 1,0 0,-1 -1,-1 0,0 0,-1 2,-1 0,0 2,0 1,-1 2,0 0,-2 3,1 1,0 0,0 2,0 1,3 2,0 2,-1 3,2 1,0 0,-1 1,0 1,0 1,-1 2,-1 2,0 2,2 1,2 0,1 0,1 1,0 0,-1 1,0 2,2 1,0 0,0 0,1 -1,1 -4,2 -1,2 0,1 0,1 1,2 2,0 0,4 1,2 -2,1 -1,1 1,1 1,-1 1,0 -1,5 1,1 -2,1 -1,1 -3,1 1,1 -1,1 0,0 2,0 1,1 0,1 0,2 -1,1 -1,0 -1,-1 -1,0 0,1 2,0 0,1 -1,1 -1,0 0,0 1,0 1,0 0,-1 2,0 0,1 3,2 0,2 1,0 1,1 1,0 0,1 1,0 0,1 -2,1 1,1 -2,2 -1,0 0,-1 -1,0 -1,-2 -2,1 -1,2 -1,0 0,1 -1,1 0,1 -1,2 0,1 2,2 -2,1 -1,0 1,1 0,0 -1,0 0,0 -1,0 -1,0 -2,-2 -2,0 -1,-1 1,-1 0,-4 0,-1 -1,0 0,-2 2,-1 0,-1 1,-2 0,-2 -1,-1 -2,-2 -1,-1 -1,0 -2,1 -1,2 -1,0 0,-1 -2,1 -2,-2 -1,0 0,-1 -1,0 0,2 -1,1 0,1 -1,0 -2,-1 -2,0 -1,0 -1,0 1,-1 0,-1 -1,0 -1,0 0,-2 -1,0 -1,0 -2,-1 -2,0 -1,1 0,-1 -2,0 0,-1 -1,0 0,-1 -1,1 1,0 1,1 0,2 -1,1 0,1 1,1 0,1 -1,0 1,2 -3,1 0,2 -1,2 -2,0 -1,0 0,-1 -2,-2 -2,1 0,0 1,0 -1,0 0,1 0,0 -1,1 0,1 -1,0 0,1 -1,0 0,1 0,1 1,0 0,1 1,0 0,1 1,0 1,2 -2,0 -1,3 -1,-1 -1,1 0,3 -2,1 0,-1 -1,0 0,2 -1,0 -1,0 1,0 -1,0 1,0 -1,2 1,1 0,1 0,0 -1,0 0,1 -1,0 -1,-1 -2,0 1,-2 -1,0 0,-1 -1,0 -1,-1 -2,1 0,1 -1,1 0,1 -1,0 0,1 -1,0 0,1 -1,0 -1,-1 0,0 -1,-1 -1,0 -1,2 1,0 0,1 0,1 -1,0 0,3 -2,1 -1,-1 0,1 1,1 -1,1 -1,0 0,1 -1,0 0,1 -1,0 -1,-2 -1,1 0,-1 -1,0 0,1 -1,0 0,1 -1,0 0,1 -2,0 0,1 1,0 0,1 1,0 -1,1 0,1 1,0 0,1 1,0 -1,1 -1,0 0,-1 -1,0 -1,-1 -2,1 0,1 0,-1 -1,-1 -1,1 -1,-1 -3,1 -1,-1 0,-1 -1,1 -1,-1 0,1 -1,-1 -1,0 0,-1 -1,0 0,2 -1,0 0,1 1,0 0,1 1,1 0,1 -1,1 1,2 0,1 -1,1 1,0 0,2 -1,0 -1,0 0,-1 -1,0 0,1 -2,0 -1,-1 -1,0 -1,0 -1,1 -1,0 0,2 -1,1 -1,0 0,-1 -1,0 -1,-2 -1,1 0,0 -2,0 0,0 1,0 0,1 -1,0 0,2 -1,0 -3,1 0,1 -1,1 1,1 -1,0 0,1 -1,1 0,-2 -1,0 0,-1 0,1 -1,1 0,1 -1,0 0,0 -1,0 0,1 -1,-1 0,1 -1,0 0,0 1,-1 0,1 1,0 0,1 1,0 0,1 0,-1 0,0 0,1 1,1 0,1 0,-1 1,0 0,1 2,1 0,1 -1,1 0,1 -1,-1 -1,1 0,0 1,0 1,0 -2,3 0,1 0,0 0,-1 -1,1 1,0 -1,2 -2,1 -1,0 0,-1 0,1 -2,1 0,1 -1,0 1,0 0,0 -2,1 -1,0 -1,-1 0,-2 -1,0 0,-1 -1,1 -3,0 0,0 -1,0 1,0 -2,-3 -2,-1 -1,-2 -1,0 0,0 -1,-3 -1,-4 0,0 1,-1 -1,0 0,-1 -1,-2 0,-1 1,0 -1,-1 0,-1 0,0 0,-4 -1,-2 0,-2 0,0 0,-1 -1,0 1,-1 -1,-1 -1,-3 -1,-1 1,0 0,0 0,-1 -1,-2 -1,0 1,-1 0,0 0,-1 -1,-1 1,-1 -1,-1 0,-1 0,0 -1,-2 0,-2 0,0 -1,-1 0,-1 -1,-2 0,0 -1,-1 0,-1 -1,-1 0,-1 1,0 0,1 2,0 0,1 1,1 0,-2 -1,-1 -1,0 -1,-1 -1,0 0,-1 -1,-2 1,-2 -2,-3 0,-2 1,0 1,-1 1,1 0,0 0,-1 -1,0 0,-1 1,0 0,-1 0,-1 0,0 1,-1 -1,0 0,-1 -1,0 0,1 -1,1 -1,0 0,2 -1,1 0,-1 -1,0 0,-2 0,0 0,0 0,0 0,-1 -1,-2 0,-3 0,-1 -1,-1 0,-2 1,-1 0,-1 0,0 -1,-1 0,-1 1,0 -1,-4 -1,-1 0,0 1,0 0,-2 1,-1 0,-2 1,-1 0,0 1,0 0,-1 1,0 0,-1 1,-1 2,0 0,0 0,1 0,1 0,0 1,0 0,1 1,1 0,-1 2,0 1,1 1,-2 0,0 2,-1 0,-1 1,0 0,0 0,0 1,0 0,-3 -1,-1 1,-1 1,-3 0,0 0,-1 -1,0 -1,-1 1,0 0,-1 1,0 0,1 1,0 1,1 1,1 1,0 1,0 1,0 2,-1 0,-1 0,-1 1,0 0,-1 1,0 1,0 0,-2 -1,-2 0,-1 -2,0 0,-1 -1,0 -1,-1 0,-1 -2,0 -1,-1 1,0 0,1 1,0 1,0 0,-1 2,0 0,-2 1,0 1,-1 0,-2 0,0 2,-1 0,-1 1,1 0,0 2,0 0,0 0,0 2,-1 0,-1 0,-1 -1,1 -1,0 -1,0 0,-1 -2,0 -4,1 -1,-2 -1,-1 2,0 0,-1 -1,-1 0,-1 -1,-1 7,-3 z"/>
+<path id="map-MN" data-state="MN" data-name="Manipur" d="m 529,289 0,1 1,0 0,1 1,0 1,1 2,-4 1,0 2,-2 0,-1 -1,0 0,-1 3,-1 2,0 1,0 0,-1 1,1 0,1 1,0 0,-1 1,0 0,1 2,0 1,0 2,-1 0,-1 1,-1 1,0 1,-2 0,0 0,1 0,0 -1,1 0,2 2,1 1,0 0,0 0,1 -1,1 -1,4 3,2 0,3 -1,1 0,1 -2,2 -1,3 -1,0 0,2 -1,1 -1,2 -1,0 0,2 -1,0 0,0 -1,1 0,1 -1,3 0,3 -1,2 -1,0 0,2 -1,0 -1,-1 -3,-1 -1,0 -2,1 -1,-2 -3,0 0,1 -1,0 -1,1 -1,-1 -1,-2 -1,0 0,0 0,1 0,0 -1,0 -1,1 0,-1 0,-1 -1,0 0,1 -1,0 0,-1 -1,1 0,-1 -1,0 -2,-1 1,-2 0,-2 1,-1 0,0 0,-1 0,0 0,0 1,0 0,-2 1,-1 0,0 1,0 -1,0 1,-2 -1,-1 1,-1 0,-2 0,0 1,1 1,0 0,-1 1,0 1,-1 0,0 0,0 0,-2 0,-1 1,0 1,-1 1,-3 z"/>
+<path id="map-ML" data-state="ML" data-name="Meghalaya" d="m 454,283 3,-1 -3,-3 1,0 0,-1 0,-1 1,-1 0,0 0,0 2,-2 1,0 3,-1 1,-1 1,0 1,1 1,-1 1,1 0,1 1,-1 1,1 0,1 0,0 1,-1 1,0 0,1 1,0 1,-1 1,0 1,0 1,1 0,-1 1,0 1,1 1,0 -1,2 1,-1 1,0 -1,1 0,0 3,-1 0,2 0,1 1,0 1,-1 1,-2 2,0 1,0 2,-1 0,0 0,1 -1,0 1,-1 -1,0 2,-3 1,0 0,1 -1,1 1,1 1,-1 0,-2 2,-1 1,0 0,1 1,1 1,-1 1,0 2,0 1,-1 1,0 1,0 -3,3 0,1 1,0 -1,1 -1,1 0,3 1,-1 2,0 1,-1 1,1 0,1 1,0 1,1 1,0 0,1 1,0 1,-1 0,1 -2,2 1,0 0,1 1,0 0,1 0,0 1,1 0,0 0,1 0,0 0,1 -1,1 1,1 -3,1 -1,1 -2,-1 0,1 -1,0 0,2 -1,0 0,0 -2,0 0,-1 -2,0 -3,-2 -6,1 -1,0 0,1 -1,0 -1,1 -1,-1 0,-1 -3,1 -1,-1 -2,0 -1,-1 -4,0 -5,1 -2,-1 -1,1 -1,0 -4,0 -1,1 -2,-1 -5,-1 -3,-2 -3,0 0,0 -1,-2 1,-2 0,0 1,0 z"/>
+<path id="map-MZ" data-state="MZ" data-name="Mizoram" d="m 505,313 3,0 0,2 1,0 0,0 1,0 0,-2 1,0 0,-2 1,-1 2,-4 1,3 1,-1 1,0 0,0 1,0 1,0 0,0 0,0 0,1 0,0 -1,1 0,2 -1,2 2,1 1,0 0,1 1,-1 0,1 1,0 0,-1 1,0 0,1 0,1 1,-1 1,0 0,0 0,2 1,1 0,4 1,2 -1,6 0,1 -1,1 1,3 0,2 0,0 -2,3 -1,0 -1,-1 -1,0 0,1 1,2 -1,0 0,2 0,0 0,2 0,1 1,3 -1,2 0,0 0,1 1,1 0,4 -1,0 0,1 0,0 -2,-1 -1,0 0,2 -1,0 0,3 0,0 -1,-1 -1,0 0,2 -1,-3 0,0 -3,-2 0,0 0,3 -2,1 0,-2 -1,-2 0,0 0,0 0,-1 -2,-9 0,-2 0,-2 -1,0 -1,-2 0,-2 0,0 0,-1 -1,0 0,-3 -1,-1 0,-3 1,0 -1,-2 0,-1 -1,-3 0,-3 0,0 0,-1 -1,-1 0,0 0,-2 1,0 0,-1 0,-1 1,0 0,-1 0,-1 0,-1 0,-1 0,-3 z"/>
+<path id="map-NL" data-state="NL" data-name="Nagaland" d="m 565,248 1,4 -1,1 1,0 0,1 1,0 -1,1 0,1 0,0 -2,2 0,1 -2,3 1,1 0,1 1,0 0,3 0,1 -1,1 0,1 1,1 -2,3 -1,1 0,1 0,1 1,3 -2,2 0,1 -1,0 0,1 -1,0 -1,2 -3,1 0,0 -1,0 -2,-1 0,-2 1,-1 0,0 0,-1 0,0 -1,2 -1,0 -1,1 0,1 -2,1 -1,0 -2,0 0,-1 -1,0 0,1 -1,0 0,-1 -1,-1 0,1 -1,0 -2,0 -3,1 0,1 1,0 0,1 -2,2 -1,0 -2,4 -1,-1 -1,0 0,-1 -1,0 0,-1 0,0 0,-1 1,-1 0,-1 -1,-1 -1,-2 2,-2 2,-1 2,-2 3,-2 0,-1 1,-1 0,-1 1,1 0,1 0,1 1,-1 1,0 1,-1 1,-1 -1,-2 1,-2 0,-2 2,-4 1,0 0,-3 2,-2 0,0 0,2 0,0 1,-1 1,-1 0,-2 1,0 0,-1 2,-1 1,0 1,-1 1,0 1,0 2,-2 2,-3 1,0 1,1 1,0 2,-1 z"/>
+<path id="map-OD" data-state="OD" data-name="Odisha" d="m 391,392 3,0 0,1 -1,0 0,0 -2,1 0,0 0,0 -1,0 0,1 -1,0 1,-3 1,0 z m -60,-39 3,1 0,2 1,1 1,0 1,1 3,0 0,-1 1,0 0,-1 1,0 5,0 0,-1 1,0 1,0 1,0 0,1 1,-1 0,0 2,-1 0,3 0,0 0,1 1,0 0,1 -1,0 -1,4 -1,1 0,0 1,-1 1,0 0,1 1,0 0,1 0,0 1,1 0,1 1,-2 0,0 1,0 0,-1 1,0 3,2 1,0 1,0 1,1 3,-1 1,1 -1,0 -1,2 3,1 0,-1 1,0 1,-2 1,-2 -1,-1 2,-1 -1,0 0,0 -1,0 1,-1 0,-1 -1,-1 0,-1 1,0 0,-1 1,2 4,1 2,2 2,1 0,0 1,0 1,1 1,0 0,1 1,0 0,1 2,0 0,0 0,2 2,0 1,1 3,0 1,1 0,1 -1,2 1,1 1,0 0,-1 1,-1 0,-1 1,0 1,3 2,1 0,1 2,0 0,1 1,0 0,1 0,1 0,0 -2,1 -4,0 -2,1 -3,2 -2,2 -1,3 0,1 3,7 0,1 -2,0 -1,1 -1,3 1,0 -1,-1 1,0 0,0 0,0 2,-1 0,0 1,0 1,0 -5,4 -1,3 1,0 0,1 -2,2 -3,1 -3,4 0,1 -1,0 -1,-2 -1,0 0,1 1,0 1,2 -15,5 -6,3 -5,4 -2,2 -3,2 -2,2 -1,2 -1,-1 0,0 -1,-1 0,-1 -1,0 0,1 -1,0 1,1 1,0 0,1 -1,0 -1,1 0,-1 -2,1 0,1 -1,-1 1,1 -1,1 0,1 -1,1 -1,0 0,0 -1,0 0,0 0,0 -1,0 0,2 -4,0 -1,1 -1,0 -1,-1 -2,0 -1,0 -2,-4 -1,1 1,2 -1,0 -1,-1 0,-1 -1,0 -2,-3 -1,1 0,1 -1,1 -1,-1 0,2 -1,0 0,0 0,0 0,-1 0,0 0,-1 0,0 0,1 0,0 -1,0 0,1 -1,-1 -1,0 -1,0 0,2 0,-1 1,1 -1,0 1,1 0,1 -1,0 0,1 -2,0 0,1 -1,0 0,1 0,-1 -1,-1 -2,3 -1,0 0,1 1,0 -1,0 0,0 1,0 -2,2 0,1 0,0 0,1 -1,0 -2,1 -1,0 0,-1 -1,0 -1,-1 0,0 0,1 -1,1 -2,1 -1,1 -1,-1 0,-1 1,-1 0,0 -1,0 0,-1 0,0 0,-2 -1,0 -1,-1 -2,3 0,1 -1,1 1,0 0,1 -1,0 0,1 -1,0 1,1 0,0 -1,0 0,2 -1,0 0,-1 -1,0 0,1 -1,0 -1,-1 0,-1 -3,0 -2,1 -3,1 -1,1 0,0 -1,1 0,-1 -1,0 -1,1 -1,0 -2,1 0,0 -2,0 0,0 0,-2 1,0 1,-2 0,-1 1,-1 0,-1 0,-1 0,-2 1,-1 1,0 0,-1 2,0 0,-1 2,-2 1,0 0,-1 1,0 0,-1 -1,-1 0,-1 1,0 0,-1 1,-1 1,0 0,-1 1,0 1,-1 0,-2 1,0 0,-2 -1,-1 0,-1 0,-1 -1,0 0,-1 -1,-2 1,-1 -1,-1 1,0 0,-1 -1,0 -1,-2 -1,0 0,-1 0,-4 0,-2 -2,0 0,-1 -2,-1 0,-1 1,-2 2,-1 2,2 1,-1 3,2 1,0 2,4 1,-1 1,0 3,1 0,1 0,1 1,-1 1,0 0,-1 0,-1 0,-2 -2,0 -1,0 -4,-2 0,-2 1,-1 0,-1 1,0 -1,-1 1,-2 0,-1 0,0 0,-1 -1,-1 1,-2 -1,-3 0,-3 1,0 0,1 1,0 1,-2 1,-1 1,-2 0,-1 1,-1 0,-1 2,0 1,0 0,0 1,0 2,-1 2,1 2,0 1,-1 1,-3 1,-1 0,-1 0,-1 2,1 1,0 0,-1 -1,-1 0,-1 1,-3 1,-1 0,1 1,0 -1,-1 1,-2 0,-1 0,-1 1,0 0,-1 1,0 0,-1 1,-1 -1,0 0,-1 0,-2 1,0 -1,-1 2,-3 1,0 1,0 2,-2 3,-1 1,-2 -1,-1 0,0 0,0 z"/>
+<path id="map-PB" data-state="PB" data-name="Punjab" d="m 161,115 0,2 2,2 -2,1 -2,3 -2,1 0,1 1,1 -2,2 0,0 1,0 1,0 2,2 2,1 2,3 -1,0 2,4 3,6 0,1 1,0 0,1 3,0 0,-1 1,0 0,-1 1,0 0,-1 0,1 1,2 0,1 1,-1 0,1 1,0 0,1 0,-1 0,1 1,-1 1,1 0,1 1,0 0,0 -1,1 0,1 1,0 -1,1 0,1 2,1 1,1 0,0 0,1 1,1 0,1 0,1 0,0 -1,0 0,0 -1,0 0,-1 -1,1 1,2 1,1 1,0 0,0 0,1 1,-1 0,1 1,1 -1,1 1,1 -1,1 0,1 1,1 -1,1 0,-1 -1,-1 -1,1 -1,-1 -1,1 0,1 1,0 0,1 -1,0 -1,1 -1,0 0,1 1,-1 1,1 0,0 1,0 0,2 -1,1 -1,0 0,-1 -1,1 0,0 -1,0 -1,-2 -1,0 0,1 0,1 -1,-1 0,1 -1,0 -2,0 -1,-1 0,1 0,0 1,1 -1,2 0,0 -1,0 0,2 -1,0 0,1 1,0 -3,2 -1,0 -1,1 0,0 -1,1 -2,0 -1,-2 -1,0 -1,0 -1,0 0,1 -2,0 0,1 -1,0 0,-1 -1,0 -1,-1 -1,2 -1,0 0,1 -1,0 -1,1 1,1 0,0 -2,1 0,-1 -1,-1 0,-1 1,-1 0,-1 1,-1 -1,-2 -1,0 0,1 -1,-1 0,0 -1,-1 0,-1 0,-1 0,1 -2,1 -2,-2 -1,0 0,-1 -1,0 -1,-1 -2,1 -1,0 -1,1 0,0 -3,-1 0,0 -13,-1 0,-2 2,-2 0,-2 0,0 0,-2 -2,-3 1,-1 1,0 0,-1 1,0 0,-1 1,-1 1,0 0,-1 1,0 0,-1 0,0 0,-1 1,0 2,-2 1,0 0,-1 1,0 0,0 1,-1 1,0 0,-1 1,-1 1,-1 1,-1 0,-2 1,1 1,0 0,-1 0,-1 -1,0 0,0 -1,0 0,1 -1,0 0,-1 -1,0 0,-3 1,-1 2,-4 0,-1 -1,0 1,-1 0,-1 -2,-4 0,-1 1,0 0,-2 1,-1 0,0 1,-1 1,0 0,-1 1,1 0,0 1,0 0,-1 1,-1 0,-1 1,0 2,1 2,-1 1,0 1,-1 1,1 3,-4 0,-1 -1,-2 0,0 2,0 1,0 0,1 0,0 0,1 1,-2 4,-2 1,-1 1,0 z"/>
+<path id="map-RJ" data-state="RJ" data-name="Rajasthan" d="m 121,173 0,2 -2,2 0,2 13,1 0,0 0,1 1,0 0,1 -2,2 0,1 1,0 1,-1 0,0 -1,5 1,1 -1,2 -1,0 0,0 0,1 1,0 1,1 0,1 1,0 0,-1 2,0 2,-1 2,1 1,2 1,0 1,0 1,1 1,0 2,-1 1,1 2,-1 0,1 1,0 0,-1 1,0 0,2 -1,1 1,0 0,1 1,0 0,1 2,0 0,1 -1,1 1,2 0,1 1,1 1,3 1,0 0,1 3,2 0,1 2,0 1,1 1,1 1,1 0,1 1,0 0,1 1,1 -1,0 0,-1 -1,0 -2,2 1,0 0,1 1,-1 0,0 -1,0 0,0 -1,0 0,0 -1,0 1,0 0,1 -1,0 0,0 0,0 1,0 0,1 2,0 1,0 2,1 1,-1 -1,-1 0,-1 -1,0 0,-1 -1,-1 1,-1 -1,-1 2,0 1,0 0,1 1,0 0,-1 -1,-1 1,-1 -2,-1 1,0 1,1 2,0 1,1 -1,0 0,0 1,1 -1,0 2,0 0,2 1,-1 1,0 0,-2 3,-1 0,-1 1,0 2,2 -1,3 0,2 0,0 0,2 0,0 0,2 1,1 -1,0 0,1 1,0 1,0 0,-2 2,0 0,-1 -1,0 0,-1 2,1 1,0 0,-1 1,0 0,1 1,-1 1,1 1,-1 0,0 0,0 1,0 0,2 1,1 0,1 -1,1 1,0 0,1 0,1 1,0 0,1 1,0 0,1 0,1 1,0 2,1 1,0 0,1 1,1 0,1 1,0 0,1 -1,0 0,1 -2,1 0,1 1,0 0,1 1,1 1,-1 1,1 0,0 0,-1 1,0 0,1 -2,0 -5,3 0,1 0,1 1,0 0,1 1,0 0,0 0,-1 0,1 2,0 2,-1 0,-1 1,-1 3,1 0,-1 1,1 1,0 0,1 1,0 0,-1 1,0 0,-1 2,0 0,0 1,1 -1,1 -1,0 0,1 0,0 -1,0 0,1 -2,0 0,1 -1,0 0,1 -2,0 -1,1 -1,0 0,1 -1,0 0,1 -1,0 -1,1 -1,0 -3,2 -2,0 0,1 -2,0 -1,1 -2,1 -2,0 -1,1 -1,0 -1,1 -2,1 -1,1 0,0 -1,1 -1,0 0,0 -1,0 -2,0 0,1 -1,0 -1,2 0,1 -1,0 0,1 1,1 0,3 1,2 1,0 0,1 2,1 2,0 0,1 2,0 1,0 1,1 0,-1 1,0 1,-1 3,1 0,-1 1,-1 0,0 1,1 -1,2 1,0 0,1 1,1 0,1 -1,0 0,2 -2,1 -1,-1 -2,0 -1,1 -1,0 -2,-1 -3,2 1,2 1,0 0,1 1,0 0,1 -2,0 -1,0 1,2 1,0 1,0 0,1 1,0 1,2 0,2 0,1 0,0 -1,1 -1,0 -1,-1 0,-1 -1,0 0,-1 -1,0 1,2 0,3 1,2 1,1 -1,0 0,1 -1,0 -1,0 -1,-1 -1,0 -1,-1 1,-1 0,-1 -2,1 0,0 -1,0 0,0 -1,1 0,0 -1,0 -1,-2 0,0 -1,0 0,0 -2,-1 -1,1 -1,0 0,-2 0,-1 0,0 -1,1 0,1 -1,1 0,2 -2,0 -2,1 0,2 -2,1 0,0 -1,0 0,0 -1,-1 -1,0 0,1 1,0 0,1 -1,0 0,1 -1,-1 -1,0 -1,-1 0,0 0,0 -2,-1 0,-1 1,-2 1,1 0,1 1,0 1,-1 1,1 1,-1 0,-1 1,0 0,-1 -1,0 0,-1 -1,0 1,-2 1,-1 0,-1 -1,0 -1,-1 0,-1 1,0 0,0 1,-1 1,1 1,-1 0,-1 0,0 1,-1 0,0 0,0 -1,-1 -1,0 0,0 0,-1 0,0 0,-1 -2,-1 -3,2 -1,-1 -3,1 -4,-1 -1,0 -1,-1 0,-1 1,-1 -1,-1 0,-1 0,0 1,0 0,1 1,0 1,1 2,-1 0,-1 -2,0 0,0 -1,0 1,-1 -1,-1 0,0 1,2 0,-1 0,-1 1,0 0,0 -4,0 0,1 -1,1 0,2 -1,0 0,1 -3,-1 0,-1 -1,0 0,0 0,-1 0,1 1,2 0,1 0,0 1,1 2,0 0,1 -1,10e-4 0,1 -1,0 0,1 -1,0 -2,-3 -1,2 1,0 -1,1 0,1 -1,0 0,1 -1,1 1,1 1,0 0,1 1,0 -1,2 0,1 -1,1 2,0 1,0 0,1 -1,0 2,4 -1,2 0,1 1,3 -1,1 1,1 -1,0 -1,2 -1,0 0,0 -1,1 -1,0 -1,1 -1,0 -1,1 0,1 -1,1 1,1 0,0 2,1 1,0 0,1 -1,0 1,0 0,0 -1,0 -1,0 -1,1 -1,0 -1,1 -3,-1 -1,1 0,0 -1,-1 0,-1 -1,-2 -1,0 -1,1 -1,-1 0,-2 -1,-1 -1,0 0,-1 -1,0 0,-1 0,0 0,1 -1,0 -1,-3 -1,0 0,-1 -1,1 0,-1 -1,0 0,0 1,-1 0,-1 0,-2 -2,-1 -1,1 0,-2 -1,0 -1,-2 -1,0 0,0 0,-2 1,-2 0,-1 0,-1 -1,-1 0,-1 -1,0 0,1 -1,1 -1,0 -1,-1 1,-1 -2,-1 -1,-1 1,-3 1,0 0,-1 0,0 0,-1 0,0 -1,1 -2,-1 0,-1 0,-2 -1,1 -1,0 0,0 -1,2 1,0 -1,1 -1,-1 -3,0 -1,-1 0,-1 -2,0 -1,-1 -1,1 0,1 -1,0 -1,-1 0,-1 0,0 -1,0 -1,-1 0,0 -1,0 -1,-1 1,0 1,0 1,-1 -1,0 -2,-1 0,0 -1,0 -2,-1 0,-1 -1,0 -2,2 -1,-1 -1,0 0,2 -1,0 0,-1 -3,1 -1,-1 -3,0 -2,1 -1,-1 -1,1 -4,-2 0,0 -3,-6 -1,-5 -3,-3 0,-1 -1,-2 0,-3 0,-4 -1,0 -2,1 -3,0 -3,-1 -4,-6 0,-3 2,-4 0,-6 0,-1 -2,-1 -4,0 -1,0 -2,-1 -4,-2 -1,-1 1,-5 1,-4 6,-6 2,-2 2,-1 2,-5 1,-2 4,-4 2,-1 2,0 2,3 0,2 2,3 3,0 8,-3 3,-1 5,0 5,-2 1,-4 1,-2 4,-4 2,-7 2,-2 7,-4 5,-2 1,-3 2,-2 4,-7 3,-9 5,-2 4,-1 z"/>
+<path id="map-SK" data-state="SK" data-name="Sikkim" d="m 428,223 0,1 2,0 2,1 0,2 1,0 1,1 -1,1 0,3 -2,2 1,4 2,2 0,1 -2,1 0,1 -1,1 0,0 -1,0 -1,-1 -1,0 -1,-1 -1,0 -1,0 0,1 -2,2 -2,-1 0,-1 -2,0 -1,0 -1,0 -1,-1 0,-1 -1,0 0,0 1,-3 -1,-1 0,-1 1,-1 -1,-2 3,-7 -1,-1 1,0 0,0 -1,-1 0,-2 0,0 1,0 1,-1 0,0 2,-1 1,0 2,-2 1,0 0,-1 1,0 0,-1 z"/>
+<path id="map-TN" data-state="TN" data-name="Tamil Nadu" d="m 233,641 0,0 0,1 0,0 2,2 -3,-2 -2,0 0,0 0,0 1,0 1,-1 z m -23,-73 0,1 -1,1 2,0 1,1 2,1 2,0 0,-1 1,0 0,-1 0,0 0,0 0,1 0,0 0,-1 1,-1 1,-3 0,0 -1,-1 1,-1 1,0 0,-1 1,0 3,-1 0,1 1,0 -1,0 0,-1 1,0 2,1 2,0 1,-2 1,0 0,-1 1,0 1,1 1,-1 0,-1 2,-1 0,0 1,0 0,0 -1,0 0,-1 -1,0 1,0 2,0 0,1 1,0 2,-1 0,1 0,0 0,1 1,0 0,1 1,-1 -1,-1 1,-1 1,0 0,0 1,0 2,-1 1,-1 0,-1 1,0 0,-1 1,0 0,-1 1,0 0,0 -1,0 0,0 2,0 2,1 2,0 1,2 1,0 0,-1 0,0 1,3 -1,3 -1,8 -2,7 -6,9 -1,3 0,0 -1,0 -1,1 0,-1 1,0 0,0 -1,0 -1,-1 -1,1 0,0 0,0 0,0 1,0 0,1 1,0 0,1 0,0 -1,-1 0,1 1,1 1,0 0,1 1,0 0,1 0,0 -1,5 2,4 0,8 0,0 -1,0 0,0 -1,0 0,1 -1,0 0,1 2,1 0,1 1,0 0,0 1,11 -1,0 -2,0 -7,-1 -2,1 -1,2 0,1 1,1 -2,2 -1,2 -3,3 -1,2 -1,3 1,2 3,2 3,0 -2,0 -3,0 -2,0 -3,1 0,0 -1,0 0,0 0,0 -2,1 -4,0 -4,3 -1,2 0,2 1,0 1,1 -1,0 -1,2 0,1 1,0 0,2 -1,2 0,1 0,0 -6,3 -1,2 -4,1 -1,1 -5,-1 -5,-4 0,0 1,-1 1,0 -1,-1 2,-1 0,-1 1,0 0,-1 -2,-4 0,0 1,-1 1,-2 -1,-1 -1,0 0,-1 -1,-1 1,-1 0,-1 1,-1 0,-1 1,-1 0,-2 0,-1 1,0 0,-2 1,0 0,-1 -1,-1 0,-1 0,1 0,-1 -1,1 -1,-1 -1,0 1,-2 0,0 0,-1 1,0 -1,-1 0,-1 -1,0 1,-2 1,0 0,-1 -1,-2 2,-1 0,-2 -1,0 0,-1 -1,-1 0,-1 -1,0 -2,1 0,1 -1,1 -1,0 -1,-1 0,0 -1,0 0,0 0,-1 -1,-1 0,-4 -1,-1 1,0 0,-1 1,-2 0,-1 -1,0 0,-1 -4,-1 1,-2 2,0 -1,0 0,-2 -1,0 1,-1 -1,0 -2,1 -3,0 -1,0 0,-1 2,-1 0,-1 -1,0 -1,-1 -1,-1 -2,-1 0,0 -1,-1 -1,0 0,-2 1,-1 1,1 1,0 1,-1 1,0 0,-1 0,0 1,0 1,-1 1,1 0,1 4,0 1,0 0,0 0,-1 0,-1 1,-3 1,0 0,-1 1,0 1,0 0,0 1,0 0,1 1,0 0,-1 3,0 0,0 1,0 1,1 1,0 1,1 1,-2 0,-1 1,0 0,-1 4,0 1,-2 2,-2 -1,-1 -5,-1 0,-1 2,0 1,-2 0,-1 0,-1 -1,0 1,-1 -1,0 0,-1 1,-1 0,-1 1,0 1,1 1,-1 1,0 1,-3 0,-1 3,-1 0,0 -1,1 0,0 0,-1 1,1 0,0 0,-1 1,0 2,2 2,0 z"/>
+<path id="map-TR" data-state="TR" data-name="Tripura" d="m 502,307 1,0 0,0 10e-4,1 1,2 -1,3 2,0 0,0 1,2 0,3 0,1 0,1 0,1 0,1 -1,0 0,1 0,1 -1,0 0,2 0,0 0,0 0,2 0,-1 -1,0 0,-1 0,0 -2,2 -1,0 -1,-2 0,0 0,1 1,5 -1,0 0,1 -1,0 -1,1 -2,3 1,4 0,1 -1,0 -1,2 -1,0 -1,0 -1,1 -1,0 -1,-4 0,-1 -1,0 0,-1 -1,-1 -1,0 -1,2 1,3 -1,0 -1,-2 0,-2 -1,-1 0,0 -1,0 1,-1 -1,0 -1,-3 -1,-1 0,-1 0,0 -1,-1 0,-2 1,1 0,-1 -1,0 0,-1 1,0 1,0 1,-2 -1,-1 0,-1 0,0 1,0 0,-1 0,0 0,0 0,-1 2,0 0,-2 0,-1 4,1 2,-1 1,-2 0,-1 0,0 0,1 1,1 1,0 0,-2 2,1 1,0 0,1 1,1 0,0 1,-3 0,-2 1,0 1,1 0,-2 3,0 0,-1 1,0 0,-2 0,-1 z"/>
+<path id="map-UP" data-state="UP" data-name="Uttar Pradesh" d="m 196,168 1,0 2,2 5,2 -2,3 -1,1 -1,0 -1,1 0,1 -1,1 0,0 -1,1 0,1 -1,1 1,2 0,2 1,0 0,0 1,0 1,-1 2,0 1,2 -1,0 0,1 1,0 0,1 1,0 0,-1 1,0 1,-2 1,-1 1,0 2,-2 2,1 2,1 1,3 2,2 4,2 3,0 -1,2 -1,1 0,0 0,1 -1,0 -1,1 2,1 1,0 1,1 0,1 1,0 0,0 1,1 0,-1 2,1 0,1 1,0 0,1 1,0 2,2 1,0 0,0 0,1 1,0 0,2 2,0 1,-1 0,1 1,-1 1,0 1,-1 1,0 1,1 -1,1 1,0 0,-1 1,0 0,1 -1,0 1,0 0,0 1,1 1,0 1,-1 1,-1 0,0 1,-1 0,0 1,0 2,2 1,0 0,1 1,1 1,2 2,0 1,2 0,-1 -1,-2 1,-1 1,1 1,0 0,1 2,1 0,1 2,1 0,0 1,0 0,1 1,1 1,0 0,1 1,1 3,1 0,2 2,2 0,1 0,0 1,0 0,0 1,0 0,-1 1,0 1,1 0,1 3,2 2,0 4,3 1,0 1,-2 2,0 1,1 2,1 5,4 5,-1 0,1 1,2 0,2 4,0 1,1 2,0 3,0 2,3 1,0 1,-2 -1,-1 0,-1 0,-1 5,0 5,3 0,0 -1,1 1,0 1,0 0,0 -1,1 1,1 1,1 -1,3 2,0 -1,1 1,1 0,2 0,0 0,0 0,1 1,0 0,-1 1,0 0,1 1,0 1,-1 1,0 0,1 -1,1 0,0 0,0 1,-1 1,2 2,0 0,1 -3,1 -4,-1 0,1 -1,1 -2,0 0,1 -1,0 0,2 2,0 1,0 1,1 2,0 0,1 0,2 -1,0 -1,1 -1,0 0,2 1,1 1,0 2,2 0,1 1,0 2,1 1,0 1,1 0,1 2,0 0,1 1,0 1,1 0,1 1,1 -2,0 0,1 0,0 0,-1 0,1 -1,0 -1,-1 -1,0 0,-1 -1,0 0,2 -1,0 0,0 -2,0 0,-1 -1,-1 -1,0 -1,1 0,1 -3,2 -1,2 -1,0 1,1 -1,0 0,0 -1,1 -1,-1 -1,1 0,0 0,0 0,0 -1,0 -1,1 -1,0 -1,0 -2,2 -1,0 0,1 -1,0 0,0 0,1 -1,2 1,0 0,3 1,1 0,1 1,1 1,0 0,1 1,1 0,1 1,1 -1,2 0,0 -2,1 0,1 0,1 1,0 0,1 -2,1 1,1 -2,4 0,0 -1,1 0,1 -1,1 -1,2 -2,1 -3,0 -3,-2 0,0 0,-1 -1,0 1,-1 -1,0 -1,-1 0,-1 1,0 0,-2 0,0 0,-1 0,-2 -1,0 1,-3 0,0 0,-1 1,0 1,0 0,-1 -1,0 0,-1 -1,0 0,-1 -1,-1 -3,1 0,-1 -1,0 0,-1 -1,1 0,2 -2,-1 -1,0 0,-1 -1,0 0,0 0,0 0,-2 0,0 0,0 0,0 0,0 0,1 -1,0 0,-1 0,0 -1,-1 0,0 -1,1 -1,0 -2,-1 -1,0 -1,-1 0,-1 0,-2 0,0 -1,-1 -1,0 -1,-1 -1,0 0,-1 -1,0 0,0 1,-1 0,0 0,1 0,-1 1,-1 -1,0 0,-1 -1,0 0,1 -1,0 0,0 1,1 0,1 -2,-1 1,0 0,-1 -1,0 -1,-1 0,0 0,1 0,-1 -1,0 0,1 0,1 -1,2 0,1 -1,0 0,0 -1,-1 -1,2 -1,-1 -1,0 0,1 -1,0 0,-1 -1,0 0,0 0,0 0,0 0,0 -1,0 -1,0 0,-1 1,-1 0,-1 1,-1 0,-1 1,-1 -1,-1 -1,0 0,2 -1,-1 -2,0 1,0 0,1 1,0 0,1 -1,0 -1,0 0,-1 0,0 -1,-1 1,0 -1,-1 0,2 -1,0 0,1 -1,-1 -1,0 0,0 0,1 -1,0 -1,-1 -2,1 0,1 0,0 -1,1 -1,-1 2,-3 2,-1 -1,-2 0,0 -2,-1 0,-2 -1,-1 0,1 -1,0 0,1 -1,1 -1,0 -1,0 -1,2 -1,0 -1,1 0,-1 -1,0 1,2 -1,0 0,1 -2,-1 -3,0 0,-1 0,0 -1,-1 -2,2 -1,0 0,-1 -1,1 0,-1 0,1 0,-1 1,-1 1,0 0,0 1,-1 1,0 -1,0 -1,1 -1,-1 0,1 0,-1 0,-1 -1,0 -1,1 0,1 1,0 0,1 1,0 0,1 0,0 0,0 -1,-1 0,1 1,1 0,0 -1,0 0,-1 0,0 0,0 1,0 0,1 -1,0 0,-1 0,0 0,1 -1,0 0,-1 0,0 -1,-1 -1,1 0,0 0,-1 1,-1 -1,-1 0,-1 -1,1 0,0 0,1 -1,-1 -2,1 0,-2 0,0 0,-1 1,0 1,-1 0,-2 -1,0 -1,0 -1,3 -1,-1 0,-1 -1,0 0,0 1,0 0,0 1,-1 2,0 0,1 -1,0 1,1 1,-1 0,-1 -1,0 -1,0 1,-1 0,-1 1,0 0,-1 0,0 0,0 -1,0 0,1 -1,0 1,1 0,1 0,0 1,0 0,0 -2,0 -1,-1 0,1 1,1 1,0 -1,0 0,1 -1,0 0,-1 -1,0 0,-1 0,0 1,-1 0,0 -1,0 -1,1 -1,0 0,1 -1,0 0,1 -1,0 0,1 0,0 -1,0 0,0 -1,1 -1,0 0,0 1,0 1,-1 2,1 1,4 1,1 0,2 1,0 0,1 2,1 0,1 0,0 0,2 -1,1 0,1 1,0 2,-1 2,3 -1,0 0,0 0,1 2,1 0,2 -1,1 -1,2 -1,0 0,1 -1,-2 0,0 0,0 -1,0 -1,0 -2,-3 -2,-1 -1,2 -1,1 -1,-1 1,-1 -2,-1 0,-1 -1,-1 1,-1 0,-3 -1,-2 0,-2 -1,-1 0,-1 3,-3 0,-2 1,-1 1,0 -1,-1 1,0 -1,-1 0,-1 -1,-1 0,-1 -1,0 0,-1 -1,-1 1,-1 0,-1 1,0 1,-1 0,-1 0,-1 1,0 1,-1 2,0 1,-1 1,1 1,-1 3,-1 0,-1 -1,-2 2,-1 0,0 0,0 0,0 1,1 0,-1 1,0 0,-1 1,-1 0,-2 1,-1 -1,-1 1,0 0,-1 1,0 0,-1 1,0 0,-1 1,0 0,0 0,-1 1,0 0,0 0,0 -1,0 0,-1 1,0 0,-1 -2,0 0,-1 -1,-1 0,0 0,-1 0,0 1,-1 0,-2 -1,1 0,-1 -1,0 -1,0 -1,-1 -1,0 -1,-1 0,0 0,0 -1,1 -2,0 -2,-1 -1,-1 -1,0 -1,-1 -1,0 0,1 -1,0 0,0 0,-1 1,0 1,-1 -1,-1 0,0 -2,0 0,1 -1,0 0,1 -1,0 0,-1 -1,0 -1,-1 0,1 -3,-1 -1,1 0,1 -2,1 -2,0 0,-1 0,1 0,0 -1,0 0,-1 -1,0 0,-1 0,-1 5,-3 2,0 0,-1 -1,0 0,1 0,10e-4 -1,-1 -1,1 -1,-1 0,-1 -1,0 0,-1 2,-1 0,-1 1,0 0,-1 -1,0 0,-1 -1,-1 0,-1 -1,0 -2,-1 -1,0 0,-1 0,-1 -1,0 0,-1 -1,0 0,-1 0,-1 -1,0 1,-1 0,-1 -1,-1 0,-2 -1,0 0,0 1,-1 2,0 0,-1 1,0 0,-1 1,0 0,-1 -1,0 1,-1 -1,-1 0,-1 0,-1 0,0 0,-1 1,-1 -1,0 0,-1 1,0 0,-1 1,0 -2,-1 1,0 0,-1 -1,-1 1,0 0,-1 -3,-2 0,0 -1,-1 1,-1 -1,-1 0,-2 -1,0 -1,-2 -1,0 0,-1 -1,-1 0,0 0,-1 1,0 -1,-1 1,-1 -2,-2 0,-2 0,-1 0,0 0,-1 1,-2 -1,0 0,-1 1,0 0,-1 0,-1 -1,-2 1,0 -1,-1 1,-3 -1,-2 1,-1 1,-3 2,-2 0,-1 3,-1 0,0 1,-1 1,0 1,-2 1,-1 0,-1 0,0 0,0 z"/>
+<path id="map-WB" data-state="WB" data-name="West Bengal" d="m 425,374 1,1 0,1 -1,0 0,-1 z m 7,0 1,1 -1,0 0,-1 z m -2,0 1,1 0,1 -1,-1 0,-1 z m -4,0 1,1 -1,1 -1,-1 0,-1 0,0 z m 5,0 1,1 -1,0 0,-1 -1,-1 1,-1 z m 4,0 0,0 -1,0 0,-1 0,1 z m -8,-1 0,1 -1,-1 1,-1 z m 8,-1 0,1 0,0 0,1 -1,0 0,-1 -1,-1 0,-1 1,0 z m -4,0 0,1 -1,0 1,0 z m -10,0 1,0 0,1 -1,1 0,-2 z m 3,0 0,1 0,1 0,-1 0,-1 z m -5,0 0,0 0,0 0,0 0,1 0,1 -1,-2 0,-1 z m 18,0 1,2 -1,1 -1,-1 0,-1 1,0 z m -11,0 1,0 0,1 -1,1 -1,-1 1,0 z m 7,-1 1,1 0,1 -1,-1 0,-1 z m -10,0 0,1 0,1 0,1 -1,1 0,-2 0,-1 -1,0 0,-1 0,1 z m -4,0 1,0 1,2 0,2 0,1 -1,0 -1,0 -1,-4 z m 15,0 1,1 -1,0 0,-1 z m -12,0 0,1 0,0 0,0 0,-1 0,0 z m 13,0 1,1 -1,0 0,-1 z m -4,0 1,0 -1,1 0,2 0,0 -1,0 0,-2 -1,0 0,-1 1,0 z m -5,0 1,1 0,1 -1,-1 0,-1 z m 8,0 1,1 0,0 -1,-1 1,0 z m -8,0 0,1 0,0 0,0 0,0 z m -3,0 0,1 -1,0 0,-1 1,0 z m 5,0 1,1 0,1 0,0 0,1 -1,0 0,1 -1,0 0,-1 0,-1 z m -4,0 1,1 0,1 -1,0 0,-1 1,-1 z m -3,0 0,0 0,1 -1,-1 1,-1 z m 12,0 0,0 0,1 -1,-1 0,0 z m -4,0 0,1 -1,0 1,-2 0,0 z m 2,-1 1,1 0,1 -1,0 0,-1 1,-1 z m -7,0 0,0 0,1 -1,0 0,-1 z m -5,0 0,1 1,0 0,0 -1,0 0,1 -1,0 0,-2 1,-1 z m 11,0 0,0 1,3 -1,-1 0,-2 z m -15,0 1,1 0,2 -1,1 0,1 -1,1 -1,-1 0,-1 1,-2 1,-2 z m 14,0 1,-1 0,0 -1,2 0,-1 0,0 z m 4,-1 1,1 0,1 -1,0 0,-1 z m -7,0 1,1 0,2 -1,-2 0,-1 z m -1,0 0,0 0,1 0,-1 0,-1 z m -2,0 1,0 0,1 -1,1 -1,0 0,-2 0,0 z m 6,0 1,0 1,1 0,2 -1,-1 0,-1 z m -2,0 1,0 0,1 0,-1 z m 4,0 2,0 1,1 0,0 -1,1 -1,-2 z m -2,0 2,0 0,1 0,0 0,-1 -1,0 0,-1 z m 0,-1 0,1 1,0 0,0 -1,0 0,-1 0,0 z m -2,-1 1,0 -1,1 -1,0 1,-1 z m -11,0 -1,2 -1,0 1,-2 1,-1 z m 14,0 2,0 0,2 -1,0 -2,-1 0,-1 1,0 z m 5,-1 1,1 0,1 -1,0 -1,-2 0,-1 1,0 z m -4,-1 0,1 -2,0 2,-1 z m -1,-1 0,0 -1,0 0,1 0,0 1,-1 1,0 0,0 z m 0,-2 1,2 -1,0 -1,-1 1,0 -1,-1 0,0 z m 2,0 1,1 0,1 -1,1 0,1 0,1 0,-1 1,0 0,2 1,1 0,0 -2,-1 0,-1 0,-2 1,-1 -1,-2 1,0 1,0 z m 1,0 1,2 0,1 -1,0 1,-1 -1,-1 1,0 z m -6,0 2,1 -2,2 1,1 0,0 -1,0 -1,-2 1,-2 z m 3,1 -2,1 -1,1 0,0 0,0 2,-2 0,0 0,1 z m 2,-2 0,1 -1,0 0,0 0,0 0,0 z m -3,-1 0,1 -1,0 0,1 -1,0 -1,-1 0,-1 1,-1 z m 1,-1 1,0 0,1 1,0 0,1 -1,0 0,1 -2,-1 0,0 0,-2 0,0 z m 3,-1 0,1 1,1 -1,0 2,2 0,1 1,0 -1,1 -1,-2 -1,0 0,-1 0,-3 0,0 z m -2,-3 0,2 1,1 -1,1 -1,-3 1,-1 z m 1,-1 1,0 1,3 -1,0 0,2 -1,-1 0,-1 1,0 -1,-2 0,-2 1,0 z m -19,-108 1,0 0,1 1,1 1,0 1,0 2,0 0,1 2,1 2,-2 0,-1 1,0 1,0 1,1 1,0 1,1 1,0 0,0 2,1 0,4 1,-1 1,1 0,1 0,0 1,0 0,1 1,0 0,1 1,1 3,0 3,-1 0,1 1,0 0,1 2,0 1,1 0,0 0,0 -1,1 0,0 1,0 0,-1 1,0 1,0 0,1 1,0 1,0 0,0 0,1 0,1 0,1 0,0 0,2 0,1 -1,1 0,0 0,0 -2,1 0,1 -1,0 0,1 -1,0 0,1 0,0 0,0 1,1 -1,0 1,0 -1,1 1,0 0,0 0,0 0,0 0,-1 0,0 -1,0 0,1 -1,0 0,1 0,0 1,1 -1,0 0,0 0,0 0,1 -1,1 0,1 -1,0 0,-1 -2,0 0,-1 -1,1 -1,0 -1,-1 0,0 0,0 0,-1 -1,-1 -1,0 0,-1 0,-1 -1,-1 1,-1 -1,0 0,0 0,-1 0,-1 -1,0 -2,-2 0,1 0,0 0,1 0,1 1,0 0,0 0,0 0,1 0,1 1,0 1,0 0,1 -2,0 -1,-1 -1,0 0,0 0,1 -1,0 -1,-1 0,-1 0,0 -1,0 0,-1 -1,0 0,-1 0,0 -2,-1 0,-1 -1,0 0,1 -1,0 0,-1 -1,0 -1,-1 -1,0 0,-2 -1,1 -1,3 0,1 0,-1 2,1 1,2 -1,0 -1,-1 0,1 -1,0 0,0 -1,1 0,1 -2,1 -1,1 0,2 1,0 0,1 0,0 -1,0 -1,2 0,1 0,2 1,1 1,-1 0,0 1,-1 0,1 2,2 1,1 1,0 0,1 1,0 0,1 2,1 1,0 1,1 1,0 0,-1 1,0 0,-1 1,0 1,1 0,1 1,0 0,1 1,1 0,0 0,1 2,0 -1,1 0,1 -1,0 0,1 -1,0 -2,-1 -1,1 -1,0 0,0 -1,-1 -2,0 -1,1 -1,-1 -1,0 0,1 0,0 0,1 0,1 0,0 -1,2 0,1 -1,0 0,1 0,0 0,1 -1,-1 0,0 0,-1 -1,-1 -2,1 1,2 -1,0 0,1 0,0 0,1 -1,0 0,1 -1,1 3,4 1,1 2,1 1,1 2,0 2,1 1,1 0,-1 0,0 1,0 2,0 1,1 0,2 -1,1 0,1 0,0 0,0 1,0 0,2 1,0 0,1 -1,0 0,1 -1,0 -1,1 -2,0 1,1 -1,1 0,0 0,3 1,0 0,1 1,0 0,1 2,2 1,0 0,1 -1,0 0,1 0,1 -1,0 0,1 -1,0 0,1 2,1 0,0 0,-1 1,1 1,0 0,0 2,0 0,1 0,0 -1,1 -1,1 0,2 -1,0 0,0 0,1 1,0 0,1 0,1 1,-10e-4 0,1 0,1 -1,1 1,2 -1,2 1,0 0,1 -1,1 -1,1 0,1 0,2 1,1 -1,0 0,2 -1,1 0,1 -1,0 -1,2 0,1 -1,2 0,1 -1,1 0,0 -1,0 0,1 -1,-1 1,-1 -2,1 0,0 0,2 -1,0 0,-1 -1,0 -1,1 0,1 -1,0 -1,-3 0,-1 0,-1 1,-1 0,-1 0,-2 -1,-1 -2,0 1,-2 -1,2 -1,-1 -1,-1 0,-3 0,-1 -1,0 1,2 0,2 1,1 3,0 1,2 -3,2 0,0 -2,3 -1,1 -1,0 -2,2 -1,0 -1,1 -4,1 0,0 0,-1 0,-1 -1,0 0,-1 -2,0 0,-1 -2,-1 -1,-3 -1,0 0,1 -1,1 0,1 -1,0 -1,-1 1,-2 0,-1 -1,-1 -3,0 -1,-1 -2,0 0,-2 0,0 1,0 0,0 1,0 0,-1 0,-1 0,0 1,0 0,-1 -1,-1 0,-2 -2,-1 0,-1 1,0 0,-1 -1,-2 -2,0 -1,-2 -2,-1 -1,0 -2,-2 0,-2 1,-1 -1,-1 1,-1 0,0 1,0 0,-1 -1,0 0,-1 -2,0 0,0 -2,-1 -2,0 -1,-1 0,-1 -2,-1 0,-1 -3,0 -1,-1 -1,0 0,-2 1,-1 0,-1 1,0 -1,-1 0,-1 2,0 2,-1 -1,-1 1,-1 2,0 0,2 2,0 0,0 0,1 0,0 1,0 0,0 0,0 0,0 2,-1 0,0 0,-1 0,-1 1,-1 0,0 2,0 1,-1 2,-1 1,0 0,0 1,0 1,-2 -1,-2 1,0 1,-1 0,0 0,0 1,1 1,0 3,2 1,0 0,-1 -1,-1 1,0 0,0 1,0 1,0 0,-2 0,1 1,-1 0,-1 -1,0 0,-2 2,0 0,1 0,0 1,0 2,1 -1,-1 1,0 1,-1 0,0 0,-1 2,1 0,0 1,-1 -1,-1 3,0 0,-1 -1,-1 0,-1 1,0 1,-1 1,0 1,-2 -1,0 1,-2 0,0 0,0 0,-1 -1,-1 2,1 1,0 0,-1 -1,0 1,0 0,0 1,-1 -1,0 0,-1 -1,0 0,-1 0,-1 0,1 0,0 0,-1 0,-1 1,0 0,-1 2,-1 0,-1 -2,-2 -2,-1 0,-3 0,0 1,0 0,-1 1,-1 -2,-1 0,-1 0,0 0,-1 0,-1 1,0 1,-1 1,0 0,-1 0,0 1,-1 1,0 0,1 0,0 0,0 0,1 1,0 0,-1 -1,-1 0,-1 1,-1 0,0 0,-1 -2,-1 -1,-1 -1,0 0,-1 -1,0 1,-1 -2,0 0,-1 1,-1 0,-3 1,-1 0,1 0,0 1,0 0,-2 1,0 1,-1 1,0 2,-2 1,-1 2,-2 -1,-1 -1,0 0,0 1,-1 -1,-1 0,-1 -1,0 0,0 1,-1 0,0 -1,0 0,1 -1,-1 0,0 0,0 0,0 0,0 0,0 1,-2 1,-3 0,-2 -1,-1 0,-1 -1,-1 0,-1 -1,0 0,-1 -1,0 0,-1 -1,0 1,-2 0,-1 z"/>
+        </svg>
+        <div class="map-label" id="mapLabel">Click a state to select region</div>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="generate()">Generate Calendar</button>
+  </aside>
+
+  <div class="main" id="resultsArea">
+    <div class="empty-state">
+      <div class="empty-icon">&#x1F4C5;</div>
+      <div>Select your religion, community, and region, then click <strong>Generate Calendar</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">
+    For informational and cultural reference purposes only. Holiday dates may vary based on lunar calendar observations and regional government notifications.
+    Dates shown are approximate and based on commonly observed schedules.
+  </p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+// INDIAN HOLIDAY CALENDAR — Data & Logic
+// ══════════════════════════════════════════════════════════════════════════════
+
+const RELIGION_DATA = {
+  hindu: {
+    name: 'Hindu',
+    population: '79.8%',
+    communities: {
+      all: 'All Hindu Communities',
+      shaivite: 'Shaivite — Shiva devotees (~25%)',
+      vaishnavite: 'Vaishnavite — Vishnu/Krishna devotees (~30%)',
+      shakta: 'Shakta — Goddess/Devi devotees (~10%)',
+      smartha: 'Smartha — Advaita, worship all five deities (~5%)',
+      lingayat: 'Lingayat — Karnataka Shaivite reform (~3%)',
+    },
+    info: 'Hinduism is the largest religion in India. Practices vary enormously by region, community, and family tradition. A Tamil Hindu and a Punjabi Hindu may celebrate almost entirely different festivals.'
+  },
+  muslim: {
+    name: 'Muslim',
+    population: '14.2%',
+    communities: {
+      all: 'All Muslim Communities',
+      sunni_barelvi: 'Sunni Barelvi — traditional, Sufi-influenced (~45%)',
+      sunni_deobandi: 'Sunni Deobandi — reformist (~25%)',
+      sunni_shafi: 'Sunni Shafi\'i — South India (~8%)',
+      shia: 'Shia Twelver (~10%)',
+      shia_bohra: 'Dawoodi Bohra (~2%)',
+      shia_ismaili: 'Ismaili / Aga Khani (<1%)',
+      ahmadiyya: 'Ahmadiyya (<1%)',
+    },
+    info: 'Indian Muslims are predominantly Sunni (Barelvi and Deobandi). Deobandi/Salafi communities may not observe some holidays like Milad-un-Nabi and Shab-e-Barat. Shia communities have distinct observances around Muharram.'
+  },
+  christian: {
+    name: 'Christian',
+    population: '2.3%',
+    communities: {
+      all: 'All Christian Communities',
+      roman_catholic: 'Roman Catholic (~28%)',
+      syro_malabar: 'Syro-Malabar Catholic — Kerala (~15%)',
+      syro_malankara: 'Syro-Malankara Catholic (~2%)',
+      orthodox: 'Malankara Orthodox (~5%)',
+      csi: 'Church of South India — Protestant (~8%)',
+      cni: 'Church of North India — Protestant (~5%)',
+      pentecostal: 'Pentecostal (~12%)',
+      northeast: 'Northeast tribal Christian (~15%)',
+      goan: 'Goan Catholic (~3%)',
+    },
+    info: 'Christianity in India is ancient — the Syrian Christian tradition in Kerala dates to the 1st century. Goan Catholics, Northeast tribal Christians, and Kerala Syrian Christians have very different cultural practices.'
+  },
+  sikh: {
+    name: 'Sikh',
+    population: '1.7%',
+    communities: {
+      all: 'All Sikh Communities',
+      jat: 'Jat Sikh (~55%)',
+      khatri: 'Khatri / Arora Sikh (~20%)',
+      ramgarhia: 'Ramgarhia Sikh (~10%)',
+      ravidasia: 'Ravidasia Sikh (~5%)',
+      namdhari: 'Namdhari Sikh (~2%)',
+      nihang: 'Nihang Sikh (~1%)',
+    },
+    info: 'Sikhs are concentrated in Punjab but have significant populations across North India. Key celebrations center on Gurpurabs (Guru anniversaries) and harvest festivals like Baisakhi and Lohri.'
+  },
+  buddhist: {
+    name: 'Buddhist',
+    population: '0.7%',
+    communities: {
+      all: 'All Buddhist Communities',
+      navayana: 'Navayana / Ambedkarite (~87%)',
+      theravada: 'Theravada — Northeast/Sri Lankan (~5%)',
+      tibetan: 'Tibetan Buddhist (~5%)',
+    },
+    info: 'Indian Buddhism is predominantly Navayana (Ambedkarite), with converts mainly from Scheduled Caste communities in Maharashtra. Tibetan Buddhist communities exist in Himachal Pradesh, Ladakh, and Sikkim.'
+  },
+  jain: {
+    name: 'Jain',
+    population: '0.4%',
+    communities: {
+      all: 'All Jain Communities',
+      digambara: 'Digambara (~40%)',
+      shvetambara: 'Shvetambara Murtipujak (~35%)',
+      shvetambara_sthanakvasi: 'Shvetambara Sthanakvasi (~15%)',
+      shvetambara_terapanthi: 'Shvetambara Terapanthi (~10%)',
+    },
+    info: 'Jains are concentrated in Gujarat, Rajasthan, Maharashtra, and Karnataka. Digambara and Shvetambara sects have some differences in observances and festival timing.'
+  },
+  all: {
+    name: 'All Religions',
+    population: '100%',
+    communities: { all: 'All Communities' },
+    info: 'India has 6 major religions plus numerous tribal and folk traditions. Only secular national holidays (Republic Day, Independence Day, Gandhi Jayanti) are universally observed across all communities.'
+  }
+};
+
+// ── Holiday Database ──────────────────────────────────────────────────────────
+function getHolidays(year) {
+  const yearDates = {
+    2025: {
+      makar_sankranti: '01-14', pongal: '01-14', lohri: '01-13', republic_day: '01-26',
+      basant_panchami: '02-02', maha_shivaratri: '02-26', holi: '03-14',
+      ugadi: '03-30', gudi_padwa: '03-30', baisakhi: '04-13', vishu: '04-14',
+      tamil_new_year: '04-14', bihu: '04-14', pohela_boishakh: '04-14',
+      ambedkar_jayanti: '04-14', ram_navami: '04-06', mahavir_jayanti: '04-10',
+      good_friday: '04-18', easter: '04-20', buddha_purnima: '05-12',
+      eid_ul_fitr: '03-31', rath_yatra: '06-27', guru_purnima: '07-10',
+      eid_ul_adha: '06-07', muharram: '07-06', shab_e_barat: '02-14',
+      shab_e_meraj: '01-27',
+      raksha_bandhan: '08-09', independence_day: '08-15', janmashtami: '08-16',
+      milad_un_nabi: '09-05', onam: '08-25', ganesh_chaturthi: '08-27',
+      navratri_start: '10-02', gandhi_jayanti: '10-02', dussehra: '10-02',
+      durga_puja: '10-02', karva_chauth: '10-10', diwali: '10-20',
+      bhai_dooj: '10-22', chhath_puja: '10-26', guru_nanak_jayanti: '11-05',
+      christmas: '12-25', paryushana: '08-16', losar: '02-28',
+      hola_mohalla: '03-15', thaipusam: '02-11',
+    },
+    2026: {
+      makar_sankranti: '01-14', pongal: '01-14', lohri: '01-13', republic_day: '01-26',
+      basant_panchami: '01-23', maha_shivaratri: '02-15', holi: '03-04',
+      ugadi: '03-19', gudi_padwa: '03-19', eid_ul_fitr: '03-20',
+      baisakhi: '04-13', vishu: '04-14', tamil_new_year: '04-14', bihu: '04-14',
+      pohela_boishakh: '04-14',
+      ambedkar_jayanti: '04-14', ram_navami: '03-26', mahavir_jayanti: '03-29',
+      good_friday: '04-03', easter: '04-05', buddha_purnima: '05-01',
+      rath_yatra: '06-16', guru_purnima: '06-29',
+      eid_ul_adha: '05-27', muharram: '06-26',
+      shab_e_barat: '02-03', shab_e_meraj: '01-16',
+      raksha_bandhan: '07-29', independence_day: '08-15', janmashtami: '08-06',
+      milad_un_nabi: '08-26', onam: '08-14', ganesh_chaturthi: '08-17',
+      navratri_start: '09-21', gandhi_jayanti: '10-02', dussehra: '09-30',
+      durga_puja: '09-30', karva_chauth: '09-28', diwali: '10-08',
+      bhai_dooj: '10-10', chhath_puja: '10-15', guru_nanak_jayanti: '10-25',
+      christmas: '12-25', paryushana: '09-04', losar: '02-17',
+      hola_mohalla: '03-05', thaipusam: '01-30',
+    },
+    2027: {
+      makar_sankranti: '01-14', pongal: '01-14', lohri: '01-13', republic_day: '01-26',
+      basant_panchami: '02-11', maha_shivaratri: '03-06', holi: '03-22',
+      ugadi: '04-07', gudi_padwa: '04-07', eid_ul_fitr: '03-10',
+      baisakhi: '04-13', vishu: '04-14', tamil_new_year: '04-14', bihu: '04-14',
+      pohela_boishakh: '04-14',
+      ambedkar_jayanti: '04-14', ram_navami: '04-15', mahavir_jayanti: '04-18',
+      good_friday: '03-26', easter: '03-28', buddha_purnima: '05-20',
+      rath_yatra: '07-06', guru_purnima: '07-19',
+      eid_ul_adha: '05-17', muharram: '06-16',
+      shab_e_barat: '01-23', shab_e_meraj: '01-06',
+      raksha_bandhan: '08-17', independence_day: '08-15', janmashtami: '08-25',
+      milad_un_nabi: '08-15', onam: '09-02', ganesh_chaturthi: '09-05',
+      navratri_start: '10-10', gandhi_jayanti: '10-02', dussehra: '10-19',
+      durga_puja: '10-19', karva_chauth: '10-17', diwali: '10-28',
+      bhai_dooj: '10-30', chhath_puja: '11-03', guru_nanak_jayanti: '11-14',
+      christmas: '12-25', paryushana: '08-24', losar: '03-08',
+      hola_mohalla: '03-23', thaipusam: '02-18',
+    }
+  };
+
+  const d = yearDates[year] || yearDates[2026];
+
+  return [
+    // ─── National / Secular (shown for ALL religions) ───────────────────
+    { id: 'republic_day', name: 'Republic Day', date: d.republic_day,
+      importance: 'national', religions: ['all','hindu','muslim','christian','sikh','buddhist','jain'],
+      communities: [], regions: [],
+      desc: 'Commemorates the adoption of the Indian Constitution on January 26, 1950. Grand parade in New Delhi showcasing military strength, cultural heritage, and state tableaux.' },
+    { id: 'independence_day', name: 'Independence Day', date: d.independence_day,
+      importance: 'national', religions: ['all','hindu','muslim','christian','sikh','buddhist','jain'],
+      communities: [], regions: [],
+      desc: 'Marks India\'s independence from British rule on August 15, 1947. The Prime Minister hoists the flag at the Red Fort and addresses the nation.' },
+    { id: 'gandhi_jayanti', name: 'Gandhi Jayanti', date: d.gandhi_jayanti,
+      importance: 'national', religions: ['all','hindu','muslim','christian','sikh','buddhist','jain'],
+      communities: [], regions: [],
+      desc: 'Birthday of Mahatma Gandhi (1869), Father of the Nation. Also observed globally as the International Day of Non-Violence.' },
+    { id: 'ambedkar_jayanti', name: 'Ambedkar Jayanti', date: d.ambedkar_jayanti,
+      importance: 'national', religions: ['all','hindu','muslim','christian','sikh','buddhist','jain'],
+      communities: [], regions: [],
+      desc: 'Birthday of Dr. B.R. Ambedkar (1891), architect of the Indian Constitution and champion of social justice. Gazetted national holiday. Especially significant for Navayana Buddhist and Dalit communities.' },
+
+    // ─── Hindu ──────────────────────────────────────────────────────────
+    { id: 'makar_sankranti', name: 'Makar Sankranti', date: d.makar_sankranti,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['UP','MP','RJ','MH','GJ','KA','HR','BR','JH','CG','DL','UK','AP','TG','WB','OD'],
+      desc: 'Solar harvest festival marking the sun\'s transit into Capricorn (Makara). Celebrated with kite flying, sesame sweets, and holy dips. Known as Uttarayan in Gujarat, Sankranti in Andhra/Telangana, and Poush Sankranti in Bengal.' },
+    { id: 'pongal', name: 'Pongal', date: d.pongal,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['TN'],
+      desc: 'Four-day Tamil harvest festival. The rice dish "Pongal" is cooked to overflowing as a symbol of abundance. Includes Bhogi (day 1), Thai Pongal (day 2), Mattu Pongal (cattle day), and Kaanum Pongal.' },
+    { id: 'lohri', name: 'Lohri', date: d.lohri,
+      importance: 'major', religions: ['hindu','sikh'], communities: [],
+      regions: ['PB','HR','DL','HP','JK'],
+      desc: 'Punjabi winter bonfire festival celebrating the end of winter and the harvest of rabi crops. Families gather around bonfires, throw popcorn and peanuts into the fire, and perform bhangra.' },
+    { id: 'thaipusam', name: 'Thaipusam', date: d.thaipusam,
+      importance: 'regional', religions: ['hindu'], communities: ['shaivite'],
+      regions: ['TN','KL'],
+      desc: 'Festival honoring Lord Murugan (Kartikeya/Subrahmanya), the son of Shiva. Devotees undertake penance, carry kavadis, and make pilgrimages to Murugan temples. Major celebration at Palani temple in Tamil Nadu.' },
+    { id: 'basant_panchami', name: 'Basant Panchami / Saraswati Puja', date: d.basant_panchami,
+      importance: 'regional', religions: ['hindu'], communities: [],
+      regions: ['WB','BR','UP','HR','PB','DL','AS','OD','JH','RJ','MP'],
+      desc: 'Festival honoring Goddess Saraswati (learning, music, arts). People wear yellow clothes symbolizing the mustard fields of spring. Students place books at Saraswati\'s feet for blessings.' },
+    { id: 'maha_shivaratri', name: 'Maha Shivaratri', date: d.maha_shivaratri,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: [],
+      desc: 'The "Great Night of Shiva" — devotees fast and keep all-night vigil worshipping Lord Shiva. Celebrated across all Hindu communities. Major celebrations at Kashi Vishwanath, Somnath, and other Jyotirlingas.' },
+    { id: 'holi', name: 'Holi', date: d.holi,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['UP','MP','RJ','HR','DL','BR','GJ','MH','WB','PB','UK','JH','CG','AS','OD'],
+      desc: 'The festival of colors celebrating the victory of good over evil and the arrival of spring. People throw colored powder (gulal) and water. Begins with Holika Dahan bonfire. Known as Dol Jatra/Phakuwa in the East.' },
+    { id: 'ugadi', name: 'Ugadi', date: d.ugadi,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['KA','AP','TG'],
+      desc: 'New Year for Telugu and Kannada communities. The Ugadi Pachadi (a dish with six tastes) symbolizes the mix of experiences in the coming year — sweet, sour, bitter, salty, spicy, and tangy.' },
+    { id: 'gudi_padwa', name: 'Gudi Padwa', date: d.gudi_padwa,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['MH','GA'],
+      desc: 'Marathi New Year. Families erect a "Gudi" — a decorated pole with a bright cloth, neem leaves, and a copper pot — outside their homes to ward off evil and invite prosperity.' },
+    { id: 'pohela_boishakh', name: 'Pohela Boishakh (Bengali New Year)', date: d.pohela_boishakh,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['WB','TR','AS'],
+      desc: 'Bengali New Year celebrated with Mangal Shobhajatra processions, fairs, and cultural programs. Homes are cleaned, new clothes worn, and special sweets prepared. Also marks the start of the Bengali business calendar.' },
+    { id: 'ram_navami', name: 'Ram Navami', date: d.ram_navami,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: [],
+      desc: 'Celebrates the birth of Lord Rama, the seventh avatar of Vishnu. Devotees fast, read the Ramayana, and visit Rama temples. Celebrated across all Hindu communities, especially significant in Ayodhya.' },
+    { id: 'baisakhi', name: 'Baisakhi / Vaisakhi', date: d.baisakhi,
+      importance: 'major', religions: ['hindu','sikh'], communities: [],
+      regions: ['PB','HR','DL','HP','UK'],
+      desc: 'Punjabi New Year and harvest festival. For Sikhs, marks the founding of the Khalsa by Guru Gobind Singh in 1699. Celebrated with Nagar Kirtan processions, bhangra, and visits to gurdwaras.' },
+    { id: 'vishu', name: 'Vishu', date: d.vishu,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['KL'],
+      desc: 'Kerala\'s astronomical New Year. The "Vishu Kani" — an auspicious arrangement of rice, fruits, flowers, gold, and a mirror — is the first thing seen on Vishu morning, believed to set the tone for the year.' },
+    { id: 'tamil_new_year', name: 'Tamil New Year (Puthandu)', date: d.tamil_new_year,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['TN'],
+      desc: 'Tamil New Year celebrated on the first day of the Tamil month Chithirai. Homes are decorated with kolam, and families prepare the "Maanga Pachadi" dish with six tastes.' },
+    { id: 'bihu', name: 'Rongali Bihu (Bohag Bihu)', date: d.bihu,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['AS'],
+      desc: 'Assamese New Year and spring harvest festival. Young people perform the Bihu dance, and communities come together for feasts. Assam\'s most important cultural celebration.' },
+    { id: 'guru_purnima', name: 'Guru Purnima', date: d.guru_purnima,
+      importance: 'regional', religions: ['hindu','buddhist','jain'], communities: [],
+      regions: [],
+      desc: 'Day to honor spiritual and academic teachers (gurus). Hindus honor the sage Vyasa. Buddhists commemorate Buddha\'s first sermon at Sarnath. Celebrated across India with special pujas and offerings to teachers.' },
+    { id: 'rath_yatra', name: 'Rath Yatra', date: d.rath_yatra,
+      importance: 'major', religions: ['hindu'], communities: ['vaishnavite'],
+      regions: ['OD','WB','GJ'],
+      desc: 'The chariot festival of Lord Jagannath in Puri, Odisha. Massive wooden chariots carrying the deities are pulled through the streets by thousands of devotees. One of the oldest and largest religious processions in the world.' },
+    { id: 'raksha_bandhan', name: 'Raksha Bandhan', date: d.raksha_bandhan,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['UP','MP','RJ','HR','DL','GJ','BR','UK','JH','MH','PB'],
+      desc: 'Sisters tie a protective thread (rakhi) on their brothers\' wrists, symbolizing love and protection. Brothers give gifts in return. Predominantly a North and West Indian tradition.' },
+    { id: 'janmashtami', name: 'Krishna Janmashtami', date: d.janmashtami,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: [],
+      desc: 'Celebrates the birth of Lord Krishna. Devotees fast until midnight (Krishna\'s birth time), sing devotional songs, and enact scenes from Krishna\'s life. Famous for Dahi Handi human pyramids in Mumbai and Mathura celebrations.' },
+    { id: 'onam', name: 'Onam', date: d.onam,
+      importance: 'major', religions: ['hindu','muslim','christian'],
+      communities: [], regions: ['KL'],
+      desc: 'Kerala\'s biggest festival (10 days), celebrating the mythical King Mahabali\'s annual return. A secular cultural celebration observed by ALL Keralites regardless of religion. Features the Onam Sadya feast, Vallam Kali boat races, and Pookalam flower carpets.' },
+    { id: 'ganesh_chaturthi', name: 'Ganesh Chaturthi', date: d.ganesh_chaturthi,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['MH','KA','AP','TG','GJ','TN','GA','MP'],
+      desc: 'Birthday of Lord Ganesha. Clay idols are installed in homes and public pandals for 1-11 days, then immersed in water (Visarjan). Biggest celebrations in Mumbai and Pune with massive public processions.' },
+    { id: 'navratri', name: 'Navratri', date: d.navratri_start,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: [],
+      desc: 'Nine nights celebrating the divine feminine (Goddess Durga/Shakti). Gujarat is famous for Garba/Dandiya dances, Bengal for Durga Puja pandals, South India for Bommai Kolu doll displays. Celebrated across all Hindu communities.' },
+    { id: 'dussehra', name: 'Dussehra (Vijayadashami)', date: d.dussehra,
+      importance: 'national', religions: ['hindu'],
+      communities: [], regions: [],
+      desc: 'Victory of good over evil. In the North, Ravana effigies are burned (Ram Lila). In the South, celebrates Goddess Chamundeshwari\'s victory over Mahishasura. In Bengal, marks Durga\'s departure. Gazetted national holiday.' },
+    { id: 'durga_puja', name: 'Durga Puja', date: d.durga_puja,
+      importance: 'major', religions: ['hindu'], communities: ['shakta'],
+      regions: ['WB','AS','TR','OD','BR','JH'],
+      desc: 'Bengal\'s grandest festival (5 days). Exquisite clay idols of Goddess Durga are worshipped in elaborately themed pandals. Ends with emotional Sindoor Khela and Visarjan. UNESCO Intangible Cultural Heritage.' },
+    { id: 'karva_chauth', name: 'Karva Chauth', date: d.karva_chauth,
+      importance: 'regional', religions: ['hindu'], communities: [],
+      regions: ['PB','HR','RJ','UP','DL','HP','MP'],
+      desc: 'Married women fast from sunrise to moonrise for their husband\'s longevity. The fast is broken after sighting the moon through a sieve. Predominantly a North Indian tradition.' },
+    { id: 'diwali', name: 'Diwali (Deepavali)', date: d.diwali,
+      importance: 'national', religions: ['hindu','jain','sikh'],
+      communities: [], regions: [],
+      desc: 'The festival of lights — India\'s biggest celebration. Homes are lit with diyas, rangoli decorates doorsteps, families exchange sweets and gifts. For Jains, marks Mahavira\'s nirvana. For Sikhs, celebrates Guru Hargobind\'s release. Gazetted national holiday.' },
+    { id: 'bhai_dooj', name: 'Bhai Dooj', date: d.bhai_dooj,
+      importance: 'regional', religions: ['hindu'], communities: [],
+      regions: ['UP','BR','HR','DL','MP','RJ','WB','JH','MH','GJ'],
+      desc: 'Sisters apply tilak on brothers\' foreheads and pray for their well-being. Called "Bhau Beej" in Maharashtra, "Bhai Bij" in Gujarat, and "Bhai Phonta" in Bengal. Celebrated two days after Diwali.' },
+    { id: 'chhath_puja', name: 'Chhath Puja', date: d.chhath_puja,
+      importance: 'major', religions: ['hindu'], communities: [],
+      regions: ['BR','JH','UP','DL','MP','CG'],
+      desc: 'Ancient Vedic festival dedicated to the Sun God (Surya) and Chhathi Maiya. Devotees stand in water at sunrise and sunset offering Arghya. Central to Bihari/Jharkhandi identity, with rigorous 36-hour fasting.' },
+
+    // ─── Muslim ─────────────────────────────────────────────────────────
+    { id: 'eid_ul_fitr', name: 'Eid ul-Fitr', date: d.eid_ul_fitr,
+      importance: 'national', religions: ['muslim'],
+      communities: [], regions: [],
+      desc: 'Marks the end of Ramadan (month of fasting). Special prayer, feasting, new clothes, and Zakat al-Fitr charity. Called "Meethi Eid" for the seviyan/sheer khurma dessert. Gazetted national holiday.' },
+    { id: 'eid_ul_adha', name: 'Eid ul-Adha (Bakrid)', date: d.eid_ul_adha,
+      importance: 'national', religions: ['muslim'],
+      communities: [], regions: [],
+      desc: 'The "Festival of Sacrifice" commemorating Prophet Ibrahim\'s willingness to sacrifice his son. Families share meat in three parts: family, friends, and the poor. Gazetted national holiday.' },
+    { id: 'muharram', name: 'Muharram (Ashura)', date: d.muharram,
+      importance: 'major', religions: ['muslim'],
+      communities: [], regions: [],
+      desc: 'The 10th day of Muharram (Ashura) commemorates the martyrdom of Imam Hussain at Karbala. For Shia Muslims, a solemn day of mourning with Tazia processions. Sunni Muslims may fast following Prophetic tradition. Gazetted holiday.' },
+    { id: 'milad_un_nabi', name: 'Milad-un-Nabi (Eid-e-Milad)', date: d.milad_un_nabi,
+      importance: 'major', religions: ['muslim'],
+      communities: ['sunni_barelvi','sunni_shafi','shia','shia_bohra','ahmadiyya'],
+      regions: [],
+      desc: 'Birthday of Prophet Muhammad (PBUH). Celebrated with processions, lectures, poetry (Na\'at), and feasts. Gazetted holiday. Note: Deobandi and some reformist communities do not observe this as a celebration.' },
+    { id: 'shab_e_barat', name: 'Shab-e-Barat', date: d.shab_e_barat,
+      importance: 'regional', religions: ['muslim'],
+      communities: ['sunni_barelvi','shia','shia_bohra'],
+      regions: [],
+      desc: 'The "Night of Forgiveness" (15th Sha\'ban). Muslims spend the night in prayer, visit graves, and distribute halwa. Shia Muslims observe it as the birthday of the 12th Imam. Not observed by Deobandi/Salafi communities.' },
+    { id: 'shab_e_meraj', name: 'Shab-e-Meraj', date: d.shab_e_meraj,
+      importance: 'minor', religions: ['muslim'],
+      communities: ['sunni_barelvi','shia'],
+      regions: [],
+      desc: 'Commemorates the Prophet\'s night journey (Isra) from Mecca to Jerusalem and ascension (Meraj) to heaven (27th Rajab). Observed with special prayers. Not widely marked by Deobandi/Salafi communities.' },
+
+    // ─── Christian ──────────────────────────────────────────────────────
+    { id: 'good_friday', name: 'Good Friday', date: d.good_friday,
+      importance: 'national', religions: ['christian'],
+      communities: [], regions: [],
+      desc: 'Commemorates the crucifixion of Jesus Christ. A solemn day of prayer, fasting, and church services. Special processions in Goa, Kerala, and Northeast India. Gazetted national holiday.' },
+    { id: 'easter', name: 'Easter Sunday', date: d.easter,
+      importance: 'major', religions: ['christian'],
+      communities: [], regions: [],
+      desc: 'Celebrates the resurrection of Jesus Christ — the most important Christian festival. Churches hold sunrise services, families gather for festive meals. Vibrant celebrations in Goa, Kerala, and the Northeast.' },
+    { id: 'christmas', name: 'Christmas', date: d.christmas,
+      importance: 'national', religions: ['christian'],
+      communities: [], regions: [],
+      desc: 'Celebrates the birth of Jesus Christ. Gazetted national holiday. Goan Catholics have distinctive traditions including midnight mass and Bebinca. Kerala Christians celebrate with special star decorations.' },
+    { id: 'assumption', name: 'Feast of the Assumption', date: '08-15',
+      importance: 'regional', religions: ['christian'],
+      communities: ['roman_catholic','syro_malabar','syro_malankara','goan'],
+      regions: ['GA','KL','TN','MH'],
+      desc: 'Catholic feast day celebrating the Virgin Mary\'s assumption into heaven. Coincides with Independence Day. Special significance in Goa and Kerala Catholic communities.' },
+    { id: 'feast_st_francis', name: 'Feast of St. Francis Xavier', date: '12-03',
+      importance: 'regional', religions: ['christian'],
+      communities: ['roman_catholic','goan'],
+      regions: ['GA'],
+      desc: 'Major feast in Goa honoring St. Francis Xavier, whose relics are at the Basilica of Bom Jesus. Every 10 years, the relics are publicly displayed in a grand exposition.' },
+
+    // ─── Sikh ───────────────────────────────────────────────────────────
+    { id: 'guru_nanak_jayanti', name: 'Guru Nanak Jayanti (Gurpurab)', date: d.guru_nanak_jayanti,
+      importance: 'national', religions: ['sikh'],
+      communities: [], regions: [],
+      desc: 'Birthday of Guru Nanak Dev Ji, founder of Sikhism (1469). 48-hour Akhand Path, Nagar Kirtan processions, and massive community Langar meals. Gazetted national holiday.' },
+    { id: 'guru_gobind_birthday', name: 'Guru Gobind Singh Jayanti', date: '01-05',
+      importance: 'major', religions: ['sikh'],
+      communities: [], regions: [],
+      desc: 'Birthday of Guru Gobind Singh Ji, the tenth Guru who founded the Khalsa in 1699. Akhand Path, kirtan, and processions from gurdwaras. Celebrated by Sikhs across India.' },
+    { id: 'hola_mohalla', name: 'Hola Mohalla', date: d.hola_mohalla,
+      importance: 'major', religions: ['sikh'],
+      communities: [], regions: ['PB','HR','DL'],
+      desc: 'Sikh festival established by Guru Gobind Singh, celebrated the day after Holi. Features mock battles, martial arts (Gatka), horse riding, and military exercises at Anandpur Sahib. Followed by kirtan and langar.' },
+    { id: 'martyrdom_guru_arjan', name: 'Martyrdom of Guru Arjan Dev', date: '06-16',
+      importance: 'regional', religions: ['sikh'],
+      communities: [], regions: [],
+      desc: 'Commemorates the fifth Guru\'s martyrdom. He compiled the Adi Granth and built the Golden Temple. Tortured and killed by Mughal emperor Jahangir in 1606.' },
+    { id: 'martyrdom_guru_tegh', name: 'Martyrdom of Guru Tegh Bahadur', date: '11-24',
+      importance: 'regional', religions: ['sikh'],
+      communities: [], regions: [],
+      desc: 'Commemorates the ninth Guru\'s martyrdom. He defended religious freedom for Kashmiri Pandits and was executed by Mughal emperor Aurangzeb in 1675.' },
+
+    // ─── Buddhist ───────────────────────────────────────────────────────
+    { id: 'buddha_purnima', name: 'Buddha Purnima (Vesak)', date: d.buddha_purnima,
+      importance: 'national', religions: ['buddhist'],
+      communities: [], regions: [],
+      desc: 'Celebrates the birth, enlightenment, and death of Gautama Buddha. Devotees visit monasteries, light lamps, and meditate. Major celebrations at Bodh Gaya, Sarnath. Gazetted national holiday.' },
+    { id: 'dhamma_chakra', name: 'Dhamma Chakra Pravartan Din', date: '10-14',
+      importance: 'major', religions: ['buddhist'],
+      communities: ['navayana'],
+      regions: ['MH','UP','MP','KA','RJ','DL'],
+      desc: 'Commemorates Dr. Ambedkar\'s conversion to Buddhism on October 14, 1956, at Deekshabhoomi, Nagpur, with 600,000 followers. Central to Navayana Buddhist identity.' },
+    { id: 'ambedkar_parinirvan', name: 'Mahaparinirvan Diwas', date: '12-06',
+      importance: 'major', religions: ['buddhist'],
+      communities: ['navayana'],
+      regions: ['MH','UP','MP','DL','AP','TG'],
+      desc: 'Death anniversary of Dr. Ambedkar (December 6, 1956). Millions gather at Chaitya Bhoomi in Mumbai. A day of remembrance and rededication to his vision of equality.' },
+    { id: 'losar', name: 'Losar (Tibetan New Year)', date: d.losar,
+      importance: 'regional', religions: ['buddhist'],
+      communities: ['tibetan'],
+      regions: ['HP','SK','AR','JK'],
+      desc: 'Tibetan Buddhist New Year with prayer ceremonies, traditional cham dances, prayer flags, and special foods like Guthuk soup and Kapse cookies. Major in Ladakh, Spiti, and Sikkim.' },
+
+    // ─── Jain ───────────────────────────────────────────────────────────
+    { id: 'mahavir_jayanti', name: 'Mahavir Jayanti', date: d.mahavir_jayanti,
+      importance: 'national', religions: ['jain'],
+      communities: [], regions: [],
+      desc: 'Birthday of Lord Mahavira, the 24th Tirthankara. Temple visits, processions, and charity. Abhisheka (ceremonial bath) is a key ritual. Gazetted national holiday.' },
+    { id: 'paryushana', name: 'Paryushana / Das Lakshan', date: d.paryushana,
+      importance: 'major', religions: ['jain'],
+      communities: [],
+      regions: ['GJ','RJ','MH','KA','MP','DL','UP'],
+      desc: '8 days for Shvetambaras (Paryushana) or 10 days for Digambaras (Das Lakshan). Intense fasting, study, and self-reflection. Ends with Samvatsari — a day of universal forgiveness ("Michhami Dukkadam").' },
+    { id: 'diwali_jain', name: 'Diwali (Mahavira Nirvana)', date: d.diwali,
+      importance: 'major', religions: ['jain'],
+      communities: [], regions: [],
+      desc: 'For Jains, Diwali marks Mahavira\'s attainment of Moksha (nirvana) in 527 BCE. The "light" represents the light of knowledge. Also the start of the Jain new financial year.' },
+  ];
+}
+
+// ── Filtering ─────────────────────────────────────────────────────────────────
+function filterHolidays(holidays, religion, community, region) {
+  return holidays.filter(h => {
+    // Religion
+    if (religion !== 'all') {
+      if (!h.religions.includes(religion) && !h.religions.includes('all')) return false;
+    }
+    // Community
+    if (community !== 'all' && h.communities.length > 0) {
+      if (!h.communities.includes(community) && !h.communities.includes('all')) return false;
+    }
+    // Region
+    if (region !== 'all' && h.regions.length > 0) {
+      if (!h.regions.includes(region)) return false;
+    }
+    return true;
+  });
+}
+
+// ── Community Options ─────────────────────────────────────────────────────────
+function updateCommunityOptions() {
+  const religion = document.getElementById('religionSelect').value;
+  const sel = document.getElementById('communitySelect');
+  const data = RELIGION_DATA[religion];
+  sel.innerHTML = '';
+  for (const [key, label] of Object.entries(data.communities)) {
+    const opt = document.createElement('option');
+    opt.value = key;
+    opt.textContent = label;
+    sel.appendChild(opt);
+  }
+  document.getElementById('demoInfo').innerHTML = '<strong>' + data.name + '</strong> (' + data.population + ' of India)<br>' + data.info;
+}
+
+// ── Map ───────────────────────────────────────────────────────────────────────
+// Map state codes from SVG to our codes (SVG uses AP for combined AP+TG, no UK)
+const SVG_TO_STATE = {
+  'AP': ['AP','TG'], 'AR': ['AR'], 'AS': ['AS'], 'BR': ['BR'], 'CG': ['CG'],
+  'DL': ['DL'], 'GA': ['GA'], 'GJ': ['GJ'], 'HR': ['HR'], 'HP': ['HP'],
+  'JK': ['JK'], 'JH': ['JH'], 'KA': ['KA'], 'KL': ['KL'], 'MP': ['MP'],
+  'MH': ['MH'], 'MN': ['MN'], 'ML': ['ML'], 'MZ': ['MZ'], 'NL': ['NL'],
+  'OD': ['OD'], 'PB': ['PB'], 'RJ': ['RJ'], 'SK': ['SK'], 'TN': ['TN'],
+  'TR': ['TR'], 'UP': ['UP','UK'], 'WB': ['WB']
+};
+const STATE_TO_SVG = {};
+for (const [svg, states] of Object.entries(SVG_TO_STATE)) {
+  states.forEach(s => STATE_TO_SVG[s] = svg);
+}
+
+function updateMapSelection() {
+  const region = document.getElementById('regionSelect').value;
+  document.querySelectorAll('#indiaMap path').forEach(p => p.classList.remove('selected'));
+  if (region !== 'all') {
+    const svgId = STATE_TO_SVG[region];
+    if (svgId) {
+      const el = document.getElementById('map-' + svgId);
+      if (el) {
+        el.classList.add('selected');
+        document.getElementById('mapLabel').textContent = document.querySelector('#regionSelect option[value="' + region + '"]')?.textContent || region;
+      }
+    }
+  } else {
+    document.getElementById('mapLabel').textContent = 'Click a state to select region';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#indiaMap path').forEach(path => {
+    path.addEventListener('click', () => {
+      const svgState = path.dataset.state;
+      const mapped = SVG_TO_STATE[svgState];
+      if (mapped) {
+        // For combined states (AP=AP+TG, UP=UP+UK), use the first one
+        document.getElementById('regionSelect').value = mapped[0];
+        updateMapSelection();
+        generate();
+      }
+    });
+  });
+});
+
+// ── Google Calendar / ICS Export ───────────────────────────────────────────────
+function gcalUrl(name, date, year, desc) {
+  const dateStr = year + '' + date.replace('-', '');
+  const params = new URLSearchParams({
+    action: 'TEMPLATE', text: name,
+    dates: dateStr + '/' + dateStr,
+    details: desc, ctz: 'Asia/Kolkata',
+  });
+  return 'https://www.google.com/calendar/render?' + params.toString();
+}
+
+function exportAllToICS(holidays, year) {
+  let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Abel\'s Calculators//Indian Holidays//EN\nCALSCALE:GREGORIAN\n';
+  holidays.forEach(h => {
+    const dateStr = year + '' + h.date.replace('-', '');
+    ics += 'BEGIN:VEVENT\nDTSTART;VALUE=DATE:' + dateStr + '\nDTEND;VALUE=DATE:' + dateStr + '\nSUMMARY:' + h.name + '\nDESCRIPTION:' + h.desc.replace(/\n/g, '\\n') + '\nEND:VEVENT\n';
+  });
+  ics += 'END:VCALENDAR';
+  const blob = new Blob([ics], { type: 'text/calendar' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'indian-holidays-' + year + '.ics';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── Calendar Rendering ────────────────────────────────────────────────────────
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAY_ABBR = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+const IMPORTANCE_LABELS = { national: 'National / Gazetted', major: 'Major Festival', regional: 'Regional / Community', minor: 'Minor Observance' };
+
+function getTopImportance(holidays) {
+  const order = ['national','major','regional','minor'];
+  let best = 'minor';
+  for (const h of holidays) { if (order.indexOf(h.importance) < order.indexOf(best)) best = h.importance; }
+  return best;
+}
+
+function renderCalendarMonth(year, month, holidays) {
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const dayHolidays = {};
+  holidays.forEach(h => {
+    const [mm, dd] = h.date.split('-').map(Number);
+    if (mm - 1 === month) { if (!dayHolidays[dd]) dayHolidays[dd] = []; dayHolidays[dd].push(h); }
+  });
+  let daysHTML = '';
+  for (let i = 0; i < firstDay; i++) daysHTML += '<div class="day-cell empty"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const hols = dayHolidays[d];
+    if (hols) {
+      const topImportance = getTopImportance(hols);
+      const multi = hols.length > 1 ? ' multi-holiday' : '';
+      const tip = hols.map(h => h.name).join(', ');
+      daysHTML += '<div class="day-cell has-holiday importance-' + topImportance + multi + '"><span class="day-tooltip">' + tip + '</span>' + d + '</div>';
+    } else {
+      daysHTML += '<div class="day-cell">' + d + '</div>';
+    }
+  }
+  return '<div class="month-card"><div class="month-name">' + MONTH_NAMES[month] + '</div><div class="month-day-headers">' + DAY_ABBR.map(d => '<span>' + d + '</span>').join('') + '</div><div class="month-days">' + daysHTML + '</div></div>';
+}
+
+function renderHolidayList(year, holidays) {
+  if (!holidays.length) return '<div style="text-align:center;color:var(--text-muted);padding:40px;">No holidays match your filters. Try broadening your selections.</div>';
+  let html = '<div class="holiday-list">';
+  let currentMonth = -1;
+  holidays.forEach(h => {
+    const [mm, dd] = h.date.split('-').map(Number);
+    if (mm - 1 !== currentMonth) {
+      currentMonth = mm - 1;
+      html += '<div style="margin-top:16px;margin-bottom:4px;"><div class="section-label">' + MONTH_NAMES[currentMonth] + '</div></div>';
+    }
+    const dateObj = new Date(year, mm - 1, dd);
+    const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+    const tags = ['<span class="holiday-tag importance-' + h.importance + '">' + IMPORTANCE_LABELS[h.importance] + '</span>'];
+    h.religions.filter(r => r !== 'all').forEach(r => {
+      tags.push('<span class="holiday-tag religion">' + (RELIGION_DATA[r]?.name || r) + '</span>');
+    });
+    if (h.regions.length > 0 && h.regions.length <= 6) tags.push('<span class="holiday-tag">' + h.regions.join(', ') + '</span>');
+    const gcal = gcalUrl(h.name, h.date, year, h.desc);
+    html += '<div class="holiday-item importance-' + h.importance + '"><div class="holiday-date"><span class="day-num">' + dd + '</span>' + dayName + ', ' + MONTH_NAMES[mm-1].slice(0,3) + '</div><div class="holiday-info"><div class="holiday-name">' + h.name + '</div><div class="holiday-tags">' + tags.join('') + '</div><div class="holiday-desc">' + h.desc + '</div></div><div class="holiday-actions"><a class="gcal-btn" href="' + gcal + '" target="_blank" rel="noopener">+ Google Cal</a></div></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+// ── Main Generate ─────────────────────────────────────────────────────────────
+let currentView = 'calendar';
+function setView(view) { currentView = view; generate(); }
+
+function generate() {
+  const year = parseInt(document.getElementById('yearSelect').value);
+  const religion = document.getElementById('religionSelect').value;
+  const community = document.getElementById('communitySelect').value;
+  const region = document.getElementById('regionSelect').value;
+
+  const filtered = filterHolidays(getHolidays(year), religion, community, region);
+  filtered.sort((a, b) => a.date.localeCompare(b.date));
+
+  const counts = { national: 0, major: 0, regional: 0, minor: 0 };
+  filtered.forEach(h => counts[h.importance]++);
+  const regionName = region === 'all' ? 'All India' : (document.querySelector('#regionSelect option[value="' + region + '"]')?.textContent || region);
+  const religionName = RELIGION_DATA[religion]?.name || religion;
+
+  const area = document.getElementById('resultsArea');
+  let calHTML = '';
+  if (currentView === 'calendar') {
+    calHTML = '<div class="month-grid">';
+    for (let m = 0; m < 12; m++) calHTML += renderCalendarMonth(year, m, filtered);
+    calHTML += '</div><div style="margin-top:24px;"><div class="card-title" style="margin-bottom:12px;">ALL HOLIDAYS</div>' + renderHolidayList(year, filtered) + '</div>';
+  } else {
+    calHTML = renderHolidayList(year, filtered);
+  }
+
+  area.innerHTML = '<div class="card"><div class="card-title">Your Holiday Summary &mdash; ' + year + '</div><div class="stats-bar"><div class="stat-box"><div class="stat-box-label">Total Holidays</div><div class="stat-box-value">' + filtered.length + '</div></div><div class="stat-box"><div class="stat-box-label">National</div><div class="stat-box-value" style="color:var(--red)">' + counts.national + '</div></div><div class="stat-box"><div class="stat-box-label">Major</div><div class="stat-box-value" style="color:var(--orange)">' + counts.major + '</div></div><div class="stat-box"><div class="stat-box-label">Regional</div><div class="stat-box-value" style="color:var(--blue)">' + counts.regional + '</div></div><div class="stat-box"><div class="stat-box-label">Religion</div><div class="stat-box-value" style="font-size:14px">' + religionName + '</div></div><div class="stat-box"><div class="stat-box-label">Region</div><div class="stat-box-value" style="font-size:14px">' + regionName + '</div></div></div></div>' +
+    '<div class="calendar-toolbar"><div style="display:flex;align-items:center;gap:12px;"><h3>' + year + ' Calendar</h3><div class="view-toggle"><button class="' + (currentView === 'calendar' ? 'active' : '') + '" onclick="setView(\'calendar\')">Calendar</button><button class="' + (currentView === 'list' ? 'active' : '') + '" onclick="setView(\'list\')">List</button></div></div><div class="toolbar-btns"><button class="toolbar-btn" onclick="exportAllToICS(window._fh,' + year + ')">&#128197; Export .ics</button></div></div>' +
+    '<div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> National / Gazetted</div><div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Major Festival</div><div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Regional / Community</div><div class="legend-item"><div class="legend-dot" style="background:var(--text-muted)"></div> Minor Observance</div></div>' + calHTML;
+
+  window._fh = filtered;
+}
+
+// ── Share Settings ────────────────────────────────────────────────────────────
+function saveSettings() {
+  const settings = {
+    year: document.getElementById('yearSelect').value,
+    religion: document.getElementById('religionSelect').value,
+    community: document.getElementById('communitySelect').value,
+    region: document.getElementById('regionSelect').value
+  };
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(settings))));
+  const url = new URL(window.location.href);
+  url.hash = 's=' + encoded;
+  window.history.pushState({}, '', url.toString());
+  const btn = document.getElementById('saveSettingsBtn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url.toString()).then(() => {
+      const orig = btn.textContent; btn.textContent = '\u2713 Link copied!';
+      setTimeout(() => btn.textContent = orig, 2500);
+    }).catch(() => {
+      prompt('Copy this link to save or share your settings:', url.toString());
+    });
+  } else {
+    prompt('Copy this link to save or share your settings:', url.toString());
+  }
+}
+
+function loadSettingsFromHash() {
+  const hash = window.location.hash;
+  if (!hash.startsWith('#s=')) return;
+  try {
+    const settings = JSON.parse(decodeURIComponent(escape(atob(hash.slice(3)))));
+    if (settings.year) document.getElementById('yearSelect').value = settings.year;
+    if (settings.religion) document.getElementById('religionSelect').value = settings.religion;
+    updateCommunityOptions();
+    if (settings.community) document.getElementById('communitySelect').value = settings.community;
+    if (settings.region) {
+      document.getElementById('regionSelect').value = settings.region;
+      updateMapSelection();
+    }
+  } catch(e) { console.error('Failed to load settings from URL:', e); }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => { loadSettingsFromHash(); updateCommunityOptions(); generate(); });
+
+// ── Theme ─────────────────────────────────────────────────────────────────────
+document.getElementById('themeToggle').addEventListener('click', function() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme', 'light');
+    document.getElementById('themeIcon').textContent = '\u263E';
+    document.getElementById('themeLabel').textContent = 'Dark';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('theme', 'dark');
+    document.getElementById('themeIcon').textContent = '\u2600';
+    document.getElementById('themeLabel').textContent = 'Light';
+  }
+});
+(function() {
+  if (document.documentElement.getAttribute('data-theme') === 'dark') {
+    document.getElementById('themeIcon').textContent = '\u2600';
+    document.getElementById('themeLabel').textContent = 'Light';
+  }
+})();
+</script>
+</body>
+</html>
