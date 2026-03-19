@@ -184,6 +184,8 @@
   .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
   .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
   .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
 </style>
 <script>
   (function(){
@@ -225,7 +227,6 @@
         <a href="roth-conversion.html">Roth Conversion</a>
         <a href="debt-payoff.html">Debt Payoff</a>
         <a href="social-security.html">Social Security Break-Even</a>
-        <a href="life-expectancy.html">Life Expectancy</a>
         <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
       </div>
     </div>
@@ -237,10 +238,20 @@
     </div>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
-      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <button class="nav-dropdown-btn">More <span class="nav-caret">&#9660;</span></button>
       <div class="nav-dropdown-menu">
+        <a href="indian-holidays.html">Indian Holiday Calendar</a>
+        <div class="nav-dropdown-divider"></div>
+        <span class="nav-dropdown-label">Running</span>
         <a href="race-predictor.html">Race Time Predictor</a>
         <a href="training-paces.html">Training Pace Calculator</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="indian-holidays.html">Indian Holiday Calendar</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -373,12 +384,6 @@
       Should you claim at 62, 67, or 70? Model the break-even crossover and lifetime benefit under different scenarios.
       <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
     </a>
-    <a href="life-expectancy.html" class="calc-secondary-link">
-      <span class="csl-title">Life Expectancy Calculator</span>
-      <span class="csl-sep">&mdash;</span>
-      See your survival probability curve from SSA actuarial data. Adjust for smoking, exercise, BMI, and education.
-      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
-    </a>
     <a href="wealth-percentile.html" class="calc-secondary-link">
       <span class="csl-title">Income &amp; Wealth Percentile</span>
       <span class="csl-sep">&mdash;</span>
@@ -411,6 +416,16 @@
       <span class="csl-title">Training Pace Calculator</span>
       <span class="csl-sep">&mdash;</span>
       Get your easy, tempo, interval, and race-pace zones based on a recent PR using Jack Daniels&rsquo; VDOT system.
+      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    </a>
+  </div>
+
+  <div class="section-label">More Tools</div>
+  <div class="calc-secondary">
+    <a href="indian-holidays.html" class="calc-secondary-link">
+      <span class="csl-title">Indian Holiday Calendar</span>
+      <span class="csl-sep">&mdash;</span>
+      Personalized Indian holiday calendar by religion, region, caste, and community &mdash; with descriptions and Google Calendar export.
       <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
     </a>
   </div>

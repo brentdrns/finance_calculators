@@ -10,10 +10,19 @@
       "Bash(do sed:*)",
       "Bash(done)",
       "Bash(ls -la /c/Users/brent/OneDrive/Documents/GitHub/finance_calculators/*.html)",
-      "Bash(grep -E \"\\\\.\\(css|js\\)$\")"
+      "Bash(grep -E \"\\\\.\\(css|js\\)$\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:upload.wikimedia.org)",
+      "WebFetch(domain:simplemaps.com)",
+      "WebFetch(domain:mapsvg.com)",
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "Bash(cd /tmp)",
+      "Bash(npm pack:*)",
+      "Bash(tar -xzf svg-maps-india-*.tgz)"
     ],
     "additionalDirectories": [
-      "c:\\Users\\brent\\OneDrive\\Documents\\GitHub\\finance_calculators\\blog"
+      "c:\\Users\\brent\\OneDrive\\Documents\\GitHub\\finance_calculators\\blog",
+      "C:\\"
     ]
   }
 }
