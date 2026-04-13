@@ -424,6 +424,55 @@
     </div>
   </div>
 
+  <div class="panel">
+    <div class="section-label">Strategy Change <span style="font-size:9px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+    <label class="checkbox-row">
+      <input type="checkbox" id="includePhase2" onchange="togglePhase2()">
+      <label for="includePhase2">Switch savings &amp; allocation at a certain age</label>
+    </label>
+    <div id="phase2Fields" style="display:none;margin-top:8px">
+      <div class="hint" style="margin-bottom:8px">Model a mid-life strategy shift — semi-retirement, a career change, or glide-path rebalancing.</div>
+      <div class="field">
+        <label>Switch at Age</label>
+        <input type="number" id="phase2Age" value="45" min="18" max="89" step="1">
+      </div>
+      <div class="field">
+        <label>New Annual Savings ($)</label>
+        <input type="text" inputmode="decimal" id="phase2AnnualSavings" value="10,000">
+      </div>
+      <div class="hint">Annual savings from this age forward. Set to 0 to stop contributing.</div>
+      <div class="section-label" style="margin-top:10px;font-size:9px">New Allocation</div>
+      <div class="presets" style="margin-bottom:8px">
+        <button class="preset-btn" onclick="applyPreset2('aggressive')">Aggressive</button>
+        <button class="preset-btn" onclick="applyPreset2('growth')">Growth</button>
+        <button class="preset-btn" onclick="applyPreset2('moderate')">Moderate</button>
+        <button class="preset-btn" onclick="applyPreset2('conservative')">Conservative</button>
+      </div>
+      <div class="alloc-slider-row">
+        <span class="alloc-slider-label">US Stocks</span>
+        <input type="range" id="allocUS2" min="0" max="100" step="5" value="40" oninput="updateAllocDisplay2()">
+        <span class="alloc-slider-pct" id="allocUS2Pct">40%</span>
+      </div>
+      <div class="alloc-slider-row">
+        <span class="alloc-slider-label">Int'l Stocks</span>
+        <input type="range" id="allocIntl2" min="0" max="100" step="5" value="15" oninput="updateAllocDisplay2()">
+        <span class="alloc-slider-pct" id="allocIntl2Pct">15%</span>
+      </div>
+      <div class="alloc-slider-row">
+        <span class="alloc-slider-label">Bonds</span>
+        <input type="range" id="allocBonds2" min="0" max="100" step="5" value="35" oninput="updateAllocDisplay2()">
+        <span class="alloc-slider-pct" id="allocBonds2Pct">35%</span>
+      </div>
+      <div class="alloc-slider-row">
+        <span class="alloc-slider-label">Cash</span>
+        <input type="range" id="allocCash2" min="0" max="100" step="5" value="10" oninput="updateAllocDisplay2()">
+        <span class="alloc-slider-pct" id="allocCash2Pct">10%</span>
+      </div>
+      <div class="alloc-bar" id="allocBar2"></div>
+      <div class="alloc-info" id="allocInfo2"></div>
+    </div>
+  </div>
+
   <div class="panel" style="padding-top:0">
     <button onclick="calc()" style="width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:0.02em;">Calculate</button>
   </div>
@@ -736,6 +785,69 @@ function applyPreset(name) {
   calc();
 }
 
+// Phase 2 toggle / helpers
+function togglePhase2() {
+  var on = document.getElementById('includePhase2').checked;
+  document.getElementById('phase2Fields').style.display = on ? 'block' : 'none';
+  if (on) updateAllocDisplay2();
+  calc();
+}
+
+function applyPreset2(name) {
+  var p = PRESETS[name];
+  if (!p) return;
+  document.getElementById('allocUS2').value = p.usStocks;
+  document.getElementById('allocIntl2').value = p.intlStocks;
+  document.getElementById('allocBonds2').value = p.bonds;
+  document.getElementById('allocCash2').value = p.cash;
+  updateAllocDisplay2();
+  calc();
+}
+
+function updateAllocDisplay2() {
+  var us = parseInt(document.getElementById('allocUS2').value) || 0;
+  var intl = parseInt(document.getElementById('allocIntl2').value) || 0;
+  var bonds = parseInt(document.getElementById('allocBonds2').value) || 0;
+  var cash = parseInt(document.getElementById('allocCash2').value) || 0;
+  var total = us + intl + bonds + cash;
+
+  document.getElementById('allocUS2Pct').textContent = us + '%';
+  document.getElementById('allocIntl2Pct').textContent = intl + '%';
+  document.getElementById('allocBonds2Pct').textContent = bonds + '%';
+  document.getElementById('allocCash2Pct').textContent = cash + '%';
+
+  var bar = document.getElementById('allocBar2');
+  bar.innerHTML = '';
+  [{ pct: us, color: '#2563eb' }, { pct: intl, color: '#7c3aed' }, { pct: bonds, color: '#60a0f0' }, { pct: cash, color: '#94a3b8' }].forEach(function(seg) {
+    if (seg.pct > 0) {
+      var el = document.createElement('div');
+      el.className = 'alloc-bar-seg';
+      el.style.width = (seg.pct / Math.max(total, 1) * 100) + '%';
+      el.style.background = seg.color;
+      bar.appendChild(el);
+    }
+  });
+
+  var info = document.getElementById('allocInfo2');
+  var w = { usStocks: us/100, intlStocks: intl/100, bonds: bonds/100, cash: cash/100 };
+  var expRet = 0, expVar = 0;
+  for (var key in ASSETS) {
+    expRet += w[key] * ASSETS[key].mean;
+    expVar += (w[key] * w[key]) * (ASSETS[key].std * ASSETS[key].std);
+  }
+  var html = '<strong>Expected return:</strong> ' + (expRet * 100).toFixed(1) + '% &nbsp;&bull;&nbsp; <strong>Risk:</strong> ' + (Math.sqrt(expVar) * 100).toFixed(1) + '%';
+  if (total !== 100) html += '<br><span class="alloc-warn">Allocation sums to ' + total + '% (should be 100%)</span>';
+  info.innerHTML = html;
+}
+
+function getAllocation2() {
+  var us = parseInt(document.getElementById('allocUS2').value) || 0;
+  var intl = parseInt(document.getElementById('allocIntl2').value) || 0;
+  var bonds = parseInt(document.getElementById('allocBonds2').value) || 0;
+  var cash = parseInt(document.getElementById('allocCash2').value) || 0;
+  return { usStocks: us/100, intlStocks: intl/100, bonds: bonds/100, cash: cash/100 };
+}
+
 // Update allocation display (bar, info, pct labels)
 function updateAllocDisplay() {
   var us = parseInt(document.getElementById('allocUS').value) || 0;
@@ -847,6 +959,9 @@ function runMonteCarloFIRE(params) {
 
   var fireNumber = swr > 0 ? expenses / swr : 0;
 
+  // Phase 2 settings
+  var phase2 = params.phase2 || null; // { age, annualSavings, weights }
+
   // Run simulations
   var allPaths = []; // allPaths[sim][yr]
   var fireAges = []; // age at which FIRE reached, or null
@@ -869,13 +984,23 @@ function runMonteCarloFIRE(params) {
   var ssAnn0 = (includeSS && currentAge >= ssStartAge) ? ssBenefit * 12 : 0;
   var displayFireTargets = [swr > 0 ? Math.max(0, expenses - ssAnn0) / swr : 0];
   var detExp = expenses, detSav = annualSavings;
+  var detPhase2Sav = 0, detPhase2Started = false;
   for (var yr = 0; yr < numYears; yr++) {
     detExp = detExp * (1 + avgInflation);
     detSav = detSav * (1 + savingsGrowth);
     var age = currentAge + yr + 1;
     var ssAnn = (includeSS && age >= ssStartAge) ? ssBenefit * 12 : 0;
     displayExpenses.push(detExp);
-    displaySavings.push(detSav);
+    // Display savings: switch to phase2 amount at transition age
+    var dispSav;
+    if (phase2 && age >= phase2.age) {
+      if (!detPhase2Started) { detPhase2Sav = phase2.annualSavings; detPhase2Started = true; }
+      else { detPhase2Sav = detPhase2Sav * (1 + savingsGrowth); }
+      dispSav = detPhase2Sav;
+    } else {
+      dispSav = detSav;
+    }
+    displaySavings.push(dispSav);
     displayFireTargets.push(swr > 0 ? Math.max(0, detExp - ssAnn) / swr : 0);
   }
 
@@ -888,13 +1013,19 @@ function runMonteCarloFIRE(params) {
 
     var curExpenses = expenses;
     var curSavings = annualSavings;
+    var curPhase2Savings = 0;
+    var simPhase2Started = false;
 
     for (var yr = 0; yr < numYears; yr++) {
       // Pick a random historical year
       var sampledYear = YEAR_POOL[Math.floor(Math.random() * YEAR_POOL.length)];
 
+      var age = currentAge + yr + 1;
+      var inPhase2 = phase2 && age >= phase2.age;
+      var effectiveWeights = inPhase2 ? phase2.weights : weights;
+
       // Get portfolio return from asset allocation
-      var annualReturn = getHistoricalReturn(sampledYear, weights);
+      var annualReturn = getHistoricalReturn(sampledYear, effectiveWeights);
 
       // Get inflation for this year
       var yearInflation;
@@ -907,21 +1038,25 @@ function runMonteCarloFIRE(params) {
       // Grow expenses by inflation
       curExpenses = curExpenses * (1 + yearInflation);
 
-      // Grow savings by savings growth rate (career growth, on top of inflation)
+      // Grow phase 1 savings (still tracked even during phase 2, in case needed)
       curSavings = curSavings * (1 + savingsGrowth);
 
+      // Manage phase 2 savings: start at phase2.annualSavings at transition age, then grow
+      if (inPhase2) {
+        if (!simPhase2Started) { curPhase2Savings = phase2.annualSavings; simPhase2Started = true; }
+        else { curPhase2Savings = curPhase2Savings * (1 + savingsGrowth); }
+      }
+      var effectiveSavings = inPhase2 ? curPhase2Savings : curSavings;
+
       // Calculate SS for this year
-      var age = currentAge + yr + 1;
       var ssAnnual = (includeSS && age >= ssStartAge) ? ssBenefit * 12 : 0;
-      // SS is already in today's dollars (SSA adjusts for inflation), so grow it with cumulative inflation
-      // Actually, ssAnnual grows with inflation implicitly since expenses grow and SS offsets them
 
       // FIRE target for this year
       var fireTarget = swr > 0 ? Math.max(0, curExpenses - ssAnnual) / swr : 0;
 
       if (simFireAge === null) {
         // Accumulation phase: invest savings
-        portfolio = portfolio * (1 + annualReturn) + curSavings;
+        portfolio = portfolio * (1 + annualReturn) + effectiveSavings;
       } else {
         // Withdrawal phase: draw down expenses minus SS
         var withdrawal = curExpenses - ssAnnual;
@@ -1019,7 +1154,8 @@ function runMonteCarloFIRE(params) {
     medianPortfolioAtFire: medianPortfolioAtFire,
     currentAge: currentAge,
     maxAge: maxAge,
-    numSims: numSims
+    numSims: numSims,
+    phase2: phase2
   };
 }
 
@@ -1078,6 +1214,18 @@ function _calcRun() {
   var ssAnnualAmount = includeSS ? ssBenefit * 12 : 0;
   var fireNumberWithSS = swr > 0 ? Math.max(0, expenses - ssAnnualAmount) / swr : 0;
 
+  // Phase 2 settings
+  var includePhase2 = document.getElementById('includePhase2').checked;
+  var phase2Param = null;
+  if (includePhase2) {
+    var p2Age = parseInt(document.getElementById('phase2Age').value) || 45;
+    var p2Sav = parseFloat(document.getElementById('phase2AnnualSavings').value) || 0;
+    var alloc2 = getAllocation2();
+    if (p2Age > currentAge && p2Age < 90) {
+      phase2Param = { age: p2Age, annualSavings: p2Sav, weights: alloc2 };
+    }
+  }
+
   // Run Monte Carlo simulation
   var mcParams = {
     currentAge: currentAge,
@@ -1098,7 +1246,8 @@ function _calcRun() {
     ssBenefit: ssBenefit,
     ssStartAge: ssStartAge,
     numSims: numSims,
-    confidence: parseInt(document.getElementById('confidenceBands').value) || 90
+    confidence: parseInt(document.getElementById('confidenceBands').value) || 90,
+    phase2: phase2Param
   };
 
   var result = runMonteCarloFIRE(mcParams);
@@ -1333,6 +1482,29 @@ function renderChart(result) {
           drawCtx.restore();
         }
       }
+
+      // Phase 2 transition line
+      if (res.phase2) {
+        var p2Index = res.phase2.age - res.currentAge;
+        if (p2Index >= 0 && p2Index <= lbls.length) {
+          var px = xScale.getPixelForValue(p2Index);
+          drawCtx.save();
+          drawCtx.beginPath();
+          drawCtx.setLineDash([4, 3]);
+          drawCtx.strokeStyle = '#d97706';
+          drawCtx.lineWidth = 1.5;
+          drawCtx.moveTo(px, yScale.top);
+          drawCtx.lineTo(px, yScale.bottom);
+          drawCtx.stroke();
+          drawCtx.restore();
+          drawCtx.save();
+          drawCtx.fillStyle = '#d97706';
+          drawCtx.font = '10px Inter, sans-serif';
+          drawCtx.textAlign = 'center';
+          drawCtx.fillText('Strategy \u2192 Age ' + res.phase2.age, px, yScale.top + 14);
+          drawCtx.restore();
+        }
+      }
     }
   };
 
@@ -1497,12 +1669,15 @@ function renderBreakdown(result) {
   for (var yr = 0; yr <= numYears; yr++) {
     var age = result.currentAge + yr;
     var isFireYear = result.medianFireAge !== null && age === result.medianFireAge;
+    var isPhase2Year = result.phase2 && age === result.phase2.age;
     var fireProb = result.fireProbByYear[yr];
 
-    rows += '<tr' + (isFireYear ? ' class="fire-row"' : '') + '>';
-    rows += '<td>' + age + (isFireYear ? ' (FIRE!)' : '') + '</td>';
+    var rowClass = isFireYear ? ' class="fire-row"' : '';
+    rows += '<tr' + rowClass + '>';
+    var ageLabel = age + (isFireYear ? ' (FIRE!)' : '') + (isPhase2Year ? ' ★' : '');
+    rows += '<td>' + ageLabel + '</td>';
     rows += '<td>' + fmt(result.expensesByYear[yr]) + '</td>';
-    rows += '<td>' + fmt(result.savingsByYear[yr]) + '</td>';
+    rows += '<td>' + fmt(result.savingsByYear[yr]) + (isPhase2Year ? '<br><span style="font-size:9px;color:var(--accent-dim)">strategy change</span>' : '') + '</td>';
     rows += '<td>' + fmt(result.yearlyPercentiles[50][yr]) + '</td>';
     rows += '<td>' + fmt(result.yearlyPercentiles[pessKey][yr]) + '</td>';
     rows += '<td>' + fmt(result.yearlyPercentiles[optKey][yr]) + '</td>';
