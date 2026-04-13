@@ -18,7 +18,9 @@
       "WebFetch(domain:cdn.jsdelivr.net)",
       "Bash(cd /tmp)",
       "Bash(npm pack:*)",
-      "Bash(tar -xzf svg-maps-india-*.tgz)"
+      "Bash(tar -xzf svg-maps-india-*.tgz)",
+      "Bash(wc -l /c/Users/brent/OneDrive/Documents/GitHub/finance_calculators/blog/*.html)",
+      "Bash(grep -E '^[0-9\\\\-]+,[0-9\\\\-]+$')"
     ],
     "additionalDirectories": [
       "c:\\Users\\brent\\OneDrive\\Documents\\GitHub\\finance_calculators\\blog",

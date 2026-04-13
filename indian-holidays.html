@@ -186,9 +186,9 @@
   /* ── India Map ── */
   .map-container { position: relative; width: 100%; max-width: 300px; margin: 0 auto; }
   .map-container svg { width: 100%; height: auto; }
-  .map-container svg path { fill: var(--surface2); stroke: var(--border); stroke-width: 0.5; cursor: pointer; transition: fill 0.2s; }
-  .map-container svg path:hover { fill: var(--accent-dim); opacity: 0.7; }
-  .map-container svg path.selected { fill: var(--accent); opacity: 0.8; }
+  .map-container svg path { fill: var(--surface2); stroke: var(--bg); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; cursor: pointer; transition: fill 0.2s; shape-rendering: geometricPrecision; vector-effect: non-scaling-stroke; }
+  .map-container svg path:hover { fill: var(--accent-dim); }
+  .map-container svg path.selected { fill: var(--accent); }
   .map-label { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 8px; }
 
   /* View toggle */
@@ -922,7 +922,61 @@ function updateMapSelection() {
   }
 }
 
+// Remove tiny artifact subpaths from the SVG map (degenerate blobs from map simplification)
+function cleanMapPaths() {
+  document.querySelectorAll('#indiaMap path').forEach(function(path) {
+    var d = path.getAttribute('d');
+    if (!d) return;
+    d = d.trim();
+
+    // Split into subpaths at every 'z <m' boundary
+    var rawParts = [];
+    var cur = d;
+    while (true) {
+      var idx = cur.search(/[zZ]\s+[mM]/);
+      if (idx === -1) break;
+      rawParts.push(cur.slice(0, idx + 1).trim()); // up to and including z
+      cur = cur.slice(idx + 1).trim();               // starts with m
+    }
+    rawParts.push(cur.trim());
+    if (rawParts.length <= 1) return; // single subpath, nothing to do
+
+    // Track absolute start position of each subpath
+    var cx = 0, cy = 0;
+    var subpaths = rawParts.map(function(part) {
+      var mMatch = part.match(/^([mM])\s*([-\d.eE+]+)\s*,\s*([-\d.eE+]+)/);
+      var startX = cx, startY = cy;
+      if (mMatch) {
+        var dx = parseFloat(mMatch[2]), dy = parseFloat(mMatch[3]);
+        startX = (mMatch[1] === 'M') ? dx : cx + dx;
+        startY = (mMatch[1] === 'M') ? dy : cy + dy;
+      }
+      var pairs = (part.match(/-?\d+(?:\.\d+)?\s*,\s*-?\d+(?:\.\d+)?/g) || []).length;
+      cx = startX; cy = startY;
+      return { part: part, startX: startX, startY: startY, pairs: pairs };
+    });
+
+    // Keep only subpaths with >= 8 coordinate pairs (filter out artifacts)
+    var kept = subpaths.filter(function(s) { return s.pairs >= 8; });
+    if (kept.length === 0 || kept.length === subpaths.length) return;
+
+    // Reconstruct: if the first kept subpath isn't the original first, convert its m to absolute M
+    var origFirst = subpaths[0];
+    var newParts = kept.map(function(s, i) {
+      var part = s.part;
+      if (i === 0 && s !== origFirst) {
+        // Use lowercase 'm' so subsequent pairs stay as relative lineto (not absolute L)
+        part = part.replace(/^[mM]\s*([-\d.eE+]+)\s*,\s*([-\d.eE+]+)/,
+          'm ' + Math.round(s.startX) + ',' + Math.round(s.startY));
+      }
+      return part;
+    });
+    path.setAttribute('d', newParts.join(' '));
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  cleanMapPaths();
   document.querySelectorAll('#indiaMap path').forEach(path => {
     path.addEventListener('click', () => {
       const svgState = path.dataset.state;
