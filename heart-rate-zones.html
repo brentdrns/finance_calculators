@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Heart Rate Zone Calculator — Abel's Calculators</title>
+<meta name="description" content="Calculate personalized heart rate training zones anchored to your lactate threshold HR. Includes a guide to testing LTHR at home and why it's more accurate than max HR formulas.">
+<meta name="author" content="Abel's Financial Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/heart-rate-zones.html">
+<meta property="og:title" content="Heart Rate Zone Calculator — Abel's Calculators">
+<meta property="og:description" content="Set heart rate zones from your lactate threshold, not a formula. Includes the 30-minute home test protocol.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/heart-rate-zones.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Calculators — personalized financial analysis tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Heart Rate Zone Calculator">
+<meta name="twitter:description" content="LTHR-based heart rate zones with a home testing guide. More accurate than age-based formulas.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Heart Rate Zone Calculator","description":"Calculate personalized heart rate training zones anchored to lactate threshold heart rate.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/heart-rate-zones.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+    --z1: #3b82f6; --z2: #22c55e; --z3: #eab308; --z4: #f97316; --z5: #ef4444;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+    --z1: #60a5fa; --z2: #4ade80; --z3: #facc15; --z4: #fb923c; --z5: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+  .layout { display: grid; grid-template-columns: 360px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+  .panel { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input, .field select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+  .tab-row { display: flex; gap: 4px; }
+  .tab-btn { flex: 1; padding: 7px 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+  .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text); border-color: var(--accent-dim); }
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
+  .card { background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+  .chart-title { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .anchor-hero { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 14px; }
+  .anchor-big { font-family: 'DM Serif Display', serif; font-size: 72px; line-height: 1; color: var(--accent); }
+  .anchor-info { padding-bottom: 8px; }
+  .anchor-method { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .anchor-sub { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .stats-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .stats-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .stat-box { background: var(--surface2); border-radius: var(--radius); padding: 11px 13px; }
+  .stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-value { font-size: 17px; font-family: 'DM Serif Display', serif; }
+  .stat-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Zone bar */
+  .zone-bar-wrap { margin-bottom: 20px; }
+  .zone-bar-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .zone-bar { display: flex; height: 28px; border-radius: 8px; overflow: hidden; gap: 2px; }
+  .zone-bar-seg { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: rgba(0,0,0,0.55); cursor: default; border-radius: 4px; }
+  [data-theme="dark"] .zone-bar-seg { color: rgba(255,255,255,0.7); }
+  .zone-bar-ticks { display: flex; justify-content: space-between; margin-top: 4px; padding: 0 1px; }
+  .zone-bar-tick { font-size: 10px; color: var(--text-muted); font-family: 'DM Mono', monospace; }
+  .lthr-marker { margin-top: 6px; font-size: 11px; color: var(--text-muted); }
+  .lthr-marker strong { color: var(--accent); }
+
+  /* Zone table */
+  .zone-table { width: 100%; border-collapse: collapse; }
+  .zone-table th { text-align: left; padding: 7px 12px; background: var(--surface2); color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 500; border-bottom: 1px solid var(--border); }
+  .zone-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); font-size: 12px; vertical-align: top; }
+  .zone-table tr:last-child td { border-bottom: none; }
+  .zone-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; flex-shrink: 0; }
+  .zone-name-cell { display: flex; align-items: center; }
+  .zone-name { font-weight: 600; color: var(--text); font-size: 12px; }
+  .zone-hr { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text); }
+  .zone-pct { font-size: 11px; color: var(--text-muted); }
+  .zone-rpe { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text); }
+  .zone-feel { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+  .zone-purpose { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Callouts and prose */
+  .callout-note { background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; padding: 10px 14px; font-size: 12px; color: var(--text-muted); line-height: 1.65; margin-top: 14px; }
+  .callout-note strong { color: var(--text); }
+  .explainer-body { font-size: 12px; color: var(--text-muted); line-height: 1.85; }
+  .explainer-body p + p { margin-top: 12px; }
+  .explainer-body strong { color: var(--text); }
+  .explainer-body .hl { font-family: 'DM Serif Display', serif; font-size: 14px; color: var(--accent); }
+  .step-list { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; gap: 10px; }
+  .step-list li { display: flex; gap: 12px; align-items: flex-start; }
+  .step-num { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .step-text { font-size: 12px; color: var(--text-muted); line-height: 1.65; }
+  .step-text strong { color: var(--text); }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 14px; }
+  .mini-card { background: var(--surface2); border-radius: var(--radius); padding: 14px 16px; }
+  .mini-card-title { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .mini-card-body { font-size: 11px; color: var(--text-muted); line-height: 1.7; }
+  .mini-card-body strong { color: var(--text); }
+
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--border); max-height: none; position: static; }
+    .main { padding: 18px; }
+    header { padding: 0 20px; }
+    .zone-table th:nth-child(4), .zone-table td:nth-child(4) { display: none; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .main { padding: 12px; }
+    .card { padding: 14px 16px; }
+    .anchor-big { font-size: 52px; }
+    .stats-grid-3 { grid-template-columns: 1fr 1fr; }
+    .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
+    .zone-table th:nth-child(5), .zone-table td:nth-child(5) { display: none; }
+  }
+</style>
+<script>
+  (function(){
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+        <a href="fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="roth-conversion.html">Roth Conversion</a>
+        <a href="debt-payoff.html">Debt Payoff</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Paces</a>
+        <a href="training-plan.html">Training Plan</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html" class="active">Heart Rate Zones</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<section class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Heart Rate Zones</div>
+      <h2 class="hero-band-title">Zones built on <span>your threshold.</span></h2>
+    </div>
+    <div class="hero-band-divider"></div>
+    <p class="hero-band-body">
+      Most zone calculators are built on max HR formulas with <strong>±10–15 bpm error</strong>. This one anchors zones to your <strong>Lactate Threshold Heart Rate (LTHR)</strong> — the number that actually determines training intensity. You can find it with a 30-minute run, no lab required.
+    </p>
+  </div>
+</section>
+
+<div class="layout">
+<aside class="sidebar">
+
+  <div class="panel">
+    <div class="section-label">Method</div>
+    <div class="tab-row">
+      <button id="modeLthrBtn" class="tab-btn active" onclick="setMode('lthr')">LTHR</button>
+      <button id="modeMaxBtn"  class="tab-btn" onclick="setMode('maxhr')">Max HR</button>
+    </div>
+    <div class="hint" style="margin-top:8px" id="modeHint">LTHR: zones anchored to your lactate threshold — more accurate, reflects current fitness.</div>
+  </div>
+
+  <!-- ── LTHR panel ─────────────────────────────── -->
+  <div id="lthrPanel" class="panel">
+    <div class="section-label">Lactate Threshold HR</div>
+    <div class="field">
+      <label for="lthrInput">LTHR (bpm)</label>
+      <input type="number" id="lthrInput" value="155" min="100" max="210" step="1" oninput="calc()">
+      <div class="hint">Average HR from the last 20 min of a 30-minute all-out time trial, or from a recent 30–60 min race effort.</div>
+    </div>
+    <div class="field">
+      <label for="lthrSource">How did you find this?</label>
+      <select id="lthrSource" onchange="calc()">
+        <option value="tt">30-minute time trial (most accurate)</option>
+        <option value="race">Recent race (30–60 min effort)</option>
+        <option value="estimate">Estimated / unsure</option>
+      </select>
+    </div>
+    <div class="field" style="margin-top:10px">
+      <label for="lthrMaxHR">Max HR (bpm) <span style="color:var(--text-muted);font-weight:400">— optional, sets Zone 5 ceiling</span></label>
+      <input type="number" id="lthrMaxHR" value="" min="120" max="230" step="1" placeholder="e.g. 185" oninput="calc()">
+      <div class="hint">If left blank, Zone 5 ceiling is estimated as 115% of LTHR.</div>
+    </div>
+  </div>
+
+  <!-- ── Max HR panel ───────────────────────────── -->
+  <div id="maxhrPanel" style="display:none">
+    <div class="panel">
+      <div class="section-label">Your Stats</div>
+      <div class="field">
+        <label for="age">Age</label>
+        <input type="number" id="age" value="35" min="10" max="90" step="1" oninput="calc()">
+      </div>
+      <div class="field">
+        <label for="restingHR">Resting HR (bpm) <span style="color:var(--text-muted);font-weight:400">— optional</span></label>
+        <input type="number" id="restingHR" value="60" min="30" max="100" step="1" oninput="calc()">
+        <div class="hint">Enables Karvonen zones. Measure before getting out of bed.</div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="section-label">Max HR Formula</div>
+      <div class="field">
+        <label for="maxHRMethod">Formula</label>
+        <select id="maxHRMethod" onchange="onMaxMethodChange(); calc()">
+          <option value="tanaka">Tanaka: 208 − 0.7 × age</option>
+          <option value="fox">Fox: 220 − age</option>
+          <option value="custom">Custom — enter your max HR</option>
+        </select>
+      </div>
+      <div id="customMaxHRRow" style="display:none">
+        <div class="field">
+          <label for="customMaxHR">Max Heart Rate (bpm)</label>
+          <input type="number" id="customMaxHR" value="185" min="120" max="220" step="1" oninput="calc()">
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="section-label">Zone Method</div>
+      <div class="field">
+        <label for="zoneMethod">Calculate zones using</label>
+        <select id="zoneMethod" onchange="calc()">
+          <option value="pctmax">% of Max HR</option>
+          <option value="karvonen">Karvonen (Heart Rate Reserve)</option>
+        </select>
+      </div>
+      <div class="hint" id="zoneMethodHint">% Max HR: simple, widely used. Karvonen accounts for resting HR — gives slightly higher zone floors.</div>
+    </div>
+  </div>
+
+</aside>
+
+<main class="main">
+
+  <!-- Summary card -->
+  <div class="card">
+    <div class="chart-title" id="summaryCardTitle">Your Lactate Threshold</div>
+    <div class="anchor-hero">
+      <div class="anchor-big" id="anchorDisplay">—</div>
+      <div class="anchor-info">
+        <div class="anchor-method" id="anchorMethodLabel">—</div>
+        <div class="anchor-sub" id="anchorSub">—</div>
+      </div>
+    </div>
+    <div class="stats-grid-3">
+      <div class="stat-box">
+        <div class="stat-label" id="stat1Label">Zone 4 floor</div>
+        <div class="stat-value" id="stat1Value">—</div>
+        <div class="stat-sub" id="stat1Sub">bpm</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label" id="stat2Label">Zone 5 starts</div>
+        <div class="stat-value" id="stat2Value">—</div>
+        <div class="stat-sub">bpm</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Max HR</div>
+        <div class="stat-value" id="maxHRStat">—</div>
+        <div class="stat-sub">bpm (ceiling)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone table card -->
+  <div class="card">
+    <div class="chart-title">Training Zones</div>
+    <div class="zone-bar-wrap">
+      <div class="zone-bar-label">Zone Distribution</div>
+      <div class="zone-bar" id="zoneBar">
+        <div class="zone-bar-seg" style="background: var(--z1)">Z1</div>
+        <div class="zone-bar-seg" style="background: var(--z2)">Z2</div>
+        <div class="zone-bar-seg" style="background: var(--z3)">Z3</div>
+        <div class="zone-bar-seg" style="background: var(--z4)">Z4</div>
+        <div class="zone-bar-seg" style="background: var(--z5)">Z5</div>
+      </div>
+      <div class="zone-bar-ticks">
+        <span class="zone-bar-tick" id="tick0">—</span>
+        <span class="zone-bar-tick" id="tick1">—</span>
+        <span class="zone-bar-tick" id="tick2">—</span>
+        <span class="zone-bar-tick" id="tick3">—</span>
+        <span class="zone-bar-tick" id="tick4">—</span>
+        <span class="zone-bar-tick" id="tick5">—</span>
+      </div>
+      <div class="lthr-marker" id="lthrMarker" style="display:none"></div>
+    </div>
+    <table class="zone-table">
+      <thead>
+        <tr>
+          <th>Zone</th>
+          <th>Heart Rate</th>
+          <th>Intensity</th>
+          <th>RPE</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody id="zoneTableBody"></tbody>
+    </table>
+    <div class="callout-note" id="methodNote"></div>
+  </div>
+
+  <!-- Why LTHR card -->
+  <div class="card">
+    <div class="chart-title">Why LTHR — and How to Find It</div>
+    <div class="explainer-body">
+      <p>Most heart rate zone calculators use <strong>max HR formulas</strong>: plug in your age, get zones. The problem is that these formulas are population averages with enormous individual error — the standard deviation on 220−age is <strong>±12 bpm</strong>, meaning a 35-year-old's predicted max HR of 185 could easily be anywhere from 173 to 197. That 24-bpm range spans nearly two full zones. Tanaka (208−0.7×age) is better, but still carries ±7 bpm error.</p>
+      <p>The deeper issue is that max HR itself doesn't tell you much about <em>fitness</em>. Two runners with identical max HR of 185 can have radically different lactate thresholds — one might hit their threshold at 155 bpm, the other at 172. The one at 172 can sustain a harder effort before accumulating lactate. Zones set from max HR look the same for both runners even though their aerobic engines are completely different.</p>
+      <p><strong>Lactate threshold HR (LTHR)</strong> is the heart rate at which lactate starts accumulating in your blood faster than your body can clear it. Below it: sustainable aerobic effort. Above it: the clock starts ticking. Every zone boundary that matters in training is defined relative to this number, not to your genetic ceiling.</p>
+      <p>There's another practical advantage: LTHR moves with fitness. As your aerobic system improves over months of training, your LTHR rises relative to your max HR. A formula-based zone calculation never changes unless you age. LTHR-based zones automatically update to reflect the runner you are now, not the average 35-year-old.</p>
+    </div>
+
+    <div class="two-col" style="margin-top: 20px;">
+      <div class="mini-card">
+        <div class="mini-card-title">30-Minute Time Trial Protocol</div>
+        <div class="mini-card-body">The standard home test for LTHR, originally popularized by Joe Friel (<em>The Triathlete's Training Bible</em>). Accurate to within a few bpm when done correctly.</div>
+        <ol class="step-list" style="margin-top:12px">
+          <li><span class="step-num">1</span><span class="step-text"><strong>Wait for the right day.</strong> Well-rested, no hard training the day before, no illness. Flat road, track, or treadmill.</span></li>
+          <li><span class="step-num">2</span><span class="step-text"><strong>Warm up 15–20 minutes</strong> at easy conversational pace. A few short strides at the end.</span></li>
+          <li><span class="step-num">3</span><span class="step-text"><strong>Run hard for exactly 30 minutes.</strong> Not a sprint — a sustained maximal effort you could hold for the full duration. Think of it as a 30-minute race. Start your watch.</span></li>
+          <li><span class="step-num">4</span><span class="step-text"><strong>Hit lap at 10 minutes.</strong> This splits the effort so you can see average HR for just the last 20 minutes, which is your LTHR. The first 10 minutes are slightly suppressed as HR climbs.</span></li>
+          <li><span class="step-num">5</span><span class="step-text"><strong>Your LTHR = average HR for the last 20 minutes</strong> of the effort. Most GPS watches show this automatically in lap data.</span></li>
+          <li><span class="step-num">6</span><span class="step-text"><strong>Re-test every 8–12 weeks</strong> of consistent training. LTHR tends to drift up 3–8 bpm over a well-executed training block.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="mini-card" style="margin-bottom: 14px;">
+          <div class="mini-card-title">Talk Test (No Watch Required)</div>
+          <div class="mini-card-body">
+            A rough but surprisingly reliable proxy for LTHR:<br><br>
+            <strong>Zone 2 ceiling</strong> — where you can still speak in full sentences but it's becoming effortful.<br><br>
+            <strong>LTHR ≈</strong> where you can get out short phrases (3–5 words) but not complete sentences.<br><br>
+            <strong>Zone 5</strong> — where speaking isn't possible at all.<br><br>
+            This maps to the <em>ventilatory threshold</em>, which correlates closely with lactate threshold in most runners. It's less precise but useful mid-run.
+          </div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-title">Race-Based Estimate</div>
+          <div class="mini-card-body">
+            If you raced recently at an all-out effort lasting <strong>30–60 minutes</strong> (roughly 5K to 10K for most runners), your average HR from that race is a good LTHR estimate.<br><br>
+            Efforts shorter than 30 min will read high; efforts longer than 60 min will read low. A 10K finish time of 40–55 minutes is the sweet spot for this shortcut.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">LTHR-based zones follow Joe Friel's running zone system. Heart rate varies with conditions, fatigue, heat, and altitude — treat zones as guidance, not hard limits. This is not medical advice. Consult a physician before beginning a new exercise program.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function updateUI() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    icon.innerHTML = isDark ? '&#9788;' : '&#9790;';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+  btn.addEventListener('click', function() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
+    else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
+    updateUI();
+  });
+  updateUI();
+})();
+
+// ── Joe Friel running zones anchored to LTHR ─────────────────────────────────
+// Zone 4 straddles the threshold (95–99% LTHR); Zone 5 is above it (≥100%).
+const LTHR_ZONE_DEFS = [
+  {
+    num: 1, name: 'Recovery', color: 'var(--z1)',
+    pctLow: 0,    pctHigh: 0.85,
+    pctLabel: '< 85% LTHR',
+    rpe: '1–2',
+    feel: 'Very easy. Full conversation. Could run for hours. Most runs feel too slow.',
+    purpose: 'Active recovery, warm-up, cool-down. Shouldn\'t feel like "training."',
+  },
+  {
+    num: 2, name: 'Aerobic Base', color: 'var(--z2)',
+    pctLow: 0.85, pctHigh: 0.89,
+    pctLabel: '85–89% LTHR',
+    rpe: '3–4',
+    feel: 'Comfortable. Can hold a full conversation with minor effort. The "easy run" zone.',
+    purpose: 'Core aerobic development. Should be ~80% of total training volume. Zone 2 is where base fitness is built.',
+  },
+  {
+    num: 3, name: 'Tempo', color: 'var(--z3)',
+    pctLow: 0.90, pctHigh: 0.94,
+    pctLabel: '90–94% LTHR',
+    rpe: '5–6',
+    feel: 'Comfortably hard. Short sentences only. Marathon race pace typically falls here.',
+    purpose: 'Builds aerobic efficiency. Marathon-specific fitness. More fatigue than Zone 2 — use selectively.',
+  },
+  {
+    num: 4, name: 'Threshold', color: 'var(--z4)',
+    pctLow: 0.95, pctHigh: 0.99,
+    pctLabel: '95–99% LTHR',
+    rpe: '7–8',
+    feel: 'Hard. A few words possible between breaths. Half-marathon race pace for most runners.',
+    purpose: 'Directly raises lactate threshold. High training return but significant recovery cost. Limit to 10–15% of weekly volume.',
+  },
+  {
+    num: 5, name: 'VO₂max +', color: 'var(--z5)',
+    pctLow: 1.00, pctHigh: null,
+    pctLabel: '≥ 100% LTHR',
+    rpe: '9–10',
+    feel: 'Cannot speak. 5K race effort and harder. Unsustainable beyond a few minutes.',
+    purpose: 'Raises VO₂max ceiling. 5K and shorter race efforts. Highest recovery demand — use sparingly.',
+  },
+];
+
+// Max HR % zones (classic 5-zone, used in Max HR mode)
+const MAXHR_ZONE_DEFS = [
+  { num:1, name:'Recovery',    color:'var(--z1)', pctLow:0.50, pctHigh:0.60, pctLabel:'50–60% max HR', rpe:'1–2', feel:'Very easy. Full conversation possible.', purpose:'Active recovery, warm-up, cool-down.' },
+  { num:2, name:'Aerobic Base',color:'var(--z2)', pctLow:0.60, pctHigh:0.70, pctLabel:'60–70% max HR', rpe:'3–4', feel:'Comfortable easy run pace. Full sentences.',  purpose:'Aerobic base building. Should dominate training volume.' },
+  { num:3, name:'Tempo',       color:'var(--z3)', pctLow:0.70, pctHigh:0.80, pctLabel:'70–80% max HR', rpe:'5–6', feel:'Moderately hard. Short sentences.',           purpose:'Aerobic efficiency. Marathon race pace range.' },
+  { num:4, name:'Threshold',   color:'var(--z4)', pctLow:0.80, pctHigh:0.90, pctLabel:'80–90% max HR', rpe:'7–8', feel:'Hard. A few words only.',                      purpose:'Raises lactate threshold. 5K–10K race pace.' },
+  { num:5, name:'VO₂max +',   color:'var(--z5)', pctLow:0.90, pctHigh:1.00, pctLabel:'90–100% max HR',rpe:'9–10','feel':'Cannot speak. Maximum effort.',             purpose:'Raises VO₂max ceiling. Track/interval intensity.' },
+];
+
+var currentMode = 'lthr';
+
+function setMode(m) {
+  currentMode = m;
+  document.getElementById('lthrPanel').style.display   = m === 'lthr'  ? '' : 'none';
+  document.getElementById('maxhrPanel').style.display  = m === 'maxhr' ? '' : 'none';
+  document.getElementById('modeLthrBtn').classList.toggle('active', m === 'lthr');
+  document.getElementById('modeMaxBtn').classList.toggle('active',  m === 'maxhr');
+  document.getElementById('modeHint').textContent = m === 'lthr'
+    ? 'LTHR: zones anchored to your lactate threshold — more accurate, reflects current fitness.'
+    : 'Max HR: formula-based, less accurate (±7–12 bpm), but usable when LTHR is unknown.';
+  calc();
+}
+
+function onMaxMethodChange() {
+  document.getElementById('customMaxHRRow').style.display =
+    document.getElementById('maxHRMethod').value === 'custom' ? '' : 'none';
+}
+
+function calc() {
+  if (currentMode === 'lthr') calcLthr();
+  else calcMaxHR();
+}
+
+function calcLthr() {
+  var lthr    = parseInt(document.getElementById('lthrInput').value) || 155;
+  var source  = document.getElementById('lthrSource').value;
+  var maxHRIn = parseInt(document.getElementById('lthrMaxHR').value) || 0;
+  var maxHR   = maxHRIn > lthr ? maxHRIn : Math.round(lthr * 1.15);
+  lthr = Math.max(100, Math.min(210, lthr));
+
+  var sourceLabel = source === 'tt'    ? '30-min time trial' :
+                    source === 'race'  ? 'Race-derived estimate' :
+                    'Estimated value';
+  var sourceSub   = source === 'tt'    ? 'Average HR from the last 20 min of a 30-min all-out run. Most accurate method.' :
+                    source === 'race'  ? 'Average HR from a recent 30–60 min race effort. Good proxy for LTHR.' :
+                    'Estimated LTHR. Consider running a 30-min time trial for a precise value.';
+
+  document.getElementById('summaryCardTitle').textContent  = 'Your Lactate Threshold';
+  document.getElementById('anchorDisplay').textContent     = lthr;
+  document.getElementById('anchorMethodLabel').textContent = sourceLabel;
+  document.getElementById('anchorSub').textContent         = sourceSub;
+
+  var z4floor = Math.round(lthr * 0.95);
+  var z5start = lthr;
+  document.getElementById('stat1Label').textContent  = 'Zone 4 starts';
+  document.getElementById('stat1Value').textContent  = z4floor;
+  document.getElementById('stat1Sub').textContent    = 'bpm (95% LTHR)';
+  document.getElementById('stat2Value').textContent  = z5start;
+  document.getElementById('maxHRStat').textContent   = maxHR;
+
+  var methodNoteEl = document.getElementById('methodNote');
+  methodNoteEl.innerHTML = '<strong>Zone system:</strong> Joe Friel\'s running zones anchored to LTHR. Zone 4 (95–99% LTHR) is where you are training <em>at</em> threshold; Zone 5 (≥100% LTHR) is above it. Zone 2 (85–89% LTHR) is the aerobic base — easy days should stay here.';
+
+  document.getElementById('lthrMarker').style.display = '';
+  document.getElementById('lthrMarker').innerHTML = '<strong>&#9650; LTHR = ' + lthr + ' bpm</strong> sits at the Zone 4/5 boundary. Zones 1–4 are below threshold; Zone 5 is above it.';
+
+  var zones = LTHR_ZONE_DEFS.map(function(z) {
+    var lo = z.pctLow  === 0    ? Math.round(lthr * 0.60) : Math.round(lthr * z.pctLow);
+    var hi = z.pctHigh === null ? maxHR                    : Math.round(lthr * z.pctHigh);
+    return { num:z.num, name:z.name, color:z.color, lo:lo, hi:hi, pctLabel:z.pctLabel, rpe:z.rpe, feel:z.feel, purpose:z.purpose };
+  });
+
+  buildZoneBar(zones, Math.round(lthr * 0.60), maxHR);
+  buildZoneTable(zones, true);
+}
+
+function calcMaxHR() {
+  var age      = parseInt(document.getElementById('age').value) || 35;
+  var restHR   = parseInt(document.getElementById('restingHR').value) || 60;
+  var method   = document.getElementById('maxHRMethod').value;
+  var zoneMethod = document.getElementById('zoneMethod').value;
+
+  var maxHR;
+  if (method === 'tanaka')   maxHR = Math.round(208 - 0.7 * age);
+  else if (method === 'fox') maxHR = 220 - age;
+  else                       maxHR = parseInt(document.getElementById('customMaxHR').value) || 185;
+  maxHR = Math.max(100, Math.min(230, maxHR));
+  var hrr = maxHR - restHR;
+
+  var methodLabel = method === 'tanaka' ? 'Tanaka Formula (208 − 0.7 × age)' :
+                    method === 'fox'    ? 'Fox Formula (220 − age)' : 'Custom Entry';
+  var methodSub   = method === 'tanaka' ? 'Better than 220-age for adults over 40. Still ±7 bpm typical error.' :
+                    method === 'fox'    ? '±12 bpm typical error. Tends to overestimate for older athletes.' :
+                    'User-measured or race-derived max HR.';
+
+  document.getElementById('summaryCardTitle').textContent  = 'Your Max Heart Rate';
+  document.getElementById('anchorDisplay').textContent     = maxHR;
+  document.getElementById('anchorMethodLabel').textContent = methodLabel;
+  document.getElementById('anchorSub').textContent         = methodSub;
+
+  var useKarv = zoneMethod === 'karvonen';
+  document.getElementById('zoneMethodHint').textContent = useKarv
+    ? 'Karvonen: zones use Heart Rate Reserve (max − resting), giving higher absolute floors for fit athletes.'
+    : '% Max HR: simple, widely used. Does not account for individual fitness.';
+
+  document.getElementById('stat1Label').textContent  = 'Resting HR';
+  document.getElementById('stat1Value').textContent  = restHR;
+  document.getElementById('stat1Sub').textContent    = 'bpm';
+  document.getElementById('stat2Value').textContent  = hrr;
+  document.getElementById('maxHRStat').textContent   = maxHR;
+  document.getElementById('stat2Label') && (document.getElementById('stat2Label').textContent = 'HR Reserve');
+
+  var methodNoteEl = document.getElementById('methodNote');
+  methodNoteEl.innerHTML = useKarv
+    ? '<strong>Karvonen method:</strong> Target HR = (HRR × intensity%) + Resting HR, where HRR = ' + maxHR + ' − ' + restHR + ' = ' + hrr + ' bpm. Zones are higher in absolute bpm than % max HR, reflecting your cardiovascular fitness.'
+    : '<strong>Note:</strong> Formula-based max HR has ±7–12 bpm error. If your zones feel wrong, switch to LTHR mode and run a 30-min time trial for precise values.';
+
+  document.getElementById('lthrMarker').style.display = 'none';
+
+  var zones = MAXHR_ZONE_DEFS.map(function(z) {
+    var lo, hi;
+    if (useKarv) { lo = Math.round(hrr * z.pctLow + restHR);  hi = Math.round(hrr * z.pctHigh + restHR); }
+    else         { lo = Math.round(maxHR * z.pctLow);          hi = Math.round(maxHR * z.pctHigh); }
+    return { num:z.num, name:z.name, color:z.color, lo:lo, hi:hi, pctLabel:z.pctLabel, rpe:z.rpe, feel:z.feel, purpose:z.purpose };
+  });
+
+  var barLow = useKarv ? restHR : Math.round(maxHR * 0.50);
+  buildZoneBar(zones, barLow, maxHR);
+  buildZoneTable(zones, false);
+}
+
+function buildZoneBar(zones, barLow, barHigh) {
+  var segs  = document.querySelectorAll('.zone-bar-seg');
+  var range = barHigh - barLow;
+  zones.forEach(function(z, i) {
+    var w = ((z.hi - z.lo) / range * 100).toFixed(1) + '%';
+    segs[i].style.flex  = 'none';
+    segs[i].style.width = w;
+  });
+  document.getElementById('tick0').textContent = zones[0].lo;
+  for (var i = 0; i < zones.length; i++) {
+    document.getElementById('tick' + (i + 1)).textContent = zones[i].hi;
+  }
+}
+
+function buildZoneTable(zones, isLthr) {
+  var html = '';
+  zones.forEach(function(z) {
+    html += '<tr>';
+    html += '<td><div class="zone-name-cell"><span class="zone-dot" style="background:' + z.color + '"></span><span class="zone-name">Z' + z.num + ' ' + z.name + '</span></div></td>';
+    html += '<td><div class="zone-hr">' + z.lo + '–' + (z.hi === z.lo ? '?' : z.hi) + ' bpm</div><div class="zone-pct">' + z.pctLabel + '</div></td>';
+    html += '<td><div class="zone-feel">' + z.feel + '</div></td>';
+    html += '<td><div class="zone-rpe">' + z.rpe + ' / 10</div></td>';
+    html += '<td><div class="zone-purpose">' + z.purpose + '</div></td>';
+    html += '</tr>';
+  });
+  document.getElementById('zoneTableBody').innerHTML = html;
+}
+
+// Missing element guard for stat2Label (only exists in max HR mode labels)
+document.getElementById('stat2Label') || Object.defineProperty(document, 'stat2Label', {value: null});
+
+calc();
+</script>
+</body>
+</html>
