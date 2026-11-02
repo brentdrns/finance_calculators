@@ -750,13 +750,14 @@ const STATE_TAX = {
   WV:{br:[{r:0.03,max:10000},{r:0.04,max:25000},{r:0.045,max:40000},{r:0.06,max:60000},{r:0.065,max:1e9}], std:{s:0,m:0}}
 };
 
-function calcStateTax(stateKey, gross, preTax, filingStatus) {
+function calcStateTax(stateKey, gross, preTax, filingStatus, ltcg) {
   if (!stateKey) return 0;
   const s = STATE_TAX[stateKey];
   if (!s) return 0; // no-tax state
   const isMfj = filingStatus === 'mfj';
   const stdDed = s.std ? (isMfj ? s.std.m : s.std.s) : 0;
-  const taxable = Math.max(0, gross - preTax - stdDed);
+  // Most states tax LTCG as ordinary income (no preferential rate)
+  const taxable = Math.max(0, gross + (ltcg || 0) - preTax - stdDed);
   if (taxable <= 0) return 0;
   if (s.flat !== undefined) return taxable * s.flat;
   // Progressive
@@ -880,7 +881,7 @@ function renderSankey(gross, preTax, deduction, bracketResults, ltcgTax, fedTax,
 const STATE_BRACKET_COLORS = ['#0e7490','#0284c7','#1d4ed8','#4f46e5','#7c3aed','#9333ea','#c026d3','#db2777','#e11d48','#dc2626','#b91c1c','#7f1d1d'];
 
 // ── Render state bracket breakdown ────────────────────────────────────────────
-function renderStateBrackets(stateKey, gross, preTax, filingStatus, stateTax) {
+function renderStateBrackets(stateKey, gross, preTax, filingStatus, stateTax, ltcg) {
   const card = document.getElementById('stateBracketCard');
   if (!card) return;
 
@@ -892,15 +893,17 @@ function renderStateBrackets(stateKey, gross, preTax, filingStatus, stateTax) {
 
   const isMfj = filingStatus === 'mfj';
   const stdDed = s.std ? (isMfj ? s.std.m : s.std.s) : 0;
-  const taxable = Math.max(0, gross - preTax - stdDed);
+  // Most states tax LTCG as ordinary income
+  const taxable = Math.max(0, gross + (ltcg || 0) - preTax - stdDed);
 
   // State name from select
   const sel = document.getElementById('stateSelect');
   const stateName = sel.options[sel.selectedIndex].text.replace(/\s*\(.*\)$/, '');
   document.getElementById('stateBracketTitle').textContent = stateName + ' — State Tax Breakdown';
+  const ltcgNote = ltcg > 0 ? ', incl. ' + fmt(ltcg) + ' LTCG taxed as ordinary income' : '';
   document.getElementById('stateBracketTaxable').textContent =
     'State taxable income: ' + fmt(taxable) +
-    (stdDed > 0 ? ' (after ' + fmt(stdDed) + ' state standard deduction)' : '');
+    (stdDed > 0 ? ' (after ' + fmt(stdDed) + ' state standard deduction' + ltcgNote + ')' : (ltcgNote ? ' (' + ltcgNote.trim().replace(/^, /, '') + ')' : ''));
 
   const bar    = document.getElementById('stateBracketBar');
   const legend = document.getElementById('stateBracketLegend');
@@ -1076,7 +1079,7 @@ function calculate() {
   }
 
   // ── State tax ──────────────────────────────────────────────────────────────
-  const stateTax = calcStateTax(stateKey, gross, preTax, status);
+  const stateTax = calcStateTax(stateKey, gross, preTax, status, ltcg);
 
   const totalTaxAll = totalTax + ltcgTax + stateTax;
   const grossTotal = gross + ltcg;
@@ -1093,7 +1096,7 @@ function calculate() {
       } else {
         const isMfj2 = status === 'mfj';
         const sStdDed = sData.std ? (isMfj2 ? sData.std.m : sData.std.s) : 0;
-        const sTaxable = Math.max(0, gross - preTax - sStdDed);
+        const sTaxable = Math.max(0, gross + ltcg - preTax - sStdDed);
         if (sTaxable > 0) {
           let prev2 = 0;
           for (const b of sData.br) {
@@ -1177,7 +1180,7 @@ function calculate() {
   renderSankey(gross, preTax, deduction, bracketResults, ltcgTax, totalTax + ltcgTax, stateTax);
 
   // ── State bracket breakdown ────────────────────────────────────────────────
-  renderStateBrackets(stateKey, gross, preTax, status, stateTax);
+  renderStateBrackets(stateKey, gross, preTax, status, stateTax, ltcg);
 
   // ── Render Bracket Bar ────────────────────────────────────────────────────
   const bar    = document.getElementById('bracketBar');

@@ -665,46 +665,36 @@ function elevFactor(gainFt, lossFt, distanceMeters, vdot) {
 //
 // Penalty reference points (based on coaching consensus and runner survey data):
 //   Marathon @ 20 mpw: ~15% slower than VDOT predicts (3:47 vs 3:17 for VDOT 50)
-//   Marathon @ 30 mpw: ~11% slower
+//   Marathon @ 30 mpw: ~12% slower
 //   Marathon @ 40 mpw: ~7% slower
-//   Half     @ 20 mpw: ~8% slower
-//   15K/10M  @ 20 mpw: ~4% slower
+//   Half     @ 20 mpw: ~5% slower
 //   10K and shorter: VDOT is reliable regardless of mileage
+//
+// Endurance requirements scale with distance^1.23 (Runalyze marathon shape model):
+//   half needs 42.5% of marathon's endurance base, 10K needs ~17%.
+// Ideal mileage and penalty ceiling are both derived continuously from the marathon anchor.
 function mileagePenalty(weeklyMiles, targetDistanceM, vdot) {
-  const targetDistanceMi = targetDistanceM / 1609.34;
+  const distMi = targetDistanceM / 1609.34;
 
-  // No meaningful penalty for 10K or shorter
-  if (targetDistanceMi <= 6.3) return 0;
+  // No meaningful endurance penalty for 10K or shorter
+  if (distMi <= 6.3) return 0;
 
-  // Ideal mileage scales with VDOT: faster runners need higher volume to reach their ceiling
-  // because they're running at a greater fraction of VO2max and need a larger aerobic base.
-  // Formula: idealMiles = clamp(vdot × distanceFactor, min, max)
-  // Anchored at VDOT 50: marathon=55, half=35, 15K/10mi=22 — consistent with coaching literature.
-  let vdotFactor, minMiles, maxMiles, maxPenalty;
-  if (targetDistanceMi >= 31) {           // 50K+
-    vdotFactor = 1.40; minMiles = 35; maxMiles = 140; maxPenalty = 0.30;
-  } else if (targetDistanceMi >= 26.2) {  // Marathon
-    vdotFactor = 1.10; minMiles = 22; maxMiles = 120; maxPenalty = 0.22;
-  } else if (targetDistanceMi >= 13.1) {  // Half Marathon
-    vdotFactor = 0.70; minMiles = 14; maxMiles = 75;  maxPenalty = 0.14;
-  } else {                                // 15K, 10 Miles
-    vdotFactor = 0.44; minMiles = 10; maxMiles = 50;  maxPenalty = 0.08;
-  }
-
-  const idealMiles = Math.max(minMiles, Math.min(maxMiles, vdot * vdotFactor));
+  // Ideal weekly mileage anchored at marathon (vdot * 1.10), scaled by distance^0.7.
+  // Penalty ceiling anchored at marathon (22%), scaled more steeply by distance^1.23
+  // so longer races punish low volume harder — matches Runalyze's endurance model.
+  const distRatio = distMi / 26.2;
+  const idealMiles = Math.max(8, Math.min(130, vdot * 1.10 * Math.pow(distRatio, 0.7)));
   if (weeklyMiles >= idealMiles) return 0;
 
-  // Power-law curve: hits hardest at very low mileage ratios
+  const maxPenalty = Math.min(0.32, 0.22 * Math.pow(distRatio, 1.23));
   const baseRatio = weeklyMiles / idealMiles;
   return maxPenalty * Math.pow(1 - baseRatio, 0.75);
 }
 
 function idealMilesForDisplay(targetDistanceM, vdot) {
-  const tmi = targetDistanceM / 1609.34;
-  if (tmi >= 31)   return Math.round(Math.max(35,  Math.min(140, vdot * 1.40)));
-  if (tmi >= 26.2) return Math.round(Math.max(22,  Math.min(120, vdot * 1.10)));
-  if (tmi >= 13.1) return Math.round(Math.max(14,  Math.min(75,  vdot * 0.70)));
-  return                  Math.round(Math.max(10,  Math.min(50,  vdot * 0.44)));
+  const distMi = targetDistanceM / 1609.34;
+  const distRatio = distMi / 26.2;
+  return Math.round(Math.max(8, Math.min(130, vdot * 1.10 * Math.pow(distRatio, 0.7))));
 }
 
 // ─── VDOT level descriptions ─────────────────────────────────────────────────

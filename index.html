@@ -8,23 +8,23 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
-<title>Abel's Financial Calculators &mdash; Smarter Math for Real Decisions</title>
-<meta name="description" content="Free financial calculators for retirement, real estate, and investing. Rent vs buy, Monte Carlo simulator, withdrawal planner, mortgage refinance &mdash; modeled with taxes, opportunity cost, and the full picture.">
-<meta name="author" content="Abel's Financial Calculators">
+<title>Abel's Calculators &mdash; Smarter Math for Finance &amp; Running</title>
+<meta name="description" content="Free calculators for finance and running. Rent vs buy, Monte Carlo retirement simulator, mortgage refinance, race time predictor, training paces, heart rate zones &mdash; all modeled with the full picture.">
+<meta name="author" content="Abel's Calculators">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://abelscalculators.com/">
-<meta property="og:title" content="Abel's Financial Calculators &mdash; Smarter Math for Real Decisions">
-<meta property="og:description" content="Free financial calculators that factor in more than the others. Refinance, rent vs buy, vehicle cost &mdash; modeled with the full picture.">
+<meta property="og:title" content="Abel's Calculators &mdash; Smarter Math for Finance &amp; Running">
+<meta property="og:description" content="Calculators that factor in more than the others. Finance, investing, mortgages, and running &mdash; modeled with the full picture.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://abelscalculators.com/">
 <meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
-<meta property="og:image:alt" content="Abel's Financial Calculators — personalized financial analysis tools">
+<meta property="og:image:alt" content="Abel's Calculators — finance and running tools that do the math properly">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Abel's Financial Calculators">
-<meta name="twitter:description" content="Free financial calculators that factor in more than the others.">
+<meta name="twitter:title" content="Abel's Calculators">
+<meta name="twitter:description" content="Calculators that factor in more than the others — finance, investing, mortgages, and running.">
 <meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Abel's Calculators","alternateName":["Abel's Financial Calculators","Abels Calculators","abelscalculators"],"description":"Free financial calculators that model the full picture.","url":"https://abelscalculators.com/"}
+{"@context":"https://schema.org","@type":"WebSite","name":"Abel's Calculators","alternateName":["Abel's Financial Calculators","Abels Calculators","abelscalculators"],"description":"Free calculators for finance and running that model the full picture.","url":"https://abelscalculators.com/"}
 </script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
@@ -173,6 +173,24 @@
     .site-footer { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
   }
 
+  /* Running tool cards */
+  .run-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 56px; }
+  .run-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px 22px; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  }
+  .run-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-2px); border-color: var(--accent-dim); }
+  .run-card-header { display: flex; align-items: center; gap: 12px; }
+  .run-card-icon { font-size: 24px; line-height: 1; flex-shrink: 0; }
+  .run-card-title { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); line-height: 1.25; }
+  .run-card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.65; flex: 1; }
+  .run-card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .run-card-tag { font-size: 10px; padding: 3px 9px; background: var(--surface2); border-radius: 5px; color: var(--text-muted); }
+  .run-card-cta { font-size: 11px; color: var(--accent); font-weight: 500; margin-top: 2px; }
+  .run-card:hover .run-card-cta { text-decoration: underline; }
+
   /* Nav dropdowns */
   .nav-dropdown { position: relative; display: flex; align-items: center; }
   .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
@@ -238,13 +256,14 @@
     </div>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
-      <button class="nav-dropdown-btn">More <span class="nav-caret">&#9660;</span></button>
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
       <div class="nav-dropdown-menu">
-        <a href="indian-holidays.html">Indian Holiday Calendar</a>
-        <div class="nav-dropdown-divider"></div>
-        <span class="nav-dropdown-label">Running</span>
         <a href="race-predictor.html">Race Time Predictor</a>
-        <a href="training-paces.html">Training Pace Calculator</a>
+        <a href="training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html">Heart Rate Zones</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -260,12 +279,13 @@
   <div class="hero-band-inner">
     <div class="hero-band-left">
       <div class="hero-band-label">Built by a dog, for humans</div>
-      <h2 class="hero-band-title">We factor in <span>more than the others.</span></h2>
+      <h2 class="hero-band-title">Calculators that do <span>the math properly.</span></h2>
     </div>
     <div class="hero-band-divider"></div>
     <p class="hero-band-body">
-      Most financial calculators online give you a number. We give you the <strong>full picture</strong> &mdash; modeling the real variables that shape your decisions: taxes, investment opportunity cost, equity, depreciation, break-even timing, and more.
-      Because a decision that looks obvious on a basic calculator can look very different when the math is actually complete.
+      Most calculators give you a number. We give you the <strong>full picture</strong> &mdash; whether you're making a financial decision or a training one.
+      For money: taxes, opportunity cost, equity, depreciation, break-even timing. For running: VDOT, lactate threshold, mileage adjustment, Galloway intervals.
+      The kind of detail that changes the answer.
     </p>
   </div>
 </section>
@@ -398,18 +418,71 @@
   </div>
 
   <div class="section-label">Running</div>
-  <div class="calc-secondary">
-    <a href="race-predictor.html" class="calc-secondary-link">
-      <span class="csl-title">Race Time Predictor</span>
-      <span class="csl-sep">&mdash;</span>
-      VDOT-based race time predictions adjusted for weekly mileage and course elevation.
-      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+  <div class="run-grid">
+    <a href="race-predictor.html" class="run-card">
+      <div class="run-card-header">
+        <div class="run-card-icon">🏁</div>
+        <div class="run-card-title">Race Time Predictor</div>
+      </div>
+      <div class="run-card-desc">Enter a recent race result and get predicted finish times for every distance — adjusted for weekly mileage and course elevation using VDOT.</div>
+      <div class="run-card-tags">
+        <span class="run-card-tag">VDOT</span>
+        <span class="run-card-tag">Mileage adjustment</span>
+        <span class="run-card-tag">Elevation</span>
+      </div>
+      <div class="run-card-cta">Open calculator &rarr;</div>
     </a>
-    <a href="training-paces.html" class="calc-secondary-link">
-      <span class="csl-title">Training Pace Calculator</span>
-      <span class="csl-sep">&mdash;</span>
-      Get your easy, tempo, interval, and race-pace zones based on a recent PR using Jack Daniels&rsquo; VDOT system.
-      <span style="color:var(--accent);font-size:11px;margin-left:4px;">Open &rarr;</span>
+    <a href="training-paces.html" class="run-card">
+      <div class="run-card-header">
+        <div class="run-card-icon">⚡</div>
+        <div class="run-card-title">Training Pace Calculator</div>
+      </div>
+      <div class="run-card-desc">Get your easy, tempo, interval, and race-pace training zones based on a recent PR — using Jack Daniels&rsquo; VDOT system.</div>
+      <div class="run-card-tags">
+        <span class="run-card-tag">Jack Daniels</span>
+        <span class="run-card-tag">Easy pace</span>
+        <span class="run-card-tag">Tempo</span>
+      </div>
+      <div class="run-card-cta">Open calculator &rarr;</div>
+    </a>
+    <a href="heart-rate-zones.html" class="run-card">
+      <div class="run-card-header">
+        <div class="run-card-icon">❤️</div>
+        <div class="run-card-title">Heart Rate Zone Calculator</div>
+      </div>
+      <div class="run-card-desc">Calculate your training zones anchored to lactate threshold HR (LTHR) — the physiologically grounded approach used by elite coaches.</div>
+      <div class="run-card-tags">
+        <span class="run-card-tag">LTHR</span>
+        <span class="run-card-tag">Joe Friel zones</span>
+        <span class="run-card-tag">Karvonen</span>
+      </div>
+      <div class="run-card-cta">Open calculator &rarr;</div>
+    </a>
+    <a href="pace-converter.html" class="run-card">
+      <div class="run-card-header">
+        <div class="run-card-icon">🔄</div>
+        <div class="run-card-title">Pace Converter</div>
+      </div>
+      <div class="run-card-desc">Convert between finish time and pace, see splits for any distance, and get a projected time for every race distance at a given pace.</div>
+      <div class="run-card-tags">
+        <span class="run-card-tag">min/mile &harr; min/km</span>
+        <span class="run-card-tag">Splits</span>
+        <span class="run-card-tag">All distances</span>
+      </div>
+      <div class="run-card-cta">Open converter &rarr;</div>
+    </a>
+    <a href="run-walk-calculator.html" class="run-card">
+      <div class="run-card-header">
+        <div class="run-card-icon">🚶</div>
+        <div class="run-card-title">Run/Walk Calculator</div>
+      </div>
+      <div class="run-card-desc">Model Galloway-style run/walk intervals to find your effective pace and finish time — or work backwards from a goal time to find the required run pace.</div>
+      <div class="run-card-tags">
+        <span class="run-card-tag">Galloway method</span>
+        <span class="run-card-tag">Interval comparison</span>
+        <span class="run-card-tag">Goal time</span>
+      </div>
+      <div class="run-card-cta">Open calculator &rarr;</div>
     </a>
   </div>
 
@@ -516,7 +589,7 @@
 </div>
 
 <footer class="site-footer">
-  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, tax, or medical advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. Running calculators are based on established models (VDOT, Joe Friel zones, Galloway method) and are not a substitute for coaching or medical guidance. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of these tools. All calculations are performed locally in your browser &mdash; no personal data is collected or stored.</p>
   <nav class="site-footer-nav">
     <a href="index.html">Home</a>
     <a href="blog.html">Blog</a>
