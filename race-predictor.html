@@ -275,10 +275,14 @@
     </div>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
-      <button class="nav-dropdown-btn active">More <span class="nav-caret">&#9660;</span></button>
+      <button class="nav-dropdown-btn active">Running <span class="nav-caret">&#9660;</span></button>
       <div class="nav-dropdown-menu">
         <a href="race-predictor.html" class="active">Race Time Predictor</a>
-        <a href="training-paces.html">Training Pace Calculator</a>
+        <a href="training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html">Heart Rate Zones</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -367,6 +371,33 @@
 
   <div class="panel">
     <div class="section-label">Target Race</div>
+    <div class="field">
+      <label for="raceProfile">Race Profile</label>
+      <select id="raceProfile" onchange="onRaceProfileChange()">
+        <option value="0">Custom</option>
+        <option value="1">Boston Marathon</option>
+        <option value="2">New York City Marathon</option>
+        <option value="3">Chicago Marathon</option>
+        <option value="4">Berlin Marathon</option>
+        <option value="5">London Marathon</option>
+        <option value="6">Tokyo Marathon</option>
+        <option value="7">LA Marathon</option>
+        <option value="8">Marine Corps Marathon</option>
+        <option value="9">Philadelphia Marathon</option>
+        <option value="10">Houston Marathon</option>
+        <option value="11">San Francisco Marathon</option>
+        <option value="12">Portland Marathon</option>
+        <option value="13">Seattle Marathon</option>
+        <option value="14">Denver Colfax Marathon</option>
+        <option value="15">Big Sur Marathon</option>
+        <option value="16">Twin Cities Marathon</option>
+        <option value="17">Walt Disney World Marathon</option>
+        <option value="18">Nashville Rock 'n' Roll Marathon</option>
+        <option value="19">Copenhagen Marathon</option>
+        <option value="20">Sydney Marathon</option>
+      </select>
+    </div>
+    <div id="raceProfileNote" class="hint" style="display:none;margin-bottom:8px"></div>
     <div class="field">
       <label for="targetDistance">Race Distance</label>
       <select id="targetDistance" onchange="onTargetDistanceChange(); calc()">
@@ -458,6 +489,27 @@
     <div class="hint">Hilly courses slow you down on the uphills more than the downhills help. Enter gain and loss for both courses to normalize to equivalent flat efforts.</div>
   </div>
 
+  <div class="panel">
+    <div class="section-label">Weather <span style="font-size:9px;color:var(--text-muted);text-transform:none;letter-spacing:0;font-weight:400">(optional)</span></div>
+    <label class="checkbox-row">
+      <input type="checkbox" id="weatherToggle" onchange="onWeatherToggle(); calc()">
+      <label for="weatherToggle">Adjust for race day weather</label>
+    </label>
+    <div id="weatherFields" style="display:none">
+      <div class="field-row field-row-2">
+        <div class="field">
+          <label for="weatherTemp">Temperature (&deg;F)</label>
+          <input type="number" id="weatherTemp" value="55" min="20" max="110" step="1" oninput="calc()">
+        </div>
+        <div class="field">
+          <label for="weatherHumidity">Humidity (%)</label>
+          <input type="number" id="weatherHumidity" value="60" min="0" max="100" step="5" oninput="calc()">
+        </div>
+      </div>
+      <div class="hint">Optimal racing temperature is ~50&ndash;55&deg;F. Based on Ely et al. (2007): each degree above 55&deg;F adds ~0.3% to finish time. Humidity above 60% compounds the effect. Pre-fills with historical race day averages when a race profile is selected.</div>
+    </div>
+  </div>
+
 </aside>
 
 <main class="main" id="mainContent">
@@ -507,7 +559,7 @@
         <span class="pred-comparison-value" id="predVdotTime">—</span>
       </div>
       <div class="pred-comparison-row">
-        <span class="pred-comparison-label">Training-adjusted</span>
+        <span class="pred-comparison-label" id="predAdjLabel">Training-adjusted</span>
         <span class="pred-comparison-value adj-col" id="predAdjTime">—</span>
       </div>
     </div>
@@ -549,7 +601,8 @@
       <p><strong>VDOT (Jack Daniels)</strong> is your aerobic capacity expressed as an equivalent VO2max value derived from a race performance. It's calculated from both your pace (how fast you ran relative to the distance) and the fractional utilization of VO2max at that effort level. Two runners with the same VDOT are aerobically equivalent and should predict nearly identical times at any distance — differences in results come from specificity of training, pacing, and course conditions.</p>
       <p><strong>Mileage adjustment</strong> accounts for the fact that VDOT from a 5K doesn't perfectly translate to marathon performance unless you're training at marathon-specific mileage. Under-trained runners see a larger gap between VDOT-predicted times and actual performance at longer distances. The penalty scales with how much your weekly mileage falls below the ideal for your target race, and how much longer the target is vs your PR distance. It's capped at 10% and only applies when the target is longer than the PR and both are beyond 10K.</p>
       <p><strong>Elevation adjustment</strong> normalizes race times to a flat-equivalent effort. Each 1% average uphill grade adds roughly <span class="hl">+1.2%</span> to your pace, while each 1% average downhill grade saves only <span class="hl-g">-0.6%</span> — uphills hurt more than downhills help. Your PR time is converted to a flat-equivalent time using your PR course's elevation, then VDOT is computed from that. The predicted time is then adjusted upward by your target course's elevation factor.</p>
-      <p><strong>Formula source:</strong> Jack Daniels, <em>Daniels' Running Formula</em>. The VDOT model was originally published in <em>Medicine &amp; Science in Sports</em> (Daniels &amp; Gilbert, 1979). Predictions are estimates — individual performance varies based on pacing, weather, course, and race-day conditions.</p>
+      <p><strong>Weather adjustment</strong> applies a heat penalty when temperature exceeds ~55&deg;F, based on research by Ely et al. (2007). Every degree above 55&deg;F adds approximately <span class="hl">+0.3%</span> to finish time, with additional compounding for humidity above 60%. At 70&deg;F / 70% humidity, expect roughly a <span class="hl">+5&ndash;6%</span> slowdown versus ideal conditions. Cold weather has a smaller effect and is not penalized here. Race profiles pre-fill historical averages for each event — override them freely for your actual forecast.</p>
+      <p><strong>Formula sources:</strong> Jack Daniels, <em>Daniels&rsquo; Running Formula</em>. The VDOT model was originally published in <em>Medicine &amp; Science in Sports</em> (Daniels &amp; Gilbert, 1979). Weather model: Ely et al. (2007), <em>Medicine &amp; Science in Sports &amp; Exercise</em>. Predictions are estimates — individual performance varies based on pacing, fueling, training, and race-day conditions.</p>
     </div>
   </div>
 
@@ -566,7 +619,7 @@
 </div>
 
 <footer class="site-footer">
-  <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not medical or professional coaching advice. Predictions are estimates based on Jack Daniels&rsquo; VDOT model with adjustments for training mileage, course elevation, and race-day weather. Individual performance varies based on pacing, fueling, health, and race-day conditions. Abel&rsquo;s Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed running coach or medical professional before making training decisions.</p>
   <nav class="site-footer-nav">
     <a href="index.html">Home</a>
     <a href="blog.html">Blog</a>
@@ -611,6 +664,31 @@ const DISTANCES = [
   { name: 'Half Marathon', meters: 21097.5 },
   { name: 'Marathon',      meters: 42195 },
   { name: '50K',           meters: 50000 },
+];
+
+// ─── Race profiles ───────────────────────────────────────────────────────────
+const RACE_PROFILES = [
+  { name: 'Custom',                     gain: null, loss: null, tempF: null, humidity: null, note: null },
+  { name: 'Boston Marathon',            gain: 740,  loss: 1450, tempF: 50,   humidity: 62,   note: 'Net downhill overall, but famous for rolling hills and Heartbreak Hill at mile 20.' },
+  { name: 'New York City Marathon',     gain: 800,  loss: 800,  tempF: 52,   humidity: 65,   note: 'Five bridge crossings and rolling pavement. The back half is harder than it looks.' },
+  { name: 'Chicago Marathon',           gain: 100,  loss: 100,  tempF: 54,   humidity: 62,   note: 'Extremely flat and fast. One of the best courses for a marathon PR.' },
+  { name: 'Berlin Marathon',            gain: 100,  loss: 100,  tempF: 62,   humidity: 65,   note: 'The flattest major marathon. World records have been set here multiple times.' },
+  { name: 'London Marathon',            gain: 250,  loss: 250,  tempF: 54,   humidity: 68,   note: 'Mostly flat course through central London. Iconic finish in The Mall.' },
+  { name: 'Tokyo Marathon',             gain: 200,  loss: 200,  tempF: 46,   humidity: 55,   note: 'Flat course through central Tokyo. Cool early-March conditions favor fast times.' },
+  { name: 'LA Marathon',                gain: 900,  loss: 1100, tempF: 64,   humidity: 62,   note: 'Dodger Stadium to Santa Monica. Net downhill but significant rolling elevation.' },
+  { name: 'Marine Corps Marathon',      gain: 700,  loss: 700,  tempF: 56,   humidity: 65,   note: 'Rolling hills through Washington D.C. monuments. Popular military and charity race.' },
+  { name: 'Philadelphia Marathon',      gain: 200,  loss: 200,  tempF: 48,   humidity: 58,   note: 'Mostly flat through Philly and Fairmount Park. Fast late-November conditions.' },
+  { name: 'Houston Marathon',           gain: 80,   loss: 80,   tempF: 52,   humidity: 82,   note: 'Very flat but notoriously humid. Watch the dew point — it often feels warmer than it is.' },
+  { name: 'San Francisco Marathon',     gain: 1800, loss: 1800, tempF: 58,   humidity: 78,   note: 'Very hilly. Crosses the Golden Gate Bridge. Significant total elevation and morning fog.' },
+  { name: 'Portland Marathon',          gain: 400,  loss: 400,  tempF: 52,   humidity: 72,   note: 'Mostly flat with some moderate hills through Portland neighborhoods.' },
+  { name: 'Seattle Marathon',           gain: 600,  loss: 600,  tempF: 48,   humidity: 72,   note: 'Some hills and often wet. Cool late-November conditions.' },
+  { name: 'Denver Colfax Marathon',     gain: 400,  loss: 400,  tempF: 56,   humidity: 45,   note: 'Run at 5,280ft altitude — expect an additional 4–6% aerobic penalty from altitude not captured here.' },
+  { name: 'Big Sur Marathon',           gain: 2000, loss: 2000, tempF: 56,   humidity: 72,   note: 'Point Lobos to Carmel. One of the most scenic and challenging marathons.' },
+  { name: 'Twin Cities Marathon',       gain: 400,  loss: 500,  tempF: 50,   humidity: 65,   note: 'Scenic point-to-point through Minneapolis–St. Paul with a slight net downhill.' },
+  { name: 'Walt Disney World Marathon', gain: 200,  loss: 200,  tempF: 68,   humidity: 82,   note: 'Flat course but January Florida heat and humidity are a significant factor.' },
+  { name: "Nashville Rock 'n' Roll",    gain: 1400, loss: 1400, tempF: 62,   humidity: 68,   note: 'Very hilly course through Nashville neighborhoods. Loud and festive.' },
+  { name: 'Copenhagen Marathon',        gain: 200,  loss: 200,  tempF: 56,   humidity: 65,   note: 'Flat and fast course through the Danish capital. May conditions are typically mild.' },
+  { name: 'Sydney Marathon',            gain: 900,  loss: 900,  tempF: 62,   humidity: 58,   note: 'Runs past the Opera House and Harbour Bridge. Spring September conditions.' },
 ];
 
 // ─── VDOT math ──────────────────────────────────────────────────────────────
@@ -697,6 +775,16 @@ function idealMilesForDisplay(targetDistanceM, vdot) {
   return Math.round(Math.max(8, Math.min(130, vdot * 1.10 * Math.pow(distRatio, 0.7))));
 }
 
+// ─── Weather penalty ─────────────────────────────────────────────────────────
+// Based on Ely et al. (2007) "Impact of weather on marathon-running performance."
+// Optimal racing temperature ~50–55°F. Each °F above 55°F adds ~0.3% to finish time.
+// Humidity above 60% compounds the heat stress effect.
+function calcWeatherPenalty(tempF, humidityPct) {
+  const heatPenalty     = Math.max(0, (tempF - 55) * 0.003);
+  const humidityPenalty = Math.max(0, (humidityPct - 60) * 0.0008);
+  return heatPenalty + humidityPenalty;
+}
+
 // ─── VDOT level descriptions ─────────────────────────────────────────────────
 function vdotLevel(v) {
   if (v < 30) return { level: 'Beginner', desc: 'Just starting out — every training cycle will bring rapid gains.' };
@@ -745,6 +833,44 @@ function onTargetDistanceChange() {
 function onElevToggle() {
   const checked = document.getElementById('elevToggle').checked;
   document.getElementById('elevFields').style.display = checked ? 'block' : 'none';
+}
+
+function onWeatherToggle() {
+  const checked = document.getElementById('weatherToggle').checked;
+  document.getElementById('weatherFields').style.display = checked ? 'block' : 'none';
+}
+
+function onRaceProfileChange() {
+  const idx     = parseInt(document.getElementById('raceProfile').value) || 0;
+  const profile = RACE_PROFILES[idx];
+  const noteEl  = document.getElementById('raceProfileNote');
+
+  if (!profile || idx === 0) {
+    noteEl.style.display = 'none';
+    calc();
+    return;
+  }
+
+  noteEl.textContent  = profile.note || '';
+  noteEl.style.display = profile.note ? 'block' : 'none';
+
+  // Auto-set target distance to marathon
+  document.getElementById('targetDistance').value = '42195';
+  document.getElementById('targetCustomRow').style.display = 'none';
+
+  // Enable elevation and fill values
+  document.getElementById('elevToggle').checked       = true;
+  document.getElementById('elevFields').style.display = 'block';
+  document.getElementById('targetGain').value         = profile.gain;
+  document.getElementById('targetLoss').value         = profile.loss;
+
+  // Enable weather and fill values
+  document.getElementById('weatherToggle').checked       = true;
+  document.getElementById('weatherFields').style.display = 'block';
+  document.getElementById('weatherTemp').value           = profile.tempF;
+  document.getElementById('weatherHumidity').value       = profile.humidity;
+
+  calc();
 }
 
 function toggleElevAdvanced() {
@@ -850,12 +976,22 @@ function calc() {
   const predVdotTime = predFlatMinutes * targetElevFactor;
 
   // Mileage penalty
-  const penalty = mileagePenalty(weeklyMiles, targetDistM, vdot);
+  const penalty     = mileagePenalty(weeklyMiles, targetDistM, vdot);
   const predAdjTime = predVdotTime * (1 + penalty);
 
-  // Final displayed time (adjusted if penalty > 0, else pure vdot)
+  // Weather penalty
+  const useWeather = document.getElementById('weatherToggle').checked;
+  let weatherPen = 0;
+  if (useWeather) {
+    const wTempF    = parseFloat(document.getElementById('weatherTemp').value)     || 55;
+    const wHumidity = parseFloat(document.getElementById('weatherHumidity').value) || 60;
+    weatherPen = calcWeatherPenalty(wTempF, wHumidity);
+  }
+
+  // Final displayed time
   const hasPenalty = penalty > 0.0001;
-  const predFinal = hasPenalty ? predAdjTime : predVdotTime;
+  const hasWeather = weatherPen > 0.0001;
+  const predFinal  = predAdjTime * (1 + weatherPen);
 
   // ── VDOT card ──
   const { level, desc } = vdotLevel(vdot);
@@ -882,19 +1018,40 @@ function calc() {
   document.getElementById('predTimeBig').textContent = formatTime(predFinal);
   document.getElementById('predDistanceLabel').textContent = targetName;
 
-  if (hasPenalty) {
+  if (hasPenalty || hasWeather) {
     document.getElementById('predComparison').style.display = 'block';
     document.getElementById('predVdotTime').textContent = formatTime(predVdotTime);
-    document.getElementById('predAdjTime').textContent = formatTime(predAdjTime);
-
-    const pctStr = (penalty * 100).toFixed(1);
-    const idealMi = idealMilesForDisplay(targetDistM, vdot);
-    const noteEl = document.getElementById('penaltyNote');
-    noteEl.style.display = 'block';
-    noteEl.innerHTML = '<strong>Mileage adjustment applied (+' + pctStr + '%):</strong> At ' + weeklyMiles + ' mi/week, your aerobic base is below the ~' + idealMi + ' mi/week a VDOT ' + vdot.toFixed(0) + ' runner typically needs to reach their ceiling at this distance. The adjusted time reflects the endurance deficit. Most of this gap closes with consistent higher-mileage training.';
+    const adjLabelEl = document.getElementById('predAdjLabel');
+    if (hasPenalty && hasWeather) {
+      adjLabelEl.textContent = 'Mileage + weather adjusted';
+    } else if (hasPenalty) {
+      adjLabelEl.textContent = 'Training-adjusted';
+    } else {
+      adjLabelEl.textContent = 'Weather-adjusted';
+    }
+    document.getElementById('predAdjTime').textContent = formatTime(predFinal);
   } else {
     document.getElementById('predComparison').style.display = 'none';
-    document.getElementById('penaltyNote').style.display = 'none';
+  }
+
+  const noteEl   = document.getElementById('penaltyNote');
+  const noteParts = [];
+  if (hasPenalty) {
+    const pctStr  = (penalty * 100).toFixed(1);
+    const idealMi = idealMilesForDisplay(targetDistM, vdot);
+    noteParts.push('<strong>Mileage adjustment (+' + pctStr + '%):</strong> At ' + weeklyMiles + ' mi/week, your aerobic base is below the ~' + idealMi + ' mi/week a VDOT ' + vdot.toFixed(0) + ' runner typically needs at this distance. Most of this gap closes with consistent higher-mileage training.');
+  }
+  if (hasWeather) {
+    const wPctStr   = (weatherPen * 100).toFixed(1);
+    const wTempF    = parseFloat(document.getElementById('weatherTemp').value)     || 55;
+    const wHumidity = parseFloat(document.getElementById('weatherHumidity').value) || 60;
+    noteParts.push('<strong>Weather adjustment (+' + wPctStr + '%):</strong> At ' + wTempF + '&deg;F / ' + wHumidity + '% humidity, heat stress adds ~' + wPctStr + '% to finish time versus ideal ~55&deg;F conditions (Ely et al., 2007).');
+  }
+  if (noteParts.length > 0) {
+    noteEl.style.display = 'block';
+    noteEl.innerHTML = noteParts.join('<br><br>');
+  } else {
+    noteEl.style.display = 'none';
   }
 
   document.getElementById('predPaceMile').textContent = formatPace(predFinal, targetDistM, 1609.34) + ' /mi';
