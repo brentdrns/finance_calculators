@@ -4,12 +4,12 @@
   <!-- Core pages -->
   <url>
     <loc>https://abelscalculators.com/</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://abelscalculators.com/blog.html</loc>
-    <lastmod>2026-03-11</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -104,16 +104,46 @@
   <!-- Running calculators -->
   <url>
     <loc>https://abelscalculators.com/race-predictor.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <priority>0.7</priority>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://abelscalculators.com/training-paces.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <priority>0.7</priority>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/heart-rate-zones.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/pace-converter.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/run-walk-calculator.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Blog posts -->
+  <!-- Finance blog posts -->
+  <url>
+    <loc>https://abelscalculators.com/blog/income-near-retirement.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/case-against-coast-fire.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/returns-matter-more-later.html</loc>
+    <lastmod>2026-03-16</lastmod>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://abelscalculators.com/blog/extra-payment-vs-invest.html</loc>
     <lastmod>2026-03-13</lastmod>
@@ -170,13 +200,65 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://abelscalculators.com/blog/how-to-build-a-running-base.html</loc>
-    <lastmod>2026-03-11</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://abelscalculators.com/blog/best-cities-landlord.html</loc>
     <lastmod>2026-03-11</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Running blog posts -->
+  <url>
+    <loc>https://abelscalculators.com/blog/how-to-build-a-running-base.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/nyc-marathon-2026.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/could-you-bq.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/hr-zones-probably-wrong.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/what-is-vdot.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/galloway-method.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/5k-fitness-marathon.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/why-runners-train-too-fast.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/zone-2-training.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/10-percent-rule-is-wrong.html</loc>
+    <lastmod>2026-11-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abelscalculators.com/blog/sub-two-hour-marathon.html</loc>
+    <lastmod>2026-11-02</lastmod>
     <priority>0.8</priority>
   </url>
 

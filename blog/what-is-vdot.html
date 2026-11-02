@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>What Is VDOT and Why Does Your 5K Time Predict Your Marathon? &mdash; Abel's Calculators</title>
+<meta name="description" content="Jack Daniels' VDOT system connects race times across distances by measuring your aerobic capacity. Here's how it works, why it's accurate, and where it breaks down.">
+<meta name="author" content="Abel's Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/what-is-vdot.html">
+<meta property="og:title" content="What Is VDOT and Why Does Your 5K Time Predict Your Marathon?">
+<meta property="og:description" content="Jack Daniels' VDOT system connects race times across distances by measuring your aerobic capacity. Here's how it works, why it's accurate, and where it breaks down.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/what-is-vdot.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Is VDOT and Why Does Your 5K Time Predict Your Marathon?">
+<meta name="twitter:description" content="Jack Daniels' VDOT system connects race times across distances by measuring your aerobic capacity.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"What Is VDOT and Why Does Your 5K Time Predict Your Marathon?","description":"Jack Daniels' VDOT system connects race times across distances by measuring your aerobic capacity. Here's how it works, why it's accurate, and where it breaks down.","author":{"@type":"Organization","name":"Abel's Calculators","url":"https://abelscalculators.com"},"publisher":{"@type":"Organization","name":"Abel's Calculators","url":"https://abelscalculators.com"},"datePublished":"2026-11-02","dateModified":"2026-11-02","mainEntityOfPage":"https://abelscalculators.com/blog/what-is-vdot.html"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GXEPDJH5VC');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#ffffff;--surface:#f7f8fa;--surface2:#eef0f4;--border:#e2e5eb;--accent:#006aff;--accent-dim:#4a90d9;--text:#1a1a2e;--text-muted:#6b7280;--blue:#2563eb;--radius:12px;}
+  [data-theme="dark"]{--bg:#121218;--surface:#1a1a24;--surface2:#24242f;--border:#2e2e3a;--accent:#4d8eff;--accent-dim:#6ba0e6;--text:#e4e4ea;--text-muted:#9395a1;--blue:#5b8def;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;min-height:100vh;}
+  header{padding:0 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  header h1{margin:0;line-height:0;}
+  .header-banner{max-height:360px;width:auto;max-width:650px;display:block;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  .header-nav{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .theme-toggle{background:var(--surface2);border:1px solid var(--border);border-radius:20px;color:var(--text-muted);font-family:'Inter',sans-serif;font-size:12px;padding:5px 12px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;display:flex;align-items:center;gap:5px;}
+  .theme-toggle:hover{color:var(--text);border-color:var(--accent-dim);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+  .page-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:8px;}
+  .page-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);margin-bottom:10px;line-height:1.2;}
+  .page-sub{color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:12px;max-width:560px;}
+  .page-date{color:var(--text-muted);font-size:11px;margin-bottom:48px;}
+  article h2{font-family:'DM Serif Display',serif;font-size:24px;color:var(--text);margin:40px 0 16px;}
+  article h3{font-family:'DM Serif Display',serif;font-size:19px;color:var(--text);margin:32px 0 12px;}
+  article p{color:var(--text-muted);font-size:13px;line-height:1.85;margin-bottom:18px;}
+  article strong{color:var(--text);}
+  article a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);transition:border-color 0.15s;}
+  article a:hover{border-color:var(--accent);}
+  article ul,article ol{color:var(--text-muted);font-size:13px;line-height:1.85;margin:0 0 18px 20px;}
+  article li{margin-bottom:6px;}
+  .callout{background:var(--surface);border:none;box-shadow:0 1px 3px rgba(0,0,0,.06);border-left:3px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
+  .callout p{margin-bottom:0;}
+  .callout p+p{margin-top:10px;}
+  .data-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:12px;}
+  .data-table th{text-align:left;padding:10px 14px;background:var(--surface2);color:var(--text-muted);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;}
+  .data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-muted);}
+  .data-table td strong{color:var(--text);}
+  .data-table tr:last-child td{border-bottom:none;}
+  .cta{margin-top:48px;padding:28px 32px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:center;}
+  .cta p{color:var(--text-muted);font-size:13px;margin-bottom:16px;line-height:1.7;}
+  .cta a.cta-btn{display:inline-block;background:var(--accent);color:var(--bg);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;padding:11px 28px;border-radius:var(--radius);text-decoration:none;border:none;transition:opacity 0.15s;}
+  .cta a.cta-btn:hover{opacity:.85;}
+  .cta-pair{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .nav-dropdown{position:relative;display:flex;align-items:center;}
+  .nav-dropdown-btn{color:var(--text-muted);font-size:12px;padding:6px 14px;border:none;border-radius:8px;font-weight:500;background:transparent;transition:color 0.15s,background 0.15s;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:3px;line-height:1;}
+  .nav-dropdown-btn:hover{color:var(--text);background:var(--surface2);}
+  .nav-caret{font-size:9px;opacity:.6;}
+  .nav-dropdown-menu{display:none;position:absolute;top:100%;padding-top:4px;left:0;background:var(--bg);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);padding:6px;min-width:200px;z-index:100;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:flex;flex-direction:column;}
+  .nav-dropdown-menu a{color:var(--text-muted);font-size:12px;text-decoration:none;padding:8px 12px;border-radius:7px;font-weight:500;white-space:nowrap;transition:color 0.15s,background 0.15s;}
+  .nav-dropdown-menu a:hover{color:var(--text);background:var(--surface2);}
+  .nav-dropdown-divider{border-top:1px solid var(--border);margin:4px 8px;}
+  .header-nav a{color:var(--text-muted);font-size:12px;text-decoration:none;padding:6px 14px;border-radius:8px;font-weight:500;transition:color 0.15s,background 0.15s;}
+  .header-nav a:hover{color:var(--text);background:var(--surface2);}
+  .nav-sep{color:var(--border);font-size:14px;margin:0 2px;user-select:none;}
+  .site-footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .site-footer-disclaimer{font-size:11px;color:var(--text-muted);line-height:1.6;max-width:640px;}
+  .site-footer-nav{display:flex;gap:16px;flex-shrink:0;}
+  .site-footer-nav a{font-size:11px;color:var(--text-muted);text-decoration:none;transition:color 0.15s;}
+  .site-footer-nav a:hover{color:var(--accent-dim);}
+  @media(max-width:640px){header{padding:0 20px;}main{padding:32px 16px 60px;}.page-title{font-size:28px;}.site-footer{padding:16px 20px;flex-direction:column;align-items:flex-start;}}
+</style>
+<script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+</head>
+<body>
+<header>
+  <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators"><span class="sr-only">Abel's Calculators</span></a></h1>
+  <nav class="header-nav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+        <a href="../rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+        <a href="../fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../roth-conversion.html">Roth Conversion</a>
+        <a href="../debt-payoff.html">Debt Payoff</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="../pace-converter.html">Pace Converter</a>
+        <a href="../run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="../heart-rate-zones.html">Heart Rate Zones</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+<main>
+  <div class="page-label">Running</div>
+  <h1 class="page-title">What Is VDOT and Why Does Your 5K Time Predict Your Marathon?</h1>
+  <p class="page-sub">Enter a recent 5K time into a race predictor and it spits out a marathon time. That's not magic — it's Jack Daniels' VDOT system, which connects all race distances through a single measure of aerobic capacity. Here's how it works.</p>
+  <p class="page-date">November 2, 2026</p>
+  <article>
+
+    <h2>The Idea Behind VDOT</h2>
+    <p>In the 1970s, exercise scientist Jack Daniels wanted a practical way to compare runners of different abilities and connect their performances across distances. He developed <strong>VDOT</strong> — a shorthand for the oxygen cost of running at a given velocity. Technically, it's derived from VO₂max (maximal oxygen uptake) adjusted for running economy, but for practical purposes you can think of it as a single number that captures your current aerobic fitness level.</p>
+    <p>The critical insight is that <strong>runners with the same VDOT perform similarly across all distances</strong>, from 1500 meters through the marathon. A runner with a VDOT of 50 will run approximately 19:22 for 5K, 40:22 for 10K, 1:29:42 for a half marathon, and 3:09:28 for a marathon — not because of a coincidence, but because all those times reflect the same underlying aerobic capacity.</p>
+    <p>This lets a 5K time serve as a reasonable proxy for marathon fitness. It also means that if your marathon significantly underperforms your 5K-derived VDOT prediction, something is wrong with your preparation — usually insufficient mileage, inadequate long run volume, or poor pacing strategy.</p>
+
+    <h2>VDOT Is Not Exactly VO₂max</h2>
+    <p>It's a common misconception that VDOT equals VO₂max. The actual relationship is more nuanced. Daniels defined VDOT as the <em>functional</em> VO₂max — the oxygen consumption you actually use when running at race velocity, incorporating your running economy.</p>
+    <p>Two runners with identical laboratory VO₂max values can have different VDOTs if one runner is significantly more economical — using oxygen more efficiently per unit of distance. This is why some elite Kenyan and Ethiopian runners achieve world-class race times with VO₂max values that wouldn't stand out in a lab but with exceptional running economy. Conversely, a physically large runner may have a high absolute VO₂max but a modest VDOT because their body weight increases the oxygen cost per kilometer.</p>
+    <p>For practical training purposes, this distinction rarely matters. VDOT is best understood as a fitness score derived from actual race performances — it captures what you can do, not what your physiology predicts you should be able to do.</p>
+
+    <h2>How the Tables Work</h2>
+    <p>Daniels built his VDOT tables by modeling the oxygen demand at various running velocities and connecting those to race times across distances. The underlying math uses the relationship between running speed and oxygen cost, adjusted for the aerobic fraction at different race durations.</p>
+    <p>Shorter races are run at a higher percentage of VO₂max. A 1500m might be run at ~98% VO₂max; a 5K at ~97.5%; a 10K at ~95%; a half marathon at ~90%; and a marathon at around 75–80%. These percentages are well-established from performance data across hundreds of athletes. Daniels' tables encode all of these relationships, so a single performance maps to a single VDOT, which then maps out to equivalent performances at every other distance.</p>
+
+    <div class="callout">
+      <p><strong>Example:</strong> A 22:00 5K runner has a VDOT of approximately 44. The VDOT tables predict their equivalent marathon fitness at roughly 3:35 — assuming equivalent marathon-specific fitness. The reason many 5K runners find their marathon time significantly slower than predicted is that marathon performance also requires high mileage, fat adaptation, and glycogen management that a 5K does not test. VDOT captures aerobic capacity; it doesn't capture marathon readiness.</p>
+    </div>
+
+    <h2>Training Zones From VDOT</h2>
+    <p>One of the most practical applications of VDOT is setting training paces. Daniels defined five training intensities, each tied to a specific physiological purpose:</p>
+    <table class="data-table">
+      <thead><tr><th>Pace type</th><th>% of VDOT velocity</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Easy (E)</strong></td><td>59–74%</td><td>Aerobic development, recovery, mileage accumulation</td></tr>
+        <tr><td><strong>Marathon (M)</strong></td><td>~80%</td><td>Goal marathon pace, aerobic and glycogen stress</td></tr>
+        <tr><td><strong>Threshold (T)</strong></td><td>83–88%</td><td>Raise lactate threshold, comfortably hard</td></tr>
+        <tr><td><strong>Interval (I)</strong></td><td>95–100%</td><td>Develop VO₂max, hard effort at ~5K race effort</td></tr>
+        <tr><td><strong>Repetition (R)</strong></td><td>105–120%</td><td>Speed and running economy, short fast reps</td></tr>
+      </tbody>
+    </table>
+    <p>These percentages are not arbitrary — they're designed so each workout type produces specific physiological adaptations without creating excessive recovery debt. Easy runs at 59–74% are low enough to allow daily training without accumulating fatigue. Threshold runs at 83–88% sit just below lactate threshold, driving adaptation without burning out the aerobic system. Interval work at 95–100% provides VO₂max stimulus in short enough doses to be repeatable.</p>
+
+    <h2>Where VDOT Breaks Down</h2>
+    <p>VDOT is a powerful tool but it has important limitations, particularly as race distances grow:</p>
+    <ul>
+      <li><strong>Mileage requirements scale non-linearly.</strong> A 5K needs a few weeks of base training. A marathon demands months of specific preparation. Two runners with identical VDOTs will run very different marathons depending on whether they've run 30 or 60 miles per week in training. The VDOT tables assume equivalent distance-specific preparation.</li>
+      <li><strong>Single-distance VDOT estimates aren't always stable.</strong> A runner who excels at 5K speed but has never trained for the marathon may have a 5K-derived VDOT of 52 and run a 3:45 marathon. Their "true" marathon VDOT is closer to 46 until they develop the specific endurance the distance requires.</li>
+      <li><strong>Heat, hills, and pacing errors aren't captured.</strong> VDOT tables assume optimal conditions and perfect pacing. A 5K PR on a flat course in cool weather may overestimate fitness for a hilly marathon in summer heat.</li>
+    </ul>
+    <p>The best way to use VDOT is as a starting estimate that gets refined by race experience at the target distance. Use it to set training paces and make rough predictions — and adjust based on how those predictions perform in reality.</p>
+
+  </article>
+  <div class="cta">
+    <p>Enter a recent race time to get your VDOT score, predicted finish times for all distances, and calibrated training paces.</p>
+    <div class="cta-pair">
+      <a href="../race-predictor.html" class="cta-btn">Race Time Predictor &rarr;</a>
+      <a href="../training-paces.html" class="cta-btn" style="background:var(--surface2);color:var(--text);">Training Pace Calculator &rarr;</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not medical or coaching advice. Running calculators are based on established models and are not a substitute for professional guidance. All calculations are performed locally in your browser &mdash; no personal data is collected or stored.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+<script>(function(){var btn=document.getElementById('themeToggle');var icon=document.getElementById('themeIcon');var label=document.getElementById('themeLabel');function updateUI(){var d=document.documentElement.getAttribute('data-theme')==='dark';icon.innerHTML=d?'&#9788;':'&#9790;';label.textContent=d?'Light':'Dark';}btn.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('theme','light');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}updateUI();});updateUI();})();</script>
+</body>
+</html>
