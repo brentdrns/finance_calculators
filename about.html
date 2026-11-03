@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -139,7 +139,8 @@ html, body { overflow-x: hidden; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 768px) {
   .hamburger { display: flex; }
-  header { position: relative; flex-direction: row; align-items: center; }
+  header { position: relative; flex-direction: row; align-items: center; flex-wrap: nowrap; }
+  .header-banner { max-width: 100%; }
   .header-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg, #fff); border-bottom: 1px solid var(--border, #e0e0e0); padding: 12px 0; z-index: 100; }
   .header-nav.mobile-open { display: flex; }
   .header-nav .nav-sep { display: none; }
@@ -203,6 +204,8 @@ html, body { overflow-x: hidden; }
         <a href="pace-converter.html">Pace Converter</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html">VDOT Tables</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>

@@ -1,0 +1,623 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
+<title>VDOT Reference Tables — Race Times &amp; Training Paces | Abel's Calculators</title>
+<meta name="description" content="Complete Jack Daniels VDOT reference table for VDOT 30–85. Shows race time equivalents (5K, 10K, half marathon, marathon) and training paces for Easy, Marathon, Threshold, Interval, and Repetition zones.">
+<meta name="author" content="Abel's Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/vdot-tables.html">
+<meta property="og:title" content="VDOT Reference Tables — Race Times &amp; Training Paces | Abel's Calculators">
+<meta property="og:description" content="Complete Jack Daniels VDOT reference table for VDOT 30–85 with race equivalents and all 5 training zones.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/vdot-tables.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Calculators — VDOT reference tables">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VDOT Reference Tables">
+<meta name="twitter:description" content="Complete Jack Daniels VDOT table with race times and training paces for every VDOT score from 30 to 85.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"VDOT Reference Tables","description":"Complete Jack Daniels VDOT reference tables with race time equivalents and training paces for VDOT scores 30–85.","url":"https://abelscalculators.com/vdot-tables.html","isPartOf":{"@type":"WebSite","name":"Abel's Calculators","url":"https://abelscalculators.com"}}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    } catch(e){}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* Header */
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  .hero-band-body a { color: var(--accent); text-decoration: none; }
+  .hero-band-body a:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Controls band */
+  .controls-band { border-bottom: 1px solid var(--border); padding: 12px 40px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; background: var(--bg); }
+  .control-item { display: flex; align-items: center; gap: 10px; }
+  .control-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .vdot-input { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; padding: 6px 12px; width: 84px; outline: none; transition: border-color 0.15s; }
+  .vdot-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .unit-toggle { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .unit-btn { background: transparent; border: none; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; padding: 6px 14px; cursor: pointer; transition: background 0.15s, color 0.15s; }
+  .unit-btn.active { background: var(--accent); color: #fff; }
+  .unit-btn:not(.active):hover { background: var(--surface2); color: var(--text); }
+  .controls-hint { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+
+  /* Table section */
+  .table-section { padding: 24px 40px 56px; }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+
+  /* VDOT table */
+  .vdot-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+
+  /* Header */
+  .vdot-table thead th {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    padding: 11px 14px;
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    position: sticky; top: 0; z-index: 10;
+    text-align: center;
+  }
+  .vdot-table thead th.th-vdot { text-align: left; position: sticky; left: 0; z-index: 20; }
+  .vdot-table thead th.th-level { text-align: left; }
+  .vdot-table thead th.th-race { color: #2563eb; border-left: 2px solid rgba(37,99,235,0.2); background: rgba(37,99,235,0.05); }
+  [data-theme="dark"] .vdot-table thead th.th-race { color: #5b8def; border-left-color: rgba(91,141,239,0.2); background: rgba(91,141,239,0.07); }
+  .vdot-table thead th.th-race:first-of-type { border-left: 2px solid rgba(37,99,235,0.3); }
+  .vdot-table thead th.th-pace { color: var(--accent); border-left: 2px solid rgba(0,106,255,0.18); background: rgba(0,106,255,0.05); }
+  .vdot-table thead th.th-pace:first-of-type { border-left: 2px solid var(--accent-dim); }
+
+  /* Body */
+  .vdot-table tbody td {
+    padding: 7px 14px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .vdot-table tbody td.td-vdot {
+    text-align: left;
+    font-family: 'DM Serif Display', serif; font-size: 16px; font-weight: 600;
+    color: var(--accent);
+    position: sticky; left: 0;
+    background: var(--bg); z-index: 5;
+    padding: 7px 16px;
+  }
+  .vdot-table tbody td.td-level { text-align: left; font-family: 'Inter', sans-serif; }
+  .vdot-table tbody td.td-race { background: rgba(37,99,235,0.03); border-left: 1px solid rgba(37,99,235,0.1); }
+  [data-theme="dark"] .vdot-table tbody td.td-race { background: rgba(91,141,239,0.04); border-left-color: rgba(91,141,239,0.12); }
+  .vdot-table tbody td.td-race:first-of-type { border-left: 2px solid rgba(37,99,235,0.2); }
+  [data-theme="dark"] .vdot-table tbody td.td-race:first-of-type { border-left-color: rgba(91,141,239,0.22); }
+  .vdot-table tbody td.td-pace { background: rgba(0,106,255,0.02); border-left: 1px solid rgba(0,106,255,0.08); }
+  [data-theme="dark"] .vdot-table tbody td.td-pace { background: rgba(77,142,255,0.03); border-left-color: rgba(77,142,255,0.1); }
+  .vdot-table tbody td.td-pace:first-of-type { border-left: 2px solid rgba(0,106,255,0.25); }
+  [data-theme="dark"] .vdot-table tbody td.td-pace:first-of-type { border-left-color: rgba(77,142,255,0.3); }
+  .vdot-table tbody tr:last-child td { border-bottom: none; }
+
+  /* Hover */
+  .vdot-table tbody tr:hover td { background: var(--surface2); }
+  .vdot-table tbody tr:hover td.td-vdot { background: var(--surface2); }
+  .vdot-table tbody tr:hover td.td-race { background: var(--surface2); }
+  .vdot-table tbody tr:hover td.td-pace { background: var(--surface2); }
+
+  /* Highlighted row */
+  .vdot-table tbody tr.highlighted td { background: rgba(0,106,255,0.08); }
+  .vdot-table tbody tr.highlighted td.td-vdot { background: rgba(0,106,255,0.14); color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+  .vdot-table tbody tr.highlighted td.td-race { background: rgba(0,106,255,0.08); }
+  .vdot-table tbody tr.highlighted td.td-pace { background: rgba(0,106,255,0.07); }
+  [data-theme="dark"] .vdot-table tbody tr.highlighted td { background: rgba(77,142,255,0.1); }
+  [data-theme="dark"] .vdot-table tbody tr.highlighted td.td-vdot { background: rgba(77,142,255,0.18); box-shadow: inset 3px 0 0 var(--accent); }
+
+  /* Level divider row */
+  .vdot-table tbody tr.level-divider td {
+    background: var(--surface) !important;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 6px 14px;
+    border-bottom: 1px solid var(--border);
+    border-top: 2px solid var(--border);
+    box-shadow: none !important;
+  }
+  .vdot-table tbody tr.level-divider td.td-vdot {
+    background: var(--surface) !important;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    box-shadow: none !important;
+  }
+
+  /* Level badge */
+  .level-badge { display: inline-block; font-size: 9px; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 8px; border-radius: 5px; font-weight: 600; }
+  .badge-recreational { background: rgba(22,163,74,0.12); color: #16a34a; }
+  .badge-intermediate { background: rgba(37,99,235,0.10); color: #2563eb; }
+  .badge-advanced { background: rgba(249,115,22,0.10); color: #f97316; }
+  .badge-sub-elite { background: rgba(239,68,68,0.10); color: #ef4444; }
+  .badge-elite { background: rgba(139,92,246,0.10); color: #8b5cf6; }
+  [data-theme="dark"] .badge-recreational { color: #4ade80; background: rgba(74,222,128,0.12); }
+  [data-theme="dark"] .badge-intermediate { color: #5b8def; background: rgba(91,141,239,0.12); }
+  [data-theme="dark"] .badge-advanced { color: #fb923c; background: rgba(251,146,60,0.12); }
+  [data-theme="dark"] .badge-sub-elite { color: #f87171; background: rgba(248,113,113,0.12); }
+  [data-theme="dark"] .badge-elite { color: #a78bfa; background: rgba(167,139,250,0.12); }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .controls-band { padding: 12px 16px; gap: 14px; }
+    .controls-hint { display: none; }
+    .table-section { padding: 16px 12px 40px; }
+    .site-footer { padding: 20px 16px; }
+  }
+  @media (max-width: 600px) {
+    header { padding: 0 16px; }
+    .hero-band-inner { padding: 16px; }
+  }
+</style>
+<style>
+/* ===== MOBILE NAV ===== */
+html, body { overflow-x: hidden; }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: 6px; background: none; border: none; cursor: pointer; z-index: 200; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--text, #1a1a2e); border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  header { position: relative; flex-direction: row; align-items: center; flex-wrap: nowrap; }
+  .header-banner { max-width: 100%; }
+  .header-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg, #fff); border-bottom: 1px solid var(--border, #e0e0e0); padding: 12px 0; z-index: 100; }
+  .header-nav.mobile-open { display: flex; }
+  .header-nav .nav-sep { display: none; }
+  .header-nav .nav-dropdown { width: 100%; }
+  .header-nav .nav-dropdown-btn { width: 100%; text-align: left; padding: 10px 20px; }
+  .header-nav .nav-dropdown-menu { position: static; box-shadow: none; border: none; padding: 0 0 0 20px; display: none; }
+  .header-nav .nav-dropdown.mobile-open .nav-dropdown-menu { display: block; }
+  .header-nav a:not(.nav-dropdown-menu a) { display: block; padding: 10px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="header-nav" id="headerNav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+        <a href="fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="roth-conversion.html">Roth Conversion</a>
+        <a href="debt-payoff.html">Debt Payoff</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html" class="active">VDOT Tables</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Jack Daniels VDOT System</div>
+      <div class="hero-band-title">VDOT <span>Reference Tables</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      Race time equivalents and training paces for every <strong>VDOT from 30 to 85</strong>.
+      Enter your VDOT below to highlight your row, or use the
+      <a href="training-paces.html">Training Paces Calculator</a> to find your VDOT from a recent race.
+      Training paces based on <strong>Jack Daniels' Running Formula</strong>.
+    </div>
+  </div>
+</div>
+
+<div class="controls-band">
+  <div class="control-item">
+    <label class="control-label" for="myVdot">My VDOT</label>
+    <input type="number" class="vdot-input" id="myVdot" min="30" max="85" step="1" placeholder="e.g. 50" oninput="onVdotInput()">
+  </div>
+  <div class="control-item">
+    <span class="control-label">Paces</span>
+    <div class="unit-toggle">
+      <button class="unit-btn active" id="unitMile" onclick="setUnit('mile')">per mile</button>
+      <button class="unit-btn" id="unitKm" onclick="setUnit('km')">per km</button>
+    </div>
+  </div>
+  <span class="controls-hint">Click any row to highlight it</span>
+</div>
+
+<div class="table-section">
+  <div class="table-wrap">
+    <table class="vdot-table" id="vdotTable" aria-label="VDOT reference table">
+      <thead>
+        <tr>
+          <th class="th-vdot">VDOT</th>
+          <th class="th-level">Level</th>
+          <th class="th-race">5K</th>
+          <th class="th-race">10K</th>
+          <th class="th-race">Half Marathon</th>
+          <th class="th-race">Marathon</th>
+          <th class="th-pace" id="thEasy">Easy (per mile)</th>
+          <th class="th-pace" id="thM">M Pace</th>
+          <th class="th-pace" id="thT">Threshold</th>
+          <th class="th-pace" id="thI">Interval</th>
+          <th class="th-pace" id="thR">Repetition</th>
+        </tr>
+      </thead>
+      <tbody id="vdotTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">Training paces calculated using the Jack Daniels VDOT model. Paces are estimates and intended as training guidelines only. Individual results vary based on fitness, conditions, and recovery. Easy pace shown as faster–slower range. M Pace shown as faster–slower range. Not a substitute for professional coaching.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─── Theme toggle ─────────────────────────────────────────────────────
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function syncTheme(){
+    var dark = html.getAttribute('data-theme') === 'dark';
+    icon.textContent = dark ? '☀' : '☽';
+    label.textContent = dark ? 'Light' : 'Dark';
+  }
+  syncTheme();
+  btn.addEventListener('click', function(){
+    var dark = html.getAttribute('data-theme') === 'dark';
+    if(dark){ html.removeAttribute('data-theme'); localStorage.setItem('theme','light'); }
+    else { html.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); }
+    syncTheme();
+  });
+})();
+
+// ─── VDOT math ────────────────────────────────────────────────────────
+function vdotFromTime(distanceMeters, timeMinutes) {
+  var v = distanceMeters / timeMinutes;
+  var vo2 = -4.60 + 0.182258 * v + 0.000104 * v * v;
+  var pvo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
+                 + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
+  return vo2 / pvo2;
+}
+
+function timeFromVdot(vdot, distanceMeters) {
+  var lo = 0.5, hi = 2000;
+  for (var i = 0; i < 100; i++) {
+    var mid = (lo + hi) / 2;
+    if (vdotFromTime(distanceMeters, mid) > vdot) lo = mid;
+    else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+function fmtPace(minutes) {
+  var m = Math.floor(minutes);
+  var s = Math.round((minutes - m) * 60);
+  if (s === 60) { m++; s = 0; }
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function fmtTime(minutes) {
+  var totalSec = Math.round(minutes * 60);
+  var h = Math.floor(totalSec / 3600);
+  var rem = totalSec % 3600;
+  var m = Math.floor(rem / 60);
+  var s = rem % 60;
+  if (h > 0) return h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+// ─── Level ─────────────────────────────────────────────────────────
+var LEVELS = [
+  { min: 30, max: 39, label: 'Recreational', cls: 'badge-recreational' },
+  { min: 40, max: 49, label: 'Intermediate',  cls: 'badge-intermediate' },
+  { min: 50, max: 59, label: 'Advanced',      cls: 'badge-advanced' },
+  { min: 60, max: 69, label: 'Sub-Elite',     cls: 'badge-sub-elite' },
+  { min: 70, max: 85, label: 'Elite',         cls: 'badge-elite' }
+];
+
+function getLevel(v) {
+  for (var i = 0; i < LEVELS.length; i++) {
+    if (v >= LEVELS[i].min && v <= LEVELS[i].max) return LEVELS[i];
+  }
+  return LEVELS[LEVELS.length - 1];
+}
+
+// ─── Compute one row ───────────────────────────────────────────────
+var MILE_M = 1609.344;
+var KM_M = 1000;
+
+function computeRow(v, unit) {
+  var d = unit === 'km' ? KM_M : MILE_M;
+
+  // Race times
+  var t5k   = fmtTime(timeFromVdot(v, 5000));
+  var t10k  = fmtTime(timeFromVdot(v, 10000));
+  var thalf = fmtTime(timeFromVdot(v, 21097.5));
+  var tmar  = fmtTime(timeFromVdot(v, 42195));
+
+  // Easy: 59–74% of VDOT — fracHigh=0.74 gives faster pace, fracLow=0.59 gives slower
+  var eFast = fmtPace(timeFromVdot(v * 0.74, d));
+  var eSlow = fmtPace(timeFromVdot(v * 0.59, d));
+
+  // M Pace: 75–84%
+  var mFast = fmtPace(timeFromVdot(v * 0.84, d));
+  var mSlow = fmtPace(timeFromVdot(v * 0.75, d));
+
+  // Threshold: 86%
+  var tPace = fmtPace(timeFromVdot(v * 0.86, d));
+
+  // Interval: 5K race pace
+  var iRefT = timeFromVdot(v, 5000);
+  var iPace = fmtPace((iRefT / 5000) * d);
+
+  // Repetition: mile race pace
+  var rRefT = timeFromVdot(v, 1609.344);
+  var rPace = fmtPace((rRefT / 1609.344) * d);
+
+  return {
+    races: [t5k, t10k, thalf, tmar],
+    easy: eFast + '–' + eSlow,
+    m: mFast + '–' + mSlow,
+    t: tPace,
+    i: iPace,
+    r: rPace
+  };
+}
+
+// ─── State ─────────────────────────────────────────────────────────
+var currentUnit = 'mile';
+var highlightedVdot = null;
+
+// ─── Build table ───────────────────────────────────────────────────
+function buildTable() {
+  var tbody = document.getElementById('vdotTableBody');
+  var rows = [];
+
+  for (var li = 0; li < LEVELS.length; li++) {
+    var lev = LEVELS[li];
+
+    // Level divider row
+    rows.push(
+      '<tr class="level-divider">' +
+        '<td class="td-vdot">' + lev.label + '</td>' +
+        '<td colspan="10">VDOT ' + lev.min + '–' + lev.max + '</td>' +
+      '</tr>'
+    );
+
+    for (var v = lev.min; v <= lev.max; v++) {
+      var row = computeRow(v, currentUnit);
+      var lvl = getLevel(v);
+      var isHL = (highlightedVdot === v);
+      rows.push(
+        '<tr data-vdot="' + v + '"' + (isHL ? ' class="highlighted"' : '') + '>' +
+          '<td class="td-vdot">' + v + '</td>' +
+          '<td class="td-level"><span class="level-badge ' + lvl.cls + '">' + lvl.label + '</span></td>' +
+          '<td class="td-race">' + row.races[0] + '</td>' +
+          '<td class="td-race">' + row.races[1] + '</td>' +
+          '<td class="td-race">' + row.races[2] + '</td>' +
+          '<td class="td-race">' + row.races[3] + '</td>' +
+          '<td class="td-pace">' + row.easy + '</td>' +
+          '<td class="td-pace">' + row.m + '</td>' +
+          '<td class="td-pace">' + row.t + '</td>' +
+          '<td class="td-pace">' + row.i + '</td>' +
+          '<td class="td-pace">' + row.r + '</td>' +
+        '</tr>'
+      );
+    }
+  }
+
+  tbody.innerHTML = rows.join('');
+
+  // Click to highlight
+  tbody.querySelectorAll('tr[data-vdot]').forEach(function(tr) {
+    tr.addEventListener('click', function() {
+      var v = parseInt(tr.getAttribute('data-vdot'));
+      if (highlightedVdot === v) {
+        highlightedVdot = null;
+        document.getElementById('myVdot').value = '';
+        removeHighlight();
+      } else {
+        highlightedVdot = v;
+        document.getElementById('myVdot').value = v;
+        applyHighlight(v);
+      }
+    });
+  });
+}
+
+function updatePaceHeaders() {
+  var suffix = currentUnit === 'km' ? ' (per km)' : ' (per mile)';
+  document.getElementById('thEasy').textContent = 'Easy' + suffix;
+  document.getElementById('thM').textContent = 'M Pace';
+  document.getElementById('thT').textContent = 'Threshold';
+  document.getElementById('thI').textContent = 'Interval';
+  document.getElementById('thR').textContent = 'Repetition';
+}
+
+// ─── Unit toggle ────────────────────────────────────────────────────
+function setUnit(unit) {
+  currentUnit = unit;
+  document.getElementById('unitMile').classList.toggle('active', unit === 'mile');
+  document.getElementById('unitKm').classList.toggle('active', unit === 'km');
+  updatePaceHeaders();
+  buildTable();
+  if (highlightedVdot) scrollToHighlighted();
+}
+
+// ─── Highlight ──────────────────────────────────────────────────────
+function removeHighlight() {
+  document.querySelectorAll('#vdotTableBody tr.highlighted').forEach(function(tr) {
+    tr.classList.remove('highlighted');
+  });
+}
+
+function applyHighlight(v) {
+  removeHighlight();
+  var tr = document.querySelector('#vdotTableBody tr[data-vdot="' + v + '"]');
+  if (tr) {
+    tr.classList.add('highlighted');
+    scrollToHighlighted();
+  }
+}
+
+function scrollToHighlighted() {
+  var tr = document.querySelector('#vdotTableBody tr.highlighted');
+  if (tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function onVdotInput() {
+  var val = parseInt(document.getElementById('myVdot').value);
+  if (!isNaN(val) && val >= 30 && val <= 85) {
+    highlightedVdot = val;
+    applyHighlight(val);
+  } else {
+    highlightedVdot = null;
+    removeHighlight();
+  }
+}
+
+// ─── Init ────────────────────────────────────────────────────────────
+buildTable();
+</script>
+<script>
+(function() {
+  var h = document.getElementById('hamburger');
+  var n = document.getElementById('headerNav');
+  if (!h || !n) return;
+  h.addEventListener('click', function() { var open = n.classList.toggle('mobile-open'); h.classList.toggle('open', open); h.setAttribute('aria-expanded', String(open)); });
+  n.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { n.classList.remove('mobile-open'); h.classList.remove('open'); h.setAttribute('aria-expanded', 'false'); }); });
+  n.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) { btn.addEventListener('click', function() { if (window.innerWidth > 768) return; btn.closest('.nav-dropdown').classList.toggle('mobile-open'); }); });
+})();
+</script>
+</body>
+</html>

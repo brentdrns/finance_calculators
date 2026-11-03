@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -328,6 +328,8 @@
         <a href="pace-converter.html">Pace Converter</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html">VDOT Tables</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -527,7 +529,7 @@
             </label>
             <input type="range" id="lossCoeff" min="0.25" max="2.5" step="0.05" value="1" oninput="onCoeffChange()">
           </div>
-          <div id="elevCoeffHint" class="hint" style="margin-top:6px">Scaled to your VDOT. Elites ~20s/100ft; 10-min milers ~40s/100ft. Raise for trail/mountain runs.</div>
+          <div id="elevCoeffHint" class="hint" style="margin-top:6px">Scaled to your VDOT. ~22s/100ft at VDOT 75; ~44s/100ft at VDOT 50. Raise for trail or concentrated climbs.</div>
         </div>
       </div>
     </div>
@@ -761,16 +763,15 @@ function timeFromVdot(vdot, distanceMeters) {
 }
 
 // ─── Elevation factor ───────────────────────────────────────────────────────
-// Base coefficients derived from running literature: elites (~VDOT 66) lose ~20 sec/100ft,
-// 10-min milers (~VDOT 37) lose ~40 sec/100ft on a marathon.
-// gc = sec_per_100ft * distMiles / (T_min * 60) → linear from 5.3% at VDOT 66 to 6.7% at VDOT 37
+// Calibrated to real-world hilly marathon reports: ~44s/100ft at VDOT 50, ~22s/100ft at VDOT 75.
+// Loss ratio is 60% of gain — downhill recovers less than it costs.
 let _elevState = { vdot: 50, flatMinutes: 240, targetDistM: 42195 };
 
 function elevCoeffs(vdot) {
-  const baseGc = Math.max(4.5, Math.min(9.0, 5.3 + (66 - vdot) * 0.048));
+  const baseGc = Math.max(6.0, Math.min(14.0, 8.0 + (66 - vdot) * 0.075));
   const gainMult = parseFloat(document.getElementById('gainCoeff')?.value) || 1.0;
   const lossMult = parseFloat(document.getElementById('lossCoeff')?.value) || 1.0;
-  return { gc: baseGc * gainMult / 100, lc: (baseGc / 2) * lossMult / 100 };
+  return { gc: baseGc * gainMult / 100, lc: baseGc * 0.6 * lossMult / 100 };
 }
 
 function elevFactor(gainFt, lossFt, distanceMeters, vdot) {
