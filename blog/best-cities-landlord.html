@@ -161,12 +161,34 @@
     .metric-row { grid-template-columns: 1fr 1fr; }
   }
 </style>
+<style>
+/* ===== MOBILE ===== */
+html, body { overflow-x: hidden; }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: 6px; background: none; border: none; cursor: pointer; z-index: 200; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--text, #1a1a2e); border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  header { position: relative; flex-direction: row; align-items: center; }
+  .header-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg, #fff); border-bottom: 1px solid var(--border, #e0e0e0); padding: 12px 0; z-index: 100; }
+  .header-nav.mobile-open { display: flex; }
+  .header-nav .nav-sep { display: none; }
+  .header-nav .nav-dropdown { width: 100%; }
+  .header-nav .nav-dropdown-btn { width: 100%; text-align: left; padding: 10px 20px; }
+  .header-nav .nav-dropdown-menu { position: static; box-shadow: none; border: none; padding: 0 0 0 20px; display: none; }
+  .header-nav .nav-dropdown.mobile-open .nav-dropdown-menu { display: block; }
+  .header-nav a:not(.nav-dropdown-menu a) { display: block; padding: 10px 20px; }
+}
+</style>
 </head>
 <body>
 
 <header>
   <h1><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
-  <nav class="header-nav" aria-label="Site navigation">
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="header-nav" id="headerNav" aria-label="Site navigation">
     <a href="../index.html">Home</a>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
@@ -204,13 +226,14 @@
     </div>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
-      <button class="nav-dropdown-btn">More <span class="nav-caret">&#9660;</span></button>
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
       <div class="nav-dropdown-menu">
-        <a href="../indian-holidays.html">Indian Holiday Calendar</a>
-        <div class="nav-dropdown-divider"></div>
-        <span class="nav-dropdown-label">Running</span>
         <a href="../race-predictor.html">Race Time Predictor</a>
-        <a href="../training-paces.html">Training Pace Calculator</a>
+        <a href="../training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="../pace-converter.html">Pace Converter</a>
+        <a href="../run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="../heart-rate-zones.html">Heart Rate Zones</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -1036,6 +1059,16 @@
     applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
   });
   try { applyTheme(localStorage.getItem('theme') === 'dark'); } catch(e) { applyTheme(false); }
+})();
+</script>
+<script>
+(function() {
+  var h = document.getElementById('hamburger');
+  var n = document.getElementById('headerNav');
+  if (!h || !n) return;
+  h.addEventListener('click', function() { var open = n.classList.toggle('mobile-open'); h.classList.toggle('open', open); h.setAttribute('aria-expanded', String(open)); });
+  n.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { n.classList.remove('mobile-open'); h.classList.remove('open'); h.setAttribute('aria-expanded', 'false'); }); });
+  n.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) { btn.addEventListener('click', function() { if (window.innerWidth > 768) return; btn.closest('.nav-dropdown').classList.toggle('mobile-open'); }); });
 })();
 </script>
 </body>
