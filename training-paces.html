@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -175,20 +175,6 @@
   .workout-zone-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
   .workout-examples { font-size: 11px; color: var(--text-muted); line-height: 1.65; }
 
-  /* Weekly structure */
-  .weekly-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 4px; }
-  .weekly-col { background: var(--surface2); border-radius: 10px; padding: 14px; }
-  .weekly-col-title { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-  .weekly-bar-group { display: flex; flex-direction: column; gap: 5px; }
-  .weekly-bar-row { display: flex; align-items: center; gap: 8px; }
-  .weekly-bar-label { font-size: 10px; color: var(--text-muted); width: 16px; text-align: right; flex-shrink: 0; }
-  .weekly-bar-track { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .weekly-bar-fill { height: 100%; border-radius: 3px; }
-  .weekly-bar-pct { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-muted); width: 28px; text-align: right; flex-shrink: 0; }
-  .weekly-highlight { border: 2px solid var(--accent); }
-  .weekly-highlight .weekly-col-title { color: var(--accent); }
-  .weekly-note { font-size: 11px; color: var(--text-muted); line-height: 1.6; margin-top: 12px; padding: 10px 14px; background: var(--surface2); border-left: 3px solid var(--accent-dim); border-radius: 0 var(--radius) var(--radius) 0; }
-
   /* Repeat paces (I/R) */
   .rep-paces { display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap; justify-content: flex-end; }
   .rep-pace-chip { background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 4px 9px; display: flex; flex-direction: column; align-items: center; gap: 1px; }
@@ -211,7 +197,6 @@
     .layout { grid-template-columns: 1fr; }
     .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
     .race-times-grid { grid-template-columns: repeat(2, 1fr); }
-    .weekly-grid { grid-template-columns: 1fr; }
     header { padding: 0 20px; }
     .main { padding: 16px; }
     .hero-band-inner { padding: 16px 20px; }
@@ -239,6 +224,7 @@
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   @media (max-width: 768px) {
     header { position: relative; flex-wrap: nowrap; flex-direction: row; align-items: center; }
+    .header-banner { max-width: 100%; }
     .hamburger { display: flex; }
     .header-nav {
       display: none; position: absolute; top: 100%; left: 0; right: 0;
@@ -318,6 +304,8 @@
         <a href="pace-converter.html">Pace Converter</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html">VDOT Tables</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -590,76 +578,6 @@ function vdotLevel(v) {
   return { label: 'Elite', tier: 5 };
 }
 
-// ─── Weekly structure by tier ─────────────────────────────────────
-var WEEKLY_PLANS = [
-  { // Beginner
-    title: 'Beginner',
-    desc: 'Focus on building aerobic base. Avoid high-intensity work until weekly mileage is consistent.',
-    bars: [
-      { zone: 'E', color: '#16a34a', pct: 80 },
-      { zone: 'M', color: '#0891b2', pct: 20 },
-      { zone: 'T', color: '#f97316', pct: 0 },
-      { zone: 'I', color: '#ef4444', pct: 0 },
-      { zone: 'R', color: '#8b5cf6', pct: 0 }
-    ]
-  },
-  { // Recreational
-    title: 'Recreational',
-    desc: 'Build mileage steadily. Add light tempo work once comfortable with 4+ days per week.',
-    bars: [
-      { zone: 'E', color: '#16a34a', pct: 80 },
-      { zone: 'M', color: '#0891b2', pct: 10 },
-      { zone: 'T', color: '#f97316', pct: 10 },
-      { zone: 'I', color: '#ef4444', pct: 0 },
-      { zone: 'R', color: '#8b5cf6', pct: 0 }
-    ]
-  },
-  { // Intermediate
-    title: 'Intermediate',
-    desc: 'Structured workouts 2×/week. Balance tempo and interval quality with easy mileage.',
-    bars: [
-      { zone: 'E', color: '#16a34a', pct: 75 },
-      { zone: 'M', color: '#0891b2', pct: 0 },
-      { zone: 'T', color: '#f97316', pct: 15 },
-      { zone: 'I', color: '#ef4444', pct: 10 },
-      { zone: 'R', color: '#8b5cf6', pct: 0 }
-    ]
-  },
-  { // Advanced
-    title: 'Advanced',
-    desc: 'High mileage base with precision quality sessions. Periodize across training blocks.',
-    bars: [
-      { zone: 'E', color: '#16a34a', pct: 70 },
-      { zone: 'M', color: '#0891b2', pct: 10 },
-      { zone: 'T', color: '#f97316', pct: 12 },
-      { zone: 'I', color: '#ef4444', pct: 6 },
-      { zone: 'R', color: '#8b5cf6', pct: 2 }
-    ]
-  },
-  { // Sub-Elite
-    title: 'Sub-Elite',
-    desc: 'Double days, high volume, multiple quality sessions per week across all zones.',
-    bars: [
-      { zone: 'E', color: '#16a34a', pct: 65 },
-      { zone: 'M', color: '#0891b2', pct: 10 },
-      { zone: 'T', color: '#f97316', pct: 14 },
-      { zone: 'I', color: '#ef4444', pct: 8 },
-      { zone: 'R', color: '#8b5cf6', pct: 3 }
-    ]
-  },
-  { // Elite
-    title: 'Elite',
-    desc: 'Periodized high-performance plan. Work with a coach to individualize volume and intensity.',
-    bars: [
-      { zone: 'E', color: '#16a34a', pct: 60 },
-      { zone: 'M', color: '#0891b2', pct: 12 },
-      { zone: 'T', color: '#f97316', pct: 15 },
-      { zone: 'I', color: '#ef4444', pct: 10 },
-      { zone: 'R', color: '#8b5cf6', pct: 3 }
-    ]
-  }
-];
-
 // ─── Pace computation ─────────────────────────────────────────────
 var MILE_M = 1609.344;
 var KM_M = 1000;
@@ -762,7 +680,6 @@ function calculate() {
 
   var unit = document.getElementById('paceUnit').value;
   var lvl = vdotLevel(vdot);
-  var plan = WEEKLY_PLANS[Math.min(lvl.tier, WEEKLY_PLANS.length - 1)];
 
   // Race predictions
   var raceDists = [
@@ -803,31 +720,6 @@ function calculate() {
     '</div>';
   }).join('');
 
-  // Weekly bars
-  var barRows = plan.bars.map(function(b){
-    return '<div class="weekly-bar-row">' +
-      '<div class="weekly-bar-label">' + b.zone + '</div>' +
-      '<div class="weekly-bar-track"><div class="weekly-bar-fill" style="width:' + b.pct + '%;background:' + b.color + '"></div></div>' +
-      '<div class="weekly-bar-pct">' + b.pct + '%</div>' +
-    '</div>';
-  }).join('');
-
-  // Current plan highlighting
-  var allPlansHTML = WEEKLY_PLANS.map(function(pl, i){
-    var isActive = (i === Math.min(lvl.tier, WEEKLY_PLANS.length - 1));
-    var bars = pl.bars.map(function(b){
-      return '<div class="weekly-bar-row">' +
-        '<div class="weekly-bar-label">' + b.zone + '</div>' +
-        '<div class="weekly-bar-track"><div class="weekly-bar-fill" style="width:' + b.pct + '%;background:' + b.color + '"></div></div>' +
-        '<div class="weekly-bar-pct">' + (b.pct > 0 ? b.pct+'%' : '—') + '</div>' +
-      '</div>';
-    }).join('');
-    return '<div class="weekly-col' + (isActive ? ' weekly-highlight' : '') + '">' +
-      '<div class="weekly-col-title">' + pl.title + '</div>' +
-      '<div class="weekly-bar-group">' + bars + '</div>' +
-    '</div>';
-  }).join('');
-
   var html =
     // Card 1: VDOT
     '<div class="card">' +
@@ -852,13 +744,6 @@ function calculate() {
     '<div class="card">' +
       '<div class="card-title">Workout Examples</div>' +
       '<div class="workout-list">' + workoutRows + '</div>' +
-    '</div>' +
-
-    // Card 4: Weekly structure
-    '<div class="card">' +
-      '<div class="card-title">Weekly Structure by Level</div>' +
-      '<div class="weekly-grid">' + allPlansHTML + '</div>' +
-      '<div class="weekly-note"><strong>' + plan.title + ' plan:</strong> ' + plan.desc + '</div>' +
     '</div>';
 
   document.getElementById('mainOutput').innerHTML = html;
