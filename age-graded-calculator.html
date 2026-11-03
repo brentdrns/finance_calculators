@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Age Graded Running Calculator — WMA Age Grade % — Abel's Calculators</title>
+<meta name="description" content="Calculate your age-graded running performance. Enter your race time, age, and sex to see your WMA age grade percentage and equivalent open-class time for 5K, 10K, half marathon, and marathon.">
+<meta name="author" content="Abel's Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/age-graded-calculator.html">
+<meta property="og:title" content="Age Graded Running Calculator — WMA Age Grade % — Abel's Calculators">
+<meta property="og:description" content="Calculate your age-graded running performance. Enter your race time, age, and sex to see your WMA age grade percentage and equivalent open-class time for 5K, 10K, half marathon, and marathon.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/age-graded-calculator.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Calculators — WMA Age Graded Running Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Age Graded Running Calculator — WMA Age Grade %">
+<meta name="twitter:description" content="Calculate your age-graded running performance using WMA 2015 factors.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Age Graded Running Calculator","description":"Calculate your age-graded running performance using WMA 2015 factors. Enter your race time, age, and sex to see your WMA age grade percentage and equivalent open-class time.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/age-graded-calculator.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    } catch(e){}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* Header */
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+  .panel { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input, .field select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+  .time-sep { display: flex; align-items: flex-end; padding-bottom: 8px; color: var(--text-muted); font-size: 16px; font-weight: 300; justify-content: center; }
+  .time-row { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 4px; align-items: end; }
+  .time-row .field { margin-bottom: 0; }
+
+  /* Sex toggle */
+  .sex-toggle { display: flex; gap: 0; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .sex-toggle-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; padding: 7px 8px; cursor: pointer; transition: background 0.15s, color 0.15s; text-align: center; }
+  .sex-toggle-btn.active { background: var(--accent); color: #fff; }
+  .sex-toggle-btn:not(.active):hover { background: var(--surface2); color: var(--text); }
+
+  /* Main */
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+  .card-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Age grade hero */
+  .ag-hero { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 16px; }
+  .ag-number { font-family: 'DM Serif Display', serif; font-size: 80px; line-height: 1; color: var(--accent); }
+  .ag-info { padding-bottom: 10px; }
+  .ag-level-badge { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 6px; margin-bottom: 6px; font-weight: 600; background: rgba(0,106,255,0.12); color: var(--accent); }
+  .ag-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+  /* Stat boxes */
+  .stat-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-box { background: var(--surface2); border-radius: var(--radius); padding: 12px 14px; }
+  .stat-box-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .stat-box-value { font-family: 'DM Mono', monospace; font-size: 18px; color: var(--text); font-weight: 500; }
+  .stat-box-sub { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+  /* AG scale */
+  .ag-scale-wrap { margin: 16px 0 4px; }
+  .ag-scale-track { position: relative; height: 10px; border-radius: 5px; background: linear-gradient(to right, #94a3b8 0%, #60a5fa 50%, #3b82f6 70%, #22c55e 80%, #f59e0b 90%, #ef4444 100%); margin-bottom: 6px; }
+  .ag-scale-marker { position: absolute; top: -4px; width: 18px; height: 18px; border-radius: 50%; background: var(--text); border: 2px solid var(--bg); transform: translateX(-50%); transition: left 0.4s; }
+  .ag-scale-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); padding: 0 0px; }
+  .ag-scale-note { font-size: 11px; color: var(--text-muted); margin-top: 10px; line-height: 1.6; }
+
+  /* Decades table */
+  .decades-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .decades-table th { text-align: left; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); padding: 6px 10px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  .decades-table td { padding: 9px 10px; border-bottom: 1px solid var(--border); color: var(--text); font-family: 'DM Mono', monospace; }
+  .decades-table tr:last-child td { border-bottom: none; }
+  .decades-table tr.current-age-row td { background: rgba(0,106,255,0.07); font-weight: 600; color: var(--accent); }
+  .decades-table td.age-col { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text); }
+  .decades-table td.factor-col { color: var(--text-muted); font-size: 11px; }
+
+  /* Error/empty state */
+  .empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); }
+  .error-msg { color: var(--red); font-size: 12px; margin-top: 6px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-boxes { grid-template-columns: 1fr 1fr; }
+    header { padding: 0 20px; }
+    .main { padding: 16px; }
+    .hero-band-inner { padding: 16px 20px; }
+  }
+  @media (max-width: 600px) {
+    .ag-hero { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .stat-boxes { grid-template-columns: 1fr; }
+  }
+</style>
+<style>
+  body { overflow-x: hidden; }
+  .sidebar, .main { min-width: 0; }
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; padding: 9px 10px; margin-left: auto; flex-shrink: 0;
+  }
+  .hamburger span {
+    display: block; width: 16px; height: 1.5px; background: var(--text-muted);
+    border-radius: 2px; transition: transform 0.2s, opacity 0.15s; transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 768px) {
+    header { position: relative; flex-wrap: nowrap; flex-direction: row; align-items: center; }
+    .header-banner { max-width: 100%; }
+    .hamburger { display: flex; }
+    .header-nav {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      flex-direction: column; gap: 2px; padding: 8px 12px 16px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      max-height: calc(100vh - 60px); overflow-y: auto;
+    }
+    .header-nav.mobile-open { display: flex; }
+    .nav-sep { display: none; }
+    .header-nav > a { padding: 10px 12px; border-radius: 8px; }
+    .nav-dropdown { width: 100%; flex-direction: column; }
+    .nav-dropdown-btn { width: 100%; padding: 10px 12px; justify-content: space-between; }
+    .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+    .nav-dropdown.mobile-open .nav-dropdown-menu {
+      display: flex; flex-direction: column; position: static;
+      box-shadow: none; border: 1px solid var(--border); border-radius: 8px;
+      padding: 4px 0; margin: 2px 0 4px; background: var(--surface);
+    }
+    .nav-caret { transition: transform 0.2s; }
+    .nav-dropdown.mobile-open .nav-caret { transform: rotate(180deg); }
+    .theme-toggle { width: 100%; justify-content: center; margin-top: 6px; }
+    .field input, .field select { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="header-nav" id="headerNav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+        <a href="fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="roth-conversion.html">Roth Conversion</a>
+        <a href="debt-payoff.html">Debt Payoff</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="bq-calculator.html">BQ Calculator</a>
+        <a href="training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="age-graded-calculator.html" class="active">Age Graded Calculator</a>
+        <a href="running-percentile.html">Percentile Calculator</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html">VDOT Tables</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">World Masters Athletics</div>
+      <div class="hero-band-title">Age Graded <span>Calculator</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      Compare your race performance to the <strong>world standard for your age and sex</strong>. Age grading adjusts for the natural decline in performance with age — letting masters runners see how their times stack up against their <strong>peak potential</strong>.
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="section-label">Race Details</div>
+
+      <div class="field">
+        <label for="eventSelect">Event</label>
+        <select id="eventSelect" oninput="calculate()">
+          <option value="5k">5K</option>
+          <option value="10k">10K</option>
+          <option value="hm">Half Marathon</option>
+          <option value="marathon" selected>Marathon</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Sex</label>
+        <div class="sex-toggle">
+          <button class="sex-toggle-btn active" id="sexMale" onclick="setSex('male')">Male</button>
+          <button class="sex-toggle-btn" id="sexFemale" onclick="setSex('female')">Female</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="ageInput">Age</label>
+        <input type="number" id="ageInput" min="15" max="100" step="1" value="40" oninput="calculate()">
+        <div class="hint">Ages 15–100. Outside this range are clamped to the nearest valid factor.</div>
+      </div>
+
+      <div class="field">
+        <label>Your finish time (H : MM : SS)</label>
+        <div class="time-row">
+          <div class="field">
+            <input type="number" id="timeHH" min="0" max="23" step="1" value="3" placeholder="H" oninput="calculate()">
+          </div>
+          <div class="time-sep">:</div>
+          <div class="field">
+            <input type="number" id="timeMM" min="0" max="59" step="1" value="30" placeholder="MM" oninput="calculate()">
+          </div>
+          <div class="time-sep">:</div>
+          <div class="field">
+            <input type="number" id="timeSS" min="0" max="59" step="1" value="0" placeholder="SS" oninput="calculate()">
+          </div>
+        </div>
+        <div class="error-msg" id="calcError"></div>
+      </div>
+    </div>
+
+    <div class="panel" style="border-bottom:none; background: var(--surface); flex:1;">
+      <div class="section-label">About Age Grading</div>
+      <p style="font-size:11px; color:var(--text-muted); line-height:1.75;">
+        WMA (World Masters Athletics) age grading uses performance factors derived from world records at each age to convert any runner's time to a percentage of the theoretical best for their age and sex.<br><br>
+        A score of <strong style="color:var(--text)">100%</strong> equals the world record for your age group. Scores above <strong style="color:var(--text)">80%</strong> are considered national class; above <strong style="color:var(--text)">70%</strong> is regional class.<br><br>
+        Factors are from the <strong style="color:var(--text)">WMA 2015</strong> road running tables.
+      </p>
+    </div>
+  </aside>
+
+  <main class="main" id="mainOutput">
+    <!-- Content injected by JS -->
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Age grading factors are based on WMA 2015 road running tables and are approximations. Results are estimates only. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─── Theme toggle ────────────────────────────────────────────────
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function syncTheme(){
+    var dark = html.getAttribute('data-theme') === 'dark';
+    icon.textContent = dark ? '☀' : '☽';
+    label.textContent = dark ? 'Light' : 'Dark';
+  }
+  syncTheme();
+  btn.addEventListener('click', function(){
+    var dark = html.getAttribute('data-theme') === 'dark';
+    if(dark){ html.removeAttribute('data-theme'); localStorage.setItem('theme','light'); }
+    else { html.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); }
+    syncTheme();
+  });
+})();
+
+// ─── Sex toggle ──────────────────────────────────────────────────
+var currentSex = 'male';
+function setSex(s) {
+  currentSex = s;
+  document.getElementById('sexMale').classList.toggle('active', s === 'male');
+  document.getElementById('sexFemale').classList.toggle('active', s === 'female');
+  calculate();
+}
+
+// ─── WMA 2015 Road Running Age Factors ───────────────────────────
+var MEN_ROAD_FACTORS = {
+  15: 0.8713, 16: 0.8921, 17: 0.9154, 18: 0.9359, 19: 0.9527,
+  20: 0.9647, 21: 0.9730, 22: 0.9790, 23: 0.9833, 24: 0.9869,
+  25: 0.9900, 26: 0.9924, 27: 0.9942, 28: 0.9955, 29: 0.9962,
+  30: 0.9965, 31: 0.9962, 32: 0.9958, 33: 0.9951, 34: 0.9941,
+  35: 0.9929, 36: 0.9914, 37: 0.9897, 38: 0.9876, 39: 0.9853,
+  40: 0.9827, 41: 0.9798, 42: 0.9765, 43: 0.9730, 44: 0.9691,
+  45: 0.9650, 46: 0.9605, 47: 0.9558, 48: 0.9507, 49: 0.9453,
+  50: 0.9395, 51: 0.9332, 52: 0.9266, 53: 0.9196, 54: 0.9123,
+  55: 0.9045, 56: 0.8963, 57: 0.8878, 58: 0.8788, 59: 0.8695,
+  60: 0.8597, 61: 0.8495, 62: 0.8389, 63: 0.8279, 64: 0.8166,
+  65: 0.8048, 66: 0.7926, 67: 0.7801, 68: 0.7671, 69: 0.7538,
+  70: 0.7401, 71: 0.7260, 72: 0.7116, 73: 0.6969, 74: 0.6818,
+  75: 0.6663, 76: 0.6505, 77: 0.6344, 78: 0.6180, 79: 0.6013,
+  80: 0.5844, 81: 0.5672, 82: 0.5498, 83: 0.5322, 84: 0.5143,
+  85: 0.4963, 86: 0.4781, 87: 0.4598, 88: 0.4413, 89: 0.4227,
+  90: 0.4040
+};
+
+var WOMEN_ROAD_FACTORS = {
+  15: 0.8713, 16: 0.8921, 17: 0.9154, 18: 0.9359, 19: 0.9527,
+  20: 0.9634, 21: 0.9718, 22: 0.9779, 23: 0.9823, 24: 0.9855,
+  25: 0.9880, 26: 0.9900, 27: 0.9916, 28: 0.9929, 29: 0.9939,
+  30: 0.9947, 31: 0.9952, 32: 0.9955, 33: 0.9955, 34: 0.9952,
+  35: 0.9947, 36: 0.9939, 37: 0.9929, 38: 0.9916, 39: 0.9901,
+  40: 0.9882, 41: 0.9860, 42: 0.9836, 43: 0.9808, 44: 0.9777,
+  45: 0.9742, 46: 0.9704, 47: 0.9663, 48: 0.9618, 49: 0.9569,
+  50: 0.9517, 51: 0.9460, 52: 0.9400, 53: 0.9336, 54: 0.9268,
+  55: 0.9196, 56: 0.9120, 57: 0.9039, 58: 0.8955, 59: 0.8866,
+  60: 0.8773, 61: 0.8676, 62: 0.8574, 63: 0.8469, 64: 0.8359,
+  65: 0.8244, 66: 0.8126, 67: 0.8003, 68: 0.7877, 69: 0.7747,
+  70: 0.7613, 71: 0.7476, 72: 0.7335, 73: 0.7191, 74: 0.7044,
+  75: 0.6893, 76: 0.6739, 77: 0.6582, 78: 0.6422, 79: 0.6260,
+  80: 0.6095, 81: 0.5928, 82: 0.5759, 83: 0.5588, 84: 0.5416,
+  85: 0.5241, 86: 0.5066, 87: 0.4889, 88: 0.4710, 89: 0.4531,
+  90: 0.4350
+};
+
+// Open standards (seconds) — WMA road running world records
+var OPEN_STANDARDS = {
+  '5k':       { male: 769,  female: 859  },  // Men 12:49, Women 14:19
+  '10k':      { male: 1584, female: 1754 },  // Men 26:24, Women 29:14
+  'hm':       { male: 3451, female: 3871 },  // Men 57:31, Women 1:04:31
+  'marathon': { male: 7235, female: 7913 }   // Men 2:00:35, Women 2:11:53
+};
+
+var EVENT_LABELS = {
+  '5k': '5K', '10k': '10K', 'hm': 'Half Marathon', 'marathon': 'Marathon'
+};
+
+// ─── Helpers ─────────────────────────────────────────────────────
+function getAgeFactor(age, sex) {
+  var table = sex === 'male' ? MEN_ROAD_FACTORS : WOMEN_ROAD_FACTORS;
+  var clamped = Math.max(15, Math.min(90, Math.round(age)));
+  return table[clamped];
+}
+
+function fmtTime(totalSec) {
+  var s = Math.round(totalSec);
+  var h = Math.floor(s / 3600);
+  var rem = s % 3600;
+  var m = Math.floor(rem / 60);
+  var sec = rem % 60;
+  if (h > 0) {
+    return h + ':' + (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function agLevel(pct) {
+  if (pct >= 100) return { label: 'World Class',      color: '#ef4444', desc: 'You are performing at or above the world record level for your age and sex. Extraordinary.' };
+  if (pct >= 90)  return { label: 'Elite',            color: '#f97316', desc: 'Elite masters performance — competitive at the highest national and international levels.' };
+  if (pct >= 80)  return { label: 'National Class',   color: '#eab308', desc: 'National-class performance. You would be competitive at national masters championships.' };
+  if (pct >= 70)  return { label: 'Regional Class',   color: '#22c55e', desc: 'Regional-class performance. Competitive at regional and state-level masters competition.' };
+  if (pct >= 60)  return { label: 'Local Class',      color: '#06b6d4', desc: 'Local-class performance. Competitive at local races and age group awards.' };
+  if (pct >= 50)  return { label: 'Good for Age',     color: '#6366f1', desc: 'A solid recreational performance relative to world-class standards for your age.' };
+  return           { label: 'Recreational',           color: '#94a3b8', desc: 'Recreational runner. Everyone starts somewhere — consistent training will raise your score.' };
+}
+
+function roughPercentile(pct) {
+  // Rough estimates of what age-grade % corresponds to among all runners
+  if (pct >= 90) return 'top 1%';
+  if (pct >= 80) return 'top 5%';
+  if (pct >= 70) return 'top 15%';
+  if (pct >= 60) return 'top 35%';
+  if (pct >= 50) return 'top 55%';
+  return 'bottom half';
+}
+
+// ─── Main calculate ───────────────────────────────────────────────
+function calculate() {
+  var event = document.getElementById('eventSelect').value;
+  var age = parseInt(document.getElementById('ageInput').value);
+  var hh = parseInt(document.getElementById('timeHH').value) || 0;
+  var mm = parseInt(document.getElementById('timeMM').value) || 0;
+  var ss = parseInt(document.getElementById('timeSS').value) || 0;
+  var errEl = document.getElementById('calcError');
+
+  if (isNaN(age) || age < 1 || age > 120) {
+    errEl.textContent = 'Enter a valid age (15–100).';
+    return;
+  }
+  var totalSec = hh * 3600 + mm * 60 + ss;
+  if (totalSec <= 0) {
+    errEl.textContent = 'Enter a valid finish time.';
+    return;
+  }
+  errEl.textContent = '';
+
+  var openStd = OPEN_STANDARDS[event][currentSex];
+  var ageFactor = getAgeFactor(age, currentSex);
+
+  // Age Standard = Open Standard / Age Factor  (the 100% mark for this age/sex)
+  var ageStandard = openStd / ageFactor;
+
+  // Age Grade % = (Age Standard / Actual Time) * 100
+  var agePct = (ageStandard / totalSec) * 100;
+
+  // Open Equivalent = Actual Time * Age Factor
+  var openEquiv = totalSec * ageFactor;
+
+  var lvl = agLevel(agePct);
+  var eventLabel = EVENT_LABELS[event];
+
+  // ─── Card 1: Age Grade Result ──────────────────────────────────
+  var scalePos = Math.min(100, Math.max(0, (agePct - 30) / 70 * 100)); // map 30–100% to 0–100%
+
+  var card1 =
+    '<div class="card">' +
+      '<div class="card-title">Age Grade Result</div>' +
+      '<div class="ag-hero">' +
+        '<div class="ag-number" style="color:' + lvl.color + '">' + agePct.toFixed(1) + '%</div>' +
+        '<div class="ag-info">' +
+          '<div class="ag-level-badge" style="background:' + lvl.color + '22; color:' + lvl.color + '">' + lvl.label + '</div>' +
+          '<div class="ag-desc">' + lvl.desc + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="stat-boxes">' +
+        '<div class="stat-box">' +
+          '<div class="stat-box-label">Open Equivalent</div>' +
+          '<div class="stat-box-value">' + fmtTime(openEquiv) + '</div>' +
+          '<div class="stat-box-sub">Time at age 25 for same grade</div>' +
+        '</div>' +
+        '<div class="stat-box">' +
+          '<div class="stat-box-label">Age Standard (100%)</div>' +
+          '<div class="stat-box-value">' + fmtTime(ageStandard) + '</div>' +
+          '<div class="stat-box-sub">World record equiv. for age ' + Math.max(15, Math.min(90, age)) + '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  // ─── Card 2: What This Means ───────────────────────────────────
+  var scaleMarkerLeft = Math.min(98, Math.max(2, (agePct - 30) / 70 * 100));
+
+  var card2 =
+    '<div class="card">' +
+      '<div class="card-title">What This Means</div>' +
+      '<p style="font-size:12px; color:var(--text-muted); line-height:1.75; margin-bottom:14px;">' +
+        'Age grading was developed by <strong style="color:var(--text)">World Masters Athletics (WMA)</strong> to allow fair comparison of performances across different ages. ' +
+        'A score of <strong style="color:var(--text)">100%</strong> represents the world record equivalent for your exact age and sex — the theoretical peak performance. ' +
+        'Your score of <strong style="color:' + lvl.color + '">' + agePct.toFixed(1) + '%</strong> places you roughly in the <strong style="color:var(--text)">' + roughPercentile(agePct) + '</strong> of all road runners.' +
+      '</p>' +
+      '<div class="ag-scale-wrap">' +
+        '<div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Performance Scale</div>' +
+        '<div class="ag-scale-track">' +
+          '<div class="ag-scale-marker" style="left:' + scaleMarkerLeft.toFixed(1) + '%"></div>' +
+        '</div>' +
+        '<div class="ag-scale-labels">' +
+          '<span>50%</span><span>60%</span><span>70%</span><span>80%</span><span>90%</span><span>100%</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ag-scale-note">' +
+        '<strong style="color:#94a3b8">50–59%</strong> Recreational &nbsp;&bull;&nbsp; ' +
+        '<strong style="color:#6366f1">60–69%</strong> Good for Age &nbsp;&bull;&nbsp; ' +
+        '<strong style="color:#06b6d4">60–69%</strong> Local Class &nbsp;&bull;&nbsp; ' +
+        '<strong style="color:#22c55e">70–79%</strong> Regional Class &nbsp;&bull;&nbsp; ' +
+        '<strong style="color:#eab308">80–89%</strong> National Class &nbsp;&bull;&nbsp; ' +
+        '<strong style="color:#f97316">90–99%</strong> Elite &nbsp;&bull;&nbsp; ' +
+        '<strong style="color:#ef4444">100%+</strong> World Class' +
+      '</div>' +
+    '</div>';
+
+  // ─── Card 3: Performance Across the Decades ────────────────────
+  var decadeAges = [20, 30, 40, 50, 60, 70, 80];
+  var tableRows = decadeAges.map(function(a) {
+    var f = getAgeFactor(a, currentSex);
+    // For this age-grade %, what actual time would produce it?
+    // agePct = (ageStandard_at_a / actualTime_at_a) * 100
+    // ageStandard_at_a = openStd / factor_at_a
+    // actualTime_at_a = ageStandard_at_a / (agePct/100)
+    var ageStdA = openStd / f;
+    var equivTime = ageStdA / (agePct / 100);
+    var isCurrent = Math.abs(a - age) < 5 && a === Math.round(age / 10) * 10;
+    var rowClass = isCurrent ? ' class="current-age-row"' : '';
+    return '<tr' + rowClass + '>' +
+      '<td class="age-col">' + a + (isCurrent ? ' ★' : '') + '</td>' +
+      '<td>' + fmtTime(equivTime) + '</td>' +
+      '<td>' + fmtTime(openStd / f) + '</td>' +
+      '<td class="factor-col">' + (f * 100).toFixed(1) + '%</td>' +
+    '</tr>';
+  }).join('');
+
+  // Highlight the row closest to current age
+  var closestAge = decadeAges.reduce(function(prev, cur) {
+    return Math.abs(cur - age) < Math.abs(prev - age) ? cur : prev;
+  });
+  tableRows = decadeAges.map(function(a) {
+    var f = getAgeFactor(a, currentSex);
+    var ageStdA = openStd / f;
+    var equivTime = ageStdA / (agePct / 100);
+    var rowClass = a === closestAge ? ' class="current-age-row"' : '';
+    return '<tr' + rowClass + '>' +
+      '<td class="age-col">' + a + (a === closestAge ? ' &#9733;' : '') + '</td>' +
+      '<td>' + fmtTime(equivTime) + '</td>' +
+      '<td>' + fmtTime(openStd / f) + '</td>' +
+      '<td class="factor-col">' + (f * 100).toFixed(1) + '%</td>' +
+    '</tr>';
+  }).join('');
+
+  var card3 =
+    '<div class="card">' +
+      '<div class="card-title">Performance Across the Decades</div>' +
+      '<p style="font-size:12px; color:var(--text-muted); line-height:1.65; margin-bottom:14px;">' +
+        'If you maintain this fitness level (' + agePct.toFixed(1) + '% age grade), here is what an equivalent ' + eventLabel + ' time would look like at different ages. ' +
+        'The closest decade to your current age (' + age + ') is highlighted.' +
+      '</p>' +
+      '<table class="decades-table">' +
+        '<thead><tr>' +
+          '<th>Age</th>' +
+          '<th>Equiv. Time</th>' +
+          '<th>Age Standard</th>' +
+          '<th>Age Factor</th>' +
+        '</tr></thead>' +
+        '<tbody>' + tableRows + '</tbody>' +
+      '</table>' +
+      '<p style="font-size:11px; color:var(--text-muted); margin-top:12px; line-height:1.6;">' +
+        '<strong style="color:var(--text)">Age Standard</strong> is the WMA world record equivalent for each age (the 100% mark). ' +
+        '<strong style="color:var(--text)">Age Factor</strong> is the fraction of open performance maintained at that age.' +
+      '</p>' +
+    '</div>';
+
+  document.getElementById('mainOutput').innerHTML = card1 + card2 + card3;
+}
+
+// ─── Init ─────────────────────────────────────────────────────────
+calculate();
+</script>
+<script>
+(function() {
+  var h = document.getElementById('hamburger');
+  var n = document.getElementById('headerNav');
+  if (!h || !n) return;
+  h.addEventListener('click', function() {
+    var open = n.classList.toggle('mobile-open');
+    h.classList.toggle('open', open);
+    h.setAttribute('aria-expanded', String(open));
+  });
+  n.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      n.classList.remove('mobile-open');
+      h.classList.remove('open');
+      h.setAttribute('aria-expanded', 'false');
+    });
+  });
+  n.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (window.innerWidth > 768) return;
+      btn.closest('.nav-dropdown').classList.toggle('mobile-open');
+    });
+  });
+})();
+</script>
+</body>
+</html>

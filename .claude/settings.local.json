@@ -22,7 +22,9 @@
       "Bash(wc -l /c/Users/brent/OneDrive/Documents/GitHub/finance_calculators/blog/*.html)",
       "Bash(grep -E '^[0-9\\\\-]+,[0-9\\\\-]+$')",
       "WebFetch(domain:runalyze.com)",
-      "WebFetch(domain:blog.runalyze.com)"
+      "WebFetch(domain:blog.runalyze.com)",
+      "Bash(git -C \"c:\\\\Users\\\\brent\\\\OneDrive\\\\Documents\\\\GitHub\\\\finance_calculators\" show worktree-agent-a3addd1f3044e52b1 --stat)",
+      "Bash(python3 -c ' *)"
     ],
     "additionalDirectories": [
       "c:\\Users\\brent\\OneDrive\\Documents\\GitHub\\finance_calculators\\blog",
