@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
+<title>Boston Qualifying Time Calculator — BQ Standards &amp; Historic Cutoffs — Abel's Calculators</title>
+<meta name="description" content="Find your Boston Marathon qualifying time by age and sex. See current BQ standards, historic cutoff buffers from 2013–2024, and what time you actually need to get in.">
+<meta name="author" content="Abel's Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/bq-calculator.html">
+<meta property="og:title" content="Boston Qualifying Time Calculator — BQ Standards &amp; Historic Cutoffs — Abel's Calculators">
+<meta property="og:description" content="Find your Boston Marathon qualifying time by age and sex. See current BQ standards, historic cutoff buffers from 2013–2024, and what time you actually need to get in.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abelscalculators.com/bq-calculator.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta property="og:image:alt" content="Abel's Calculators — Boston Qualifying Time Calculator">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boston Qualifying Time Calculator — BQ Standards &amp; Historic Cutoffs">
+<meta name="twitter:description" content="Find your Boston Marathon qualifying time by age and sex. See current BQ standards and historic cutoff buffers.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Boston Qualifying Time Calculator","description":"Find your Boston Marathon qualifying time by age and sex. See current BQ standards, historic cutoff buffers from 2013–2024, and what time you actually need to get in.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/bq-calculator.html"}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GXEPDJH5VC');
+</script>
+<script>
+  (function(){
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+    } catch(e){}
+  })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --surface: #f7f8fa; --surface2: #eef0f4; --border: #e2e5eb;
+    --accent: #006aff; --accent-dim: #4a90d9; --text: #1a1a2e; --text-muted: #6b7280;
+    --blue: #2563eb; --red: #dc2626; --green: #16a34a; --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121218; --surface: #1a1a24; --surface2: #24242f; --border: #2e2e3a;
+    --accent: #4d8eff; --accent-dim: #6ba0e6; --text: #e4e4ea; --text-muted: #9395a1;
+    --blue: #5b8def; --red: #ef4444; --green: #4ade80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
+
+  /* Header */
+  header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  header h1 { margin: 0; line-height: 0; }
+  .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+  .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
+  .theme-toggle:hover { color: var(--text); border-color: var(--accent-dim); }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
+
+  /* Hero band */
+  .hero-band { border-bottom: 1px solid var(--border); background: var(--surface); }
+  .hero-band-inner { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; align-items: center; gap: 40px; }
+  .hero-band-left { flex-shrink: 0; }
+  .hero-band-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 6px; }
+  .hero-band-title { font-family: 'DM Serif Display', serif; font-size: 26px; font-style: italic; color: var(--text); line-height: 1.15; letter-spacing: -0.5px; }
+  .hero-band-title span { color: var(--accent); }
+  .hero-band-divider { width: 1px; align-self: stretch; background: var(--border); flex-shrink: 0; }
+  .hero-band-body { color: var(--text-muted); font-size: 12px; line-height: 1.75; }
+  .hero-band-body strong { color: var(--text); }
+  @media (max-width: 900px) { .hero-band-inner { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; } .hero-band-divider { display: none; } }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 320px 1fr; min-height: calc(100vh - 73px); align-items: start; }
+  .sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; position: sticky; top: 0; max-height: 100vh; overflow-y: auto; }
+  .panel { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+  .section-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; color: var(--text-muted); font-size: 11px; margin-bottom: 3px; }
+  .field input, .field select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-family: 'Inter', sans-serif; font-size: 13px; padding: 7px 10px; outline: none; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,106,255,0.12); }
+  .hint { font-size: 11px; color: var(--text-muted); margin-top: 3px; line-height: 1.5; }
+
+  /* Toggle switch */
+  .input-mode-toggle { display: flex; gap: 0; margin-bottom: 12px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .input-mode-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; padding: 7px 8px; cursor: pointer; transition: background 0.15s, color 0.15s; text-align: center; }
+  .input-mode-btn.active { background: var(--accent); color: #fff; }
+  .input-mode-btn:not(.active):hover { background: var(--surface2); color: var(--text); }
+
+  /* Sidebar BQ display */
+  .bq-sidebar-display { margin-top: 14px; padding: 14px 16px; background: var(--surface2); border-radius: var(--radius); border: 1px solid var(--border); }
+  .bq-sidebar-row { margin-bottom: 8px; }
+  .bq-sidebar-row:last-child { margin-bottom: 0; }
+  .bq-sidebar-sublabel { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+  .bq-sidebar-badge { display: inline-block; font-size: 12px; font-weight: 600; color: var(--accent); background: rgba(0,106,255,0.1); border-radius: 6px; padding: 3px 10px; }
+  .bq-sidebar-time { font-family: 'DM Mono', monospace; font-size: 26px; font-weight: 500; color: var(--text); line-height: 1.1; }
+
+  /* Main */
+  .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
+  .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+  .card-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* BQ target chips */
+  .bq-chips { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .bq-chip { flex: 1; min-width: 155px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; transition: box-shadow 0.15s; }
+  .bq-chip:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+  .bq-chip.accent { border-color: var(--accent); background: rgba(0,106,255,0.06); }
+  .bq-chip-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+  .bq-chip.accent .bq-chip-label { color: var(--accent); opacity: 0.75; }
+  .bq-chip-time { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; color: var(--text); }
+  .bq-chip.accent .bq-chip-time { color: var(--accent); }
+  .bq-chip-tag { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .bq-note { font-size: 11px; color: var(--text-muted); line-height: 1.65; padding: 10px 14px; background: var(--surface2); border-radius: 8px; border-left: 3px solid var(--accent-dim); }
+
+  /* Historic cutoff chart */
+  .cutoff-chart { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+  .cutoff-row { display: grid; grid-template-columns: 44px 1fr 68px; gap: 8px; align-items: center; }
+  .cutoff-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-muted); font-weight: 600; text-align: right; }
+  .cutoff-bar-wrap { background: var(--surface2); border-radius: 4px; height: 22px; position: relative; overflow: hidden; }
+  .cutoff-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; transition: width 0.35s ease; }
+  .cutoff-bar-fill-text { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.9); white-space: nowrap; }
+  .cutoff-bar-cancelled { height: 100%; width: 100%; border-radius: 4px; background: repeating-linear-gradient(90deg, var(--border) 0px, var(--border) 6px, transparent 6px, transparent 12px); display: flex; align-items: center; padding-left: 8px; }
+  .cutoff-bar-cancelled-text { font-size: 10px; color: var(--text-muted); font-style: italic; white-space: nowrap; }
+  .cutoff-val { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text); text-align: right; white-space: nowrap; font-weight: 600; }
+  .cutoff-chart-note { font-size: 11px; color: var(--text-muted); line-height: 1.65; margin-top: 10px; padding: 10px 14px; background: var(--surface2); border-radius: 8px; }
+
+  /* All age groups table */
+  .bq-table-wrap { overflow-x: auto; }
+  .bq-table { width: 100%; border-collapse: collapse; }
+  .bq-table th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); padding: 6px 12px; border-bottom: 1px solid var(--border); font-weight: 600; }
+  .bq-table th:not(:first-child) { text-align: right; }
+  .bq-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 13px; vertical-align: middle; }
+  .bq-table td:not(:first-child) { text-align: right; font-family: 'DM Mono', monospace; font-size: 13px; }
+  .bq-table tr:last-child td { border-bottom: none; }
+  .bq-table tbody tr.row-active td { background: rgba(0,106,255,0.07); font-weight: 600; color: var(--accent); }
+  .bq-table tbody tr.row-active td:first-child { border-left: 3px solid var(--accent); padding-left: 9px; }
+  [data-theme="dark"] .bq-table tbody tr.row-active td { background: rgba(77,142,255,0.12); }
+  .bq-table tbody tr:not(.row-active):hover td { background: var(--surface2); }
+  .you-badge { display: inline-block; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--accent); color: #fff; border-radius: 5px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; font-weight: 600; }
+
+  /* Error state */
+  .empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .site-footer-disclaimer { font-size: 11px; color: var(--text-muted); line-height: 1.6; max-width: 640px; }
+  .site-footer-nav { display: flex; gap: 16px; flex-shrink: 0; }
+  .site-footer-nav a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+  .site-footer-nav a:hover { color: var(--accent-dim); }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--border); }
+    header { padding: 0 20px; }
+    .main { padding: 16px; }
+    .hero-band-inner { padding: 16px 20px; }
+  }
+  @media (max-width: 600px) {
+    .bq-chips { flex-direction: column; }
+    .bq-chip { min-width: unset; }
+  }
+</style>
+<style>
+  body { overflow-x: hidden; }
+  .sidebar, .main { min-width: 0; }
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 36px; height: 36px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer; padding: 9px 10px; margin-left: auto; flex-shrink: 0;
+  }
+  .hamburger span {
+    display: block; width: 16px; height: 1.5px; background: var(--text-muted);
+    border-radius: 2px; transition: transform 0.2s, opacity 0.15s; transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  @media (max-width: 768px) {
+    header { position: relative; flex-wrap: nowrap; flex-direction: row; align-items: center; }
+    .header-banner { max-width: 100%; }
+    .hamburger { display: flex; }
+    .header-nav {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      flex-direction: column; gap: 2px; padding: 8px 12px 16px; z-index: 200;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      max-height: calc(100vh - 60px); overflow-y: auto;
+    }
+    .header-nav.mobile-open { display: flex; }
+    .nav-sep { display: none; }
+    .header-nav > a { padding: 10px 12px; border-radius: 8px; }
+    .nav-dropdown { width: 100%; flex-direction: column; }
+    .nav-dropdown-btn { width: 100%; padding: 10px 12px; justify-content: space-between; }
+    .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+    .nav-dropdown.mobile-open .nav-dropdown-menu {
+      display: flex; flex-direction: column; position: static;
+      box-shadow: none; border: 1px solid var(--border); border-radius: 8px;
+      padding: 4px 0; margin: 2px 0 4px; background: var(--surface);
+    }
+    .nav-caret { transition: transform 0.2s; }
+    .nav-dropdown.mobile-open .nav-caret { transform: rotate(180deg); }
+    .theme-toggle { width: 100%; justify-content: center; margin-top: 6px; }
+    .field input, .field select { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="header-nav" id="headerNav" aria-label="Site navigation">
+    <a href="index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="refinance.html">Refinance Calculator</a>
+        <a href="rent-vs-buy.html">Rent vs Buy</a>
+        <a href="extra-payment.html">Extra Payment vs Invest</a>
+        <a href="rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="monte-carlo.html">Investment Simulator</a>
+        <a href="withdrawal.html">Withdrawal Simulator</a>
+        <a href="fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="roth-conversion.html">Roth Conversion</a>
+        <a href="debt-payoff.html">Debt Payoff</a>
+        <a href="social-security.html">Social Security Break-Even</a>
+        <a href="wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn active">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="race-predictor.html">Race Time Predictor</a>
+        <a href="bq-calculator.html" class="active">BQ Calculator</a>
+        <a href="training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="age-graded-calculator.html">Age Graded Calculator</a>
+        <a href="running-percentile.html">Percentile Calculator</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html">VDOT Tables</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="blog.html">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+
+<div class="hero-band">
+  <div class="hero-band-inner">
+    <div class="hero-band-left">
+      <div class="hero-band-label">Boston Athletic Association</div>
+      <div class="hero-band-title">BQ Time <span>Calculator</span></div>
+    </div>
+    <div class="hero-band-divider"></div>
+    <div class="hero-band-body">
+      Enter your <strong>age and sex</strong> to find your current Boston qualifying standard, what time you
+      realistically need to actually get in based on <strong>recent cutoffs</strong>, and how the cutoff buffer
+      has changed over the past decade.
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="section-label">Your Profile</div>
+
+      <div class="input-mode-toggle">
+        <button class="input-mode-btn active" id="btnMale" onclick="setSex('M')">Male</button>
+        <button class="input-mode-btn" id="btnFemale" onclick="setSex('F')">Female</button>
+      </div>
+
+      <div class="field">
+        <label for="ageInput">Age on race day</label>
+        <input type="number" id="ageInput" min="18" max="90" step="1" value="35" oninput="calculate()">
+      </div>
+      <div class="hint">Standards apply to your age on the day of the Boston Marathon.</div>
+
+      <div class="bq-sidebar-display">
+        <div class="bq-sidebar-row">
+          <div class="bq-sidebar-sublabel">Age Group</div>
+          <div class="bq-sidebar-badge" id="ageGroupBadge">35–39</div>
+        </div>
+        <div class="bq-sidebar-row">
+          <div class="bq-sidebar-sublabel">BQ Standard</div>
+          <div class="bq-sidebar-time" id="bqStandardDisplay">3:00:00</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main" id="mainOutput">
+    <!-- Content injected by JS -->
+  </main>
+</div>
+
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">BQ standards are based on the Boston Athletic Association's current qualifying standards. Cutoff buffers are historical data only &mdash; actual cutoffs vary each year. Always verify current standards at <a href="https://www.baa.org" target="_blank" rel="noopener" style="color:var(--accent-dim);text-decoration:none;">baa.org</a>. This calculator is a general educational tool and does not guarantee Boston Marathon registration acceptance. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored.</p>
+  <nav class="site-footer-nav">
+    <a href="index.html">Home</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+
+<script>
+// ─── Theme toggle ────────────────────────────────────────────────
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var icon = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+  function syncTheme(){
+    var dark = html.getAttribute('data-theme') === 'dark';
+    icon.textContent = dark ? '☀' : '☽';
+    label.textContent = dark ? 'Light' : 'Dark';
+  }
+  syncTheme();
+  btn.addEventListener('click', function(){
+    var dark = html.getAttribute('data-theme') === 'dark';
+    if(dark){ html.removeAttribute('data-theme'); localStorage.setItem('theme','light'); }
+    else { html.setAttribute('data-theme','dark'); localStorage.setItem('theme','dark'); }
+    syncTheme();
+  });
+})();
+
+// ─── BQ Standards (2024+ — 5 min tighter than pre-2024) ──────────
+// All values stored in total seconds
+var BQ_STANDARDS = {
+  M: [
+    { group: '18–34', min: 18, max: 34,  sec: 2*3600 + 55*60 },  // 2:55:00
+    { group: '35–39', min: 35, max: 39,  sec: 3*3600 + 0*60  },  // 3:00:00
+    { group: '40–44', min: 40, max: 44,  sec: 3*3600 + 5*60  },  // 3:05:00
+    { group: '45–49', min: 45, max: 49,  sec: 3*3600 + 15*60 },  // 3:15:00
+    { group: '50–54', min: 50, max: 54,  sec: 3*3600 + 20*60 },  // 3:20:00
+    { group: '55–59', min: 55, max: 59,  sec: 3*3600 + 30*60 },  // 3:30:00
+    { group: '60–64', min: 60, max: 64,  sec: 3*3600 + 45*60 },  // 3:45:00
+    { group: '65–69', min: 65, max: 69,  sec: 4*3600 + 5*60  },  // 4:05:00
+    { group: '70–74', min: 70, max: 74,  sec: 4*3600 + 30*60 },  // 4:30:00
+    { group: '75–79', min: 75, max: 79,  sec: 4*3600 + 55*60 },  // 4:55:00
+    { group: '80+',         min: 80, max: 999, sec: 5*3600 + 25*60 }   // 5:25:00
+  ],
+  F: [
+    { group: '18–34', min: 18, max: 34,  sec: 3*3600 + 25*60 },  // 3:25:00
+    { group: '35–39', min: 35, max: 39,  sec: 3*3600 + 30*60 },  // 3:30:00
+    { group: '40–44', min: 40, max: 44,  sec: 3*3600 + 35*60 },  // 3:35:00
+    { group: '45–49', min: 45, max: 49,  sec: 3*3600 + 45*60 },  // 3:45:00
+    { group: '50–54', min: 50, max: 54,  sec: 3*3600 + 50*60 },  // 3:50:00
+    { group: '55–59', min: 55, max: 59,  sec: 4*3600 + 0*60  },  // 4:00:00
+    { group: '60–64', min: 60, max: 64,  sec: 4*3600 + 15*60 },  // 4:15:00
+    { group: '65–69', min: 65, max: 69,  sec: 4*3600 + 35*60 },  // 4:35:00
+    { group: '70–74', min: 70, max: 74,  sec: 5*3600 + 0*60  },  // 5:00:00
+    { group: '75–79', min: 75, max: 79,  sec: 5*3600 + 25*60 },  // 5:25:00
+    { group: '80+',         min: 80, max: 999, sec: 5*3600 + 55*60 }   // 5:55:00
+  ]
+};
+
+// ─── Historic cutoff data: seconds faster than BQ standard needed ─
+var CUTOFF_DATA = [
+  { year: 2013, seconds: 62 },
+  { year: 2014, seconds: 98 },
+  { year: 2015, seconds: 62 },
+  { year: 2016, seconds: 148 },
+  { year: 2017, seconds: 129 },
+  { year: 2018, seconds: 203 },
+  { year: 2019, seconds: 292 },
+  { year: 2020, seconds: null },   // cancelled COVID
+  { year: 2021, seconds: 467 },
+  { year: 2022, seconds: 62 },
+  { year: 2023, seconds: 367 },
+  { year: 2024, seconds: 329 }
+];
+
+// Max value for bar scaling
+var CHART_MAX = 467;
+// 2022–2024 average
+var AVG_RECENT_SEC = Math.round((62 + 367 + 329) / 3); // 253
+
+// ─── State ───────────────────────────────────────────────────────
+var currentSex = 'M';
+
+function setSex(s) {
+  currentSex = s;
+  document.getElementById('btnMale').classList.toggle('active', s === 'M');
+  document.getElementById('btnFemale').classList.toggle('active', s === 'F');
+  calculate();
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────
+function fmtTime(totalSeconds) {
+  var s = Math.round(totalSeconds);
+  if (s < 0) s = 0;
+  var h = Math.floor(s / 3600);
+  var rem = s % 3600;
+  var m = Math.floor(rem / 60);
+  var sec = rem % 60;
+  return h + ':' + (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function fmtMinSec(totalSeconds) {
+  var s = Math.round(Math.abs(totalSeconds));
+  var m = Math.floor(s / 60);
+  var sec = s % 60;
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function getAgeGroup(age, sex) {
+  var list = BQ_STANDARDS[sex];
+  for (var i = 0; i < list.length; i++) {
+    if (age >= list[i].min && age <= list[i].max) return list[i];
+  }
+  return list[list.length - 1];
+}
+
+// Bar color: green for small buffers, orange/red for large
+function barColor(seconds) {
+  var ratio = seconds / CHART_MAX;
+  var r, g, b;
+  if (ratio <= 0.5) {
+    var t = ratio * 2; // 0..1
+    r = Math.round(34  + (249 - 34)  * t);
+    g = Math.round(197 + (115 - 197) * t);
+    b = Math.round(94  + (22  - 94)  * t);
+  } else {
+    var t2 = (ratio - 0.5) * 2; // 0..1
+    r = Math.round(249 + (220 - 249) * t2);
+    g = Math.round(115 + (38  - 115) * t2);
+    b = Math.round(22  + (38  - 22)  * t2);
+  }
+  return 'rgb(' + r + ',' + g + ',' + b + ')';
+}
+
+// ─── Main calculate ───────────────────────────────────────────────
+function calculate() {
+  var age = parseInt(document.getElementById('ageInput').value);
+  if (isNaN(age)) age = 35;
+  age = Math.max(18, Math.min(90, age));
+
+  var grp = getAgeGroup(age, currentSex);
+  var bqSec  = grp.sec;
+  var safeSec  = bqSec - 300;  // -5:00
+  var vSafeSec = bqSec - 420;  // -7:00
+
+  // Update sidebar display
+  document.getElementById('ageGroupBadge').textContent = grp.group;
+  document.getElementById('bqStandardDisplay').textContent = fmtTime(bqSec);
+
+  // ── Card 1: Your BQ Target ────────────────────────────────────
+  var card1 =
+    '<div class="card">' +
+      '<div class="card-title">Your BQ Target</div>' +
+      '<div class="bq-chips">' +
+        '<div class="bq-chip">' +
+          '<div class="bq-chip-label">Minimum Qualifier</div>' +
+          '<div class="bq-chip-time">' + fmtTime(bqSec) + '</div>' +
+          '<div class="bq-chip-tag">Technically qualified</div>' +
+        '</div>' +
+        '<div class="bq-chip accent">' +
+          '<div class="bq-chip-label">Safe Target</div>' +
+          '<div class="bq-chip-time">' + fmtTime(safeSec) + '</div>' +
+          '<div class="bq-chip-tag">Beat standard by 5:00</div>' +
+        '</div>' +
+        '<div class="bq-chip">' +
+          '<div class="bq-chip-label">High Confidence</div>' +
+          '<div class="bq-chip-time">' + fmtTime(vSafeSec) + '</div>' +
+          '<div class="bq-chip-tag">Beat standard by 7:00</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="bq-note">Historically, runners who beat the standard by 4–6 minutes get in. The cutoff buffer varies year to year — always target at least 5 minutes faster than your BQ standard.</div>' +
+    '</div>';
+
+  // ── Card 2: Historic Cutoff Buffers ───────────────────────────
+  var avgFmt = fmtMinSec(AVG_RECENT_SEC);
+
+  var rows = '';
+  CUTOFF_DATA.forEach(function(d) {
+    if (d.seconds === null) {
+      rows +=
+        '<div class="cutoff-row">' +
+          '<div class="cutoff-year">' + d.year + '</div>' +
+          '<div class="cutoff-bar-wrap"><div class="cutoff-bar-cancelled"><span class="cutoff-bar-cancelled-text">Race cancelled — COVID</span></div></div>' +
+          '<div class="cutoff-val" style="color:var(--text-muted);">—</div>' +
+        '</div>';
+    } else {
+      var pct = Math.max(2, (d.seconds / CHART_MAX) * 100);
+      var color = barColor(d.seconds);
+      var label = fmtMinSec(d.seconds);
+      var showInBar = pct >= 20;
+      rows +=
+        '<div class="cutoff-row">' +
+          '<div class="cutoff-year">' + d.year + '</div>' +
+          '<div class="cutoff-bar-wrap">' +
+            '<div class="cutoff-bar-fill" style="width:' + pct.toFixed(1) + '%;background:' + color + ';">' +
+              (showInBar ? '<span class="cutoff-bar-fill-text">−' + label + '</span>' : '') +
+            '</div>' +
+          '</div>' +
+          '<div class="cutoff-val" style="color:' + color + ';">' + (showInBar ? '' : '−') + label + '</div>' +
+        '</div>';
+    }
+  });
+
+  var card2 =
+    '<div class="card">' +
+      '<div class="card-title">Historic Cutoff Buffers</div>' +
+      '<div class="cutoff-chart">' + rows + '</div>' +
+      '<div class="cutoff-chart-note">' +
+        '<strong>2022–2024 average cutoff: −' + avgFmt + '</strong> faster than BQ standard. ' +
+        'Cutoff is how many seconds faster than your age-group BQ standard you needed to run to get in. ' +
+        '2021 was the return year after COVID cancellation, which produced an unusually large cutoff buffer.' +
+      '</div>' +
+    '</div>';
+
+  // ── Card 3: All Age Groups Table ──────────────────────────────
+  var sexLabel = currentSex === 'M' ? 'Male' : 'Female';
+  var standards = BQ_STANDARDS[currentSex];
+
+  var tableRows = standards.map(function(s) {
+    var isActive = (age >= s.min && age <= s.max);
+    var rc = isActive ? ' class="row-active"' : '';
+    return '<tr' + rc + '>' +
+      '<td>' + s.group + (isActive ? '<span class="you-badge">you</span>' : '') + '</td>' +
+      '<td>' + fmtTime(s.sec) + '</td>' +
+      '<td>' + fmtTime(s.sec - 300) + '</td>' +
+      '<td>' + fmtTime(s.sec - 420) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  var card3 =
+    '<div class="card">' +
+      '<div class="card-title">All Age Groups — ' + sexLabel + '</div>' +
+      '<div class="bq-table-wrap">' +
+        '<table class="bq-table">' +
+          '<thead><tr>' +
+            '<th>Age Group</th>' +
+            '<th>BQ Standard</th>' +
+            '<th>Safe Target (−5:00)</th>' +
+            '<th>High Confidence (−7:00)</th>' +
+          '</tr></thead>' +
+          '<tbody>' + tableRows + '</tbody>' +
+        '</table>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById('mainOutput').innerHTML = card1 + card2 + card3;
+}
+
+// ─── Init ─────────────────────────────────────────────────────────
+calculate();
+</script>
+<script>
+(function() {
+  var h = document.getElementById('hamburger');
+  var n = document.getElementById('headerNav');
+  if (!h || !n) return;
+  h.addEventListener('click', function() {
+    var open = n.classList.toggle('mobile-open');
+    h.classList.toggle('open', open);
+    h.setAttribute('aria-expanded', String(open));
+  });
+  n.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      n.classList.remove('mobile-open');
+      h.classList.remove('open');
+      h.setAttribute('aria-expanded', 'false');
+    });
+  });
+  n.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (window.innerWidth > 768) return;
+      btn.closest('.nav-dropdown').classList.toggle('mobile-open');
+    });
+  });
+})();
+</script>
+</body>
+</html>
