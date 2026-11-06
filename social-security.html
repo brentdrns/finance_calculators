@@ -65,25 +65,30 @@ header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex;
 header h1 { margin: 0; line-height: 0; }
 .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-.header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
 .header-nav > a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
 .header-nav > a:hover { color: var(--text); background: var(--surface2); }
 .header-nav > a.active { color: #fff; background: var(--accent); }
-.nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
 
 /* ── Nav dropdowns ── */
-.nav-dropdown { position: relative; display: flex; align-items: center; }
-.nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
-.nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
-.nav-dropdown-btn.active { color: #fff; background: var(--accent); }
-.nav-caret { font-size: 9px; opacity: 0.6; }
-.nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
-.nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
-.nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
-.nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
-.nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
-  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
-  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
 
 /* ── Theme toggle ── */
 .theme-toggle { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 12px; padding: 5px 12px; cursor: pointer; transition: color 0.15s, background 0.15s, border-color 0.15s; display: flex; align-items: center; gap: 5px; }
@@ -207,25 +212,45 @@ header h1 { margin: 0; line-height: 0; }
 }
 </style>
 <style>
-/* ===== MOBILE ===== */
+/* ===== MOBILE NAV ===== */
 html, body { overflow-x: hidden; }
-.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; padding: 6px; background: none; border: none; cursor: pointer; z-index: 200; }
-.hamburger span { display: block; width: 22px; height: 2px; background: var(--text, #1a1a2e); border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+.hamburger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; padding: 9px 10px; margin-left: auto; flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 16px; height: 1.5px; background: var(--text-muted);
+  border-radius: 2px; transition: transform 0.2s, opacity 0.15s; transform-origin: center;
+}
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 @media (max-width: 768px) {
-  .hamburger { display: flex; }
-  header { position: relative; flex-direction: row; align-items: center; flex-wrap: nowrap; }
+  header { position: relative; flex-wrap: nowrap; flex-direction: row; align-items: center; }
   .header-banner { max-width: 100%; }
-  .header-nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg, #fff); border-bottom: 1px solid var(--border, #e0e0e0); padding: 12px 0; z-index: 100; }
+  .hamburger { display: flex; }
+  .header-nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    flex-direction: column; gap: 2px; padding: 8px 12px 16px; z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    max-height: calc(100vh - 60px); overflow-y: auto;
+  }
   .header-nav.mobile-open { display: flex; }
-  .header-nav .nav-sep { display: none; }
-  .header-nav .nav-dropdown { width: 100%; }
-  .header-nav .nav-dropdown-btn { width: 100%; text-align: left; padding: 10px 20px; }
-  .header-nav .nav-dropdown-menu { position: static; box-shadow: none; border: none; padding: 0 0 0 20px; display: none; }
-  .header-nav .nav-dropdown.mobile-open .nav-dropdown-menu { display: block; }
-  .header-nav a:not(.nav-dropdown-menu a) { display: block; padding: 10px 20px; }
+  .nav-sep { display: none; }
+  .header-nav > a { padding: 10px 12px; border-radius: 8px; }
+  .nav-dropdown { width: 100%; flex-direction: column; }
+  .nav-dropdown-btn { width: 100%; padding: 10px 12px; justify-content: space-between; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+  .nav-dropdown.mobile-open .nav-dropdown-menu {
+    display: flex; flex-direction: column; position: static;
+    box-shadow: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 4px 0; margin: 2px 0 4px; background: var(--surface);
+  }
+  .nav-caret { transition: transform 0.2s; }
+  .nav-dropdown.mobile-open .nav-caret { transform: rotate(180deg); }
+  .theme-toggle { width: 100%; justify-content: center; margin-top: 6px; }
   .field input, .field select { font-size: 16px; }
 }
 </style>
@@ -283,6 +308,7 @@ html, body { overflow-x: hidden; }
         <a href="running-percentile.html">Percentile Calculator</a>
         <div class="nav-dropdown-divider"></div>
         <a href="pace-converter.html">Pace Converter</a>
+        <a href="pace-planner.html">Race Pace Planner</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
         <div class="nav-dropdown-divider"></div>
@@ -319,7 +345,7 @@ html, body { overflow-x: hidden; }
 
     <div class="field">
       <label for="birthYear">Birth year</label>
-      <input type="number" id="birthYear" min="1943" max="1975" value="1965" step="1" oninput="updateFRAHint(); calculate()">
+      <input type="number" id="birthYear" min="1943" max="1975" value="1965" step="1" oninput="updateFRAHint(); recalculate()">
       <div class="hint" id="fraHint">Your full retirement age (FRA) is <strong id="fraDisplay">67</strong>.</div>
     </div>
 
@@ -427,6 +453,9 @@ html, body { overflow-x: hidden; }
 
   </main>
 </div>
+
+<div id="siteFeedback"></div>
+<script src="feedback.js" defer></script>
 
 <footer class="site-footer">
   <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
@@ -542,7 +571,7 @@ function cumulativeSeries(claimAge, fraBenefit, cola, taxRate, useTax, maxAge, f
 // Get cumulative at a specific age (returns 0 if before claimAge)
 function getCumulativeAtAge(series, claimAge, targetAge) {
   if (targetAge < claimAge) return 0;
-  var idx = targetAge - claimAge;
+  var idx = Math.floor(targetAge - claimAge + 1e-9);   // claim ages can be fractional (e.g. FRA of 66 and 8 months)
   if (idx >= series.length) return series[series.length - 1].cumulative;
   return series[idx].cumulative;
 }
@@ -556,7 +585,7 @@ function findBreakEven(earlyAge, lateAge, fraBenefit, cola, taxRate, useTax, max
   for (var age = lateAge; age <= maxAge; age++) {
     var earlyTotal = getCumulativeAtAge(earlySeries, earlyAge, age);
     var lateTotal = getCumulativeAtAge(lateSeries, lateAge, age);
-    if (lateTotal >= earlyTotal) return age;
+    if (lateTotal >= earlyTotal) return Math.round(age);   // lateAge can be a fractional FRA (e.g. 66 and 8 months)
   }
   return null;
 }
@@ -794,13 +823,15 @@ function renderChart() {
 // UI / Results
 // ─────────────────────────────────────────────
 function getInputs() {
-  var currentAge = parseInt(document.getElementById('currentAge').value) || 60;
-  var birthYear = parseInt(document.getElementById('birthYear').value) || 1965;
+  // read numbers directly, ignoring thousands separators (inputs are comma-formatted as you type)
+  function num(id) { return Number(String(document.getElementById(id).value).replace(/,/g, '')); }
+  var currentAge = 60;   // chart starts at 60, two years before the earliest claiming age
+  var birthYear = Math.round(num('birthYear')) || 1965;
   var fra = getFRA(birthYear);
-  var fraBenefit = parseFloat(document.getElementById('fraBenefit').value) || 2000;
-  var cola = parseFloat(document.getElementById('cola').value) || 2.5;
-  var investReturn = parseFloat(document.getElementById('investReturn').value) || 7;
-  var taxRate = parseFloat(document.getElementById('taxRate').value) || 15;
+  var fraBenefit = num('fraBenefit') || 2000;
+  var cola = num('cola') || 2.5;
+  var investReturn = num('investReturn') || 7;
+  var taxRate = num('taxRate') || 15;
   var useTax = document.getElementById('taxToggle').checked;
   var lifeExpectancy = parseInt(document.getElementById('lifeExpectancy').value) || 85;
 
@@ -854,9 +885,9 @@ function renderVerdict(inputs) {
   var statsHtml = '';
   var statAges = [62, 67, 70].filter(function(a) { return true; }); // always show these 3
   var statData = [
-    { label: 'Monthly at 62', value: fmt(m62), sub: Math.round(benefitFactor(62)*100) + '% of FRA benefit' },
+    { label: 'Monthly at 62', value: fmt(m62), sub: Math.round(benefitFactor(62, fra)*100) + '% of FRA benefit' },
     { label: 'Monthly at 67 (FRA)', value: fmt(m67), sub: '100% of FRA benefit' },
-    { label: 'Monthly at 70', value: fmt(m70), sub: Math.round(benefitFactor(70)*100) + '% of FRA benefit' }
+    { label: 'Monthly at 70', value: fmt(m70), sub: Math.round(benefitFactor(70, fra)*100) + '% of FRA benefit' }
   ];
   statData.forEach(function(s) {
     statsHtml += '<div class="stat-box"><div class="stat-label">' + s.label + '</div><div class="stat-value">' + s.value + '</div><div class="stat-sub">' + s.sub + '</div></div>';
@@ -963,7 +994,7 @@ document.getElementById('taxToggle').addEventListener('change', function() {
   recalculate();
 });
 
-['currentAge','fraBenefit','cola','investReturn','taxRate'].forEach(function(id) {
+['fraBenefit','cola','investReturn','taxRate'].forEach(function(id) {
   document.getElementById(id).addEventListener('input', recalculate);
 });
 

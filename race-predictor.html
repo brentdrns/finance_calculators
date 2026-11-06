@@ -8,23 +8,23 @@
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
-<title>Marathon Race Time Predictor — Boston, NYC, Chicago & More | Abel's Calculators</title>
-<meta name="description" content="Predict your time for Boston, NYC, Chicago, Berlin, Tokyo, and 15 other major marathons. VDOT-based with course elevation and race-day weather pre-filled for each race profile.">
+<title>Marathon Time Predictor & Pace Plan: Boston, NYC & 50+ Races | Abel's Calculators</title>
+<meta name="description" content="Predict your marathon time from a recent race, then get a hill-adjusted pace plan for Boston, NYC, London, Berlin, Chicago, Tokyo and 40+ more real course profiles.">
 <meta name="author" content="Abel's Calculators">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://abelscalculators.com/race-predictor.html">
-<meta property="og:title" content="Marathon Race Time Predictor — 20 Course Profiles With Elevation & Weather">
-<meta property="og:description" content="Enter a recent PR and get predicted finish times for any distance. Choose from 20 major marathon profiles — Boston, NYC, Chicago, Berlin, Tokyo, and more — with elevation and historical race-day weather pre-filled.">
+<meta property="og:title" content="Marathon Time Predictor & Race-Day Pace Plan — 49 Real Course Profiles">
+<meta property="og:description" content="Enter a recent PR and get predicted finish times for any distance. Pick one of 49 measured marathon courses — Boston, NYC, London, Berlin, Tokyo and more — for an elevation-adjusted race-day pace plan.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://abelscalculators.com/race-predictor.html">
 <meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
 <meta property="og:image:alt" content="Abel's Calculators — VDOT marathon race time predictor with course profiles, elevation, and weather adjustment">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Marathon Race Time Predictor — Boston, NYC, Chicago & More">
-<meta name="twitter:description" content="VDOT-based predictions with built-in course profiles for 20 major marathons. Elevation and race-day weather included for each race.">
+<meta name="twitter:title" content="Marathon Time Predictor & Pace Plan — Boston, NYC & 50+ Races">
+<meta name="twitter:description" content="VDOT-based predictions plus a hill-adjusted race-day pace plan on measured course profiles for 49 marathons.">
 <meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Marathon Race Time Predictor","description":"Predict your finish time for Boston, NYC, Chicago, Berlin, Tokyo, and 15 other major marathons using Jack Daniels' VDOT system. Includes course elevation profiles and historical race-day weather for 20 major marathons.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/race-predictor.html"}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Marathon Race Time Predictor","description":"Predict your finish time from a recent race using Jack Daniels' VDOT system, adjusted for training mileage, course elevation and race-day weather. Includes measured elevation profiles for 49 marathons with an elevation-adjusted race-day pace plan for each.","applicationCategory":"SportsApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"url":"https://abelscalculators.com/race-predictor.html","featureList":["VDOT race time prediction for any distance","Training mileage adjustment","Course elevation adjustment with measured profiles for 49 marathons","Race-day weather adjustment","Elevation-adjusted pace plan with Garmin watch export for each profiled marathon"]}
 </script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
@@ -122,6 +122,19 @@
   /* Main */
   .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
   .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+  .plan-card { padding-left: 0; padding-right: 0; padding-bottom: 0; overflow: hidden; scroll-margin-top: 12px; }
+  .plan-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; padding: 0 24px 4px; }
+  .plan-title { margin: 0; font-weight: 400; font-family: inherit; line-height: 1.4; }
+  .plan-sub { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin: 4px 0 0; max-width: 640px; }
+  .plan-open { font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); }
+  .plan-open:hover { border-color: var(--accent); }
+  .plan-frame { display: block; width: 100%; height: 1100px; border: 0; background: transparent; }
+  .share-row { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .share-btn { display: inline-flex; align-items: center; gap: 7px; font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; cursor: pointer; min-height: 36px; }
+  .share-btn:hover, .share-btn:focus-visible { border-color: var(--accent); outline: none; }
+  .share-hint { font-size: 11px; color: var(--text-muted); line-height: 1.5; flex: 1; min-width: 200px; }
+  .plan-jump { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  @media (max-width: 600px) { .plan-head { padding: 0 16px 4px; } }
 
   .verdict-badge { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; margin-bottom: 8px; font-weight: 500; }
   .badge-blue { background: rgba(37,99,235,0.12); color: var(--blue); }
@@ -330,6 +343,7 @@
         <a href="running-percentile.html">Percentile Calculator</a>
         <div class="nav-dropdown-divider"></div>
         <a href="pace-converter.html">Pace Converter</a>
+        <a href="pace-planner.html">Race Pace Planner</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
         <div class="nav-dropdown-divider"></div>
@@ -353,7 +367,7 @@
     </div>
     <div class="hero-band-divider"></div>
     <p class="hero-band-body">
-      Based on <strong>Jack Daniels' VDOT system</strong> — the gold standard for translating a known race performance into predictions at any distance. Enter a recent PR and your weekly mileage, then choose from <strong>20 major marathon profiles</strong> — Boston, NYC, Chicago, Berlin, Tokyo, and more — to auto-fill course elevation and historical race-day weather. Or enter any custom distance and conditions manually. <strong>VDOT</strong> is your aerobic capacity expressed as a single number — the higher, the faster.
+      Based on <strong>Jack Daniels' VDOT system</strong> — the gold standard for translating a known race performance into predictions at any distance. Enter a recent PR and your weekly mileage, then choose from <strong>54 marathons</strong> — Boston, NYC, Chicago, Berlin, Tokyo, and more — to auto-fill course elevation and race-day weather. For the 49 with a measured course profile you also get a <strong>race-day pace plan</strong> with hill-adjusted splits. Or enter any custom distance and conditions manually. <strong>VDOT</strong> is your aerobic capacity expressed as a single number — the higher, the faster.
     </p>
   </div>
 </section>
@@ -625,7 +639,23 @@
       </div>
     </div>
     <div class="penalty-note" id="penaltyNote" style="display:none"></div>
+    <div class="share-row">
+      <button type="button" class="share-btn" onclick="copyPredLink(this)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg> Copy link to this prediction</button>
+      <span class="share-hint">Your inputs and pace plan settings are saved in this page's address, so you can bookmark it and come back later.</span>
+    </div>
   </div>
+
+  <!-- Race-day pace plan (embedded Race Pace Planner) -->
+  <section class="card plan-card" id="planCard" style="display:none" aria-labelledby="planTitle">
+    <div class="plan-head">
+      <div>
+        <h2 class="chart-title plan-title" id="planTitle">Race-Day Pace Plan</h2>
+        <p class="plan-sub" id="planSub"></p>
+      </div>
+      <a class="plan-open" id="planOpenLink" href="pace-planner.html" target="_blank" rel="noopener">Open in full planner ↗</a>
+    </div>
+    <iframe id="planFrame" class="plan-frame" title="Race pace plan for the selected marathon"></iframe>
+  </section>
 
   <!-- All Distances Table Card -->
   <div class="card" id="tableCard" style="display:none">
@@ -652,7 +682,8 @@
       <p><strong>VDOT (Jack Daniels)</strong> is your aerobic capacity expressed as an equivalent VO2max value derived from a race performance. It's calculated from both your pace (how fast you ran relative to the distance) and the fractional utilization of VO2max at that effort level. Two runners with the same VDOT are aerobically equivalent and should predict nearly identical times at any distance — differences in results come from specificity of training, pacing, and course conditions.</p>
       <p><strong>Mileage adjustment</strong> accounts for the fact that VDOT from a 5K doesn't perfectly translate to marathon performance unless you're training at marathon-specific mileage. Under-trained runners see a larger gap between VDOT-predicted times and actual performance at longer distances. The penalty scales with how much your weekly mileage falls below the ideal for your target race, and how much longer the target is vs your PR distance. It's capped at 10% and only applies when the target is longer than the PR and both are beyond 10K.</p>
       <p><strong>Elevation adjustment</strong> normalizes race times to a flat-equivalent effort. Each 1% average uphill grade adds roughly <span class="hl">+1.2%</span> to your pace, while each 1% average downhill grade saves only <span class="hl-g">-0.6%</span> — uphills hurt more than downhills help. Your PR time is converted to a flat-equivalent time using your PR course's elevation, then VDOT is computed from that. The predicted time is then adjusted upward by your target course's elevation factor.</p>
-      <p><strong>Weather adjustment</strong> applies a heat penalty when temperature exceeds ~55&deg;F, based on research by Ely et al. (2007). Every degree above 55&deg;F adds approximately <span class="hl">+0.3%</span> to finish time, with additional compounding for humidity above 60%. At 70&deg;F / 70% humidity, expect roughly a <span class="hl">+5&ndash;6%</span> slowdown versus ideal conditions. Cold weather has a smaller effect and is not penalized here. Race profiles pre-fill historical averages for each event — override them freely for your actual forecast.</p>
+      <p><strong>Weather adjustment</strong> applies a heat penalty when temperature exceeds ~55&deg;F, based on research by Ely et al. (2007). Every degree above 55&deg;F adds approximately <span class="hl">+0.3%</span> to finish time, with additional compounding for humidity above 60%. At 70&deg;F / 70% humidity, expect roughly a <span class="hl">+5&ndash;6%</span> slowdown versus ideal conditions. Cold weather has a smaller effect and is not penalized here. Race profiles pre-fill historical averages where we have them — override them freely for your actual forecast.</p>
+      <p><strong>Race-day pace plan.</strong> For the 49 marathons with a measured course profile, the predictor also builds a pacing plan at your predicted finish time using the <a href="pace-planner.html" style="color:var(--accent)">Race Pace Planner</a>. The plan slows you on climbs and speeds you up on descents while still adding up to your predicted time. You can split it by mile or by grade, adjust how hard to push the hills, and export it to a Garmin watch workout, a printable pace band, or CSV. Course gain and loss for these races come from the same measured profiles.</p>
       <p><strong>Formula sources:</strong> Jack Daniels, <em>Daniels&rsquo; Running Formula</em>. The VDOT model was originally published in <em>Medicine &amp; Science in Sports</em> (Daniels &amp; Gilbert, 1979). Weather model: Ely et al. (2007), <em>Medicine &amp; Science in Sports &amp; Exercise</em>. Predictions are estimates — individual performance varies based on pacing, fueling, training, and race-day conditions.</p>
     </div>
   </div>
@@ -669,6 +700,9 @@
 </main>
 </div>
 
+<div id="siteFeedback"></div>
+<script src="feedback.js" defer></script>
+
 <footer class="site-footer">
   <p class="site-footer-disclaimer">For informational and educational purposes only. Not medical or professional coaching advice. Predictions are estimates based on Jack Daniels&rsquo; VDOT model with adjustments for training mileage, course elevation, and race-day weather. Individual performance varies based on pacing, fueling, health, and race-day conditions. Abel&rsquo;s Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed running coach or medical professional before making training decisions.</p>
   <nav class="site-footer-nav">
@@ -679,6 +713,7 @@
   </nav>
 </footer>
 
+<script src="pace-planner-courses.js"></script>
 <script>
 // ─── Theme toggle ───────────────────────────────────────────────────────────
 (function(){
@@ -720,27 +755,75 @@ const DISTANCES = [
 // ─── Race profiles ───────────────────────────────────────────────────────────
 const RACE_PROFILES = [
   { name: 'Custom',                     gain: null, loss: null, tempF: null, humidity: null, note: null },
-  { name: 'Boston Marathon',            gain: 740,  loss: 1450, tempF: 50,   humidity: 62,   note: 'Net downhill overall, but famous for rolling hills and Heartbreak Hill at mile 20.' },
-  { name: 'New York City Marathon',     gain: 800,  loss: 800,  tempF: 52,   humidity: 65,   note: 'Five bridge crossings and rolling pavement. The back half is harder than it looks.' },
-  { name: 'Chicago Marathon',           gain: 100,  loss: 100,  tempF: 54,   humidity: 62,   note: 'Extremely flat and fast. One of the best courses for a marathon PR.' },
-  { name: 'Berlin Marathon',            gain: 100,  loss: 100,  tempF: 62,   humidity: 65,   note: 'The flattest major marathon. World records have been set here multiple times.' },
-  { name: 'London Marathon',            gain: 250,  loss: 250,  tempF: 54,   humidity: 68,   note: 'Mostly flat course through central London. Iconic finish in The Mall.' },
-  { name: 'Tokyo Marathon',             gain: 200,  loss: 200,  tempF: 46,   humidity: 55,   note: 'Flat course through central Tokyo. Cool early-March conditions favor fast times.' },
-  { name: 'LA Marathon',                gain: 900,  loss: 1100, tempF: 64,   humidity: 62,   note: 'Dodger Stadium to Santa Monica. Net downhill but significant rolling elevation.' },
-  { name: 'Marine Corps Marathon',      gain: 700,  loss: 700,  tempF: 56,   humidity: 65,   note: 'Rolling hills through Washington D.C. monuments. Popular military and charity race.' },
-  { name: 'Philadelphia Marathon',      gain: 200,  loss: 200,  tempF: 48,   humidity: 58,   note: 'Mostly flat through Philly and Fairmount Park. Fast late-November conditions.' },
-  { name: 'Houston Marathon',           gain: 80,   loss: 80,   tempF: 52,   humidity: 82,   note: 'Very flat but notoriously humid. Watch the dew point — it often feels warmer than it is.' },
-  { name: 'San Francisco Marathon',     gain: 1800, loss: 1800, tempF: 58,   humidity: 78,   note: 'Very hilly. Crosses the Golden Gate Bridge. Significant total elevation and morning fog.' },
+  { slug: 'boston', name: 'Boston Marathon',            gain: 740,  loss: 1450, tempF: 50,   humidity: 62,   note: 'Net downhill overall, but famous for rolling hills and Heartbreak Hill at mile 20.' },
+  { slug: 'nyc', name: 'New York City Marathon',     gain: 800,  loss: 800,  tempF: 52,   humidity: 65,   note: 'Five bridge crossings and rolling pavement. The back half is harder than it looks.' },
+  { slug: 'chicago', name: 'Chicago Marathon',           gain: 100,  loss: 100,  tempF: 54,   humidity: 62,   note: 'Extremely flat and fast. One of the best courses for a marathon PR.' },
+  { slug: 'berlin', name: 'Berlin Marathon',            gain: 100,  loss: 100,  tempF: 62,   humidity: 65,   note: 'The flattest major marathon. World records have been set here multiple times.' },
+  { slug: 'london', name: 'London Marathon',            gain: 250,  loss: 250,  tempF: 54,   humidity: 68,   note: 'Mostly flat course through central London. Iconic finish in The Mall.' },
+  { slug: 'tokyo', name: 'Tokyo Marathon',             gain: 200,  loss: 200,  tempF: 46,   humidity: 55,   note: 'Flat course through central Tokyo. Cool early-March conditions favor fast times.' },
+  { slug: 'los-angeles', name: 'LA Marathon',                gain: 900,  loss: 1100, tempF: 64,   humidity: 62,   note: 'Dodger Stadium to Century City. Net downhill, with rolling climbs through Hollywood and Beverly Hills.' },
+  { slug: 'marine-corps', name: 'Marine Corps Marathon',      gain: 700,  loss: 700,  tempF: 56,   humidity: 65,   note: 'Rolling hills through Washington D.C. monuments. Popular military and charity race.' },
+  { slug: 'philadelphia', name: 'Philadelphia Marathon',      gain: 200,  loss: 200,  tempF: 48,   humidity: 58,   note: 'Mostly flat through Philly and Fairmount Park. Fast late-November conditions.' },
+  { slug: 'houston', name: 'Houston Marathon',           gain: 80,   loss: 80,   tempF: 52,   humidity: 82,   note: 'Very flat but notoriously humid. Watch the dew point — it often feels warmer than it is.' },
+  { slug: 'san-francisco', name: 'San Francisco Marathon',     gain: 1800, loss: 1800, tempF: 58,   humidity: 78,   note: 'Very hilly. Crosses the Golden Gate Bridge. Significant total elevation and morning fog.' },
   { name: 'Portland Marathon',          gain: 400,  loss: 400,  tempF: 52,   humidity: 72,   note: 'Mostly flat with some moderate hills through Portland neighborhoods.' },
   { name: 'Seattle Marathon',           gain: 600,  loss: 600,  tempF: 48,   humidity: 72,   note: 'Some hills and often wet. Cool late-November conditions.' },
   { name: 'Denver Colfax Marathon',     gain: 400,  loss: 400,  tempF: 56,   humidity: 45,   note: 'Run at 5,280ft altitude — expect an additional 4–6% aerobic penalty from altitude not captured here.' },
-  { name: 'Big Sur Marathon',           gain: 2000, loss: 2000, tempF: 56,   humidity: 72,   note: 'Point Lobos to Carmel. One of the most scenic and challenging marathons.' },
-  { name: 'Twin Cities Marathon',       gain: 400,  loss: 500,  tempF: 50,   humidity: 65,   note: 'Scenic point-to-point through Minneapolis–St. Paul with a slight net downhill.' },
+  { slug: 'big-sur', name: 'Big Sur Marathon',           gain: 2000, loss: 2000, tempF: 56,   humidity: 72,   note: 'Big Sur to Carmel along Highway 1, with the long climb to Hurricane Point around miles 10–12. One of the most scenic and challenging marathons.' },
+  { slug: 'twin-cities', name: 'Twin Cities Marathon',       gain: 400,  loss: 500,  tempF: 50,   humidity: 65,   note: 'Scenic point-to-point through Minneapolis–St. Paul with a slight net downhill.' },
   { name: 'Walt Disney World Marathon', gain: 200,  loss: 200,  tempF: 68,   humidity: 82,   note: 'Flat course but January Florida heat and humidity are a significant factor.' },
   { name: "Nashville Rock 'n' Roll",    gain: 1400, loss: 1400, tempF: 62,   humidity: 68,   note: 'Very hilly course through Nashville neighborhoods. Loud and festive.' },
-  { name: 'Copenhagen Marathon',        gain: 200,  loss: 200,  tempF: 56,   humidity: 65,   note: 'Flat and fast course through the Danish capital. May conditions are typically mild.' },
-  { name: 'Sydney Marathon',            gain: 900,  loss: 900,  tempF: 62,   humidity: 58,   note: 'Runs past the Opera House and Harbour Bridge. Spring September conditions.' },
+  { slug: 'copenhagen', name: 'Copenhagen Marathon',        gain: 200,  loss: 200,  tempF: 56,   humidity: 65,   note: 'Flat and fast course through the Danish capital. May conditions are typically mild.' },
+  { slug: 'sydney', name: 'Sydney Marathon',            gain: 900,  loss: 900,  tempF: 62,   humidity: 58,   note: 'Crosses the Harbour Bridge early and finishes at the Opera House. Late-August conditions are usually mild.' },
 ];
+
+// ─── Real course profiles (pace-planner-courses.js) ─────────────────────────
+// Races with a measured elevation profile get their gain/loss from it, and a pace plan card.
+function escapeHTML(s) { return String(s).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch])); }
+const COURSES = {};
+(window.MARATHON_COURSES || []).forEach(c => { COURSES[c.slug] = c; });
+
+function courseGainLossFt(c) {
+  let g = 0, l = 0;
+  for (let i = 1; i < c.e.length; i++) { const dz = c.e[i] - c.e[i - 1]; if (dz > 0) g += dz; else l -= dz; }
+  const ft = m => Math.round(m / 0.3048 / 10) * 10;
+  return { gain: ft(g), loss: ft(l), net: Math.round((c.e[c.e.length - 1] - c.e[0]) / 0.3048) };
+}
+function describeCourse(gl) {
+  const perMile = gl.gain / 26.2;
+  const feel = perMile < 8 ? 'Flat' : perMile < 15 ? 'Mostly flat' : perMile < 25 ? 'Rolling' : 'Hilly';
+  const net = gl.net <= -100 ? ', net downhill ' + (-gl.net).toLocaleString() + ' ft' : gl.net >= 100 ? ', net uphill ' + gl.net.toLocaleString() + ' ft' : '';
+  return feel + ' course: +' + gl.gain.toLocaleString() + ' / −' + gl.loss.toLocaleString() + ' ft from the measured profile' + net + '.';
+}
+
+(function mergeCourses() {
+  const listed = new Set();
+  RACE_PROFILES.forEach(p => { if (p.slug && !COURSES[p.slug]) delete p.slug; if (p.slug) listed.add(p.slug); });
+  Object.keys(COURSES).forEach(slug => {
+    if (!listed.has(slug)) RACE_PROFILES.push({ slug, name: COURSES[slug].name, gain: null, loss: null, tempF: null, humidity: null, note: null });
+  });
+  RACE_PROFILES.forEach(p => { p.id = p.slug || p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); });
+  RACE_PROFILES.forEach(p => {
+    if (!p.slug) return;
+    const c = COURSES[p.slug], gl = courseGainLossFt(c);
+    p.name = c.name; p.gain = gl.gain; p.loss = gl.loss; p.terrain = describeCourse(gl);
+  });
+
+  // Rebuild the race dropdown: Custom, then real course profiles, then races with elevation totals only.
+  const sel = document.getElementById('raceProfile');
+  sel.innerHTML = '';
+  const add = (parent, i) => { const o = document.createElement('option'); o.value = String(i); o.textContent = RACE_PROFILES[i].name; parent.appendChild(o); };
+  add(sel, 0);
+  const idx = RACE_PROFILES.map((p, i) => i).slice(1).sort((a, b) => RACE_PROFILES[a].name.localeCompare(RACE_PROFILES[b].name));
+  const groups = [['Marathons with course profile and pace plan', idx.filter(i => RACE_PROFILES[i].slug)],
+                  ['Marathons with elevation totals only', idx.filter(i => !RACE_PROFILES[i].slug)]];
+  groups.forEach(([label, items]) => {
+    if (!items.length) return;
+    const g = document.createElement('optgroup'); g.label = label;
+    items.forEach(i => add(g, i));
+    sel.appendChild(g);
+  });
+})();
 
 // ─── VDOT math ──────────────────────────────────────────────────────────────
 function vdotFromTime(distanceMeters, timeMinutes) {
@@ -901,8 +984,11 @@ function onRaceProfileChange() {
     return;
   }
 
-  noteEl.textContent  = profile.note || '';
-  noteEl.style.display = profile.note ? 'block' : 'none';
+  const hasWeather = profile.tempF != null;
+  noteEl.innerHTML = [profile.note, profile.terrain].filter(Boolean).map(escapeHTML).join(' ') +
+    (hasWeather ? '' : ' Typical race-day weather isn\'t on file for this race, so the weather adjustment is off. Turn it on below to enter your forecast.') +
+    (profile.slug ? ' <a href="#planCard" class="plan-jump">See your race-day pace plan ↓</a>' : '');
+  noteEl.style.display = 'block';
 
   // Auto-set target distance to marathon
   document.getElementById('targetDistance').value = '42195';
@@ -914,11 +1000,13 @@ function onRaceProfileChange() {
   document.getElementById('targetGain').value         = profile.gain;
   document.getElementById('targetLoss').value         = profile.loss;
 
-  // Enable weather and fill values
-  document.getElementById('weatherToggle').checked       = true;
-  document.getElementById('weatherFields').style.display = 'block';
-  document.getElementById('weatherTemp').value           = profile.tempF;
-  document.getElementById('weatherHumidity').value       = profile.humidity;
+  // Weather: fill typical race-day values where we have them; otherwise switch the adjustment off
+  document.getElementById('weatherToggle').checked       = hasWeather;
+  document.getElementById('weatherFields').style.display = hasWeather ? 'block' : 'none';
+  if (hasWeather) {
+    document.getElementById('weatherTemp').value     = profile.tempF;
+    document.getElementById('weatherHumidity').value = profile.humidity;
+  }
 
   calc();
 }
@@ -1106,6 +1194,8 @@ function calc() {
 
   document.getElementById('predPaceMile').textContent = formatPace(predFinal, targetDistM, 1609.34) + ' /mi';
   document.getElementById('predPaceKm').textContent   = formatPace(predFinal, targetDistM, 1000)    + ' /km';
+  updatePlanCard(predFinal, targetDistM);
+  syncPredUrl();
 
   // ── Predictions table ──
   const tbody = document.getElementById('predTableBody');
@@ -1202,7 +1292,136 @@ function buildElevMatrix(vdot, flatMinutes, distM, distName, mileagePen, selecte
   table.appendChild(tbody);
 }
 
+// ─── Inputs in the URL (bookmark / share) ───────────────────────────────────
+// race, pr (PR distance), prc/pru (custom), pt (PR time H:MM:SS), mi (weekly miles), td (target distance), tdc/tdu,
+// elev=1|0 with pg/pl/tg/tl (ft) and gc/lc (sensitivity), wx=1|0 with temp/hum,
+// plus the embedded pace plan's own settings: units, split, n, hill, tilt, lk.
+let predUrlReady = false;
+let planParams = '';
+const PLAN_KEYS = ['units', 'split', 'n', 'hill', 'tilt', 'lk'];
+function filterPlanParams(q) {
+  const out = new URLSearchParams();
+  PLAN_KEYS.forEach(k => { if (q.has(k)) out.set(k, q.get(k)); });
+  return out.toString();
+}
+function predSettings() {
+  const v = id => document.getElementById(id).value;
+  const q = new URLSearchParams();
+  const idx = parseInt(v('raceProfile')) || 0;
+  if (idx > 0) q.set('race', RACE_PROFILES[idx].id);
+  q.set('pr', v('prDistance'));
+  if (v('prDistance') === 'custom') { q.set('prc', v('prCustomDist')); q.set('pru', v('prCustomUnit')); }
+  const hh = parseInt(v('prHH')) || 0, mm = parseInt(v('prMM')) || 0, ss = parseInt(v('prSS')) || 0;
+  q.set('pt', hh + ':' + String(mm).padStart(2, '0') + ':' + String(ss).padStart(2, '0'));
+  q.set('mi', v('weeklyMileage'));
+  q.set('td', v('targetDistance'));
+  if (v('targetDistance') === 'custom') { q.set('tdc', v('targetCustomDist')); q.set('tdu', v('targetCustomUnit')); }
+  if (document.getElementById('elevToggle').checked) {
+    q.set('elev', '1');
+    ['prGain:pg', 'prLoss:pl', 'targetGain:tg', 'targetLoss:tl'].forEach(s => { const [id, k] = s.split(':'); q.set(k, v(id) || '0'); });
+    if (v('gainCoeff') !== '1') q.set('gc', v('gainCoeff'));
+    if (v('lossCoeff') !== '1') q.set('lc', v('lossCoeff'));
+  } else q.set('elev', '0');
+  if (document.getElementById('weatherToggle').checked) { q.set('wx', '1'); q.set('temp', v('weatherTemp')); q.set('hum', v('weatherHumidity')); }
+  else q.set('wx', '0');
+  const showPlan = document.getElementById('planCard').style.display !== 'none';
+  if (showPlan && planParams) new URLSearchParams(planParams).forEach((val, k) => q.set(k, val));
+  return q;
+}
+function syncPredUrl() {
+  if (!predUrlReady) return;
+  try { history.replaceState(null, '', location.pathname + '?' + predSettings().toString() + location.hash); } catch (e) {}
+}
+function applyPredSettings(q) {
+  planParams = filterPlanParams(q);   // first: choosing the race below builds the plan frame's address
+  const set = (id, k) => { if (q.has(k)) document.getElementById(id).value = q.get(k); };
+  const hasOpt = (id, val) => [...document.getElementById(id).options].some(o => o.value === val);
+  const ri = q.has('race') ? RACE_PROFILES.findIndex(p => p.id === q.get('race')) : -1;
+  if (ri > 0) { document.getElementById('raceProfile').value = String(ri); onRaceProfileChange(); }
+  if (q.has('pr') && hasOpt('prDistance', q.get('pr'))) document.getElementById('prDistance').value = q.get('pr');
+  set('prCustomDist', 'prc'); if (q.get('pru') === 'km' || q.get('pru') === 'miles') set('prCustomUnit', 'pru');
+  onPrDistanceChange();
+  if (q.has('pt')) {
+    const parts = q.get('pt').split(':').map(x => parseInt(x, 10) || 0);
+    while (parts.length < 3) parts.unshift(0);
+    document.getElementById('prHH').value = parts[0];
+    document.getElementById('prMM').value = parts[1];
+    document.getElementById('prSS').value = parts[2];
+  }
+  set('weeklyMileage', 'mi');
+  if (q.has('td') && hasOpt('targetDistance', q.get('td'))) document.getElementById('targetDistance').value = q.get('td');
+  set('targetCustomDist', 'tdc'); if (q.get('tdu') === 'km' || q.get('tdu') === 'miles') set('targetCustomUnit', 'tdu');
+  onTargetDistanceChange();
+  if (q.has('elev')) { document.getElementById('elevToggle').checked = q.get('elev') === '1'; onElevToggle(); }
+  set('prGain', 'pg'); set('prLoss', 'pl'); set('targetGain', 'tg'); set('targetLoss', 'tl');
+  set('gainCoeff', 'gc'); set('lossCoeff', 'lc');
+  if (q.has('wx')) { document.getElementById('weatherToggle').checked = q.get('wx') === '1'; onWeatherToggle(); }
+  set('weatherTemp', 'temp'); set('weatherHumidity', 'hum');
+}
+function copyPredLink(btn) {
+  const url = location.href, label = btn.innerHTML;
+  const done = ok => { btn.textContent = ok ? 'Link copied ✓' : 'Copy the address bar instead'; setTimeout(() => { btn.innerHTML = label; }, 2200); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(() => done(true), () => done(false));
+  else {
+    const ta = document.createElement('textarea'); ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); done(ok);
+  }
+}
+
+// ─── Race-day pace plan card ────────────────────────────────────────────────
+// Embeds pace-planner.html?embed=1 for the selected course, with the predicted time as the goal.
+// After the first load the frame is updated by postMessage, so typing in the PR fields doesn't reload it.
+const planFrameState = { ready: false, pending: null, src: '' };
+function isDarkTheme() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+function postToPlan(msg) {
+  const f = document.getElementById('planFrame');
+  if (f.contentWindow) f.contentWindow.postMessage(msg, '*');
+}
+function updatePlanCard(predMinutes, targetDistM) {
+  const card = document.getElementById('planCard');
+  const idx = parseInt(document.getElementById('raceProfile').value) || 0;
+  const profile = RACE_PROFILES[idx];
+  const goalSec = Math.round(predMinutes * 60);
+  if (!profile || !profile.slug || Math.abs(targetDistM - 42195) > 1 || !(goalSec > 0)) { card.style.display = 'none'; return; }
+  const c = COURSES[profile.slug];
+  card.style.display = 'block';
+  document.getElementById('planTitle').textContent = 'Race-Day Pace Plan: ' + c.name;
+  document.getElementById('planSub').textContent = 'Splits for your predicted ' + formatTime(predMinutes) +
+    ' on the measured ' + (c.year ? c.year + ' ' : '') + 'course profile. Choose mile or grade-based splits, set how much to ease off on climbs, and export to a Garmin watch, a printable pace band, or CSV.';
+  document.getElementById('planOpenLink').href = 'pace-planner.html?course=' + encodeURIComponent(profile.slug) + '&goal=' + goalSec + (planParams ? '&' + planParams : '');
+  const f = document.getElementById('planFrame');
+  if (!planFrameState.src) {
+    planFrameState.src = 'pace-planner.html?embed=1&course=' + encodeURIComponent(profile.slug) + '&goal=' + goalSec + (planParams ? '&' + planParams : '') + '&theme=' + (isDarkTheme() ? 'dark' : 'light');
+    f.src = planFrameState.src;
+  } else {
+    const msg = { type: 'pace-planner:set', course: profile.slug, goalSec };
+    if (planFrameState.ready) postToPlan(msg); else planFrameState.pending = msg;
+  }
+}
+window.addEventListener('message', ev => {
+  const f = document.getElementById('planFrame');
+  if (!f || ev.source !== f.contentWindow || !ev.data || typeof ev.data !== 'object') return;
+  if (ev.data.type === 'pace-planner:height' && ev.data.height > 100) f.style.height = ev.data.height + 'px';
+  if (ev.data.type === 'pace-planner:state' && typeof ev.data.params === 'string') {
+    planParams = filterPlanParams(new URLSearchParams(ev.data.params));
+    const idx = parseInt(document.getElementById('raceProfile').value) || 0, prof = RACE_PROFILES[idx];
+    const link = document.getElementById('planOpenLink'), g = new URLSearchParams(link.search).get('goal');
+    if (prof && prof.slug && g) link.href = 'pace-planner.html?course=' + encodeURIComponent(prof.slug) + '&goal=' + g + (planParams ? '&' + planParams : '');
+    syncPredUrl();
+  }
+  if (ev.data.type === 'pace-planner:ready') {
+    planFrameState.ready = true;
+    postToPlan({ type: 'pace-planner:theme', dark: isDarkTheme() });
+    if (planFrameState.pending) { postToPlan(planFrameState.pending); planFrameState.pending = null; }
+  }
+});
+new MutationObserver(() => { if (planFrameState.ready) postToPlan({ type: 'pace-planner:theme', dark: isDarkTheme() }); })
+  .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
 function showEmpty(show) {
+  if (show) document.getElementById('planCard').style.display = 'none';
   document.getElementById('emptyState').style.display = show ? 'block' : 'none';
   document.getElementById('vdotCard').style.display   = show ? 'none' : 'block';
   document.getElementById('predCard').style.display   = show ? 'none' : 'block';
@@ -1217,8 +1436,18 @@ function toggleExplain() {
   body.classList.toggle('open');
 }
 
-// Run on load
-calc();
+// Run on load: restore inputs saved in the URL (?race=boston&pt=0:21:30...), otherwise start on the
+// LA Marathon so first-time visitors see a real course profile and race-day pace plan.
+(function() {
+  const q = new URLSearchParams(location.search);
+  if (['race', 'pr', 'pt', 'mi', 'td', 'elev', 'wx'].some(k => q.has(k))) applyPredSettings(q);
+  else {
+    const la = RACE_PROFILES.findIndex(p => p.slug === 'los-angeles');
+    if (la > 0) { document.getElementById('raceProfile').value = String(la); onRaceProfileChange(); }
+  }
+  predUrlReady = true;
+  calc();
+})();
 </script>
 <script>
 (function() {

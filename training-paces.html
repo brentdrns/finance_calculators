@@ -124,6 +124,21 @@
   /* Main */
   .main { padding: 24px 28px; display: flex; flex-direction: column; gap: 18px; }
   .card { background: var(--surface); border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); border-radius: 12px; padding: 20px 24px; }
+  .vdot-table-cta { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: 12px; text-decoration: none; color: #fff;
+    background: linear-gradient(120deg, #006aff 0%, #3b5bff 55%, #6a3dff 100%); box-shadow: 0 6px 20px rgba(0,106,255,0.28);
+    transition: transform 0.15s, box-shadow 0.15s; }
+  .vdot-table-cta:hover, .vdot-table-cta:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(0,106,255,0.38); }
+  .vdot-table-cta:focus-visible { outline: 3px solid #fff; outline-offset: -5px; }
+  .vdot-table-cta .cta-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px; background: rgba(255,255,255,0.18); display: flex; align-items: center; justify-content: center; }
+  .vdot-table-cta .cta-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+  .vdot-table-cta .cta-title { font-family: 'DM Serif Display', serif; font-size: 22px; line-height: 1.15; }
+  .vdot-table-cta .cta-sub { font-size: 12px; line-height: 1.5; opacity: 0.92; }
+  .vdot-table-cta .cta-go { flex-shrink: 0; background: #fff; color: #0050d0; font-weight: 700; font-size: 13px; padding: 10px 16px; border-radius: 8px; white-space: nowrap; }
+  @media (max-width: 600px) {
+    .vdot-table-cta { flex-wrap: wrap; padding: 16px; gap: 12px; }
+    .vdot-table-cta .cta-title { font-size: 19px; }
+    .vdot-table-cta .cta-go { width: 100%; text-align: center; }
+  }
   .card-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
@@ -306,6 +321,7 @@
         <a href="running-percentile.html">Percentile Calculator</a>
         <div class="nav-dropdown-divider"></div>
         <a href="pace-converter.html">Pace Converter</a>
+        <a href="pace-planner.html">Race Pace Planner</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
         <div class="nav-dropdown-divider"></div>
@@ -419,6 +435,9 @@
     <!-- Content injected by JS -->
   </main>
 </div>
+
+<div id="siteFeedback"></div>
+<script src="feedback.js" defer></script>
 
 <footer class="site-footer">
   <p class="site-footer-disclaimer">For informational and educational purposes only. Not financial, investment, or tax advice. Results are estimates based on inputs provided and simplified assumptions. Monte Carlo simulations model uncertainty but do not predict the future. Past performance does not guarantee future results. All investments carry risk, including potential loss of principal. This calculator is a general educational tool and does not assess your financial situation, goals, risk tolerance, or suitability for any strategy. Abel's Calculators assumes no liability for errors, omissions, or consequences arising from the use of this tool. All calculations are performed locally in your browser &mdash; no personal data is collected or stored. Consult a licensed financial professional before making any financial decision.</p>
@@ -724,7 +743,20 @@ function calculate() {
     '</div>';
   }).join('');
 
+  var vdotRow = Math.min(85, Math.max(30, Math.round(vdot)));
   var html =
+    // Banner: jump to the full VDOT tables, with this runner's row highlighted
+    '<a class="vdot-table-cta" href="vdot-tables.html?vdot=' + vdotRow + '">' +
+      '<span class="cta-icon" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>' +
+      '</span>' +
+      '<span class="cta-text">' +
+        '<span class="cta-title">See the full VDOT tables</span>' +
+        '<span class="cta-sub">Race times and training paces for every VDOT from 30 to 85, with your VDOT ' + vdotRow + ' row highlighted</span>' +
+      '</span>' +
+      '<span class="cta-go">Open tables <span aria-hidden="true">→</span></span>' +
+    '</a>' +
+
     // Card 1: VDOT
     '<div class="card">' +
       '<div class="card-title">Your VDOT</div>' +
