@@ -48,7 +48,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { margin: 0; line-height: 0; }
+  header .site-logo { margin: 0; line-height: 0; }
   .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -197,7 +197,7 @@
 <body>
 
 <header>
-  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <div class="site-logo"><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -269,7 +269,7 @@
   <div class="hero-band-inner">
     <div class="hero-band-left">
       <div class="hero-band-label">Pace Converter</div>
-      <h2 class="hero-band-title">Pace to time, <span>time to pace.</span></h2>
+      <h1 class="hero-band-title">Pace to time, <span>time to pace.</span></h1>
     </div>
     <div class="hero-band-divider"></div>
     <p class="hero-band-body">

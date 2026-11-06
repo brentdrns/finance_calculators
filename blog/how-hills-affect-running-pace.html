@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+<title>How Hills Affect Running Pace, Grade by Grade &mdash; Abel's Calculators</title>
+<meta name="description" content="A 5% climb slows you about 15%, but a 5% descent gives back only about 7%. What the research says about grade and pace, and how to pace a hilly race.">
+<meta name="author" content="Abel's Calculators">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://abelscalculators.com/blog/how-hills-affect-running-pace.html">
+<meta property="og:title" content="How Hills Affect Running Pace, Grade by Grade">
+<meta property="og:description" content="What each 1% of grade costs, why downhills give back less than uphills take, and how to pace a hilly race, with the research behind the numbers.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://abelscalculators.com/blog/how-hills-affect-running-pace.html">
+<meta property="og:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Hills Affect Running Pace, Grade by Grade">
+<meta name="twitter:description" content="What each 1% of grade costs, why downhills give back less than uphills take, and how to pace a hilly race.">
+<meta name="twitter:image" content="https://abelscalculators.com/images/og-preview.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How Hills Affect Running Pace, Grade by Grade","description":"A 5% climb slows you about 15%, but a 5% descent gives back only about 7%. What the research says about grade and pace, and how to pace a hilly race.","image":"https://abelscalculators.com/images/og-preview.jpg","author":{"@type":"Organization","name":"Abel's Calculators","url":"https://abelscalculators.com"},"publisher":{"@type":"Organization","name":"Abel's Calculators","url":"https://abelscalculators.com"},"datePublished":"2026-11-06","dateModified":"2026-11-06","mainEntityOfPage":"https://abelscalculators.com/blog/how-hills-affect-running-pace.html"}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GXEPDJH5VC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-GXEPDJH5VC');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#ffffff;--surface:#f7f8fa;--surface2:#eef0f4;--border:#e2e5eb;--accent:#006aff;--accent-dim:#4a90d9;--text:#1a1a2e;--text-muted:#6b7280;--blue:#2563eb;--radius:12px;}
+  [data-theme="dark"]{--bg:#121218;--surface:#1a1a24;--surface2:#24242f;--border:#2e2e3a;--accent:#4d8eff;--accent-dim:#6ba0e6;--text:#e4e4ea;--text-muted:#9395a1;--blue:#5b8def;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;min-height:100vh;}
+  header{padding:0 40px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  header .site-logo{margin:0;line-height:0;}
+  .header-banner{max-height:360px;width:auto;max-width:650px;display:block;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .header-nav a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; }
+  .header-nav a:hover { color: var(--text); background: var(--surface2); }
+  .header-nav a.active { color: #fff; background: var(--accent); }
+  .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+
+  /* Nav dropdowns */
+  .nav-dropdown { position: relative; display: flex; align-items: center; }
+  .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
+  .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-btn.active { color: #fff; background: var(--accent); }
+  .nav-caret { font-size: 9px; opacity: 0.6; }
+  .nav-dropdown-menu { display: none; position: absolute; top: 100%; padding-top: 4px; left: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 6px; min-width: 200px; z-index: 100; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: flex; flex-direction: column; }
+  .nav-dropdown-menu a { color: var(--text-muted); font-size: 12px; text-decoration: none; padding: 8px 12px; border-radius: 7px; font-weight: 500; white-space: nowrap; transition: color 0.15s, background 0.15s; }
+  .nav-dropdown-menu a:hover { color: var(--text); background: var(--surface2); }
+  .nav-dropdown-menu a.active { color: #fff; background: var(--accent); }
+  .nav-dropdown-divider { border-top: 1px solid var(--border); margin: 4px 8px; }
+  .nav-dropdown-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding: 6px 12px 2px; opacity: 0.6; }
+  .theme-toggle{background:var(--surface2);border:1px solid var(--border);border-radius:20px;color:var(--text-muted);font-family:'Inter',sans-serif;font-size:12px;padding:5px 12px;cursor:pointer;transition:color 0.15s,background 0.15s,border-color 0.15s;display:flex;align-items:center;gap:5px;}
+  .theme-toggle:hover{color:var(--text);border-color:var(--accent-dim);}
+  main{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+  .page-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-dim);margin-bottom:8px;}
+  .page-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--text);margin-bottom:10px;line-height:1.2;}
+  .page-sub{color:var(--text-muted);font-size:13px;line-height:1.7;margin-bottom:12px;max-width:560px;}
+  .page-date{color:var(--text-muted);font-size:11px;margin-bottom:48px;}
+  article h2{font-family:'DM Serif Display',serif;font-size:24px;color:var(--text);margin:40px 0 16px;}
+  article h3{font-family:'DM Serif Display',serif;font-size:19px;color:var(--text);margin:32px 0 12px;}
+  article p{color:var(--text-muted);font-size:13px;line-height:1.85;margin-bottom:18px;}
+  article strong{color:var(--text);}
+  article a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent-dim);transition:border-color 0.15s;}
+  article a:hover{border-color:var(--accent);}
+  article ul,article ol{color:var(--text-muted);font-size:13px;line-height:1.85;margin:0 0 18px 20px;}
+  article li{margin-bottom:6px;}
+  .callout{background:var(--surface);border:none;box-shadow:0 1px 3px rgba(0,0,0,.06);border-left:3px solid var(--accent);border-radius:var(--radius);padding:20px 24px;margin:28px 0;}
+  .callout p{margin-bottom:0;}
+  .callout p+p{margin-top:10px;}
+  .data-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:12px;}
+  .data-table th{text-align:left;padding:10px 14px;background:var(--surface2);color:var(--text-muted);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;}
+  .data-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text-muted);}
+  .data-table td strong{color:var(--text);}
+  .data-table tr:last-child td{border-bottom:none;}
+  .cta{margin-top:48px;padding:28px 32px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:center;}
+  .cta p{color:var(--text-muted);font-size:13px;margin-bottom:16px;line-height:1.7;}
+  .cta a.cta-btn{display:inline-block;background:var(--accent);color:var(--bg);font-family:'DM Mono',monospace;font-size:13px;font-weight:500;padding:11px 28px;border-radius:var(--radius);text-decoration:none;border:none;transition:opacity 0.15s;}
+  .cta a.cta-btn:hover{opacity:.85;}
+  .cta-pair{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .site-footer{border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .site-footer-disclaimer{font-size:11px;color:var(--text-muted);line-height:1.6;max-width:640px;}
+  .site-footer-nav{display:flex;gap:16px;flex-shrink:0;}
+  .site-footer-nav a{font-size:11px;color:var(--text-muted);text-decoration:none;transition:color 0.15s;}
+  .site-footer-nav a:hover{color:var(--accent-dim);}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:24px 0;}
+  .table-wrap .data-table{margin:0;}
+  .data-table td.num,.data-table th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .formula{font-family:'DM Mono',monospace;font-size:12px;line-height:1.9;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin:0 0 18px;overflow-x:auto;white-space:nowrap;}
+  .hill-chart{margin:28px 0;padding:18px 16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);}
+  .hill-chart-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:10px;}
+  .hill-chart svg{display:block;width:100%;max-width:500px;height:auto;margin:0 auto;overflow:visible;}
+  .hill-chart figcaption{font-size:11px;color:var(--text-muted);line-height:1.6;margin-top:10px;}
+  .hc-grid{stroke:var(--border);stroke-width:1;}
+  .hc-zero{stroke:var(--text-muted);stroke-width:1;stroke-dasharray:4 3;}
+  .hc-tick{fill:var(--text-muted);font-family:'Inter',sans-serif;font-size:10.5px;}
+  .hc-axis{fill:var(--text-muted);font-family:'Inter',sans-serif;font-size:10.5px;font-weight:500;}
+  .hc-note{fill:var(--text);font-family:'Inter',sans-serif;font-size:11px;font-weight:500;}
+  .hc-lead{stroke:var(--text-muted);stroke-width:1;}
+  .hc-line{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+  .hc-dot{fill:var(--accent);stroke:var(--surface);stroke-width:2;}
+  .hc-hit{fill:transparent;}
+  .hc-pt{cursor:default;}
+  .hc-pt:hover .hc-dot{stroke:var(--text);}
+  .sources li{font-size:12px;}
+  @media(max-width:640px){.data-table th,.data-table td{padding:9px 7px;}.formula{font-size:11px;padding:12px 14px;}.hill-chart{padding:14px 10px 12px;}}
+  @media(max-width:640px){header{padding:0 20px;}main{padding:32px 16px 60px;}.page-title{font-size:28px;}.site-footer{padding:16px 20px;flex-direction:column;align-items:flex-start;}}
+</style>
+<script>(function(){var s=localStorage.getItem('theme');if(s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<style>
+/* ===== MOBILE NAV ===== */
+html, body { overflow-x: hidden; }
+.hamburger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; padding: 9px 10px; margin-left: auto; flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 16px; height: 1.5px; background: var(--text-muted);
+  border-radius: 2px; transition: transform 0.2s, opacity 0.15s; transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 768px) {
+  header { position: relative; flex-wrap: nowrap; flex-direction: row; align-items: center; }
+  .header-banner { max-width: 100%; }
+  .hamburger { display: flex; }
+  .header-nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    flex-direction: column; gap: 2px; padding: 8px 12px 16px; z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    max-height: calc(100vh - 60px); overflow-y: auto;
+  }
+  .header-nav.mobile-open { display: flex; }
+  .nav-sep { display: none; }
+  .header-nav > a { padding: 10px 12px; border-radius: 8px; }
+  .nav-dropdown { width: 100%; flex-direction: column; }
+  .nav-dropdown-btn { width: 100%; padding: 10px 12px; justify-content: space-between; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+  .nav-dropdown.mobile-open .nav-dropdown-menu {
+    display: flex; flex-direction: column; position: static;
+    box-shadow: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 4px 0; margin: 2px 0 4px; background: var(--surface);
+  }
+  .nav-caret { transition: transform 0.2s; }
+  .nav-dropdown.mobile-open .nav-caret { transform: rotate(180deg); }
+  .theme-toggle { width: 100%; justify-content: center; margin-top: 6px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="site-logo"><a href="../index.html"><img class="header-banner" src="../images/website banner 2.png" alt="Abel's Calculators"><span class="sr-only">Abel's Calculators</span></a></div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="header-nav" id="headerNav" aria-label="Site navigation">
+    <a href="../index.html">Home</a>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Mortgage <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../refinance.html">Refinance Calculator</a>
+        <a href="../rent-vs-buy.html">Rent vs Buy</a>
+        <a href="../extra-payment.html">Extra Payment vs Invest</a>
+        <a href="../rent-or-sell.html">Rent or Sell Your Home</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Investing <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../monte-carlo.html">Investment Simulator</a>
+        <a href="../withdrawal.html">Withdrawal Simulator</a>
+        <a href="../fire-calculator.html">FIRE Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Taxes &amp; More <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../tax-brackets.html">Tax Bracket Visualizer</a>
+        <a href="../roth-conversion.html">Roth Conversion</a>
+        <a href="../debt-payoff.html">Debt Payoff</a>
+        <a href="../social-security.html">Social Security Break-Even</a>
+        <a href="../wealth-percentile.html">Income &amp; Wealth Percentile</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Cars <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../vehicle-cost.html">Cost of Ownership Comparison</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
+      <div class="nav-dropdown-menu">
+        <a href="../race-predictor.html">Race Time Predictor</a>
+        <a href="../bq-calculator.html">BQ Calculator</a>
+        <a href="../training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="../age-graded-calculator.html">Age Graded Calculator</a>
+        <a href="../running-percentile.html">Percentile Calculator</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="../pace-converter.html">Pace Converter</a>
+        <a href="../pace-planner.html">Race Pace Planner</a>
+        <a href="../run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="../heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="../vdot-tables.html">VDOT Tables</a>
+      </div>
+    </div>
+    <span class="nav-sep">&middot;</span>
+    <a href="../blog.html" class="active">Blog</a>
+    <span class="nav-sep">&middot;</span>
+    <a href="../about.html">About</a>
+    <span class="nav-sep">&middot;</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span id="themeIcon">&#9790;</span> <span id="themeLabel">Dark</span></button>
+  </nav>
+</header>
+<main>
+  <div class="page-label">Running</div>
+  <h1 class="page-title">How Hills Affect Running Pace, Grade by Grade</h1>
+  <p class="page-sub">Every runner knows hills slow you down. Fewer know by how much, or that the downhill on the other side never fully pays you back. Here's what the research says each percent of grade costs, where the downhill benefit runs out, and how to use that to pace a hilly race.</p>
+  <p class="page-date">November 6, 2026</p>
+  <article>
+
+    <h2>The Short Answer</h2>
+    <div class="callout">
+      <p><strong>On typical road grades, each 1% of uphill costs roughly 3% of pace at the same effort.</strong> A 5% climb makes an 8:00/mile runner about 15% slower, or around 9:12. The same 5% downhill gives back only about 7%, or 7:25.</p>
+      <p>The downhill benefit grows until about &minus;9%, where it tops out at roughly 9&ndash;12% faster than flat. By about &minus;18% you're back to flat pace, and anything steeper is slower than running on level ground. Because climbs take more than descents return, a course that goes up and comes back down is always slower than a flat one.</p>
+    </div>
+
+    <h2>What the Lab Says: The Energy Cost of Running on a Slope</h2>
+    <p>The most-cited measurement of running on gradients comes from <a href="https://doi.org/10.1152/japplphysiol.01177.2001" rel="noopener">Minetti and colleagues (2002, <em>Journal of Applied Physiology</em>)</a>. They put 10 elite mountain runners on a treadmill tilted anywhere from &minus;45% to +45% and measured how much energy each meter of running cost.</p>
+    <p>On level ground the cost was <strong>3.40 J per kg per meter</strong>, regardless of speed. At +10% it rose to 5.77, about 70% more. Downhill it fell to 1.93 at &minus;10% and bottomed out at <strong>1.73 at &minus;20%</strong>, roughly half the level cost. Below that it climbed again, reaching 3.92 at &minus;45%, more than running on the flat. A <a href="https://doi.org/10.1007/s40279-016-0605-y" rel="noopener">2017 review in <em>Sports Medicine</em> by Vernillo and colleagues</a> sums up the same picture: the energy cost of running rises steadily with uphill slope, falls on downhills until about &minus;20%, then rises again.</p>
+    <p>The physics explains the shape. Going up, your muscles do extra work lifting your body against gravity. Going gently down, gravity does some of that work for you. On steep descents your legs spend more and more effort braking, which is work too, done by muscles lengthening under load (eccentric contractions).</p>
+    <p>There's a catch for runners. Energy cost isn't the same thing as speed. Minetti's team noted that the downhill speeds their numbers predicted were <em>well above</em> what athletes actually run in downhill mountain races. Gravity may make a &minus;20% slope metabolically cheap, but nobody can run it twice as fast as the flat. Leg turnover, footing, stability and the pounding all get in the way first.</p>
+
+    <h2>What Real Runners Do: Strava's Grade Adjusted Pace</h2>
+    <p>Strava's original Grade Adjusted Pace (GAP) was built on the Minetti curve and ran into exactly that problem. In 2017, Strava engineer Drew Robb <a href="https://medium.com/strava-engineering/an-improved-gap-model-8b07ae8886c3" rel="noopener">rebuilt the model from real-world data</a>: about 6 million runs from 240,000 athletes that had both elevation change and heart rate. Instead of energy cost, the new model asks a simpler question: what pace on flat ground would produce the same heart rate?</p>
+    <p>The results:</p>
+    <ul>
+      <li><strong>Uphill, the lab and the real world mostly agree.</strong> Robb describes the two curves as nearly parallel, with the heart-rate model shifted by about 2 points of grade (slightly gentler).</li>
+      <li><strong>Downhill, they disagree a lot.</strong> The old lab-based model put the biggest benefit at about &minus;18%, at half the flat-pace cost, which meant running up to twice as fast. The heart-rate model puts the biggest benefit at <strong>&minus;9%, worth about 12%</strong>, and by &minus;18% the adjustment is back to zero.</li>
+    </ul>
+    <p>That lines up with what most runners feel. Robb notes that runners Strava surveyed didn't think any downhill was worth more than about a 10% speed boost.</p>
+
+    <h2>Why Downhills Give Back Less Than Uphills Take</h2>
+    <p>Studies differ on the exact numbers, but they all agree on the asymmetry. The reasons stack up:</p>
+    <ul>
+      <li><strong>Braking.</strong> Past a gentle grade, more of each stride goes into controlling your descent instead of moving you forward.</li>
+      <li><strong>Mechanical limits.</strong> To go faster downhill you need longer strides or a faster turnover. In a field study of hill running, <a href="https://pubmed.ncbi.nlm.nih.gov/20010117/" rel="noopener">Townshend, Worringham and Stewart (2010, <em>Medicine &amp; Science in Sports &amp; Exercise</em>)</a> found that runners changed speed on hills almost entirely through stride length (20.5% shorter uphill, 16.2% longer downhill) while step rate stayed nearly constant. Stride length can only stretch so far before it turns into overstriding.</li>
+      <li><strong>Muscle damage.</strong> Eccentric braking is what leaves your quads sore for days after a downhill race. It doesn't cost much oxygen at the time, but you pay for it later in the race.</li>
+      <li><strong>Footing and confidence.</strong> Most people simply won't let go on a steep road, and on trails they shouldn't.</li>
+    </ul>
+    <p>The practical consequence: <strong>hills never cancel out.</strong> Run one mile up a 5% grade and one mile back down at an 8:00/mile effort, and the model below gives 9:12 + 7:25 = 16:37, which is 37 seconds slower than two flat miles. Even gentle 2% rollers cost about 1% overall. That's why an out-and-back or loop course with lots of climbing is slower than a flat course with the same start and finish.</p>
+
+    <h2>The Hill Model Our Calculators Use</h2>
+    <p>The <a href="../pace-planner.html">Race Pace Planner</a> turns grade into pace with a simple multiplier on your flat-ground pace. With grade <strong>G</strong> in percent:</p>
+    <div class="formula">Uphill, up to 5%: &nbsp;1 + 0.028&middot;G + 0.0004&middot;G&sup2;<br>Uphill, 9% and steeper: &nbsp;Minetti&rsquo;s energy-cost curve at (G &minus; 2)%, with a smooth blend from 5% to 9%<br>Downhill (x = &minus;G): &nbsp;1 &minus; 0.020&middot;x + 0.0011&middot;x&sup2;</div>
+    <p>On a road-race climb that's about 2.8% slower per 1% of grade. Past about 7% the cost rises much faster. Steep climbs follow the lab energy-cost curve, shifted 2 points of grade gentler to match what Strava saw in real runners' heart rates: about 51% slower at 10% and 89% slower at 15%. On a gentle descent it's about 2% faster per 1%, but the benefit flattens out. It peaks at <strong>about &minus;9% (9% faster)</strong>, is back to flat pace at <strong>about &minus;18%</strong>, and steeper descents are slower than flat, as they are in real life.</p>
+
+    <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th>Grade</th><th class="num">Multiplier</th><th class="num">vs flat</th><th class="num">8:00/mi becomes</th><th class="num">5:00/km becomes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>&minus;20%</strong></td><td class="num">1.040</td><td class="num">+4.0%</td><td class="num">8:19</td><td class="num">5:12</td></tr>
+        <tr><td><strong>&minus;15%</strong></td><td class="num">0.948</td><td class="num">&minus;5.2%</td><td class="num">7:35</td><td class="num">4:44</td></tr>
+        <tr><td><strong>&minus;10%</strong></td><td class="num">0.910</td><td class="num">&minus;9.0%</td><td class="num">7:17</td><td class="num">4:33</td></tr>
+        <tr><td><strong>&minus;6%</strong></td><td class="num">0.920</td><td class="num">&minus;8.0%</td><td class="num">7:21</td><td class="num">4:36</td></tr>
+        <tr><td><strong>&minus;3%</strong></td><td class="num">0.950</td><td class="num">&minus;5.0%</td><td class="num">7:36</td><td class="num">4:45</td></tr>
+        <tr><td><strong>0%</strong></td><td class="num">1.000</td><td class="num">&mdash;</td><td class="num">8:00</td><td class="num">5:00</td></tr>
+        <tr><td><strong>+3%</strong></td><td class="num">1.088</td><td class="num">+8.8%</td><td class="num">8:42</td><td class="num">5:26</td></tr>
+        <tr><td><strong>+6%</strong></td><td class="num">1.191</td><td class="num">+19.1%</td><td class="num">9:32</td><td class="num">5:57</td></tr>
+        <tr><td><strong>+8%</strong></td><td class="num">1.350</td><td class="num">+35.0%</td><td class="num">10:48</td><td class="num">6:45</td></tr>
+        <tr><td><strong>+10%</strong></td><td class="num">1.509</td><td class="num">+50.9%</td><td class="num">12:04</td><td class="num">7:33</td></tr>
+        <tr><td><strong>+12%</strong></td><td class="num">1.658</td><td class="num">+65.8%</td><td class="num">13:16</td><td class="num">8:17</td></tr>
+        <tr><td><strong>+15%</strong></td><td class="num">1.894</td><td class="num">+89.4%</td><td class="num">15:09</td><td class="num">9:28</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <figure class="hill-chart">
+      <div class="hill-chart-title">Pace change vs flat, by grade (even effort)</div>
+      <svg viewBox="0 0 420 350" role="img" aria-labelledby="hcTitle hcDesc">
+      <title id="hcTitle">Pace change versus grade in the site's hill model</title>
+      <desc id="hcDesc">Pace change compared with flat ground, from -20% to +15% grade. Uphill the line rises slowly on road grades, +15% at a 5% climb, then much faster past about 7%: +51% at 10% and +89% at 15%. Downhill it dips to about 9% faster near -9%, returns to flat pace near -18%, and is 4% slower at -20%.</desc>
+      <line class="hc-grid" x1="42" x2="406" y1="290.7" y2="290.7"/>
+      <text class="hc-tick" x="36" y="294.7" text-anchor="end">−10%</text>
+      <line class="hc-grid" x1="42" x2="406" y1="264.7" y2="264.7"/>
+      <text class="hc-tick" x="36" y="268.7" text-anchor="end">0%</text>
+      <line class="hc-grid" x1="42" x2="406" y1="212.7" y2="212.7"/>
+      <text class="hc-tick" x="36" y="216.7" text-anchor="end">+20%</text>
+      <line class="hc-grid" x1="42" x2="406" y1="160.7" y2="160.7"/>
+      <text class="hc-tick" x="36" y="164.7" text-anchor="end">+40%</text>
+      <line class="hc-grid" x1="42" x2="406" y1="108.7" y2="108.7"/>
+      <text class="hc-tick" x="36" y="112.7" text-anchor="end">+60%</text>
+      <line class="hc-grid" x1="42" x2="406" y1="56.7" y2="56.7"/>
+      <text class="hc-tick" x="36" y="60.7" text-anchor="end">+80%</text>
+      <line class="hc-zero" x1="42" x2="406" y1="264.7" y2="264.7"/>
+      <line class="hc-grid" x1="42" x2="42" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="42" y="323.7" text-anchor="middle">−20%</text>
+      <line class="hc-grid" x1="94" x2="94" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="94" y="323.7" text-anchor="middle">−15%</text>
+      <line class="hc-grid" x1="146" x2="146" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="146" y="323.7" text-anchor="middle">−10%</text>
+      <line class="hc-grid" x1="198" x2="198" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="198" y="323.7" text-anchor="middle">−5%</text>
+      <line class="hc-grid" x1="250" x2="250" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="250" y="323.7" text-anchor="middle">0%</text>
+      <line class="hc-grid" x1="302" x2="302" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="302" y="323.7" text-anchor="middle">+5%</text>
+      <line class="hc-grid" x1="354" x2="354" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="354" y="323.7" text-anchor="middle">+10%</text>
+      <line class="hc-grid" x1="406" x2="406" y1="307.7" y2="311.7"/>
+      <text class="hc-tick" x="406" y="323.7" text-anchor="middle">+15%</text>
+      <text class="hc-axis" x="224" y="343.7" text-anchor="middle">Grade (downhill ← → uphill)</text>
+      <text class="hc-axis" x="46" y="24">Slower than flat</text>
+      <text class="hc-axis" x="402" y="301.7" text-anchor="end">Faster than flat</text>
+      <path class="hc-line" d="M42 254.3 L44.6 255.8 L47.2 257.3 L49.8 258.8 L52.4 260.3 L55 261.7 L57.6 263 L60.2 264.3 L62.8 265.6 L65.4 266.9 L68 268.1 L70.6 269.3 L73.2 270.4 L75.8 271.6 L78.4 272.6 L81 273.7 L83.6 274.7 L86.2 275.7 L88.8 276.6 L91.4 277.5 L94 278.4 L96.6 279.2 L99.2 280 L101.8 280.7 L104.4 281.4 L107 282.1 L109.6 282.8 L112.2 283.4 L114.8 284 L117.4 284.5 L120 285 L122.6 285.5 L125.2 285.9 L127.8 286.3 L130.4 286.7 L133 287 L135.6 287.3 L138.2 287.5 L140.8 287.8 L143.4 288 L146 288.1 L148.6 288.2 L151.2 288.3 L153.8 288.3 L156.4 288.3 L159 288.3 L161.6 288.2 L164.2 288.1 L166.8 288 L169.4 287.8 L172 287.6 L174.6 287.4 L177.2 287.1 L179.8 286.8 L182.4 286.4 L185 286 L187.6 285.6 L190.2 285.1 L192.8 284.6 L195.4 284.1 L198 283.6 L200.6 282.9 L203.2 282.3 L205.8 281.6 L208.4 280.9 L211 280.2 L213.6 279.4 L216.2 278.6 L218.8 277.7 L221.4 276.8 L224 275.9 L226.6 275 L229.2 274 L231.8 272.9 L234.4 271.9 L237 270.8 L239.6 269.6 L242.2 268.4 L244.8 267.2 L247.4 266 L250 264.7 L252.6 262.9 L255.2 261 L257.8 259.2 L260.4 257.3 L263 255.4 L265.6 253.5 L268.2 251.6 L270.8 249.7 L273.4 247.8 L276 245.8 L278.6 243.9 L281.2 241.9 L283.8 239.9 L286.4 237.9 L289 235.9 L291.6 233.9 L294.2 231.9 L296.8 229.8 L299.4 227.8 L302 225.7 L304.6 223.5 L307.2 221.1 L309.8 218.3 L312.4 215.1 L315 211.4 L317.6 207.2 L320.2 202.6 L322.8 197.5 L325.4 192 L328 186.1 L330.6 179.9 L333.2 173.7 L335.8 167.5 L338.4 161.4 L341 155.8 L343.6 150.8 L346.2 146.2 L348.8 141.6 L351.4 137 L354 132.3 L356.6 127.6 L359.2 122.8 L361.8 118 L364.4 113.2 L367 108.4 L369.6 103.5 L372.2 98.6 L374.8 93.7 L377.4 88.7 L380 83.7 L382.6 78.7 L385.2 73.6 L387.8 68.5 L390.4 63.4 L393 58.3 L395.6 53.1 L398.2 47.9 L400.8 42.7 L403.4 37.5 L406 32.2"/>
+      <line class="hc-lead" x1="155.5" y1="288.3" x2="163.5" y2="204.7"/>
+      <text class="hc-note" x="163.5" y="187.7" text-anchor="start">Biggest boost: −9%</text>
+      <text class="hc-note" x="163.5" y="201.7" text-anchor="start">~9% faster</text>
+      <line class="hc-lead" x1="60.9" y1="264.7" x2="68.9" y2="204.7"/>
+      <text class="hc-note" x="68.9" y="187.7" text-anchor="start">Back to flat</text>
+      <text class="hc-note" x="68.9" y="201.7" text-anchor="start">pace: −18%</text>
+      <line class="hc-lead" x1="302" y1="225.7" x2="288" y2="145.7"/>
+      <text class="hc-note" x="288" y="128.7" text-anchor="end">+5% climb:</text>
+      <text class="hc-note" x="288" y="142.7" text-anchor="end">~15% slower</text>
+      <line class="hc-lead" x1="354" y1="132.3" x2="340" y2="74.3"/>
+      <text class="hc-note" x="340" y="57.3" text-anchor="end">+10% climb:</text>
+      <text class="hc-note" x="340" y="71.3" text-anchor="end">~51% slower</text>
+      <g class="hc-pt"><title>−20% grade: +4.0% vs flat pace (1.040×)</title><circle class="hc-hit" cx="42" cy="254.3" r="11"/><circle class="hc-dot" cx="42" cy="254.3" r="4"/></g>
+      <g class="hc-pt"><title>−15% grade: −5.2% vs flat pace (0.948×)</title><circle class="hc-hit" cx="94" cy="278.4" r="11"/><circle class="hc-dot" cx="94" cy="278.4" r="4"/></g>
+      <g class="hc-pt"><title>−10% grade: −9.0% vs flat pace (0.910×)</title><circle class="hc-hit" cx="146" cy="288.1" r="11"/><circle class="hc-dot" cx="146" cy="288.1" r="4"/></g>
+      <g class="hc-pt"><title>−6% grade: −8.0% vs flat pace (0.920×)</title><circle class="hc-hit" cx="187.6" cy="285.6" r="11"/><circle class="hc-dot" cx="187.6" cy="285.6" r="4"/></g>
+      <g class="hc-pt"><title>−3% grade: −5.0% vs flat pace (0.950×)</title><circle class="hc-hit" cx="218.8" cy="277.7" r="11"/><circle class="hc-dot" cx="218.8" cy="277.7" r="4"/></g>
+      <g class="hc-pt"><title>0% grade: +0.0% vs flat pace (1.000×)</title><circle class="hc-hit" cx="250" cy="264.7" r="11"/><circle class="hc-dot" cx="250" cy="264.7" r="4"/></g>
+      <g class="hc-pt"><title>+3% grade: +8.8% vs flat pace (1.088×)</title><circle class="hc-hit" cx="281.2" cy="241.9" r="11"/><circle class="hc-dot" cx="281.2" cy="241.9" r="4"/></g>
+      <g class="hc-pt"><title>+6% grade: +19.1% vs flat pace (1.191×)</title><circle class="hc-hit" cx="312.4" cy="215.1" r="11"/><circle class="hc-dot" cx="312.4" cy="215.1" r="4"/></g>
+      <g class="hc-pt"><title>+8% grade: +35.0% vs flat pace (1.350×)</title><circle class="hc-hit" cx="333.2" cy="173.7" r="11"/><circle class="hc-dot" cx="333.2" cy="173.7" r="4"/></g>
+      <g class="hc-pt"><title>+10% grade: +50.9% vs flat pace (1.509×)</title><circle class="hc-hit" cx="354" cy="132.3" r="11"/><circle class="hc-dot" cx="354" cy="132.3" r="4"/></g>
+      <g class="hc-pt"><title>+12% grade: +65.8% vs flat pace (1.658×)</title><circle class="hc-hit" cx="374.8" cy="93.7" r="11"/><circle class="hc-dot" cx="374.8" cy="93.7" r="4"/></g>
+      <g class="hc-pt"><title>+15% grade: +89.4% vs flat pace (1.894×)</title><circle class="hc-hit" cx="406" cy="32.2" r="11"/><circle class="hc-dot" cx="406" cy="32.2" r="4"/></g>
+      <circle class="hc-dot hc-key" cx="60.9" cy="264.7" r="4"/>
+      </svg>
+      <figcaption>Above the dashed line you're slower than your flat pace; below it, faster. The downhill side bottoms out near &minus;9% and is back above the line by &minus;18%. Hover a point for its value.</figcaption>
+    </figure>
+
+    <p>These are <strong>estimates for a typical runner</strong>, not laws. How they compare with the research:</p>
+    <ul>
+      <li><strong>Downhill</strong>, the model is a little more conservative than Strava's heart-rate curve: a 9% peak benefit instead of about 12%, at the same &minus;9% grade, and the same return to flat pace near &minus;18%. Most runners don't get the full downhill benefit in a race, so we'd rather not promise it.</li>
+      <li><strong>Uphill</strong>, on typical road-race grades (up to about 6%) it lands in the same range as Strava's real-world curve. On steeper climbs it follows the lab curve with Strava's 2-point real-world offset. One thing it doesn't model is <strong>power-hiking</strong>: on very steep trail climbs, many runners hike, which costs less energy than running at the same slow speed. On those stretches, read the split as a target effort, not a requirement to keep running.</li>
+      <li><strong>Individuals vary.</strong> Lighter runners, strong climbers and skilled descenders will beat these numbers on their favorite side of the hill. Runners who train only on flat ground will usually lose more.</li>
+    </ul>
+
+    <h3>The hill effort setting</h3>
+    <p>The table above shows <em>even effort</em>: the full multiplier, the pace that would feel the same as your flat pace. The planner has a <strong>hill effort</strong> slider so you can choose how closely to follow it. At <strong>0%</strong> you run even pace, the same pace on every grade. At <strong>100%</strong> you run even effort, with the full multiplier. In between it blends the two: at the default 60%, a 5% climb gets 60% of the 15% slowdown, so about 9% slower. Whatever you pick, the splits are rescaled so they still add up to your goal time. That's why your flat-ground pace on a hilly course comes out a bit faster than your average pace.</p>
+
+    <div class="callout">
+      <p><strong>See it on a real course.</strong> The <a href="../pace-planner.html">Race Pace Planner</a> has measured elevation profiles for 49 marathons, or you can upload your own GPX. Set a goal time and hill effort and it gives you elevation-adjusted splits by mile, by kilometer or by climb and descent, with export to a Garmin watch workout. Try it on <a href="../pace-planner.html?course=boston">Boston</a> or <a href="../pace-planner.html?course=nyc">New York</a>.</p>
+    </div>
+
+    <h2>How to Pace a Hilly Race</h2>
+    <h3>Run by effort, not by pace</h3>
+    <p>Holding your flat pace up a hill is a much bigger effort than it looks. Running 8:00/mile up a 5% grade takes about the same effort as running <strong>6:57/mile on flat ground</strong>. Do that on every climb of a marathon and you'll be paying for it by the late miles. Townshend's runners show the natural tendency. Left to pace themselves on a hilly course, they ran 23% slower uphill and 13.8% faster downhill than on the flat, yet their oxygen use still averaged about 100% of their ventilatory threshold on the climbs, against 89% on the level and 79% on the descents. Even experienced runners overspend on the climbs. The runners in that study who let their pace vary more with the gradient kept their oxygen use steadier.</p>
+
+    <h3>You can't bank time on hills</h3>
+    <p>Pushing a climb to "stay on pace" and planning to "get it back on the downhill" doesn't work for two reasons. The seconds you save uphill cost more effort than the same seconds on the flat. And the downhill can't refund them: past about &minus;9%, pushing harder buys almost nothing, and it costs you quad damage you'll feel at mile 22. The same logic applies to the early-race version of banking time. The <a href="what-is-vdot.html">VDOT tables</a> assume even pacing for a reason.</p>
+
+    <h3>On climbs</h3>
+    <ul>
+      <li>Shorten your stride, keep your cadence and hold the effort and breathing you'd have on the flat. Accept the slower split; it's built into a good plan.</li>
+      <li>Run through the top. In Townshend's study, speed on the flat stayed affected for about 78 seconds after a climb, versus about 24 seconds after a descent. The authors concluded that getting back up to speed on the flat sections after hills is where runners can save the most time.</li>
+    </ul>
+
+    <h3>On descents</h3>
+    <ul>
+      <li>On gentle grades (roughly 2&ndash;6%), let gravity work. Lean slightly forward from the ankles, keep your feet under you and let your turnover come up. That's where most of the free speed is.</li>
+      <li>On steep descents, stay controlled. Past about &minus;10%, extra speed is small and the braking cost is large. Save your legs for the rest of the race.</li>
+    </ul>
+
+    <h2>Example: Boston's Newton Hills</h2>
+    <p>Boston shows both sides of the hill problem. The course drops roughly 130&ndash;140 m (about 450 ft) from Hopkinton to Boston, about three times the 1 m per km (42 m over a marathon) that <a href="https://worldathletics.org/records/certified-roadevents" rel="noopener">World Athletics allows</a> for a course to count for records. That doesn't make it easy. Most of the drop comes in the first few miles, where it's tempting to run fast and where the eccentric pounding starts. Then the Newton hills come between about miles 16 and 21, ending with Heartbreak Hill between miles 20 and 21. In the profile the Race Pace Planner uses, that mile alone climbs about 28 m (around 90 ft).</p>
+    <p>For a runner whose flat-effort pace is 8:00/mile, a 4% section of Heartbreak works out to about 8:57/mile at full even effort, or about 8:34 at the planner's default 60% hill effort. Planned in advance, that's just a split on the plan. If it catches you by surprise, you'll try to hold pace and blow up on the climb. <a href="../pace-planner.html?course=boston">Load Boston in the planner</a> to see every mile, or start from your PR in the <a href="../race-predictor.html?race=boston">Race Time Predictor's Boston preset</a>.</p>
+
+    <h2>How the Race Predictor Accounts for Elevation</h2>
+    <p>The <a href="../race-predictor.html">Race Time Predictor</a> uses the same principle at the whole-course level. Instead of working grade by grade, it uses a course's total elevation gain and loss. First it converts your PR to a flat-equivalent time using your PR course's elevation. From that it works out your VDOT, then applies your target course's elevation: climbing adds time, and descending gives back only part of it, the same asymmetry as above. The penalty scales with fitness, so faster runners lose fewer seconds per 100 ft of climbing, partly because they spend less time on each hill. For the 49 marathons with a measured course profile, it also builds a race-day pace plan with hill-adjusted splits using the Race Pace Planner.</p>
+    <p>The same thinking applies in training. On hilly easy runs, let your pace drift on the climbs and keep the effort easy. Run by feel or heart rate, as covered in <a href="zone-2-training.html">Zone 2 training</a> and <a href="why-runners-train-too-fast.html">why most runners train too fast</a>. Your <a href="../training-paces.html">training paces</a> are flat-ground numbers.</p>
+
+    <h2>Sources</h2>
+    <ul class="sources">
+      <li>Minetti AE, Moia C, Roi GS, Susta D, Ferretti G. <a href="https://doi.org/10.1152/japplphysiol.01177.2001" rel="noopener">Energy cost of walking and running at extreme uphill and downhill slopes</a>. <em>J Appl Physiol</em> 93:1039&ndash;1046, 2002.</li>
+      <li>Robb D. <a href="https://medium.com/strava-engineering/an-improved-gap-model-8b07ae8886c3" rel="noopener">An Improved GAP Model</a>. Strava Engineering, October 2017.</li>
+      <li>Townshend AD, Worringham CJ, Stewart IB. <a href="https://pubmed.ncbi.nlm.nih.gov/20010117/" rel="noopener">Spontaneous pacing during overground hill running</a>. <em>Med Sci Sports Exerc</em> 42(1):160&ndash;169, 2010.</li>
+      <li>Vernillo G et al. <a href="https://doi.org/10.1007/s40279-016-0605-y" rel="noopener">Biomechanics and physiology of uphill and downhill running</a>. <em>Sports Med</em> 47(4):615&ndash;629, 2017.</li>
+      <li>World Athletics. <a href="https://worldathletics.org/records/certified-roadevents" rel="noopener">Certified road events</a> (start-to-finish elevation drop limit).</li>
+    </ul>
+
+  </article>
+  <div class="cta">
+    <p>Get elevation-adjusted splits for your race: pick one of 49 real marathon courses or upload a GPX, set your goal and hill effort, and send the plan to your Garmin.</p>
+    <div class="cta-pair">
+      <a href="../pace-planner.html" class="cta-btn">Race Pace Planner &rarr;</a>
+      <a href="../race-predictor.html" class="cta-btn" style="background:var(--surface2);color:var(--text);">Race Time Predictor &rarr;</a>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <p class="site-footer-disclaimer">For informational and educational purposes only. Not medical or coaching advice. Running calculators are based on established models and are not a substitute for professional guidance. All calculations are performed locally in your browser &mdash; no personal data is collected or stored.</p>
+  <nav class="site-footer-nav">
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../privacy.html">Privacy Policy</a>
+  </nav>
+</footer>
+<script>(function(){var btn=document.getElementById('themeToggle');var icon=document.getElementById('themeIcon');var label=document.getElementById('themeLabel');function updateUI(){var d=document.documentElement.getAttribute('data-theme')==='dark';icon.innerHTML=d?'&#9788;':'&#9790;';label.textContent=d?'Light':'Dark';}btn.addEventListener('click',function(){var d=document.documentElement.getAttribute('data-theme')==='dark';if(d){document.documentElement.removeAttribute('data-theme');localStorage.setItem('theme','light');}else{document.documentElement.setAttribute('data-theme','dark');localStorage.setItem('theme','dark');}updateUI();});updateUI();})();</script>
+<script>
+(function() {
+  var h = document.getElementById('hamburger');
+  var n = document.getElementById('headerNav');
+  if (!h || !n) return;
+  h.addEventListener('click', function() { var open = n.classList.toggle('mobile-open'); h.classList.toggle('open', open); h.setAttribute('aria-expanded', String(open)); });
+  n.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { n.classList.remove('mobile-open'); h.classList.remove('open'); h.setAttribute('aria-expanded', 'false'); }); });
+  n.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) { btn.addEventListener('click', function() { if (window.innerWidth > 768) return; btn.closest('.nav-dropdown').classList.toggle('mobile-open'); }); });
+})();
+</script>
+</body>
+</html>

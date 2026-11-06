@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
 <title>VDOT Reference Tables — Race Times &amp; Training Paces | Abel's Calculators</title>
-<meta name="description" content="Complete Jack Daniels VDOT reference table for VDOT 30–85. Shows race time equivalents (5K, 10K, half marathon, marathon) and training paces for Easy, Marathon, Threshold, Interval, and Repetition zones.">
+<meta name="description" content="Jack Daniels VDOT table for VDOT 30–85: equivalent 5K, 10K, half and marathon times plus Easy, Marathon, Threshold, Interval and Repetition paces.">
 <meta name="author" content="Abel's Calculators">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://abelscalculators.com/vdot-tables.html">
@@ -59,7 +59,7 @@
 
   /* Header */
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { margin: 0; line-height: 0; }
+  header .site-logo { margin: 0; line-height: 0; }
   .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -228,6 +228,7 @@
     header { padding: 0 16px; }
     .hero-band-inner { padding: 16px; }
   }
+  h1.hero-band-title { font-weight: 400; }
 </style>
 <style>
 /* ===== MOBILE NAV ===== */
@@ -275,7 +276,7 @@ html, body { overflow-x: hidden; }
 <body>
 
 <header>
-  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <div class="site-logo"><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -347,7 +348,7 @@ html, body { overflow-x: hidden; }
   <div class="hero-band-inner">
     <div class="hero-band-left">
       <div class="hero-band-label">Jack Daniels VDOT System</div>
-      <div class="hero-band-title">VDOT <span>Reference Tables</span></div>
+      <h1 class="hero-band-title">VDOT <span>Reference Tables</span></h1>
     </div>
     <div class="hero-band-divider"></div>
     <div class="hero-band-body">
