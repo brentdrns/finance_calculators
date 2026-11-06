@@ -77,7 +77,7 @@
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
 
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { margin: 0; line-height: 0; }
+  header .site-logo { margin: 0; line-height: 0; }
   .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -351,7 +351,7 @@ html, body { overflow-x: hidden; }
 <body>
 
 <header>
-  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <div class="site-logo"><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="header-nav" id="headerNav" aria-label="Site navigation">
     <a href="index.html">Home</a>
@@ -422,7 +422,7 @@ html, body { overflow-x: hidden; }
     <img src="images/withdrawal strategy.png" alt="Withdrawal Strategy Monte Carlo" style="height:178px;width:auto;border-radius:12px;flex-shrink:0">
     <div class="hero-band-left">
       <div class="hero-band-label">Withdrawal Strategy Monte Carlo</div>
-      <h2 class="hero-band-title">Will your money <span>last through retirement?</span></h2>
+      <h1 class="hero-band-title">Will your money <span>last through retirement?</span></h1>
       <h3 class="hero-band-subtitle" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text-muted);margin:6px 0 0;">Monte Carlo withdrawal simulator &mdash; compare strategies, model inflation, and stress-test your retirement income plan</h3>
     </div>
     <div class="hero-band-divider"></div>

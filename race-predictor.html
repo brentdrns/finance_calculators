@@ -59,7 +59,7 @@
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
 
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { margin: 0; line-height: 0; }
+  header .site-logo { margin: 0; line-height: 0; }
   .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -291,7 +291,7 @@
 <body>
 
 <header>
-  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <div class="site-logo"><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -363,7 +363,7 @@
   <div class="hero-band-inner">
     <div class="hero-band-left">
       <div class="hero-band-label">Race Predictor</div>
-      <h2 class="hero-band-title">Your race, <span>predicted.</span></h2>
+      <h1 class="hero-band-title">Your race, <span>predicted.</span></h1>
     </div>
     <div class="hero-band-divider"></div>
     <p class="hero-band-body">
@@ -683,7 +683,7 @@
       <p><strong>Mileage adjustment</strong> accounts for the fact that VDOT from a 5K doesn't perfectly translate to marathon performance unless you're training at marathon-specific mileage. Under-trained runners see a larger gap between VDOT-predicted times and actual performance at longer distances. The penalty scales with how much your weekly mileage falls below the ideal for your target race, and how much longer the target is vs your PR distance. It's capped at 10% and only applies when the target is longer than the PR and both are beyond 10K.</p>
       <p><strong>Elevation adjustment</strong> normalizes race times to a flat-equivalent effort. Each 1% average uphill grade adds roughly <span class="hl">+1.2%</span> to your pace, while each 1% average downhill grade saves only <span class="hl-g">-0.6%</span> — uphills hurt more than downhills help. Your PR time is converted to a flat-equivalent time using your PR course's elevation, then VDOT is computed from that. The predicted time is then adjusted upward by your target course's elevation factor.</p>
       <p><strong>Weather adjustment</strong> applies a heat penalty when temperature exceeds ~55&deg;F, based on research by Ely et al. (2007). Every degree above 55&deg;F adds approximately <span class="hl">+0.3%</span> to finish time, with additional compounding for humidity above 60%. At 70&deg;F / 70% humidity, expect roughly a <span class="hl">+5&ndash;6%</span> slowdown versus ideal conditions. Cold weather has a smaller effect and is not penalized here. Race profiles pre-fill historical averages where we have them — override them freely for your actual forecast.</p>
-      <p><strong>Race-day pace plan.</strong> For the 49 marathons with a measured course profile, the predictor also builds a pacing plan at your predicted finish time using the <a href="pace-planner.html" style="color:var(--accent)">Race Pace Planner</a>. The plan slows you on climbs and speeds you up on descents while still adding up to your predicted time. You can split it by mile or by grade, adjust how hard to push the hills, and export it to a Garmin watch workout, a printable pace band, or CSV. Course gain and loss for these races come from the same measured profiles.</p>
+      <p><strong>Race-day pace plan.</strong> For the 49 marathons with a measured course profile, the predictor also builds a pacing plan at your predicted finish time using the <a href="pace-planner.html" style="color:var(--accent)">Race Pace Planner</a>. The plan slows you on climbs and speeds you up on descents while still adding up to your predicted time. You can split it by mile or by grade, adjust how hard to push the hills, and export it to a Garmin watch workout, a printable pace band, or CSV. Course gain and loss for these races come from the same measured profiles. For what each percent of grade does to your pace, read <a href="blog/how-hills-affect-running-pace.html" style="color:var(--accent)">How Hills Affect Running Pace, Grade by Grade</a>.</p>
       <p><strong>Formula sources:</strong> Jack Daniels, <em>Daniels&rsquo; Running Formula</em>. The VDOT model was originally published in <em>Medicine &amp; Science in Sports</em> (Daniels &amp; Gilbert, 1979). Weather model: Ely et al. (2007), <em>Medicine &amp; Science in Sports &amp; Exercise</em>. Predictions are estimates — individual performance varies based on pacing, fueling, training, and race-day conditions.</p>
     </div>
   </div>

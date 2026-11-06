@@ -50,7 +50,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { margin: 0; line-height: 0; }
+  header .site-logo { margin: 0; line-height: 0; }
   .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -301,7 +301,7 @@
 <body>
 
 <header>
-  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <div class="site-logo"><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -373,7 +373,7 @@
   <div class="hero-band-inner">
     <div class="hero-band-left">
       <div class="hero-band-label">Race Pace Planner</div>
-      <h2 class="hero-band-title">Run the hills, <span>not the average.</span></h2>
+      <h1 class="hero-band-title">Run the hills, <span>not the average.</span></h1>
     </div>
     <div class="hero-band-divider"></div>
     <p class="hero-band-body">
@@ -703,7 +703,7 @@
   <div class="card">
     <div class="chart-title">How the Planner Works</div>
     <div class="explain">
-      <p><strong>Grade adjustment.</strong> Each stretch of the course gets a pace multiplier based on its grade. Climbs cost roughly 2.5&ndash;3% per 1% of grade, and the cost grows on steeper pitches. Descents help less than climbs hurt: the benefit is biggest around a &minus;9% grade and shrinks on steeper ground. Past about &minus;18% you're braking hard enough that the descent is no faster than flat, and very steep descents are slower than flat.</p>
+      <p><strong>Grade adjustment.</strong> Each stretch of the course gets a pace multiplier based on its grade. Road-race climbs cost about 2.8% per 1% of grade. Past about 7% the cost rises much faster, following lab measurements adjusted to real runners' heart-rate data: a 10% climb is about 51% slower than flat at full effort, and a 15% climb about 89% slower. Descents help less than climbs hurt: the benefit is biggest around a &minus;9% grade and shrinks on steeper ground. Past about &minus;18% you're braking hard enough that the descent is no faster than flat, and very steep descents are slower than flat. For the research behind these numbers, see <a href="blog/how-hills-affect-running-pace.html" style="color:var(--accent)">How Hills Affect Running Pace, Grade by Grade</a>.</p>
       <p><strong>Hill effort.</strong> At 0% you run the same pace everywhere, regardless of terrain. At 100% you hold an even effort, so your pace changes by the full grade multiplier. Values in between blend the two. Most runners race well somewhere around 50&ndash;80%, because pushing uphill costs more than it gains back downhill.</p>
       <p><strong>Your goal stays fixed.</strong> The planner solves for the flat-ground pace that makes all the adjusted segments add up to exactly your goal time. The pacing-across-the-race slider then tilts that plan so you start slower or faster than the finish.</p>
       <p><strong>GPX elevation.</strong> GPS elevation is noisy, so uploaded tracks are smoothed before grades are calculated. Total gain may read a little lower than your watch shows. If your file measures slightly long or short, type the official distance and the course is scaled to match.</p>
@@ -782,12 +782,23 @@ function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 /* ================================================================
    Grade model
    Full-effect pace multiplier vs flat, by grade in percent.
-   Uphill: ~2.8%/1% grade, rising on steeper pitches.
+   Uphill: ~2.8%/1% grade on road grades. From 5% to 9% it blends into
+   Minetti's (2002) energy-cost curve shifted 2 points of grade gentler,
+   the offset Strava found between lab cost and real runners' heart rate.
    Downhill: benefit peaks near -9%, back to flat by ~-18%, a penalty beyond.
    ================================================================ */
+function minettiRatio(i) {   // energy cost at fractional grade i, relative to flat
+  return (((((155.4 * i - 30.4) * i - 43.3) * i + 46.3) * i + 19.5) * i + 3.6) / 3.6;
+}
 function gradeFactor(G) {
   G = clamp(G, -35, 35);
-  if (G >= 0) return 1 + 0.028 * G + 0.0004 * G * G;
+  if (G >= 0) {
+    var road = 1 + 0.028 * G + 0.0004 * G * G;
+    if (G <= 5) return road;
+    var steep = minettiRatio((G - 2) / 100);
+    var t = Math.min(1, (G - 5) / 4), w = t * t * (3 - 2 * t);
+    return road + w * (steep - road);
+  }
   var x = -G;
   return 1 - 0.020 * x + 0.0011 * x * x;
 }
@@ -1620,7 +1631,7 @@ function profileLeave() {
 })();
 
 /* ----- grade curve chart ----- */
-var CG = { gMin: -30, gMax: 20, yMin: -15, yMax: 75 };
+var CG = { gMin: -25, gMax: 15, yMin: -15, yMax: 100 };
 var curveGeom = null;
 function renderCurve() {
   var wrap = document.getElementById('curveWrap'), el = document.getElementById('curveChart');
@@ -1629,14 +1640,14 @@ function renderCurve() {
   function X(g) { return ML + (g - CG.gMin) / (CG.gMax - CG.gMin) * PW; }
   function Y(v) { return T + (1 - (v - CG.yMin) / (CG.yMax - CG.yMin)) * PH; }
   var q = svgOpen(W, H, 'Pace change versus grade at the current hill effort setting');
-  [-15, 0, 25, 50, 75].forEach(function(v) {
+  [-15, 0, 25, 50, 75, 100].forEach(function(v) {
     var yy = Y(v).toFixed(1);
     q += '<line x1="' + ML + '" x2="' + (W - MR) + '" y1="' + yy + '" y2="' + yy + '" stroke="' + (v === 0 ? 'var(--viz-axis)' : 'var(--border)') + '" stroke-width="1"/>';
     q += '<text x="' + (ML - 6) + '" y="' + yy + '" text-anchor="end" dominant-baseline="middle">' + (v === 0 ? 'flat' : fmtSigned(v) + '%') + '</text>';
   });
-  for (var g = CG.gMin; g <= CG.gMax; g += 10) {
-    q += '<text x="' + X(g).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="' + (g === CG.gMax ? 'end' : g === CG.gMin ? 'start' : 'middle') + '">' + fmtSigned(g) + '%</text>';
-  }
+  [-20, -10, 0, 10].forEach(function(g) {
+    q += '<text x="' + X(g).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle">' + fmtSigned(g) + '%</text>';
+  });
   q += '<text x="' + (ML + 4) + '" y="' + (T + 4) + '" dominant-baseline="hanging">↑ slower</text>';
   q += '<text x="' + (ML + 4) + '" y="' + (Y(-15) - 4) + '">↓ faster</text>';
   var path = '';

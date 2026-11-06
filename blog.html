@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="180x180" href="images/apple-touch-icon.png">
 <title>Blog &mdash; Abel&#8217;s Calculators</title>
-<meta name="description" content="In-depth articles on rent vs. buy, retirement withdrawal strategies, Monte Carlo investing, rental property, vehicle costs, and tax brackets &mdash; financial decisions backed by math, not guesswork.">
+<meta name="description" content="Articles on running and money: pacing hills, VDOT, Boston qualifying, heart rate zones, rent vs. buy, retirement withdrawals and taxes, backed by the math.">
 <meta name="author" content="Abel&#8217;s Financial Calculators">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://abelscalculators.com/blog.html">
@@ -48,7 +48,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; }
   header { padding: 0 40px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  header h1 { margin: 0; line-height: 0; }
+  header .site-logo { margin: 0; line-height: 0; }
   .header-banner { max-height: 360px; width: auto; max-width: 650px; display: block; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   .header-nav { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -176,7 +176,7 @@ html, body { overflow-x: hidden; }
 <body>
 
 <header>
-  <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></h1>
+  <div class="site-logo"><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel's Calculators</span></a></div>
   <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="header-nav" id="headerNav" aria-label="Site navigation">
     <a href="index.html">Home</a>
@@ -243,7 +243,7 @@ html, body { overflow-x: hidden; }
 </header>
 
 <div class="content">
-  <h2 class="page-title">Blog</h2>
+  <h1 class="page-title">Blog</h1>
   <p class="page-sub">Deep dives into financial and running decisions &mdash; with the math to back them up.</p>
 
   <div class="filter-bar" id="filterBar">
@@ -258,6 +258,142 @@ html, body { overflow-x: hidden; }
   </div>
 
   <div class="blog-list" id="blogList">
+
+    <a href="blog/how-hills-affect-running-pace.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 6, 2026</div>
+      <div class="blog-card-title">How Hills Affect Running Pace, Grade by Grade</div>
+      <div class="blog-card-desc">A 5% climb slows you about 15%, but a 5% descent gives back only about 7%. What each 1% of grade costs, where the downhill benefit runs out, and how to pace a hilly race.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Pacing</span>
+        <span class="blog-card-tag">Hills</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/bq-gender-gap.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 3, 2026</div>
+      <div class="blog-card-title">Women's BQ Standards Are More Forgiving Than Men's</div>
+      <div class="blog-card-desc">The Boston Marathon qualifying standards look equal on paper, but the data tells a different story. Women's BQ times are proportionally more lenient than men's by about 10%.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Boston</span>
+        <span class="blog-card-tag">Racing</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/nyc-marathon-2026.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">NYC Marathon 2026: What Separated the Elites From the Field</div>
+      <div class="blog-card-desc">The NYC Marathon just wrapped. We break down what the elite winning times imply about aerobic capacity, pacing, and what recreational runners can learn from how the best in the world race.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Racing</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/sub-two-hour-marathon.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">The Sub-2-Hour Marathon: Where Does the Barrier Stand in 2026?</div>
+      <div class="blog-card-desc">Kipchoge broke 2 hours in a controlled setting in 2019. The official world record stood at 2:00:35 as of 2024. Here's where the barrier stands, what physiology limits it, and what it means for the sport.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Racing</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/what-is-vdot.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">What Is VDOT and Why Does Your 5K Time Predict Your Marathon?</div>
+      <div class="blog-card-desc">Jack Daniels' VDOT system connects race times across distances by measuring your aerobic capacity. Here's how it works, why it's accurate, and where it breaks down.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">VDOT</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/5k-fitness-marathon.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">Why Your 5K Fitness Doesn't Predict Your Marathon As Well As You Think</div>
+      <div class="blog-card-desc">VDOT tables suggest a clean relationship between your 5K time and marathon potential. Reality is messier. Here's why mileage, fueling, and training specificity explain the gap.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">VDOT</span>
+        <span class="blog-card-tag">Racing</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/could-you-bq.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">Could You BQ? What Boston Qualifying Standards Actually Require</div>
+      <div class="blog-card-desc">A Boston qualifier isn't enough to get in anymore — you need to beat the standard by several minutes. Here's what a BQ actually requires physiologically, and what training gets you there.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Boston</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/zone-2-training.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">Zone 2 Training: What It Is, Why Everyone's Talking About It</div>
+      <div class="blog-card-desc">Zone 2 training became a mainstream topic thanks to longevity researchers and coaches. Here's the actual physiology behind it, how to find your zone, and what it does for runners.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Heart Rate</span>
+        <span class="blog-card-tag">Training</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/hr-zones-probably-wrong.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">Why Your Heart Rate Zones Are Probably Wrong</div>
+      <div class="blog-card-desc">Most heart rate zones are calculated from age-predicted max HR formulas that carry ±12 bpm error. Here's why LTHR is a better anchor — and how to find it.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Heart Rate</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/why-runners-train-too-fast.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">Why Most Runners Train Too Fast (And What to Do Instead)</div>
+      <div class="blog-card-desc">Most recreational runners spend the majority of their miles in a moderate-intensity gray zone — too fast to recover, too slow to get fast. The 80/20 principle and how to fix it.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Training</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/10-percent-rule-is-wrong.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">The 10% Rule Is Wrong &mdash; Here's What the Research Actually Says</div>
+      <div class="blog-card-desc">The 10% rule for increasing weekly mileage has no rigorous study behind it and doesn't prevent injuries the way coaches claim. Here's what the evidence actually shows.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Training</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
+
+    <a href="blog/galloway-method.html" class="blog-card" data-tags="running">
+      <div class="blog-card-date">November 2, 2026</div>
+      <div class="blog-card-title">The Galloway Method: Does Running Slower Actually Make You Faster?</div>
+      <div class="blog-card-desc">Jeff Galloway's run/walk intervals delay fatigue and can produce similar or faster finish times for recreational runners. Here's what the evidence shows and how to use them.</div>
+      <div class="blog-card-tags">
+        <span class="blog-card-tag">Running</span>
+        <span class="blog-card-tag">Run/Walk</span>
+      </div>
+      <div class="blog-card-cta">Read article &rarr;</div>
+    </a>
 
     <a href="blog/income-near-retirement.html" class="blog-card" data-tags="retirement investing">
       <div class="blog-card-date">March 16, 2026</div>
