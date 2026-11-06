@@ -69,6 +69,8 @@
   .header-nav a:hover { color: var(--text); background: var(--surface2); }
   .header-nav a.active { color: #fff; background: var(--accent); }
   .nav-sep { color: var(--border); font-size: 14px; margin: 0 2px; user-select: none; }
+
+  /* Nav dropdowns */
   .nav-dropdown { position: relative; display: flex; align-items: center; }
   .nav-dropdown-btn { color: var(--text-muted); font-size: 12px; padding: 6px 14px; border: none; border-radius: 8px; font-weight: 500; background: transparent; transition: color 0.15s, background 0.15s; cursor: pointer; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 3px; line-height: 1; }
   .nav-dropdown-btn:hover { color: var(--text); background: var(--surface2); }
@@ -234,12 +236,57 @@
     .map-container { max-width: 240px; }
   }
 </style>
+<style>
+/* ===== MOBILE NAV ===== */
+html, body { overflow-x: hidden; }
+.hamburger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; padding: 9px 10px; margin-left: auto; flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 16px; height: 1.5px; background: var(--text-muted);
+  border-radius: 2px; transition: transform 0.2s, opacity 0.15s; transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 768px) {
+  header { position: relative; flex-wrap: nowrap; flex-direction: row; align-items: center; }
+  .header-banner { max-width: 100%; }
+  .hamburger { display: flex; }
+  .header-nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    flex-direction: column; gap: 2px; padding: 8px 12px 16px; z-index: 200;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    max-height: calc(100vh - 60px); overflow-y: auto;
+  }
+  .header-nav.mobile-open { display: flex; }
+  .nav-sep { display: none; }
+  .header-nav > a { padding: 10px 12px; border-radius: 8px; }
+  .nav-dropdown { width: 100%; flex-direction: column; }
+  .nav-dropdown-btn { width: 100%; padding: 10px 12px; justify-content: space-between; }
+  .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+  .nav-dropdown.mobile-open .nav-dropdown-menu {
+    display: flex; flex-direction: column; position: static;
+    box-shadow: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 4px 0; margin: 2px 0 4px; background: var(--surface);
+  }
+  .nav-caret { transition: transform 0.2s; }
+  .nav-dropdown.mobile-open .nav-caret { transform: rotate(180deg); }
+  .theme-toggle { width: 100%; justify-content: center; margin-top: 6px; }
+}
+</style>
 </head>
 <body>
 
 <header>
   <h1><a href="index.html"><img class="header-banner" src="images/website banner 2.png" alt="Abel's Calculators — Smarter Decisions. Better Results."><span class="sr-only">Abel&rsquo;s Calculators</span></a></h1>
-  <nav class="header-nav" aria-label="Site navigation">
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="header-nav" id="headerNav" aria-label="Site navigation">
     <a href="index.html">Home</a>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
@@ -277,14 +324,21 @@
     </div>
     <span class="nav-sep">&middot;</span>
     <div class="nav-dropdown">
-      <button class="nav-dropdown-btn active">More <span class="nav-caret">&#9660;</span></button>
+      <button class="nav-dropdown-btn">Running <span class="nav-caret">&#9660;</span></button>
       <div class="nav-dropdown-menu">
-        <a href="indian-holidays.html" class="active">Indian Holiday Calendar</a>
-        <div class="nav-dropdown-divider"></div>
-        <span class="nav-dropdown-label">Running</span>
         <a href="race-predictor.html">Race Time Predictor</a>
         <a href="bq-calculator.html">BQ Calculator</a>
-        <a href="training-paces.html">Training Pace Calculator</a>
+        <a href="training-paces.html">Training Paces</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="age-graded-calculator.html">Age Graded Calculator</a>
+        <a href="running-percentile.html">Percentile Calculator</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="pace-converter.html">Pace Converter</a>
+        <a href="pace-planner.html">Race Pace Planner</a>
+        <a href="run-walk-calculator.html">Run/Walk Calculator</a>
+        <a href="heart-rate-zones.html">Heart Rate Zones</a>
+        <div class="nav-dropdown-divider"></div>
+        <a href="vdot-tables.html">VDOT Tables</a>
       </div>
     </div>
     <span class="nav-sep">&middot;</span>
@@ -439,6 +493,9 @@
     </div>
   </div>
 </div>
+
+<div id="siteFeedback"></div>
+<script src="feedback.js" defer></script>
 
 <footer class="site-footer">
   <p class="site-footer-disclaimer">
@@ -1186,6 +1243,31 @@ document.getElementById('themeToggle').addEventListener('click', function() {
     document.getElementById('themeIcon').textContent = '\u2600';
     document.getElementById('themeLabel').textContent = 'Light';
   }
+})();
+</script>
+<script>
+(function() {
+  var h = document.getElementById('hamburger');
+  var n = document.getElementById('headerNav');
+  if (!h || !n) return;
+  h.addEventListener('click', function() {
+    var open = n.classList.toggle('mobile-open');
+    h.classList.toggle('open', open);
+    h.setAttribute('aria-expanded', String(open));
+  });
+  n.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      n.classList.remove('mobile-open');
+      h.classList.remove('open');
+      h.setAttribute('aria-expanded', 'false');
+    });
+  });
+  n.querySelectorAll('.nav-dropdown-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (window.innerWidth > 768) return;
+      btn.closest('.nav-dropdown').classList.toggle('mobile-open');
+    });
+  });
 })();
 </script>
 </body>
