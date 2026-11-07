@@ -139,6 +139,15 @@
     .vdot-table-cta .cta-title { font-size: 19px; }
     .vdot-table-cta .cta-go { width: 100%; text-align: center; }
   }
+  /* Marathon course guides */
+  .course-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 12px; }
+  .course-chip { font-size: 12px; font-weight: 500; color: var(--text); text-decoration: none; padding: 6px 11px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg); transition: border-color 0.15s, color 0.15s; }
+  .course-chip:hover, .course-chip:focus-visible { border-color: var(--accent); color: var(--accent); }
+  .course-all { font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; }
+  .course-all:hover { text-decoration: underline; }
+  .course-card-lead { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .course-card-lead strong { color: var(--text); }
+  .course-card-foot { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; }
   .card-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
@@ -323,6 +332,7 @@
         <div class="nav-dropdown-divider"></div>
         <a href="pace-converter.html">Pace Converter</a>
         <a href="pace-planner.html">Race Pace Planner</a>
+        <a href="marathon-courses.html">Marathon Course Guides</a>
         <a href="run-walk-calculator.html">Run/Walk Calculator</a>
         <a href="heart-rate-zones.html">Heart Rate Zones</a>
         <div class="nav-dropdown-divider"></div>
@@ -418,6 +428,15 @@
           <option value="both">Both</option>
         </select>
       </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-label">Racing a Marathon?</div>
+      <p style="font-size:11px; color:var(--text-muted); line-height:1.75;">
+        Hills change how your marathon pace plays out. See the elevation profile, the biggest climbs, and a mile-by-mile pace chart for your race:
+      </p>
+      <div class="course-chips"><a class="course-chip" href="marathons/boston-marathon.html">Boston</a><a class="course-chip" href="marathons/nyc-marathon.html">New York</a><a class="course-chip" href="marathons/chicago-marathon.html">Chicago</a><a class="course-chip" href="marathons/los-angeles-marathon.html">Los Angeles</a><a class="course-chip" href="marathons/london-marathon.html">London</a><a class="course-chip" href="marathons/berlin-marathon.html">Berlin</a></div>
+      <a class="course-all" href="marathon-courses.html">All 49 marathon course guides &rarr;</a>
     </div>
 
     <div class="panel" style="border-bottom:none; background: var(--surface); flex:1;">
@@ -769,6 +788,18 @@ function calculate() {
         '</div>' +
       '</div>' +
       '<div class="race-times-grid">' + raceBoxes + '</div>' +
+    '</div>' +
+
+    // Card: the predicted marathon time on a real course
+    '<div class="card">' +
+      '<div class="card-title">Your Marathon on a Real Course</div>' +
+      '<div class="course-card-lead">VDOT ' + vdot.toFixed(1) + ' predicts a <strong>' + fmtTime(timeFromVdot(vdot, 42195)) + '</strong> marathon on a flat course. ' +
+        'See where the hills are on your race, and what pace each mile needs:</div>' +
+      '<div class="course-chips"><a class="course-chip" href="marathons/boston-marathon.html">Boston</a><a class="course-chip" href="marathons/nyc-marathon.html">New York</a><a class="course-chip" href="marathons/chicago-marathon.html">Chicago</a><a class="course-chip" href="marathons/los-angeles-marathon.html">Los Angeles</a><a class="course-chip" href="marathons/london-marathon.html">London</a><a class="course-chip" href="marathons/berlin-marathon.html">Berlin</a></div>' +
+      '<div class="course-card-foot">' +
+        '<a class="course-all" href="marathon-courses.html">All 49 course guides →</a>' +
+        '<a class="course-all" href="pace-planner.html?course=boston&amp;goal=' + encodeURIComponent(fmtTime(timeFromVdot(vdot, 42195))) + '">Plan exact splits for ' + fmtTime(timeFromVdot(vdot, 42195)) + ' →</a>' +
+      '</div>' +
     '</div>' +
 
     // Card 2: Training zones
