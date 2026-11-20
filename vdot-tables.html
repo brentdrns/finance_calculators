@@ -158,6 +158,7 @@
   [data-theme="dark"] .vdot-table tbody td.td-race { background: rgba(91,141,239,0.04); border-left-color: rgba(91,141,239,0.12); }
   .vdot-table tbody td.td-race:first-of-type { border-left: 2px solid rgba(37,99,235,0.2); }
   [data-theme="dark"] .vdot-table tbody td.td-race:first-of-type { border-left-color: rgba(91,141,239,0.22); }
+  .vdot-table tbody td.td-race .race-pace { color: var(--text-muted); font-size: 11px; }
   .vdot-table tbody td.td-pace { background: rgba(0,106,255,0.02); border-left: 1px solid rgba(0,106,255,0.08); }
   [data-theme="dark"] .vdot-table tbody td.td-pace { background: rgba(77,142,255,0.03); border-left-color: rgba(77,142,255,0.1); }
   .vdot-table tbody td.td-pace:first-of-type { border-left: 2px solid rgba(0,106,255,0.25); }
@@ -502,11 +503,12 @@ var KM_M = 1000;
 function computeRow(v, unit) {
   var d = unit === 'km' ? KM_M : MILE_M;
 
-  // Race times
-  var t5k   = fmtTime(timeFromVdot(v, 5000));
-  var t10k  = fmtTime(timeFromVdot(v, 10000));
-  var thalf = fmtTime(timeFromVdot(v, 21097.5));
-  var tmar  = fmtTime(timeFromVdot(v, 42195));
+  // Race times, each followed by its pace in the selected unit
+  var unitLabel = unit === 'km' ? '/km' : '/mi';
+  var races = [5000, 10000, 21097.5, 42195].map(function(dist) {
+    var t = timeFromVdot(v, dist);
+    return fmtTime(t) + ' <span class="race-pace">(' + fmtPace(t / dist * d) + unitLabel + ')</span>';
+  });
 
   // Easy: 62–70% of VO2max (the core of Daniels' 59–74% E zone, as in his tables)
   var eFast = fmtPace(paceAtFraction(v, 0.70) * d);
@@ -527,7 +529,7 @@ function computeRow(v, unit) {
   var rPace = fmtPace((rRefT / 1609.344) * d);
 
   return {
-    races: [t5k, t10k, thalf, tmar],
+    races: races,
     easy: eFast + '–' + eSlow,
     m: mPace,
     t: tPace,
