@@ -403,7 +403,7 @@ html, body { overflow-x: hidden; }
 <script src="feedback.js" defer></script>
 
 <footer class="site-footer">
-  <p class="site-footer-disclaimer">Training paces calculated using the Jack Daniels VDOT model. Paces are estimates and intended as training guidelines only. Individual results vary based on fitness, conditions, and recovery. Easy pace shown as faster–slower range. M Pace shown as faster–slower range. Not a substitute for professional coaching.</p>
+  <p class="site-footer-disclaimer">Training paces calculated using the Jack Daniels VDOT model. Paces are estimates and intended as training guidelines only. Individual results vary based on fitness, conditions, and recovery. Easy pace shown as faster–slower range. M Pace is predicted marathon race pace; Threshold is the pace sustainable for about one hour of racing. Not a substitute for professional coaching.</p>
   <nav class="site-footer-nav">
     <a href="index.html">Home</a>
     <a href="blog.html">Blog</a>
@@ -434,12 +434,22 @@ html, body { overflow-x: hidden; }
 })();
 
 // ─── VDOT math ────────────────────────────────────────────────────────
+// Fraction of VO2max sustainable for a race lasting timeMinutes.
+function pctVo2max(timeMinutes) {
+  return 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
+             + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
+}
+
 function vdotFromTime(distanceMeters, timeMinutes) {
   var v = distanceMeters / timeMinutes;
   var vo2 = -4.60 + 0.182258 * v + 0.000104 * v * v;
-  var pvo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
-                 + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
-  return vo2 / pvo2;
+  return vo2 / pctVo2max(timeMinutes);
+}
+
+// Minutes per meter when running at `frac` of VO2max (inverts the oxygen-cost curve).
+function paceAtFraction(vdot, frac) {
+  var a = 0.000104, b = 0.182258, c = -4.60 - vdot * frac;
+  return (2 * a) / (-b + Math.sqrt(b * b - 4 * a * c));
 }
 
 function timeFromVdot(vdot, distanceMeters) {
@@ -498,16 +508,15 @@ function computeRow(v, unit) {
   var thalf = fmtTime(timeFromVdot(v, 21097.5));
   var tmar  = fmtTime(timeFromVdot(v, 42195));
 
-  // Easy: 59–74% of VDOT — fracHigh=0.74 gives faster pace, fracLow=0.59 gives slower
-  var eFast = fmtPace(timeFromVdot(v * 0.74, d));
-  var eSlow = fmtPace(timeFromVdot(v * 0.59, d));
+  // Easy: 62–70% of VO2max (the core of Daniels' 59–74% E zone, as in his tables)
+  var eFast = fmtPace(paceAtFraction(v, 0.70) * d);
+  var eSlow = fmtPace(paceAtFraction(v, 0.62) * d);
 
-  // M Pace: 75–84%
-  var mFast = fmtPace(timeFromVdot(v * 0.84, d));
-  var mSlow = fmtPace(timeFromVdot(v * 0.75, d));
+  // M Pace: predicted marathon race pace
+  var mPace = fmtPace(timeFromVdot(v, 42195) / 42195 * d);
 
-  // Threshold: 86%
-  var tPace = fmtPace(timeFromVdot(v * 0.86, d));
+  // Threshold: pace sustainable for ~60 min of racing (~88–89% VO2max)
+  var tPace = fmtPace(paceAtFraction(v, pctVo2max(60)) * d);
 
   // Interval: 5K race pace
   var iRefT = timeFromVdot(v, 5000);
@@ -520,7 +529,7 @@ function computeRow(v, unit) {
   return {
     races: [t5k, t10k, thalf, tmar],
     easy: eFast + '–' + eSlow,
-    m: mFast + '–' + mSlow,
+    m: mPace,
     t: tPace,
     i: iPace,
     r: rPace
