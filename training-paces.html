@@ -508,12 +508,22 @@ function onDistChange(){
 }
 
 // ─── VDOT math ───────────────────────────────────────────────────
+// Fraction of VO2max sustainable for a race lasting timeMinutes.
+function pctVo2max(timeMinutes) {
+  return 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
+             + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
+}
+
 function vdotFromTime(distanceMeters, timeMinutes) {
   var v = distanceMeters / timeMinutes;
   var vo2 = -4.60 + 0.182258 * v + 0.000104 * v * v;
-  var pvo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
-                 + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
-  return vo2 / pvo2;
+  return vo2 / pctVo2max(timeMinutes);
+}
+
+// Minutes per meter when running at `frac` of VO2max (inverts the oxygen-cost curve).
+function paceAtFraction(vdot, frac) {
+  var a = 0.000104, b = 0.182258, c = -4.60 - vdot * frac;
+  return (2 * a) / (-b + Math.sqrt(b * b - 4 * a * c));
 }
 
 function timeFromVdot(vdot, distanceMeters) {
@@ -557,8 +567,9 @@ var ZONES = [
     desc: 'Aerobic base building, recovery, long runs',
     effort: 'Conversational effort — you can speak in full sentences',
     hr: '65–79% max HR',
-    fracLow: 0.59,
-    fracHigh: 0.74,
+    // Core of Daniels' 59–74% VO2max E zone, matching the band his tables print
+    fracLow: 0.62,
+    fracHigh: 0.70,
     type: 'range', // show low–high
     workouts: ['60–90 min easy run', 'Long run at conversational pace']
   },
@@ -569,9 +580,8 @@ var ZONES = [
     desc: 'Marathon race pace, stamina development',
     effort: 'Controlled but purposeful — marathon race effort',
     hr: '80–87% max HR',
-    fracLow: 0.75,
-    fracHigh: 0.84,
-    type: 'range',
+    refDist: 42195, // M-pace = predicted marathon race pace
+    type: 'single',
     workouts: ['20–22 mile long run at race effort', '2×10 miles at M pace']
   },
   {
@@ -581,7 +591,7 @@ var ZONES = [
     desc: 'Lactate threshold, tempo runs, comfortably hard',
     effort: 'Comfortably hard — can say a few words, not sentences',
     hr: '88–92% max HR',
-    frac: 0.86,
+    frac: pctVo2max(60), // pace sustainable for ~60 min of racing (~88–89% VO2max)
     type: 'single',
     workouts: ['4×1 mile at T pace w/ 1-min rest', '3–4 mile tempo run']
   },
@@ -628,21 +638,17 @@ var KM_M = 1000;
 function zonePaces(vdot, zone) {
   var pacePerMile, pacePerKm;
   if (zone.type === 'range') {
-    var tMileLow = timeFromVdot(vdot * zone.fracLow, MILE_M);
-    var tMileHigh = timeFromVdot(vdot * zone.fracHigh, MILE_M);
-    var tKmLow = timeFromVdot(vdot * zone.fracLow, KM_M);
-    var tKmHigh = timeFromVdot(vdot * zone.fracHigh, KM_M);
-    // fracHigh = faster pace → smaller number; fracLow = slower pace → bigger number
-    // range display: slower (fracLow gives slower pace, bigger time) – faster (fracHigh gives faster pace)
-    // Wait: higher fraction → higher effective vdot → faster → smaller time
-    // So fracHigh → faster pace (smaller time), fracLow → slower pace (larger time)
-    pacePerMile = { low: fmtPace(tMileHigh), high: fmtPace(tMileLow), isRange: true };
-    pacePerKm   = { low: fmtPace(tKmHigh), high: fmtPace(tKmLow), isRange: true };
+    // higher fraction → faster pace, so fracHigh gives the low (fast) end
+    var fastPerM = paceAtFraction(vdot, zone.fracHigh);
+    var slowPerM = paceAtFraction(vdot, zone.fracLow);
+    pacePerMile = { low: fmtPace(fastPerM * MILE_M), high: fmtPace(slowPerM * MILE_M), isRange: true };
+    pacePerKm   = { low: fmtPace(fastPerM * KM_M),   high: fmtPace(slowPerM * KM_M),   isRange: true };
   } else if (zone.type === 'single') {
-    var tMile = timeFromVdot(vdot * zone.frac, MILE_M);
-    var tKm   = timeFromVdot(vdot * zone.frac, KM_M);
-    pacePerMile = { val: fmtPace(tMile), isRange: false };
-    pacePerKm   = { val: fmtPace(tKm), isRange: false };
+    var perM = zone.refDist
+      ? timeFromVdot(vdot, zone.refDist) / zone.refDist
+      : paceAtFraction(vdot, zone.frac);
+    pacePerMile = { val: fmtPace(perM * MILE_M), isRange: false };
+    pacePerKm   = { val: fmtPace(perM * KM_M), isRange: false };
   } else {
     // repeat — pace based on reference race distance (I = 5K pace, R = mile pace)
     var refT = timeFromVdot(vdot, zone.refDist);

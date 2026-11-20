@@ -612,12 +612,27 @@ document.getElementById('prDist').addEventListener('change', function() {
 })();
 
 // ─── VDOT math ───────────────────────────────────────────────────────────────
+// Fraction of VO2max sustainable for a race lasting timeMinutes.
+function pctVo2max(timeMinutes) {
+  return 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
+             + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
+}
+
 function vdotFromTime(distMeters, timeMinutes) {
   const v = distMeters / timeMinutes;
-  const vo2  = -4.60 + 0.182258 * v + 0.000104 * v * v;
-  const pvo2 = 0.8 + 0.1894393 * Math.exp(-0.012778 * timeMinutes)
-                   + 0.2989558 * Math.exp(-0.1932605 * timeMinutes);
-  return vo2 / pvo2;
+  const vo2 = -4.60 + 0.182258 * v + 0.000104 * v * v;
+  return vo2 / pctVo2max(timeMinutes);
+}
+
+// Minutes per meter when running at `frac` of VO2max (inverts the oxygen-cost curve).
+function paceAtFraction(vdot, frac) {
+  const a = 0.000104, b = 0.182258, c = -4.60 - vdot * frac;
+  return (2 * a) / (-b + Math.sqrt(b * b - 4 * a * c));
+}
+
+// Minutes per meter at race pace for the given distance.
+function racePace(vdot, distMeters) {
+  return vdotToTime(vdot, distMeters) / distMeters;
 }
 
 function vdotToTime(vdot, distMeters) {
@@ -632,8 +647,9 @@ function vdotToTime(vdot, distMeters) {
 }
 
 function formatPace(minutes) {
-  const m = Math.floor(minutes);
-  const s = Math.round((minutes - m) * 60);
+  const total = Math.round(minutes * 60);
+  const m = Math.floor(total / 60);
+  const s = total % 60;
   return m + ':' + String(s).padStart(2, '0');
 }
 
@@ -648,12 +664,12 @@ function formatTime(totalMinutes) {
 function zonePaces(vdot) {
   const mile = 1609.34;
   return {
-    easyLo:   vdotToTime(vdot * 0.59, mile),
-    easyHi:   vdotToTime(vdot * 0.74, mile),
-    marathon:  vdotToTime(vdot * 0.79, mile),
-    tempo:     vdotToTime(vdot * 0.86, mile),
-    interval:  vdotToTime(vdot * 0.98, mile),
-    rep400:    vdotToTime(vdot * 1.10, 400),
+    easyLo:   paceAtFraction(vdot, 0.62) * mile,        // slow end of E
+    easyHi:   paceAtFraction(vdot, 0.70) * mile,        // fast end of E
+    marathon:  racePace(vdot, 42195) * mile,
+    tempo:     paceAtFraction(vdot, pctVo2max(60)) * mile, // ~1-hour race pace
+    interval:  racePace(vdot, 5000) * mile,
+    rep400:    racePace(vdot, 1609.344) * 400,
   };
 }
 
